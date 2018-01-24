@@ -8,6 +8,9 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './surveys/SurveyNew';
 
+import Button from 'antd/lib/button';
+import './App.css';
+
 class App extends Component {
 	componentDidMount() {
 		this.props.fetchUser();
@@ -19,6 +22,7 @@ class App extends Component {
 				<BrowserRouter>
 					<div className="container">
 						<Header />
+						<Button type="primary">Button</Button>
 						<Route exact={true} path="/" component={Landing} />
 						<Route
 							exact={true}
