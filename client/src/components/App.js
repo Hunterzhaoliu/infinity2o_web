@@ -8,7 +8,7 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './surveys/SurveyNew';
 
-import Button from 'antd/lib/button';
+import { Button } from 'antd';
 import './App.css';
 
 class App extends Component {
