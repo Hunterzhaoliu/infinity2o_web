@@ -57,7 +57,7 @@ class Header extends Component {
 						to={this.renderLogoRedirect()}
 						className="left brand-logo"
 					>
-						Emaily
+						infinity2o
 					</Link>
 					<ul className="right">{this.renderContent()}</ul>
 				</div>
