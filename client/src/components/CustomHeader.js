@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-class Header extends Component {
+import { Row, Col } from 'antd';
+import { Layout, Menu } from 'antd';
+const { Header } = Layout;
+
+class CustomHeader extends Component {
 	renderContent() {
 		let stateOfUser = this.props.auth;
 		if (stateOfUser) {
@@ -20,7 +24,7 @@ class Header extends Component {
 				);
 			default:
 				return [
-					<li key="1">
+					<li>
 						<a href="/api/logout">Logout</a>
 					</li>
 				];
@@ -42,17 +46,18 @@ class Header extends Component {
 
 	render() {
 		return (
-			<nav>
-				<div className="nav-wrapper">
-					<Link
-						to={this.renderLogoRedirect()}
-						className="left brand-logo"
-					>
-						infinity2o
-					</Link>
-					<ul className="right">{this.renderContent()}</ul>
-				</div>
-			</nav>
+			<Header style={{ position: 'fixed', width: '100%' }}>
+				<Row>
+					<Col span={8}>
+						<Link to={this.renderLogoRedirect()} className="left">
+							infinity2o
+						</Link>
+					</Col>
+					<Col span={8} offset={8}>
+						<ul className="right">{this.renderContent()}</ul>
+					</Col>
+				</Row>
+			</Header>
 		);
 	}
 }
@@ -61,8 +66,4 @@ function mapStateToProps(state) {
 	return { auth: state.auth };
 }
 
-// function mapStateToProps({ auth }) {
-// 	return { auth };
-// }
-
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(CustomHeader);

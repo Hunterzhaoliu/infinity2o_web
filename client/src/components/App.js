@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-import Header from './Header';
-import Landing from './Landing';
-import Dashboard from './Dashboard';
-import SurveyNew from './surveys/SurveyNew';
+import CustomHeader from './CustomHeader';
+// import Landing from './Landing';
+// import Dashboard from './Dashboard';
+// import SurveyNew from './surveys/SurveyNew';
 
-import { Button } from 'antd';
 import './App.css';
+import { Layout } from 'antd';
+const { Content, Footer } = Layout;
 
 class App extends Component {
 	componentDidMount() {
@@ -17,26 +18,27 @@ class App extends Component {
 	}
 
 	render() {
+		console.log(this.props);
 		return (
-			<div className="container">
-				<BrowserRouter>
-					<div className="container">
-						<Header />
-						<Button type="primary">Button</Button>
-						<Route exact={true} path="/" component={Landing} />
-						<Route
-							exact={true}
-							path="/surveys"
-							component={Dashboard}
-						/>
-						<Route
-							exact={true}
-							path="/surveys/new"
-							component={SurveyNew}
-						/>
-					</div>
-				</BrowserRouter>
-			</div>
+			<BrowserRouter>
+				<Layout>
+					<CustomHeader />
+					<Content style={{ padding: '0 50px', marginTop: 64 }}>
+						<div
+							style={{
+								background: '#fff',
+								padding: 24,
+								minHeight: 880
+							}}
+						>
+							Content
+						</div>
+					</Content>
+					<Footer style={{ textAlign: 'center' }}>
+						Copyright © 2018 Infinity2o Inc. All rights reserved.
+					</Footer>
+				</Layout>
+			</BrowserRouter>
 		);
 	}
 }
