@@ -1,4 +1,5 @@
-import { GREY_1, GREY_9 } from './styles/ColorConstants';
+//import { GREY_0, GREY_1, GREY_9, YELLOW_1 } from './styles/ColorConstants';
+import * as colors from './styles/ColorConstants';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -26,11 +27,11 @@ class CustomHeader extends Component {
 					</li>
 				);
 			default:
-				return [
+				return (
 					<li>
 						<a href="/api/logout">Logout</a>
 					</li>
-				];
+				);
 		}
 	}
 
@@ -53,7 +54,7 @@ class CustomHeader extends Component {
 				<Row type="flex">
 					<Col span={4}>
 						<Link to={this.renderLogoRedirect()}>
-							<p style={styles.text}>infinity2o</p>
+							<div style={styles.text}>infinity2o</div>
 						</Link>
 					</Col>
 					<Col span={4} offset={16}>
@@ -71,12 +72,12 @@ CustomHeader = Radium(CustomHeader);
 // every instance of the component.
 var styles = {
 	header: {
-		background: GREY_9,
+		background: colors.GREY_9,
 		position: 'fixed',
 		width: '100%'
 	},
 	text: {
-		background: GREY_1
+		color: colors.GREY_1
 	}
 };
 
