@@ -3,29 +3,29 @@
 // The human eye has about 6 million cones 64% red, 32% green, and 2% blue.
 // Darkest Grey(Black) to lighest Grey(White)
 export const GREY_0 = 'rgb(255, 255, 255)';
-export const GREY_1 = 'rgb(229.5, 229.5, 229.5)';
+export const GREY_1 = 'rgb(229, 229, 229)';
 export const GREY_2 = 'rgb(204, 204, 204)';
-export const GREY_3 = 'rgb(178.5, 178.5, 178.5)';
+export const GREY_3 = 'rgb(178, 178, 178)';
 export const GREY_4 = 'rgb(153, 153, 153)';
-export const GREY_5 = 'rgb(127.5, 127.5, 127.5)';
+export const GREY_5 = 'rgb(127, 127, 127)';
 export const GREY_6 = 'rgb(102, 102, 102)';
-export const GREY_7 = 'rgb(76.5, 76.5, 76.5)';
+export const GREY_7 = 'rgb(76, 76, 76)';
 export const GREY_8 = 'rgb(51, 51, 51)';
-export const GREY_9 = 'rgb(25.5, 25.5, 25.5)';
+export const GREY_9 = 'rgb(25, 25, 25)';
 export const GREY_10 = 'rgb(0, 0, 0)';
 
 //                       rgb(R  , G  , B)
 // If you decrease B yellow becomes darker.
 // After B is 0, then if you increase R & G the same the yellow becomes darker
-export const YELLOW_1 = 'rgb(247.5, 247.5, 0)';
-export const YELLOW_2 = 'rgb(220, 220, 0)'; // - 27.5 Red and Green
-export const YELLOW_3 = 'rgb(192.5, 192.5, 0)'; // - 27.5 over and over
+export const YELLOW_1 = 'rgb(247, 247, 0)';
+export const YELLOW_2 = 'rgb(220, 220, 0)'; // - 27 Red and Green
+export const YELLOW_3 = 'rgb(192, 192, 0)'; // - 27 over and over
 export const YELLOW_4 = 'rgb(165, 165, 0)';
-export const YELLOW_5 = 'rgb(137.5, 137.5, 0)';
+export const YELLOW_5 = 'rgb(137, 137, 0)';
 export const YELLOW_6 = 'rgb(110, 110, 0)';
-export const YELLOW_7 = 'rgb(82.5, 82.5, 0)';
+export const YELLOW_7 = 'rgb(82, 82, 0)';
 export const YELLOW_8 = 'rgb(55, 55, 0)';
-export const YELLOW_9 = 'rgb(27.5, 27.5, 0)';
+export const YELLOW_9 = 'rgb(27, 27, 0)';
 
 //                       rgb(R  , G  , B)
 // If you decrease R and increase B yellow-green becomes darker.
@@ -45,11 +45,11 @@ export const YELLOW_GREEN_9 = 'rgb(20, 29, 0)'; // previous R-20, G-31
 // After R & B are 0, then if you decrease G the green becomes darker
 export const GREEN_1 = 'rgb(165, 255, 165)';
 export const GREEN_2 = 'rgb(79, 255, 79)'; // R-86, B-86
-export const GREEN_3 = 'rgb(0, 247.5, 0)';
-export const GREEN_4 = 'rgb(0, 212, 0)'; // G-35.5
-export const GREEN_5 = 'rgb(0, 176.5, 0)'; // G-35.5
-export const GREEN_6 = 'rgb(0, 142, 0)'; // G-33.5
-export const GREEN_7 = 'rgb(0, 108.5, 0)';
+export const GREEN_3 = 'rgb(0, 247, 0)';
+export const GREEN_4 = 'rgb(0, 212, 0)'; // G-35
+export const GREEN_5 = 'rgb(0, 176, 0)'; // G-35
+export const GREEN_6 = 'rgb(0, 142, 0)'; // G-33
+export const GREEN_7 = 'rgb(0, 108, 0)';
 export const GREEN_8 = 'rgb(0, 73, 0)';
 export const GREEN_9 = 'rgb(0, 35, 0)';
 

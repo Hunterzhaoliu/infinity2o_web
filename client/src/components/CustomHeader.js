@@ -1,12 +1,10 @@
-//import { GREY_0, GREY_1, GREY_9, YELLOW_1 } from './styles/ColorConstants';
 import * as colors from './styles/ColorConstants';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Row, Col } from 'antd';
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 const { Header } = Layout;
 const Radium = require('radium');
 
@@ -22,15 +20,15 @@ class CustomHeader extends Component {
 				return;
 			case '':
 				return (
-					<li>
-						<a href="/auth/google">Login with Google</a>
-					</li>
+					<a href="/auth/google" style={styles.text}>
+						<p style={styles.text1}>Google Login</p>
+					</a>
 				);
 			default:
 				return (
-					<li>
-						<a href="/api/logout">Logout</a>
-					</li>
+					<a href="/api/logout" style={styles.text1}>
+						Logout
+					</a>
 				);
 		}
 	}
@@ -52,12 +50,12 @@ class CustomHeader extends Component {
 		return (
 			<Header style={styles.header}>
 				<Row type="flex">
-					<Col span={4}>
+					<Col span={12}>
 						<Link to={this.renderLogoRedirect()}>
-							<div style={styles.text}>infinity2o</div>
+							<p style={styles.text2}>infinity2o</p>
 						</Link>
 					</Col>
-					<Col span={4} offset={16}>
+					<Col span={12}>
 						<ul>{this.renderContent()}</ul>
 					</Col>
 				</Row>
@@ -72,12 +70,15 @@ CustomHeader = Radium(CustomHeader);
 // every instance of the component.
 var styles = {
 	header: {
-		background: colors.GREY_9,
+		background: colors.GREY_5,
 		position: 'fixed',
 		width: '100%'
 	},
-	text: {
+	text1: {
 		color: colors.GREY_1
+	},
+	text2: {
+		color: colors.GREY_2
 	}
 };
 
