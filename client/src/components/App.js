@@ -8,7 +8,6 @@ import CustomHeader from './CustomHeader';
 // import Dashboard from './Dashboard';
 // import SurveyNew from './surveys/SurveyNew';
 
-import './App.css';
 import { Layout } from 'antd';
 const { Content, Footer } = Layout;
 

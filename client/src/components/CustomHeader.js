@@ -1,10 +1,13 @@
+import { GREY_1, GREY_9 } from './styles/ColorConstants';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Row, Col } from 'antd';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 const { Header } = Layout;
+const Radium = require('radium');
 
 class CustomHeader extends Component {
 	renderContent() {
@@ -46,21 +49,36 @@ class CustomHeader extends Component {
 
 	render() {
 		return (
-			<Header style={{ position: 'fixed', width: '100%' }}>
-				<Row>
-					<Col span={8}>
-						<Link to={this.renderLogoRedirect()} className="left">
-							infinity2o
+			<Header style={styles.header}>
+				<Row type="flex">
+					<Col span={4}>
+						<Link to={this.renderLogoRedirect()}>
+							<p style={styles.text}>infinity2o</p>
 						</Link>
 					</Col>
-					<Col span={8} offset={8}>
-						<ul className="right">{this.renderContent()}</ul>
+					<Col span={4} offset={16}>
+						<ul>{this.renderContent()}</ul>
 					</Col>
 				</Row>
 			</Header>
 		);
 	}
 }
+
+CustomHeader = Radium(CustomHeader);
+
+// You can create your style objects dynamically or share them for
+// every instance of the component.
+var styles = {
+	header: {
+		background: GREY_9,
+		position: 'fixed',
+		width: '100%'
+	},
+	text: {
+		background: GREY_1
+	}
+};
 
 function mapStateToProps(state) {
 	return { auth: state.auth };
