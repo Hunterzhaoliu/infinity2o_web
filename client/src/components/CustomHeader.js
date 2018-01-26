@@ -23,34 +23,36 @@ class CustomHeader extends Component {
 				return;
 			default:
 				return [
-					<Col span={8}>
-						<Button
-							key="5"
-							style={{
-								borderColor: this.props.colorTheme
-									.buttonTextColor,
-								background: this.props.colorTheme
-									.buttonTextColor,
-								color: colors.GREY_5
-							}}
-						>
-							<a>Ask Research Question</a>
-						</Button>
-					</Col>,
-					<Col span={8}>
-						<Button
-							key="5"
-							style={{
-								borderColor: this.props.colorTheme
-									.buttonTextColor,
-								background: this.props.colorTheme
-									.buttonTextColor,
-								color: colors.GREY_5
-							}}
-						>
-							<a href="/api/logout">Logout</a>
-						</Button>
-					</Col>
+					<Row type="flex">
+						<Col span={8}>
+							<Button
+								key="5"
+								style={{
+									borderColor: this.props.colorTheme.keyColor,
+									background: this.props.colorTheme.keyColor,
+									color: colors.GREY_5
+								}}
+							>
+								<a>Ask Research Question</a>
+							</Button>
+						</Col>
+					</Row>,
+					<Row type="flex">
+						<Col span={6}>
+							<Button
+								key="5"
+								style={{
+									borderColor: this.props.colorTheme
+										.keyComplimentColor,
+									background: this.props.colorTheme
+										.keyComplimentColor,
+									color: colors.GREY_5
+								}}
+							>
+								<a href="/api/logout">Logout</a>
+							</Button>
+						</Col>
+					</Row>
 				];
 		}
 	}
@@ -58,21 +60,23 @@ class CustomHeader extends Component {
 	render() {
 		return (
 			<Header style={styles.header}>
-				<Row gutter={24}>
-					<Col span={8}>
-						<Button
-							style={{
-								borderColor: this.props.colorTheme
-									.buttonTextColor,
-								background: this.props.colorTheme
-									.buttonTextColor,
-								color: colors.GREY_5
-							}}
-							onClick={this.props.onPressRandomColorTheme}
-						>
-							Change Theme
-						</Button>
-					</Col>
+				<Row type="flex" justify="space-between">
+					<Row type="flex" justify="start">
+						<Col span={8}>
+							<Button
+								style={{
+									borderColor: this.props.colorTheme
+										.buttonTextColor,
+									background: this.props.colorTheme
+										.buttonTextColor,
+									color: colors.GREY_5
+								}}
+								onClick={this.props.onPressRandomColorTheme}
+							>
+								Change Theme
+							</Button>
+						</Col>
+					</Row>
 					{this.renderLogout()}
 				</Row>
 			</Header>
