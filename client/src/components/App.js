@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
-
 import Questions from './Questions';
 // import SurveyNew from './surveys/SurveyNew';
 

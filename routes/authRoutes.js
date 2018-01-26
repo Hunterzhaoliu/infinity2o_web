@@ -8,11 +8,11 @@ module.exports = app => {
 		})
 	);
 
-	// after a user is logged in
 	app.get(
 		'/auth/google/callback',
 		passport.authenticate('google'),
 		(request, response) => {
+			// after a user is logged in show them questions they can vote on
 			response.redirect('/questions');
 		}
 	);
