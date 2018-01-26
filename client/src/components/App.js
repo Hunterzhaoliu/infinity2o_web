@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as indexActions from '../actions/index';
 import { bindActionCreators } from 'redux';
@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
 
-// import Dashboard from './Dashboard';
+import Questions from './Questions';
 // import SurveyNew from './surveys/SurveyNew';
 
 import { Layout } from 'antd';
@@ -23,7 +23,12 @@ class App extends Component {
 			<BrowserRouter>
 				<Layout style={styles.layout}>
 					<CustomHeader />
-					<Landing />
+					<Route exact={true} path="/" component={Landing} />
+					<Route
+						exact={true}
+						path="/questions"
+						component={Questions}
+					/>
 				</Layout>
 			</BrowserRouter>
 		);

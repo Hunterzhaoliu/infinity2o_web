@@ -27,10 +27,6 @@ export default function(state = initialState, action) {
 			newState.text2Color = action.text2Color;
 			newState.text3Color = action.text3Color;
 			newState.buttonTextColor = action.buttonTextColor;
-			console.log(
-				'reducing action SWITCH_COLOR_MODE newState = ' +
-					JSON.stringify(newState)
-			);
 			return newState;
 		default:
 			return state || newState;

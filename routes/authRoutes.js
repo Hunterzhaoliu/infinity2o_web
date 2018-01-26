@@ -8,11 +8,12 @@ module.exports = app => {
 		})
 	);
 
+	// after a user is logged in
 	app.get(
 		'/auth/google/callback',
 		passport.authenticate('google'),
 		(request, response) => {
-			response.redirect('/surveys');
+			response.redirect('/questions');
 		}
 	);
 
@@ -23,13 +24,5 @@ module.exports = app => {
 
 	app.get('/api/current_user', (request, response) => {
 		response.send(request.user);
-	});
-
-	app.get('/legal/terms-of-service', (request, response) => {
-		response.send('terms of service');
-	});
-
-	app.get('/legal/privacy-policy', (request, response) => {
-		response.send('privacy policy');
 	});
 };

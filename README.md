@@ -28,6 +28,20 @@ Setup:
 
 1. `cd infinity2o_server` then `npm run dev`
 
+## Development workflow checklists
+
+1. what do u want to add?
+2. create `actions/types`
+3. create `actions/actionCreator.js`
+4. deal with action type in `reducers/actionReducer.js`
+5. add `reducers/actionReducer.js` to `reducers/index.js`
+6. if state changes add `mapStateToProps` in `components/Component.js`
+7. if added functions to change state add `mapDispatchToProps` in `components/Component.js`
+
+1) What do u want to remove?
+
+1) What do u want to change?
+
 ## Deployment checklist
 
 1. `cd infinity2o_server`

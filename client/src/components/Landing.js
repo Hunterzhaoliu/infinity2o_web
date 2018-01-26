@@ -6,16 +6,12 @@ const { Content } = Layout;
 
 class Landing extends Component {
 	renderLogin() {
-		//<a href="/auth/google">Google Login</a>
 		let stateOfUser = this.props.auth;
-		if (stateOfUser) {
-			stateOfUser = this.props.auth.data;
-		}
 		switch (stateOfUser) {
 			case null:
 				// show nothing when still signing in
 				return;
-			case '':
+			case false:
 				return (
 					<Button
 						key="5"
