@@ -6,7 +6,9 @@ import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
-import Questions from './Questions';
+import Questions from './questions/Questions';
+import Ask from './questions/Ask';
+
 // import SurveyNew from './surveys/SurveyNew';
 
 import { Layout } from 'antd';
@@ -28,6 +30,7 @@ class App extends Component {
 						path="/questions"
 						component={Questions}
 					/>
+					<Route exact={true} path="/questions/ask" component={Ask} />
 				</Layout>
 			</BrowserRouter>
 		);

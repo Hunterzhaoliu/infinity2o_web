@@ -30,7 +30,7 @@ class Landing extends Component {
 	}
 
 	render() {
-		console.log('this.props inside Landing', this.props);
+		//console.log('this.props inside Landing', this.props);
 		return (
 			<Content
 				style={{
