@@ -18,7 +18,7 @@ class App extends Component {
 	}
 
 	render() {
-		console.log('this.props inside App', this.props);
+		//console.log('this.props inside App', this.props);
 		return (
 			<BrowserRouter>
 				<Layout style={styles.layout}>

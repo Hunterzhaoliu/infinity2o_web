@@ -1,10 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Typist from 'react-typist';
-import { Layout } from 'antd';
+import { Layout, Button } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
+	renderLogin() {
+		//<a href="/auth/google">Google Login</a>
+		let stateOfUser = this.props.auth;
+		if (stateOfUser) {
+			stateOfUser = this.props.auth.data;
+		}
+		switch (stateOfUser) {
+			case null:
+				// show nothing when still signing in
+				return;
+			case '':
+				return (
+					<Button
+						key="5"
+						style={{
+							borderColor: this.props.colorTheme.keyColor,
+							background: this.props.colorTheme.keyColor,
+							color: this.props.colorTheme.text1Color
+						}}
+					>
+						<a href="/auth/google">Google Login</a>
+					</Button>
+				);
+			default:
+				return;
+		}
+	}
+
 	render() {
 		console.log('this.props inside Landing', this.props);
 		return (
@@ -59,6 +87,7 @@ class Landing extends Component {
 						believable they are during future votes
 					</h2>
 				</Typist>
+				{this.renderLogin()}
 			</Content>
 		);
 	}
@@ -70,6 +99,7 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
+		auth: state.auth,
 		colorTheme: state.colorTheme
 	};
 }

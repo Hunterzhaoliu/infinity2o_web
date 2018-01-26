@@ -27,9 +27,7 @@ class CustomHeader extends Component {
 									.buttonTextColor,
 								color: colors.GREY_5
 							}}
-							onClick={this.props.onPressRandomColorTheme.bind(
-								this
-							)}
+							onClick={this.props.onPressRandomColorTheme}
 						>
 							Change Theme
 						</Button>
