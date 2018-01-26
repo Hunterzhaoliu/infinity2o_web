@@ -9,9 +9,8 @@ import { Layout, Row, Col, Button } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
-	constructor(props) {
-		super(props);
-		props.onPressRandomColorTheme();
+	componentDidMount() {
+		this.props.onPressRandomColorTheme();
 	}
 
 	renderLogout() {
@@ -23,8 +22,22 @@ class CustomHeader extends Component {
 			case false:
 				return;
 			default:
-				return (
-					<Col span={6}>
+				return [
+					<Col span={8}>
+						<Button
+							key="5"
+							style={{
+								borderColor: this.props.colorTheme
+									.buttonTextColor,
+								background: this.props.colorTheme
+									.buttonTextColor,
+								color: colors.GREY_5
+							}}
+						>
+							<a>Ask Research Question</a>
+						</Button>
+					</Col>,
+					<Col span={8}>
 						<Button
 							key="5"
 							style={{
@@ -38,7 +51,7 @@ class CustomHeader extends Component {
 							<a href="/api/logout">Logout</a>
 						</Button>
 					</Col>
-				);
+				];
 		}
 	}
 
@@ -46,7 +59,7 @@ class CustomHeader extends Component {
 		return (
 			<Header style={styles.header}>
 				<Row gutter={24}>
-					<Col span={6}>
+					<Col span={8}>
 						<Button
 							style={{
 								borderColor: this.props.colorTheme
