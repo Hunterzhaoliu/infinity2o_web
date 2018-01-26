@@ -15,6 +15,9 @@ class Questions extends Component {
 				}}
 			>
 				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
+					Your Current Beliefs
+				</h1>
+				<h1 key="1" style={{ color: this.props.colorTheme.text1Color }}>
 					Hottest Revoted Questions
 				</h1>
 			</Content>

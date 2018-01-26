@@ -1,6 +1,7 @@
 import * as colors from './styles/ColorConstants';
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../actions/colorTheme';
@@ -9,13 +10,8 @@ import { Layout, Row, Col, Button } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
-	componentDidMount() {
-		this.props.onPressRandomColorTheme();
-	}
-
 	renderLogout() {
-		let stateOfUser = this.props.auth;
-		switch (stateOfUser) {
+		switch (this.props.auth.userInfo) {
 			case null:
 				// show nothing when still signing in
 				return;
@@ -33,9 +29,9 @@ class CustomHeader extends Component {
 									color: this.props.colorTheme.text1Color
 								}}
 							>
-								<a href="/questions/ask">
-									Ask Research Question
-								</a>
+								<Link to="/questions/ask">
+									<div>Ask Research Question</div>
+								</Link>
 							</Button>
 						</Col>
 					</Row>,

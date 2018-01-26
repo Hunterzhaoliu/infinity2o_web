@@ -6,8 +6,7 @@ const { Content } = Layout;
 
 class Landing extends Component {
 	renderLogin() {
-		let stateOfUser = this.props.auth;
-		switch (stateOfUser) {
+		switch (this.props.auth.userInfo) {
 			case null:
 				// show nothing when still signing in
 				return;

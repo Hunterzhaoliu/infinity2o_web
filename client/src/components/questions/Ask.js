@@ -10,8 +10,7 @@ class Ask extends Component {
 	//
 	// 	this.state = { new: true };
 	// }
-	state = { showFormReview: false };
-	renderContent() {}
+	// state = { showFormReview: false };
 
 	render() {
 		return (
