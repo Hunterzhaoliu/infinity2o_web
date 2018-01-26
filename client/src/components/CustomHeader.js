@@ -1,49 +1,17 @@
 import * as colors from './styles/ColorConstants';
 
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import * as colorThemeActions from '../actions/colorTheme';
 
-import { Layout, Row, Col } from 'antd';
+import { Layout, Row, Col, Button } from 'antd';
 const { Header } = Layout;
-const Radium = require('radium');
 
 class CustomHeader extends Component {
-	renderContent() {
-		let stateOfUser = this.props.auth;
-		if (stateOfUser) {
-			stateOfUser = this.props.auth.data;
-		}
-		switch (stateOfUser) {
-			case null:
-				// show nothing when still signing in
-				return;
-			case '':
-				return (
-					<a href="/auth/google" style={styles.text}>
-						<p style={styles.text1}>Google Login</p>
-					</a>
-				);
-			default:
-				return (
-					<a href="/api/logout" style={styles.text1}>
-						Logout
-					</a>
-				);
-		}
-	}
-
-	renderLogoRedirect() {
-		let stateOfUser = this.props.auth;
-		if (stateOfUser) {
-			stateOfUser = this.props.auth.data;
-		}
-		if (stateOfUser === '' || stateOfUser == null) {
-			// not logged in
-			return '/';
-		} else {
-			return '/surveys';
-		}
+	constructor(props) {
+		super(props);
+		props.onPressRandomColorTheme();
 	}
 
 	render() {
@@ -51,20 +19,26 @@ class CustomHeader extends Component {
 			<Header style={styles.header}>
 				<Row type="flex">
 					<Col span={12}>
-						<Link to={this.renderLogoRedirect()}>
-							<p style={styles.text2}>infinity2o</p>
-						</Link>
-					</Col>
-					<Col span={12}>
-						<ul>{this.renderContent()}</ul>
+						<Button
+							style={{
+								borderColor: this.props.colorTheme
+									.buttonTextColor,
+								background: this.props.colorTheme
+									.buttonTextColor,
+								color: colors.GREY_5
+							}}
+							onClick={this.props.onPressRandomColorTheme.bind(
+								this
+							)}
+						>
+							Change Theme
+						</Button>
 					</Col>
 				</Row>
 			</Header>
 		);
 	}
 }
-
-CustomHeader = Radium(CustomHeader);
 
 // You can create your style objects dynamically or share them for
 // every instance of the component.
@@ -73,17 +47,35 @@ var styles = {
 		background: colors.GREY_5,
 		position: 'fixed',
 		width: '100%'
-	},
-	text1: {
-		color: colors.GREY_1
-	},
-	text2: {
-		color: colors.GREY_2
 	}
 };
 
+/*
+So we have a state and a UI(with props).
+This function gives the UI the parts of the state it will need to display.
+*/
 function mapStateToProps(state) {
-	return { auth: state.auth };
+	return {
+		auth: state.auth,
+		colorTheme: state.colorTheme
+	};
 }
 
-export default connect(mapStateToProps)(CustomHeader);
+/*
+So we have a state and a UI(with props).
+This function gives the UI the functions it will need to be called.
+*/
+function mapDispatchToProps(dispatch) {
+	const customHeaderDispatchers = bindActionCreators(
+		colorThemeActions,
+		dispatch
+	);
+
+	return {
+		onPressRandomColorTheme: () => {
+			customHeaderDispatchers.generateRandomColorTheme();
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomHeader);
