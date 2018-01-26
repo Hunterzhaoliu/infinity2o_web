@@ -14,11 +14,39 @@ class CustomHeader extends Component {
 		props.onPressRandomColorTheme();
 	}
 
+	renderLogout() {
+		let stateOfUser = this.props.auth;
+		switch (stateOfUser) {
+			case null:
+				// show nothing when still signing in
+				return;
+			case false:
+				return;
+			default:
+				return (
+					<Col span={6}>
+						<Button
+							key="5"
+							style={{
+								borderColor: this.props.colorTheme
+									.buttonTextColor,
+								background: this.props.colorTheme
+									.buttonTextColor,
+								color: colors.GREY_5
+							}}
+						>
+							<a href="/api/logout">Logout</a>
+						</Button>
+					</Col>
+				);
+		}
+	}
+
 	render() {
 		return (
 			<Header style={styles.header}>
-				<Row type="flex">
-					<Col span={12}>
+				<Row gutter={24}>
+					<Col span={6}>
 						<Button
 							style={{
 								borderColor: this.props.colorTheme
@@ -32,6 +60,7 @@ class CustomHeader extends Component {
 							Change Theme
 						</Button>
 					</Col>
+					{this.renderLogout()}
 				</Row>
 			</Header>
 		);
