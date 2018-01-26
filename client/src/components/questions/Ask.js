@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
-import { Layout } from 'antd';
+import { reduxForm, Field } from 'redux-form';
+import QuestionField from './QuestionField';
+import { Layout, Row, Col, Form, Input, Icon, Button } from 'antd';
 const { Content } = Layout;
+const Search = Input.Search;
+const FormItem = Form.Item;
 
 class Ask extends Component {
 	// constructor(props) {
@@ -11,6 +14,9 @@ class Ask extends Component {
 	// 	this.state = { new: true };
 	// }
 	// state = { showFormReview: false };
+	renderIfDuplicateQuestion() {
+		// TODO: after db is full of questions
+	}
 
 	render() {
 		return (
@@ -21,9 +27,37 @@ class Ask extends Component {
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
-					Ask Research Question
-				</h1>
+				<Form>
+					<Row type="flex" justify="center">
+						<FormItem
+							label=""
+							validateStatus="success" // warning, validating, success
+							help="Between 15 and 150 characters"
+						>
+							<Field
+								name="QuestionField"
+								component={QuestionField}
+								type="text"
+								placeholder={'ask away'}
+							/>
+						</FormItem>
+					</Row>
+					{this.renderIfDuplicateQuestion()}
+					<Row type="flex" justify="center">
+						<FormItem
+							label=""
+							validateStatus="success" // warning, validating, success
+							help="Between 1 and 15 contexts"
+						>
+							<Field
+								name="ContextField"
+								component={QuestionField}
+								type="text"
+								placeholder={'clear up your context'}
+							/>
+						</FormItem>
+					</Row>
+				</Form>
 			</Content>
 		);
 	}
@@ -41,6 +75,21 @@ function mapStateToProps(state) {
 
 Ask = connect(mapStateToProps, null)(Ask);
 
+function validate(values) {
+	const errors = {};
+
+	// errors.recipients = validateEmails(values.recipients || '');
+	//
+	// _.each(formFields, ({ name }) => {
+	// 	if (!values[name]) {
+	// 		errors[name] = 'must provide ' + name;
+	// 	}
+	// });
+
+	return errors;
+}
+
 export default reduxForm({
+	validate: validate,
 	askForm: 'askForm'
 })(Ask);

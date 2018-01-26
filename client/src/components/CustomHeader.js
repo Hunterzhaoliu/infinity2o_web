@@ -19,10 +19,9 @@ class CustomHeader extends Component {
 				return;
 			default:
 				return [
-					<Row type="flex">
+					<Row type="flex" key="1">
 						<Col span={8}>
 							<Button
-								key="5"
 								style={{
 									borderColor: this.props.colorTheme.keyColor,
 									background: this.props.colorTheme.keyColor,
@@ -35,10 +34,9 @@ class CustomHeader extends Component {
 							</Button>
 						</Col>
 					</Row>,
-					<Row type="flex">
+					<Row type="flex" key="2">
 						<Col span={6}>
 							<Button
-								key="5"
 								style={{
 									borderColor: this.props.colorTheme
 										.keyComplimentColor,
