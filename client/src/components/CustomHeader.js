@@ -30,10 +30,12 @@ class CustomHeader extends Component {
 								style={{
 									borderColor: this.props.colorTheme.keyColor,
 									background: this.props.colorTheme.keyColor,
-									color: colors.GREY_5
+									color: this.props.colorTheme.text1Color
 								}}
 							>
-								<a>Ask Research Question</a>
+								<a href="/questions/ask">
+									Ask Research Question
+								</a>
 							</Button>
 						</Col>
 					</Row>,
@@ -46,7 +48,7 @@ class CustomHeader extends Component {
 										.keyComplimentColor,
 									background: this.props.colorTheme
 										.keyComplimentColor,
-									color: colors.GREY_5
+									color: this.props.colorTheme.text2Color
 								}}
 							>
 								<a href="/api/logout">Logout</a>
