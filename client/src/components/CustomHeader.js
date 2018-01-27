@@ -21,8 +21,8 @@ class CustomHeader extends Component {
 						<Col span={8}>
 							<Button
 								style={{
-									borderColor: this.props.colorTheme.keyColor,
-									background: this.props.colorTheme.keyColor,
+									borderColor: this.props.colorTheme.key,
+									background: this.props.colorTheme.key,
 									color: this.props.colorTheme.text1Color
 								}}
 							>
@@ -55,13 +55,13 @@ class CustomHeader extends Component {
 		return (
 			<Header
 				style={{
-					background: this.props.colorTheme.keyComplimentColor,
+					background: this.props.colorTheme.text2Color,
 					position: 'fixed',
 					width: '100%'
 				}}
 			>
 				<Row type="flex" justify="space-between">
-					<Row type="flex" justify="start">
+					<Row type="flex">
 						<Col span={8}>
 							<Button
 								style={{

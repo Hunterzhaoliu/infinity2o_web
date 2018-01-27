@@ -52,6 +52,12 @@ what do u want to change?
 4. `git push heroku master`
 5. https://infinity2o.herokuapp.com/
 
+## Design principles
+
+1. [Fletcher Color Control](http://www.barnstonestudios.com/content/COLOUR-CONTROL-by-Frank-Morley-Fletcher.pdf)
+2. `color` beside `opposite color` is the most contrasting.
+3. `color` surrounded by grey changes grey into shade of `color`.
+
 ## Useful links
 
 [HTTP status codes](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)

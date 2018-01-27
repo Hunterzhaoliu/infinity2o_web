@@ -65,63 +65,75 @@ export const ORANGE_YELLOW_5 = 'rgb(162, 129, 0)';
 
 export const colorsHashtable5 = [
 	{
-		keyColor: YELLOW_5,
-		keyComplimentColor: RED_VIOLET_5,
+		key: YELLOW_5,
+		keyCompliment1: RED_VIOLET_5,
+		keyCompliment2: BLUE_VIOLET_5,
 		thirdColor: BLUE_5
 	},
 	{
-		keyColor: YELLOW_GREEN_5,
-		keyComplimentColor: RED_5,
+		key: YELLOW_GREEN_5,
+		keyCompliment1: RED_5,
+		keyCompliment2: YELLOW_GREEN_5,
 		thirdColor: BLUE_VIOLET_5
 	},
 	{
-		keyColor: GREEN_5,
-		keyComplimentColor: RED_ORANGE_5,
+		key: GREEN_5,
+		keyCompliment1: RED_ORANGE_5,
+		keyCompliment2: RED_VIOLET_5,
 		thirdColor: VIOLET_5
 	},
 	{
-		keyColor: BLUE_GREEN_5,
-		keyComplimentColor: ORANGE_5,
+		key: BLUE_GREEN_5,
+		keyCompliment1: ORANGE_5,
+		keyCompliment2: RED_5,
 		thirdColor: RED_VIOLET_5
 	},
 	{
-		keyColor: BLUE_5,
-		keyComplimentColor: ORANGE_YELLOW_5,
+		key: BLUE_5,
+		keyCompliment1: ORANGE_YELLOW_5,
+		keyCompliment2: RED_ORANGE_5,
 		thirdColor: RED_5
 	},
 	{
-		keyColor: BLUE_VIOLET_5,
-		keyComplimentColor: YELLOW_5,
+		key: BLUE_VIOLET_5,
+		keyCompliment1: YELLOW_5,
+		keyCompliment2: ORANGE_5,
 		thirdColor: RED_ORANGE_5
 	},
 	{
-		keyColor: VIOLET_5,
-		keyComplimentColor: YELLOW_GREEN_5,
+		key: VIOLET_5,
+		keyCompliment1: YELLOW_GREEN_5,
+		keyCompliment2: ORANGE_YELLOW_5,
 		thirdColor: ORANGE_5
 	},
 	{
-		keyColor: RED_VIOLET_5,
-		keyComplimentColor: GREEN_5,
+		key: RED_VIOLET_5,
+		keyCompliment1: GREEN_5,
+		keyCompliment2: YELLOW_5,
 		thirdColor: ORANGE_YELLOW_5
 	},
 	{
-		keyColor: RED_5,
-		keyComplimentColor: BLUE_GREEN_5,
+		key: RED_5,
+		keyCompliment1: BLUE_GREEN_5,
+		keyCompliment2: YELLOW_GREEN_5,
 		thirdColor: YELLOW_5
 	},
 	{
-		keyColor: RED_ORANGE_5,
-		keyComplimentColor: BLUE_5,
+		key: RED_ORANGE_5,
+		keyCompliment1: BLUE_5,
+		keyCompliment2: GREEN_5,
 		thirdColor: YELLOW_GREEN_5
 	},
 	{
-		keyColor: ORANGE_5,
-		keyComplimentColor: BLUE_VIOLET_5,
+		key: ORANGE_5,
+		keyCompliment1: BLUE_VIOLET_5,
+		keyCompliment2: BLUE_GREEN_5,
 		thirdColor: GREEN_5
 	},
 	{
-		keyColor: ORANGE_YELLOW_5,
-		keyComplimentColor: VIOLET_5,
+		key: ORANGE_YELLOW_5,
+		keyCompliment1: VIOLET_5,
+		keyCompliment2: BLUE_5,
 		thirdColor: BLUE_GREEN_5
 	}
 ];

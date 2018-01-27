@@ -5,8 +5,9 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	keyColor: null,
-	keyComplimentColor: null,
+	key: null,
+	keyCompliment1: null,
+	keyCompliment2: null,
 	thirdColor: null,
 	backgroundColor: null,
 	text1Color: null,
@@ -18,8 +19,9 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case UPDATE_COLOR_THEME:
-			newState.keyColor = action.keyColor;
-			newState.keyComplimentColor = action.keyComplimentColor;
+			newState.key = action.key;
+			newState.keyCompliment1 = action.keyCompliment1;
+			newState.keyCompliment2 = action.keyCompliment2;
 			newState.thirdColor = action.thirdColor;
 			newState.backgroundColor = action.backgroundColor;
 			newState.text1Color = action.text1Color;

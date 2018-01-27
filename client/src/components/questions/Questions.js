@@ -8,7 +8,7 @@ class Questions extends Component {
 		return (
 			<Content
 				style={{
-					textAlign: 'center',
+					textAlign: 'start',
 					padding: '100px 50px 81px', // top left&right bottom
 					minHeight: 82,
 					background: this.props.colorTheme.backgroundColor
