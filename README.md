@@ -9,12 +9,13 @@
 
 mlab.com databases:
 
-1. infinity2o-dev username = `infinity2o-dev` & password = `2134711p`
-2. infinity2o-prod username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
+1. `infinity2o-dev` database username = `infinity2o-dev` & password = `2134711p`
+2. `infinity2o-prod` database username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
 
 OAuth:
 
-1. login `console.developers.google.com` with `q42liu@gmail.com`
+1. login `console.developers.google.com` with `q42liu@gmail.com` under projects
+   `infinity2o-dev` & `infinity2o-prod`
 
 Stripe.com login:
 
@@ -30,17 +31,18 @@ Setup:
 
 ## Development workflow checklists
 
-1. what do u want to add?
-2. create `actions/types`
-3. create `actions/actionCreator.js`
-4. deal with action type in `reducers/actionReducer.js`
-5. add `reducers/actionReducer.js` to `reducers/index.js`
-6. if state changes add `mapStateToProps` in `components/Component.js`
-7. if added functions to change state add `mapDispatchToProps` in `components/Component.js`
+what do u want to add?
 
-1) What do u want to remove?
+1. create `actions/types`
+2. create `actions/actionCreator.js`
+3. deal with action type in `reducers/actionReducer.js`
+4. add `reducers/actionReducer.js` to `reducers/index.js`
+5. if state changes add `mapStateToProps` in `components/Component.js`
+6. if added functions to change state add `mapDispatchToProps` in `components/Component.js`
 
-1) What do u want to change?
+what do u want to remove?
+
+what do u want to change?
 
 ## Deployment checklist
 
