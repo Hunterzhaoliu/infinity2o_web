@@ -23,15 +23,13 @@
 		"redux": "^3.7.2",
 		"redux-form": "^7.2.1",
 		"redux-thunk": "^2.2.0",
-		"react-app-rewired": "^1.4.0"
+		"react-app-rewired": "^1.4.0",
+		"babel-plugin-import": "^1.6.3"
 	},
 	"scripts": {
 		"start": "react-app-rewired start",
 		"build": "react-app-rewired build",
 		"test": "react-app-rewired test --env=jsdom",
 		"eject": "react-scripts eject"
-	},
-	"devDependencies": {
-		"babel-plugin-import": "^1.6.3"
 	}
 }
