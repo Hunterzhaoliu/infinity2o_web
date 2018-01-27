@@ -1,5 +1,3 @@
-import * as colors from './styles/ColorConstants';
-
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -39,9 +37,9 @@ class CustomHeader extends Component {
 							<Button
 								style={{
 									borderColor: this.props.colorTheme
-										.keyComplimentColor,
+										.thirdColor,
 									background: this.props.colorTheme
-										.keyComplimentColor,
+										.thirdColor,
 									color: this.props.colorTheme.text2Color
 								}}
 							>
@@ -55,17 +53,23 @@ class CustomHeader extends Component {
 
 	render() {
 		return (
-			<Header style={styles.header}>
+			<Header
+				style={{
+					background: this.props.colorTheme.keyComplimentColor,
+					position: 'fixed',
+					width: '100%'
+				}}
+			>
 				<Row type="flex" justify="space-between">
 					<Row type="flex" justify="start">
 						<Col span={8}>
 							<Button
 								style={{
 									borderColor: this.props.colorTheme
-										.buttonTextColor,
+										.thirdColor,
 									background: this.props.colorTheme
-										.buttonTextColor,
-									color: colors.GREY_5
+										.thirdColor,
+									color: this.props.colorTheme.text2Color
 								}}
 								onClick={this.props.onPressRandomColorTheme}
 							>
@@ -79,16 +83,6 @@ class CustomHeader extends Component {
 		);
 	}
 }
-
-// You can create your style objects dynamically or share them for
-// every instance of the component.
-var styles = {
-	header: {
-		background: colors.GREY_5,
-		position: 'fixed',
-		width: '100%'
-	}
-};
 
 /*
 So we have a state and a UI(with props).
