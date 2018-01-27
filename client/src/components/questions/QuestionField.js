@@ -13,3 +13,17 @@ export default ({ input, label, placeholder, meta }) => {
 		</div>
 	);
 };
+
+// return (
+//     <div>
+//         <label>{label}</label>
+//         <Search
+//             placeholder={placeholder}
+//             onSearch={QuestionInput}
+//             style={{ width: 550, marginTop: '25px' }} // 50px shows 1 char, 150px => 20 char
+//         />{' '}
+//         <div style={{ marginBottom: '5px' }}>
+//             {meta.touched && meta.error}
+//         </div>
+//     </div>
+// );

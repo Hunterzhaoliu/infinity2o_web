@@ -39,6 +39,7 @@ class AskForm extends Component {
 								component={QuestionField}
 								type="text"
 								placeholder={'ask away'}
+								colorTheme={this.props.colorTheme}
 							/>
 						</FormItem>
 					</Row>
