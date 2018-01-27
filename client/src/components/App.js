@@ -7,7 +7,7 @@ import * as actions from '../actions';
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
 import Questions from './questions/Questions';
-import Ask from './questions/Ask';
+import AskForm from './questions/AskForm';
 
 // import SurveyNew from './surveys/SurveyNew';
 
@@ -30,7 +30,11 @@ class App extends Component {
 						path="/questions"
 						component={Questions}
 					/>
-					<Route exact={true} path="/questions/ask" component={Ask} />
+					<Route
+						exact={true}
+						path="/questions/ask"
+						component={AskForm}
+					/>
 				</Layout>
 			</BrowserRouter>
 		);

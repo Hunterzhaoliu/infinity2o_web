@@ -6,7 +6,7 @@ import { Layout, Row, Form } from 'antd';
 const { Content } = Layout;
 const FormItem = Form.Item;
 
-class Ask extends Component {
+class AskForm extends Component {
 	// constructor(props) {
 	// 	super(props);
 	//
@@ -18,6 +18,7 @@ class Ask extends Component {
 	}
 
 	render() {
+		// console.log('this.props in AskForm.js', this.props);
 		return (
 			<Content
 				style={{
@@ -26,15 +27,15 @@ class Ask extends Component {
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<Form>
+				<Form onSubmit={this.props.handleSubmit}>
 					<Row type="flex" justify="start">
 						<FormItem
 							label=""
 							validateStatus="success" // warning, validating, success
-							help="Between 15 and 150 characters"
 						>
 							<Field
-								name="QuestionField"
+								name="question"
+								label="What's on your mind? "
 								component={QuestionField}
 								type="text"
 								placeholder={'ask away'}
@@ -58,7 +59,7 @@ function mapStateToProps(state) {
 	};
 }
 
-Ask = connect(mapStateToProps, null)(Ask);
+AskForm = connect(mapStateToProps, null)(AskForm);
 
 function validate(values) {
 	const errors = {};
@@ -76,5 +77,5 @@ function validate(values) {
 
 export default reduxForm({
 	validate: validate,
-	askForm: 'askForm'
-})(Ask);
+	form: 'askForm'
+})(AskForm);
