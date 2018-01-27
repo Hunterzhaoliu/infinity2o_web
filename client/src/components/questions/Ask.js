@@ -28,7 +28,7 @@ class Ask extends Component {
 				}}
 			>
 				<Form>
-					<Row type="flex" justify="center">
+					<Row type="flex" justify="start">
 						<FormItem
 							label=""
 							validateStatus="success" // warning, validating, success
@@ -43,20 +43,6 @@ class Ask extends Component {
 						</FormItem>
 					</Row>
 					{this.renderIfDuplicateQuestion()}
-					<Row type="flex" justify="center">
-						<FormItem
-							label=""
-							validateStatus="success" // warning, validating, success
-							help="Between 1 and 15 contexts"
-						>
-							<Field
-								name="ContextField"
-								component={QuestionField}
-								type="text"
-								placeholder={'clear up your context'}
-							/>
-						</FormItem>
-					</Row>
 				</Form>
 			</Content>
 		);

@@ -9,7 +9,7 @@
 
 mlab.com databases:
 
-1. emaily-dev username = `infinity2o-dev` & password = `2134711p`
+1. infinity2o-dev username = `infinity2o-dev` & password = `2134711p`
 2. emaily-prod username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
 
 OAuth:

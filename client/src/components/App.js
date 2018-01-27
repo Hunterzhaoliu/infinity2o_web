@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as indexActions from '../actions/index';
+import * as actions from '../actions';
 import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
@@ -43,18 +43,18 @@ var styles = {
 	}
 };
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-function mapDispatchToProps(dispatch) {
-	const appDispatchers = bindActionCreators(indexActions, dispatch);
+// /*
+// So we have a state and a UI(with props).
+// This function gives the UI the functions it will need to be called.
+// */
+// function mapDispatchToProps(dispatch) {
+// 	const appDispatchers = bindActionCreators(indexActions, dispatch);
+//
+// 	return {
+// 		fetchUser: () => {
+// 			appDispatchers.fetchUser();
+// 		}
+// 	};
+// }
 
-	return {
-		fetchUser: () => {
-			appDispatchers.fetchUser();
-		}
-	};
-}
-
-export default connect(null, mapDispatchToProps)(App);
+export default connect(null, actions)(App);
