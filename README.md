@@ -10,7 +10,7 @@
 mlab.com databases:
 
 1. infinity2o-dev username = `infinity2o-dev` & password = `2134711p`
-2. emaily-prod username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
+2. infinity2o-prod username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
 
 OAuth:
 
@@ -48,6 +48,7 @@ Setup:
 2. `gitsync`
 3. `heroku login` username = `qn1over12@gmail.com` & password = `exxxxxIxxFxxx`
 4. `git push heroku master`
+5. https://infinity2o.herokuapp.com/
 
 ## Useful links
 
