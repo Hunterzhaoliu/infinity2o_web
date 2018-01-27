@@ -38,7 +38,6 @@ class AskForm extends Component {
 								label="What's on your mind? "
 								component={QuestionField}
 								type="text"
-								placeholder={'ask away'}
 								colorTheme={this.props.colorTheme}
 							/>
 						</FormItem>

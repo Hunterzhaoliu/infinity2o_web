@@ -12,7 +12,8 @@ let initialState = {
 	backgroundColor: null,
 	text1Color: null,
 	text2Color: null,
-	text3Color: null
+	text3Color: null,
+	text4Color: null
 };
 
 export default function(state = initialState, action) {
@@ -27,6 +28,7 @@ export default function(state = initialState, action) {
 			newState.text1Color = action.text1Color;
 			newState.text2Color = action.text2Color;
 			newState.text3Color = action.text3Color;
+			newState.text4Color = action.text4Color;
 			return newState;
 		default:
 			return state || newState;

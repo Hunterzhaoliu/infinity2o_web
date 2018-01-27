@@ -25,11 +25,13 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 	let newText1Color = GREY_9;
 	let newText2Color = GREY_7;
 	let newText3Color = GREY_5;
+	let newText4Color = GREY_3;
 	if (oldBackgroundColor === GREY_1) {
 		newBackgroundColor = GREY_9;
 		newText1Color = GREY_1;
 		newText2Color = GREY_3;
 		newText3Color = GREY_5;
+		newText4Color = GREY_7;
 	}
 
 	return {
@@ -41,6 +43,7 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 		backgroundColor: newBackgroundColor,
 		text1Color: newText1Color,
 		text2Color: newText2Color,
-		text3Color: newText3Color
+		text3Color: newText3Color,
+		text4Color: newText4Color
 	};
 }
