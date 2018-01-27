@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import QuestionField from './QuestionField';
-import { Layout, Row, Col, Form, Input, Icon, Button } from 'antd';
+import { Layout, Row, Form } from 'antd';
 const { Content } = Layout;
-const Search = Input.Search;
 const FormItem = Form.Item;
 
 class Ask extends Component {
