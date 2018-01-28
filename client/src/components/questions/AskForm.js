@@ -21,9 +21,9 @@ class AskForm extends Component {
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<Row type="flex" justify="start">
-					<Col>
-						<Form onSubmit={this.props.handleSubmit}>
+				<Form onSubmit={this.props.handleSubmit}>
+					<Row type="flex" justify="start" align="middle">
+						<Col>
 							<Field
 								name="question"
 								label="Question: "
@@ -31,11 +31,12 @@ class AskForm extends Component {
 								type="text"
 								colorTheme={this.props.colorTheme}
 							/>
-
-							{this.renderIfDuplicateQuestion()}
-						</Form>
-					</Col>
-				</Row>
+						</Col>
+					</Row>
+					<Row>
+						<Col>{this.renderIfDuplicateQuestion()}</Col>
+					</Row>
+				</Form>
 			</Content>
 		);
 	}
