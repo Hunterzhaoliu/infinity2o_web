@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import QuestionField from './QuestionField';
-import { Layout, Row, Form } from 'antd';
+import InputField from './InputField';
+import { Layout, Row, Col, Form, Button, Icon } from 'antd';
 const { Content } = Layout;
 const FormItem = Form.Item;
 
 class AskForm extends Component {
-	// constructor(props) {
-	// 	super(props);
-	//
-	// 	this.state = { new: true };
-	// }
-	// state = { showFormReview: false };
 	renderIfDuplicateQuestion() {
 		// TODO: after db is full of questions
 	}
@@ -27,23 +21,21 @@ class AskForm extends Component {
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<Form onSubmit={this.props.handleSubmit}>
-					<Row type="flex" justify="start">
-						<FormItem
-							label=""
-							validateStatus="success" // warning, validating, success
-						>
+				<Row type="flex" justify="start">
+					<Col>
+						<Form onSubmit={this.props.handleSubmit}>
 							<Field
 								name="question"
-								label="What's on your mind? "
-								component={QuestionField}
+								label="Question: "
+								component={InputField}
 								type="text"
 								colorTheme={this.props.colorTheme}
 							/>
-						</FormItem>
-					</Row>
-					{this.renderIfDuplicateQuestion()}
-				</Form>
+
+							{this.renderIfDuplicateQuestion()}
+						</Form>
+					</Col>
+				</Row>
 			</Content>
 		);
 	}
@@ -64,13 +56,13 @@ AskForm = connect(mapStateToProps, null)(AskForm);
 function validate(values) {
 	const errors = {};
 
-	// errors.recipients = validateEmails(values.recipients || '');
-	//
-	// _.each(formFields, ({ name }) => {
-	// 	if (!values[name]) {
-	// 		errors[name] = 'must provide ' + name;
-	// 	}
-	// });
+	if (values.question) {
+		let acceptableQuestion =
+			values.question.length >= 15 && values.question.length <= 150;
+		if (!acceptableQuestion) {
+			errors['question'] = 'between 15 & 150 characters pretty please';
+		}
+	}
 
 	return errors;
 }

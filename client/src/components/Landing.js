@@ -5,6 +5,169 @@ import { Layout, Button } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
+	renderIdeaMeritocracyStrategy() {
+		const intro = `We at infinity2o believe the truth gets harder to find as
+        information quantity increases. So we created an idea
+        meritocracy where you can anonymously make believability
+        weighed votes to help get everyone closer to the evolving truth.
+        Current strategy:`;
+		const step1 = `1) Ask research questions that don't have 1 right answer
+        anonymously.`;
+		const step2 = `2) Express, vote, & revote on possible answers
+        anonymously or publicly.`;
+		const step3 = `3) In general, more people change their beliefs towards
+        the truth than people who change towards untruths over time.`;
+		const step3_1 = `3.1) Examples:
+            Flat earth vs. round earth |
+            Earth in the center vs. not in the center |
+            Santa vs. no Santa |
+            Human like god vs. agnostic |
+            No human free will vs. there is human free will`;
+		const step3_2 = `3.2) CounterExamples:
+                TODO: submit one`;
+		const step4 = `4) Track people's change in beliefs to figure out how
+        believable they are during future votes.`;
+		switch (this.props.auth.userInfo) {
+			case null:
+				// show nothing when still signing in
+				return;
+			case false:
+				// not logged in
+				return (
+					<div>
+						<h1
+							key="0"
+							style={{ color: this.props.colorTheme.text1Color }}
+						>
+							{intro}
+						</h1>
+						<Typist
+							key="1"
+							avgTypingDelay={42}
+							cursor={{
+								show: false
+							}}
+						>
+							<Typist.Delay ms={3000} />
+							<h2
+								key="2"
+								style={{
+									color: this.props.colorTheme.text2Color
+								}}
+							>
+								{step1}
+							</h2>
+							<Typist.Delay ms={1000} />
+							<h2
+								key="3"
+								style={{
+									color: this.props.colorTheme.text2Color
+								}}
+							>
+								{step2}
+							</h2>
+							<Typist.Delay ms={1000} />
+							<h2
+								key="4"
+								style={{
+									color: this.props.colorTheme.text2Color
+								}}
+							>
+								{step3}
+							</h2>
+							<Typist.Delay ms={1000} />
+							<h2
+								key="5"
+								style={{
+									color: this.props.colorTheme.text2Color
+								}}
+							>
+								{step3_1}
+							</h2>
+							<Typist.Delay ms={1000} />
+							<h2
+								key="6"
+								style={{
+									color: this.props.colorTheme.text2Color
+								}}
+							>
+								{step3_2}
+							</h2>
+							<Typist.Delay ms={1000} />
+							<h2
+								key="7"
+								style={{
+									color: this.props.colorTheme.text2Color
+								}}
+							>
+								{step4}
+							</h2>
+						</Typist>
+					</div>
+				);
+			default:
+				// logged in
+				return (
+					<div>
+						<h1
+							key="0"
+							style={{ color: this.props.colorTheme.text1Color }}
+						>
+							{intro}
+						</h1>
+						<h2
+							key="2"
+							style={{
+								color: this.props.colorTheme.text2Color
+							}}
+						>
+							{step1}
+						</h2>
+						<h2
+							key="3"
+							style={{
+								color: this.props.colorTheme.text2Color
+							}}
+						>
+							{step2}
+						</h2>
+						<h2
+							key="4"
+							style={{
+								color: this.props.colorTheme.text2Color
+							}}
+						>
+							{step3}
+						</h2>
+						<h2
+							key="5"
+							style={{
+								color: this.props.colorTheme.text2Color
+							}}
+						>
+							{step3_1}
+						</h2>
+						<h2
+							key="6"
+							style={{
+								color: this.props.colorTheme.text2Color
+							}}
+						>
+							{step3_2}
+						</h2>
+						<h2
+							key="7"
+							style={{
+								color: this.props.colorTheme.text2Color
+							}}
+						>
+							{step4}
+						</h2>
+					</div>
+				);
+		}
+	}
+
 	renderLogin() {
 		switch (this.props.auth.userInfo) {
 			case null:
@@ -13,10 +176,10 @@ class Landing extends Component {
 			case false:
 				return (
 					<Button
-						key="5"
+						key="-1"
 						style={{
-							borderColor: this.props.colorTheme.keyColor,
-							background: this.props.colorTheme.keyColor,
+							borderColor: this.props.colorTheme.key,
+							background: this.props.colorTheme.key,
 							color: this.props.colorTheme.text1Color
 						}}
 					>
@@ -30,6 +193,7 @@ class Landing extends Component {
 
 	render() {
 		//console.log('this.props inside Landing', this.props);
+
 		return (
 			<Content
 				style={{
@@ -39,49 +203,7 @@ class Landing extends Component {
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
-					We at infinity2o believe the truth gets greyer & harder to
-					find as we age. So we aimed to create a place to get as
-					close to the evolving truth as possible.
-				</h1>
-				<Typist
-					avgTypingDelay={42}
-					cursor={{
-						show: false
-					}}
-				>
-					<Typist.Delay ms={3000} />
-					<h2
-						key="1"
-						style={{ color: this.props.colorTheme.text2Color }}
-					>
-						1) Ask research questions that don't have 1 right answer
-					</h2>
-					<Typist.Delay ms={1000} />
-					<h2
-						key="2"
-						style={{ color: this.props.colorTheme.text2Color }}
-					>
-						2) Express, vote, & revote on possible answers
-						anonymously or publicly
-					</h2>
-					<Typist.Delay ms={1000} />
-					<h2
-						key="3"
-						style={{ color: this.props.colorTheme.text2Color }}
-					>
-						3) Over time people will change their beliefs towards
-						the truth
-					</h2>
-					<Typist.Delay ms={1000} />
-					<h2
-						key="4"
-						style={{ color: this.props.colorTheme.text2Color }}
-					>
-						4) Track people's change in beliefs to figure out how
-						believable they are during future votes
-					</h2>
-				</Typist>
+				{this.renderIdeaMeritocracyStrategy()}
 				{this.renderLogin()}
 			</Content>
 		);
