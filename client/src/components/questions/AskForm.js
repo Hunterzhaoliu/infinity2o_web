@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import InputField from './InputField';
-import { Layout, Row, Col, Form, Button, Icon } from 'antd';
+import { Layout, Row, Form } from 'antd';
 const { Content } = Layout;
-const FormItem = Form.Item;
 
 class AskForm extends Component {
 	renderIfDuplicateQuestion() {
@@ -23,18 +22,22 @@ class AskForm extends Component {
 			>
 				<Form onSubmit={this.props.handleSubmit}>
 					<Row type="flex" justify="start" align="middle">
-						<Col>
-							<Field
-								name="question"
-								label="Question: "
-								component={InputField}
-								type="text"
-								colorTheme={this.props.colorTheme}
-							/>
-						</Col>
+						<Field
+							name="question"
+							label="Question: "
+							component={InputField}
+							type="text"
+							colorTheme={this.props.colorTheme}
+						/>
 					</Row>
-					<Row>
-						<Col>{this.renderIfDuplicateQuestion()}</Col>
+					<Row type="flex" justify="start" align="middle">
+						<Field
+							name="possibleAnswer"
+							label="Answer 1: "
+							component={InputField}
+							type="text"
+							colorTheme={this.props.colorTheme}
+						/>
 					</Row>
 				</Form>
 			</Content>
@@ -62,6 +65,7 @@ function validate(values) {
 			values.question.length >= 15 && values.question.length <= 150;
 		if (!acceptableQuestion) {
 			errors['question'] = 'between 15 & 150 characters pretty please';
+			// TODO: show possible answers and submit button
 		}
 	}
 
