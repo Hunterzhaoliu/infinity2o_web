@@ -37,8 +37,8 @@ what do u want to add?
 2. create `actions/actionCreator.js`
 3. deal with action type in `reducers/actionReducer.js`
 4. add `reducers/actionReducer.js` to `reducers/index.js`
-5. if state changes add `mapStateToProps` in `components/Component.js`
-6. if added functions to change state add `mapDispatchToProps` in `components/Component.js`
+5. if state changes add `mapStateToProps` in `containers/Containers.js`
+6. if added functions to change state add `mapDispatchToProps` in `containers/Containers.js`
 
 what do u want to remove?
 

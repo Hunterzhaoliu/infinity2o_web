@@ -14,13 +14,13 @@ import { Layout } from 'antd';
 
 class App extends Component {
 	componentDidMount() {
-		this.props.asyncFetchUser();
+		this.props.fetchUser();
 		// set random color theme on initial login
 		this.props.generateRandomColorTheme();
 	}
 
 	render() {
-		console.log('this.props inside App', this.props);
+		//console.log('this.props inside App', this.props);
 		return (
 			<BrowserRouter>
 				<Layout style={styles.layout}>
@@ -61,8 +61,8 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		asyncFetchUser: () => {
-			indexDispatchers.asyncFetchUser();
+		fetchUser: () => {
+			indexDispatchers.fetchUser();
 		},
 		generateRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();
