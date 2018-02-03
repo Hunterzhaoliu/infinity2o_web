@@ -17,6 +17,21 @@ module.exports = app => {
 		}
 	);
 
+	app.get(
+		'/auth/linkedIn/',
+		passport.authenticate('linkedIn', {
+			scope: ['profile', 'email']
+		})
+	);
+
+	app.get(
+		'/auth/linkedIn/callback',
+		passport.authenticate('linkedIn'),
+		(request, response) => {
+			response.redirect('/PID');
+		}
+	);
+
 	app.get('/api/logout', (request, response) => {
 		request.logout(); // kills the cookie
 		response.redirect('/');

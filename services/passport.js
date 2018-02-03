@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
 
@@ -22,6 +23,27 @@ passport.use(
 			clientID: keys.googleClientID,
 			clientSecret: keys.googleClientSecret,
 			callbackURL: '/auth/google/callback',
+			proxy: true
+		},
+		async (accessToken, refreshToken, profile, done) => {
+			const existingUser = await User.findOne({ googleId: profile.id }); // asynchronus
+			if (existingUser) {
+				// we already have this user in db
+				error = null;
+				done(error, existingUser);
+			} else {
+				const newUserFromDB = await new User({
+					googleId: profile.id
+				}).save();
+				done(null, newUserFromDB);
+			}
+		}
+	),
+	new LinkedinStategy(
+		{
+			clientID: keys.linkedInClientID,
+			clientSecret: keys.linkedInClientSecret,
+			callbackURL: '/auth/linkedIn/callback',
 			proxy: true
 		},
 		async (accessToken, refreshToken, profile, done) => {
