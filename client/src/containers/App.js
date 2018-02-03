@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as indexActionCreators from '../actions/index';
-//import { bindActionCreators } from 'redux';
+import * as colorThemeActionCreators from '../actions/colorTheme';
+import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
@@ -13,7 +14,9 @@ import { Layout } from 'antd';
 
 class App extends Component {
 	componentDidMount() {
-		this.props.fetchUser();
+		this.props.asyncFetchUser();
+		// set random color theme on initial login
+		this.props.generateRandomColorTheme();
 	}
 
 	render() {
@@ -45,18 +48,26 @@ var styles = {
 	}
 };
 
-// /*
-// So we have a state and a UI(with props).
-// This function gives the UI the functions it will need to be called.
-// */
-// function mapDispatchToProps(dispatch) {
-// 	const appDispatchers = bindActionCreators(indexActions, dispatch);
-//
-// 	return {
-// 		fetchUser: () => {
-// 			appDispatchers.fetchUser();
-// 		}
-// 	};
-// }
+/*
+So we have a state and a UI(with props).
+This function gives the UI the functions it will need to be called.
+*/
+function mapDispatchToProps(dispatch) {
+	const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
 
-export default connect(null, indexActionCreators)(App);
+	const colorThemeDispatchers = bindActionCreators(
+		colorThemeActionCreators,
+		dispatch
+	);
+
+	return {
+		asyncFetchUser: () => {
+			indexDispatchers.asyncFetchUser();
+		},
+		generateRandomColorTheme: () => {
+			colorThemeDispatchers.generateRandomColorTheme();
+		}
+	};
+}
+
+export default connect(null, mapDispatchToProps)(App);
