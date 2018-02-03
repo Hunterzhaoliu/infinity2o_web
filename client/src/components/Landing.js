@@ -6,27 +6,10 @@ const { Content } = Layout;
 
 class Landing extends Component {
 	renderIdeaMeritocracyStrategy() {
-		const intro = `We at infinity2o believe the truth gets harder to find as
-        information quantity increases. So we created an idea
-        meritocracy where you can anonymously make believability
-        weighed votes to help get everyone closer to the evolving truth.
-        Current strategy:`;
-		const step1 = `1) Ask research questions that don't have 1 right answer
-        anonymously.`;
-		const step2 = `2) Express, vote, & revote on possible answers
-        anonymously or publicly.`;
-		const step3 = `3) In general, more people change their beliefs towards
-        the truth than people who change towards untruths over time.`;
-		const step3_1 = `3.1) Examples:
-            Flat earth vs. round earth |
-            Earth in the center vs. not in the center |
-            Santa vs. no Santa |
-            Human like god vs. agnostic |
-            No human free will vs. there is human free will`;
-		const step3_2 = `3.2) CounterExamples:
-                TODO: submit one`;
-		const step4 = `4) Track people's change in beliefs to figure out how
-        believable they are during future votes.`;
+		const intro = `Colleges are too expensive & online classes are too lonely.
+        Join us to find a partner to take online classes with.`;
+		const step1 = `1) Answer a few simple questions.`;
+		const step2 = `2) Let our AI find you a study partner at the same skill level with similar interests.`;
 		switch (this.props.auth.userInfo) {
 			case null:
 				// show nothing when still signing in
@@ -42,7 +25,6 @@ class Landing extends Component {
 							{intro}
 						</h1>
 						<Typist
-							key="1"
 							avgTypingDelay={42}
 							cursor={{
 								show: false
@@ -50,57 +32,21 @@ class Landing extends Component {
 						>
 							<Typist.Delay ms={3000} />
 							<h2
-								key="2"
+								key="1"
 								style={{
 									color: this.props.colorTheme.text2Color
 								}}
 							>
 								{step1}
 							</h2>
-							<Typist.Delay ms={1000} />
+							<Typist.Delay ms={3000} />
 							<h2
-								key="3"
+								key="2"
 								style={{
 									color: this.props.colorTheme.text2Color
 								}}
 							>
 								{step2}
-							</h2>
-							<Typist.Delay ms={1000} />
-							<h2
-								key="4"
-								style={{
-									color: this.props.colorTheme.text2Color
-								}}
-							>
-								{step3}
-							</h2>
-							<Typist.Delay ms={1000} />
-							<h2
-								key="5"
-								style={{
-									color: this.props.colorTheme.text2Color
-								}}
-							>
-								{step3_1}
-							</h2>
-							<Typist.Delay ms={1000} />
-							<h2
-								key="6"
-								style={{
-									color: this.props.colorTheme.text2Color
-								}}
-							>
-								{step3_2}
-							</h2>
-							<Typist.Delay ms={1000} />
-							<h2
-								key="7"
-								style={{
-									color: this.props.colorTheme.text2Color
-								}}
-							>
-								{step4}
 							</h2>
 						</Typist>
 					</div>
@@ -116,7 +62,7 @@ class Landing extends Component {
 							{intro}
 						</h1>
 						<h2
-							key="2"
+							key="1"
 							style={{
 								color: this.props.colorTheme.text2Color
 							}}
@@ -124,44 +70,12 @@ class Landing extends Component {
 							{step1}
 						</h2>
 						<h2
-							key="3"
+							key="2"
 							style={{
 								color: this.props.colorTheme.text2Color
 							}}
 						>
 							{step2}
-						</h2>
-						<h2
-							key="4"
-							style={{
-								color: this.props.colorTheme.text2Color
-							}}
-						>
-							{step3}
-						</h2>
-						<h2
-							key="5"
-							style={{
-								color: this.props.colorTheme.text2Color
-							}}
-						>
-							{step3_1}
-						</h2>
-						<h2
-							key="6"
-							style={{
-								color: this.props.colorTheme.text2Color
-							}}
-						>
-							{step3_2}
-						</h2>
-						<h2
-							key="7"
-							style={{
-								color: this.props.colorTheme.text2Color
-							}}
-						>
-							{step4}
 						</h2>
 					</div>
 				);
