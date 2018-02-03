@@ -12,18 +12,22 @@ mlab.com databases:
 1. `infinity2o-dev` database username = `infinity2o-dev` & password = `2134711p`
 2. `infinity2o-prod` database username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
 
-OAuth:
+Google OAuth:
 
 1. login `console.developers.google.com` with `q42liu@gmail.com` under projects
    `infinity2o-dev` & `infinity2o-prod`
 
 Stripe.com login:
 
-1. login `stripe.com` with `q1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1. login with `q1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
 Sendgrid.com login:
 
-1. login `Sendgrid.com` with `q1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1. login with `q1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+
+Godaddy.com login:
+
+1. login with `q42liu@gmail.com` & password = `49xxxxxx@wxxxxx`
 
 Setup:
 
