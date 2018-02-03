@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import * as indexActionCreators from '../actions/index';
 //import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
 import Questions from './questions/Questions';
 import AskForm from './questions/AskForm';
-
-// import SurveyNew from './surveys/SurveyNew';
 
 import { Layout } from 'antd';
 
@@ -19,7 +17,7 @@ class App extends Component {
 	}
 
 	render() {
-		//console.log('this.props inside App', this.props);
+		console.log('this.props inside App', this.props);
 		return (
 			<BrowserRouter>
 				<Layout style={styles.layout}>
@@ -61,4 +59,4 @@ var styles = {
 // 	};
 // }
 
-export default connect(null, actions)(App);
+export default connect(null, indexActionCreators)(App);

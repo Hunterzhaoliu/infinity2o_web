@@ -8,6 +8,17 @@ import {
 	GREY_9
 } from '../components/styles/ColorConstants';
 
+export const actionCreators = {
+	generateRandomColorTheme: () => dispatch => {
+		const isGrey_1 = Math.floor(Math.random() * 2) < 0.5;
+		if (isGrey_1) {
+			return _generateColorThemeBasedOnBackground(GREY_1);
+		} else {
+			return _generateColorThemeBasedOnBackground(GREY_9);
+		}
+	}
+};
+
 export const generateRandomColorTheme = () => {
 	return function(dispatch) {
 		let isGrey_1 = Math.floor(Math.random() * 2) < 0.5;
