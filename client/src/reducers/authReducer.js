@@ -9,7 +9,9 @@ let initialState = {
 		_id: null,
 		googleId: null,
 		__v: null,
-		credits: null
+		credits: null,
+		linkedInId: null,
+		location: null
 	}
 };
 

@@ -58,7 +58,8 @@ passport.use(
 				done(error, existingUser);
 			} else {
 				const newUserFromDB = await new User({
-					linkedInId: profile.id
+					linkedInId: profile.id,
+					location: profile._json.location.name
 				}).save();
 				done(null, newUserFromDB);
 			}
