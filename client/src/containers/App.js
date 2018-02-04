@@ -7,8 +7,9 @@ import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
-import Questions from './questions/Questions';
-import AskForm from './questions/AskForm';
+import Dashboard from './dashboard/Dashboard';
+import DashboardMatches from './dashboard/DashboardMatches';
+import DashboardProfile from './dashboard/DashboardProfile';
 
 import { Layout } from 'antd';
 
@@ -26,8 +27,21 @@ class App extends Component {
 				<Layout style={styles.layout}>
 					<CustomHeader />
 					<Route exact={true} path="/" component={Landing} />
-					<Route exact={true} path="/questions" component={Questions} />
-					<Route exact={true} path="/questions/ask" component={AskForm} />
+					<Route
+						exact={true}
+						path="/dashboard"
+						component={Dashboard}
+					/>
+					<Route
+						exact={true}
+						path="/dashboard/matches"
+						component={DashboardMatches}
+					/>
+					<Route
+						exact={true}
+						path="/dashboard/profile"
+						component={DashboardProfile}
+					/>
 				</Layout>
 			</BrowserRouter>
 		);
