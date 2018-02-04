@@ -9,33 +9,33 @@
 
 mlab.com databases:
 
-1. login with `qliu` & password = `mxxxxFxxxxxIxxxxxx`
+1. Login with `qliu` & password = `mxxxxFxxxxxIxxxxxx`
 2. `infinity2o-dev` database username = `infinity2o-dev` & password = `2134711p`
 3. `infinity2o-prod` database username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
 
 Google OAuth:
 
-1. login `console.developers.google.com` with `q42liu@gmail.com` under projects
+1. Login `console.developers.google.com` with `q42liu@gmail.com` under projects
    `infinity2o-dev` & `infinity2o-prod`
 
 Stripe.com login:
 
-1. login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
 Sendgrid.com login:
 
-1. login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
 Godaddy.com login:
 
-1. login with `q42liu@gmail.com` & password = `49xxxxxx@wxxxxx`
+1. Login with `q42liu@gmail.com` & password = `49xxxxxx@wxxxxx`
 2. Already added name servers(NS) `karl.ns.cloudflare.com` & `wally.ns.cloudflare.com`
 3. Add forwarding to domain: `https://www.infinity2o.com` by adding
    subdomains `infinity2o.com` & `www`
 
 Cloudflare.com
 
-1. login with `qn1over12@gmail.com` & password = `21xxxxx@ix`
+1. Login with `qn1over12@gmail.com` & password = `21xxxxx@ix`
 2. Already added 2 CNAMEs.
     * Name: `infinity2o.com` Value: `www.infinity2o.com.herokudns.com`
       TTL: `Automatic` Status: `Arrow through cloud`
@@ -48,14 +48,16 @@ Local development setup:
 
 ## Development workflow checklists
 
-what do u want to add?
+When you want to add something...
 
-1. create `actions/types`
-2. create `actions/actionCreator.js`
-3. deal with action type in `reducers/actionReducer.js`
-4. add `reducers/actionReducer.js` to `reducers/index.js`
-5. if state changes add `mapStateToProps` in `containers/Containers.js`
-6. if added functions to change state add `mapDispatchToProps` in `containers/Containers.js`
+1. Create a `new-branch` off latest `master`
+1. Create `actions/types`
+1. Create `actions/actionCreator.js`
+1. Deal with action type in `reducers/actionReducer.js`
+1. Add `reducers/actionReducer.js` to `reducers/index.js`
+1. If state changes add `mapStateToProps` in `containers/Containers.js`
+1. If added functions to change state add `mapDispatchToProps` in `containers/Containers.js`
+1. Create a `pull request` for your `new-branch` to merge into `master`
 
 ## Deployment checklist
 
@@ -64,7 +66,7 @@ what do u want to add?
 3. `heroku login` username = `qn1over12@gmail.com` & password = `exxxxxIxxFxxx`
 4. `git push heroku master`
 5. https://infinity2o.herokuapp.com/
-6. check code is deployed on https://www.infinity2o.com/
+6. Check code is deployed on https://www.infinity2o.com/
 
 ## Design principles
 
@@ -77,9 +79,9 @@ what do u want to add?
 The key idea is we want to direct all different ways one can type our
 domain name and redirect it to `https://www.infinity2o.com`
 
-Right now if one types `infinity2o.com` or `www.infinity2o.com`
+Right now if one types `www.infinity2o.com`
 
-They all get redirected to `https://www.infinity2o.com`
+They will get redirected to `https://www.infinity2o.com`
 
 ## Useful links
 
