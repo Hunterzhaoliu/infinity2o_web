@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Typist from 'react-typist';
-import { Layout, Button } from 'antd';
+import { Layout, Button, Row, Col } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
@@ -18,7 +18,10 @@ class Landing extends Component {
 				// not logged in
 				return (
 					<div>
-						<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
+						<h1
+							key="0"
+							style={{ color: this.props.colorTheme.text1Color }}
+						>
 							{intro}
 						</h1>
 						<Typist
@@ -52,7 +55,10 @@ class Landing extends Component {
 				// logged in
 				return (
 					<div>
-						<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
+						<h1
+							key="0"
+							style={{ color: this.props.colorTheme.text1Color }}
+						>
 							{intro}
 						</h1>
 						<h2
@@ -84,26 +90,36 @@ class Landing extends Component {
 			case false:
 				return (
 					<div>
-						<Button
-							key="-1"
-							style={{
-								borderColor: this.props.colorTheme.key,
-								background: this.props.colorTheme.key,
-								color: this.props.colorTheme.text1Color
-							}}
-						>
-							<a href="/auth/google">Google Login</a>
-						</Button>
-						<Button
-							key="0"
-							style={{
-								borderColor: this.props.colorTheme.key,
-								background: this.props.colorTheme.key,
-								color: this.props.colorTheme.text1Color
-							}}
-						>
-							<a href="/auth/linkedIn">LinkedIn Login</a>
-						</Button>
+						<Row type="flex" justify="space-around">
+							<Col span={8} />
+							<Col span={4}>
+								<Button
+									key="-1"
+									style={{
+										borderColor: this.props.colorTheme.key,
+										background: this.props.colorTheme.key,
+										color: this.props.colorTheme.text1Color
+									}}
+								>
+									<a href="/auth/google">Google Login</a>
+								</Button>
+							</Col>
+							<Col span={4}>
+								<Button
+									key="0"
+									style={{
+										borderColor: this.props.colorTheme
+											.keyCompliment1,
+										background: this.props.colorTheme
+											.keyCompliment1,
+										color: this.props.colorTheme.text1Color
+									}}
+								>
+									<a href="/auth/linkedIn">LinkedIn Login</a>
+								</Button>
+							</Col>
+							<Col span={8} />
+						</Row>
 					</div>
 				);
 			default:
