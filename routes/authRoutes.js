@@ -16,7 +16,16 @@ module.exports = app => {
 			response.redirect('/questions');
 		}
 	);
+	app.get('/auth/linkedIn/', passport.authenticate('linkedin'));
 
+	app.get(
+		'/auth/linkedIn/callback',
+		passport.authenticate('linkedin'),
+		(request, response) => {
+			// after a user is logged in show them questions they can vote on
+			response.redirect('/questions');
+		}
+	);
 	app.get('/api/logout', (request, response) => {
 		request.logout(); // kills the cookie
 		response.redirect('/');

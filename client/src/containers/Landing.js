@@ -18,10 +18,7 @@ class Landing extends Component {
 				// not logged in
 				return (
 					<div>
-						<h1
-							key="0"
-							style={{ color: this.props.colorTheme.text1Color }}
-						>
+						<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
 							{intro}
 						</h1>
 						<Typist
@@ -55,10 +52,7 @@ class Landing extends Component {
 				// logged in
 				return (
 					<div>
-						<h1
-							key="0"
-							style={{ color: this.props.colorTheme.text1Color }}
-						>
+						<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
 							{intro}
 						</h1>
 						<h2
@@ -89,16 +83,28 @@ class Landing extends Component {
 				return;
 			case false:
 				return (
-					<Button
-						key="-1"
-						style={{
-							borderColor: this.props.colorTheme.key,
-							background: this.props.colorTheme.key,
-							color: this.props.colorTheme.text1Color
-						}}
-					>
-						<a href="/auth/google">Google Login</a>
-					</Button>
+					<div>
+						<Button
+							key="-1"
+							style={{
+								borderColor: this.props.colorTheme.key,
+								background: this.props.colorTheme.key,
+								color: this.props.colorTheme.text1Color
+							}}
+						>
+							<a href="/auth/google">Google Login</a>
+						</Button>
+						<Button
+							key="0"
+							style={{
+								borderColor: this.props.colorTheme.key,
+								background: this.props.colorTheme.key,
+								color: this.props.colorTheme.text1Color
+							}}
+						>
+							<a href="/auth/linkedIn">LinkedIn Login</a>
+						</Button>
+					</div>
 				);
 			default:
 				return;

@@ -26,16 +26,8 @@ class App extends Component {
 				<Layout style={styles.layout}>
 					<CustomHeader />
 					<Route exact={true} path="/" component={Landing} />
-					<Route
-						exact={true}
-						path="/questions"
-						component={Questions}
-					/>
-					<Route
-						exact={true}
-						path="/questions/ask"
-						component={AskForm}
-					/>
+					<Route exact={true} path="/questions" component={Questions} />
+					<Route exact={true} path="/questions/ask" component={AskForm} />
 				</Layout>
 			</BrowserRouter>
 		);
