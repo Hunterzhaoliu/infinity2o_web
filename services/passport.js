@@ -7,9 +7,9 @@ const keys = require('../config/keys');
 const User = mongoose.model('users');
 
 passport.serializeUser((userFromDB, done) => {
-	error = null;
-	done(error, userFromDB.id);
+	done(null, userFromDB.id);
 });
+//serializeUser puts id into user cookie
 
 passport.deserializeUser((id, done) => [
 	User.findById(id).then(userFromDB => {
@@ -38,23 +38,27 @@ passport.use(
 				done(null, newUserFromDB);
 			}
 		}
-	),
-	new LinkedinStategy(
+	)
+);
+passport.use(
+	new LinkedInStrategy(
 		{
 			clientID: keys.linkedInClientID,
 			clientSecret: keys.linkedInClientSecret,
 			callbackURL: '/auth/linkedIn/callback',
+			scope: ['r_basicprofile'],
+			state: true,
 			proxy: true
 		},
 		async (accessToken, refreshToken, profile, done) => {
-			const existingUser = await User.findOne({ googleId: profile.id }); // asynchronus
+			const existingUser = await User.findOne({ linkedInId: profile.id }); // asynchronus
 			if (existingUser) {
 				// we already have this user in db
 				error = null;
 				done(error, existingUser);
 			} else {
 				const newUserFromDB = await new User({
-					googleId: profile.id
+					linkedInId: profile.id
 				}).save();
 				done(null, newUserFromDB);
 			}

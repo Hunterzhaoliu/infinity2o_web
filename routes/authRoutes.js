@@ -16,22 +16,16 @@ module.exports = app => {
 			response.redirect('/questions');
 		}
 	);
-
-	app.get(
-		'/auth/linkedIn/',
-		passport.authenticate('linkedIn', {
-			scope: ['profile', 'email']
-		})
-	);
+	app.get('/auth/linkedIn/', passport.authenticate('linkedin'));
 
 	app.get(
 		'/auth/linkedIn/callback',
-		passport.authenticate('linkedIn'),
+		passport.authenticate('linkedin'),
 		(request, response) => {
-			response.redirect('/PID');
+			// after a user is logged in show them questions they can vote on
+			response.redirect('/questions');
 		}
 	);
-
 	app.get('/api/logout', (request, response) => {
 		request.logout(); // kills the cookie
 		response.redirect('/');
