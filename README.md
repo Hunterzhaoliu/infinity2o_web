@@ -29,12 +29,20 @@ Sendgrid.com login:
 Godaddy.com login:
 
 1. login with `q42liu@gmail.com` & password = `49xxxxxx@wxxxxx`
+2. Already added name servers(NS) `karl.ns.cloudflare.com` & `wally.ns.cloudflare.com`
+3. Add forwarding to domain: `https://www.infinity2o.com` by adding
+   subdomains `infinity2o.com` & `www`
 
 Cloudflare.com
 
 1. login with `qn1over12@gmail.com` & password = `21xxxxx@ix`
+2. Already added 2 CNAMEs.
+    * Name: `infinity2o.com` Value: `www.infinity2o.com.herokudns.com`
+      TTL: `Automatic` Status: `Arrow through cloud`
+    * Name: `www` Value: `www.infinity2o.com.herokudns.com`
+      TTL: `Automatic` Status: `Arrow through cloud`
 
-Setup:
+Local development setup:
 
 1. `cd infinity2o_server` then `npm run dev`
 
@@ -48,10 +56,6 @@ what do u want to add?
 4. add `reducers/actionReducer.js` to `reducers/index.js`
 5. if state changes add `mapStateToProps` in `containers/Containers.js`
 6. if added functions to change state add `mapDispatchToProps` in `containers/Containers.js`
-
-what do u want to remove?
-
-what do u want to change?
 
 ## Deployment checklist
 
