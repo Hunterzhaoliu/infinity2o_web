@@ -62,10 +62,10 @@ When you want to add something...
 ## Deployment checklist
 
 1. `cd infinity2o_server`
-2. `gitsync`
+2. `git checkout master`
 3. `heroku login` username = `qn1over12@gmail.com` & password = `exxxxxIxxFxxx`
 4. `git push heroku master`
-5. https://infinity2o.herokuapp.com/
+5. Check code is deployed on https://infinity2o.herokuapp.com/
 6. Check code is deployed on https://www.infinity2o.com/
 
 ## Design principles
