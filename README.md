@@ -9,8 +9,9 @@
 
 mlab.com databases:
 
-1. `infinity2o-dev` database username = `infinity2o-dev` & password = `2134711p`
-2. `infinity2o-prod` database username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
+1. login with `qliu` & password = `mxxxxFxxxxxIxxxxxx`
+2. `infinity2o-dev` database username = `infinity2o-dev` & password = `2134711p`
+3. `infinity2o-prod` database username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
 
 Google OAuth:
 
@@ -19,15 +20,19 @@ Google OAuth:
 
 Stripe.com login:
 
-1. login with `q1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1. login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
 Sendgrid.com login:
 
-1. login with `q1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1. login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
 Godaddy.com login:
 
 1. login with `q42liu@gmail.com` & password = `49xxxxxx@wxxxxx`
+
+Cloudflare.com
+
+1. login with `qn1over12@gmail.com` & password = `21xxxxx@ix`
 
 Setup:
 
@@ -55,12 +60,22 @@ what do u want to change?
 3. `heroku login` username = `qn1over12@gmail.com` & password = `exxxxxIxxFxxx`
 4. `git push heroku master`
 5. https://infinity2o.herokuapp.com/
+6. check code is deployed on https://www.infinity2o.com/
 
 ## Design principles
 
 1. [Fletcher Color Control](http://www.barnstonestudios.com/content/COLOUR-CONTROL-by-Frank-Morley-Fletcher.pdf)
 2. `color` beside `opposite color` is the most contrasting.
 3. `color` surrounded by grey changes grey into shade of `color`.
+
+## Domain name
+
+The key idea is we want to direct all different ways one can type our
+domain name and redirect it to `https://www.infinity2o.com`
+
+Right now if one types `infinity2o.com` or `www.infinity2o.com`
+
+They all get redirected to `https://www.infinity2o.com`
 
 ## Useful links
 
