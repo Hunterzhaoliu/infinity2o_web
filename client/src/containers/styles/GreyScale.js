@@ -1,11 +1,5 @@
-import {
-	colorsHashtable5,
-	GREY_1,
-	GREY_3,
-	GREY_5,
-	GREY_7,
-	GREY_9
-} from './ColorConstants';
+import { colorsHashtable5 } from './ColorConstants';
+import * as colors from './ColorConstants';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout, Row, Col } from 'antd';
@@ -19,17 +13,164 @@ class GreyScale extends Component {
 				style={{
 					textAlign: 'center',
 					padding: '100px 50px 81px', // top left&right bottom
-					background: GREY_5
+					background: colors.GREY_5
 				}}
 			>
 				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
 					GreyScale
 				</h1>
 				<Row type="flex" justify="center">
-					<Col span={4}>col-4</Col>
-					<Col span={4}>col-4</Col>
-					<Col span={4}>col-4</Col>
-					<Col span={4}>col-4</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_0
+							}}
+						/>
+					</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_1
+							}}
+						>
+							<Content
+								style={{
+									padding: '50px 20px', // height width
+									background: colors.BLUE_GREEN_1
+								}}
+							/>
+						</Content>
+					</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_2
+							}}
+						>
+							<Content
+								style={{
+									padding: '50px 20px', // height width
+									background: colors.BLUE_GREEN_1
+								}}
+							/>
+						</Content>
+					</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_3
+							}}
+						>
+							<Content
+								style={{
+									padding: '50px 20px', // height width
+									background: colors.BLUE_GREEN_1
+								}}
+							/>
+						</Content>
+					</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_4
+							}}
+						>
+							<Content
+								style={{
+									padding: '50px 20px', // height width
+									background: colors.BLUE_GREEN_1
+								}}
+							/>
+						</Content>
+					</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_5
+							}}
+						>
+							<Content
+								style={{
+									padding: '50px 20px', // height width
+									background: colors.BLUE_GREEN_1
+								}}
+							/>
+						</Content>
+					</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_6
+							}}
+						>
+							<Content
+								style={{
+									padding: '50px 20px', // height width
+									background: colors.BLUE_GREEN_1
+								}}
+							/>
+						</Content>
+					</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_7
+							}}
+						>
+							<Content
+								style={{
+									padding: '50px 20px', // height width
+									background: colors.BLUE_GREEN_1
+								}}
+							/>
+						</Content>
+					</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_8
+							}}
+						>
+							<Content
+								style={{
+									padding: '50px 20px', // height width
+									background: colors.BLUE_GREEN_1
+								}}
+							/>
+						</Content>
+					</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_9
+							}}
+						>
+							<Content
+								style={{
+									padding: '50px 20px', // height width
+									background: colors.BLUE_GREEN_1
+								}}
+							/>
+						</Content>
+					</Col>
+					<Col span={2.1}>
+						<Content
+							style={{
+								padding: '100px 40px', // height width
+								background: colors.GREY_10
+							}}
+						/>
+					</Col>
 				</Row>
 			</Content>
 		);
