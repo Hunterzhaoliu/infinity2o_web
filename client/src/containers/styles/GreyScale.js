@@ -1,10 +1,16 @@
-import { colorsHashtable5 } from './ColorConstants';
+//import { colorsHashtable5 } from './ColorConstants';
 import * as colors from './ColorConstants';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout, Row, Col } from 'antd';
 const { Content } = Layout;
 
+// Add the following to App.js for color rgb value development
+/* <Route
+    exact={true}
+    path="/greyscale"
+    component={GreyScale}
+/> */
 class GreyScale extends Component {
 	render() {
 		// console.log('this.props in GreyScale.js', this.props);
