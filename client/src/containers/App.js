@@ -13,6 +13,7 @@ import DashboardProfile from './dashboard/DashboardProfile';
 //import GreyScale from './styles/GreyScale';
 
 import { Layout } from 'antd';
+const { Footer } = Layout;
 
 class App extends Component {
 	componentDidMount() {
@@ -43,6 +44,16 @@ class App extends Component {
 						path="/dashboard/profile"
 						component={DashboardProfile}
 					/>
+					<Footer
+						style={{
+							textAlign: 'center',
+							background: this.props.colorTheme.backgroundColor,
+							color: this.props.colorTheme.text8Color
+						}}
+					>
+						<p>Infinity2o Inc. © 2018 to year infinity</p>
+						<p>UI version: 0.1.0 | API version: 1.0.0</p>
+					</Footer>
 				</Layout>
 			</BrowserRouter>
 		);
@@ -54,6 +65,16 @@ var styles = {
 		height: '100vh'
 	}
 };
+
+/*
+So we have a state and a UI(with props).
+This function gives the UI the parts of the state it will need to display.
+*/
+function mapStateToProps(state) {
+	return {
+		colorTheme: state.colorTheme
+	};
+}
 
 /*
 So we have a state and a UI(with props).
@@ -77,4 +98,4 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
