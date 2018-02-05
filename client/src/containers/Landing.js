@@ -5,7 +5,7 @@ import { Layout, Button, Row, Col } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
-	renderIdeaMeritocracyStrategy() {
+	renderMarketingInfo() {
 		const intro = `Colleges are too expensive & online classes are too lonely.
         Join us to find a partner to take online classes with.`;
 		const step1 = `1) Answer a few simple questions.`;
@@ -139,7 +139,7 @@ class Landing extends Component {
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				{this.renderIdeaMeritocracyStrategy()}
+				{this.renderMarketingInfo()}
 				{this.renderLogin()}
 			</Content>
 		);

@@ -8,8 +8,9 @@ import { Layout, Row, Col, Button } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
-	renderLogout() {
-		switch (this.props.auth.userInfo) {
+	renderHeaderButtons() {
+		const loginState = this.props.auth.userInfo;
+		switch (loginState) {
 			case null:
 				// show nothing when still signing in
 				return;
@@ -17,36 +18,45 @@ class CustomHeader extends Component {
 				return;
 			default:
 				return [
-					<Row type="flex" key="1">
-						<Col span={8}>
-							<Button
-								style={{
-									borderColor: this.props.colorTheme.key,
-									background: this.props.colorTheme.key,
-									color: this.props.colorTheme.text1Color
-								}}
-							>
-								<Link to="/questions/ask">
-									<div>Ask Research Question</div>
-								</Link>
-							</Button>
-						</Col>
-					</Row>,
-					<Row type="flex" key="2">
-						<Col span={6}>
-							<Button
-								style={{
-									borderColor: this.props.colorTheme
-										.thirdColor,
-									background: this.props.colorTheme
-										.thirdColor,
-									color: this.props.colorTheme.text2Color
-								}}
-							>
-								<a href="/api/logout">Logout</a>
-							</Button>
-						</Col>
-					</Row>
+					<Col span={3.5} key="1">
+						<Button
+							style={{
+								borderColor: this.props.colorTheme.key,
+								background: this.props.colorTheme.key,
+								color: this.props.colorTheme.text1Color
+							}}
+						>
+							<Link to="/dashboard/matches">
+								<div>Matches</div>
+							</Link>
+						</Button>
+					</Col>,
+					<Col span={14} key="2">
+						<Button
+							style={{
+								borderColor: this.props.colorTheme
+									.keyCompliment1,
+								background: this.props.colorTheme
+									.keyCompliment1,
+								color: this.props.colorTheme.text1Color
+							}}
+						>
+							<Link to="/dashboard/profile">
+								<div>Profile</div>
+							</Link>
+						</Button>
+					</Col>,
+					<Col span={2} key="3">
+						<Button
+							style={{
+								borderColor: this.props.colorTheme.thirdColor,
+								background: this.props.colorTheme.thirdColor,
+								color: this.props.colorTheme.text2Color
+							}}
+						>
+							<a href="/api/logout">Logout</a>
+						</Button>
+					</Col>
 				];
 		}
 	}
@@ -55,29 +65,25 @@ class CustomHeader extends Component {
 		return (
 			<Header
 				style={{
-					background: this.props.colorTheme.text2Color,
+					background: this.props.colorTheme.backgroundColor,
 					position: 'fixed',
 					width: '100%'
 				}}
 			>
 				<Row type="flex" justify="space-between">
-					<Row type="flex">
-						<Col span={8}>
-							<Button
-								style={{
-									borderColor: this.props.colorTheme
-										.text1Color,
-									background: this.props.colorTheme
-										.text1Color,
-									color: this.props.colorTheme.text3Color
-								}}
-								onClick={this.props.onPressRandomColorTheme}
-							>
-								Change Theme
-							</Button>
-						</Col>
-					</Row>
-					{this.renderLogout()}
+					<Col key="0" span={4.5}>
+						<Button
+							style={{
+								borderColor: this.props.colorTheme.text3Color,
+								background: this.props.colorTheme.text3Color,
+								color: this.props.colorTheme.text1Color
+							}}
+							onClick={this.props.onPressRandomColorTheme}
+						>
+							Change Theme
+						</Button>
+					</Col>
+					{this.renderHeaderButtons()}
 				</Row>
 			</Header>
 		);

@@ -53,7 +53,17 @@ export const GREEN_7 = 'rgb(0, 108, 0)';
 export const GREEN_8 = 'rgb(0, 73, 0)';
 export const GREEN_9 = 'rgb(0, 35, 0)';
 
+export const BLUE_GREEN_1 = 'rgb(0, 160, 160)';
+export const BLUE_GREEN_2 = 'rgb(0, 160, 160)';
+export const BLUE_GREEN_3 = 'rgb(0, 160, 160)';
+export const BLUE_GREEN_4 = 'rgb(0, 160, 160)';
 export const BLUE_GREEN_5 = 'rgb(0, 160, 160)';
+export const BLUE_GREEN_6 = 'rgb(0, 160, 160)';
+export const BLUE_GREEN_7 = 'rgb(0, 160, 160)';
+export const BLUE_GREEN_8 = 'rgb(0, 160, 160)';
+export const BLUE_GREEN_9 = 'rgb(0, 160, 160)';
+
+//export const BLUE_GREEN_5 = 'rgb(0, 160, 160)';
 export const BLUE_5 = 'rgb(0, 156, 213)';
 export const BLUE_VIOLET_5 = 'rgb(133, 114, 255)';
 export const VIOLET_5 = 'rgb(181, 98, 254)';

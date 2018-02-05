@@ -3,22 +3,19 @@ import { connect } from 'react-redux';
 import { Layout } from 'antd';
 const { Content } = Layout;
 
-class Questions extends Component {
+class DashboardMatches extends Component {
 	render() {
+		// console.log('this.props in DashboardMatches.js', this.props);
 		return (
 			<Content
 				style={{
-					textAlign: 'start',
+					textAlign: 'center',
 					padding: '100px 50px 81px', // top left&right bottom
-					minHeight: 82,
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
 				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
-					Your Current Beliefs
-				</h1>
-				<h1 key="1" style={{ color: this.props.colorTheme.text1Color }}>
-					Hottest Revoted Questions
+					DashboardMatches
 				</h1>
 			</Content>
 		);
@@ -35,4 +32,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(Questions);
+export default connect(mapStateToProps, null)(DashboardMatches);
