@@ -10,6 +10,7 @@ import Landing from './Landing';
 import Dashboard from './dashboard/Dashboard';
 import DashboardMatches from './dashboard/DashboardMatches';
 import DashboardProfile from './dashboard/DashboardProfile';
+import GreyScale from './styles/GreyScale';
 
 import { Layout } from 'antd';
 
@@ -41,6 +42,11 @@ class App extends Component {
 						exact={true}
 						path="/dashboard/profile"
 						component={DashboardProfile}
+					/>
+					<Route
+						exact={true}
+						path="/greyscale"
+						component={GreyScale}
 					/>
 				</Layout>
 			</BrowserRouter>
