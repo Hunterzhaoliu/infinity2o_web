@@ -35,18 +35,6 @@ class DashboardMatches extends Component {
 							height: '50%'
 						}}
 					>
-						<Button
-							style={{
-								borderColor: this.props.colorTheme
-									.keyCompliment2,
-								background: this.props.colorTheme
-									.keyCompliment2,
-								color: this.props.colorTheme.text1Color
-							}}
-							//onClick={}
-						>
-							Swap Out
-						</Button>
 						<Card
 							hoverable={true}
 							borderded="false"
@@ -58,6 +46,9 @@ class DashboardMatches extends Component {
 							}}
 							cover={
 								<img
+									style={{
+										height: '300px'
+									}}
 									alt="example"
 									src="https://www.mills.edu/uniquely-mills/students-faculty/student-profiles/images/student-profile-gabriela-mills-college.jpg"
 								/>
@@ -68,6 +59,18 @@ class DashboardMatches extends Component {
 							<p>Class interest: LINK_TO_ONLINE_CLASS</p>
 							<p># of hours/week free: 5</p>
 							<p>Resume: CLICK_TO_EXPAND</p>
+							<Button
+								style={{
+									borderColor: this.props.colorTheme
+										.keyCompliment2,
+									background: this.props.colorTheme
+										.keyCompliment2,
+									color: this.props.colorTheme.text1Color
+								}}
+								//onClick={}
+							>
+								Swap Out
+							</Button>
 						</Card>
 					</Col>
 					<Col
@@ -76,18 +79,6 @@ class DashboardMatches extends Component {
 							height: '50%'
 						}}
 					>
-						<Button
-							style={{
-								borderColor: this.props.colorTheme
-									.keyCompliment2,
-								background: this.props.colorTheme
-									.keyCompliment2,
-								color: this.props.colorTheme.text1Color
-							}}
-							//onClick={}
-						>
-							Swap Out
-						</Button>
 						<Card
 							hoverable={true}
 							borderded="false"
@@ -99,6 +90,9 @@ class DashboardMatches extends Component {
 							}}
 							cover={
 								<img
+									style={{
+										height: '300px'
+									}}
 									alt="example"
 									src="https://camd.northeastern.edu/wp-content/uploads/2016/02/Cory.png"
 								/>
@@ -109,6 +103,18 @@ class DashboardMatches extends Component {
 							<p>Class interest: LINK_TO_ONLINE_CLASS</p>
 							<p># of hours/week free: 4</p>
 							<p>Resume: CLICK_TO_EXPAND</p>
+							<Button
+								style={{
+									borderColor: this.props.colorTheme
+										.keyCompliment2,
+									background: this.props.colorTheme
+										.keyCompliment2,
+									color: this.props.colorTheme.text1Color
+								}}
+								//onClick={}
+							>
+								Swap Out
+							</Button>
 						</Card>
 					</Col>
 					<Col span={2} />
