@@ -6,10 +6,10 @@ const { Content } = Layout;
 
 class Landing extends Component {
 	renderMarketingInfo() {
-		const intro = `Colleges are too expensive & online classes are too lonely.
-        Join us to find a partner to take online classes with.`;
+		const intro = `Online classes are amazing but too lonely.
+        Join our community to find a partner for your online classes.`;
 		const step1 = `1) Answer a few simple questions.`;
-		const step2 = `2) Let our AI find you a study partner at the same skill level with similar interests.`;
+		const step2 = `2) Let our AI find you a great study partner at the same skill level with similar interests.`;
 		switch (this.props.auth.userInfo) {
 			case null:
 				// show nothing when still signing in

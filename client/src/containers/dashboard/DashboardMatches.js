@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout } from 'antd';
+import { Layout, Carousel } from 'antd';
 const { Content } = Layout;
 
 class DashboardMatches extends Component {
@@ -15,8 +15,12 @@ class DashboardMatches extends Component {
 				}}
 			>
 				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
-					DashboardMatches
+					Here are 2 matches our AI has selected for you.
 				</h1>
+				<h2 key="0" style={{ color: this.props.colorTheme.text2Color }}>
+					Teach our AI which study partner you prefer by swapping out
+					the partner you don't want.
+				</h2>
 			</Content>
 		);
 	}
