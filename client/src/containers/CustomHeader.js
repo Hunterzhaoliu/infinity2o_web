@@ -65,7 +65,7 @@ class CustomHeader extends Component {
 		return (
 			<Header
 				style={{
-					background: this.props.colorTheme.text2Color,
+					background: this.props.colorTheme.backgroundColor,
 					position: 'fixed',
 					width: '100%'
 				}}
@@ -74,9 +74,9 @@ class CustomHeader extends Component {
 					<Col key="0" span={4.5}>
 						<Button
 							style={{
-								borderColor: this.props.colorTheme.text1Color,
-								background: this.props.colorTheme.text1Color,
-								color: this.props.colorTheme.text3Color
+								borderColor: this.props.colorTheme.text3Color,
+								background: this.props.colorTheme.text3Color,
+								color: this.props.colorTheme.text1Color
 							}}
 							onClick={this.props.onPressRandomColorTheme}
 						>
