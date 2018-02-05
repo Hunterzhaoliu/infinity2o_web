@@ -38,7 +38,7 @@ class GreyScale extends Component {
 							<Content
 								style={{
 									padding: '50px 20px', // height width
-									background: colors.BLUE_GREEN_1
+									background: colors.GREEN_1
 								}}
 							/>
 						</Content>
@@ -53,7 +53,7 @@ class GreyScale extends Component {
 							<Content
 								style={{
 									padding: '50px 20px', // height width
-									background: colors.BLUE_GREEN_1
+									background: colors.GREEN_2
 								}}
 							/>
 						</Content>
@@ -68,7 +68,7 @@ class GreyScale extends Component {
 							<Content
 								style={{
 									padding: '50px 20px', // height width
-									background: colors.BLUE_GREEN_1
+									background: colors.GREEN_3
 								}}
 							/>
 						</Content>
@@ -83,7 +83,7 @@ class GreyScale extends Component {
 							<Content
 								style={{
 									padding: '50px 20px', // height width
-									background: colors.BLUE_GREEN_1
+									background: colors.GREEN_4
 								}}
 							/>
 						</Content>
@@ -98,7 +98,7 @@ class GreyScale extends Component {
 							<Content
 								style={{
 									padding: '50px 20px', // height width
-									background: colors.BLUE_GREEN_1
+									background: colors.GREEN_5
 								}}
 							/>
 						</Content>
@@ -113,7 +113,7 @@ class GreyScale extends Component {
 							<Content
 								style={{
 									padding: '50px 20px', // height width
-									background: colors.BLUE_GREEN_1
+									background: colors.GREEN_6
 								}}
 							/>
 						</Content>
@@ -128,7 +128,7 @@ class GreyScale extends Component {
 							<Content
 								style={{
 									padding: '50px 20px', // height width
-									background: colors.BLUE_GREEN_1
+									background: colors.GREEN_7
 								}}
 							/>
 						</Content>
@@ -143,7 +143,7 @@ class GreyScale extends Component {
 							<Content
 								style={{
 									padding: '50px 20px', // height width
-									background: colors.BLUE_GREEN_1
+									background: colors.GREEN_8
 								}}
 							/>
 						</Content>
@@ -158,7 +158,7 @@ class GreyScale extends Component {
 							<Content
 								style={{
 									padding: '50px 20px', // height width
-									background: colors.BLUE_GREEN_1
+									background: colors.GREEN_9
 								}}
 							/>
 						</Content>
