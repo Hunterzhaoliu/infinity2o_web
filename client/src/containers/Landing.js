@@ -34,7 +34,7 @@ class Landing extends Component {
 							<h2
 								key="1"
 								style={{
-									color: this.props.colorTheme.text2Color
+									color: this.props.colorTheme.text3Color
 								}}
 							>
 								{step1}
@@ -43,7 +43,7 @@ class Landing extends Component {
 							<h2
 								key="2"
 								style={{
-									color: this.props.colorTheme.text2Color
+									color: this.props.colorTheme.text3Color
 								}}
 							>
 								{step2}
@@ -64,7 +64,7 @@ class Landing extends Component {
 						<h2
 							key="1"
 							style={{
-								color: this.props.colorTheme.text2Color
+								color: this.props.colorTheme.text3Color
 							}}
 						>
 							{step1}
@@ -72,7 +72,7 @@ class Landing extends Component {
 						<h2
 							key="2"
 							style={{
-								color: this.props.colorTheme.text2Color
+								color: this.props.colorTheme.text3Color
 							}}
 						>
 							{step2}

@@ -18,7 +18,7 @@ class CustomHeader extends Component {
 				return;
 			default:
 				return [
-					<Col span={3.5} key="1">
+					<Col span={3} key="1">
 						<Button
 							style={{
 								borderColor: this.props.colorTheme.key,
@@ -31,7 +31,7 @@ class CustomHeader extends Component {
 							</Link>
 						</Button>
 					</Col>,
-					<Col span={14} key="2">
+					<Col span={13} key="2">
 						<Button
 							style={{
 								borderColor: this.props.colorTheme
@@ -46,7 +46,7 @@ class CustomHeader extends Component {
 							</Link>
 						</Button>
 					</Col>,
-					<Col span={2} key="3">
+					<Col span={3} key="3">
 						<Button
 							style={{
 								borderColor: this.props.colorTheme.thirdColor,
@@ -71,11 +71,11 @@ class CustomHeader extends Component {
 				}}
 			>
 				<Row type="flex" justify="space-between">
-					<Col key="0" span={4.5}>
+					<Col key="0" span={5}>
 						<Button
 							style={{
-								borderColor: this.props.colorTheme.text3Color,
-								background: this.props.colorTheme.text3Color,
+								borderColor: this.props.colorTheme.text5Color,
+								background: this.props.colorTheme.text5Color,
 								color: this.props.colorTheme.text1Color
 							}}
 							onClick={this.props.onPressRandomColorTheme}

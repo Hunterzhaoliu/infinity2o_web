@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Row, Col, Card, Carousel } from 'antd';
+import { Layout, Row, Col, Card, Button } from 'antd';
 const { Content } = Layout;
-const { Meta } = Card;
 
 class DashboardMatches extends Component {
 	render() {
@@ -11,14 +10,20 @@ class DashboardMatches extends Component {
 			<Content
 				style={{
 					textAlign: 'center',
-					padding: '100px 50px 81px', // top left&right bottom
+					padding: '10% 5% 5%', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
 				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
 					Here are 2 matches our AI has selected for you.
 				</h1>
-				<h2 key="1" style={{ color: this.props.colorTheme.text2Color }}>
+				<h2
+					key="1"
+					style={{
+						color: this.props.colorTheme.text2Color,
+						padding: '0% 0% 5%'
+					}}
+				>
 					Teach our AI which study partner you prefer by swapping out
 					the partner you don't want.
 				</h2>
@@ -30,19 +35,31 @@ class DashboardMatches extends Component {
 							height: '50%'
 						}}
 					>
+						<Button
+							style={{
+								borderColor: this.props.colorTheme
+									.keyCompliment2,
+								background: this.props.colorTheme
+									.keyCompliment2,
+								color: this.props.colorTheme.text1Color
+							}}
+							//onClick={}
+						>
+							Swap Out
+						</Button>
 						<Card
 							hoverable={true}
-							borderded={false}
+							borderded="false"
 							loading={false}
 							style={{
 								width: '100%',
 								color: this.props.colorTheme.text1Color,
-								background: this.props.colorTheme.text4Color
+								background: this.props.colorTheme.text8Color
 							}}
 							cover={
 								<img
 									alt="example"
-									src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+									src="https://www.mills.edu/uniquely-mills/students-faculty/student-profiles/images/student-profile-gabriela-mills-college.jpg"
 								/>
 							}
 						>
@@ -59,13 +76,26 @@ class DashboardMatches extends Component {
 							height: '50%'
 						}}
 					>
+						<Button
+							style={{
+								borderColor: this.props.colorTheme
+									.keyCompliment2,
+								background: this.props.colorTheme
+									.keyCompliment2,
+								color: this.props.colorTheme.text1Color
+							}}
+							//onClick={}
+						>
+							Swap Out
+						</Button>
 						<Card
 							hoverable={true}
+							borderded="false"
+							loading={false}
 							style={{
 								width: '100%',
 								color: this.props.colorTheme.text1Color,
-								background: this.props.colorTheme
-									.backgroundColor
+								background: this.props.colorTheme.text8Color
 							}}
 							cover={
 								<img
