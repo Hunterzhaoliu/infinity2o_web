@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { colorsHashtable } from './ColorConstants';
+//import { colorsHashtable } from './ColorConstants';
 import * as colors from './ColorConstants';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -9,11 +9,11 @@ const { Content } = Layout;
 const scaleFields = [
 	{
 		color: colors.GREY_0,
-		color2: colorsHashtable[0].key
+		color2: colors.ORANGE_YELLOW_1
 	},
 	{
 		color: colors.GREY_1,
-		color2: colorsHashtable[0].key
+		color2: colors.ORANGE_YELLOW_1
 	},
 	{
 		color: colors.GREY_2,

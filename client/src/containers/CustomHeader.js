@@ -80,9 +80,9 @@ class CustomHeader extends Component {
 					<Col key="0" span={5}>
 						<Button
 							style={{
-								borderColor: this.props.colorTheme.text5Color,
-								background: this.props.colorTheme.text5Color,
-								color: this.props.colorTheme.text1Color
+								borderColor: this.props.colorTheme.text6Color,
+								background: this.props.colorTheme.text6Color,
+								color: this.props.colorTheme.text2Color
 							}}
 							onClick={this.props.onPressRandomColorTheme}
 						>

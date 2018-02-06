@@ -10,6 +10,7 @@ class DashboardMatches extends Component {
 		return _.map(matchesFields, match => {
 			return (
 				<Col
+					key={match.name}
 					span={8}
 					style={{
 						height: '50%'
@@ -22,6 +23,7 @@ class DashboardMatches extends Component {
 						style={{
 							width: '100%',
 							color: this.props.colorTheme.text1Color,
+							borderColor: this.props.colorTheme.text8Color,
 							background: this.props.colorTheme.text8Color
 						}}
 						cover={
@@ -34,20 +36,48 @@ class DashboardMatches extends Component {
 							/>
 						}
 					>
-						<p>Name: {match.name}</p>
-						<p>Learning interests: {match.learning_interests}</p>
-						<p>Class interest: {match.class_interests}</p>
-						<p># of hours/week free: {match.num_hrs_week_free}</p>
-						<p>Resume: {match.resume}</p>
+						<p
+							style={{
+								color: this.props.colorTheme.text1Color
+							}}
+						>
+							{match.name}
+						</p>
+						<p
+							style={{
+								color: this.props.colorTheme.text3Color
+							}}
+						>
+							Learning interests: {match.learning_interests}
+						</p>
+						<p
+							style={{
+								color: this.props.colorTheme.text3Color
+							}}
+						>
+							Class interest: {match.class_interests}
+						</p>
+						<p
+							style={{
+								color: this.props.colorTheme.text3Color
+							}}
+						>
+							# of hours/week free: {match.num_hrs_week_free}
+						</p>
+						<p
+							style={{
+								color: this.props.colorTheme.text3Color
+							}}
+						>
+							Resume: {match.resume}
+						</p>
 						<Row type="flex" justify="space-between" align="top">
 							<Col span={10}>
 								<Button
 									style={{
-										borderColor: this.props.colorTheme
-											.keyCompliment2,
-										background: this.props.colorTheme
-											.keyCompliment2,
-										color: this.props.colorTheme.text1Color
+										borderColor: this.props.colorTheme.key,
+										background: this.props.colorTheme.key,
+										color: this.props.colorTheme.text2Color
 									}}
 									//onClick={}
 								>
@@ -60,7 +90,7 @@ class DashboardMatches extends Component {
 									style={{
 										borderColor: this.props.colorTheme.key,
 										background: this.props.colorTheme.key,
-										color: this.props.colorTheme.text1Color
+										color: this.props.colorTheme.text2Color
 									}}
 									//onClick={}
 								>
@@ -85,13 +115,13 @@ class DashboardMatches extends Component {
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
+				<h1 key="0" style={{ color: this.props.colorTheme.text4Color }}>
 					Here are 2 matches our AI has selected for you.
 				</h1>
 				<h2
 					key="1"
 					style={{
-						color: this.props.colorTheme.text2Color,
+						color: this.props.colorTheme.text5Color,
 						padding: '0% 0% 5%'
 					}}
 				>

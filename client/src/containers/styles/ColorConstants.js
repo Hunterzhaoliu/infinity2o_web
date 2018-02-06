@@ -143,9 +143,309 @@ export const ORANGE_YELLOW_7 = 'rgb(104, 76, 0)';
 export const ORANGE_YELLOW_8 = 'rgb(68, 50, 0)';
 export const ORANGE_YELLOW_9 = 'rgb(35, 26, 0)';
 
-export const colorsHashtable = [
+export const colorsHashtable1 = [
 	{
 		key: YELLOW_1,
+		keyCompliment1: RED_VIOLET_1,
+		keyCompliment2: BLUE_VIOLET_1,
+		thirdColor: BLUE_1
+	},
+	{
+		key: YELLOW_GREEN_1,
+		keyCompliment1: RED_1,
+		keyCompliment2: YELLOW_GREEN_1,
+		thirdColor: BLUE_VIOLET_1
+	},
+	{
+		key: GREEN_1,
+		keyCompliment1: RED_ORANGE_1,
+		keyCompliment2: RED_VIOLET_1,
+		thirdColor: VIOLET_1
+	},
+	{
+		key: BLUE_GREEN_1,
+		keyCompliment1: ORANGE_1,
+		keyCompliment2: RED_1,
+		thirdColor: RED_VIOLET_1
+	},
+	{
+		key: BLUE_1,
+		keyCompliment1: ORANGE_YELLOW_1,
+		keyCompliment2: RED_ORANGE_1,
+		thirdColor: RED_1
+	},
+	{
+		key: BLUE_VIOLET_1,
+		keyCompliment1: YELLOW_1,
+		keyCompliment2: ORANGE_1,
+		thirdColor: RED_ORANGE_1
+	},
+	{
+		key: VIOLET_1,
+		keyCompliment1: YELLOW_GREEN_1,
+		keyCompliment2: ORANGE_YELLOW_1,
+		thirdColor: ORANGE_1
+	},
+	{
+		key: RED_VIOLET_1,
+		keyCompliment1: GREEN_1,
+		keyCompliment2: YELLOW_1,
+		thirdColor: ORANGE_YELLOW_1
+	},
+	{
+		key: RED_1,
+		keyCompliment1: BLUE_GREEN_1,
+		keyCompliment2: YELLOW_GREEN_1,
+		thirdColor: YELLOW_1
+	},
+	{
+		key: RED_ORANGE_1,
+		keyCompliment1: BLUE_1,
+		keyCompliment2: GREEN_1,
+		thirdColor: YELLOW_GREEN_1
+	},
+	{
+		key: ORANGE_1,
+		keyCompliment1: BLUE_VIOLET_1,
+		keyCompliment2: BLUE_GREEN_1,
+		thirdColor: GREEN_1
+	},
+	{
+		key: ORANGE_YELLOW_1,
+		keyCompliment1: VIOLET_1,
+		keyCompliment2: BLUE_1,
+		thirdColor: BLUE_GREEN_1
+	}
+];
+
+export const colorsHashtable2 = [
+	{
+		key: YELLOW_2,
+		keyCompliment1: RED_VIOLET_2,
+		keyCompliment2: BLUE_VIOLET_2,
+		thirdColor: BLUE_2
+	},
+	{
+		key: YELLOW_GREEN_2,
+		keyCompliment1: RED_2,
+		keyCompliment2: YELLOW_GREEN_2,
+		thirdColor: BLUE_VIOLET_2
+	},
+	{
+		key: GREEN_2,
+		keyCompliment1: RED_ORANGE_2,
+		keyCompliment2: RED_VIOLET_2,
+		thirdColor: VIOLET_2
+	},
+	{
+		key: BLUE_GREEN_2,
+		keyCompliment1: ORANGE_2,
+		keyCompliment2: RED_2,
+		thirdColor: RED_VIOLET_2
+	},
+	{
+		key: BLUE_2,
+		keyCompliment1: ORANGE_YELLOW_2,
+		keyCompliment2: RED_ORANGE_2,
+		thirdColor: RED_2
+	},
+	{
+		key: BLUE_VIOLET_2,
+		keyCompliment1: YELLOW_2,
+		keyCompliment2: ORANGE_2,
+		thirdColor: RED_ORANGE_2
+	},
+	{
+		key: VIOLET_2,
+		keyCompliment1: YELLOW_GREEN_2,
+		keyCompliment2: ORANGE_YELLOW_2,
+		thirdColor: ORANGE_2
+	},
+	{
+		key: RED_VIOLET_2,
+		keyCompliment1: GREEN_2,
+		keyCompliment2: YELLOW_2,
+		thirdColor: ORANGE_YELLOW_2
+	},
+	{
+		key: RED_2,
+		keyCompliment1: BLUE_GREEN_2,
+		keyCompliment2: YELLOW_GREEN_2,
+		thirdColor: YELLOW_2
+	},
+	{
+		key: RED_ORANGE_2,
+		keyCompliment1: BLUE_2,
+		keyCompliment2: GREEN_2,
+		thirdColor: YELLOW_GREEN_2
+	},
+	{
+		key: ORANGE_2,
+		keyCompliment1: BLUE_VIOLET_2,
+		keyCompliment2: BLUE_GREEN_2,
+		thirdColor: GREEN_2
+	},
+	{
+		key: ORANGE_YELLOW_2,
+		keyCompliment1: VIOLET_2,
+		keyCompliment2: BLUE_2,
+		thirdColor: BLUE_GREEN_2
+	}
+];
+
+export const colorsHashtable3 = [
+	{
+		key: YELLOW_3,
+		keyCompliment1: RED_VIOLET_3,
+		keyCompliment2: BLUE_VIOLET_3,
+		thirdColor: BLUE_3
+	},
+	{
+		key: YELLOW_GREEN_3,
+		keyCompliment1: RED_3,
+		keyCompliment2: YELLOW_GREEN_3,
+		thirdColor: BLUE_VIOLET_3
+	},
+	{
+		key: GREEN_3,
+		keyCompliment1: RED_ORANGE_3,
+		keyCompliment2: RED_VIOLET_3,
+		thirdColor: VIOLET_3
+	},
+	{
+		key: BLUE_GREEN_3,
+		keyCompliment1: ORANGE_3,
+		keyCompliment2: RED_3,
+		thirdColor: RED_VIOLET_3
+	},
+	{
+		key: BLUE_3,
+		keyCompliment1: ORANGE_YELLOW_3,
+		keyCompliment2: RED_ORANGE_3,
+		thirdColor: RED_3
+	},
+	{
+		key: BLUE_VIOLET_3,
+		keyCompliment1: YELLOW_3,
+		keyCompliment2: ORANGE_3,
+		thirdColor: RED_ORANGE_3
+	},
+	{
+		key: VIOLET_3,
+		keyCompliment1: YELLOW_GREEN_3,
+		keyCompliment2: ORANGE_YELLOW_3,
+		thirdColor: ORANGE_3
+	},
+	{
+		key: RED_VIOLET_3,
+		keyCompliment1: GREEN_3,
+		keyCompliment2: YELLOW_3,
+		thirdColor: ORANGE_YELLOW_3
+	},
+	{
+		key: RED_3,
+		keyCompliment1: BLUE_GREEN_3,
+		keyCompliment2: YELLOW_GREEN_3,
+		thirdColor: YELLOW_3
+	},
+	{
+		key: RED_ORANGE_3,
+		keyCompliment1: BLUE_3,
+		keyCompliment2: GREEN_3,
+		thirdColor: YELLOW_GREEN_3
+	},
+	{
+		key: ORANGE_3,
+		keyCompliment1: BLUE_VIOLET_3,
+		keyCompliment2: BLUE_GREEN_3,
+		thirdColor: GREEN_3
+	},
+	{
+		key: ORANGE_YELLOW_3,
+		keyCompliment1: VIOLET_3,
+		keyCompliment2: BLUE_3,
+		thirdColor: BLUE_GREEN_3
+	}
+];
+
+export const colorsHashtable4 = [
+	{
+		key: YELLOW_4,
+		keyCompliment1: RED_VIOLET_4,
+		keyCompliment2: BLUE_VIOLET_4,
+		thirdColor: BLUE_4
+	},
+	{
+		key: YELLOW_GREEN_4,
+		keyCompliment1: RED_4,
+		keyCompliment2: YELLOW_GREEN_4,
+		thirdColor: BLUE_VIOLET_4
+	},
+	{
+		key: GREEN_4,
+		keyCompliment1: RED_ORANGE_4,
+		keyCompliment2: RED_VIOLET_4,
+		thirdColor: VIOLET_4
+	},
+	{
+		key: BLUE_GREEN_4,
+		keyCompliment1: ORANGE_4,
+		keyCompliment2: RED_4,
+		thirdColor: RED_VIOLET_4
+	},
+	{
+		key: BLUE_4,
+		keyCompliment1: ORANGE_YELLOW_4,
+		keyCompliment2: RED_ORANGE_4,
+		thirdColor: RED_4
+	},
+	{
+		key: BLUE_VIOLET_4,
+		keyCompliment1: YELLOW_4,
+		keyCompliment2: ORANGE_4,
+		thirdColor: RED_ORANGE_4
+	},
+	{
+		key: VIOLET_4,
+		keyCompliment1: YELLOW_GREEN_4,
+		keyCompliment2: ORANGE_YELLOW_4,
+		thirdColor: ORANGE_4
+	},
+	{
+		key: RED_VIOLET_4,
+		keyCompliment1: GREEN_4,
+		keyCompliment2: YELLOW_4,
+		thirdColor: ORANGE_YELLOW_4
+	},
+	{
+		key: RED_4,
+		keyCompliment1: BLUE_GREEN_4,
+		keyCompliment2: YELLOW_GREEN_4,
+		thirdColor: YELLOW_4
+	},
+	{
+		key: RED_ORANGE_4,
+		keyCompliment1: BLUE_4,
+		keyCompliment2: GREEN_4,
+		thirdColor: YELLOW_GREEN_4
+	},
+	{
+		key: ORANGE_4,
+		keyCompliment1: BLUE_VIOLET_4,
+		keyCompliment2: BLUE_GREEN_4,
+		thirdColor: GREEN_4
+	},
+	{
+		key: ORANGE_YELLOW_4,
+		keyCompliment1: VIOLET_4,
+		keyCompliment2: BLUE_4,
+		thirdColor: BLUE_GREEN_4
+	}
+];
+
+export const colorsHashtable5 = [
+	{
+		key: YELLOW_5,
 		keyCompliment1: RED_VIOLET_5,
 		keyCompliment2: BLUE_VIOLET_5,
 		thirdColor: BLUE_5
@@ -215,5 +515,305 @@ export const colorsHashtable = [
 		keyCompliment1: VIOLET_5,
 		keyCompliment2: BLUE_5,
 		thirdColor: BLUE_GREEN_5
+	}
+];
+
+export const colorsHashtable6 = [
+	{
+		key: YELLOW_6,
+		keyCompliment1: RED_VIOLET_6,
+		keyCompliment2: BLUE_VIOLET_6,
+		thirdColor: BLUE_6
+	},
+	{
+		key: YELLOW_GREEN_6,
+		keyCompliment1: RED_6,
+		keyCompliment2: YELLOW_GREEN_6,
+		thirdColor: BLUE_VIOLET_6
+	},
+	{
+		key: GREEN_6,
+		keyCompliment1: RED_ORANGE_6,
+		keyCompliment2: RED_VIOLET_6,
+		thirdColor: VIOLET_6
+	},
+	{
+		key: BLUE_GREEN_6,
+		keyCompliment1: ORANGE_6,
+		keyCompliment2: RED_6,
+		thirdColor: RED_VIOLET_6
+	},
+	{
+		key: BLUE_6,
+		keyCompliment1: ORANGE_YELLOW_6,
+		keyCompliment2: RED_ORANGE_6,
+		thirdColor: RED_6
+	},
+	{
+		key: BLUE_VIOLET_6,
+		keyCompliment1: YELLOW_6,
+		keyCompliment2: ORANGE_6,
+		thirdColor: RED_ORANGE_6
+	},
+	{
+		key: VIOLET_6,
+		keyCompliment1: YELLOW_GREEN_6,
+		keyCompliment2: ORANGE_YELLOW_6,
+		thirdColor: ORANGE_6
+	},
+	{
+		key: RED_VIOLET_6,
+		keyCompliment1: GREEN_6,
+		keyCompliment2: YELLOW_6,
+		thirdColor: ORANGE_YELLOW_6
+	},
+	{
+		key: RED_6,
+		keyCompliment1: BLUE_GREEN_6,
+		keyCompliment2: YELLOW_GREEN_6,
+		thirdColor: YELLOW_6
+	},
+	{
+		key: RED_ORANGE_6,
+		keyCompliment1: BLUE_6,
+		keyCompliment2: GREEN_6,
+		thirdColor: YELLOW_GREEN_6
+	},
+	{
+		key: ORANGE_6,
+		keyCompliment1: BLUE_VIOLET_6,
+		keyCompliment2: BLUE_GREEN_6,
+		thirdColor: GREEN_6
+	},
+	{
+		key: ORANGE_YELLOW_6,
+		keyCompliment1: VIOLET_6,
+		keyCompliment2: BLUE_6,
+		thirdColor: BLUE_GREEN_6
+	}
+];
+
+export const colorsHashtable7 = [
+	{
+		key: YELLOW_7,
+		keyCompliment1: RED_VIOLET_7,
+		keyCompliment2: BLUE_VIOLET_7,
+		thirdColor: BLUE_7
+	},
+	{
+		key: YELLOW_GREEN_7,
+		keyCompliment1: RED_7,
+		keyCompliment2: YELLOW_GREEN_7,
+		thirdColor: BLUE_VIOLET_7
+	},
+	{
+		key: GREEN_7,
+		keyCompliment1: RED_ORANGE_7,
+		keyCompliment2: RED_VIOLET_7,
+		thirdColor: VIOLET_7
+	},
+	{
+		key: BLUE_GREEN_7,
+		keyCompliment1: ORANGE_7,
+		keyCompliment2: RED_7,
+		thirdColor: RED_VIOLET_7
+	},
+	{
+		key: BLUE_7,
+		keyCompliment1: ORANGE_YELLOW_7,
+		keyCompliment2: RED_ORANGE_7,
+		thirdColor: RED_7
+	},
+	{
+		key: BLUE_VIOLET_7,
+		keyCompliment1: YELLOW_7,
+		keyCompliment2: ORANGE_7,
+		thirdColor: RED_ORANGE_7
+	},
+	{
+		key: VIOLET_7,
+		keyCompliment1: YELLOW_GREEN_7,
+		keyCompliment2: ORANGE_YELLOW_7,
+		thirdColor: ORANGE_7
+	},
+	{
+		key: RED_VIOLET_7,
+		keyCompliment1: GREEN_7,
+		keyCompliment2: YELLOW_7,
+		thirdColor: ORANGE_YELLOW_7
+	},
+	{
+		key: RED_7,
+		keyCompliment1: BLUE_GREEN_7,
+		keyCompliment2: YELLOW_GREEN_7,
+		thirdColor: YELLOW_7
+	},
+	{
+		key: RED_ORANGE_7,
+		keyCompliment1: BLUE_7,
+		keyCompliment2: GREEN_7,
+		thirdColor: YELLOW_GREEN_7
+	},
+	{
+		key: ORANGE_7,
+		keyCompliment1: BLUE_VIOLET_7,
+		keyCompliment2: BLUE_GREEN_7,
+		thirdColor: GREEN_7
+	},
+	{
+		key: ORANGE_YELLOW_7,
+		keyCompliment1: VIOLET_7,
+		keyCompliment2: BLUE_7,
+		thirdColor: BLUE_GREEN_7
+	}
+];
+
+export const colorsHashtable8 = [
+	{
+		key: YELLOW_8,
+		keyCompliment1: RED_VIOLET_8,
+		keyCompliment2: BLUE_VIOLET_8,
+		thirdColor: BLUE_8
+	},
+	{
+		key: YELLOW_GREEN_8,
+		keyCompliment1: RED_8,
+		keyCompliment2: YELLOW_GREEN_8,
+		thirdColor: BLUE_VIOLET_8
+	},
+	{
+		key: GREEN_8,
+		keyCompliment1: RED_ORANGE_8,
+		keyCompliment2: RED_VIOLET_8,
+		thirdColor: VIOLET_8
+	},
+	{
+		key: BLUE_GREEN_8,
+		keyCompliment1: ORANGE_8,
+		keyCompliment2: RED_8,
+		thirdColor: RED_VIOLET_8
+	},
+	{
+		key: BLUE_8,
+		keyCompliment1: ORANGE_YELLOW_8,
+		keyCompliment2: RED_ORANGE_8,
+		thirdColor: RED_8
+	},
+	{
+		key: BLUE_VIOLET_8,
+		keyCompliment1: YELLOW_8,
+		keyCompliment2: ORANGE_8,
+		thirdColor: RED_ORANGE_8
+	},
+	{
+		key: VIOLET_8,
+		keyCompliment1: YELLOW_GREEN_8,
+		keyCompliment2: ORANGE_YELLOW_8,
+		thirdColor: ORANGE_8
+	},
+	{
+		key: RED_VIOLET_8,
+		keyCompliment1: GREEN_8,
+		keyCompliment2: YELLOW_8,
+		thirdColor: ORANGE_YELLOW_8
+	},
+	{
+		key: RED_8,
+		keyCompliment1: BLUE_GREEN_8,
+		keyCompliment2: YELLOW_GREEN_8,
+		thirdColor: YELLOW_8
+	},
+	{
+		key: RED_ORANGE_8,
+		keyCompliment1: BLUE_8,
+		keyCompliment2: GREEN_8,
+		thirdColor: YELLOW_GREEN_8
+	},
+	{
+		key: ORANGE_8,
+		keyCompliment1: BLUE_VIOLET_8,
+		keyCompliment2: BLUE_GREEN_8,
+		thirdColor: GREEN_8
+	},
+	{
+		key: ORANGE_YELLOW_8,
+		keyCompliment1: VIOLET_8,
+		keyCompliment2: BLUE_8,
+		thirdColor: BLUE_GREEN_8
+	}
+];
+
+export const colorsHashtable9 = [
+	{
+		key: YELLOW_9,
+		keyCompliment1: RED_VIOLET_9,
+		keyCompliment2: BLUE_VIOLET_9,
+		thirdColor: BLUE_9
+	},
+	{
+		key: YELLOW_GREEN_9,
+		keyCompliment1: RED_9,
+		keyCompliment2: YELLOW_GREEN_9,
+		thirdColor: BLUE_VIOLET_9
+	},
+	{
+		key: GREEN_9,
+		keyCompliment1: RED_ORANGE_9,
+		keyCompliment2: RED_VIOLET_9,
+		thirdColor: VIOLET_9
+	},
+	{
+		key: BLUE_GREEN_9,
+		keyCompliment1: ORANGE_9,
+		keyCompliment2: RED_9,
+		thirdColor: RED_VIOLET_9
+	},
+	{
+		key: BLUE_9,
+		keyCompliment1: ORANGE_YELLOW_9,
+		keyCompliment2: RED_ORANGE_9,
+		thirdColor: RED_9
+	},
+	{
+		key: BLUE_VIOLET_9,
+		keyCompliment1: YELLOW_9,
+		keyCompliment2: ORANGE_9,
+		thirdColor: RED_ORANGE_9
+	},
+	{
+		key: VIOLET_9,
+		keyCompliment1: YELLOW_GREEN_9,
+		keyCompliment2: ORANGE_YELLOW_9,
+		thirdColor: ORANGE_9
+	},
+	{
+		key: RED_VIOLET_9,
+		keyCompliment1: GREEN_9,
+		keyCompliment2: YELLOW_9,
+		thirdColor: ORANGE_YELLOW_9
+	},
+	{
+		key: RED_9,
+		keyCompliment1: BLUE_GREEN_9,
+		keyCompliment2: YELLOW_GREEN_9,
+		thirdColor: YELLOW_9
+	},
+	{
+		key: RED_ORANGE_9,
+		keyCompliment1: BLUE_9,
+		keyCompliment2: GREEN_9,
+		thirdColor: YELLOW_GREEN_9
+	},
+	{
+		key: ORANGE_9,
+		keyCompliment1: BLUE_VIOLET_9,
+		keyCompliment2: BLUE_GREEN_9,
+		thirdColor: GREEN_9
+	},
+	{
+		key: ORANGE_YELLOW_9,
+		keyCompliment1: VIOLET_9,
+		keyCompliment2: BLUE_9,
+		thirdColor: BLUE_GREEN_9
 	}
 ];

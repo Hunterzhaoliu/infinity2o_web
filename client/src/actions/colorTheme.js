@@ -1,6 +1,9 @@
 import { UPDATE_COLOR_THEME } from './types';
 import {
-	colorsHashtable,
+	//colorsHashtable1,
+	colorsHashtable4,
+	colorsHashtable6,
+	//colorsHashtable9,
 	GREY_1,
 	GREY_2,
 	GREY_3,
@@ -26,6 +29,10 @@ export const generateRandomColorTheme = () => {
 function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 	const colorPallateIndex = Math.floor(Math.random() * 12);
 	let newBackgroundColor = GREY_1;
+	let newKey = colorsHashtable4[colorPallateIndex].key;
+	let newKeyCompliment1 = colorsHashtable4[colorPallateIndex].keyCompliment1;
+	let newKeyCompliment2 = colorsHashtable4[colorPallateIndex].keyCompliment2;
+	let newThirdColor = colorsHashtable4[colorPallateIndex].thirdColor;
 	let newText1Color = GREY_9;
 	let newText2Color = GREY_8;
 	let newText3Color = GREY_7;
@@ -36,6 +43,10 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 	let newText8Color = GREY_2;
 	if (oldBackgroundColor === GREY_1) {
 		newBackgroundColor = GREY_9;
+		newKey = colorsHashtable6[colorPallateIndex].key;
+		newKeyCompliment1 = colorsHashtable6[colorPallateIndex].keyCompliment1;
+		newKeyCompliment2 = colorsHashtable6[colorPallateIndex].keyCompliment2;
+		newThirdColor = colorsHashtable6[colorPallateIndex].thirdColor;
 		newText1Color = GREY_1;
 		newText2Color = GREY_2;
 		newText3Color = GREY_3;
@@ -48,10 +59,10 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 
 	return {
 		type: UPDATE_COLOR_THEME,
-		key: colorsHashtable[colorPallateIndex].key,
-		keyCompliment1: colorsHashtable[colorPallateIndex].keyCompliment1,
-		keyCompliment2: colorsHashtable[colorPallateIndex].keyCompliment2,
-		thirdColor: colorsHashtable[colorPallateIndex].thirdColor,
+		key: newKey,
+		keyCompliment1: newKeyCompliment1,
+		keyCompliment2: newKeyCompliment2,
+		thirdColor: newThirdColor,
 		backgroundColor: newBackgroundColor,
 		text1Color: newText1Color,
 		text2Color: newText2Color,
