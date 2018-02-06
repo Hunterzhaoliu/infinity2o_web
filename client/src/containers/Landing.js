@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Typist from 'react-typist';
-import { Layout, Button, Row, Col } from 'antd';
+import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
@@ -91,8 +91,8 @@ class Landing extends Component {
 				return (
 					<div>
 						<Row type="flex" justify="space-around">
-							<Col span={8} />
-							<Col span={4}>
+							<Col span={7} />
+							<Col span={5}>
 								<Button
 									key="-1"
 									style={{
@@ -101,10 +101,12 @@ class Landing extends Component {
 										color: this.props.colorTheme.text1Color
 									}}
 								>
-									<a href="/auth/google">Google Login</a>
+									<a href="/auth/google">
+										Google Login <Icon type="google" />
+									</a>
 								</Button>
 							</Col>
-							<Col span={4}>
+							<Col span={5}>
 								<Button
 									key="0"
 									style={{
@@ -115,10 +117,12 @@ class Landing extends Component {
 										color: this.props.colorTheme.text1Color
 									}}
 								>
-									<a href="/auth/linkedIn">LinkedIn Login</a>
+									<a href="/auth/linkedIn">
+										LinkedIn Login <Icon type="linkedin" />
+									</a>
 								</Button>
 							</Col>
-							<Col span={8} />
+							<Col span={7} />
 						</Row>
 					</div>
 				);

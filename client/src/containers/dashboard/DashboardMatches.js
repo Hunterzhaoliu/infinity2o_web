@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Row, Col, Card, Button } from 'antd';
+import { Layout, Row, Col, Card, Button, Icon } from 'antd';
 const { Content } = Layout;
 
 class DashboardMatches extends Component {
@@ -59,18 +59,44 @@ class DashboardMatches extends Component {
 							<p>Class interest: LINK_TO_ONLINE_CLASS</p>
 							<p># of hours/week free: 5</p>
 							<p>Resume: CLICK_TO_EXPAND</p>
-							<Button
-								style={{
-									borderColor: this.props.colorTheme
-										.keyCompliment2,
-									background: this.props.colorTheme
-										.keyCompliment2,
-									color: this.props.colorTheme.text1Color
-								}}
-								//onClick={}
+							<Row
+								type="flex"
+								justify="space-between"
+								align="top"
 							>
-								Swap Out
-							</Button>
+								<Col span={12}>
+									<Button
+										style={{
+											borderColor: this.props.colorTheme
+												.keyCompliment2,
+											background: this.props.colorTheme
+												.keyCompliment2,
+											color: this.props.colorTheme
+												.text1Color
+										}}
+										//onClick={}
+									>
+										Swap Out
+										<Icon type="swap" />
+									</Button>
+								</Col>
+								<Col span={12}>
+									<Button
+										style={{
+											borderColor: this.props.colorTheme
+												.keyCompliment2,
+											background: this.props.colorTheme
+												.keyCompliment2,
+											color: this.props.colorTheme
+												.text1Color
+										}}
+										//onClick={}
+									>
+										Say Hi!
+										<Icon type="message" />
+									</Button>
+								</Col>
+							</Row>
 						</Card>
 					</Col>
 					<Col
