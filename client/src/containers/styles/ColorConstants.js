@@ -73,9 +73,19 @@ export const BLUE_7 = 'rgb(0, 89, 168)';
 export const BLUE_8 = 'rgb(0, 61, 114)';
 export const BLUE_9 = 'rgb(0, 31, 58)';
 
+export const BLUE_VIOLET_1 = 'rgb(235, 221, 255)';
+export const BLUE_VIOLET_2 = 'rgb(218, 193, 255)';
+export const BLUE_VIOLET_3 = 'rgb(201, 165, 255)';
+export const BLUE_VIOLET_4 = 'rgb(181, 132, 255)';
+export const BLUE_VIOLET_5 = 'rgb(161, 102, 255)';
+export const BLUE_VIOLET_6 = 'rgb(143, 68, 255)';
+export const BLUE_VIOLET_7 = 'rgb(123, 35, 255)';
+export const BLUE_VIOLET_8 = 'rgb(102, 0, 255)';
+export const BLUE_VIOLET_9 = 'rgb(60, 0, 150)';
+
 //export const BLUE_GREEN_5 = 'rgb(0, 160, 160)';
 //export const BLUE_5 = 'rgb(0, 156, 213)';
-export const BLUE_VIOLET_5 = 'rgb(133, 114, 255)';
+//export const BLUE_VIOLET_5 = 'rgb(133, 114, 255)';
 export const VIOLET_5 = 'rgb(181, 98, 254)';
 export const RED_VIOLET_5 = 'rgb(255, 84, 173)';
 export const RED_5 = 'rgb(255, 94, 94)';
