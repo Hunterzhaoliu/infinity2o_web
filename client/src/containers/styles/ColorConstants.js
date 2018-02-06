@@ -133,15 +133,15 @@ export const ORANGE_7 = 'rgb(150, 62, 0)';
 export const ORANGE_8 = 'rgb(99, 41, 0)';
 export const ORANGE_9 = 'rgb(51, 21, 0)';
 
-//export const BLUE_GREEN_5 = 'rgb(0, 160, 160)';
-//export const BLUE_5 = 'rgb(0, 156, 213)';
-//export const BLUE_VIOLET_5 = 'rgb(133, 114, 255)';
-//export const VIOLET_5 = 'rgb(181, 98, 254)';
-//export const RED_VIOLET_5 = 'rgb(255, 84, 173)';
-//export const RED_5 = 'rgb(255, 94, 94)';
-//export const RED_ORANGE_5 = 'rgb(255, 97, 37)';
-//export const ORANGE_5 = 'rgb(218, 113, 0)';
-export const ORANGE_YELLOW_5 = 'rgb(162, 129, 0)';
+export const ORANGE_YELLOW_1 = 'rgb(255, 228, 155)';
+export const ORANGE_YELLOW_2 = 'rgb(255, 203, 61)';
+export const ORANGE_YELLOW_3 = 'rgb(242, 177, 0)';
+export const ORANGE_YELLOW_4 = 'rgb(204, 149, 0)';
+export const ORANGE_YELLOW_5 = 'rgb(173, 127, 0)';
+export const ORANGE_YELLOW_6 = 'rgb(140, 100, 0)';
+export const ORANGE_YELLOW_7 = 'rgb(104, 76, 0)';
+export const ORANGE_YELLOW_8 = 'rgb(68, 50, 0)';
+export const ORANGE_YELLOW_9 = 'rgb(35, 26, 0)';
 
 export const colorsHashtable5 = [
 	{
