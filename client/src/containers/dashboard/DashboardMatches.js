@@ -1,22 +1,138 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout } from 'antd';
+import matchesFields from './matchesFields';
+import { Layout, Row, Col, Card, Button, Icon } from 'antd';
 const { Content } = Layout;
 
 class DashboardMatches extends Component {
+	renderMatches() {
+		return _.map(matchesFields, match => {
+			return (
+				<Col
+					key={match.name}
+					span={8}
+					style={{
+						height: '50%'
+					}}
+				>
+					<Card
+						hoverable={true}
+						borderded="false"
+						loading={false}
+						style={{
+							width: '100%',
+							color: this.props.colorTheme.text1Color,
+							borderColor: this.props.colorTheme.text8Color,
+							background: this.props.colorTheme.text8Color
+						}}
+						cover={
+							<img
+								style={{
+									height: '300px'
+								}}
+								alt="example"
+								src={match.profile_pic_src}
+							/>
+						}
+					>
+						<p
+							style={{
+								color: this.props.colorTheme.text1Color
+							}}
+						>
+							{match.name}
+						</p>
+						<p
+							style={{
+								color: this.props.colorTheme.text3Color
+							}}
+						>
+							Learning interests: {match.learning_interests}
+						</p>
+						<p
+							style={{
+								color: this.props.colorTheme.text3Color
+							}}
+						>
+							Class interest: {match.class_interests}
+						</p>
+						<p
+							style={{
+								color: this.props.colorTheme.text3Color
+							}}
+						>
+							# of hours/week free: {match.num_hrs_week_free}
+						</p>
+						<p
+							style={{
+								color: this.props.colorTheme.text3Color
+							}}
+						>
+							Resume: {match.resume}
+						</p>
+						<Row type="flex" justify="space-between" align="top">
+							<Col span={10}>
+								<Button
+									style={{
+										borderColor: this.props.colorTheme.key,
+										background: this.props.colorTheme.key,
+										color: this.props.colorTheme.text2Color
+									}}
+									//onClick={}
+								>
+									Swap Out
+									<Icon type="swap" />
+								</Button>
+							</Col>
+							<Col span={10}>
+								<Button
+									style={{
+										borderColor: this.props.colorTheme.key,
+										background: this.props.colorTheme.key,
+										color: this.props.colorTheme.text2Color
+									}}
+									//onClick={}
+								>
+									Say Hi!
+									<Icon type="message" />
+								</Button>
+							</Col>
+						</Row>
+					</Card>
+				</Col>
+			);
+		});
+	}
+
 	render() {
 		// console.log('this.props in DashboardMatches.js', this.props);
 		return (
 			<Content
 				style={{
 					textAlign: 'center',
-					padding: '100px 50px 81px', // top left&right bottom
+					padding: '10% 5% 5%', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
-					DashboardMatches
+				<h1 key="0" style={{ color: this.props.colorTheme.text4Color }}>
+					Here are 2 matches our AI has selected for you.
 				</h1>
+				<h2
+					key="1"
+					style={{
+						color: this.props.colorTheme.text5Color,
+						padding: '0% 0% 5%'
+					}}
+				>
+					Teach our AI which study partner you prefer by swapping out
+					the partner you don't want.
+				</h2>
+				<Row type="flex" justify="space-between" align="top">
+					<Col span={2} />
+					{this.renderMatches()}
+					<Col span={2} />
+				</Row>
 			</Content>
 		);
 	}

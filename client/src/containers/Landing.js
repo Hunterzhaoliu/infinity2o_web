@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Typist from 'react-typist';
-import { Layout, Button, Row, Col } from 'antd';
+import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
 	renderMarketingInfo() {
-		const intro = `Colleges are too expensive & online classes are too lonely.
-        Join us to find a partner to take online classes with.`;
+		const intro = `Online classes are amazing but too lonely.
+        Join our community to find a partner for your online classes.`;
 		const step1 = `1) Answer a few simple questions.`;
-		const step2 = `2) Let our AI find you a study partner at the same skill level with similar interests.`;
+		const step2 = `2) Let our AI find you a great study partner at the same skill level with similar interests.`;
 		switch (this.props.auth.userInfo) {
 			case null:
 				// show nothing when still signing in
@@ -34,7 +34,7 @@ class Landing extends Component {
 							<h2
 								key="1"
 								style={{
-									color: this.props.colorTheme.text2Color
+									color: this.props.colorTheme.text5Color
 								}}
 							>
 								{step1}
@@ -43,7 +43,7 @@ class Landing extends Component {
 							<h2
 								key="2"
 								style={{
-									color: this.props.colorTheme.text2Color
+									color: this.props.colorTheme.text5Color
 								}}
 							>
 								{step2}
@@ -64,7 +64,7 @@ class Landing extends Component {
 						<h2
 							key="1"
 							style={{
-								color: this.props.colorTheme.text2Color
+								color: this.props.colorTheme.text3Color
 							}}
 						>
 							{step1}
@@ -72,7 +72,7 @@ class Landing extends Component {
 						<h2
 							key="2"
 							style={{
-								color: this.props.colorTheme.text2Color
+								color: this.props.colorTheme.text3Color
 							}}
 						>
 							{step2}
@@ -91,8 +91,8 @@ class Landing extends Component {
 				return (
 					<div>
 						<Row type="flex" justify="space-around">
-							<Col span={8} />
-							<Col span={4}>
+							<Col span={7} />
+							<Col span={5}>
 								<Button
 									key="-1"
 									style={{
@@ -101,10 +101,12 @@ class Landing extends Component {
 										color: this.props.colorTheme.text1Color
 									}}
 								>
-									<a href="/auth/google">Google Login</a>
+									<a href="/auth/google">
+										Google Login <Icon type="google" />
+									</a>
 								</Button>
 							</Col>
-							<Col span={4}>
+							<Col span={5}>
 								<Button
 									key="0"
 									style={{
@@ -115,10 +117,12 @@ class Landing extends Component {
 										color: this.props.colorTheme.text1Color
 									}}
 								>
-									<a href="/auth/linkedIn">LinkedIn Login</a>
+									<a href="/auth/linkedIn">
+										LinkedIn Login <Icon type="linkedin" />
+									</a>
 								</Button>
 							</Col>
-							<Col span={8} />
+							<Col span={7} />
 						</Row>
 					</div>
 				);

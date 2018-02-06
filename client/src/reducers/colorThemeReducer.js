@@ -13,7 +13,11 @@ let initialState = {
 	text1Color: null,
 	text2Color: null,
 	text3Color: null,
-	text4Color: null
+	text4Color: null,
+	text5Color: null,
+	text6Color: null,
+	text7Color: null,
+	text8Color: null
 };
 
 export default function(state = initialState, action) {
@@ -29,6 +33,10 @@ export default function(state = initialState, action) {
 			newState.text2Color = action.text2Color;
 			newState.text3Color = action.text3Color;
 			newState.text4Color = action.text4Color;
+			newState.text5Color = action.text5Color;
+			newState.text6Color = action.text6Color;
+			newState.text7Color = action.text7Color;
+			newState.text8Color = action.text8Color;
 			return newState;
 		default:
 			return state || newState;

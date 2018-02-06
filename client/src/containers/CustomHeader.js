@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../actions/colorTheme';
 
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col, Button, Icon } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
@@ -18,7 +18,7 @@ class CustomHeader extends Component {
 				return;
 			default:
 				return [
-					<Col span={3.5} key="1">
+					<Col span={4} key="1">
 						<Button
 							style={{
 								borderColor: this.props.colorTheme.key,
@@ -27,11 +27,13 @@ class CustomHeader extends Component {
 							}}
 						>
 							<Link to="/dashboard/matches">
-								<div>Matches</div>
+								<div>
+									Matches <Icon type="usergroup-add" />
+								</div>
 							</Link>
 						</Button>
 					</Col>,
-					<Col span={14} key="2">
+					<Col span={12} key="2">
 						<Button
 							style={{
 								borderColor: this.props.colorTheme
@@ -42,11 +44,13 @@ class CustomHeader extends Component {
 							}}
 						>
 							<Link to="/dashboard/profile">
-								<div>Profile</div>
+								<div>
+									Profile <Icon type="profile" />
+								</div>
 							</Link>
 						</Button>
 					</Col>,
-					<Col span={2} key="3">
+					<Col span={3} key="3">
 						<Button
 							style={{
 								borderColor: this.props.colorTheme.thirdColor,
@@ -54,7 +58,9 @@ class CustomHeader extends Component {
 								color: this.props.colorTheme.text2Color
 							}}
 						>
-							<a href="/api/logout">Logout</a>
+							<a href="/api/logout">
+								Logout <Icon type="logout" />
+							</a>
 						</Button>
 					</Col>
 				];
@@ -71,12 +77,12 @@ class CustomHeader extends Component {
 				}}
 			>
 				<Row type="flex" justify="space-between">
-					<Col key="0" span={4.5}>
+					<Col key="0" span={5}>
 						<Button
 							style={{
-								borderColor: this.props.colorTheme.text3Color,
-								background: this.props.colorTheme.text3Color,
-								color: this.props.colorTheme.text1Color
+								borderColor: this.props.colorTheme.text6Color,
+								background: this.props.colorTheme.text6Color,
+								color: this.props.colorTheme.text2Color
 							}}
 							onClick={this.props.onPressRandomColorTheme}
 						>
