@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { colorsHashtable5 } from './ColorConstants';
+import { colorsHashtable } from './ColorConstants';
 import * as colors from './ColorConstants';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -9,11 +9,11 @@ const { Content } = Layout;
 const scaleFields = [
 	{
 		color: colors.GREY_0,
-		color2: colors.ORANGE_YELLOW_1
+		color2: colorsHashtable(1)[0].key
 	},
 	{
 		color: colors.GREY_1,
-		color2: colors.ORANGE_YELLOW_1
+		color2: colorsHashtable(1)[0].key
 	},
 	{
 		color: colors.GREY_2,
@@ -63,7 +63,7 @@ class GreyScale extends Component {
 	renderScales() {
 		return _.map(scaleFields, field => {
 			return (
-				<Col span={2.1}>
+				<Col span={2.1} key={field.color}>
 					<Content
 						style={{
 							padding: '100px 40px', // height width
@@ -83,6 +83,8 @@ class GreyScale extends Component {
 	}
 
 	render() {
+		console.log('colorsHashtable(1)[0].key = ', colorsHashtable(1)[0].key);
+		console.log('colorsHashtable(1)[1].key = ', colorsHashtable(1)[1].key);
 		// console.log('this.props in GreyScale.js', this.props);
 		return (
 			<Content

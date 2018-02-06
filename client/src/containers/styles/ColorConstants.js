@@ -143,12 +143,44 @@ export const ORANGE_YELLOW_7 = 'rgb(104, 76, 0)';
 export const ORANGE_YELLOW_8 = 'rgb(68, 50, 0)';
 export const ORANGE_YELLOW_9 = 'rgb(35, 26, 0)';
 
-export const colorsHashtable5 = [
+export const getThemeRGBValues = (keyColor, greyScale) => {
+	return {
+		key: eval(`${keyColor}_${greyScale}`),
+		keyCompliment1: `RED_VIOLET_${greyScale}`,
+		keyCompliment2: `BLUE_VIOLET_${greyScale}`,
+		thirdColor: `BLUE_${greyScale}`
+	};
+};
+
+function _getKeyCompliment(oneOrTwo, keyColor) {
+	const colorWheel = {
+		YELLOW: 1,
+		YELLOW_GREEN: 2,
+		GREEN: 3,
+		BLUE_GREEN: 4,
+		BLUE: 5,
+		BLUE_VIOLET: 6,
+		VIOLET: 7,
+		RED_VIOLET: 8,
+		RED: 9,
+		RED_ORANGE: 10,
+		ORANGE: 11,
+		ORANGE_YELLOW: 12
+	};
+	let index = colorWheel[keyColor];
+	index += 5;
+	if (index > 12) {
+		index = index % 12;
+	}
+	return colorWheel[index - 1];
+}
+
+export const colorsHashtable = greyScale => [
 	{
-		key: YELLOW_5,
-		keyCompliment1: RED_VIOLET_5,
-		keyCompliment2: BLUE_VIOLET_5,
-		thirdColor: BLUE_5
+		key: `YELLOW_${greyScale}`,
+		keyCompliment1: `RED_VIOLET_${greyScale}`,
+		keyCompliment2: `BLUE_VIOLET_${greyScale}`,
+		thirdColor: `BLUE_${greyScale}`
 	},
 	{
 		key: YELLOW_GREEN_5,

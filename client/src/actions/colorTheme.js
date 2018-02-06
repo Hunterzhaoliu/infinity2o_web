@@ -1,6 +1,6 @@
 import { UPDATE_COLOR_THEME } from './types';
 import {
-	colorsHashtable5,
+	colorsHashtable,
 	GREY_1,
 	GREY_2,
 	GREY_3,
@@ -48,10 +48,10 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 
 	return {
 		type: UPDATE_COLOR_THEME,
-		key: colorsHashtable5[colorPallateIndex].key,
-		keyCompliment1: colorsHashtable5[colorPallateIndex].keyCompliment1,
-		keyCompliment2: colorsHashtable5[colorPallateIndex].keyCompliment2,
-		thirdColor: colorsHashtable5[colorPallateIndex].thirdColor,
+		key: colorsHashtable(5)[colorPallateIndex].key,
+		keyCompliment1: colorsHashtable(5)[colorPallateIndex].keyCompliment1,
+		keyCompliment2: colorsHashtable(5)[colorPallateIndex].keyCompliment2,
+		thirdColor: colorsHashtable(5)[colorPallateIndex].thirdColor,
 		backgroundColor: newBackgroundColor,
 		text1Color: newText1Color,
 		text2Color: newText2Color,
