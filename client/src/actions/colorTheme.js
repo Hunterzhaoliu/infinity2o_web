@@ -48,10 +48,10 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 
 	return {
 		type: UPDATE_COLOR_THEME,
-		key: colorsHashtable(5)[colorPallateIndex].key,
-		keyCompliment1: colorsHashtable(5)[colorPallateIndex].keyCompliment1,
-		keyCompliment2: colorsHashtable(5)[colorPallateIndex].keyCompliment2,
-		thirdColor: colorsHashtable(5)[colorPallateIndex].thirdColor,
+		key: colorsHashtable[colorPallateIndex].key,
+		keyCompliment1: colorsHashtable[colorPallateIndex].keyCompliment1,
+		keyCompliment2: colorsHashtable[colorPallateIndex].keyCompliment2,
+		thirdColor: colorsHashtable[colorPallateIndex].thirdColor,
 		backgroundColor: newBackgroundColor,
 		text1Color: newText1Color,
 		text2Color: newText2Color,

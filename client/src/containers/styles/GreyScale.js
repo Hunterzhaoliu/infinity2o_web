@@ -9,11 +9,11 @@ const { Content } = Layout;
 const scaleFields = [
 	{
 		color: colors.GREY_0,
-		color2: colorsHashtable(1)[0].key
+		color2: colorsHashtable[0].key
 	},
 	{
 		color: colors.GREY_1,
-		color2: colorsHashtable(1)[0].key
+		color2: colorsHashtable[0].key
 	},
 	{
 		color: colors.GREY_2,
@@ -83,8 +83,6 @@ class GreyScale extends Component {
 	}
 
 	render() {
-		console.log('colorsHashtable(1)[0].key = ', colorsHashtable(1)[0].key);
-		console.log('colorsHashtable(1)[1].key = ', colorsHashtable(1)[1].key);
 		// console.log('this.props in GreyScale.js', this.props);
 		return (
 			<Content
