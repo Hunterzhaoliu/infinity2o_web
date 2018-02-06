@@ -53,15 +53,15 @@ export const GREEN_7 = 'rgb(0, 108, 0)';
 export const GREEN_8 = 'rgb(0, 73, 0)';
 export const GREEN_9 = 'rgb(0, 35, 0)';
 
-export const BLUE_GREEN_1 = 'rgb(0, 160, 160)';
-export const BLUE_GREEN_2 = 'rgb(0, 160, 160)';
-export const BLUE_GREEN_3 = 'rgb(0, 160, 160)';
-export const BLUE_GREEN_4 = 'rgb(0, 160, 160)';
-export const BLUE_GREEN_5 = 'rgb(0, 160, 160)';
-export const BLUE_GREEN_6 = 'rgb(0, 160, 160)';
-export const BLUE_GREEN_7 = 'rgb(0, 160, 160)';
-export const BLUE_GREEN_8 = 'rgb(0, 160, 160)';
-export const BLUE_GREEN_9 = 'rgb(0, 160, 160)';
+export const BLUE_GREEN_1 = 'rgb(170, 242, 255)';
+export const BLUE_GREEN_2 = 'rgb(0, 250, 250)';
+export const BLUE_GREEN_3 = 'rgb(0, 218, 218)';
+export const BLUE_GREEN_4 = 'rgb(0, 188, 188)';
+export const BLUE_GREEN_5 = 'rgb(0, 158, 158)';
+export const BLUE_GREEN_6 = 'rgb(0, 126, 126)';
+export const BLUE_GREEN_7 = 'rgb(0, 95, 95)';
+export const BLUE_GREEN_8 = 'rgb(0, 65, 65)';
+export const BLUE_GREEN_9 = 'rgb(0, 35, 35)';
 
 //export const BLUE_GREEN_5 = 'rgb(0, 160, 160)';
 export const BLUE_5 = 'rgb(0, 156, 213)';

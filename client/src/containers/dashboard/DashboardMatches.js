@@ -1,9 +1,80 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import matchesFields from './matchesFields';
 import { Layout, Row, Col, Card, Button, Icon } from 'antd';
 const { Content } = Layout;
 
 class DashboardMatches extends Component {
+	renderMatches() {
+		return _.map(matchesFields, match => {
+			return (
+				<Col
+					span={8}
+					style={{
+						height: '50%'
+					}}
+				>
+					<Card
+						hoverable={true}
+						borderded="false"
+						loading={false}
+						style={{
+							width: '100%',
+							color: this.props.colorTheme.text1Color,
+							background: this.props.colorTheme.text8Color
+						}}
+						cover={
+							<img
+								style={{
+									height: '300px'
+								}}
+								alt="example"
+								src={match.profile_pic_src}
+							/>
+						}
+					>
+						<p>Name: {match.name}</p>
+						<p>Learning interests: {match.learning_interests}</p>
+						<p>Class interest: {match.class_interests}</p>
+						<p># of hours/week free: {match.num_hrs_week_free}</p>
+						<p>Resume: {match.resume}</p>
+						<Row type="flex" justify="space-between" align="top">
+							<Col span={10}>
+								<Button
+									style={{
+										borderColor: this.props.colorTheme
+											.keyCompliment2,
+										background: this.props.colorTheme
+											.keyCompliment2,
+										color: this.props.colorTheme.text1Color
+									}}
+									//onClick={}
+								>
+									Swap Out
+									<Icon type="swap" />
+								</Button>
+							</Col>
+							<Col span={10}>
+								<Button
+									style={{
+										borderColor: this.props.colorTheme.key,
+										background: this.props.colorTheme.key,
+										color: this.props.colorTheme.text1Color
+									}}
+									//onClick={}
+								>
+									Say Hi!
+									<Icon type="message" />
+								</Button>
+							</Col>
+						</Row>
+					</Card>
+				</Col>
+			);
+		});
+	}
+
 	render() {
 		// console.log('this.props in DashboardMatches.js', this.props);
 		return (
@@ -29,120 +100,7 @@ class DashboardMatches extends Component {
 				</h2>
 				<Row type="flex" justify="space-between" align="top">
 					<Col span={2} />
-					<Col
-						span={8}
-						style={{
-							height: '50%'
-						}}
-					>
-						<Card
-							hoverable={true}
-							borderded="false"
-							loading={false}
-							style={{
-								width: '100%',
-								color: this.props.colorTheme.text1Color,
-								background: this.props.colorTheme.text8Color
-							}}
-							cover={
-								<img
-									style={{
-										height: '300px'
-									}}
-									alt="example"
-									src="https://www.mills.edu/uniquely-mills/students-faculty/student-profiles/images/student-profile-gabriela-mills-college.jpg"
-								/>
-							}
-						>
-							<p>Name: Karly</p>
-							<p>Learning interests: Machine Learning</p>
-							<p>Class interest: LINK_TO_ONLINE_CLASS</p>
-							<p># of hours/week free: 5</p>
-							<p>Resume: CLICK_TO_EXPAND</p>
-							<Row
-								type="flex"
-								justify="space-between"
-								align="top"
-							>
-								<Col span={12}>
-									<Button
-										style={{
-											borderColor: this.props.colorTheme
-												.keyCompliment2,
-											background: this.props.colorTheme
-												.keyCompliment2,
-											color: this.props.colorTheme
-												.text1Color
-										}}
-										//onClick={}
-									>
-										Swap Out
-										<Icon type="swap" />
-									</Button>
-								</Col>
-								<Col span={12}>
-									<Button
-										style={{
-											borderColor: this.props.colorTheme
-												.keyCompliment2,
-											background: this.props.colorTheme
-												.keyCompliment2,
-											color: this.props.colorTheme
-												.text1Color
-										}}
-										//onClick={}
-									>
-										Say Hi!
-										<Icon type="message" />
-									</Button>
-								</Col>
-							</Row>
-						</Card>
-					</Col>
-					<Col
-						span={8}
-						style={{
-							height: '50%'
-						}}
-					>
-						<Card
-							hoverable={true}
-							borderded="false"
-							loading={false}
-							style={{
-								width: '100%',
-								color: this.props.colorTheme.text1Color,
-								background: this.props.colorTheme.text8Color
-							}}
-							cover={
-								<img
-									style={{
-										height: '300px'
-									}}
-									alt="example"
-									src="https://camd.northeastern.edu/wp-content/uploads/2016/02/Cory.png"
-								/>
-							}
-						>
-							<p>Name: Joe</p>
-							<p>Learning interests: Machine Learning</p>
-							<p>Class interest: LINK_TO_ONLINE_CLASS</p>
-							<p># of hours/week free: 4</p>
-							<p>Resume: CLICK_TO_EXPAND</p>
-							<Button
-								style={{
-									borderColor: this.props.colorTheme
-										.keyCompliment2,
-									background: this.props.colorTheme
-										.keyCompliment2,
-									color: this.props.colorTheme.text1Color
-								}}
-								//onClick={}
-							>
-								Swap Out
-							</Button>
-						</Card>
-					</Col>
+					{this.renderMatches()}
 					<Col span={2} />
 				</Row>
 			</Content>
