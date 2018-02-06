@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
+import ProfileForm from './ProfileForm';
 const { Content } = Layout;
 
 class DashboardProfile extends Component {
@@ -17,6 +18,7 @@ class DashboardProfile extends Component {
 				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
 					DashboardProfile
 				</h1>
+				<ProfileForm />
 			</Content>
 		);
 	}
