@@ -83,14 +83,64 @@ export const BLUE_VIOLET_7 = 'rgb(123, 35, 255)';
 export const BLUE_VIOLET_8 = 'rgb(102, 0, 255)';
 export const BLUE_VIOLET_9 = 'rgb(60, 0, 150)';
 
+export const VIOLET_1 = 'rgb(255, 220, 255)';
+export const VIOLET_2 = 'rgb(255, 185, 255)';
+export const VIOLET_3 = 'rgb(255, 145, 255)';
+export const VIOLET_4 = 'rgb(255, 108, 255)';
+export const VIOLET_5 = 'rgb(255, 70, 255)';
+export const VIOLET_6 = 'rgb(255, 27, 255)';
+export const VIOLET_7 = 'rgb(222, 0, 222)';
+export const VIOLET_8 = 'rgb(165, 0, 165)';
+export const VIOLET_9 = 'rgb(100, 0, 100)';
+
+export const RED_VIOLET_1 = 'rgb(255, 219, 235)';
+export const RED_VIOLET_2 = 'rgb(255, 186, 218)';
+export const RED_VIOLET_3 = 'rgb(255, 150, 199)';
+export const RED_VIOLET_4 = 'rgb(255, 119, 182)';
+export const RED_VIOLET_5 = 'rgb(255, 81, 162)';
+export const RED_VIOLET_6 = 'rgb(255, 45, 143)';
+export const RED_VIOLET_7 = 'rgb(222, 15, 127)';
+export const RED_VIOLET_8 = 'rgb(193, 0, 90)';
+export const RED_VIOLET_9 = 'rgb(114, 0, 53)';
+
+export const RED_1 = 'rgb(255, 222, 222)';
+export const RED_2 = 'rgb(255, 190, 190)';
+export const RED_3 = 'rgb(255, 155, 155)';
+export const RED_4 = 'rgb(255, 125, 125)';
+export const RED_5 = 'rgb(255, 90, 90)';
+export const RED_6 = 'rgb(255, 55, 55)';
+export const RED_7 = 'rgb(255, 15, 15)';
+export const RED_8 = 'rgb(215, 0, 0)';
+export const RED_9 = 'rgb(124, 0, 0)';
+
+export const RED_ORANGE_1 = 'rgb(255, 221, 214)';
+export const RED_ORANGE_2 = 'rgb(255, 192, 178)';
+export const RED_ORANGE_3 = 'rgb(255, 157, 135)';
+export const RED_ORANGE_4 = 'rgb(255, 125, 96)';
+export const RED_ORANGE_5 = 'rgb(255, 94, 58)';
+export const RED_ORANGE_6 = 'rgb(255, 61, 17)';
+export const RED_ORANGE_7 = 'rgb(211, 38, 0)';
+export const RED_ORANGE_8 = 'rgb(137, 25, 0)';
+export const RED_ORANGE_9 = 'rgb(71, 13, 0)';
+
+export const ORANGE_1 = 'rgb(255, 220, 196)';
+export const ORANGE_2 = 'rgb(255, 192, 147)';
+export const ORANGE_3 = 'rgb(255, 164, 99)';
+export const ORANGE_4 = 'rgb(255, 133, 45)';
+export const ORANGE_5 = 'rgb(244, 102, 0)';
+export const ORANGE_6 = 'rgb(198, 82, 0)';
+export const ORANGE_7 = 'rgb(150, 62, 0)';
+export const ORANGE_8 = 'rgb(99, 41, 0)';
+export const ORANGE_9 = 'rgb(51, 21, 0)';
+
 //export const BLUE_GREEN_5 = 'rgb(0, 160, 160)';
 //export const BLUE_5 = 'rgb(0, 156, 213)';
 //export const BLUE_VIOLET_5 = 'rgb(133, 114, 255)';
-export const VIOLET_5 = 'rgb(181, 98, 254)';
-export const RED_VIOLET_5 = 'rgb(255, 84, 173)';
-export const RED_5 = 'rgb(255, 94, 94)';
-export const RED_ORANGE_5 = 'rgb(255, 97, 37)';
-export const ORANGE_5 = 'rgb(218, 113, 0)';
+//export const VIOLET_5 = 'rgb(181, 98, 254)';
+//export const RED_VIOLET_5 = 'rgb(255, 84, 173)';
+//export const RED_5 = 'rgb(255, 94, 94)';
+//export const RED_ORANGE_5 = 'rgb(255, 97, 37)';
+//export const ORANGE_5 = 'rgb(218, 113, 0)';
 export const ORANGE_YELLOW_5 = 'rgb(162, 129, 0)';
 
 export const colorsHashtable5 = [
