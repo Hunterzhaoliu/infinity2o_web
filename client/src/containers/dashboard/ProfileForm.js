@@ -2,18 +2,46 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import InputField from './InputField';
-import { Layout, Row, Form, Select, Slider, InputNumber, Col } from 'antd';
+import {
+	Layout,
+	Row,
+	Form,
+	Select,
+	Slider,
+	InputNumber,
+	Col,
+	Menu,
+	Dropdown,
+	Icon,
+	Checkbox
+} from 'antd';
 const { Option } = Select;
 const FormItem = Form.Item;
 const { Content } = Layout;
+const CheckboxGroup = Checkbox.Group;
 
+const plainOptions = ['7-9 AM', '9-11 AM', '11 AM -1 PM'];
 class ProfileForm extends Component {
 	state = {
-		inputValue: 0
+		inputValue: 0,
+		checkedList: []
+		//indeterminate: true,
+		//checkAll: false
 	};
-	onChange = value => {
+	onChange = (value, checkedList) => {
 		this.setState({
-			inputValue: value
+			inputValue: value,
+			checkedList
+			//indeterminate:
+			//!!checkedList.length && checkedList.length < plainOptions.length,
+			//checkAll: checkedList.length === plainOptions.length
+		});
+	};
+	onCheckAllChange = e => {
+		this.setState({
+			checkedList: e.target.checked ? plainOptions : [],
+			indeterminate: false,
+			checkAll: e.target.checked
 		});
 	};
 	render() {
@@ -21,6 +49,29 @@ class ProfileForm extends Component {
 			labelCol: { span: 6 },
 			wrapperCol: { span: 14 }
 		};
+		const menu = (
+			<Menu>
+				<Menu.Item>
+					<div>
+						<div style={{ borderBottom: '1px solid #E9E9E9' }}>
+							<Checkbox
+								indeterminate={this.state.indeterminate}
+								onChange={this.onCheckAllChange}
+								checked={this.state.checkAll}
+							>
+								Check all
+							</Checkbox>
+						</div>
+						<br />
+						<CheckboxGroup
+							options={plainOptions}
+							value={this.state.checkedList}
+							onChange={this.onChange}
+						/>
+					</div>
+				</Menu.Item>
+			</Menu>
+		);
 		// console.log('this.props in ProfileForm.js', this.props);
 		return (
 			<Content
@@ -74,10 +125,18 @@ class ProfileForm extends Component {
 								max={40}
 								style={{ marginLeft: 16 }}
 								value={this.state.inputValue}
-								onChange={this.onChang}
+								onChange={this.onChange}
 							/>
 						</Col>
 					</Row>
+					<FormItem {...formItemLayout} label="Age: ">
+						<InputNumber min={10} max={100} />
+					</FormItem>
+					<Dropdown overlay={menu}>
+						<a className="ant-dropdown-link" href="#">
+							Time on Monday <Icon type="down" />
+						</a>
+					</Dropdown>
 				</Form>
 			</Content>
 		);
