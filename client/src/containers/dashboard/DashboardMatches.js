@@ -25,7 +25,7 @@ class DashboardMatches extends Component {
 							borderded="false"
 							loading={false}
 							style={{
-								width: '275px',
+								width: '260px',
 								color: this.props.colorTheme.text1Color,
 								borderColor: this.props.colorTheme.text8Color,
 								background: this.props.colorTheme.text8Color
@@ -33,8 +33,8 @@ class DashboardMatches extends Component {
 							cover={
 								<img
 									style={{
-										height: '275px',
-										width: '275px'
+										height: '260px',
+										width: '260px'
 									}}
 									alt="example"
 									src={match.profile_pic_src}
@@ -81,7 +81,7 @@ class DashboardMatches extends Component {
 								justify="space-between"
 								align="top"
 							>
-								<Col span={10}>
+								<Col span={11}>
 									<Button
 										style={{
 											borderColor: this.props.colorTheme
@@ -93,11 +93,11 @@ class DashboardMatches extends Component {
 										}}
 										//onClick={}
 									>
-										Swap Out
+										Swap
 										<Icon type="swap" />
 									</Button>
 								</Col>
-								<Col span={10}>
+								<Col span={11}>
 									<Button
 										style={{
 											borderColor: this.props.colorTheme
@@ -109,7 +109,7 @@ class DashboardMatches extends Component {
 										}}
 										//onClick={}
 									>
-										Say Hi!
+										Say Hi
 										<Icon type="message" />
 									</Button>
 								</Col>
