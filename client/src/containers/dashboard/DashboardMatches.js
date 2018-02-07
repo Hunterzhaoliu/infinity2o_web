@@ -11,18 +11,21 @@ class DashboardMatches extends Component {
 			return (
 				<Col
 					key={match.name}
-					span={10}
+					sm={{ span: 10 }}
+					md={{ span: 11, offset: 0 }}
+					lg={{ span: 9 }}
+					xl={{ span: 7 }}
 					style={{
 						height: '50%'
 					}}
 				>
-					<Row type="flex" justify="center">
+					<Row type="flex" justify="center" align="top">
 						<Card
 							hoverable={true}
 							borderded="false"
 							loading={false}
 							style={{
-								width: '300px',
+								width: '275px',
 								color: this.props.colorTheme.text1Color,
 								borderColor: this.props.colorTheme.text8Color,
 								background: this.props.colorTheme.text8Color
@@ -30,8 +33,8 @@ class DashboardMatches extends Component {
 							cover={
 								<img
 									style={{
-										height: '300px',
-										width: '300px'
+										height: '275px',
+										width: '275px'
 									}}
 									alt="example"
 									src={match.profile_pic_src}
@@ -142,9 +145,19 @@ class DashboardMatches extends Component {
 					the partner you don't want.
 				</h2>
 				<Row type="flex" justify="space-between" align="top">
-					<Col span={2} />
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 1 }}
+						lg={{ span: 3 }}
+						xl={{ span: 5 }}
+					/>
 					{this.renderMatches()}
-					<Col span={2} />
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 1 }}
+						lg={{ span: 3 }}
+						xl={{ span: 5 }}
+					/>
 				</Row>
 			</Content>
 		);
