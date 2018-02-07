@@ -1,4 +1,4 @@
-import { colorsHashtable5 } from './ColorConstants';
+//import { colorsHashtable5 } from './ColorConstants';
 import * as colors from './ColorConstants';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';

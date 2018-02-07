@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import InputTimeZone from './InputTimeZone';
 import InputField from './InputField';
 import {
 	Layout,
@@ -100,7 +101,9 @@ class ProfileForm extends Component {
 							mode="multiple"
 							placeholder="Select what you're curious about"
 						>
-							<Option value="Computer Science">Computer Science</Option>
+							<Option value="Computer Science">
+								Computer Science
+							</Option>
 							<Option value="Business">Business</Option>
 						</Select>
 					</FormItem>
@@ -111,7 +114,11 @@ class ProfileForm extends Component {
 								colorTheme={this.props.colorTheme}
 							>
 								<Slider
-									marks={{ 1: '1 or less', 20: '20', 40: '40 or more' }}
+									marks={{
+										1: '1 or less',
+										20: '20',
+										40: '40 or more'
+									}}
 									min={1}
 									max={40}
 									onChange={this.onChange}
@@ -137,6 +144,7 @@ class ProfileForm extends Component {
 							Time on Monday <Icon type="down" />
 						</a>
 					</Dropdown>
+					<InputTimeZone />
 				</Form>
 			</Content>
 		);
