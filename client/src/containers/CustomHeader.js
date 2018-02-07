@@ -18,7 +18,13 @@ class CustomHeader extends Component {
 				return;
 			default:
 				return [
-					<Col span={4} key="1">
+					<Col
+						sm={{ span: 4, offset: 1 }}
+						md={{ span: 4, offset: 0 }}
+						lg={{ span: 3, offset: 0 }}
+						xl={{ span: 3, offset: 1 }}
+						key="1"
+					>
 						<Button
 							style={{
 								borderColor: this.props.colorTheme.key,
@@ -33,7 +39,13 @@ class CustomHeader extends Component {
 							</Link>
 						</Button>
 					</Col>,
-					<Col span={12} key="2">
+					<Col
+						sm={{ span: 4, offset: 1 }}
+						md={{ span: 4, offset: 0 }}
+						lg={{ span: 3, offset: 0 }}
+						xl={{ span: 3, offset: 0 }}
+						key="2"
+					>
 						<Button
 							style={{
 								borderColor: this.props.colorTheme
@@ -50,7 +62,13 @@ class CustomHeader extends Component {
 							</Link>
 						</Button>
 					</Col>,
-					<Col span={3} key="3">
+					<Col
+						sm={{ span: 4, offset: 1 }}
+						md={{ span: 4, offset: 6 }}
+						lg={{ span: 3, offset: 11 }}
+						xl={{ span: 2, offset: 12 }}
+						key="4"
+					>
 						<Button
 							style={{
 								borderColor: this.props.colorTheme.thirdColor,
@@ -76,8 +94,14 @@ class CustomHeader extends Component {
 					width: '100%'
 				}}
 			>
-				<Row type="flex" justify="space-between">
-					<Col key="0" span={5}>
+				<Row type="flex" justify="space-around">
+					<Col
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 4 }}
+						xl={{ span: 3 }}
+						key="0"
+					>
 						<Button
 							style={{
 								borderColor: this.props.colorTheme.text6Color,

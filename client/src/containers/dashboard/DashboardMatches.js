@@ -11,95 +11,108 @@ class DashboardMatches extends Component {
 			return (
 				<Col
 					key={match.name}
-					span={8}
+					span={10}
 					style={{
 						height: '50%'
 					}}
 				>
-					<Card
-						hoverable={true}
-						borderded="false"
-						loading={false}
-						style={{
-							width: '100%',
-							color: this.props.colorTheme.text1Color,
-							borderColor: this.props.colorTheme.text8Color,
-							background: this.props.colorTheme.text8Color
-						}}
-						cover={
-							<img
+					<Row type="flex" justify="center">
+						<Card
+							hoverable={true}
+							borderded="false"
+							loading={false}
+							style={{
+								width: '300px',
+								color: this.props.colorTheme.text1Color,
+								borderColor: this.props.colorTheme.text8Color,
+								background: this.props.colorTheme.text8Color
+							}}
+							cover={
+								<img
+									style={{
+										height: '300px',
+										width: '300px'
+									}}
+									alt="example"
+									src={match.profile_pic_src}
+								/>
+							}
+						>
+							<h3
 								style={{
-									height: '300px'
+									color: this.props.colorTheme.text1Color
 								}}
-								alt="example"
-								src={match.profile_pic_src}
-							/>
-						}
-					>
-						<p
-							style={{
-								color: this.props.colorTheme.text1Color
-							}}
-						>
-							{match.name}
-						</p>
-						<p
-							style={{
-								color: this.props.colorTheme.text3Color
-							}}
-						>
-							Learning interests: {match.learning_interests}
-						</p>
-						<p
-							style={{
-								color: this.props.colorTheme.text3Color
-							}}
-						>
-							Class interest: {match.class_interests}
-						</p>
-						<p
-							style={{
-								color: this.props.colorTheme.text3Color
-							}}
-						>
-							# of hours/week free: {match.num_hrs_week_free}
-						</p>
-						<p
-							style={{
-								color: this.props.colorTheme.text3Color
-							}}
-						>
-							Resume: {match.resume}
-						</p>
-						<Row type="flex" justify="space-between" align="top">
-							<Col span={10}>
-								<Button
-									style={{
-										borderColor: this.props.colorTheme.key,
-										background: this.props.colorTheme.key,
-										color: this.props.colorTheme.text2Color
-									}}
-									//onClick={}
-								>
-									Swap Out
-									<Icon type="swap" />
-								</Button>
-							</Col>
-							<Col span={10}>
-								<Button
-									style={{
-										borderColor: this.props.colorTheme.key,
-										background: this.props.colorTheme.key,
-										color: this.props.colorTheme.text2Color
-									}}
-									//onClick={}
-								>
-									Say Hi!
-									<Icon type="message" />
-								</Button>
-							</Col>
-						</Row>
-					</Card>
+							>
+								{match.name}
+							</h3>
+							<p
+								style={{
+									color: this.props.colorTheme.text3Color
+								}}
+							>
+								Learning interests: {match.learning_interests}
+							</p>
+							<p
+								style={{
+									color: this.props.colorTheme.text3Color
+								}}
+							>
+								Class interest: {match.class_interests}
+							</p>
+							<p
+								style={{
+									color: this.props.colorTheme.text3Color
+								}}
+							>
+								# of hours/week free: {match.num_hrs_week_free}
+							</p>
+							<p
+								style={{
+									color: this.props.colorTheme.text3Color
+								}}
+							>
+								Resume: {match.resume}
+							</p>
+							<Row
+								type="flex"
+								justify="space-between"
+								align="top"
+							>
+								<Col span={10}>
+									<Button
+										style={{
+											borderColor: this.props.colorTheme
+												.key,
+											background: this.props.colorTheme
+												.key,
+											color: this.props.colorTheme
+												.text2Color
+										}}
+										//onClick={}
+									>
+										Swap Out
+										<Icon type="swap" />
+									</Button>
+								</Col>
+								<Col span={10}>
+									<Button
+										style={{
+											borderColor: this.props.colorTheme
+												.key,
+											background: this.props.colorTheme
+												.key,
+											color: this.props.colorTheme
+												.text2Color
+										}}
+										//onClick={}
+									>
+										Say Hi!
+										<Icon type="message" />
+									</Button>
+								</Col>
+							</Row>
+						</Card>
+					</Row>
 				</Col>
 			);
 		});
