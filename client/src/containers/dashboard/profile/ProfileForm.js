@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import InputTimeZone from './InputTimeZone';
 import InputField from './InputField';
+import InputFieldNumber from './InputFieldNumber';
 import { isValidName } from '../../../utils/validate';
 import {
 	Layout,
 	Row,
 	Form,
 	Select,
-	InputNumber,
 	Col,
 	Menu,
 	Dropdown,
@@ -60,6 +60,9 @@ class ProfileForm extends Component {
 			wrapperCol: { span: 14 }
 		};
 
+		// <FormItem {...formItemLayout} label="Age: ">
+		//     <InputNumber min={10} max={125} />
+		// </FormItem>
 		const menu = (
 			<Menu>
 				<Menu.Item>
@@ -109,16 +112,14 @@ class ProfileForm extends Component {
 							<Field
 								name="age"
 								label="Age:"
-								width={280}
+								width={68}
 								min={10}
 								max={125}
-								component={InputNumber}
+								defaultValue={18}
+								component={InputFieldNumber}
 								type="text"
 								colorTheme={this.props.colorTheme}
 							/>
-							<FormItem {...formItemLayout} label="Age: ">
-								<InputNumber min={10} max={125} />
-							</FormItem>
 						</Col>
 					</Row>
 					<FormItem {...formItemLayout} label="Interest(s):">
