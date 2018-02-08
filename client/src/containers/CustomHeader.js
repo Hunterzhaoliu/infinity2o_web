@@ -22,10 +22,10 @@ class CustomHeader extends Component {
 								<Button
 									style={{
 										borderColor: this.props.colorTheme
-											.text6Color,
+											.text8Color,
 										background: this.props.colorTheme
-											.text6Color,
-										color: this.props.colorTheme.text2Color
+											.text8Color,
+										color: this.props.colorTheme.text5Color
 									}}
 									onClick={this.props.onPressRandomColorTheme}
 								>
