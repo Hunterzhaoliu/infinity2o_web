@@ -10,9 +10,9 @@ class InputFieldNumber extends Component {
 				<Row type="flex" justify="start" align="middle">
 					<Col
 						sm={{ span: 9 }}
-						md={{ span: 12 }}
-						lg={{ span: 12 }}
-						xl={{ span: 12 }}
+						md={{ span: 9 }}
+						lg={{ span: 9 }}
+						xl={{ span: 9 }}
 					>
 						<label
 							style={{
@@ -24,9 +24,9 @@ class InputFieldNumber extends Component {
 					</Col>
 					<Col
 						sm={{ span: 4, offset: 11 }}
-						md={{ span: 12 }}
-						lg={{ span: 12 }}
-						xl={{ span: 12 }}
+						md={{ span: 4, offset: 11 }}
+						lg={{ span: 4, offset: 11 }}
+						xl={{ span: 4, offset: 11 }}
 					>
 						<InputNumber
 							min={13}
