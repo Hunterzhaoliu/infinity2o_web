@@ -7,7 +7,6 @@ import {
 	Row,
 	Form,
 	Select,
-	Slider,
 	InputNumber,
 	Col,
 	Menu,
@@ -24,17 +23,17 @@ const plainOptions = ['7-9 AM', '9-11 AM', '11 AM -1 PM'];
 class ProfileForm extends Component {
 	state = {
 		inputValue: 0,
-		checkedList: []
-		//indeterminate: true,
-		//checkAll: false
+		checkedList: [],
+		indeterminate: true,
+		checkAll: false,
+		visible: false
 	};
-	onChange = (value, checkedList) => {
+	onSchedChange = checkedList => {
 		this.setState({
-			inputValue: value,
-			checkedList
-			//indeterminate:
-			//!!checkedList.length && checkedList.length < plainOptions.length,
-			//checkAll: checkedList.length === plainOptions.length
+			checkedList,
+			indeterminate:
+				!!checkedList.length && checkedList.length < plainOptions.length,
+			checkAll: checkedList.length === plainOptions.length
 		});
 	};
 	onCheckAllChange = e => {
@@ -43,6 +42,9 @@ class ProfileForm extends Component {
 			indeterminate: false,
 			checkAll: e.target.checked
 		});
+	};
+	handleVisibleChange = flag => {
+		this.setState({ visible: flag });
 	};
 	render() {
 		const formItemLayout = {
@@ -66,7 +68,7 @@ class ProfileForm extends Component {
 						<CheckboxGroup
 							options={plainOptions}
 							value={this.state.checkedList}
-							onChange={this.onChange}
+							onChange={this.onSchedChange}
 						/>
 					</div>
 				</Menu.Item>
@@ -100,39 +102,59 @@ class ProfileForm extends Component {
 							mode="multiple"
 							placeholder="Select what you're curious about"
 						>
+							<Option value="Architecture">Architecture</Option>
+							<Option value="Art & Culture">Art & Culture</Option>
+							<Option value="Biology & Life Sciences">
+								Biology & Life Sciences
+							</Option>
+							<Option value="Business & Management">
+								Business & Management
+							</Option>
+							<Option value="Chemistry">Computer Science</Option>
+							<Option value="Communication">Communication</Option>
 							<Option value="Computer Science">Computer Science</Option>
-							<Option value="Business">Business</Option>
+							<Option value="Data Analysis & Statistics">
+								Data Analysis & Statistics
+							</Option>
+							<Option value="Design">Design</Option>
+							<Option value="Economics & Finance">Economics & Finance</Option>
+							<Option value="Education & Teacher Training">
+								Education & Teacher Training
+							</Option>
+							<Option value="Electronics">Electronics</Option>
+							<Option value="Energy & Earth Sciences">
+								Energy & Earth Sciences
+							</Option>
+							<Option value="Engineering">Engineering</Option>
+							<Option value="Environmental Studies">
+								Environmental Studies
+							</Option>
+							<Option value="Ethics">Ethics</Option>
+							<Option value="Food & Nurtition">Food & Nurtition</Option>
+							<Option value="Health & Safety">Health & Safety</Option>
+							<Option value="History">History</Option>
+							<Option value="Humanities">Humanities</Option>
+							<Option value="Language & Literature">
+								Language & Literature
+							</Option>
+							<Option value="Law">Law</Option>
+							<Option value="Math">Math</Option>
+							<Option value="Medicine">Medicine</Option>
+							<Option value="Music">Music</Option>
+							<Option value="Philosophy & Ethics">Philosophy & Ethics</Option>
+							<Option value="Physics">Physics</Option>
+							<Option value="Science">Science</Option>
+							<Option value="Social Sciences">Social Sciences</Option>
 						</Select>
 					</FormItem>
-					<Row type="flex" justify="start" align="middle">
-						<Col span={12}>
-							<FormItem
-								label="# Hours/Week Availabe"
-								colorTheme={this.props.colorTheme}
-							>
-								<Slider
-									marks={{ 1: '1 or less', 20: '20', 40: '40 or more' }}
-									min={1}
-									max={40}
-									onChange={this.onChange}
-									value={this.state.inputValue}
-								/>
-							</FormItem>
-						</Col>
-						<Col span={4}>
-							<InputNumber
-								min={0}
-								max={40}
-								style={{ marginLeft: 16 }}
-								value={this.state.inputValue}
-								onChange={this.onChange}
-							/>
-						</Col>
-					</Row>
 					<FormItem {...formItemLayout} label="Age: ">
 						<InputNumber min={10} max={100} />
 					</FormItem>
-					<Dropdown overlay={menu}>
+					<Dropdown
+						overlay={menu}
+						onVisibleChange={this.handleVisibleChange}
+						visible={this.state.visible}
+					>
 						<a className="ant-dropdown-link" href="#">
 							Time on Monday <Icon type="down" />
 						</a>
