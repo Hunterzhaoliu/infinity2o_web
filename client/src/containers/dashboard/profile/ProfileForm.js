@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import InputTimeZone from './InputTimeZone';
 import InputField from './InputField';
+import { isValidName } from '../../../utils/validate';
 import {
 	Layout,
 	Row,
@@ -29,6 +30,7 @@ class ProfileForm extends Component {
 		checkAll: false,
 		visible: false
 	};
+
 	onSchedChange = checkedList => {
 		this.setState({
 			checkedList,
@@ -38,6 +40,7 @@ class ProfileForm extends Component {
 			checkAll: checkedList.length === plainOptions.length
 		});
 	};
+
 	onCheckAllChange = e => {
 		this.setState({
 			checkedList: e.target.checked ? plainOptions : [],
@@ -45,14 +48,18 @@ class ProfileForm extends Component {
 			checkAll: e.target.checked
 		});
 	};
+
 	handleVisibleChange = flag => {
 		this.setState({ visible: flag });
 	};
+
 	render() {
+		// console.log('this.props in ProfileForm.js', this.props);
 		const formItemLayout = {
 			labelCol: { span: 6 },
 			wrapperCol: { span: 14 }
 		};
+
 		const menu = (
 			<Menu>
 				<Menu.Item>
@@ -76,25 +83,43 @@ class ProfileForm extends Component {
 				</Menu.Item>
 			</Menu>
 		);
-		// console.log('this.props in ProfileForm.js', this.props);
+
 		return (
 			<Content
 				style={{
-					textAlign: 'center',
-					padding: '100px 50px 81px', // top left&right bottom
+					padding: '0% 0% 0%', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
 				<Form onSubmit={this.props.handleSubmit}>
 					<Row type="flex" justify="start">
-						<Field
-							name="name"
-							label="Name:"
-							width={300}
-							component={InputField}
-							type="text"
-							colorTheme={this.props.colorTheme}
-						/>
+						<Col>
+							<Field
+								name="name"
+								label="Name:"
+								width={280}
+								component={InputField}
+								type="text"
+								colorTheme={this.props.colorTheme}
+							/>
+						</Col>
+					</Row>
+					<Row type="flex" justify="start">
+						<Col>
+							<Field
+								name="age"
+								label="Age:"
+								width={280}
+								min={10}
+								max={125}
+								component={InputNumber}
+								type="text"
+								colorTheme={this.props.colorTheme}
+							/>
+							<FormItem {...formItemLayout} label="Age: ">
+								<InputNumber min={10} max={125} />
+							</FormItem>
+						</Col>
 					</Row>
 					<FormItem {...formItemLayout} label="Interest(s):">
 						<Select
@@ -158,9 +183,6 @@ class ProfileForm extends Component {
 							</Option>
 						</Select>
 					</FormItem>
-					<FormItem {...formItemLayout} label="Age: ">
-						<InputNumber min={10} max={100} />
-					</FormItem>
 					<Dropdown
 						overlay={menu}
 						onVisibleChange={this.handleVisibleChange}
@@ -192,13 +214,8 @@ ProfileForm = connect(mapStateToProps, null)(ProfileForm);
 function validate(values) {
 	const errors = {};
 
-	if (values.question) {
-		let acceptableQuestion =
-			values.question.length >= 15 && values.question.length <= 150;
-		if (!acceptableQuestion) {
-			errors['question'] = 'between 15 & 150 characters pretty please';
-			// TODO: show possible answers and submit button
-		}
+	if (!isValidName(values.name)) {
+		errors['name'] = 'Cool name! But we need between 1 & 30 valid letters';
 	}
 
 	return errors;
