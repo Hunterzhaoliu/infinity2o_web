@@ -86,7 +86,7 @@ class ProfileForm extends Component {
 					<Row type="flex" justify="start" align="middle">
 						<Field
 							name="name"
-							label="Name "
+							label="Name: "
 							component={InputField}
 							type="text"
 							colorTheme={this.props.colorTheme}
@@ -140,7 +140,7 @@ class ProfileForm extends Component {
 						<InputNumber min={10} max={100} />
 					</FormItem>
 					<Dropdown overlay={menu}>
-						<a className="ant-dropdown-link" href="#">
+						<a className="ant-dropdown-link">
 							Time on Monday <Icon type="down" />
 						</a>
 					</Dropdown>

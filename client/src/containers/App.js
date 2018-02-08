@@ -57,7 +57,7 @@ class App extends Component {
 						}}
 					>
 						<p>Infinity2o Inc. © 2018 to year infinity</p>
-						<p>UI version: 0.2.0 | API version: 1.0.0</p>
+						<p>UI v0.2.0 | API v1.0.0</p>
 					</Footer>
 				</Layout>
 			</BrowserRouter>
