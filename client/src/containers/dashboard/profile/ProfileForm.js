@@ -90,7 +90,6 @@ class ProfileForm extends Component {
 								width={280}
 								component={InputField}
 								type="text"
-								colorTheme={this.props.colorTheme}
 							/>
 						</Col>
 					</Row>
@@ -111,7 +110,6 @@ class ProfileForm extends Component {
 								defaultValue={18}
 								component={InputFieldNumber}
 								type="text"
-								colorTheme={this.props.colorTheme}
 							/>
 						</Col>
 					</Row>
@@ -130,7 +128,6 @@ class ProfileForm extends Component {
 								width={280}
 								component={InputFieldSelect}
 								type="text"
-								colorTheme={this.props.colorTheme}
 							/>
 						</Col>
 					</Row>
@@ -173,7 +170,11 @@ class ProfileForm extends Component {
 						}}
 					>
 						<Col>
-							<InputTimeZone />
+							<InputTimeZone
+								style={{
+									color: this.props.colorTheme.text2Color
+								}}
+							/>
 						</Col>
 					</Row>
 				</Form>
