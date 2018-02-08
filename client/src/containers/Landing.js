@@ -28,20 +28,20 @@ class Landing extends Component {
 						<Row type="flex" justify="center">
 							<Col
 								sm={{ span: 0, offset: 0 }}
-								md={{ span: 16, offset: 0 }}
-								lg={{ span: 16, offset: 0 }}
-								xl={{ span: 16, offset: 0 }}
+								md={{ span: 3, offset: 0 }}
+								lg={{ span: 5, offset: 0 }}
+								xl={{ span: 6, offset: 0 }}
 							/>
 							<Col
 								sm={{ span: 13, offset: 0 }}
-								md={{ span: 16, offset: 0 }}
-								lg={{ span: 16, offset: 0 }}
-								xl={{ span: 16, offset: 0 }}
+								md={{ span: 10, offset: 0 }}
+								lg={{ span: 7, offset: 0 }}
+								xl={{ span: 6, offset: 0 }}
 							>
 								<h1
 									key="0"
 									style={{
-										color: this.props.colorTheme.text1Color
+										color: this.props.colorTheme.text2Color
 									}}
 								>
 									{why_part_0}
@@ -50,13 +50,13 @@ class Landing extends Component {
 							<Col
 								sm={{ span: 11, offset: 0 }}
 								md={{ span: 8, offset: 0 }}
-								lg={{ span: 7, offset: 1 }}
-								xl={{ span: 7, offset: 1 }}
+								lg={{ span: 6, offset: 0 }}
+								xl={{ span: 5, offset: 0 }}
 							>
 								<h1
 									key="0"
 									style={{
-										color: this.props.colorTheme.text1Color
+										color: this.props.colorTheme.text2Color
 									}}
 								>
 									<Typist
@@ -91,9 +91,9 @@ class Landing extends Component {
 							</Col>
 							<Col
 								sm={{ span: 0, offset: 0 }}
-								md={{ span: 16, offset: 0 }}
-								lg={{ span: 16, offset: 0 }}
-								xl={{ span: 16, offset: 0 }}
+								md={{ span: 3, offset: 0 }}
+								lg={{ span: 6, offset: 0 }}
+								xl={{ span: 7, offset: 0 }}
 							/>
 						</Row>
 						<Row type="flex" justify="center">
@@ -117,7 +117,8 @@ class Landing extends Component {
 								<h2
 									key="1"
 									style={{
-										color: this.props.colorTheme.text5Color
+										color: this.props.colorTheme.text5Color,
+										padding: '0% 0% 3%'
 									}}
 								>
 									{how}
@@ -169,14 +170,14 @@ class Landing extends Component {
 							<Col
 								sm={{ span: 3, offset: 0 }}
 								md={{ span: 5, offset: 0 }}
-								lg={{ span: 5, offset: 0 }}
-								xl={{ span: 16, offset: 0 }}
+								lg={{ span: 7, offset: 0 }}
+								xl={{ span: 8, offset: 0 }}
 							/>
 							<Col
 								sm={{ span: 9, offset: 0 }}
-								md={{ span: 6, offset: 0 }}
-								lg={{ span: 16, offset: 0 }}
-								xl={{ span: 16, offset: 0 }}
+								md={{ span: 7, offset: 0 }}
+								lg={{ span: 5, offset: 0 }}
+								xl={{ span: 4, offset: 0 }}
 							>
 								<Button
 									key="-1"
@@ -193,9 +194,9 @@ class Landing extends Component {
 							</Col>
 							<Col
 								sm={{ span: 9, offset: 0 }}
-								md={{ span: 16, offset: 0 }}
-								lg={{ span: 16, offset: 0 }}
-								xl={{ span: 16, offset: 0 }}
+								md={{ span: 7, offset: 0 }}
+								lg={{ span: 5, offset: 0 }}
+								xl={{ span: 4, offset: 0 }}
 							>
 								<Button
 									key="0"
@@ -214,9 +215,9 @@ class Landing extends Component {
 							</Col>
 							<Col
 								sm={{ span: 3, offset: 0 }}
-								md={{ span: 16, offset: 0 }}
-								lg={{ span: 16, offset: 0 }}
-								xl={{ span: 16, offset: 0 }}
+								md={{ span: 5, offset: 0 }}
+								lg={{ span: 7, offset: 0 }}
+								xl={{ span: 8, offset: 0 }}
 							/>
 						</Row>
 					</div>
