@@ -21,18 +21,16 @@ class InputField extends Component {
 						<Input
 							{...this.props.input}
 							style={{
-								width: 500,
-								borderColor: this.props.colorTheme.text4Color,
-								background: this.props.colorTheme.text4Color,
+								width: this.props.width,
+								borderColor: this.props.colorTheme.text6Color,
+								background: this.props.colorTheme.text6Color,
 								color: this.props.colorTheme.text1Color
 							}}
 						/>
 					</Col>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
-					<Col span={4}>
-						<label />
-					</Col>
+					<Col span={4} />
 					<Col span={20}>
 						<div
 							style={{

@@ -83,20 +83,17 @@ class ProfileForm extends Component {
 				}}
 			>
 				<Form onSubmit={this.props.handleSubmit}>
-					<Row type="flex" justify="start" align="middle">
+					<Row type="flex" justify="start">
 						<Field
 							name="name"
-							label="Name: "
+							label="Name:"
+							width={300}
 							component={InputField}
 							type="text"
 							colorTheme={this.props.colorTheme}
 						/>
 					</Row>
-					<FormItem
-						{...formItemLayout}
-						label="Interest(s)"
-						colorTheme={this.props.colorTheme}
-					>
+					<FormItem {...formItemLayout} label="Interest(s):">
 						<Select
 							mode="multiple"
 							placeholder="Select what you're curious about"
