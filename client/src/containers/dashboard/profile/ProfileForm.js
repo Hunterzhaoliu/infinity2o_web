@@ -4,20 +4,9 @@ import { reduxForm, Field } from 'redux-form';
 import InputTimeZone from './InputTimeZone';
 import InputField from './InputField';
 import InputFieldNumber from './InputFieldNumber';
+import InputFieldSelect from './InputFieldSelect';
 import { isValidName } from '../../../utils/validate';
-import {
-	Layout,
-	Row,
-	Form,
-	Select,
-	Col,
-	Menu,
-	Dropdown,
-	Icon,
-	Checkbox
-} from 'antd';
-const { Option } = Select;
-const FormItem = Form.Item;
+import { Layout, Row, Form, Col, Menu, Dropdown, Icon, Checkbox } from 'antd';
 const { Content } = Layout;
 const CheckboxGroup = Checkbox.Group;
 
@@ -55,14 +44,6 @@ class ProfileForm extends Component {
 
 	render() {
 		// console.log('this.props in ProfileForm.js', this.props);
-		const formItemLayout = {
-			labelCol: { span: 6 },
-			wrapperCol: { span: 14 }
-		};
-
-		// <FormItem {...formItemLayout} label="Age: ">
-		//     <InputNumber min={10} max={125} />
-		// </FormItem>
 		const menu = (
 			<Menu>
 				<Menu.Item>
@@ -95,11 +76,17 @@ class ProfileForm extends Component {
 				}}
 			>
 				<Form onSubmit={this.props.handleSubmit}>
-					<Row type="flex" justify="start">
+					<Row
+						type="flex"
+						justify="start"
+						style={{
+							padding: '2% 0% 0%' // top left&right bottom
+						}}
+					>
 						<Col>
 							<Field
 								name="name"
-								label="Name:"
+								label="First Name:"
 								width={280}
 								component={InputField}
 								type="text"
@@ -107,7 +94,13 @@ class ProfileForm extends Component {
 							/>
 						</Col>
 					</Row>
-					<Row type="flex" justify="start">
+					<Row
+						type="flex"
+						justify="start"
+						style={{
+							padding: '2% 0% 0%' // top left&right bottom
+						}}
+					>
 						<Col>
 							<Field
 								name="age"
@@ -122,68 +115,25 @@ class ProfileForm extends Component {
 							/>
 						</Col>
 					</Row>
-					<FormItem {...formItemLayout} label="Interest(s):">
-						<Select
-							mode="multiple"
-							placeholder="Select what you're curious about"
-						>
-							<Option value="Architecture">Architecture</Option>
-							<Option value="Art & Culture">Art & Culture</Option>
-							<Option value="Biology & Life Sciences">
-								Biology & Life Sciences
-							</Option>
-							<Option value="Business & Management">
-								Business & Management
-							</Option>
-							<Option value="Chemistry">Computer Science</Option>
-							<Option value="Communication">Communication</Option>
-							<Option value="Computer Science">
-								Computer Science
-							</Option>
-							<Option value="Data Analysis & Statistics">
-								Data Analysis & Statistics
-							</Option>
-							<Option value="Design">Design</Option>
-							<Option value="Economics & Finance">
-								Economics & Finance
-							</Option>
-							<Option value="Education & Teacher Training">
-								Education & Teacher Training
-							</Option>
-							<Option value="Electronics">Electronics</Option>
-							<Option value="Energy & Earth Sciences">
-								Energy & Earth Sciences
-							</Option>
-							<Option value="Engineering">Engineering</Option>
-							<Option value="Environmental Studies">
-								Environmental Studies
-							</Option>
-							<Option value="Ethics">Ethics</Option>
-							<Option value="Food & Nurtition">
-								Food & Nurtition
-							</Option>
-							<Option value="Health & Safety">
-								Health & Safety
-							</Option>
-							<Option value="History">History</Option>
-							<Option value="Humanities">Humanities</Option>
-							<Option value="Language & Literature">
-								Language & Literature
-							</Option>
-							<Option value="Law">Law</Option>
-							<Option value="Math">Math</Option>
-							<Option value="Medicine">Medicine</Option>
-							<Option value="Music">Music</Option>
-							<Option value="Philosophy & Ethics">
-								Philosophy & Ethics
-							</Option>
-							<Option value="Physics">Physics</Option>
-							<Option value="Science">Science</Option>
-							<Option value="Social Sciences">
-								Social Sciences
-							</Option>
-						</Select>
-					</FormItem>
+					<Row
+						type="flex"
+						justify="start"
+						style={{
+							padding: '3% 0% 0%' // top left&right bottom
+						}}
+					>
+						<Col>
+							<Field
+								name="interests"
+								label="Interest(s):"
+								placeholder="What are you curious about?"
+								width={280}
+								component={InputFieldSelect}
+								type="text"
+								colorTheme={this.props.colorTheme}
+							/>
+						</Col>
+					</Row>
 					<Dropdown
 						overlay={menu}
 						onVisibleChange={this.handleVisibleChange}

@@ -8,7 +8,12 @@ class InputField extends Component {
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col span={4}>
+					<Col
+						sm={{ span: 6 }}
+						md={{ span: 6 }}
+						lg={{ span: 6 }}
+						xl={{ span: 6 }}
+					>
 						<label
 							style={{
 								color: this.props.colorTheme.text1Color
@@ -17,7 +22,12 @@ class InputField extends Component {
 							{this.props.label}
 						</label>
 					</Col>
-					<Col span={20}>
+					<Col
+						sm={{ span: 18 }}
+						md={{ span: 18 }}
+						lg={{ span: 18 }}
+						xl={{ span: 18 }}
+					>
 						<Input
 							{...this.props.input}
 							style={{
@@ -30,8 +40,18 @@ class InputField extends Component {
 					</Col>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
-					<Col span={4} />
-					<Col span={20}>
+					<Col
+						sm={{ span: 4 }}
+						md={{ span: 4 }}
+						lg={{ span: 4 }}
+						xl={{ span: 4 }}
+					/>
+					<Col
+						sm={{ span: 20 }}
+						md={{ span: 20 }}
+						lg={{ span: 20 }}
+						xl={{ span: 20 }}
+					>
 						<div
 							style={{
 								marginBottom: '5px',

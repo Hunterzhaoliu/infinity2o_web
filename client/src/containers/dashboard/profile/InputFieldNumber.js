@@ -4,11 +4,16 @@ import { InputNumber, Row, Col } from 'antd';
 
 class InputFieldNumber extends Component {
 	render() {
-		console.log('this.props in InputFieldNumber', this.props);
+		//console.log('this.props in InputFieldNumber', this.props);
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col span={12}>
+					<Col
+						sm={{ span: 9 }}
+						md={{ span: 12 }}
+						lg={{ span: 12 }}
+						xl={{ span: 12 }}
+					>
 						<label
 							style={{
 								color: this.props.colorTheme.text1Color
@@ -17,7 +22,12 @@ class InputFieldNumber extends Component {
 							{this.props.label}
 						</label>
 					</Col>
-					<Col span={12}>
+					<Col
+						sm={{ span: 4, offset: 11 }}
+						md={{ span: 12 }}
+						lg={{ span: 12 }}
+						xl={{ span: 12 }}
+					>
 						<InputNumber
 							min={13}
 							max={125}
@@ -25,23 +35,9 @@ class InputFieldNumber extends Component {
 							style={{
 								width: this.props.width,
 								borderColor: this.props.colorTheme.text6Color,
-								background: this.props.colorTheme.text6Color,
 								color: this.props.colorTheme.text1Color
 							}}
 						/>
-					</Col>
-				</Row>
-				<Row type="flex" justify="start" align="middle">
-					<Col span={4} />
-					<Col span={20}>
-						<div
-							style={{
-								marginBottom: '5px',
-								color: this.props.colorTheme.key
-							}}
-						>
-							{this.props.meta.touched && this.props.meta.error}
-						</div>
 					</Col>
 				</Row>
 			</div>
