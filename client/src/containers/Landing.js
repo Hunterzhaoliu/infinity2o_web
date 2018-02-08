@@ -15,8 +15,7 @@ class Landing extends Component {
 		const why_part_6 = `are amazing but too lonely.`;
 
 		const how = `Join our community and train an AI to find the best partners for your online classes.`;
-		const step1 = `1) Answer a few simple questions.`;
-		const step2 = `2) Let our AI find you a great study partner at the same skill level with similar interests.`;
+		const why = `Online classes from the best teachers are amazing but too lonely.`;
 		switch (this.props.auth.userInfo) {
 			case null:
 				// show nothing when still signing in
@@ -100,7 +99,7 @@ class Landing extends Component {
 							<h1
 								key="0"
 								style={{
-									color: this.props.colorTheme.text1Color
+									color: this.props.colorTheme.text2Color
 								}}
 							>
 								{why_part_6}
@@ -133,25 +132,17 @@ class Landing extends Component {
 					<div>
 						<h1
 							key="0"
-							style={{ color: this.props.colorTheme.text1Color }}
+							style={{ color: this.props.colorTheme.text2Color }}
 						>
-							{why_part_6}
+							{why}
 						</h1>
 						<h2
 							key="1"
 							style={{
-								color: this.props.colorTheme.text3Color
+								color: this.props.colorTheme.text5Color
 							}}
 						>
-							{step1}
-						</h2>
-						<h2
-							key="2"
-							style={{
-								color: this.props.colorTheme.text3Color
-							}}
-						>
-							{step2}
+							{how}
 						</h2>
 					</div>
 				);
