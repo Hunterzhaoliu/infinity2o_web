@@ -95,7 +95,13 @@ class InputTimeZone extends Component {
 
 		return (
 			<div>
-				<p>Time Zone: </p>
+				<p
+					style={{
+						color: this.props.colorTheme.text2Color
+					}}
+				>
+					What time zone are you in?
+				</p>
 				<Tree
 					checkable
 					onExpand={this.onExpand}

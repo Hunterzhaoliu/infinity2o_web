@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Row, Col } from 'antd';
+import { InputNumber, Row, Col } from 'antd';
 
-class InputField extends Component {
+class InputFieldNumber extends Component {
 	render() {
-		//console.log('this.props in InputField', this.props);
+		//console.log('this.props in InputFieldNumber', this.props);
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col span={4}>
+					<Col
+						sm={{ span: 9 }}
+						md={{ span: 9 }}
+						lg={{ span: 9 }}
+						xl={{ span: 9 }}
+					>
 						<label
 							style={{
 								color: this.props.colorTheme.text1Color
@@ -17,29 +22,22 @@ class InputField extends Component {
 							{this.props.label}
 						</label>
 					</Col>
-					<Col span={20}>
-						<Input
-							{...this.props.input}
+					<Col
+						sm={{ span: 4, offset: 11 }}
+						md={{ span: 4, offset: 11 }}
+						lg={{ span: 4, offset: 11 }}
+						xl={{ span: 4, offset: 11 }}
+					>
+						<InputNumber
+							min={13}
+							max={125}
+							defaultValue={this.props.defaultValue}
 							style={{
 								width: this.props.width,
 								borderColor: this.props.colorTheme.text6Color,
-								background: this.props.colorTheme.text6Color,
 								color: this.props.colorTheme.text1Color
 							}}
 						/>
-					</Col>
-				</Row>
-				<Row type="flex" justify="start" align="middle">
-					<Col span={4} />
-					<Col span={20}>
-						<div
-							style={{
-								marginBottom: '5px',
-								color: this.props.colorTheme.key
-							}}
-						>
-							{this.props.meta.touched && this.props.meta.error}
-						</div>
 					</Col>
 				</Row>
 			</div>
@@ -57,4 +55,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(InputField);
+export default connect(mapStateToProps, null)(InputFieldNumber);

@@ -10,13 +10,12 @@ class DashboardProfile extends Component {
 		return (
 			<Content
 				style={{
-					textAlign: 'center',
-					padding: '100px 50px 81px', // top left&right bottom
+					padding: '10% 10% 5%', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
-					DashboardProfile
+				<h1 key="0" style={{ color: this.props.colorTheme.text2Color }}>
+					Let's get to know each other :)
 				</h1>
 				<ProfileForm />
 			</Content>

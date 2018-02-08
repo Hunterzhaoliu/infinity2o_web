@@ -8,8 +8,8 @@ import { bindActionCreators } from 'redux';
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
 import Dashboard from './dashboard/Dashboard';
-import DashboardMatches from './dashboard/DashboardMatches';
-import DashboardProfile from './dashboard/DashboardProfile';
+import DashboardMatches from './dashboard/matches/Matches';
+import DashboardProfile from './dashboard/profile/Profile';
 import GreyScale from './styles/GreyScale';
 
 import { Layout } from 'antd';
