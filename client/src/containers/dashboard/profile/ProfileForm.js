@@ -134,16 +134,48 @@ class ProfileForm extends Component {
 							/>
 						</Col>
 					</Row>
-					<Dropdown
-						overlay={menu}
-						onVisibleChange={this.handleVisibleChange}
-						visible={this.state.visible}
+					<Row
+						type="flex"
+						justify="start"
+						style={{
+							padding: '4% 0% 0%' // top left&right bottom
+						}}
 					>
-						<a className="ant-dropdown-link">
-							Time on Monday <Icon type="down" />
-						</a>
-					</Dropdown>
-					<InputTimeZone />
+						<Col>
+							<p
+								style={{
+									color: this.props.colorTheme.text2Color
+								}}
+							>
+								When are you free to video chat for about 1.5
+								hours for your class?
+							</p>
+							<Dropdown
+								overlay={menu}
+								onVisibleChange={this.handleVisibleChange}
+								visible={this.state.visible}
+								style={{
+									borderColor: this.props.colorTheme
+										.text6Color
+								}}
+							>
+								<a className="ant-dropdown-link">
+									Monday <Icon type="down" />
+								</a>
+							</Dropdown>
+						</Col>
+					</Row>
+					<Row
+						type="flex"
+						justify="start"
+						style={{
+							padding: '3% 0% 0%' // top left&right bottom
+						}}
+					>
+						<Col>
+							<InputTimeZone />
+						</Col>
+					</Row>
 				</Form>
 			</Content>
 		);

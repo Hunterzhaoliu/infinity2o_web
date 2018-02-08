@@ -8,7 +8,11 @@ const { Option } = Select;
 class InputFieldSelect extends Component {
 	renderOptions() {
 		return _.map(optionFields, option => {
-			return <Option value={option.value}>{option.name}</Option>;
+			return (
+				<Option value={option.value} key={option.value}>
+					{option.name}
+				</Option>
+			);
 		});
 	}
 
@@ -42,8 +46,7 @@ class InputFieldSelect extends Component {
 							placeholder={this.props.placeholder}
 							style={{
 								width: this.props.width,
-								borderColor: this.props.colorTheme.text6Color,
-								color: this.props.colorTheme.text1Color
+								borderColor: this.props.colorTheme.text6Color
 							}}
 						>
 							{this.renderOptions()}
