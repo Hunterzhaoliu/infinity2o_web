@@ -49,8 +49,8 @@ export const GREEN_3 = 'rgb(0, 237, 0)';
 export const GREEN_4 = 'rgb(0, 203, 0)';
 export const GREEN_5 = 'rgb(0, 172, 0)';
 export const GREEN_6 = 'rgb(0, 138, 0)';
-export const GREEN_7 = 'rgb(0, 104, 0)';
-export const GREEN_8 = 'rgb(0, 71, 0)';
+export const GREEN_7 = 'rgb(0, 108, 0)';
+export const GREEN_8 = 'rgb(0, 73, 0)';
 export const GREEN_9 = 'rgb(0, 35, 0)';
 
 export const BLUE_GREEN_1 = 'rgb(170, 242, 255)';
@@ -64,7 +64,7 @@ export const BLUE_GREEN_8 = 'rgb(0, 65, 65)';
 export const BLUE_GREEN_9 = 'rgb(0, 35, 35)';
 
 export const BLUE_1 = 'rgb(209, 233, 255)';
-export const BLUE_2 = 'rgb(168, 214, 255)';
+export const BLUE_2 = 'rgb(196, 203, 255)';
 export const BLUE_3 = 'rgb(117, 190, 245)';
 export const BLUE_4 = 'rgb(66, 166, 255)';
 export const BLUE_5 = 'rgb(20, 145, 255)';

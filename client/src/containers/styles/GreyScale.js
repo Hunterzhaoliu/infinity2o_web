@@ -9,47 +9,47 @@ const { Content } = Layout;
 const scaleFields = [
 	{
 		color: colors.GREY_0,
-		color2: colors.GREEN_1
+		color2: colors.BLUE_1
 	},
 	{
 		color: colors.GREY_1,
-		color2: colors.GREEN_1
+		color2: colors.BLUE_1
 	},
 	{
 		color: colors.GREY_2,
-		color2: colors.GREEN_2
+		color2: colors.BLUE_2
 	},
 	{
 		color: colors.GREY_3,
-		color2: colors.GREEN_3
+		color2: colors.BLUE_3
 	},
 	{
 		color: colors.GREY_4,
-		color2: colors.GREEN_4
+		color2: colors.BLUE_4
 	},
 	{
 		color: colors.GREY_5,
-		color2: colors.GREEN_5
+		color2: colors.BLUE_5
 	},
 	{
 		color: colors.GREY_6,
-		color2: colors.GREEN_6
+		color2: colors.BLUE_6
 	},
 	{
 		color: colors.GREY_7,
-		color2: colors.GREEN_7
+		color2: colors.BLUE_7
 	},
 	{
 		color: colors.GREY_8,
-		color2: colors.GREEN_8
+		color2: colors.BLUE_8
 	},
 	{
 		color: colors.GREY_9,
-		color2: colors.GREEN_9
+		color2: colors.BLUE_9
 	},
 	{
 		color: colors.GREY_10,
-		color2: colors.GREEN_9
+		color2: colors.BLUE_9
 	}
 ];
 
