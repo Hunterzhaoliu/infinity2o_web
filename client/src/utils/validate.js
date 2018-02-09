@@ -25,3 +25,16 @@ export const isValidName = name => {
 		return false;
 	}
 };
+
+export const isValidAge = age => {
+	const num_age = Number(age);
+	const isNumber = !isNaN(num_age);
+
+	if (isNumber) {
+		if (num_age >= 13 && num_age <= 125) {
+			return true;
+		}
+	}
+
+	return false;
+};

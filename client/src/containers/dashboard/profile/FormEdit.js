@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import InputTimeZone from './InputTimeZone';
 import InputField from './InputField';
 import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './InputFieldSelect';
-import { isValidName } from '../../../utils/validate';
+import { isValidName, isValidAge } from '../../../utils/validate';
 import { Layout, Row, Form, Col, Menu, Dropdown, Icon, Checkbox } from 'antd';
 const { Content } = Layout;
 const CheckboxGroup = Checkbox.Group;
@@ -135,13 +134,13 @@ class ProfileForm extends Component {
 						}}
 					>
 						<Col span={24}>
-							<div
+							<h3
 								style={{
 									color: this.props.colorTheme.keyText5Color
 								}}
 							>
 								When are you free to video chat for your class?
-							</div>
+							</h3>
 							<Dropdown
 								overlay={menu}
 								onVisibleChange={this.handleVisibleChange}
@@ -161,7 +160,7 @@ class ProfileForm extends Component {
 						type="flex"
 						justify="start"
 						style={{
-							padding: '10% 0% 0%' // top left&right bottom
+							padding: '5% 0% 0%' // top left&right bottom
 						}}
 					>
 						<Col span={24}>
@@ -196,7 +195,11 @@ function validate(values) {
 	const errors = {};
 
 	if (!isValidName(values.name)) {
-		errors['name'] = 'Cool name! But we need between 1 & 30 valid letters';
+		errors['name'] = 'Cool name! But we need between 1 & 30 valid letters.';
+	}
+
+	if (!isValidAge(values.age)) {
+		errors['age'] = 'Between 13 & 125. If your close you should lie ;)';
 	}
 
 	return errors;
@@ -204,5 +207,5 @@ function validate(values) {
 
 export default reduxForm({
 	validate: validate,
-	form: 'profileForm' // state.form.profileForm
+	form: 'profile' // state.form.profile
 })(ProfileForm);
