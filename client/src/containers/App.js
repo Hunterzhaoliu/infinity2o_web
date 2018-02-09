@@ -8,11 +8,12 @@ import { bindActionCreators } from 'redux';
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
 import Dashboard from './dashboard/Dashboard';
-import DashboardMatches from './dashboard/DashboardMatches';
-import DashboardProfile from './dashboard/DashboardProfile';
+import DashboardMatches from './dashboard/matches/Matches';
+import DashboardProfile from './dashboard/profile/Profile';
 import GreyScale from './styles/GreyScale';
 
 import { Layout } from 'antd';
+const { Footer } = Layout;
 
 class App extends Component {
 	componentDidMount() {
@@ -48,6 +49,16 @@ class App extends Component {
 						path="/greyscale"
 						component={GreyScale}
 					/>
+					<Footer
+						style={{
+							textAlign: 'center',
+							background: this.props.colorTheme.backgroundColor,
+							color: this.props.colorTheme.text7Color
+						}}
+					>
+						<p>Infinity2o Inc. © 2018 to year infinity</p>
+						<p>UI v0.2.0 | API v1.0.0</p>
+					</Footer>
 				</Layout>
 			</BrowserRouter>
 		);
@@ -59,6 +70,16 @@ var styles = {
 		height: '100vh'
 	}
 };
+
+/*
+So we have a state and a UI(with props).
+This function gives the UI the parts of the state it will need to display.
+*/
+function mapStateToProps(state) {
+	return {
+		colorTheme: state.colorTheme
+	};
+}
 
 /*
 So we have a state and a UI(with props).
@@ -82,4 +103,4 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

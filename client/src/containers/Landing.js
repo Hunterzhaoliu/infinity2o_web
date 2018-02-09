@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Typist from 'react-typist';
-import { Layout, Button, Row, Col } from 'antd';
+import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
 	renderMarketingInfo() {
-		const intro = `Colleges are too expensive & online classes are too lonely.
-        Join us to find a partner to take online classes with.`;
-		const step1 = `1) Answer a few simple questions.`;
-		const step2 = `2) Let our AI find you a study partner at the same skill level with similar interests.`;
+		const why_part_0 = `Online classes from `;
+		const why_part_1 = `udacity.com`;
+		const why_part_2 = `edx.org`;
+		const why_part_3 = `udemy.com`;
+		const why_part_4 = `coursera.org`;
+		const why_part_5 = `the best teachers`;
+		const why_part_6 = `are amazing but too lonely.`;
+
+		const how = `Join our community and train an AI to find the best partners for your online classes.`;
+		const why = `Online classes from the best teachers are amazing but too lonely.`;
 		switch (this.props.auth.userInfo) {
 			case null:
 				// show nothing when still signing in
@@ -18,37 +24,106 @@ class Landing extends Component {
 				// not logged in
 				return (
 					<div>
-						<h1
-							key="0"
-							style={{ color: this.props.colorTheme.text1Color }}
-						>
-							{intro}
-						</h1>
-						<Typist
-							avgTypingDelay={42}
-							cursor={{
-								show: false
-							}}
-						>
-							<Typist.Delay ms={3000} />
-							<h2
-								key="1"
+						<Row type="flex" justify="center">
+							<Col
+								sm={{ span: 0, offset: 0 }}
+								md={{ span: 3, offset: 0 }}
+								lg={{ span: 5, offset: 0 }}
+								xl={{ span: 6, offset: 0 }}
+							/>
+							<Col
+								sm={{ span: 13, offset: 0 }}
+								md={{ span: 10, offset: 0 }}
+								lg={{ span: 7, offset: 0 }}
+								xl={{ span: 6, offset: 0 }}
+							>
+								<h1
+									key="0"
+									style={{
+										color: this.props.colorTheme.text2Color
+									}}
+								>
+									{why_part_0}
+								</h1>
+							</Col>
+							<Col
+								sm={{ span: 11, offset: 0 }}
+								md={{ span: 8, offset: 0 }}
+								lg={{ span: 6, offset: 0 }}
+								xl={{ span: 5, offset: 0 }}
+							>
+								<h1
+									key="0"
+									style={{
+										color: this.props.colorTheme.text2Color
+									}}
+								>
+									<Typist
+										avgTypingDelay={35}
+										cursor={{
+											show: false
+										}}
+									>
+										{why_part_1}
+										<Typist.Backspace
+											count={why_part_1.length}
+											delay={200}
+										/>
+										{why_part_2}
+										<Typist.Backspace
+											count={why_part_2.length}
+											delay={200}
+										/>
+										{why_part_3}
+										<Typist.Backspace
+											count={why_part_3.length}
+											delay={200}
+										/>
+										{why_part_4}
+										<Typist.Backspace
+											count={why_part_4.length}
+											delay={200}
+										/>
+										{why_part_5}
+									</Typist>
+								</h1>
+							</Col>
+							<Col
+								sm={{ span: 0, offset: 0 }}
+								md={{ span: 3, offset: 0 }}
+								lg={{ span: 6, offset: 0 }}
+								xl={{ span: 7, offset: 0 }}
+							/>
+						</Row>
+						<Row type="flex" justify="center">
+							<h1
+								key="0"
 								style={{
 									color: this.props.colorTheme.text2Color
 								}}
 							>
-								{step1}
-							</h2>
-							<Typist.Delay ms={3000} />
-							<h2
-								key="2"
-								style={{
-									color: this.props.colorTheme.text2Color
+								{why_part_6}
+							</h1>
+						</Row>
+						<Row type="flex" justify="center">
+							<Typist
+								avgTypingDelay={35}
+								cursor={{
+									show: false
 								}}
 							>
-								{step2}
-							</h2>
-						</Typist>
+								<Typist.Delay ms={6000} />
+								<h2
+									key="1"
+									style={{
+										color: this.props.colorTheme.text4Color,
+										padding: '0% 0% 3%'
+									}}
+								>
+									{how}
+								</h2>
+							</Typist>
+						</Row>
 					</div>
 				);
 			default:
@@ -57,25 +132,17 @@ class Landing extends Component {
 					<div>
 						<h1
 							key="0"
-							style={{ color: this.props.colorTheme.text1Color }}
+							style={{ color: this.props.colorTheme.text2Color }}
 						>
-							{intro}
+							{why}
 						</h1>
 						<h2
 							key="1"
 							style={{
-								color: this.props.colorTheme.text2Color
+								color: this.props.colorTheme.text5Color
 							}}
 						>
-							{step1}
-						</h2>
-						<h2
-							key="2"
-							style={{
-								color: this.props.colorTheme.text2Color
-							}}
-						>
-							{step2}
+							{how}
 						</h2>
 					</div>
 				);
@@ -91,8 +158,18 @@ class Landing extends Component {
 				return (
 					<div>
 						<Row type="flex" justify="space-around">
-							<Col span={8} />
-							<Col span={4}>
+							<Col
+								sm={{ span: 3, offset: 0 }}
+								md={{ span: 5, offset: 0 }}
+								lg={{ span: 7, offset: 0 }}
+								xl={{ span: 8, offset: 0 }}
+							/>
+							<Col
+								sm={{ span: 9, offset: 0 }}
+								md={{ span: 7, offset: 0 }}
+								lg={{ span: 5, offset: 0 }}
+								xl={{ span: 4, offset: 0 }}
+							>
 								<Button
 									key="-1"
 									style={{
@@ -101,10 +178,17 @@ class Landing extends Component {
 										color: this.props.colorTheme.text1Color
 									}}
 								>
-									<a href="/auth/google">Google Login</a>
+									<a href="/auth/google">
+										Google Login <Icon type="google" />
+									</a>
 								</Button>
 							</Col>
-							<Col span={4}>
+							<Col
+								sm={{ span: 9, offset: 0 }}
+								md={{ span: 7, offset: 0 }}
+								lg={{ span: 5, offset: 0 }}
+								xl={{ span: 4, offset: 0 }}
+							>
 								<Button
 									key="0"
 									style={{
@@ -115,10 +199,17 @@ class Landing extends Component {
 										color: this.props.colorTheme.text1Color
 									}}
 								>
-									<a href="/auth/linkedIn">LinkedIn Login</a>
+									<a href="/auth/linkedIn">
+										LinkedIn Login <Icon type="linkedin" />
+									</a>
 								</Button>
 							</Col>
-							<Col span={8} />
+							<Col
+								sm={{ span: 3, offset: 0 }}
+								md={{ span: 5, offset: 0 }}
+								lg={{ span: 7, offset: 0 }}
+								xl={{ span: 8, offset: 0 }}
+							/>
 						</Row>
 					</div>
 				);

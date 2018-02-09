@@ -1,11 +1,87 @@
-import { colorsHashtable5 } from './ColorConstants';
+import _ from 'lodash';
+//import { colorsHashtable } from './ColorConstants';
 import * as colors from './ColorConstants';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout, Row, Col } from 'antd';
 const { Content } = Layout;
 
+const scaleFields = [
+	{
+		color: colors.GREY_0,
+		color2: colors.ORANGE_YELLOW_1
+	},
+	{
+		color: colors.GREY_1,
+		color2: colors.ORANGE_YELLOW_1
+	},
+	{
+		color: colors.GREY_2,
+		color2: colors.ORANGE_YELLOW_2
+	},
+	{
+		color: colors.GREY_3,
+		color2: colors.ORANGE_YELLOW_3
+	},
+	{
+		color: colors.GREY_4,
+		color2: colors.ORANGE_YELLOW_4
+	},
+	{
+		color: colors.GREY_5,
+		color2: colors.ORANGE_YELLOW_5
+	},
+	{
+		color: colors.GREY_6,
+		color2: colors.ORANGE_YELLOW_6
+	},
+	{
+		color: colors.GREY_7,
+		color2: colors.ORANGE_YELLOW_7
+	},
+	{
+		color: colors.GREY_8,
+		color2: colors.ORANGE_YELLOW_8
+	},
+	{
+		color: colors.GREY_9,
+		color2: colors.ORANGE_YELLOW_9
+	},
+	{
+		color: colors.GREY_10,
+		color2: colors.ORANGE_YELLOW_9
+	}
+];
+
+// Add the following to App.js for color rgb value development
+/* <Route
+    exact={true}
+    path="/greyscale"
+    component={GreyScale}
+/> */
 class GreyScale extends Component {
+	renderScales() {
+		return _.map(scaleFields, field => {
+			return (
+				<Col span={2.1} key={field.color}>
+					<Content
+						style={{
+							padding: '100px 40px', // height width
+							background: field.color
+						}}
+					>
+						<Content
+							style={{
+								padding: '50px 20px', // height width
+								background: field.color2
+							}}
+						/>
+					</Content>
+				</Col>
+			);
+		});
+	}
+
 	render() {
 		// console.log('this.props in GreyScale.js', this.props);
 		return (
@@ -20,157 +96,7 @@ class GreyScale extends Component {
 					GreyScale
 				</h1>
 				<Row type="flex" justify="center">
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_0
-							}}
-						/>
-					</Col>
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_1
-							}}
-						>
-							<Content
-								style={{
-									padding: '50px 20px', // height width
-									background: colors.GREEN_1
-								}}
-							/>
-						</Content>
-					</Col>
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_2
-							}}
-						>
-							<Content
-								style={{
-									padding: '50px 20px', // height width
-									background: colors.GREEN_2
-								}}
-							/>
-						</Content>
-					</Col>
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_3
-							}}
-						>
-							<Content
-								style={{
-									padding: '50px 20px', // height width
-									background: colors.GREEN_3
-								}}
-							/>
-						</Content>
-					</Col>
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_4
-							}}
-						>
-							<Content
-								style={{
-									padding: '50px 20px', // height width
-									background: colors.GREEN_4
-								}}
-							/>
-						</Content>
-					</Col>
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_5
-							}}
-						>
-							<Content
-								style={{
-									padding: '50px 20px', // height width
-									background: colors.GREEN_5
-								}}
-							/>
-						</Content>
-					</Col>
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_6
-							}}
-						>
-							<Content
-								style={{
-									padding: '50px 20px', // height width
-									background: colors.GREEN_6
-								}}
-							/>
-						</Content>
-					</Col>
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_7
-							}}
-						>
-							<Content
-								style={{
-									padding: '50px 20px', // height width
-									background: colors.GREEN_7
-								}}
-							/>
-						</Content>
-					</Col>
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_8
-							}}
-						>
-							<Content
-								style={{
-									padding: '50px 20px', // height width
-									background: colors.GREEN_8
-								}}
-							/>
-						</Content>
-					</Col>
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_9
-							}}
-						>
-							<Content
-								style={{
-									padding: '50px 20px', // height width
-									background: colors.GREEN_9
-								}}
-							/>
-						</Content>
-					</Col>
-					<Col span={2.1}>
-						<Content
-							style={{
-								padding: '100px 40px', // height width
-								background: colors.GREY_10
-							}}
-						/>
-					</Col>
+					{this.renderScales()}
 				</Row>
 			</Content>
 		);
