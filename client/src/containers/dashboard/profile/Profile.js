@@ -10,7 +10,7 @@ class DashboardProfile extends Component {
 		return (
 			<Content
 				style={{
-					padding: '10% 10% 5%', // top left&right bottom
+					padding: '10% 7% 5%', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>

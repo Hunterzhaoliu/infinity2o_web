@@ -38,9 +38,9 @@ class CustomHeader extends Component {
 			default:
 				return (
 					<div>
-						<Row type="flex" justify="space-around">
+						<Row type="flex" justify="space-between">
 							<Col
-								sm={{ span: 5 }}
+								sm={{ span: 7 }}
 								md={{ span: 5 }}
 								lg={{ span: 4 }}
 								xl={{ span: 3 }}
@@ -60,33 +60,11 @@ class CustomHeader extends Component {
 								</Button>
 							</Col>
 							<Col
-								sm={{ span: 4, offset: 1 }}
-								md={{ span: 4, offset: 0 }}
+								sm={{ span: 5, offset: 0 }}
+								md={{ span: 3, offset: 0 }}
 								lg={{ span: 3, offset: 0 }}
-								xl={{ span: 3, offset: 1 }}
+								xl={{ span: 2, offset: 0 }}
 								key="1"
-							>
-								<Button
-									style={{
-										borderColor: this.props.colorTheme.key,
-										background: this.props.colorTheme.key,
-										color: this.props.colorTheme.text1Color
-									}}
-								>
-									<Link to="/dashboard/matches">
-										<div>
-											Matches{' '}
-											<Icon type="usergroup-add" />
-										</div>
-									</Link>
-								</Button>
-							</Col>
-							<Col
-								sm={{ span: 4, offset: 1 }}
-								md={{ span: 4, offset: 0 }}
-								lg={{ span: 3, offset: 0 }}
-								xl={{ span: 3, offset: 0 }}
-								key="2"
 							>
 								<Button
 									style={{
@@ -105,10 +83,32 @@ class CustomHeader extends Component {
 								</Button>
 							</Col>
 							<Col
-								sm={{ span: 4, offset: 1 }}
-								md={{ span: 4, offset: 6 }}
+								sm={{ span: 5, offset: 0 }}
+								md={{ span: 4, offset: 1 }}
+								lg={{ span: 3, offset: 0 }}
+								xl={{ span: 3, offset: 0 }}
+								key="2"
+							>
+								<Button
+									style={{
+										borderColor: this.props.colorTheme.key,
+										background: this.props.colorTheme.key,
+										color: this.props.colorTheme.text1Color
+									}}
+								>
+									<Link to="/dashboard/matches">
+										<div>
+											Matches{' '}
+											<Icon type="usergroup-add" />
+										</div>
+									</Link>
+								</Button>
+							</Col>
+							<Col
+								sm={{ span: 5, offset: 2 }}
+								md={{ span: 3, offset: 7 }}
 								lg={{ span: 3, offset: 11 }}
-								xl={{ span: 2, offset: 12 }}
+								xl={{ span: 2, offset: 14 }}
 								key="4"
 							>
 								<Button
