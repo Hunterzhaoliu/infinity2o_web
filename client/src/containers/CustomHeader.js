@@ -22,10 +22,10 @@ class CustomHeader extends Component {
 								<Button
 									style={{
 										borderColor: this.props.colorTheme
-											.text8Color,
+											.text7Color,
 										background: this.props.colorTheme
-											.text8Color,
-										color: this.props.colorTheme.text5Color
+											.text7Color,
+										color: this.props.colorTheme.text4Color
 									}}
 									onClick={this.props.onPressRandomColorTheme}
 								>
@@ -49,10 +49,10 @@ class CustomHeader extends Component {
 								<Button
 									style={{
 										borderColor: this.props.colorTheme
-											.text6Color,
+											.text7Color,
 										background: this.props.colorTheme
-											.text6Color,
-										color: this.props.colorTheme.text2Color
+											.text7Color,
+										color: this.props.colorTheme.text4Color
 									}}
 									onClick={this.props.onPressRandomColorTheme}
 								>
@@ -68,10 +68,8 @@ class CustomHeader extends Component {
 							>
 								<Button
 									style={{
-										borderColor: this.props.colorTheme
-											.keyCompliment1,
-										background: this.props.colorTheme
-											.keyCompliment1,
+										borderColor: this.props.colorTheme.key,
+										background: this.props.colorTheme.key,
 										color: this.props.colorTheme.text1Color
 									}}
 								>
@@ -91,8 +89,10 @@ class CustomHeader extends Component {
 							>
 								<Button
 									style={{
-										borderColor: this.props.colorTheme.key,
-										background: this.props.colorTheme.key,
+										borderColor: this.props.colorTheme
+											.keyCompliment1,
+										background: this.props.colorTheme
+											.keyCompliment1,
 										color: this.props.colorTheme.text1Color
 									}}
 								>
@@ -117,7 +117,7 @@ class CustomHeader extends Component {
 											.thirdColor,
 										background: this.props.colorTheme
 											.thirdColor,
-										color: this.props.colorTheme.text2Color
+										color: this.props.colorTheme.text4Color
 									}}
 								>
 									<a href="/api/logout">

@@ -14,7 +14,10 @@ class DashboardProfile extends Component {
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<h1 key="0" style={{ color: this.props.colorTheme.text2Color }}>
+				<h1
+					key="0"
+					style={{ color: this.props.colorTheme.keyText2Color }}
+				>
 					Let's get to know each other :)
 				</h1>
 				<ProfileForm />

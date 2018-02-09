@@ -116,7 +116,7 @@ class Landing extends Component {
 								<h2
 									key="1"
 									style={{
-										color: this.props.colorTheme.text5Color,
+										color: this.props.colorTheme.text4Color,
 										padding: '0% 0% 3%'
 									}}
 								>
