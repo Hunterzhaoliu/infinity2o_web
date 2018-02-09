@@ -83,10 +83,10 @@ class ProfileForm extends Component {
 							padding: '2% 0% 0%' // top left&right bottom
 						}}
 					>
-						<Col>
+						<Col span={24}>
 							<Field
 								name="name"
-								label="First Name:"
+								label="Name:"
 								width={280}
 								component={InputField}
 								type="text"
@@ -100,14 +100,11 @@ class ProfileForm extends Component {
 							padding: '2% 0% 0%' // top left&right bottom
 						}}
 					>
-						<Col>
+						<Col span={24}>
 							<Field
 								name="age"
 								label="Age:"
-								width={68}
-								min={10}
-								max={125}
-								defaultValue={18}
+								width={50}
 								component={InputFieldNumber}
 								type="text"
 							/>
@@ -120,11 +117,10 @@ class ProfileForm extends Component {
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
 					>
-						<Col>
+						<Col span={24}>
 							<Field
 								name="interests"
-								label="Interest(s):"
-								placeholder="What are you curious about?"
+								placeholder="Interested in learning?"
 								width={280}
 								component={InputFieldSelect}
 								type="text"
@@ -135,17 +131,16 @@ class ProfileForm extends Component {
 						type="flex"
 						justify="start"
 						style={{
-							padding: '4% 0% 0%' // top left&right bottom
+							padding: '5% 0% 0%' // top left&right bottom
 						}}
 					>
-						<Col>
+						<Col span={24}>
 							<div
 								style={{
 									color: this.props.colorTheme.keyText5Color
 								}}
 							>
-								When are you free to video chat for 1.5 hours
-								for your class?
+								When are you free to video chat for your class?
 							</div>
 							<Dropdown
 								overlay={menu}
@@ -166,14 +161,16 @@ class ProfileForm extends Component {
 						type="flex"
 						justify="start"
 						style={{
-							padding: '5% 0% 0%' // top left&right bottom
+							padding: '10% 0% 0%' // top left&right bottom
 						}}
 					>
-						<Col>
-							<InputTimeZone
-								style={{
-									color: this.props.colorTheme.text2Color
-								}}
+						<Col span={24}>
+							<Field
+								name="city"
+								label="City:"
+								width={280}
+								component={InputField}
+								type="text"
 							/>
 						</Col>
 					</Row>

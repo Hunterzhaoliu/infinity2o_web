@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { InputNumber, Row, Col } from 'antd';
+import { Input, InputNumber, Row, Col } from 'antd';
 
 class InputFieldNumber extends Component {
 	render() {
@@ -9,10 +9,10 @@ class InputFieldNumber extends Component {
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col
-						sm={{ span: 9 }}
-						md={{ span: 9 }}
-						lg={{ span: 9 }}
-						xl={{ span: 9 }}
+						sm={{ span: 4 }}
+						md={{ span: 4 }}
+						lg={{ span: 4 }}
+						xl={{ span: 4 }}
 					>
 						<label
 							style={{
@@ -23,18 +23,16 @@ class InputFieldNumber extends Component {
 						</label>
 					</Col>
 					<Col
-						sm={{ span: 4, offset: 11 }}
-						md={{ span: 4, offset: 11 }}
-						lg={{ span: 4, offset: 11 }}
-						xl={{ span: 4, offset: 11 }}
+						sm={{ span: 3, offset: 1 }}
+						md={{ span: 3, offset: 1 }}
+						lg={{ span: 3, offset: 1 }}
+						xl={{ span: 3, offset: 1 }}
 					>
-						<InputNumber
-							min={13}
-							max={125}
-							defaultValue={this.props.defaultValue}
+						<Input
+							{...this.props.input}
 							style={{
 								width: this.props.width,
-								borderColor: this.props.colorTheme.text6Color,
+								borderColor: this.props.colorTheme.text7Color,
 								background: this.props.colorTheme.text7Color,
 								color: this.props.colorTheme.keyText3Color
 							}}

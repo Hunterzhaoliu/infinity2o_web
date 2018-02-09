@@ -9,10 +9,10 @@ class InputField extends Component {
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col
-						sm={{ span: 6 }}
-						md={{ span: 6 }}
-						lg={{ span: 6 }}
-						xl={{ span: 6 }}
+						sm={{ span: 4 }}
+						md={{ span: 4 }}
+						lg={{ span: 4 }}
+						xl={{ span: 4 }}
 					>
 						<label
 							style={{
@@ -23,10 +23,10 @@ class InputField extends Component {
 						</label>
 					</Col>
 					<Col
-						sm={{ span: 18 }}
-						md={{ span: 18 }}
-						lg={{ span: 18 }}
-						xl={{ span: 18 }}
+						sm={{ span: 19, offset: 1 }}
+						md={{ span: 19, offset: 1 }}
+						lg={{ span: 19, offset: 1 }}
+						xl={{ span: 19, offset: 1 }}
 					>
 						<Input
 							{...this.props.input}
