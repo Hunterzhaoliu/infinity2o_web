@@ -98,7 +98,7 @@ class CustomHeader extends Component {
 								>
 									<Link to="/dashboard/matches">
 										<div>
-											Matches{' '}
+											Matches
 											<Icon type="usergroup-add" />
 										</div>
 									</Link>

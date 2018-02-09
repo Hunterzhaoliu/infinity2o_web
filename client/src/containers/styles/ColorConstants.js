@@ -48,7 +48,7 @@ export const GREEN_2 = 'rgb(60, 255, 60)';
 export const GREEN_3 = 'rgb(0, 237, 0)';
 export const GREEN_4 = 'rgb(0, 203, 0)';
 export const GREEN_5 = 'rgb(0, 172, 0)';
-export const GREEN_6 = 'rgb(0, 138, 0)';
+export const GREEN_6 = 'rgb(0, 138f, 0)';
 export const GREEN_7 = 'rgb(0, 108, 0)';
 export const GREEN_8 = 'rgb(0, 73, 0)';
 export const GREEN_9 = 'rgb(0, 35, 0)';
@@ -64,11 +64,11 @@ export const BLUE_GREEN_8 = 'rgb(0, 65, 65)';
 export const BLUE_GREEN_9 = 'rgb(0, 35, 35)';
 
 export const BLUE_1 = 'rgb(209, 233, 255)';
-export const BLUE_2 = 'rgb(196, 203, 255)';
+export const BLUE_2 = 'rgb(195, 203, 255)';
 export const BLUE_3 = 'rgb(117, 190, 245)';
 export const BLUE_4 = 'rgb(66, 166, 255)';
-export const BLUE_5 = 'rgb(20, 145, 255)';
-export const BLUE_6 = 'rgb(0, 115, 215)';
+export const BLUE_5 = 'rgb(13, 142, 255)';
+export const BLUE_6 = 'rgb(0, 116, 219)';
 export const BLUE_7 = 'rgb(0, 89, 168)';
 export const BLUE_8 = 'rgb(0, 61, 114)';
 export const BLUE_9 = 'rgb(0, 31, 58)';
@@ -143,7 +143,7 @@ export const ORANGE_YELLOW_7 = 'rgb(104, 76, 0)';
 export const ORANGE_YELLOW_8 = 'rgb(68, 50, 0)';
 export const ORANGE_YELLOW_9 = 'rgb(35, 26, 0)';
 
-export const colorsHashtable1 = [
+export const colors1 = [
 	{
 		key: YELLOW_1,
 		keyCompliment1: RED_VIOLET_1,
@@ -218,7 +218,7 @@ export const colorsHashtable1 = [
 	}
 ];
 
-export const colorsHashtable2 = [
+export const colors2 = [
 	{
 		key: YELLOW_2,
 		keyCompliment1: RED_VIOLET_2,
@@ -293,7 +293,7 @@ export const colorsHashtable2 = [
 	}
 ];
 
-export const colorsHashtable3 = [
+export const colors3 = [
 	{
 		key: YELLOW_3,
 		keyCompliment1: RED_VIOLET_3,
@@ -368,7 +368,7 @@ export const colorsHashtable3 = [
 	}
 ];
 
-export const colorsHashtable4 = [
+export const colors4 = [
 	{
 		key: YELLOW_4,
 		keyCompliment1: RED_VIOLET_4,
@@ -443,7 +443,7 @@ export const colorsHashtable4 = [
 	}
 ];
 
-export const colorsHashtable5 = [
+export const colors5 = [
 	{
 		key: YELLOW_5,
 		keyCompliment1: RED_VIOLET_5,
@@ -518,7 +518,7 @@ export const colorsHashtable5 = [
 	}
 ];
 
-export const colorsHashtable6 = [
+export const colors6 = [
 	{
 		key: YELLOW_6,
 		keyCompliment1: RED_VIOLET_6,
@@ -593,7 +593,7 @@ export const colorsHashtable6 = [
 	}
 ];
 
-export const colorsHashtable7 = [
+export const colors7 = [
 	{
 		key: YELLOW_7,
 		keyCompliment1: RED_VIOLET_7,
@@ -668,7 +668,7 @@ export const colorsHashtable7 = [
 	}
 ];
 
-export const colorsHashtable8 = [
+export const colors8 = [
 	{
 		key: YELLOW_8,
 		keyCompliment1: RED_VIOLET_8,
@@ -743,7 +743,7 @@ export const colorsHashtable8 = [
 	}
 ];
 
-export const colorsHashtable9 = [
+export const colors9 = [
 	{
 		key: YELLOW_9,
 		keyCompliment1: RED_VIOLET_9,
