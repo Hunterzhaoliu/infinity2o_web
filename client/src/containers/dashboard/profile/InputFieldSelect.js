@@ -29,7 +29,7 @@ class InputFieldSelect extends Component {
 					>
 						<label
 							style={{
-								color: this.props.colorTheme.text1Color
+								color: this.props.colorTheme.keyText5Color
 							}}
 						>
 							{this.props.label}

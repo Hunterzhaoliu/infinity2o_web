@@ -16,7 +16,7 @@ class InputField extends Component {
 					>
 						<label
 							style={{
-								color: this.props.colorTheme.keyText6Color
+								color: this.props.colorTheme.keyText5Color
 							}}
 						>
 							{this.props.label}
@@ -32,9 +32,9 @@ class InputField extends Component {
 							{...this.props.input}
 							style={{
 								width: this.props.width,
-								borderColor: this.props.colorTheme.text8Color,
-								background: this.props.colorTheme.text8Color,
-								color: this.props.colorTheme.keyText4Color
+								borderColor: this.props.colorTheme.text7Color,
+								background: this.props.colorTheme.text7Color,
+								color: this.props.colorTheme.keyText3Color
 							}}
 						/>
 					</Col>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
-import ProfileForm from './ProfileForm';
+import FormEdit from './FormEdit';
 const { Content } = Layout;
 
 class DashboardProfile extends Component {
@@ -10,17 +10,11 @@ class DashboardProfile extends Component {
 		return (
 			<Content
 				style={{
-					padding: '10% 7% 5%', // top left&right bottom
+					padding: '10% 9% 5%', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<h1
-					key="0"
-					style={{ color: this.props.colorTheme.keyText6Color }}
-				>
-					Let's get to know each other :)
-				</h1>
-				<ProfileForm />
+				<FormEdit />
 			</Content>
 		);
 	}

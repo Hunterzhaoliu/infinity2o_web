@@ -56,6 +56,7 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 	let newKeyText8Color = colors2[colorPallateIndex].key;
 	if (oldBackgroundColor === GREY_1) {
 		newBackgroundColor = GREY_9;
+		newKey = colors7[colorPallateIndex].key;
 		newKeyCompliment1 = colors7[colorPallateIndex].keyCompliment1;
 		newKeyCompliment2 = colors7[colorPallateIndex].keyCompliment2;
 		newThirdColor = colors7[colorPallateIndex].thirdColor;

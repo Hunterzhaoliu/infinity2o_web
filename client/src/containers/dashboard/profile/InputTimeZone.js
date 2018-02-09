@@ -43,7 +43,7 @@ const treeData = [
 class InputTimeZone extends Component {
 	state = {
 		greaterThanOneTimeZone: false,
-		expandedKeys: [],
+		expandedKeys: ['United States', 'Canada', 'Europe'],
 		autoExpandParent: true,
 		checkedKeys: [],
 		selectedKeys: []
@@ -81,12 +81,38 @@ class InputTimeZone extends Component {
 		return data.map(item => {
 			if (item.children) {
 				return (
-					<TreeNode title={item.title} key={item.key} dataRef={item}>
+					<TreeNode
+						title={
+							<span
+								style={{
+									color: this.props.colorTheme.text5Color
+								}}
+							>
+								{item.title}
+							</span>
+						}
+						key={item.key}
+						dataRef={item}
+					>
 						{this.renderTreeNodes(item.children)}
 					</TreeNode>
 				);
 			}
-			return <TreeNode {...item} />;
+			return (
+				<TreeNode
+					title={
+						<span
+							style={{
+								color: this.props.colorTheme.text5Color
+							}}
+						>
+							{item.title}
+						</span>
+					}
+					key={item.key}
+					dataRef={item}
+				/>
+			);
 		});
 	};
 
@@ -95,14 +121,15 @@ class InputTimeZone extends Component {
 
 		return (
 			<div>
-				<p
+				<div
 					style={{
-						color: this.props.colorTheme.text2Color
+						color: this.props.colorTheme.keyText5Color
 					}}
 				>
-					What time zone are you in?
-				</p>
+					Time zone?
+				</div>
 				<Tree
+					showIcon
 					checkable
 					onExpand={this.onExpand}
 					expandedKeys={this.state.expandedKeys}

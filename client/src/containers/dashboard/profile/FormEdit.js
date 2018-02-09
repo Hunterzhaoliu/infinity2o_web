@@ -71,7 +71,7 @@ class ProfileForm extends Component {
 		return (
 			<Content
 				style={{
-					padding: '0% 0% 0%', // top left&right bottom
+					padding: '5% 0% 0%', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
@@ -139,14 +139,14 @@ class ProfileForm extends Component {
 						}}
 					>
 						<Col>
-							<p
+							<div
 								style={{
-									color: this.props.colorTheme.text2Color
+									color: this.props.colorTheme.keyText5Color
 								}}
 							>
-								When are you free to video chat for about 1.5
-								hours for your class?
-							</p>
+								When are you free to video chat for 1.5 hours
+								for your class?
+							</div>
 							<Dropdown
 								overlay={menu}
 								onVisibleChange={this.handleVisibleChange}
@@ -166,7 +166,7 @@ class ProfileForm extends Component {
 						type="flex"
 						justify="start"
 						style={{
-							padding: '3% 0% 0%' // top left&right bottom
+							padding: '5% 0% 0%' // top left&right bottom
 						}}
 					>
 						<Col>
