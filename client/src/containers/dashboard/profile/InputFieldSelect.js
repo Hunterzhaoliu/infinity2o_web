@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import optionFields from './optionFields';
+import ErrorMessage from './ErrorMessage';
 import { Row, Col, Select } from 'antd';
 const { Option } = Select;
 
@@ -22,24 +23,24 @@ class InputFieldSelect extends Component {
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col
-						sm={{ span: 4 }}
-						md={{ span: 4 }}
-						lg={{ span: 4 }}
-						xl={{ span: 4 }}
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
 					>
-						<label
+						<h3
 							style={{
 								color: this.props.colorTheme.keyText5Color
 							}}
 						>
 							{this.props.label}
-						</label>
+						</h3>
 					</Col>
 					<Col
-						sm={{ span: 19, offset: 1 }}
-						md={{ span: 19, offset: 1 }}
-						lg={{ span: 19, offset: 1 }}
-						xl={{ span: 19, offset: 1 }}
+						sm={{ span: 18, offset: 1 }}
+						md={{ span: 18, offset: 1 }}
+						lg={{ span: 18, offset: 1 }}
+						xl={{ span: 18, offset: 1 }}
 					>
 						<Select
 							{...this.props.input}
@@ -55,6 +56,7 @@ class InputFieldSelect extends Component {
 						</Select>
 					</Col>
 				</Row>
+				<ErrorMessage meta={this.props.meta} />
 			</div>
 		);
 	}
