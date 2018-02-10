@@ -10,10 +10,23 @@ class InputSchedule extends Component {
 	}
 	render() {
 		console.log('this.props in InputSchedule', this.props);
+		const menu = (
+			<Menu>
+				<Menu.Item key="1">Clicking me will not close the menu.</Menu.Item>
+				<Menu.Item key="2">Clicking me will not close the menu also.</Menu.Item>
+				<Menu.Item key="3">Clicking me will close the menu</Menu.Item>
+			</Menu>
+		);
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
-					{this.renderDropdown(this.props.data.name)}
+					<Col span={24}>
+						<Dropdown overlay={menu}>
+							<a className="ant-dropdown-link" href="#">
+								{this.props.data.name} <Icon type="down" />
+							</a>
+						</Dropdown>
+					</Col>
 				</Row>
 			</div>
 		);
