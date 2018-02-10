@@ -19,15 +19,12 @@ import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 
 class FormEdit extends Component {
-	renderDaysOfWeekDropdown() {
+	renderDaysOfWeekDropdowns() {
 		return _.map(daysOfWeek, day => {
 			return (
-				<Field
-					name="schedule"
-					data={day}
-					component={InputSchedule}
-					key={day.name}
-				/>
+				<Col span={3} key={day.name}>
+					<Field name="schedule" data={day} component={InputSchedule} />
+				</Col>
 			);
 		});
 	}
@@ -138,7 +135,7 @@ class FormEdit extends Component {
 							</Row>
 
 							<Row type="flex" justify="middle" align="middle">
-								<Col span={24}>{this.renderDaysOfWeekDropdown()}</Col>
+								<Col span={24}>{this.renderDaysOfWeekDropdowns()}</Col>
 							</Row>
 						</Col>
 					</Row>
