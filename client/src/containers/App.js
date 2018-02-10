@@ -8,9 +8,8 @@ import { bindActionCreators } from 'redux';
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
 import Dashboard from './dashboard/Dashboard';
-import DashboardMatches from './dashboard/matches/Matches';
-import DashboardProfile from './dashboard/profile/Profile';
-import GreyScale from './styles/GreyScale';
+import Matches from './dashboard/matches/Matches';
+import Edit from './dashboard/profile/Edit';
 
 import { Layout } from 'antd';
 const { Footer } = Layout;
@@ -37,17 +36,12 @@ class App extends Component {
 					<Route
 						exact={true}
 						path="/dashboard/matches"
-						component={DashboardMatches}
+						component={Matches}
 					/>
 					<Route
 						exact={true}
-						path="/dashboard/profile"
-						component={DashboardProfile}
-					/>
-					<Route
-						exact={true}
-						path="/greyscale"
-						component={GreyScale}
+						path="/dashboard/profile/edit"
+						component={Edit}
 					/>
 					<Footer
 						style={{

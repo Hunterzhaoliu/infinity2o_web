@@ -1,14 +1,14 @@
 import { UPDATE_COLOR_THEME } from './types';
 import {
-	colorsHashtable1,
-	colorsHashtable2,
-	colorsHashtable3,
-	colorsHashtable4,
-	colorsHashtable5,
-	colorsHashtable6,
-	colorsHashtable7,
-	colorsHashtable8,
-	colorsHashtable9,
+	colors1,
+	colors2,
+	colors3,
+	colors4,
+	colors5,
+	colors6,
+	colors7,
+	colors8,
+	colors9,
 	GREY_1,
 	GREY_2,
 	GREY_3,
@@ -34,10 +34,10 @@ export const generateRandomColorTheme = () => {
 function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 	const colorPallateIndex = Math.floor(Math.random() * 12);
 	let newBackgroundColor = GREY_1;
-	let newKey = colorsHashtable3[colorPallateIndex].key;
-	let newKeyCompliment1 = colorsHashtable3[colorPallateIndex].keyCompliment1;
-	let newKeyCompliment2 = colorsHashtable3[colorPallateIndex].keyCompliment2;
-	let newThirdColor = colorsHashtable3[colorPallateIndex].thirdColor;
+	let newKey = colors3[colorPallateIndex].key;
+	let newKeyCompliment1 = colors3[colorPallateIndex].keyCompliment1;
+	let newKeyCompliment2 = colors3[colorPallateIndex].keyCompliment2;
+	let newThirdColor = colors3[colorPallateIndex].thirdColor;
 	let newText1Color = GREY_9;
 	let newText2Color = GREY_8;
 	let newText3Color = GREY_7;
@@ -46,19 +46,20 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 	let newText6Color = GREY_4;
 	let newText7Color = GREY_3;
 	let newText8Color = GREY_2;
-	let newKeyText1Color = colorsHashtable9[colorPallateIndex].key;
-	let newKeyText2Color = colorsHashtable8[colorPallateIndex].key;
-	let newKeyText3Color = colorsHashtable7[colorPallateIndex].key;
-	let newKeyText4Color = colorsHashtable6[colorPallateIndex].key;
-	let newKeyText5Color = colorsHashtable5[colorPallateIndex].key;
-	let newKeyText6Color = colorsHashtable4[colorPallateIndex].key;
-	let newKeyText7Color = colorsHashtable3[colorPallateIndex].key;
-	let newKeyText8Color = colorsHashtable2[colorPallateIndex].key;
+	let newKeyText1Color = colors9[colorPallateIndex].key;
+	let newKeyText2Color = colors8[colorPallateIndex].key;
+	let newKeyText3Color = colors7[colorPallateIndex].key;
+	let newKeyText4Color = colors6[colorPallateIndex].key;
+	let newKeyText5Color = colors5[colorPallateIndex].key;
+	let newKeyText6Color = colors4[colorPallateIndex].key;
+	let newKeyText7Color = colors3[colorPallateIndex].key;
+	let newKeyText8Color = colors2[colorPallateIndex].key;
 	if (oldBackgroundColor === GREY_1) {
 		newBackgroundColor = GREY_9;
-		newKeyCompliment1 = colorsHashtable7[colorPallateIndex].keyCompliment1;
-		newKeyCompliment2 = colorsHashtable7[colorPallateIndex].keyCompliment2;
-		newThirdColor = colorsHashtable7[colorPallateIndex].thirdColor;
+		newKey = colors7[colorPallateIndex].key;
+		newKeyCompliment1 = colors7[colorPallateIndex].keyCompliment1;
+		newKeyCompliment2 = colors7[colorPallateIndex].keyCompliment2;
+		newThirdColor = colors7[colorPallateIndex].thirdColor;
 		newText1Color = GREY_1;
 		newText2Color = GREY_2;
 		newText3Color = GREY_3;
@@ -67,14 +68,14 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 		newText6Color = GREY_6;
 		newText7Color = GREY_7;
 		newText8Color = GREY_8;
-		newKeyText1Color = colorsHashtable1[colorPallateIndex].key;
-		newKeyText2Color = colorsHashtable2[colorPallateIndex].key;
-		newKeyText3Color = colorsHashtable3[colorPallateIndex].key;
-		newKeyText4Color = colorsHashtable4[colorPallateIndex].key;
-		newKeyText5Color = colorsHashtable5[colorPallateIndex].key;
-		newKeyText6Color = colorsHashtable6[colorPallateIndex].key;
-		newKeyText7Color = colorsHashtable7[colorPallateIndex].key;
-		newKeyText8Color = colorsHashtable8[colorPallateIndex].key;
+		newKeyText1Color = colors1[colorPallateIndex].key;
+		newKeyText2Color = colors2[colorPallateIndex].key;
+		newKeyText3Color = colors3[colorPallateIndex].key;
+		newKeyText4Color = colors4[colorPallateIndex].key;
+		newKeyText5Color = colors5[colorPallateIndex].key;
+		newKeyText6Color = colors6[colorPallateIndex].key;
+		newKeyText7Color = colors7[colorPallateIndex].key;
+		newKeyText8Color = colors8[colorPallateIndex].key;
 	}
 
 	return {

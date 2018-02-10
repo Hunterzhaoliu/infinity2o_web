@@ -1,93 +1,109 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Tree } from 'antd';
-const TreeNode = Tree.TreeNode;
+import { TreeSelect, Row, Col } from 'antd';
+//const TreeNode = Tree.TreeNode;
 
 const treeData = [
 	{
-		title: 'United States',
+		label: 'United States',
+		value: 'a',
 		key: 'United States',
 		children: [
-			{ title: 'Hawaii', key: 'Hawaii', UTC_offset: -10 },
-			{ title: 'Alaska', key: 'Alaska', UTC_offset: -9 },
-			{ title: 'Pacific', key: 'US-Pacific', UTC_offset: -8 },
-			{ title: 'Mountain', key: 'US-Mountain', UTC_offset: -7 },
-			{ title: 'Central', key: 'US-Central', UTC_offset: -6 },
-			{ title: 'Eastern', key: 'US-Eastern', UTC_offset: -5 }
+			{
+				label: 'Hawaii',
+				value: 'Hawaii',
+				key: 'Hawaii',
+				UTC_offset: -10
+			},
+			{ label: 'Alaska', value: 'Alaska', key: 'Alaska', UTC_offset: -9 },
+			{
+				label: 'Pacific',
+				value: 'US-Pacific',
+				key: 'US-Pacific',
+				UTC_offset: -8
+			},
+			{
+				label: 'Mountain',
+				value: 'US-Mountain',
+				key: 'US-Mountain',
+				UTC_offset: -7
+			},
+			{
+				label: 'Central',
+				value: 'US-Central',
+				key: 'US-Central',
+				UTC_offset: -6
+			},
+			{
+				label: 'Eastern',
+				value: 'US-Eastern',
+				key: 'US-Eastern',
+				UTC_offset: -5
+			}
 		]
 	},
 	{
-		title: 'Canada',
+		label: 'Canada',
 		key: 'Canada',
 		children: [
-			{ title: 'Pacific', key: 'C-Pacific', UTC_offset: -8 },
-			{ title: 'Mountain', key: 'C-Mountain', UTC_offset: -7 },
-			{ title: 'Central', key: 'C-Central', UTC_offset: -6 },
-			{ title: 'Eastern', key: 'C-Eastern', UTC_offset: -5 },
-			{ title: 'Atlantic', key: 'Atlantic', UTC_offset: -4 },
-			{ title: 'Newfoundland', key: 'Newfoundland', UTC_offset: -3.5 }
+			{
+				label: 'Pacific',
+				value: 'C-Pacific',
+				key: 'C-Pacific',
+				UTC_offset: -8
+			},
+			{
+				label: 'Mountain',
+				value: 'C-Mountain',
+				key: 'C-Mountain',
+				UTC_offset: -7
+			},
+			{
+				label: 'Central',
+				value: 'C-Central',
+				key: 'C-Central',
+				UTC_offset: -6
+			},
+			{
+				label: 'Eastern',
+				value: 'C-Eastern',
+				key: 'C-Eastern',
+				UTC_offset: -5
+			},
+			{
+				label: 'Atlantic',
+				value: 'Atlantic',
+				key: 'Atlantic',
+				UTC_offset: -4
+			},
+			{
+				label: 'Newfoundland',
+				value: 'Newfoundland',
+				key: 'Newfoundland',
+				UTC_offset: -3.5
+			}
 		]
 	},
 	{
-		title: 'Europe',
+		label: 'Europe',
 		key: 'Europe',
 		children: [
-			{ title: 'BST', key: 'BST', UTC_offset: 1 },
-			{ title: 'CEST', key: 'CEST', UTC_offset: 2 },
-			{ title: 'CET', key: 'CET', UTC_offset: 1 },
-			{ title: 'EEST', key: 'EEST', UTC_offset: 3 }
+			{ label: 'BST', value: 'BST', key: 'BST', UTC_offset: 1 },
+			{ label: 'CEST', value: 'CEST', key: 'CEST', UTC_offset: 2 },
+			{ label: 'CET', value: 'CET', key: 'CET', UTC_offset: 1 },
+			{ label: 'EEST', value: 'EEST', key: 'EEST', UTC_offset: 3 }
 		]
 	}
 ];
 
 class InputTimeZone extends Component {
 	state = {
-		greaterThanOneTimeZone: false,
-		expandedKeys: [],
-		autoExpandParent: true,
-		checkedKeys: [],
-		selectedKeys: []
+		value: undefined
 	};
 
-	onExpand = expandedKeys => {
-		console.log('onExpand', arguments);
-		// if not set autoExpandParent to false, if children expanded, parent can not collapse.
-		// or, you can remove all expanded children keys.
-		this.setState({
-			expandedKeys,
-			autoExpandParent: false
-		});
-	};
-
-	onCheck = (checkedKeys, state) => {
-		console.log('onCheck', checkedKeys);
-		this.setState({ checkedKeys });
-		if (checkedKeys.length > 1) {
-			// show warning that user can't check > 1 box
-			this.setState({ greaterThanOneTimeZone: true });
-			// TODO: replace setState with action creators
-		} else {
-			this.setState({ greaterThanOneTimeZone: false });
-		}
-		console.log('state = ', state);
-	};
-
-	onSelect = (selectedKeys, info) => {
-		console.log('onSelect', info);
-		this.setState({ selectedKeys });
-	};
-
-	renderTreeNodes = data => {
-		return data.map(item => {
-			if (item.children) {
-				return (
-					<TreeNode title={item.title} key={item.key} dataRef={item}>
-						{this.renderTreeNodes(item.children)}
-					</TreeNode>
-				);
-			}
-			return <TreeNode {...item} />;
-		});
+	onChange = value => {
+		console.log('value = ', value);
+		this.setState({ value });
 	};
 
 	render() {
@@ -95,25 +111,37 @@ class InputTimeZone extends Component {
 
 		return (
 			<div>
-				<p
-					style={{
-						color: this.props.colorTheme.text2Color
-					}}
-				>
-					What time zone are you in?
-				</p>
-				<Tree
-					checkable
-					onExpand={this.onExpand}
-					expandedKeys={this.state.expandedKeys}
-					autoExpandParent={this.state.autoExpandParent}
-					onCheck={this.onCheck}
-					checkedKeys={this.state.checkedKeys}
-					onSelect={this.onSelect}
-					selectedKeys={this.state.selectedKeys}
-				>
-					{this.renderTreeNodes(treeData)}
-				</Tree>
+				<Row type="flex" justify="start" align="middle">
+					<Col
+						sm={{ span: 4 }}
+						md={{ span: 4 }}
+						lg={{ span: 4 }}
+						xl={{ span: 4 }}
+					>
+						<label
+							style={{
+								color: this.props.colorTheme.keyText5Color
+							}}
+						>
+							{this.props.label}
+						</label>
+					</Col>
+					<Col
+						sm={{ span: 19, offset: 1 }}
+						md={{ span: 19, offset: 1 }}
+						lg={{ span: 19, offset: 1 }}
+						xl={{ span: 19, offset: 1 }}
+					>
+						<TreeSelect
+							style={{ width: this.props.width }}
+							value={this.state.value}
+							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+							treeData={treeData}
+							placeholder="Time Zone?"
+							onChange={this.onChange}
+						/>
+					</Col>
+				</Row>
 			</div>
 		);
 	}

@@ -22,26 +22,28 @@ class InputFieldSelect extends Component {
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col
-						sm={{ span: 5 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
+						sm={{ span: 4 }}
+						md={{ span: 4 }}
+						lg={{ span: 4 }}
+						xl={{ span: 4 }}
 					>
 						<label
 							style={{
-								color: this.props.colorTheme.text1Color
+								color: this.props.colorTheme.keyText5Color
 							}}
 						>
 							{this.props.label}
 						</label>
 					</Col>
 					<Col
-						sm={{ span: 18, offset: 1 }}
-						md={{ span: 18, offset: 1 }}
-						lg={{ span: 18, offset: 1 }}
-						xl={{ span: 18, offset: 1 }}
+						sm={{ span: 19, offset: 1 }}
+						md={{ span: 19, offset: 1 }}
+						lg={{ span: 19, offset: 1 }}
+						xl={{ span: 19, offset: 1 }}
 					>
 						<Select
+							{...this.props.input}
+							value={this.props.input.value || []} // requires value to be an array
 							mode="multiple"
 							placeholder={this.props.placeholder}
 							style={{

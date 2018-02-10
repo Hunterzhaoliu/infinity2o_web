@@ -9,53 +9,53 @@ class InputField extends Component {
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col
-						sm={{ span: 6 }}
-						md={{ span: 6 }}
-						lg={{ span: 6 }}
-						xl={{ span: 6 }}
+						sm={{ span: 4 }}
+						md={{ span: 4 }}
+						lg={{ span: 4 }}
+						xl={{ span: 4 }}
 					>
-						<label
+						<h3
 							style={{
-								color: this.props.colorTheme.keyText2Color
+								color: this.props.colorTheme.keyText5Color
 							}}
 						>
 							{this.props.label}
-						</label>
+						</h3>
 					</Col>
 					<Col
-						sm={{ span: 18 }}
-						md={{ span: 18 }}
-						lg={{ span: 18 }}
-						xl={{ span: 18 }}
+						sm={{ span: 19, offset: 1 }}
+						md={{ span: 19, offset: 1 }}
+						lg={{ span: 19, offset: 1 }}
+						xl={{ span: 19, offset: 1 }}
 					>
 						<Input
 							{...this.props.input}
 							style={{
 								width: this.props.width,
-								borderColor: this.props.colorTheme.text8Color,
-								background: this.props.colorTheme.text8Color,
-								color: this.props.colorTheme.keyText4Color
+								borderColor: this.props.colorTheme.text7Color,
+								background: this.props.colorTheme.text7Color,
+								color: this.props.colorTheme.text3Color
 							}}
 						/>
 					</Col>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
 					<Col
-						sm={{ span: 4 }}
-						md={{ span: 4 }}
-						lg={{ span: 4 }}
-						xl={{ span: 4 }}
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
 					/>
 					<Col
-						sm={{ span: 20 }}
-						md={{ span: 20 }}
-						lg={{ span: 20 }}
-						xl={{ span: 20 }}
+						sm={{ span: 19 }}
+						md={{ span: 19 }}
+						lg={{ span: 19 }}
+						xl={{ span: 19 }}
 					>
 						<div
 							style={{
 								marginBottom: '5px',
-								color: this.props.colorTheme.key
+								color: this.props.colorTheme.keyText3Color
 							}}
 						>
 							{this.props.meta.touched && this.props.meta.error}
