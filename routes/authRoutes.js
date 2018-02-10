@@ -13,7 +13,7 @@ module.exports = app => {
 		passport.authenticate('google'),
 		(request, response) => {
 			// after a user is logged in show them their dashboard
-			response.redirect('/dashboard/profile/edit');
+			response.redirect('/profile/edit');
 		}
 	);
 	app.get('/auth/linkedIn/', passport.authenticate('linkedin'));
@@ -23,7 +23,7 @@ module.exports = app => {
 		passport.authenticate('linkedin'),
 		(request, response) => {
 			// after a user is logged in show them their dashboard
-			response.redirect('/dashboard/profile');
+			response.redirect('/profile/edit');
 		}
 	);
 	app.get('/api/logout', (request, response) => {

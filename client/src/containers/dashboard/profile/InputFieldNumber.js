@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Input, Row, Col } from 'antd';
+import ErrorMessage from './ErrorMessage';
 
 class InputFieldNumber extends Component {
 	render() {
@@ -9,10 +10,10 @@ class InputFieldNumber extends Component {
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col
-						sm={{ span: 4 }}
-						md={{ span: 4 }}
-						lg={{ span: 4 }}
-						xl={{ span: 4 }}
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
 					>
 						<h3
 							style={{
@@ -39,29 +40,7 @@ class InputFieldNumber extends Component {
 						/>
 					</Col>
 				</Row>
-				<Row type="flex" justify="start" align="middle">
-					<Col
-						sm={{ span: 5 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
-					/>
-					<Col
-						sm={{ span: 19 }}
-						md={{ span: 19 }}
-						lg={{ span: 19 }}
-						xl={{ span: 19 }}
-					>
-						<div
-							style={{
-								marginBottom: '5px',
-								color: this.props.colorTheme.keyText3Color
-							}}
-						>
-							{this.props.meta.touched && this.props.meta.error}
-						</div>
-					</Col>
-				</Row>
+				<ErrorMessage meta={this.props.meta} />
 			</div>
 		);
 	}

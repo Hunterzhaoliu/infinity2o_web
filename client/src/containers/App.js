@@ -28,21 +28,9 @@ class App extends Component {
 				<Layout style={styles.layout}>
 					<CustomHeader />
 					<Route exact={true} path="/" component={Landing} />
-					<Route
-						exact={true}
-						path="/dashboard"
-						component={Dashboard}
-					/>
-					<Route
-						exact={true}
-						path="/dashboard/matches"
-						component={Matches}
-					/>
-					<Route
-						exact={true}
-						path="/dashboard/profile/edit"
-						component={Edit}
-					/>
+					<Route exact={true} path="/profile" component={Dashboard} />
+					<Route exact={true} path="/profile/edit" component={Edit} />
+					<Route exact={true} path="/matches" component={Matches} />
 					<Footer
 						style={{
 							textAlign: 'center',

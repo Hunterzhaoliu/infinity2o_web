@@ -73,7 +73,7 @@ class CustomHeader extends Component {
 										color: this.props.colorTheme.text1Color
 									}}
 								>
-									<Link to="/dashboard/profile">
+									<Link to="/profile">
 										<div>
 											Profile <Icon type="profile" />
 										</div>
@@ -96,7 +96,7 @@ class CustomHeader extends Component {
 										color: this.props.colorTheme.text1Color
 									}}
 								>
-									<Link to="/dashboard/matches">
+									<Link to="/matches">
 										<div>
 											Matches{' '}
 											<Icon type="usergroup-add" />
