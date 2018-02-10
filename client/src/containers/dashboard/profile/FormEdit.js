@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as profileActionCreators from '../../../actions/profile';
@@ -8,6 +9,7 @@ import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './InputFieldSelect';
 import InputSchedule from './InputSchedule';
 import InputTimeZone from './InputTimeZone';
+import daysOfWeek from './daysOfWeek';
 import {
 	isValidName,
 	isValidAge,
@@ -16,9 +18,21 @@ import {
 import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 
-class ProfileForm extends Component {
+class FormEdit extends Component {
+	renderDaysOfWeekDropdown() {
+		return _.map(daysOfWeek, day => {
+			return (
+				<Field
+					name="schedule"
+					data={day}
+					component={InputSchedule}
+					key={day.name}
+				/>
+			);
+		});
+	}
 	render() {
-		//console.log('this.props in ProfileForm.js', this.props);
+		//console.log('this.props in FormEdit.js', this.props);
 		const {
 			colorTheme,
 			handleSubmit,
@@ -111,7 +125,21 @@ class ProfileForm extends Component {
 						}}
 					>
 						<Col span={24}>
-							<Field name="schedule" component={InputSchedule} />
+							<Row type="flex" justify="middle" align="middle">
+								<Col span={24}>
+									<h3
+										style={{
+											color: this.props.colorTheme.keyText5Color
+										}}
+									>
+										When are you free to video chat for your class?
+									</h3>
+								</Col>
+							</Row>
+
+							<Row type="flex" justify="middle" align="middle">
+								<Col span={24}>{this.renderDaysOfWeekDropdown()}</Col>
+							</Row>
 						</Col>
 					</Row>
 					<Row
@@ -130,9 +158,7 @@ class ProfileForm extends Component {
 								}}
 								type="submit"
 								disabled={pristine || submitting}
-								onClick={() =>
-									saveProfile(profileValues, history)
-								}
+								onClick={() => saveProfile(profileValues, history)}
 							>
 								Save
 							</Button>
@@ -172,7 +198,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-ProfileForm = connect(mapStateToProps, mapDispatchToProps)(ProfileForm);
+FormEdit = connect(mapStateToProps, mapDispatchToProps)(FormEdit);
 
 function validate(values) {
 	const errors = {};
@@ -199,4 +225,4 @@ function validate(values) {
 export default reduxForm({
 	validate: validate,
 	form: 'profile' // state.form.profile
-})(ProfileForm);
+})(FormEdit);
