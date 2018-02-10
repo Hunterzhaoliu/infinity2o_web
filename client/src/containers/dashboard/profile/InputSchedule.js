@@ -1,9 +1,9 @@
-import _ from 'lodash';
+//import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import optionFields from './optionFields';
-import { Row, Col, Select, Menu, Dropdown, Icon, Checkbox } from 'antd';
-const { Option } = Select;
+//import optionFields from './optionFields';
+import { Row, Col, Menu, Dropdown, Icon, Checkbox } from 'antd';
+//const { Option } = Select;
 const CheckboxGroup = Checkbox.Group;
 
 const plainOptions = ['7-9 AM', '9-11 AM', '11 AM -1 PM'];

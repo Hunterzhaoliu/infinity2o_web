@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as profileActionCreators from '../../../actions/profile';
 import { reduxForm, Field } from 'redux-form';
+import { bindActionCreators } from 'redux';
 import InputField from './InputField';
 import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './InputFieldSelect';
@@ -16,16 +18,24 @@ const { Content } = Layout;
 
 class ProfileForm extends Component {
 	render() {
-		// console.log('this.props in ProfileForm.js', this.props);
-
+		//console.log('this.props in ProfileForm.js', this.props);
+		const {
+			colorTheme,
+			handleSubmit,
+			pristine,
+			submitting,
+			profileValues,
+			saveProfile,
+			history
+		} = this.props;
 		return (
 			<Content
 				style={{
 					padding: '5% 0% 0%', // top left&right bottom
-					background: this.props.colorTheme.backgroundColor
+					background: colorTheme.backgroundColor
 				}}
 			>
-				<Form onSubmit={this.props.handleSubmit}>
+				<Form onSubmit={handleSubmit}>
 					<Row
 						type="flex"
 						justify="start"
@@ -90,7 +100,6 @@ class ProfileForm extends Component {
 								label="Time Zone:"
 								width={280}
 								component={InputTimeZone}
-								type="text"
 							/>
 						</Col>
 					</Row>
@@ -115,12 +124,17 @@ class ProfileForm extends Component {
 						<Col span={24}>
 							<Button
 								style={{
-									borderColor: this.props.colorTheme.key,
-									background: this.props.colorTheme.key,
-									color: this.props.colorTheme.text1Color
+									borderColor: colorTheme.key,
+									background: colorTheme.key,
+									color: colorTheme.text1Color
 								}}
+								type="submit"
+								disabled={pristine || submitting}
+								onClick={() =>
+									saveProfile(profileValues, history)
+								}
 							>
-								Submit
+								Save
 							</Button>
 						</Col>
 					</Row>
@@ -136,11 +150,29 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		profileValues: state.form.profile.values
 	};
 }
 
-ProfileForm = connect(mapStateToProps, null)(ProfileForm);
+/*
+So we have a state and a UI(with props).
+This function gives the UI the functions it will need to be called.
+*/
+function mapDispatchToProps(dispatch) {
+	const profileDispatchers = bindActionCreators(
+		profileActionCreators,
+		dispatch
+	);
+
+	return {
+		saveProfile: () => {
+			profileDispatchers.saveProfile();
+		}
+	};
+}
+
+ProfileForm = connect(mapStateToProps, mapDispatchToProps)(ProfileForm);
 
 function validate(values) {
 	const errors = {};
