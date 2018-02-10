@@ -16,9 +16,9 @@ import {
 import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 
-class ProfileForm extends Component {
+class FormEdit extends Component {
 	render() {
-		//console.log('this.props in ProfileForm.js', this.props);
+		//console.log('this.props in FormEdit.js', this.props);
 		const {
 			colorTheme,
 			handleSubmit,
@@ -171,8 +171,7 @@ function mapDispatchToProps(dispatch) {
 		}
 	};
 }
-
-ProfileForm = connect(mapStateToProps, mapDispatchToProps)(ProfileForm);
+FormEdit = connect(mapStateToProps, mapDispatchToProps)(FormEdit);
 
 function validate(values) {
 	const errors = {};
@@ -199,4 +198,4 @@ function validate(values) {
 export default reduxForm({
 	validate: validate,
 	form: 'profile' // state.form.profile
-})(ProfileForm);
+})(FormEdit);
