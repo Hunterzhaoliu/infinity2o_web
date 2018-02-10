@@ -6,7 +6,11 @@ import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './InputFieldSelect';
 import InputSchedule from './InputSchedule';
 import InputTimeZone from './InputTimeZone';
-import { isValidName, isValidAge } from '../../../utils/validate';
+import {
+	isValidName,
+	isValidAge,
+	isValidInterests
+} from '../../../utils/validate';
 import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 
@@ -26,7 +30,7 @@ class ProfileForm extends Component {
 						type="flex"
 						justify="start"
 						style={{
-							padding: '2% 0% 0%' // top left&right bottom
+							padding: '3% 0% 0%' // top left&right bottom
 						}}
 					>
 						<Col span={24}>
@@ -43,7 +47,7 @@ class ProfileForm extends Component {
 						type="flex"
 						justify="start"
 						style={{
-							padding: '2% 0% 0%' // top left&right bottom
+							padding: '3% 0% 0%' // top left&right bottom
 						}}
 					>
 						<Col span={24}>
@@ -66,6 +70,7 @@ class ProfileForm extends Component {
 						<Col span={24}>
 							<Field
 								name="interests"
+								label="Interest(s):"
 								placeholder="Select up to 5 interests!"
 								width={280}
 								component={InputFieldSelect}
@@ -76,12 +81,13 @@ class ProfileForm extends Component {
 						type="flex"
 						justify="start"
 						style={{
-							padding: '5% 0% 0%' // top left&right bottom
+							padding: '3% 0% 0%' // top left&right bottom
 						}}
 					>
 						<Col span={24}>
 							<Field
 								name="time_zone"
+								label="Time Zone:"
 								width={280}
 								component={InputTimeZone}
 								type="text"
@@ -103,7 +109,7 @@ class ProfileForm extends Component {
 						type="flex"
 						justify="start"
 						style={{
-							padding: '5% 0% 0%' // top left&right bottom
+							padding: '3% 0% 0%' // top left&right bottom
 						}}
 					>
 						<Col span={24}>
@@ -140,11 +146,19 @@ function validate(values) {
 	const errors = {};
 
 	if (!isValidName(values.name)) {
-		errors['name'] = 'Cool name! But we need between 1 & 30 valid letters.';
+		errors['name'] = 'Cool name! But we need 1 to 30 valid letters';
 	}
 
 	if (!isValidAge(values.age)) {
 		errors['age'] = 'Between 13 & 125. If your close you should lie ;)';
+	}
+
+	if (!isValidInterests(values.interests)) {
+		errors['interests'] = '1 to 5 interests pretty please';
+	}
+
+	if (values.time_zone === 'country') {
+		errors['time_zone'] = 'Need a time zone';
 	}
 
 	return errors;

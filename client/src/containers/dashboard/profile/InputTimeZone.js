@@ -1,100 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TreeSelect, Row, Col } from 'antd';
-//const TreeNode = Tree.TreeNode;
-
-const treeData = [
-	{
-		label: 'United States',
-		value: 'a',
-		key: 'United States',
-		children: [
-			{
-				label: 'Hawaii',
-				value: 'Hawaii',
-				key: 'Hawaii',
-				UTC_offset: -10
-			},
-			{ label: 'Alaska', value: 'Alaska', key: 'Alaska', UTC_offset: -9 },
-			{
-				label: 'Pacific',
-				value: 'US-Pacific',
-				key: 'US-Pacific',
-				UTC_offset: -8
-			},
-			{
-				label: 'Mountain',
-				value: 'US-Mountain',
-				key: 'US-Mountain',
-				UTC_offset: -7
-			},
-			{
-				label: 'Central',
-				value: 'US-Central',
-				key: 'US-Central',
-				UTC_offset: -6
-			},
-			{
-				label: 'Eastern',
-				value: 'US-Eastern',
-				key: 'US-Eastern',
-				UTC_offset: -5
-			}
-		]
-	},
-	{
-		label: 'Canada',
-		key: 'Canada',
-		children: [
-			{
-				label: 'Pacific',
-				value: 'C-Pacific',
-				key: 'C-Pacific',
-				UTC_offset: -8
-			},
-			{
-				label: 'Mountain',
-				value: 'C-Mountain',
-				key: 'C-Mountain',
-				UTC_offset: -7
-			},
-			{
-				label: 'Central',
-				value: 'C-Central',
-				key: 'C-Central',
-				UTC_offset: -6
-			},
-			{
-				label: 'Eastern',
-				value: 'C-Eastern',
-				key: 'C-Eastern',
-				UTC_offset: -5
-			},
-			{
-				label: 'Atlantic',
-				value: 'Atlantic',
-				key: 'Atlantic',
-				UTC_offset: -4
-			},
-			{
-				label: 'Newfoundland',
-				value: 'Newfoundland',
-				key: 'Newfoundland',
-				UTC_offset: -3.5
-			}
-		]
-	},
-	{
-		label: 'Europe',
-		key: 'Europe',
-		children: [
-			{ label: 'BST', value: 'BST', key: 'BST', UTC_offset: 1 },
-			{ label: 'CEST', value: 'CEST', key: 'CEST', UTC_offset: 2 },
-			{ label: 'CET', value: 'CET', key: 'CET', UTC_offset: 1 },
-			{ label: 'EEST', value: 'EEST', key: 'EEST', UTC_offset: 3 }
-		]
-	}
-];
+import timeZones from './timeZones';
+import ErrorMessage from './ErrorMessage';
 
 class InputTimeZone extends Component {
 	state = {
@@ -113,35 +21,36 @@ class InputTimeZone extends Component {
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col
-						sm={{ span: 4 }}
-						md={{ span: 4 }}
-						lg={{ span: 4 }}
-						xl={{ span: 4 }}
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
 					>
-						<label
+						<h3
 							style={{
 								color: this.props.colorTheme.keyText5Color
 							}}
 						>
 							{this.props.label}
-						</label>
+						</h3>
 					</Col>
 					<Col
-						sm={{ span: 19, offset: 1 }}
-						md={{ span: 19, offset: 1 }}
-						lg={{ span: 19, offset: 1 }}
-						xl={{ span: 19, offset: 1 }}
+						sm={{ span: 18, offset: 1 }}
+						md={{ span: 18, offset: 1 }}
+						lg={{ span: 18, offset: 1 }}
+						xl={{ span: 18, offset: 1 }}
 					>
 						<TreeSelect
+							{...this.props.input}
+							value={this.props.input.value || []} // requires value to be an array
 							style={{ width: this.props.width }}
-							value={this.state.value}
 							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-							treeData={treeData}
+							treeData={timeZones}
 							placeholder="Time Zone?"
-							onChange={this.onChange}
 						/>
 					</Col>
 				</Row>
+				<ErrorMessage meta={this.props.meta} />
 			</div>
 		);
 	}

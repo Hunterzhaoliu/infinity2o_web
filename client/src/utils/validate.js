@@ -38,3 +38,13 @@ export const isValidAge = age => {
 
 	return false;
 };
+
+export const isValidInterests = interests => {
+	if (interests !== undefined) {
+		if (interests.length >= 1 && interests.length <= 5) {
+			return true;
+		}
+	}
+
+	return false;
+};
