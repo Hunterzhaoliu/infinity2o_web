@@ -42,6 +42,8 @@ class InputFieldSelect extends Component {
 						xl={{ span: 19, offset: 1 }}
 					>
 						<Select
+							{...this.props.input}
+							value={this.props.input.value || []} // requires value to be an array
 							mode="multiple"
 							placeholder={this.props.placeholder}
 							style={{

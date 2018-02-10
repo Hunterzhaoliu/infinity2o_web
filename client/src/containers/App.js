@@ -10,7 +10,6 @@ import Landing from './Landing';
 import Dashboard from './dashboard/Dashboard';
 import Matches from './dashboard/matches/Matches';
 import Edit from './dashboard/profile/Edit';
-import GreyScale from './styles/GreyScale';
 
 import { Layout } from 'antd';
 const { Footer } = Layout;
@@ -43,11 +42,6 @@ class App extends Component {
 						exact={true}
 						path="/dashboard/profile/edit"
 						component={Edit}
-					/>
-					<Route
-						exact={true}
-						path="/greyscale"
-						component={GreyScale}
 					/>
 					<Footer
 						style={{

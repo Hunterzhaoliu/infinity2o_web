@@ -4,8 +4,19 @@ import { reduxForm, Field } from 'redux-form';
 import InputField from './InputField';
 import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './InputFieldSelect';
+import InputTimeZone from './InputTimeZone';
 import { isValidName, isValidAge } from '../../../utils/validate';
-import { Layout, Row, Form, Col, Menu, Dropdown, Icon, Checkbox } from 'antd';
+import {
+	Layout,
+	Row,
+	Form,
+	Col,
+	Menu,
+	Dropdown,
+	Icon,
+	Checkbox,
+	Button
+} from 'antd';
 const { Content } = Layout;
 const CheckboxGroup = Checkbox.Group;
 
@@ -119,9 +130,24 @@ class ProfileForm extends Component {
 						<Col span={24}>
 							<Field
 								name="interests"
-								placeholder="Interested in learning?"
+								placeholder="Select up to 5 interests!"
 								width={280}
 								component={InputFieldSelect}
+							/>
+						</Col>
+					</Row>
+					<Row
+						type="flex"
+						justify="start"
+						style={{
+							padding: '5% 0% 0%' // top left&right bottom
+						}}
+					>
+						<Col span={24}>
+							<Field
+								name="time_zone"
+								width={280}
+								component={InputTimeZone}
 								type="text"
 							/>
 						</Col>
@@ -164,13 +190,15 @@ class ProfileForm extends Component {
 						}}
 					>
 						<Col span={24}>
-							<Field
-								name="city"
-								label="City:"
-								width={280}
-								component={InputField}
-								type="text"
-							/>
+							<Button
+								style={{
+									borderColor: this.props.colorTheme.key,
+									background: this.props.colorTheme.key,
+									color: this.props.colorTheme.text1Color
+								}}
+							>
+								Submit
+							</Button>
 						</Col>
 					</Row>
 				</Form>
