@@ -5,25 +5,21 @@ import { Row, Col, Select, Menu, Dropdown, Icon, Checkbox } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 
 class InputSchedule extends Component {
-	renderDropdown(name) {
-		return <Col>{name}</Col>;
+	renderMenuItems(timeSlots) {
+		return _.map(timeSlots, timeSlot => {
+			return <Menu.Item key={timeSlot.key}> {timeSlot.label} </Menu.Item>;
+		});
 	}
 	render() {
 		console.log('this.props in InputSchedule', this.props);
-		const menu = (
-			<Menu>
-				<Menu.Item key="1">Clicking me will not close the menu.</Menu.Item>
-				<Menu.Item key="2">Clicking me will not close the menu also.</Menu.Item>
-				<Menu.Item key="3">Clicking me wil close the menu</Menu.Item>
-			</Menu>
-		);
+		const menu = <Menu>{this.renderMenuItems(this.props.day.timeSlots)}</Menu>;
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
 						<Dropdown overlay={menu}>
 							<a className="ant-dropdown-link" href="#">
-								{this.props.data.name} <Icon type="down" />
+								{this.props.day.name} <Icon type="down" />
 							</a>
 						</Dropdown>
 					</Col>

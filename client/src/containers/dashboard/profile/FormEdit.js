@@ -25,7 +25,7 @@ class FormEdit extends Component {
 				<Col span={3} key={day.name}>
 					<Field
 						name="schedule"
-						data={day}
+						day={day}
 						component={InputSchedule}
 					/>
 				</Col>
@@ -140,7 +140,11 @@ class FormEdit extends Component {
 								</Col>
 							</Row>
 
-							<Row type="flex" justify="middle" align="middle">
+							<Row
+								type="flex"
+								justify="space-around"
+								align="middle"
+							>
 								<Col span={24}>
 									{this.renderDaysOfWeekDropdowns()}
 								</Col>
