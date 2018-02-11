@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Select, Menu, Dropdown, Icon, Checkbox } from 'antd';
+import { Row, Col, Menu, Dropdown, Icon, Checkbox } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 
 class InputSchedule extends Component {
@@ -12,13 +12,15 @@ class InputSchedule extends Component {
 	}
 	render() {
 		console.log('this.props in InputSchedule', this.props);
-		const menu = <Menu>{this.renderMenuItems(this.props.day.timeSlots)}</Menu>;
+		const menu = (
+			<Menu>{this.renderMenuItems(this.props.day.timeSlots)}</Menu>
+		);
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
 						<Dropdown overlay={menu}>
-							<a className="ant-dropdown-link" href="#">
+							<a className="ant-dropdown-link">
 								{this.props.day.name} <Icon type="down" />
 							</a>
 						</Dropdown>
