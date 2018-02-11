@@ -1,23 +1,20 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+//import { reduxForm, Field } from 'redux-form';
 import { Row, Col, Menu, Dropdown, Icon, Checkbox } from 'antd';
-const CheckboxGroup = Checkbox.Group;
+//const CheckboxGroup = Checkbox.Group;
 
-class InputSchedule extends Component {
-	state = {
-		indeterminate: true,
-		checkAll: false
-	};
-
+class DayDropdown extends Component {
 	renderMenuItems(timeSlots) {
 		return _.map(timeSlots, timeSlot => {
 			return <Menu.Item key={timeSlot.key}> {timeSlot.label} </Menu.Item>;
 		});
 	}
+
 	render() {
-		console.log('this.props in InputSchedule', this.props);
-		const { input } = this.props;
+		console.log('this.props in DayDropdown', this.props);
+		const { input, day } = this.props;
 		const menu = (
 			<Menu>{this.renderMenuItems(this.props.day.timeSlots)}</Menu>
 		);
@@ -25,7 +22,11 @@ class InputSchedule extends Component {
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Dropdown overlay={menu}>
+						<Dropdown
+							onVisibleChange={input.onChange}
+							value={input.value || []}
+							overlay={menu}
+						>
 							<a className="ant-dropdown-link">
 								{this.props.day.name} <Icon type="down" />
 							</a>
@@ -47,4 +48,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(InputSchedule);
+export default connect(mapStateToProps, null)(DayDropdown);

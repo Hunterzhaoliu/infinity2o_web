@@ -1,20 +1,20 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as profileActionCreators from '../../../actions/profile';
+import * as profileActionCreators from '../../actions/profile';
 import { reduxForm, Field } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import InputField from './InputField';
 import InputFieldNumber from './InputFieldNumber';
-import InputFieldSelect from './InputFieldSelect';
-import InputSchedule from './InputSchedule';
-import InputTimeZone from './InputTimeZone';
-import daysOfWeek from './daysOfWeek';
+import InputFieldSelect from './interestsSelect/InputFieldSelect';
+import InputSchedule from './scheduleDropdowns/InputSchedule';
+import InputTimeZone from './timeZone/InputTimeZone';
+import daysOfWeek from './scheduleDropdowns/daysOfWeek';
 import {
 	isValidName,
 	isValidAge,
 	isValidInterests
-} from '../../../utils/validate';
+} from '../../utils/validate';
 import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 

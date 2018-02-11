@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TreeSelect, Row, Col } from 'antd';
 import timeZones from './timeZones';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 
 class InputTimeZone extends Component {
 	render() {
