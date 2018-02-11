@@ -5,6 +5,11 @@ import { Row, Col, Menu, Dropdown, Icon, Checkbox } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 
 class InputSchedule extends Component {
+	state = {
+		indeterminate: true,
+		checkAll: false
+	};
+
 	renderMenuItems(timeSlots) {
 		return _.map(timeSlots, timeSlot => {
 			return <Menu.Item key={timeSlot.key}> {timeSlot.label} </Menu.Item>;
@@ -12,6 +17,7 @@ class InputSchedule extends Component {
 	}
 	render() {
 		console.log('this.props in InputSchedule', this.props);
+		const { input } = this.props;
 		const menu = (
 			<Menu>{this.renderMenuItems(this.props.day.timeSlots)}</Menu>
 		);
