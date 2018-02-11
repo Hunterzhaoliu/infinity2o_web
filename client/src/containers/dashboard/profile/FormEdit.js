@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as profileActionCreators from '../../../actions/profile';
@@ -8,6 +9,7 @@ import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './InputFieldSelect';
 import InputSchedule from './InputSchedule';
 import InputTimeZone from './InputTimeZone';
+import daysOfWeek from './daysOfWeek';
 import {
 	isValidName,
 	isValidAge,
@@ -17,6 +19,19 @@ import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 
 class FormEdit extends Component {
+	renderDaysOfWeekDropdowns() {
+		return _.map(daysOfWeek, day => {
+			return (
+				<Col span={3} key={day.name}>
+					<Field
+						name="schedule"
+						data={day}
+						component={InputSchedule}
+					/>
+				</Col>
+			);
+		});
+	}
 	render() {
 		//console.log('this.props in FormEdit.js', this.props);
 		const {
@@ -111,7 +126,25 @@ class FormEdit extends Component {
 						}}
 					>
 						<Col span={24}>
-							<Field name="schedule" component={InputSchedule} />
+							<Row type="flex" justify="middle" align="middle">
+								<Col span={24}>
+									<h3
+										style={{
+											color: this.props.colorTheme
+												.keyText5Color
+										}}
+									>
+										When are you free to video chat for your
+										class?
+									</h3>
+								</Col>
+							</Row>
+
+							<Row type="flex" justify="middle" align="middle">
+								<Col span={24}>
+									{this.renderDaysOfWeekDropdowns()}
+								</Col>
+							</Row>
 						</Col>
 					</Row>
 					<Row
@@ -171,6 +204,7 @@ function mapDispatchToProps(dispatch) {
 		}
 	};
 }
+
 FormEdit = connect(mapStateToProps, mapDispatchToProps)(FormEdit);
 
 function validate(values) {
