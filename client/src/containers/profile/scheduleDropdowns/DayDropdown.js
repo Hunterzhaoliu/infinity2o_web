@@ -13,7 +13,7 @@ class DayDropdown extends Component {
 	}
 
 	render() {
-		console.log('this.props in DayDropdown', this.props);
+		//console.log('this.props in DayDropdown', this.props);
 		const { input, day } = this.props;
 		const menu = (
 			<Menu>{this.renderMenuItems(this.props.day.timeSlots)}</Menu>
