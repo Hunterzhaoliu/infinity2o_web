@@ -2,11 +2,31 @@ export default [
 	// coursera.org 2/8/2018 categories
 	{
 		value: 'monday',
-		name: 'Monday'
+		name: 'Monday',
+		timeSlots: [
+			{
+				label: '7-9 AM',
+				key: 'M-7-9_AM'
+			},
+			{
+				label: '9-11 AM',
+				key: 'M-9-11_AM'
+			}
+		]
 	},
 	{
 		value: 'tuesday',
-		name: 'Tuesday'
+		name: 'Tuesday',
+		timeSlots: [
+			{
+				label: '7-9 AM',
+				key: 'Tu-7-9_AM'
+			},
+			{
+				label: '9-11 AM',
+				key: 'Tu-9-11_AM'
+			}
+		]
 	},
 	{
 		value: 'wednesday',
