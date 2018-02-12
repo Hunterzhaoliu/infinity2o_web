@@ -21,16 +21,23 @@ class TimeSlots extends Component {
 		});
 	};
 
-	renderMenuItems(timeSlots) {
+	renderTimeSlotCheckboxes(timeSlots) {
 		return _.map(timeSlots, timeSlot => {
 			return (
-				<Row key={timeSlot.key}>
-					<Col span={24}>
-						<Checkbox value={timeSlot.key}>
-							{timeSlot.label}
-						</Checkbox>
-					</Col>
-				</Row>
+				<Menu.Item key={timeSlot.key}>
+					<Checkbox.Group onChange={this.onChange}>
+						<Row key={timeSlot.key}>
+							<Col span={24}>
+								<Checkbox
+									onChange={this.onChange}
+									value={timeSlot.key}
+								>
+									{timeSlot.label}
+								</Checkbox>
+							</Col>
+						</Row>
+					</Checkbox.Group>
+				</Menu.Item>
 			);
 		});
 	}
@@ -42,12 +49,8 @@ class TimeSlots extends Component {
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Menu>
-							<Menu.Item key={day.value}>
-								<Checkbox.Group onChange={this.onChange}>
-									{this.renderMenuItems(day.timeSlots)}
-								</Checkbox.Group>
-							</Menu.Item>
+						<Menu multiple={true} mode="vertical">
+							{this.renderTimeSlotCheckboxes(day.timeSlots)}
 						</Menu>
 					</Col>
 				</Row>
