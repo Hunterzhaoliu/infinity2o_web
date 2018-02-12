@@ -8,8 +8,8 @@ import { bindActionCreators } from 'redux';
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
 import Dashboard from './dashboard/Dashboard';
-import Matches from './dashboard/matches/Matches';
-import Edit from './dashboard/profile/Edit';
+import Matches from './matches/Matches';
+import Edit from './profile/Edit';
 
 import { Layout } from 'antd';
 const { Footer } = Layout;
