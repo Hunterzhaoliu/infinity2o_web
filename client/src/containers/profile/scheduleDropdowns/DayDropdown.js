@@ -1,22 +1,19 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import { reduxForm, Field } from 'redux-form';
-import { Row, Col, Menu, Dropdown, Icon, Checkbox } from 'antd';
-//const CheckboxGroup = Checkbox.Group;
+import { reduxForm, Field } from 'redux-form';
+import { Row, Col, Dropdown, Icon } from 'antd';
+import TimeSlots from './TimeSlots';
 
 class DayDropdown extends Component {
-	renderMenuItems(timeSlots) {
-		return _.map(timeSlots, timeSlot => {
-			return <Menu.Item key={timeSlot.key}> {timeSlot.label} </Menu.Item>;
-		});
-	}
-
 	render() {
 		//console.log('this.props in DayDropdown', this.props);
 		const { input, day } = this.props;
 		const menu = (
-			<Menu>{this.renderMenuItems(this.props.day.timeSlots)}</Menu>
+			<Field
+				name={day.value}
+				timeSlots={day.timeSlots}
+				component={TimeSlots}
+			/>
 		);
 		return (
 			<div>
@@ -28,7 +25,7 @@ class DayDropdown extends Component {
 							overlay={menu}
 						>
 							<a className="ant-dropdown-link">
-								{this.props.day.name} <Icon type="down" />
+								{day.name} <Icon type="down" />
 							</a>
 						</Dropdown>
 					</Col>
@@ -48,4 +45,8 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(DayDropdown);
+DayDropdown = connect(mapStateToProps, null)(DayDropdown);
+
+export default reduxForm({
+	form: 'profileDayDropdownMenu' // state.form.profileDayDropdownMenu
+})(DayDropdown);

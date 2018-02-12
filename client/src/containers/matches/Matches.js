@@ -5,7 +5,7 @@ import matchesFields from './matchesFields';
 import { Layout, Row, Col, Card, Button, Icon } from 'antd';
 const { Content } = Layout;
 
-class DashboardMatches extends Component {
+class Matches extends Component {
 	renderMatches() {
 		return _.map(matchesFields, match => {
 			return (
@@ -122,7 +122,7 @@ class DashboardMatches extends Component {
 	}
 
 	render() {
-		// console.log('this.props in DashboardMatches.js', this.props);
+		// console.log('this.props in Matches.js', this.props);
 		return (
 			<Content
 				style={{
@@ -174,4 +174,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(DashboardMatches);
+export default connect(mapStateToProps, null)(Matches);

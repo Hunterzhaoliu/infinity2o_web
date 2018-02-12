@@ -30,22 +30,72 @@ export default [
 	},
 	{
 		value: 'wednesday',
-		name: 'Wed'
+		name: 'Wed',
+		timeSlots: [
+			{
+				label: '7-9 AM',
+				key: 'W-7-9_AM'
+			},
+			{
+				label: '9-11 AM',
+				key: 'W-9-11_AM'
+			}
+		]
 	},
 	{
 		value: 'thursday',
-		name: 'Thur'
+		name: 'Thur',
+		timeSlots: [
+			{
+				label: '7-9 AM',
+				key: 'Th-7-9_AM'
+			},
+			{
+				label: '9-11 AM',
+				key: 'Th-9-11_AM'
+			}
+		]
 	},
 	{
 		value: 'friday',
-		name: 'Fri'
+		name: 'Fri',
+		timeSlots: [
+			{
+				label: '7-9 AM',
+				key: 'F-7-9_AM'
+			},
+			{
+				label: '9-11 AM',
+				key: 'F-9-11_AM'
+			}
+		]
 	},
 	{
 		value: 'saturday',
-		name: 'Sat'
+		name: 'Sat',
+		timeSlots: [
+			{
+				label: '7-9 AM',
+				key: 'Sa-7-9_AM'
+			},
+			{
+				label: '9-11 AM',
+				key: 'Sa-9-11_AM'
+			}
+		]
 	},
 	{
 		value: 'sunday',
-		name: 'Sun'
+		name: 'Sun',
+		timeSlots: [
+			{
+				label: '7-9 AM',
+				key: 'Su-7-9_AM'
+			},
+			{
+				label: '9-11 AM',
+				key: 'Su-9-11_AM'
+			}
+		]
 	}
 ];
