@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import { Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Row, Col, Menu, Checkbox } from 'antd';
 
@@ -42,6 +43,13 @@ class TimeSlots extends Component {
 		});
 	}
 
+	handleMenuClick = e => {
+		console.log('e.key = ', e.key);
+		if (e.key === '3') {
+			this.setState({ visible: false });
+		}
+	};
+
 	render() {
 		console.log('this.props in TimeSlots', this.props);
 		const { day } = this.props;
@@ -49,7 +57,7 @@ class TimeSlots extends Component {
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Menu multiple={true} mode="vertical">
+						<Menu onClick={this.handleMenuClick}>
 							{this.renderTimeSlotCheckboxes(day.timeSlots)}
 						</Menu>
 					</Col>
