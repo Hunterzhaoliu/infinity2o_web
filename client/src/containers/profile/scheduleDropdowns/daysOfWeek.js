@@ -5,12 +5,40 @@ export default [
 		name: 'Mon',
 		timeSlots: [
 			{
-				label: '7-9 AM',
+				label: '6-8 AM',
 				key: 'M-7-9_AM'
 			},
 			{
-				label: '9-11 AM',
+				label: '8-10 AM',
 				key: 'M-9-11_AM'
+			},
+			{
+				label: '10-12 noon',
+				key: 'M-10-12_noon'
+			},
+			{
+				label: '12-2 PM',
+				key: 'M-12-2_PM'
+			},
+			{
+				label: '2-4 PM',
+				key: 'M-2-4_PM'
+			},
+			{
+				label: '4-6 PM',
+				key: 'M-4-6_PM'
+			},
+			{
+				label: '6-8 PM',
+				key: 'M-6-8_PM'
+			},
+			{
+				label: '8-10 PM',
+				key: 'M-8-10_PM'
+			},
+			{
+				label: '10-12 midnight',
+				key: 'M-10-12_midnight'
 			}
 		]
 	},

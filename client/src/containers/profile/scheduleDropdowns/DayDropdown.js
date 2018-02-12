@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { Field } from 'redux-form';
 import { Row, Col, Dropdown, Icon } from 'antd';
 import TimeSlots from './TimeSlots';
 
@@ -8,13 +8,7 @@ class DayDropdown extends Component {
 	render() {
 		//console.log('this.props in DayDropdown', this.props);
 		const { input, day } = this.props;
-		const menu = (
-			<Field
-				name={day.value}
-				timeSlots={day.timeSlots}
-				component={TimeSlots}
-			/>
-		);
+		const menu = <Field name={day.value} day={day} component={TimeSlots} />;
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
@@ -45,8 +39,4 @@ function mapStateToProps(state) {
 	};
 }
 
-DayDropdown = connect(mapStateToProps, null)(DayDropdown);
-
-export default reduxForm({
-	form: 'profileDayDropdownMenu' // state.form.profileDayDropdownMenu
-})(DayDropdown);
+export default connect(mapStateToProps, null)(DayDropdown);

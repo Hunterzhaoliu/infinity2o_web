@@ -1,55 +1,54 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import { reduxForm } from 'redux-form';
-import { Row, Col, Menu, Icon, Checkbox } from 'antd';
-//const CheckboxGroup = Checkbox.Group;
+import { Row, Col, Menu, Checkbox } from 'antd';
+
+const checkedTimeSlots = [];
 
 class TimeSlots extends Component {
-	onChange(checkedValues) {
-		console.log('checked = ', checkedValues);
-	}
+	state = {
+		checkedList: checkedTimeSlots
+	};
+
+	// onChange(checkedValues) {
+	// 	console.log('checked = ', checkedValues);
+	// }
+
+	onChange = checkedList => {
+		console.log('checkedList = ', checkedList);
+		this.setState({
+			checkedList
+		});
+	};
 
 	renderMenuItems(timeSlots) {
 		return _.map(timeSlots, timeSlot => {
-			console.log('timeSlot = ', timeSlot);
-			//return <div key={timeSlot.key}>Hi</div>;
 			return (
-				<Menu.Item key={timeSlot.key}>
-					{timeSlot.label}
-					<Checkbox.Group onChange={this.onChange}>
-						<Row>
-							<Col span={8}>
-								<Checkbox value="A">A</Checkbox>
-							</Col>
-							<Col span={8}>
-								<Checkbox value="B">B</Checkbox>
-							</Col>
-							<Col span={8}>
-								<Checkbox value="C">C</Checkbox>
-							</Col>
-							<Col span={8}>
-								<Checkbox value="D">D</Checkbox>
-							</Col>
-							<Col span={8}>
-								<Checkbox value="E">E</Checkbox>
-							</Col>
-						</Row>
-					</Checkbox.Group>
-				</Menu.Item>
+				<Row key={timeSlot.key}>
+					<Col span={24}>
+						<Checkbox value={timeSlot.key}>
+							{timeSlot.label}
+						</Checkbox>
+					</Col>
+				</Row>
 			);
 		});
 	}
 
 	render() {
 		console.log('this.props in TimeSlots', this.props);
-		const { input, timeSlots } = this.props;
-		//const menu = <Menu>{this.renderMenuItems(this.props.timeSlots)}</Menu>;
+		const { day } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Menu>{this.renderMenuItems(timeSlots)}</Menu>
+						<Menu>
+							<Menu.Item key={day.value}>
+								<Checkbox.Group onChange={this.onChange}>
+									{this.renderMenuItems(day.timeSlots)}
+								</Checkbox.Group>
+							</Menu.Item>
+						</Menu>
 					</Col>
 				</Row>
 			</div>
@@ -68,9 +67,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, null)(TimeSlots);
-
-// TimeSlots = connect(mapStateToProps, null)(TimeSlots);
-//
-// export default reduxForm({
-// 	form: 'profileDayDropdownTimeSlots' // state.form.profileDayDropdownTimeSlots
-// })(TimeSlots);

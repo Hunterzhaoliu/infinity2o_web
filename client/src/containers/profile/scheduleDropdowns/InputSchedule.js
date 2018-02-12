@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { Field } from 'redux-form';
 import DayDropdown from './DayDropdown';
 import { Row, Col } from 'antd';
 
@@ -34,8 +34,4 @@ function mapStateToProps(state) {
 	};
 }
 
-InputSchedule = connect(mapStateToProps, null)(InputSchedule);
-
-export default reduxForm({
-	form: 'profileDayDropdown' // state.form.profileDayDropdown
-})(InputSchedule);
+export default connect(mapStateToProps, null)(InputSchedule);
