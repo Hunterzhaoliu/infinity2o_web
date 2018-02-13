@@ -6,26 +6,42 @@ import { isValidTimeSlots } from '../../../utils/validate';
 import { Row, Col, Menu, Checkbox } from 'antd';
 const CheckboxGroup = Checkbox.Group;
 
-const timeSlotOptions = [
-	'6-8 AM',
-	'8-10 AM',
-	'10-12 noon',
-	'12-2 PM',
-	'2-4 PM',
-	'4-6 PM',
-	'6-8 PM',
-	'8-10 PM',
-	'10-12 midnight'
-];
+const timeSlotOptions1 = ['6-8 AM', '8-10 AM', '10-12 noon'];
+const timeSlotOptions2 = ['12-2 PM', '2-4 PM', '4-6 PM'];
+const timeSlotOptions3 = ['6-8 PM', '8-10 PM', '10-12 midnight'];
 
 class TimeSlots extends Component {
 	renderCheckboxs = ({ input, timeSlots }) => {
 		return (
-			<CheckboxGroup
-				options={timeSlotOptions}
-				onChange={input.onChange}
-				value={input.value || []}
-			/>
+			<div>
+				<Row type="flex" justify="space-between" align="middle">
+					<Col span={24}>
+						<CheckboxGroup
+							options={timeSlotOptions1}
+							onChange={input.onChange}
+							value={input.value || []}
+						/>
+					</Col>
+				</Row>
+				<Row type="flex" justify="space-between" align="middle">
+					<Col span={24}>
+						<CheckboxGroup
+							options={timeSlotOptions2}
+							onChange={input.onChange}
+							value={input.value || []}
+						/>
+					</Col>
+				</Row>
+				<Row type="flex" justify="space-between" align="middle">
+					<Col span={24}>
+						<CheckboxGroup
+							options={timeSlotOptions3}
+							onChange={input.onChange}
+							value={input.value || []}
+						/>
+					</Col>
+				</Row>
+			</div>
 		);
 	};
 
@@ -47,11 +63,7 @@ class TimeSlots extends Component {
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Menu>
-							<Menu.Item key={day.value}>
-								{this.renderTimeSlots(day)}
-							</Menu.Item>
-						</Menu>
+						<Menu>{this.renderTimeSlots(day)}</Menu>
 					</Col>
 				</Row>
 			</div>
