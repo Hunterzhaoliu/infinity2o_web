@@ -18,6 +18,13 @@ import {
 import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 
+// {
+// 	/* <Field
+//     name={day.name}
+//     day={day}
+//     component={InputSchedule}
+// /> */
+// }
 class FormEdit extends Component {
 	renderDaysOfWeekDropdowns() {
 		return _.map(daysOfWeek, day => {

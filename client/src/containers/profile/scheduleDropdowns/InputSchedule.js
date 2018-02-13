@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field } from 'redux-form';
 import DayDropdown from './DayDropdown';
 import { Row, Col } from 'antd';
 

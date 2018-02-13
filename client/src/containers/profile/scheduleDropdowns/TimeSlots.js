@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Field } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Row, Col, Menu, Checkbox } from 'antd';
 
@@ -11,10 +11,6 @@ class TimeSlots extends Component {
 		checkedList: checkedTimeSlots
 	};
 
-	// onChange(checkedValues) {
-	// 	console.log('checked = ', checkedValues);
-	// }
-
 	onChange = checkedList => {
 		console.log('checkedList = ', checkedList);
 		this.setState({
@@ -22,26 +18,60 @@ class TimeSlots extends Component {
 		});
 	};
 
+	renderCheckbox = ({ input, timeSlot }) => {
+		return (
+			<Checkbox.Group onChange={input.onChange}>
+				<Row key={timeSlot.key}>
+					<Col span={24}>
+						<Checkbox value={timeSlot.key}>
+							{timeSlot.label}
+						</Checkbox>
+					</Col>
+				</Row>
+			</Checkbox.Group>
+		);
+	};
+
+	renderTimeSlotCheckbox(timeSlot) {
+		return (
+			<Field
+				name={timeSlot.key}
+				timeSlot={timeSlot}
+				component={this.renderCheckbox}
+			/>
+		);
+	}
+
 	renderTimeSlotCheckboxes(timeSlots) {
 		return _.map(timeSlots, timeSlot => {
 			return (
 				<Menu.Item key={timeSlot.key}>
-					<Checkbox.Group onChange={this.onChange}>
-						<Row key={timeSlot.key}>
-							<Col span={24}>
-								<Checkbox
-									onChange={this.onChange}
-									value={timeSlot.key}
-								>
-									{timeSlot.label}
-								</Checkbox>
-							</Col>
-						</Row>
-					</Checkbox.Group>
+					{this.renderTimeSlotCheckbox(timeSlot)}
 				</Menu.Item>
 			);
 		});
 	}
+
+	// renderTimeSlotCheckboxes(timeSlots) {
+	// 	return _.map(timeSlots, timeSlot => {
+	// 		return (
+	// 			<Menu.Item key={timeSlot.key}>
+	// 				<Checkbox.Group onChange={this.onChange}>
+	// 					<Row key={timeSlot.key} align="middle">
+	// 						<Col span={24}>
+	// 							<Checkbox
+	// 								onChange={this.onChange}
+	// 								value={timeSlot.key}
+	// 							>
+	// 								{timeSlot.label}
+	// 							</Checkbox>
+	// 						</Col>
+	// 					</Row>
+	// 				</Checkbox.Group>
+	// 			</Menu.Item>
+	// 		);
+	// 	});
+	// }
 
 	handleMenuClick = e => {
 		console.log('e.key = ', e.key);
@@ -51,8 +81,8 @@ class TimeSlots extends Component {
 	};
 
 	render() {
-		console.log('this.props in TimeSlots', this.props);
-		const { day } = this.props;
+		//console.log('this.props in TimeSlots', this.props);
+		const { day, input } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
@@ -77,4 +107,9 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(TimeSlots);
+TimeSlots = connect(mapStateToProps, null)(TimeSlots);
+
+export default reduxForm({
+	//validate: validate,
+	form: 'timeSlots' // state.form.profile
+})(TimeSlots);
