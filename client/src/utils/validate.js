@@ -48,3 +48,8 @@ export const isValidInterests = interests => {
 
 	return false;
 };
+
+export const isValidTimeSlots = timeSlots => {
+	console.log('timeSlots = ', timeSlots);
+	return false;
+};

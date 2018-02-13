@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Row, Col, Menu, Checkbox } from 'antd';
+import { isValidTimeSlots } from '../../../utils/validate';
 
 class TimeSlots extends Component {
 	renderCheckbox = ({ input, timeSlot }) => {
 		return (
-			<Checkbox.Group onChange={input.onChange} value={input.value || []}>
+			<Checkbox.Group onChange={input.onChange}>
 				<Row key={timeSlot.key}>
 					<Col span={24}>
 						<Checkbox value={timeSlot.key}>
@@ -66,7 +67,17 @@ function mapStateToProps(state) {
 
 TimeSlots = connect(mapStateToProps, null)(TimeSlots);
 
+function validate(values) {
+	const errors = {};
+
+	if (!isValidTimeSlots(values)) {
+		errors['timeSlots'] = 'Need at least 2 time slots your usually free';
+	}
+
+	return errors;
+}
+
 export default reduxForm({
-	//validate: validate,
-	form: 'timeSlots'
+	validate: validate,
+	form: 'profile.timeSlots'
 })(TimeSlots);
