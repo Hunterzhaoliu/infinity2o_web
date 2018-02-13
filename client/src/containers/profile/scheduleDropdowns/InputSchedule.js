@@ -12,11 +12,7 @@ class InputSchedule extends Component {
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Field
-							name={day.value}
-							day={day}
-							component={DayDropdown}
-						/>
+						<DayDropdown day={day} />
 					</Col>
 				</Row>
 			</div>

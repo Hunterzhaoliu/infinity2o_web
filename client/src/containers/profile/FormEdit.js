@@ -23,11 +23,7 @@ class FormEdit extends Component {
 		return _.map(daysOfWeek, day => {
 			return (
 				<Col span={3} key={day.name}>
-					<Field
-						name="schedule"
-						day={day}
-						component={InputSchedule}
-					/>
+					<InputSchedule day={day} />
 				</Col>
 			);
 		});

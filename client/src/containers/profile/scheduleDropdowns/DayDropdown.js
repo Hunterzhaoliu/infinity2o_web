@@ -8,16 +8,12 @@ class DayDropdown extends Component {
 	render() {
 		//console.log('this.props in DayDropdown', this.props);
 		const { input, day } = this.props;
-		const menu = <Field name={day.value} day={day} component={TimeSlots} />;
+		const menu = <TimeSlots day={day} />;
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Dropdown
-							onVisibleChange={input.onChange}
-							value={input.value || []}
-							overlay={menu}
-						>
+						<Dropdown overlay={menu}>
 							<a className="ant-dropdown-link">
 								{day.name} <Icon type="down" />
 							</a>
