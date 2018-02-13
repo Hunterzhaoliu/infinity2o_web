@@ -4,23 +4,10 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Row, Col, Menu, Checkbox } from 'antd';
 
-const checkedTimeSlots = [];
-
 class TimeSlots extends Component {
-	state = {
-		checkedList: checkedTimeSlots
-	};
-
-	onChange = checkedList => {
-		console.log('checkedList = ', checkedList);
-		this.setState({
-			checkedList
-		});
-	};
-
 	renderCheckbox = ({ input, timeSlot }) => {
 		return (
-			<Checkbox.Group onChange={input.onChange}>
+			<Checkbox.Group onChange={input.onChange} value={input.value || []}>
 				<Row key={timeSlot.key}>
 					<Col span={24}>
 						<Checkbox value={timeSlot.key}>
@@ -32,7 +19,7 @@ class TimeSlots extends Component {
 		);
 	};
 
-	renderTimeSlotCheckbox(timeSlot) {
+	renderTimeSlot(timeSlot) {
 		return (
 			<Field
 				name={timeSlot.key}
@@ -42,43 +29,15 @@ class TimeSlots extends Component {
 		);
 	}
 
-	renderTimeSlotCheckboxes(timeSlots) {
+	renderTimeSlots(timeSlots) {
 		return _.map(timeSlots, timeSlot => {
 			return (
 				<Menu.Item key={timeSlot.key}>
-					{this.renderTimeSlotCheckbox(timeSlot)}
+					{this.renderTimeSlot(timeSlot)}
 				</Menu.Item>
 			);
 		});
 	}
-
-	// renderTimeSlotCheckboxes(timeSlots) {
-	// 	return _.map(timeSlots, timeSlot => {
-	// 		return (
-	// 			<Menu.Item key={timeSlot.key}>
-	// 				<Checkbox.Group onChange={this.onChange}>
-	// 					<Row key={timeSlot.key} align="middle">
-	// 						<Col span={24}>
-	// 							<Checkbox
-	// 								onChange={this.onChange}
-	// 								value={timeSlot.key}
-	// 							>
-	// 								{timeSlot.label}
-	// 							</Checkbox>
-	// 						</Col>
-	// 					</Row>
-	// 				</Checkbox.Group>
-	// 			</Menu.Item>
-	// 		);
-	// 	});
-	// }
-
-	handleMenuClick = e => {
-		console.log('e.key = ', e.key);
-		if (e.key === '3') {
-			this.setState({ visible: false });
-		}
-	};
 
 	render() {
 		//console.log('this.props in TimeSlots', this.props);
@@ -87,9 +46,7 @@ class TimeSlots extends Component {
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Menu onClick={this.handleMenuClick}>
-							{this.renderTimeSlotCheckboxes(day.timeSlots)}
-						</Menu>
+						<Menu>{this.renderTimeSlots(day.timeSlots)}</Menu>
 					</Col>
 				</Row>
 			</div>
@@ -111,5 +68,5 @@ TimeSlots = connect(mapStateToProps, null)(TimeSlots);
 
 export default reduxForm({
 	//validate: validate,
-	form: 'timeSlots' // state.form.profile
+	form: 'timeSlots'
 })(TimeSlots);
