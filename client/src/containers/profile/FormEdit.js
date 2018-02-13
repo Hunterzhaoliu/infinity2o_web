@@ -30,15 +30,6 @@ class FormEdit extends Component {
 		});
 	}
 
-	renderDayDropdownError() {
-		const dayDropdownError = this.props.subcomponentSyncErrors.dayDropdowns;
-		if (dayDropdownError) {
-			return <div>{dayDropdownError}</div>;
-		} else {
-			return <div>no error</div>;
-		}
-	}
-
 	render() {
 		console.log('this.props in FormEdit.js', this.props);
 		const {
@@ -61,6 +52,7 @@ class FormEdit extends Component {
 					<Row
 						type="flex"
 						justify="start"
+						align="middle"
 						style={{
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
@@ -78,6 +70,7 @@ class FormEdit extends Component {
 					<Row
 						type="flex"
 						justify="start"
+						align="middle"
 						style={{
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
@@ -95,6 +88,7 @@ class FormEdit extends Component {
 					<Row
 						type="flex"
 						justify="start"
+						align="middle"
 						style={{
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
@@ -112,6 +106,7 @@ class FormEdit extends Component {
 					<Row
 						type="flex"
 						justify="start"
+						align="middle"
 						style={{
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
@@ -128,6 +123,7 @@ class FormEdit extends Component {
 					<Row
 						type="flex"
 						justify="start"
+						align="middle"
 						style={{
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
@@ -142,13 +138,8 @@ class FormEdit extends Component {
 										}}
 									>
 										When are you free to video chat for your
-										class?
+										class? (Min. 2 times on different days)
 									</h3>
-								</Col>
-							</Row>
-							<Row type="flex" justify="start" align="middle">
-								<Col span={24}>
-									<div>{this.renderDayDropdownError()}</div>
 								</Col>
 							</Row>
 							<Row
@@ -199,7 +190,6 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		subcomponentSyncErrors: state.form.profile.syncErrors,
 		profileValues: state.form.profile.values
 	};
 }
