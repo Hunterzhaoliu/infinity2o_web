@@ -50,6 +50,8 @@ export const isValidInterests = interests => {
 };
 
 export const isValidTimeSlots = timeSlots => {
-	console.log('timeSlots = ', timeSlots);
+	if (timeSlots.length >= 2) {
+		return true;
+	}
 	return false;
 };

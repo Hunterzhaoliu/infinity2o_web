@@ -29,7 +29,7 @@ class FormEdit extends Component {
 		});
 	}
 	render() {
-		//console.log('this.props in FormEdit.js', this.props);
+		console.log('this.props in FormEdit.js', this.props);
 		const {
 			colorTheme,
 			handleSubmit,
@@ -122,7 +122,7 @@ class FormEdit extends Component {
 						}}
 					>
 						<Col span={24}>
-							<Row type="flex" justify="middle" align="middle">
+							<Row type="flex" justify="start" align="middle">
 								<Col span={24}>
 									<h3
 										style={{
@@ -135,7 +135,11 @@ class FormEdit extends Component {
 									</h3>
 								</Col>
 							</Row>
-
+							<Row type="flex" justify="start" align="middle">
+								<Col span={24}>
+									<div>Error for time slot</div>
+								</Col>
+							</Row>
 							<Row
 								type="flex"
 								justify="space-around"

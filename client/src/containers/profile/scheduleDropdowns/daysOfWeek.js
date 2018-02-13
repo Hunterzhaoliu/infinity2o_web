@@ -10,7 +10,7 @@ export default [
 			},
 			{
 				label: '8-10 AM',
-				key: 'M-8-1_AM'
+				key: 'M-8-10_AM'
 			},
 			{
 				label: '10-12 noon',

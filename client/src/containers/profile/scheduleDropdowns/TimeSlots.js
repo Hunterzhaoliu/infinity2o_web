@@ -6,7 +6,7 @@ import { Row, Col, Menu, Checkbox } from 'antd';
 import { isValidTimeSlots } from '../../../utils/validate';
 
 class TimeSlots extends Component {
-	renderCheckbox = ({ input, timeSlot }) => {
+	renderCheckbox = ({ input, timeSlot, meta }) => {
 		return (
 			<Checkbox.Group onChange={input.onChange}>
 				<Row key={timeSlot.key}>
@@ -41,8 +41,9 @@ class TimeSlots extends Component {
 	}
 
 	render() {
-		//console.log('this.props in TimeSlots', this.props);
-		const { day, input } = this.props;
+		console.log('this.props in TimeSlots', this.props);
+		console.log('this.props.meta = ', this.props.meta);
+		const { day } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
@@ -79,5 +80,5 @@ function validate(values) {
 
 export default reduxForm({
 	validate: validate,
-	form: 'profile.timeSlots'
+	form: 'profile.values.timeSlots'
 })(TimeSlots);

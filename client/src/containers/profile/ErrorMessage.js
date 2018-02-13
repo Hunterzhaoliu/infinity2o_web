@@ -38,8 +38,7 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme,
-		userInfo: state.auth.userInfo
+		colorTheme: state.colorTheme
 	};
 }
 
