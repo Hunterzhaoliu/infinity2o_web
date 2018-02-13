@@ -13,7 +13,8 @@ import daysOfWeek from './scheduleDropdowns/daysOfWeek';
 import {
 	isValidName,
 	isValidAge,
-	isValidInterests
+	isValidInterests,
+	isValidTimeSlots
 } from '../../utils/validate';
 import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
@@ -28,6 +29,16 @@ class FormEdit extends Component {
 			);
 		});
 	}
+
+	renderDayDropdownError() {
+		const dayDropdownError = this.props.subcomponentSyncErrors.dayDropdowns;
+		if (dayDropdownError) {
+			return <div>{dayDropdownError}</div>;
+		} else {
+			return <div>no error</div>;
+		}
+	}
+
 	render() {
 		console.log('this.props in FormEdit.js', this.props);
 		const {
@@ -137,7 +148,7 @@ class FormEdit extends Component {
 							</Row>
 							<Row type="flex" justify="start" align="middle">
 								<Col span={24}>
-									<div>Error for time slot</div>
+									<div>{this.renderDayDropdownError()}</div>
 								</Col>
 							</Row>
 							<Row
@@ -188,6 +199,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
+		subcomponentSyncErrors: state.form.profile.syncErrors,
 		profileValues: state.form.profile.values
 	};
 }
@@ -227,7 +239,12 @@ function validate(values) {
 	}
 
 	if (values.time_zone === 'country') {
-		errors['time_zone'] = 'Need a time zone';
+		errors['timeZone'] = 'Need a time zone instead of a country silly';
+	}
+
+	if (!isValidTimeSlots(values.dayDropdowns)) {
+		errors['dayDropdowns'] =
+			'Need at least 2 time slots from 2 different days';
 	}
 
 	return errors;
