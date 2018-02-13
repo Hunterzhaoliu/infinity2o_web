@@ -37,9 +37,8 @@ class FormEdit extends Component {
 			handleSubmit,
 			pristine,
 			submitting,
-			profileValues,
 			saveProfile,
-			history
+			profileValues
 		} = this.props;
 		return (
 			<Content
@@ -133,8 +132,7 @@ class FormEdit extends Component {
 								<Col span={24}>
 									<h3
 										style={{
-											color: this.props.colorTheme
-												.keyText5Color
+											color: colorTheme.keyText5Color
 										}}
 									>
 										When are you free to video chat for your
@@ -169,9 +167,7 @@ class FormEdit extends Component {
 								}}
 								type="submit"
 								disabled={pristine || submitting}
-								onClick={() =>
-									saveProfile(profileValues, history)
-								}
+								onClick={() => saveProfile(profileValues)}
 							>
 								Save
 							</Button>
@@ -205,8 +201,8 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		saveProfile: () => {
-			profileDispatchers.saveProfile();
+		saveProfile: values => {
+			profileDispatchers.saveProfile(values);
 		}
 	};
 }
