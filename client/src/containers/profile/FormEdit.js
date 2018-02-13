@@ -9,6 +9,7 @@ import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './interestsSelect/InputFieldSelect';
 import InputSchedule from './scheduleDropdowns/InputSchedule';
 import InputTimeZone from './timeZone/InputTimeZone';
+import InputResume from './InputResume';
 import daysOfWeek from './scheduleDropdowns/daysOfWeek';
 import {
 	isValidName,
@@ -23,11 +24,7 @@ class FormEdit extends Component {
 		return _.map(daysOfWeek, day => {
 			return (
 				<Col span={3} key={day.name}>
-					<Field
-						name="schedule"
-						day={day}
-						component={InputSchedule}
-					/>
+					<Field name="schedule" day={day} component={InputSchedule} />
 				</Col>
 			);
 		});
@@ -130,25 +127,33 @@ class FormEdit extends Component {
 								<Col span={24}>
 									<h3
 										style={{
-											color: this.props.colorTheme
-												.keyText5Color
+											color: this.props.colorTheme.keyText5Color
 										}}
 									>
-										When are you free to video chat for your
-										class?
+										When are you free to video chat for your class?
 									</h3>
 								</Col>
 							</Row>
 
-							<Row
-								type="flex"
-								justify="space-around"
-								align="middle"
-							>
-								<Col span={24}>
-									{this.renderDaysOfWeekDropdowns()}
-								</Col>
+							<Row type="flex" justify="space-around" align="middle">
+								<Col span={24}>{this.renderDaysOfWeekDropdowns()}</Col>
 							</Row>
+						</Col>
+					</Row>
+					<Row
+						type="flex"
+						justify="start"
+						style={{
+							padding: '3% 0% 0%' // top left&right bottom
+						}}
+					>
+						<Col span={24}>
+							<Field
+								name="resume"
+								label="Resume: "
+								width={280}
+								component={InputResume}
+							/>
 						</Col>
 					</Row>
 					<Row
@@ -167,9 +172,7 @@ class FormEdit extends Component {
 								}}
 								type="submit"
 								disabled={pristine || submitting}
-								onClick={() =>
-									saveProfile(profileValues, history)
-								}
+								onClick={() => saveProfile(profileValues, history)}
 							>
 								Save
 							</Button>
