@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
+import FormEdit from './FormEdit';
 const { Content } = Layout;
 
-class Dashboard extends Component {
+class Profile extends Component {
 	render() {
+		// console.log('this.props in Profile.js', this.props);
 		return (
 			<Content
 				style={{
-					textAlign: 'start',
-					padding: '100px 50px 81px', // top left&right bottom
-					minHeight: 82,
+					padding: '10% 9% 5%', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<h1 key="0" style={{ color: this.props.colorTheme.text1Color }}>
-					Dashboard
-				</h1>
+				<FormEdit />
 			</Content>
 		);
 	}
@@ -32,4 +30,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(Dashboard);
+export default connect(mapStateToProps, null)(Profile);

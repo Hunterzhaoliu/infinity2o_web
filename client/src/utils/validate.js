@@ -48,3 +48,10 @@ export const isValidInterests = interests => {
 
 	return false;
 };
+
+export const isValidTimeSlots = dayDropdowns => {
+	if (dayDropdowns !== undefined && dayDropdowns.length >= 2) {
+		return true;
+	}
+	return false;
+};

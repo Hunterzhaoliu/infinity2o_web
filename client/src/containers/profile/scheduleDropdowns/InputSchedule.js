@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
 import DayDropdown from './DayDropdown';
 import { Row, Col } from 'antd';
 
@@ -12,11 +11,7 @@ class InputSchedule extends Component {
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Field
-							name={day.value}
-							day={day}
-							component={DayDropdown}
-						/>
+						<DayDropdown day={day} />
 					</Col>
 				</Row>
 			</div>
@@ -34,8 +29,4 @@ function mapStateToProps(state) {
 	};
 }
 
-InputSchedule = connect(mapStateToProps, null)(InputSchedule);
-
-export default reduxForm({
-	form: 'profileDayDropdown' // state.form.profileDayDropdown
-})(InputSchedule);
+export default connect(mapStateToProps, null)(InputSchedule);

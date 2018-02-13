@@ -14,7 +14,8 @@ import daysOfWeek from './scheduleDropdowns/daysOfWeek';
 import {
 	isValidName,
 	isValidAge,
-	isValidInterests
+	isValidInterests,
+	isValidTimeSlots
 } from '../../utils/validate';
 import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
@@ -24,13 +25,18 @@ class FormEdit extends Component {
 		return _.map(daysOfWeek, day => {
 			return (
 				<Col span={3} key={day.name}>
+<<<<<<< HEAD
 					<Field name="schedule" day={day} component={InputSchedule} />
+=======
+					<InputSchedule day={day} />
+>>>>>>> profile-2
 				</Col>
 			);
 		});
 	}
+
 	render() {
-		//console.log('this.props in FormEdit.js', this.props);
+		console.log('this.props in FormEdit.js', this.props);
 		const {
 			colorTheme,
 			handleSubmit,
@@ -51,6 +57,7 @@ class FormEdit extends Component {
 					<Row
 						type="flex"
 						justify="start"
+						align="middle"
 						style={{
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
@@ -68,6 +75,7 @@ class FormEdit extends Component {
 					<Row
 						type="flex"
 						justify="start"
+						align="middle"
 						style={{
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
@@ -85,6 +93,7 @@ class FormEdit extends Component {
 					<Row
 						type="flex"
 						justify="start"
+						align="middle"
 						style={{
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
@@ -102,6 +111,7 @@ class FormEdit extends Component {
 					<Row
 						type="flex"
 						justify="start"
+						align="middle"
 						style={{
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
@@ -118,18 +128,20 @@ class FormEdit extends Component {
 					<Row
 						type="flex"
 						justify="start"
+						align="middle"
 						style={{
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
 					>
 						<Col span={24}>
-							<Row type="flex" justify="middle" align="middle">
+							<Row type="flex" justify="start" align="middle">
 								<Col span={24}>
 									<h3
 										style={{
 											color: this.props.colorTheme.keyText5Color
 										}}
 									>
+<<<<<<< HEAD
 										When are you free to video chat for your class?
 									</h3>
 								</Col>
@@ -137,6 +149,21 @@ class FormEdit extends Component {
 
 							<Row type="flex" justify="space-around" align="middle">
 								<Col span={24}>{this.renderDaysOfWeekDropdowns()}</Col>
+=======
+										When are you free to video chat for your
+										class? (Min. 2 times on different days)
+									</h3>
+								</Col>
+							</Row>
+							<Row
+								type="flex"
+								justify="space-around"
+								align="middle"
+							>
+								<Col span={24}>
+									{this.renderDaysOfWeekDropdowns()}
+								</Col>
+>>>>>>> profile-2
 							</Row>
 						</Col>
 					</Row>
@@ -230,7 +257,12 @@ function validate(values) {
 	}
 
 	if (values.time_zone === 'country') {
-		errors['time_zone'] = 'Need a time zone';
+		errors['timeZone'] = 'Need a time zone instead of a country silly';
+	}
+
+	if (!isValidTimeSlots(values.dayDropdowns)) {
+		errors['dayDropdowns'] =
+			'Need at least 2 time slots from 2 different days';
 	}
 
 	return errors;
