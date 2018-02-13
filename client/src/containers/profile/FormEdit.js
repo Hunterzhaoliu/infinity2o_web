@@ -238,5 +238,6 @@ function validate(values) {
 
 export default reduxForm({
 	validate: validate,
-	form: 'profile' // state.form.profile
+	form: 'profile', // state.form.profile
+	destroyOnUnmount: false
 })(FormEdit);
