@@ -7,8 +7,10 @@ import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
-import Matches from './matches/Matches';
 import Profile from './profile/Profile';
+import ProfileEdit from './profile/ProfileEdit';
+
+import Matches from './matches/Matches';
 
 import { Layout } from 'antd';
 const { Footer } = Layout;
@@ -29,6 +31,11 @@ class App extends Component {
 					<CustomHeader />
 					<Route exact={true} path="/" component={Landing} />
 					<Route exact={true} path="/profile" component={Profile} />
+					<Route
+						exact={true}
+						path="/profile/edit"
+						component={ProfileEdit}
+					/>
 					<Route exact={true} path="/matches" component={Matches} />
 					<Footer
 						style={{

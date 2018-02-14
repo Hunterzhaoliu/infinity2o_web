@@ -5,11 +5,10 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	userInfo: {
+	user: {
 		_id: null,
 		googleId: null,
 		__v: null,
-		credits: null,
 		linkedInId: null,
 		location: null,
 		profile: {
@@ -26,7 +25,7 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case FETCH_USER:
-			newState.userInfo = action.payload.data || false;
+			newState.user = action.payload.data || false;
 			return newState;
 		default:
 			return state;

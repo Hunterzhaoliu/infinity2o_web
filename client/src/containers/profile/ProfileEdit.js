@@ -19,7 +19,7 @@ import {
 import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 
-class FormEdit extends Component {
+class ProfileEdit extends Component {
 	renderDaysOfWeekDropdowns() {
 		return _.map(daysOfWeek, day => {
 			return (
@@ -31,7 +31,7 @@ class FormEdit extends Component {
 	}
 
 	render() {
-		//console.log('this.props in FormEdit.js', this.props);
+		//console.log('this.props in ProfileEdit.js', this.props);
 		const {
 			colorTheme,
 			handleSubmit,
@@ -43,7 +43,7 @@ class FormEdit extends Component {
 		return (
 			<Content
 				style={{
-					padding: '5% 0% 0%', // top left&right bottom
+					padding: '10% 7% 0%', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -58,6 +58,7 @@ class FormEdit extends Component {
 					>
 						<Col span={24}>
 							<Field
+								databaseValue="Q Liu"
 								name="name"
 								label="Name:"
 								width={280}
@@ -169,7 +170,7 @@ class FormEdit extends Component {
 								disabled={pristine || submitting}
 								onClick={() => saveProfile(profileValues)}
 							>
-								Save
+								<a href="/profile">Save</a>
 							</Button>
 						</Col>
 					</Row>
@@ -207,7 +208,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-FormEdit = connect(mapStateToProps, mapDispatchToProps)(FormEdit);
+ProfileEdit = connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);
 
 function validate(values) {
 	const errors = {};
@@ -240,4 +241,4 @@ export default reduxForm({
 	validate: validate,
 	form: 'profile', // state.form.profile
 	destroyOnUnmount: false
-})(FormEdit);
+})(ProfileEdit);

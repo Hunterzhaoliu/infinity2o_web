@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, SAVE_PROFILE_START, SAVE_PROFILE_DONE } from './types';
+import { SAVE_PROFILE_START, SAVE_PROFILE_DONE } from './types';
 
 export const saveProfile = values => async dispatch => {
 	dispatch({ type: SAVE_PROFILE_START });
@@ -46,6 +46,5 @@ export const saveProfile = values => async dispatch => {
 	values.availability = allTimeSlots;
 
 	const response = await axios.post('/api/profile', values);
-	dispatch({ type: FETCH_USER, payload: response });
-	dispatch({ type: SAVE_PROFILE_DONE });
+	dispatch({ type: SAVE_PROFILE_DONE, profile: response });
 };
