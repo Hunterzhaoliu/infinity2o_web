@@ -1,6 +1,5 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Row, Col, Menu, Checkbox } from 'antd';
 const CheckboxGroup = Checkbox.Group;
