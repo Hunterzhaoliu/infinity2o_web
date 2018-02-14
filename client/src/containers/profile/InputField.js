@@ -31,6 +31,7 @@ class InputField extends Component {
 					>
 						<Input
 							{...this.props.input}
+							defaultValue="Q"
 							style={{
 								width: this.props.width,
 								borderColor: this.props.colorTheme.text7Color,

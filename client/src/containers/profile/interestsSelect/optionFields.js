@@ -69,6 +69,10 @@ export default [
 		name: 'Machine Learning'
 	},
 	{
+		value: 'artificial_intelligence',
+		name: 'Artificial Intelligence'
+	},
+	{
 		value: 'statistics',
 		name: 'Statistics'
 	},

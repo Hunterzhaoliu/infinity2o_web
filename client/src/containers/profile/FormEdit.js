@@ -31,7 +31,7 @@ class FormEdit extends Component {
 	}
 
 	render() {
-		console.log('this.props in FormEdit.js', this.props);
+		//console.log('this.props in FormEdit.js', this.props);
 		const {
 			colorTheme,
 			handleSubmit,
