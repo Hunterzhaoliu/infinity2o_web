@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Upload, Icon, message, Row, Col } from 'antd';
+import { Upload, Button, Icon, message, Row, Col } from 'antd';
 import ErrorMessage from './ErrorMessage';
-const Dragger = Upload.Dragger;
 
 class InputResume extends Component {
 	render() {
@@ -31,19 +30,16 @@ class InputResume extends Component {
 						lg={{ span: 18, offset: 1 }}
 						xl={{ span: 18, offset: 1 }}
 					>
-						<Dragger
+						<Upload
+							href="/resume"
+							target="_blank"
 							{...this.props.input}
 							value={this.props.input.value || []}
-							name="files"
-							action="/upload.do"
 						>
-							<p className="ant-upload-drag-icon">
-								<Icon type="inbox" />
-							</p>
-							<p className="ant-upload-text">
-								Click or drag file to this area to upload
-							</p>
-						</Dragger>
+							<Button>
+								<Icon type="upload" /> Upload
+							</Button>
+						</Upload>
 					</Col>
 				</Row>
 				<ErrorMessage meta={this.props.meta} />

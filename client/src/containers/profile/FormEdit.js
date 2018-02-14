@@ -25,11 +25,7 @@ class FormEdit extends Component {
 		return _.map(daysOfWeek, day => {
 			return (
 				<Col span={3} key={day.name}>
-<<<<<<< HEAD
 					<Field name="schedule" day={day} component={InputSchedule} />
-=======
-					<InputSchedule day={day} />
->>>>>>> profile-2
 				</Col>
 			);
 		});
@@ -141,29 +137,13 @@ class FormEdit extends Component {
 											color: this.props.colorTheme.keyText5Color
 										}}
 									>
-<<<<<<< HEAD
-										When are you free to video chat for your class?
+										When are you free to video chat for your class? (Min. 2
+										times on different days)
 									</h3>
 								</Col>
 							</Row>
-
 							<Row type="flex" justify="space-around" align="middle">
 								<Col span={24}>{this.renderDaysOfWeekDropdowns()}</Col>
-=======
-										When are you free to video chat for your
-										class? (Min. 2 times on different days)
-									</h3>
-								</Col>
-							</Row>
-							<Row
-								type="flex"
-								justify="space-around"
-								align="middle"
-							>
-								<Col span={24}>
-									{this.renderDaysOfWeekDropdowns()}
-								</Col>
->>>>>>> profile-2
 							</Row>
 						</Col>
 					</Row>
@@ -261,8 +241,7 @@ function validate(values) {
 	}
 
 	if (!isValidTimeSlots(values.dayDropdowns)) {
-		errors['dayDropdowns'] =
-			'Need at least 2 time slots from 2 different days';
+		errors['dayDropdowns'] = 'Need at least 2 time slots from 2 different days';
 	}
 
 	return errors;
