@@ -1,4 +1,9 @@
-import { UPDATE_COLOR_THEME } from './types';
+import {
+	UPDATE_COLOR_THEME,
+	ON_PROFILE,
+	ON_TRAIN_AI,
+	ON_MATCHES
+} from './types';
 import {
 	colors1,
 	colors2,
@@ -19,6 +24,24 @@ import {
 	GREY_8,
 	GREY_9
 } from '../containers/styles/ColorConstants';
+
+export const onProfile = () => {
+	return function(dispatch) {
+		dispatch({ type: ON_PROFILE });
+	};
+};
+
+export const onTrainAI = () => {
+	return function(dispatch) {
+		dispatch({ type: ON_TRAIN_AI });
+	};
+};
+
+export const onMatches = () => {
+	return function(dispatch) {
+		dispatch({ type: ON_MATCHES });
+	};
+};
 
 export const generateRandomColorTheme = () => {
 	return function(dispatch) {
@@ -54,6 +77,7 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 	let newKeyText6Color = colors4[colorPallateIndex].key;
 	let newKeyText7Color = colors3[colorPallateIndex].key;
 	let newKeyText8Color = colors2[colorPallateIndex].key;
+
 	if (oldBackgroundColor === GREY_1) {
 		newBackgroundColor = GREY_9;
 		newKey = colors7[colorPallateIndex].key;

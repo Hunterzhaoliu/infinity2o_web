@@ -18,6 +18,7 @@ class App extends Component {
 		this.props.fetchUser();
 		// set random color theme on initial login
 		this.props.generateRandomColorTheme();
+		this.props.onPressProfile();
 	}
 
 	render() {
@@ -79,6 +80,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		generateRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();
+		},
+		onPressProfile: () => {
+			colorThemeDispatchers.onProfile();
 		}
 	};
 }

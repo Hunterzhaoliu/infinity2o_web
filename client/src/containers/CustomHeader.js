@@ -4,12 +4,18 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../actions/colorTheme';
 
-import { Layout, Row, Col, Button, Icon } from 'antd';
+import { Layout, Row, Col, Button } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
 	renderHeaderButtons() {
-		const { colorTheme, onPressRandomColorTheme } = this.props;
+		const {
+			colorTheme,
+			onPressRandomColorTheme,
+			onPressProfile,
+			onPressTrainAI,
+			onPressMatches
+		} = this.props;
 		const loginState = this.props.auth.userInfo;
 		switch (loginState) {
 			case null:
@@ -53,10 +59,13 @@ class CustomHeader extends Component {
 							<Col md={{ span: 3, offset: 1 }} key="1">
 								<Button
 									style={{
-										borderColor: colorTheme.key,
-										background: colorTheme.key,
-										color: colorTheme.text1Color
+										borderColor:
+											colorTheme.profileButtonColor,
+										background:
+											colorTheme.profileButtonColor,
+										color: colorTheme.profileButtonTextColor
 									}}
+									onClick={onPressProfile}
 								>
 									<Link to="/profile">
 										<div>Profile</div>
@@ -66,10 +75,13 @@ class CustomHeader extends Component {
 							<Col md={{ span: 3, offset: 1 }} key="2">
 								<Button
 									style={{
-										borderColor: colorTheme.text7Color,
-										background: colorTheme.text7Color,
-										color: colorTheme.text4Color
+										borderColor:
+											colorTheme.trainAIButtonColor,
+										background:
+											colorTheme.trainAIButtonColor,
+										color: colorTheme.trainAIButtonTextColor
 									}}
+									onClick={onPressTrainAI}
 								>
 									<Link to="/train_ai">
 										<div>Train AI</div>
@@ -79,10 +91,13 @@ class CustomHeader extends Component {
 							<Col md={{ span: 3, offset: 1 }} key="3">
 								<Button
 									style={{
-										borderColor: colorTheme.text7Color,
-										background: colorTheme.text7Color,
-										color: colorTheme.text4Color
+										borderColor:
+											colorTheme.matchesButtonColor,
+										background:
+											colorTheme.matchesButtonColor,
+										color: colorTheme.matchesButtonTextColor
 									}}
+									onClick={onPressMatches}
 								>
 									<Link to="/matches">
 										<div>Matches</div>
@@ -146,6 +161,15 @@ function mapDispatchToProps(dispatch) {
 	return {
 		onPressRandomColorTheme: () => {
 			customHeaderDispatchers.generateRandomColorTheme();
+		},
+		onPressProfile: () => {
+			customHeaderDispatchers.onProfile();
+		},
+		onPressTrainAI: () => {
+			customHeaderDispatchers.onTrainAI();
+		},
+		onPressMatches: () => {
+			customHeaderDispatchers.onMatches();
 		}
 	};
 }
