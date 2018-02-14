@@ -26,7 +26,6 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case FETCH_USER:
-			console.log('action.payload.data = ', action.payload.data);
 			newState.userInfo = action.payload.data || false;
 			return newState;
 		default:

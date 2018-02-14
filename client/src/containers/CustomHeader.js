@@ -9,6 +9,7 @@ const { Header } = Layout;
 
 class CustomHeader extends Component {
 	renderHeaderButtons() {
+		const { colorTheme, onPressRandomColorTheme } = this.props;
 		const loginState = this.props.auth.userInfo;
 		switch (loginState) {
 			case null:
@@ -21,13 +22,11 @@ class CustomHeader extends Component {
 							<Col key="0">
 								<Button
 									style={{
-										borderColor: this.props.colorTheme
-											.text7Color,
-										background: this.props.colorTheme
-											.text7Color,
-										color: this.props.colorTheme.text4Color
+										borderColor: colorTheme.text7Color,
+										background: colorTheme.text7Color,
+										color: colorTheme.text4Color
 									}}
-									onClick={this.props.onPressRandomColorTheme}
+									onClick={onPressRandomColorTheme}
 								>
 									Change Theme
 								</Button>
@@ -39,90 +38,66 @@ class CustomHeader extends Component {
 				return (
 					<div>
 						<Row type="flex" justify="space-between">
-							<Col
-								sm={{ span: 7 }}
-								md={{ span: 5 }}
-								lg={{ span: 4 }}
-								xl={{ span: 3 }}
-								key="0"
-							>
+							<Col md={{ span: 5 }} key="0">
 								<Button
 									style={{
-										borderColor: this.props.colorTheme
-											.text7Color,
-										background: this.props.colorTheme
-											.text7Color,
-										color: this.props.colorTheme.text4Color
+										borderColor: colorTheme.text7Color,
+										background: colorTheme.text7Color,
+										color: colorTheme.text4Color
 									}}
-									onClick={this.props.onPressRandomColorTheme}
+									onClick={onPressRandomColorTheme}
 								>
 									Change Theme
 								</Button>
 							</Col>
-							<Col
-								sm={{ span: 5, offset: 0 }}
-								md={{ span: 3, offset: 0 }}
-								lg={{ span: 3, offset: 0 }}
-								xl={{ span: 2, offset: 0 }}
-								key="1"
-							>
+							<Col md={{ span: 3, offset: 1 }} key="1">
 								<Button
 									style={{
-										borderColor: this.props.colorTheme.key,
-										background: this.props.colorTheme.key,
-										color: this.props.colorTheme.text1Color
+										borderColor: colorTheme.key,
+										background: colorTheme.key,
+										color: colorTheme.text1Color
 									}}
 								>
 									<Link to="/profile">
-										<div>
-											Profile <Icon type="profile" />
-										</div>
+										<div>Profile</div>
 									</Link>
 								</Button>
 							</Col>
-							<Col
-								sm={{ span: 5, offset: 0 }}
-								md={{ span: 4, offset: 1 }}
-								lg={{ span: 3, offset: 0 }}
-								xl={{ span: 3, offset: 0 }}
-								key="2"
-							>
+							<Col md={{ span: 3, offset: 1 }} key="2">
 								<Button
 									style={{
-										borderColor: this.props.colorTheme
-											.keyCompliment1,
-										background: this.props.colorTheme
-											.keyCompliment1,
-										color: this.props.colorTheme.text1Color
+										borderColor: colorTheme.text7Color,
+										background: colorTheme.text7Color,
+										color: colorTheme.text4Color
+									}}
+								>
+									<Link to="/train_ai">
+										<div>Train AI</div>
+									</Link>
+								</Button>
+							</Col>
+							<Col md={{ span: 3, offset: 1 }} key="3">
+								<Button
+									style={{
+										borderColor: colorTheme.text7Color,
+										background: colorTheme.text7Color,
+										color: colorTheme.text4Color
 									}}
 								>
 									<Link to="/matches">
-										<div>
-											Matches{' '}
-											<Icon type="usergroup-add" />
-										</div>
+										<div>Matches</div>
 									</Link>
 								</Button>
 							</Col>
-							<Col
-								sm={{ span: 5, offset: 2 }}
-								md={{ span: 3, offset: 7 }}
-								lg={{ span: 3, offset: 11 }}
-								xl={{ span: 2, offset: 14 }}
-								key="4"
-							>
+							<Col md={{ span: 3, offset: 4 }} key="4">
 								<Button
 									style={{
-										borderColor: this.props.colorTheme
-											.thirdColor,
-										background: this.props.colorTheme
-											.thirdColor,
-										color: this.props.colorTheme.text4Color
+										borderColor: colorTheme.text7Color,
+										background: colorTheme.text7Color,
+										color: colorTheme.text4Color
 									}}
 								>
-									<a href="/api/logout">
-										Logout <Icon type="logout" />
-									</a>
+									<a href="/api/logout">Logout</a>
 								</Button>
 							</Col>
 						</Row>
@@ -132,10 +107,11 @@ class CustomHeader extends Component {
 	}
 
 	render() {
+		const { colorTheme } = this.props;
 		return (
 			<Header
 				style={{
-					background: this.props.colorTheme.backgroundColor,
+					background: colorTheme.backgroundColor,
 					position: 'fixed',
 					width: '100%'
 				}}
