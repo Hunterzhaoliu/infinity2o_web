@@ -17,7 +17,7 @@ const { Footer } = Layout;
 
 class App extends Component {
 	componentDidMount() {
-		this.props.fetchUser();
+		this.props.fetchUserAuth();
 		// set random color theme on initial login
 		this.props.generateRandomColorTheme();
 		this.props.onPressProfile();
@@ -82,8 +82,8 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		fetchUser: () => {
-			indexDispatchers.fetchUser();
+		fetchUserAuth: () => {
+			indexDispatchers.fetchUserAuth();
 		},
 		generateRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();

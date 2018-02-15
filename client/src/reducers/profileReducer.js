@@ -16,10 +16,10 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case SAVE_PROFILE_START:
-			newState.userInfo = action.payload.data || false;
+			newState = action.response.data || false;
 			return newState;
 		case SAVE_PROFILE_DONE:
-			newState.userInfo = action.payload.data || false;
+			newState = action.response.data || false;
 			return newState;
 		default:
 			return state;

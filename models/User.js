@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose; // = const Schema = mongoose.Schema;
 //schema describes every property of a user
 const userSchema = new Schema({
-	googleId: String,
-	linkedInId: String,
-	location: String,
+	auth: {
+		googleId: String,
+		linkedInId: String,
+		location: String
+	},
 	profile: {
 		name: String,
 		age: { type: Number },

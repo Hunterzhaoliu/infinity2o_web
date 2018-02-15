@@ -1,12 +1,7 @@
 import axios from 'axios';
-import { FETCH_USER } from './types';
+import { FETCH_USER_AUTH } from './types';
 
-export const fetchUser = () => async dispatch => {
+export const fetchUserAuth = () => async dispatch => {
 	const response = await axios.get('/api/current_user');
-	dispatch({ type: FETCH_USER, payload: response });
+	dispatch({ type: FETCH_USER_AUTH, response: response });
 };
-
-// export const handleToken = token => async dispatch => {
-// 	const response = await axios.post('/api/stripe', token);
-// 	dispatch({ type: FETCH_USER, payload: response.data });
-// };
