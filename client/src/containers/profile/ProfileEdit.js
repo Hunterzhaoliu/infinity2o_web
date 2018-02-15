@@ -31,14 +31,15 @@ class ProfileEdit extends Component {
 	}
 
 	render() {
-		//console.log('this.props in ProfileEdit.js', this.props);
+		console.log('this.props in ProfileEdit.js', this.props);
 		const {
 			colorTheme,
 			handleSubmit,
 			pristine,
 			submitting,
 			saveProfile,
-			profileValues
+			profileValues,
+			profile
 		} = this.props;
 		return (
 			<Content
@@ -58,7 +59,7 @@ class ProfileEdit extends Component {
 					>
 						<Col span={24}>
 							<Field
-								databaseValue="Q Liu"
+								databaseValue="TODO"
 								name="name"
 								label="Name:"
 								width={280}
@@ -233,6 +234,7 @@ function validate(values) {
 		errors['dayDropdowns'] =
 			'Need at least 2 time slots from 2 different days';
 	}
+	// TODO: add validation to check first time user edited everything
 
 	return errors;
 }

@@ -46,5 +46,7 @@ export const saveProfile = values => async dispatch => {
 	values.availability = allTimeSlots;
 
 	const response = await axios.post('/api/profile', values);
+	console.log('SAVE_PROFILE_DONE response = ', response);
+	debugger;
 	dispatch({ type: SAVE_PROFILE_DONE, profile: response });
 };

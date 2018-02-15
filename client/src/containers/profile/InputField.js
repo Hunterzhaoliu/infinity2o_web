@@ -5,7 +5,7 @@ import ErrorMessage from './ErrorMessage';
 
 class InputField extends Component {
 	render() {
-		//console.log('this.props in InputField', this.props);
+		console.log('this.props in InputField', this.props);
 		const {
 			colorTheme,
 			label,
@@ -29,7 +29,7 @@ class InputField extends Component {
 					<Col md={{ span: 18, offset: 1 }}>
 						<Input
 							defaultValue={databaseValue}
-							{...input}
+							onChange={input.onChange}
 							style={{
 								width: width,
 								borderColor: colorTheme.text7Color,
