@@ -5,7 +5,6 @@ export const saveProfile = values => async dispatch => {
 	dispatch({ type: SAVE_PROFILE_START });
 	const { dayDropdowns } = values;
 
-	console.log('in profile.js values = ', values);
 	let allTimeSlots = [];
 	if (dayDropdowns.monday !== undefined) {
 		dayDropdowns.monday.forEach(function(timeSlot) {
@@ -44,6 +43,7 @@ export const saveProfile = values => async dispatch => {
 	}
 
 	values.availability = allTimeSlots;
+	console.log('profile.js values = ', values);
 	const response = await axios.post('/api/profile', values);
 	dispatch({ type: SAVE_PROFILE_DONE, response: response });
 };

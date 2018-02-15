@@ -30,13 +30,25 @@ class ProfileEdit extends Component {
 		});
 	}
 
+	isSaveDisabled(profileValues) {
+		if (profileValues === undefined) {
+			return false;
+		} else {
+			const numProfileFieldsFilled = Object.keys(profileValues).length;
+			const allFieldsFilled = numProfileFieldsFilled === 5;
+			if (!allFieldsFilled) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
 	render() {
-		console.log('this.props in ProfileEdit.js', this.props);
+		//console.log('this.props in ProfileEdit.js', this.props);
 		const {
 			colorTheme,
 			handleSubmit,
-			pristine,
-			submitting,
 			saveProfile,
 			profileValues,
 			profile
@@ -168,10 +180,10 @@ class ProfileEdit extends Component {
 									color: colorTheme.text1Color
 								}}
 								type="submit"
-								disabled={pristine || submitting}
+								disabled={this.isSaveDisabled(profileValues)}
 								onClick={() => saveProfile(profileValues)}
 							>
-								<a href="/profile">Save</a>
+								Save
 							</Button>
 						</Col>
 					</Row>
@@ -234,7 +246,6 @@ function validate(values) {
 		errors['dayDropdowns'] =
 			'Need at least 2 time slots from 2 different days';
 	}
-	// TODO: add validation to check first time user edited everything
 
 	return errors;
 }

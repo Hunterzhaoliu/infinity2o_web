@@ -8,6 +8,7 @@ class InputTimeZone extends Component {
 	render() {
 		//console.log('this.props in InputTimeZone', this.props);
 		// <input onBlur={input.onBlur} onChange={input.onChange} />
+		const { colorTheme, label, width, input, meta } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -19,10 +20,10 @@ class InputTimeZone extends Component {
 					>
 						<h3
 							style={{
-								color: this.props.colorTheme.keyText5Color
+								color: colorTheme.keyText5Color
 							}}
 						>
-							{this.props.label}
+							{label}
 						</h3>
 					</Col>
 					<Col
@@ -32,16 +33,17 @@ class InputTimeZone extends Component {
 						xl={{ span: 18, offset: 1 }}
 					>
 						<TreeSelect
-							{...this.props.input}
-							value={this.props.input.value || []} // requires value to be an array
-							style={{ width: this.props.width }}
+							onChange={input.onChange}
+							onFocus={input.onFocus}
+							value={input.value || []} // requires value to be an array
+							style={{ width }}
 							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
 							treeData={timeZones}
 							placeholder="Time Zone?"
 						/>
 					</Col>
 				</Row>
-				<ErrorMessage meta={this.props.meta} />
+				<ErrorMessage meta={meta} />
 			</div>
 		);
 	}
