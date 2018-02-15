@@ -16,7 +16,7 @@ class CustomHeader extends Component {
 			onPressTrainAI,
 			onPressMatches
 		} = this.props;
-		const loginState = this.props.auth.userInfo;
+		const loginState = this.props.auth.user;
 		switch (loginState) {
 			case null:
 				// show nothing when still signing in

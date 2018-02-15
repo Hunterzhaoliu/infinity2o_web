@@ -6,6 +6,7 @@ const { Content } = Layout;
 
 class Landing extends Component {
 	renderMarketingInfo() {
+		const { colorTheme, auth } = this.props;
 		const why_part_0 = `Online classes from `;
 		const why_part_1 = `udacity.com`;
 		const why_part_2 = `edx.org`;
@@ -16,7 +17,7 @@ class Landing extends Component {
 
 		const how = `Join our community and train an AI to find the best partners for you.`;
 		const why = `Online classes from the best teachers are amazing but too lonely.`;
-		switch (this.props.auth.userInfo) {
+		switch (auth.user) {
 			case null:
 				// show nothing when still signing in
 				return;
@@ -40,7 +41,7 @@ class Landing extends Component {
 								<h1
 									key="0"
 									style={{
-										color: this.props.colorTheme.text2Color
+										color: colorTheme.text2Color
 									}}
 								>
 									{why_part_0}
@@ -55,7 +56,7 @@ class Landing extends Component {
 								<h1
 									key="0"
 									style={{
-										color: this.props.colorTheme.text2Color
+										color: colorTheme.text2Color
 									}}
 								>
 									<Typist
@@ -99,7 +100,7 @@ class Landing extends Component {
 							<h1
 								key="0"
 								style={{
-									color: this.props.colorTheme.text2Color
+									color: colorTheme.text2Color
 								}}
 							>
 								{why_part_6}
@@ -116,7 +117,7 @@ class Landing extends Component {
 								<h2
 									key="1"
 									style={{
-										color: this.props.colorTheme.text4Color,
+										color: colorTheme.text4Color,
 										padding: '0% 0% 3%'
 									}}
 								>
@@ -130,16 +131,13 @@ class Landing extends Component {
 				// logged in
 				return (
 					<div>
-						<h1
-							key="0"
-							style={{ color: this.props.colorTheme.text2Color }}
-						>
+						<h1 key="0" style={{ color: colorTheme.text2Color }}>
 							{why}
 						</h1>
 						<h2
 							key="1"
 							style={{
-								color: this.props.colorTheme.text5Color
+								color: colorTheme.text5Color
 							}}
 						>
 							{how}
@@ -150,7 +148,9 @@ class Landing extends Component {
 	}
 
 	renderLogin() {
-		switch (this.props.auth.userInfo) {
+		const { colorTheme, auth } = this.props;
+
+		switch (auth.user) {
 			case null:
 				// show nothing when still signing in
 				return;
@@ -173,9 +173,9 @@ class Landing extends Component {
 								<Button
 									key="-1"
 									style={{
-										borderColor: this.props.colorTheme.key,
-										background: this.props.colorTheme.key,
-										color: this.props.colorTheme.text1Color
+										borderColor: colorTheme.key,
+										background: colorTheme.key,
+										color: colorTheme.text1Color
 									}}
 								>
 									<a href="/auth/google">
@@ -192,11 +192,9 @@ class Landing extends Component {
 								<Button
 									key="0"
 									style={{
-										borderColor: this.props.colorTheme
-											.keyCompliment1,
-										background: this.props.colorTheme
-											.keyCompliment1,
-										color: this.props.colorTheme.text1Color
+										borderColor: colorTheme.keyCompliment1,
+										background: colorTheme.keyCompliment1,
+										color: colorTheme.text1Color
 									}}
 								>
 									<a href="/auth/linkedIn">
@@ -220,14 +218,14 @@ class Landing extends Component {
 
 	render() {
 		//console.log('this.props inside Landing', this.props);
-
+		const { colorTheme } = this.props;
 		return (
 			<Content
 				style={{
 					textAlign: 'center',
 					padding: '100px 50px 81px', // top left&right bottom
 					minHeight: 82,
-					background: this.props.colorTheme.backgroundColor
+					background: colorTheme.backgroundColor
 				}}
 			>
 				{this.renderMarketingInfo()}

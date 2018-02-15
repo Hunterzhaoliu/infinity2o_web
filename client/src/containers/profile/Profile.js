@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Row, Form, Col, Button } from 'antd';
-import ProfileEdit from './ProfileEdit';
+import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
 class Profile extends Component {
