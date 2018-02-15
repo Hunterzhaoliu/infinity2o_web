@@ -1,4 +1,9 @@
-import { UPDATE_COLOR_THEME } from '../actions/types';
+import {
+	UPDATE_COLOR_THEME,
+	ON_PROFILE,
+	ON_TRAIN_AI,
+	ON_MATCHES
+} from '../actions/types';
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
@@ -25,8 +30,41 @@ let initialState = {
 	keyText5Color: null,
 	keyText6Color: null,
 	keyText7Color: null,
-	keyText8Color: null
+	keyText8Color: null,
+	activeSection: null,
+	profileButtonColor: null,
+	profileButtonTextColor: null,
+	trainAIButtonColor: null,
+	trainAIButtonTextColor: null,
+	matchesButtonColor: null,
+	matchesButtonTextColor: null
 };
+
+function _getStateForSection(newState) {
+	if (newState.activeSection === 'train_ai') {
+		newState.profileButtonColor = newState.text7Color;
+		newState.profileButtonTextColor = newState.text4Color;
+		newState.trainAIButtonColor = newState.key;
+		newState.trainAIButtonTextColor = newState.keyText1Color;
+		newState.matchesButtonColor = newState.text7Color;
+		newState.matchesButtonTextColor = newState.text4Color;
+	} else if (newState.activeSection === 'matches') {
+		newState.profileButtonColor = newState.text7Color;
+		newState.profileButtonTextColor = newState.text4Color;
+		newState.trainAIButtonColor = newState.text7Color;
+		newState.trainAIButtonTextColor = newState.text4Color;
+		newState.matchesButtonColor = newState.key;
+		newState.matchesButtonTextColor = newState.keyText1Color;
+	} else if (newState.activeSection === 'profile') {
+		newState.profileButtonColor = newState.key;
+		newState.profileButtonTextColor = newState.keyText1Color;
+		newState.trainAIButtonColor = newState.text7Color;
+		newState.trainAIButtonTextColor = newState.text4Color;
+		newState.matchesButtonColor = newState.text7Color;
+		newState.matchesButtonTextColor = newState.text4Color;
+	}
+	return newState;
+}
 
 export default function(state = initialState, action) {
 	let newState = cloneObject(state);
@@ -58,6 +96,19 @@ export default function(state = initialState, action) {
 			newState.keyText6Color = action.keyText6Color;
 			newState.keyText7Color = action.keyText7Color;
 			newState.keyText8Color = action.keyText8Color;
+			newState = _getStateForSection(newState);
+			return newState;
+		case ON_PROFILE:
+			newState.activeSection = 'profile';
+			newState = _getStateForSection(newState);
+			return newState;
+		case ON_TRAIN_AI:
+			newState.activeSection = 'train_ai';
+			newState = _getStateForSection(newState);
+			return newState;
+		case ON_MATCHES:
+			newState.activeSection = 'matches';
+			newState = _getStateForSection(newState);
 			return newState;
 		default:
 			return state || newState;

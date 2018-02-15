@@ -12,7 +12,7 @@ module.exports = app => {
 		'/auth/google/callback',
 		passport.authenticate('google'),
 		(request, response) => {
-			// after a user is logged in show them their dashboard
+			// after a user is logged in show them...
 			response.redirect('/profile');
 		}
 	);
@@ -22,7 +22,7 @@ module.exports = app => {
 		'/auth/linkedIn/callback',
 		passport.authenticate('linkedin'),
 		(request, response) => {
-			// after a user is logged in show them their dashboard
+			// after a user is logged in show them...
 			response.redirect('/profile');
 		}
 	);

@@ -6,41 +6,40 @@ import ErrorMessage from './ErrorMessage';
 class InputField extends Component {
 	render() {
 		//console.log('this.props in InputField', this.props);
+		const {
+			colorTheme,
+			label,
+			input,
+			width,
+			meta,
+			databaseValue
+		} = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col
-						sm={{ span: 5 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
-					>
+					<Col md={{ span: 5 }}>
 						<h3
 							style={{
-								color: this.props.colorTheme.keyText5Color
+								color: colorTheme.keyText5Color
 							}}
 						>
-							{this.props.label}
+							{label}
 						</h3>
 					</Col>
-					<Col
-						sm={{ span: 18, offset: 1 }}
-						md={{ span: 18, offset: 1 }}
-						lg={{ span: 18, offset: 1 }}
-						xl={{ span: 18, offset: 1 }}
-					>
+					<Col md={{ span: 18, offset: 1 }}>
 						<Input
-							{...this.props.input}
+							defaultValue={databaseValue}
+							{...input}
 							style={{
-								width: this.props.width,
-								borderColor: this.props.colorTheme.text7Color,
-								background: this.props.colorTheme.text7Color,
-								color: this.props.colorTheme.text3Color
+								width: width,
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text3Color
 							}}
 						/>
 					</Col>
 				</Row>
-				<ErrorMessage meta={this.props.meta} />
+				<ErrorMessage meta={meta} />
 			</div>
 		);
 	}
