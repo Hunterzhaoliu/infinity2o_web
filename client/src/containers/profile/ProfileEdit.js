@@ -50,8 +50,7 @@ class ProfileEdit extends Component {
 			colorTheme,
 			handleSubmit,
 			saveProfile,
-			profileValues,
-			profile
+			profileValues
 		} = this.props;
 		return (
 			<Content
@@ -150,7 +149,7 @@ class ProfileEdit extends Component {
 										}}
 									>
 										When are you free to video chat for your
-										class? (Min. 2 times on different days)
+										class?
 									</h3>
 								</Col>
 							</Row>
@@ -238,8 +237,12 @@ function validate(values) {
 		errors['interests'] = '1 to 5 interests pretty please';
 	}
 
-	if (values.time_zone === 'country') {
-		errors['timeZone'] = 'Need a time zone instead of a country silly';
+	if (
+		values.time_zone === 'europe' ||
+		values.time_zone === 'canada' ||
+		values.time_zone === 'united_states'
+	) {
+		errors['time_zone'] = 'Need a time zone instead of a country silly';
 	}
 
 	if (!isValidTimeSlots(values.dayDropdowns)) {

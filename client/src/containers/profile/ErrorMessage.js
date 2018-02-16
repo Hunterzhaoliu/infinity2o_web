@@ -4,6 +4,7 @@ import { Row, Col } from 'antd';
 
 class ErrorMessage extends Component {
 	render() {
+		//console.log('ErrorMessage this.props = ', this.props);
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col md={{ span: 6 }} />

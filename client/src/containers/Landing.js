@@ -217,7 +217,7 @@ class Landing extends Component {
 	}
 
 	render() {
-		console.log('this.props inside Landing', this.props);
+		//console.log('this.props inside Landing', this.props);
 		const { colorTheme } = this.props;
 		return (
 			<Content

@@ -14,7 +14,7 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case FETCH_USER_AUTH:
-			newState = action.response.data.auth || false;
+			newState = action.auth || false;
 			return newState;
 		default:
 			return state;

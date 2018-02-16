@@ -1,7 +1,7 @@
 export default [
 	{
 		label: 'United States',
-		value: 'country',
+		value: 'united_states',
 		key: 'United States',
 		children: [
 			{
@@ -39,7 +39,7 @@ export default [
 	},
 	{
 		label: 'Canada',
-		value: 'country',
+		value: 'canada',
 		key: 'Canada',
 		children: [
 			{
@@ -82,7 +82,7 @@ export default [
 	},
 	{
 		label: 'Europe',
-		value: 'country',
+		value: 'europe',
 		key: 'Europe',
 		children: [
 			{ label: 'BST', value: 'BST', key: 'BST', UTC_offset: 1 },

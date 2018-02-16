@@ -6,7 +6,7 @@ import ErrorMessage from '../ErrorMessage';
 
 class InputTimeZone extends Component {
 	render() {
-		//console.log('this.props in InputTimeZone', this.props);
+		//console.log('InputTimeZone this.props = ', this.props);
 		// <input onBlur={input.onBlur} onChange={input.onChange} />
 		const { colorTheme, label, width, input, meta } = this.props;
 		return (
@@ -33,8 +33,7 @@ class InputTimeZone extends Component {
 						xl={{ span: 18, offset: 1 }}
 					>
 						<TreeSelect
-							onChange={input.onChange}
-							onFocus={input.onFocus}
+							{...input}
 							value={input.value || []} // requires value to be an array
 							style={{ width }}
 							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
