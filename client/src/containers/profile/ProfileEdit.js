@@ -18,11 +18,11 @@ import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 
 class ProfileEdit extends Component {
-	isSaveDisabled(profileValues) {
-		if (profileValues === undefined) {
+	isSaveDisabled(newProfile) {
+		if (newProfile === undefined) {
 			return true;
 		} else {
-			const numProfileFieldsFilled = Object.keys(profileValues).length;
+			const numProfileFieldsFilled = Object.keys(newProfile).length;
 			const allFieldsFilled = numProfileFieldsFilled === 5;
 			if (!allFieldsFilled) {
 				return true;
@@ -33,12 +33,13 @@ class ProfileEdit extends Component {
 	}
 
 	render() {
-		//console.log('this.props in ProfileEdit.js', this.props);
+		console.log('this.props in ProfileEdit.js', this.props);
 		const {
 			colorTheme,
+			currentProfile,
 			handleSubmit,
 			saveProfile,
-			profileValues
+			newProfile
 		} = this.props;
 		return (
 			<Content
@@ -58,7 +59,7 @@ class ProfileEdit extends Component {
 					>
 						<Col span={24}>
 							<Field
-								databaseValue="TODO"
+								databaseValue={currentProfile.name}
 								name="name"
 								label="Name:"
 								width={280}
@@ -150,8 +151,8 @@ class ProfileEdit extends Component {
 									color: colorTheme.text1Color
 								}}
 								type="submit"
-								disabled={this.isSaveDisabled(profileValues)}
-								onClick={() => saveProfile(profileValues)}
+								disabled={this.isSaveDisabled(newProfile)}
+								onClick={() => saveProfile(newProfile)}
 							>
 								Save
 							</Button>
@@ -170,7 +171,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		profileValues: state.form.profile.values
+		newProfile: state.form.profile.values,
+		currentProfile: state.profile
 	};
 }
 

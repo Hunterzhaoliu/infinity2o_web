@@ -17,7 +17,7 @@ class InputSchedule extends Component {
 	}
 
 	render() {
-		console.log('this.props in InputSchedule', this.props);
+		//console.log('this.props in InputSchedule', this.props);
 		const { colorTheme, meta } = this.props;
 		return (
 			<div>

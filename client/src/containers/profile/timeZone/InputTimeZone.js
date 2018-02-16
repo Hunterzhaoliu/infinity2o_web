@@ -6,7 +6,7 @@ import ErrorMessage from '../ErrorMessage';
 
 class InputTimeZone extends Component {
 	render() {
-		console.log('InputTimeZone this.props = ', this.props);
+		//console.log('InputTimeZone this.props = ', this.props);
 		// <input onBlur={input.onBlur} onChange={input.onChange} />
 		const { colorTheme, label, width, input, meta } = this.props;
 		return (
