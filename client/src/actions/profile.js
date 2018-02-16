@@ -6,7 +6,21 @@ export const saveProfile = values => async dispatch => {
 	const { dayDropdowns } = values;
 
 	console.log('in profile.js values = ', values);
+	console.log('dayDropdowns, not so confusing eh? = ', dayDropdowns);
 	let allTimeSlots = [];
+	//day.toString().substring(0, 3) + ' ' +
+	Object.keys(dayDropdowns).forEach(function(day) {
+		console.log('dayDropdowns.day = ', day);
+		if (day !== undefined) {
+			day.forEach(function(timeSlot) {
+				console.log('dayDropdowns.day.timeSlot = ', timeSlot);
+				debugger;
+				allTimeSlots.push(timeSlot);
+			});
+		}
+	});
+
+	/*
 	if (dayDropdowns.monday !== undefined) {
 		dayDropdowns.monday.forEach(function(timeSlot) {
 			allTimeSlots.push('M ' + timeSlot);
@@ -42,7 +56,7 @@ export const saveProfile = values => async dispatch => {
 			allTimeSlots.push('Su ' + timeSlot);
 		});
 	}
-
+	*/
 	values.availability = allTimeSlots;
 
 	const response = await axios.post('/api/profile', values);

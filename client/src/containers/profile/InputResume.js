@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Upload, Button, Icon, message, Row, Col } from 'antd';
+import { Upload, Button, Icon, Row, Col } from 'antd';
 import ErrorMessage from './ErrorMessage';
 
 class InputResume extends Component {
