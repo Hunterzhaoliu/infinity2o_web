@@ -144,22 +144,6 @@ class ProfileEdit extends Component {
 						}}
 					>
 						<Col span={24}>
-							<Field
-								name="resume"
-								label="Resume: "
-								width={280}
-								component={InputResume}
-							/>
-						</Col>
-					</Row>
-					<Row
-						type="flex"
-						justify="start"
-						style={{
-							padding: '3% 0% 0%' // top left&right bottom
-						}}
-					>
-						<Col span={24}>
 							<Button
 								style={{
 									borderColor: colorTheme.key,
