@@ -9,7 +9,6 @@ module.exports = app => {
 		request.user.profile.interests = interests;
 		request.user.profile.time_zone = time_zone;
 		request.user.profile.availability = availability;
-
 		const user = await request.user.save();
 		response.send(user);
 	});

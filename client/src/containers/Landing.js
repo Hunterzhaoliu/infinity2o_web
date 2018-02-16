@@ -17,7 +17,7 @@ class Landing extends Component {
 
 		const how = `Join our community and train an AI to find the best partners for you.`;
 		const why = `Online classes from the best teachers are amazing but too lonely.`;
-		switch (auth.user) {
+		switch (auth) {
 			case null:
 				// show nothing when still signing in
 				return;
@@ -150,7 +150,7 @@ class Landing extends Component {
 	renderLogin() {
 		const { colorTheme, auth } = this.props;
 
-		switch (auth.user) {
+		switch (auth) {
 			case null:
 				// show nothing when still signing in
 				return;

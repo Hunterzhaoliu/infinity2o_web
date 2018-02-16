@@ -14,10 +14,10 @@ class CustomHeader extends Component {
 			onPressRandomColorTheme,
 			onPressProfile,
 			onPressTrainAI,
-			onPressMatches
+			onPressMatches,
+			auth
 		} = this.props;
-		const loginState = this.props.auth.user;
-		switch (loginState) {
+		switch (auth) {
 			case null:
 				// show nothing when still signing in
 				return;

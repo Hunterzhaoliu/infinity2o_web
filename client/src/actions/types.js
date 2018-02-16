@@ -1,7 +1,11 @@
 export const UPDATE_COLOR_THEME = 'UPDATE_COLOR_THEME';
-export const FETCH_USER = 'FETCH_USER';
+
+export const FETCH_USER_AUTH = 'FETCH_USER_AUTH';
+export const FETCH_USER_PROFILE = 'FETCH_USER_PROFILE';
+
 export const SAVE_PROFILE_START = 'SAVE_PROFILE_START';
 export const SAVE_PROFILE_DONE = 'SAVE_PROFILE_DONE';
+
 export const ON_PROFILE = 'ON_PROFILE';
 export const ON_TRAIN_AI = 'ON_TRAIN_AI';
 export const ON_MATCHES = 'ON_MATCHES';

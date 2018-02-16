@@ -29,7 +29,8 @@ class InputField extends Component {
 					<Col md={{ span: 18, offset: 1 }}>
 						<Input
 							defaultValue={databaseValue}
-							{...input}
+							onChange={input.onChange}
+							onFocus={input.onFocus}
 							style={{
 								width: width,
 								borderColor: colorTheme.text7Color,

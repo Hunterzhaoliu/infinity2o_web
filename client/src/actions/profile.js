@@ -9,7 +9,7 @@ export const saveProfile = values => async dispatch => {
 	console.log('dayDropdowns, not so confusing eh? = ', dayDropdowns);
 	let allTimeSlots = [];
 	//day.toString().substring(0, 3) + ' ' +
-	Object.keys(dayDropdowns).forEach(function(day) {
+	Object.entries(dayDropdowns).forEach(function(day) {
 		console.log('dayDropdowns.day = ', day);
 		if (day !== undefined) {
 			day.forEach(function(timeSlot) {
@@ -60,5 +60,5 @@ export const saveProfile = values => async dispatch => {
 	values.availability = allTimeSlots;
 
 	const response = await axios.post('/api/profile', values);
-	dispatch({ type: SAVE_PROFILE_DONE, profile: response });
+	dispatch({ type: SAVE_PROFILE_DONE, profile: response.data.profile });
 };

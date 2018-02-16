@@ -31,16 +31,23 @@ class ProfileEdit extends Component {
 		});
 	}
 
+	isSaveDisabled(profileValues) {
+		if (profileValues === undefined) {
+			return false;
+		} else {
+			const numProfileFieldsFilled = Object.keys(profileValues).length;
+			const allFieldsFilled = numProfileFieldsFilled === 5;
+			if (!allFieldsFilled) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
 	render() {
 		//console.log('this.props in ProfileEdit.js', this.props);
-		const {
-			colorTheme,
-			handleSubmit,
-			pristine,
-			submitting,
-			saveProfile,
-			profileValues
-		} = this.props;
+		const { colorTheme, handleSubmit, saveProfile, profileValues } = this.props;
 		return (
 			<Content
 				style={{
@@ -59,7 +66,7 @@ class ProfileEdit extends Component {
 					>
 						<Col span={24}>
 							<Field
-								databaseValue="Q Liu"
+								databaseValue="TODO"
 								name="name"
 								label="Name:"
 								width={280}
@@ -137,8 +144,7 @@ class ProfileEdit extends Component {
 											color: colorTheme.keyText5Color
 										}}
 									>
-										When are you free to video chat for your class? (Min. 2
-										times on different days)
+										When are you free to video chat for your class?
 									</h3>
 								</Col>
 							</Row>
@@ -178,10 +184,10 @@ class ProfileEdit extends Component {
 									color: colorTheme.text1Color
 								}}
 								type="submit"
-								disabled={pristine || submitting}
+								disabled={this.isSaveDisabled(profileValues)}
 								onClick={() => saveProfile(profileValues)}
 							>
-								<a href="/profile">Save</a>
+								Save
 							</Button>
 						</Col>
 					</Row>
@@ -236,8 +242,12 @@ function validate(values) {
 		errors['interests'] = '1 to 5 interests pretty please';
 	}
 
-	if (values.time_zone === 'country') {
-		errors['timeZone'] = 'Need a time zone instead of a country silly';
+	if (
+		values.time_zone === 'europe' ||
+		values.time_zone === 'canada' ||
+		values.time_zone === 'united_states'
+	) {
+		errors['time_zone'] = 'Need a time zone instead of a country silly';
 	}
 
 	if (!isValidTimeSlots(values.dayDropdowns)) {

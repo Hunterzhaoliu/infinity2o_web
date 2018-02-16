@@ -26,14 +26,18 @@ passport.use(
 			proxy: true
 		},
 		async (accessToken, refreshToken, profile, done) => {
-			const existingUser = await User.findOne({ googleId: profile.id }); // asynchronus
+			const existingUser = await User.findOne({
+				auth: { googleId: profile.id }
+			}); // asynchronus
 			if (existingUser) {
 				// we already have this user in db
 				error = null;
 				done(error, existingUser);
 			} else {
 				const newUserFromDB = await new User({
-					googleId: profile.id
+					auth: {
+						googleId: profile.id
+					}
 				}).save();
 				done(null, newUserFromDB);
 			}
@@ -51,15 +55,19 @@ passport.use(
 			proxy: true
 		},
 		async (accessToken, refreshToken, profile, done) => {
-			const existingUser = await User.findOne({ linkedInId: profile.id }); // asynchronus
+			const existingUser = await User.findOne({
+				auth: { linkedInId: profile.id }
+			}); // asynchronus
 			if (existingUser) {
 				// we already have this user in db
 				error = null;
 				done(error, existingUser);
 			} else {
 				const newUserFromDB = await new User({
-					linkedInId: profile.id,
-					location: profile._json.location.name
+					auth: {
+						linkedInId: profile.id,
+						location: profile._json.location.name
+					}
 				}).save();
 				done(null, newUserFromDB);
 			}
