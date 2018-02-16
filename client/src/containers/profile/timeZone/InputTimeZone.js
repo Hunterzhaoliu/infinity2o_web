@@ -34,7 +34,7 @@ class InputTimeZone extends Component {
 					>
 						<TreeSelect
 							{...input}
-							value={input.value || []} // requires value to be an array
+							value={input.value}
 							style={{ width }}
 							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
 							treeData={timeZones}

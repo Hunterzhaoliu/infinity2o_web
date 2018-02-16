@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import DisplayField from './DisplayField';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
 class Profile extends Component {
 	render() {
 		// console.log('this.props in Profile.js', this.props);
-		const { colorTheme } = this.props;
+		const { colorTheme, currentProfile } = this.props;
 		return (
 			<Content
 				style={{
@@ -14,6 +15,81 @@ class Profile extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 24 }}>
+						<DisplayField
+							label="Name: "
+							value={currentProfile.name}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 24 }}>
+						<DisplayField
+							label="Age: "
+							value={currentProfile.age}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 24 }}>
+						<DisplayField
+							label="Interest(s): "
+							value={currentProfile.interests}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 24 }}>
+						<DisplayField
+							label="Time Zone: "
+							value={currentProfile.time_zone}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 24 }}>
+						<DisplayField
+							label="Availability: "
+							value={currentProfile.availability}
+						/>
+					</Col>
+				</Row>
 				<Row
 					type="flex"
 					justify="start"
@@ -44,7 +120,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		currentProfile: state.profile
 	};
 }
 
