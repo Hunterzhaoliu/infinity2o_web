@@ -1,17 +1,55 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DayDropdown from './DayDropdown';
 import { Row, Col } from 'antd';
+import daysOfWeek from './daysOfWeek';
 
 class InputSchedule extends Component {
+	renderDaysOfWeekDropdowns() {
+		return _.map(daysOfWeek, day => {
+			return (
+				<Col span={3} key={day.name}>
+					<DayDropdown day={day} />
+				</Col>
+			);
+		});
+	}
+
 	render() {
-		//console.log('this.props in InputSchedule', this.props);
-		const { day } = this.props;
+		console.log('this.props in InputSchedule', this.props);
+		const { colorTheme, meta } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<DayDropdown day={day} />
+						<Row type="flex" justify="start" align="middle">
+							<Col span={24}>
+								<h3
+									style={{
+										color: colorTheme.keyText5Color
+									}}
+								>
+									When are you free to video chat for your
+									class?
+								</h3>
+							</Col>
+						</Row>
+						<Row type="flex" justify="start" align="middle">
+							<div
+								style={{
+									marginBottom: '10px',
+									color: colorTheme.keyText3Color
+								}}
+							>
+								{meta.error}
+							</div>
+						</Row>
+						<Row type="flex" justify="space-around" align="middle">
+							<Col span={24}>
+								{this.renderDaysOfWeekDropdowns()}
+							</Col>
+						</Row>
 					</Col>
 				</Row>
 			</div>

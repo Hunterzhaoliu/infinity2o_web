@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as profileActionCreators from '../../actions/profile';
@@ -9,7 +8,6 @@ import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './interestsSelect/InputFieldSelect';
 import InputSchedule from './scheduleDropdowns/InputSchedule';
 import InputTimeZone from './timeZone/InputTimeZone';
-import daysOfWeek from './scheduleDropdowns/daysOfWeek';
 import {
 	isValidName,
 	isValidAge,
@@ -20,19 +18,9 @@ import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 
 class ProfileEdit extends Component {
-	renderDaysOfWeekDropdowns() {
-		return _.map(daysOfWeek, day => {
-			return (
-				<Col span={3} key={day.name}>
-					<InputSchedule day={day} />
-				</Col>
-			);
-		});
-	}
-
 	isSaveDisabled(profileValues) {
 		if (profileValues === undefined) {
-			return false;
+			return true;
 		} else {
 			const numProfileFieldsFilled = Object.keys(profileValues).length;
 			const allFieldsFilled = numProfileFieldsFilled === 5;
@@ -141,27 +129,10 @@ class ProfileEdit extends Component {
 						}}
 					>
 						<Col span={24}>
-							<Row type="flex" justify="start" align="middle">
-								<Col span={24}>
-									<h3
-										style={{
-											color: colorTheme.keyText5Color
-										}}
-									>
-										When are you free to video chat for your
-										class?
-									</h3>
-								</Col>
-							</Row>
-							<Row
-								type="flex"
-								justify="space-around"
-								align="middle"
-							>
-								<Col span={24}>
-									{this.renderDaysOfWeekDropdowns()}
-								</Col>
-							</Row>
+							<Field
+								name="input_schedule"
+								component={InputSchedule}
+							/>
 						</Col>
 					</Row>
 					<Row
@@ -246,8 +217,7 @@ function validate(values) {
 	}
 
 	if (!isValidTimeSlots(values.dayDropdowns)) {
-		errors['dayDropdowns'] =
-			'Need at least 2 time slots from 2 different days';
+		errors['input_schedule'] = 'Need at least 2 time slots';
 	}
 
 	return errors;

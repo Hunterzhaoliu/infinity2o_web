@@ -50,7 +50,17 @@ export const isValidInterests = interests => {
 };
 
 export const isValidTimeSlots = dayDropdowns => {
-	if (dayDropdowns !== undefined && dayDropdowns.length >= 2) {
+	let num_time_slots_checked = 0;
+	if (dayDropdowns !== undefined) {
+		Object.entries(dayDropdowns).forEach(function(dayTimePair) {
+			if (dayTimePair[1] !== undefined) {
+				dayTimePair[1].forEach(function(timeSlot) {
+					num_time_slots_checked += 1;
+				});
+			}
+		});
+	}
+	if (num_time_slots_checked >= 2) {
 		return true;
 	}
 	return false;
