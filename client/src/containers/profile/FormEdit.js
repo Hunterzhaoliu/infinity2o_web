@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as profileActionCreators from '../../actions/profile';
@@ -8,6 +9,8 @@ import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './interestsSelect/InputFieldSelect';
 import InputSchedule from './scheduleDropdowns/InputSchedule';
 import InputTimeZone from './timeZone/InputTimeZone';
+import InputResume from './InputResume';
+import daysOfWeek from './scheduleDropdowns/daysOfWeek';
 import {
 	isValidName,
 	isValidAge,
@@ -17,34 +20,31 @@ import {
 import { Layout, Row, Form, Col, Button } from 'antd';
 const { Content } = Layout;
 
-class ProfileEdit extends Component {
-	isSaveDisabled(newProfile) {
-		if (newProfile === undefined) {
-			return true;
-		} else {
-			const numProfileFieldsFilled = Object.keys(newProfile).length;
-			const allFieldsFilled = numProfileFieldsFilled === 5;
-			if (!allFieldsFilled) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+class FormEdit extends Component {
+	renderDaysOfWeekDropdowns() {
+		return _.map(daysOfWeek, day => {
+			return (
+				<Col span={3} key={day.name}>
+					<Field name="schedule" day={day} component={InputSchedule} />
+				</Col>
+			);
+		});
 	}
 
 	render() {
-		console.log('this.props in ProfileEdit.js', this.props);
+		console.log('this.props in FormEdit.js', this.props);
 		const {
 			colorTheme,
-			currentProfile,
 			handleSubmit,
+			pristine,
+			submitting,
 			saveProfile,
-			newProfile
+			profileValues
 		} = this.props;
 		return (
 			<Content
 				style={{
-					padding: '10% 7% 0%', // top left&right bottom
+					padding: '5% 0% 0%', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -59,7 +59,6 @@ class ProfileEdit extends Component {
 					>
 						<Col span={24}>
 							<Field
-								databaseValue={currentProfile.name}
 								name="name"
 								label="Name:"
 								width={280}
@@ -130,10 +129,21 @@ class ProfileEdit extends Component {
 						}}
 					>
 						<Col span={24}>
-							<Field
-								name="input_schedule"
-								component={InputSchedule}
-							/>
+							<Row type="flex" justify="start" align="middle">
+								<Col span={24}>
+									<h3
+										style={{
+											color: colorTheme.keyText5Color
+										}}
+									>
+										When are you free to video chat for your class? (Min. 2
+										times on different days)
+									</h3>
+								</Col>
+							</Row>
+							<Row type="flex" justify="space-around" align="middle">
+								<Col span={24}>{this.renderDaysOfWeekDropdowns()}</Col>
+							</Row>
 						</Col>
 					</Row>
 					<Row
@@ -167,8 +177,8 @@ class ProfileEdit extends Component {
 									color: colorTheme.text1Color
 								}}
 								type="submit"
-								disabled={this.isSaveDisabled(newProfile)}
-								onClick={() => saveProfile(newProfile)}
+								disabled={pristine || submitting}
+								onClick={() => saveProfile(profileValues)}
 							>
 								Save
 							</Button>
@@ -187,8 +197,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		newProfile: state.form.profile.values,
-		currentProfile: state.profile
+		profileValues: state.form.profile.values
 	};
 }
 
@@ -209,7 +218,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-ProfileEdit = connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);
+FormEdit = connect(mapStateToProps, mapDispatchToProps)(FormEdit);
 
 function validate(values) {
 	const errors = {};
@@ -226,16 +235,12 @@ function validate(values) {
 		errors['interests'] = '1 to 5 interests pretty please';
 	}
 
-	if (
-		values.time_zone === 'europe' ||
-		values.time_zone === 'canada' ||
-		values.time_zone === 'united_states'
-	) {
-		errors['time_zone'] = 'Need a time zone instead of a country silly';
+	if (values.time_zone === 'country') {
+		errors['timeZone'] = 'Need a time zone instead of a country silly';
 	}
 
 	if (!isValidTimeSlots(values.dayDropdowns)) {
-		errors['input_schedule'] = 'Need at least 2 time slots';
+		errors['dayDropdowns'] = 'Need at least 2 time slots from 2 different days';
 	}
 
 	return errors;
@@ -245,4 +250,4 @@ export default reduxForm({
 	validate: validate,
 	form: 'profile', // state.form.profile
 	destroyOnUnmount: false
-})(ProfileEdit);
+})(FormEdit);
