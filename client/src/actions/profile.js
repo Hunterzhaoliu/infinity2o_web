@@ -5,7 +5,6 @@ export const saveProfile = values => async dispatch => {
 	dispatch({ type: SAVE_PROFILE_START });
 	const { dayDropdowns } = values;
 
-	console.log('in profile.js values = ', values);
 	let allTimeSlots = [];
 
 	Object.entries(dayDropdowns).forEach(function(dayTimePair) {
