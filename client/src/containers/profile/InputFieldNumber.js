@@ -6,6 +6,7 @@ import ErrorMessage from './ErrorMessage';
 class InputFieldNumber extends Component {
 	render() {
 		//console.log('this.props in InputFieldNumber', this.props);
+		const { colorTheme, label, input, width, meta, profile } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -17,10 +18,10 @@ class InputFieldNumber extends Component {
 					>
 						<h3
 							style={{
-								color: this.props.colorTheme.keyText5Color
+								color: colorTheme.keyText5Color
 							}}
 						>
-							{this.props.label}
+							{label}
 						</h3>
 					</Col>
 					<Col
@@ -30,17 +31,19 @@ class InputFieldNumber extends Component {
 						xl={{ span: 3, offset: 1 }}
 					>
 						<Input
-							{...this.props.input}
+							defaultValue={profile.age}
+							onChange={input.onChange}
+							onFocus={input.onFocus}
 							style={{
-								width: this.props.width,
-								borderColor: this.props.colorTheme.text7Color,
-								background: this.props.colorTheme.text7Color,
-								color: this.props.colorTheme.text3Color
+								width: width,
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text3Color
 							}}
 						/>
 					</Col>
 				</Row>
-				<ErrorMessage meta={this.props.meta} />
+				<ErrorMessage meta={meta} />
 			</div>
 		);
 	}
@@ -52,7 +55,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		profile: state.profile
 	};
 }
 

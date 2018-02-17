@@ -5,6 +5,7 @@ let cloneObject = obj => {
 };
 
 let initialState = {
+	loggedIn: false,
 	googleId: null,
 	linkedInId: null,
 	location: null
@@ -15,6 +16,12 @@ export default function(state = initialState, action) {
 	switch (action.type) {
 		case FETCH_USER_AUTH:
 			newState = action.auth || false;
+			if (
+				action.auth !== undefined &&
+				(action.auth.googleId || action.auth.linkedInId)
+			) {
+				newState.loggedIn = true;
+			}
 			return newState;
 		default:
 			return state;

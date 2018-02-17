@@ -39,7 +39,7 @@ class InputSchedule extends Component {
 							<div
 								style={{
 									marginBottom: '10px',
-									color: colorTheme.keyText3Color
+									color: colorTheme.keyText1Color
 								}}
 							>
 								{meta.error}

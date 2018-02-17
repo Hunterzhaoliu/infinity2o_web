@@ -18,13 +18,26 @@ const { Footer } = Layout;
 class App extends Component {
 	componentDidMount() {
 		this.props.fetchUser();
-		// set random color theme on initial login
-		this.props.generateRandomColorTheme();
-		this.props.onPressProfile();
 	}
 
 	render() {
 		//console.log('this.props inside App', this.props);
+
+		const { auth, profile } = this.props;
+		const loggedIn = auth.loggedIn;
+		const hasProfile = profile.name !== undefined && profile.name !== null;
+		console.log('this.props = ', this.props);
+		if (!loggedIn) {
+			console.log('user not logged in');
+			//this.props.fetchUser();
+			//this.props.generateRandomColorTheme();
+		} else if (loggedIn && !hasProfile) {
+			console.log('user logged in & has no profile');
+			//this.props.onProfile();
+		} else if (loggedIn && hasProfile) {
+			console.log('user logged in & has profile');
+			//this.props.onTrainAI();
+		}
 		return (
 			<BrowserRouter>
 				<Layout style={styles.layout}>
@@ -65,7 +78,9 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		auth: state.auth,
+		profile: state.profile
 	};
 }
 
@@ -88,8 +103,11 @@ function mapDispatchToProps(dispatch) {
 		generateRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();
 		},
-		onPressProfile: () => {
+		onProfile: () => {
 			colorThemeDispatchers.onProfile();
+		},
+		onTrainAI: () => {
+			colorThemeDispatchers.onTrainAI();
 		}
 	};
 }

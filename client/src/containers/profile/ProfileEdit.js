@@ -33,10 +33,9 @@ class ProfileEdit extends Component {
 	}
 
 	render() {
-		console.log('this.props in ProfileEdit.js', this.props);
+		//console.log('this.props in ProfileEdit.js', this.props);
 		const {
 			colorTheme,
-			currentProfile,
 			handleSubmit,
 			saveProfile,
 			newProfile
@@ -59,7 +58,6 @@ class ProfileEdit extends Component {
 					>
 						<Col span={24}>
 							<Field
-								databaseValue={currentProfile.name}
 								name="name"
 								label="Name:"
 								width={280}
@@ -171,8 +169,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		newProfile: state.form.profile.values,
-		currentProfile: state.profile
+		newProfile: state.form.profile.values
 	};
 }
 

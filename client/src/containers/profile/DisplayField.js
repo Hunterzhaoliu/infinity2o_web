@@ -31,7 +31,7 @@ class DisplayField extends Component {
 					<Col md={{ span: 5 }}>
 						<h3
 							style={{
-								color: colorTheme.keyText5Color
+								color: colorTheme.keyText6Color
 							}}
 						>
 							{label}
@@ -40,7 +40,7 @@ class DisplayField extends Component {
 					<Col md={{ span: 18, offset: 1 }}>
 						<h3
 							style={{
-								color: colorTheme.keyText3Color
+								color: colorTheme.keyText5Color
 							}}
 						>
 							{this.renderValue(value)}

@@ -5,15 +5,8 @@ import ErrorMessage from './ErrorMessage';
 
 class InputField extends Component {
 	render() {
-		//console.log('this.props in InputField', this.props);
-		const {
-			colorTheme,
-			label,
-			input,
-			width,
-			meta,
-			databaseValue
-		} = this.props;
+		console.log('this.props in InputField', this.props);
+		const { colorTheme, label, input, width, meta, profile } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -28,7 +21,7 @@ class InputField extends Component {
 					</Col>
 					<Col md={{ span: 18, offset: 1 }}>
 						<Input
-							defaultValue={databaseValue}
+							defaultValue={profile.name}
 							onChange={input.onChange}
 							onFocus={input.onFocus}
 							style={{
@@ -52,7 +45,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		profile: state.profile
 	};
 }
 

@@ -5,6 +5,7 @@ import { Row, Col } from 'antd';
 class ErrorMessage extends Component {
 	render() {
 		//console.log('ErrorMessage this.props = ', this.props);
+		const { colorTheme, meta } = this.props;
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col md={{ span: 6 }} />
@@ -12,10 +13,10 @@ class ErrorMessage extends Component {
 					<div
 						style={{
 							marginBottom: '10px',
-							color: this.props.colorTheme.keyText3Color
+							color: colorTheme.keyText1Color
 						}}
 					>
-						{this.props.meta.visited && this.props.meta.error}
+						{meta.visited && meta.error}
 					</div>
 				</Col>
 			</Row>
