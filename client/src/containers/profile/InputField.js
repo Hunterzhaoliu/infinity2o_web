@@ -5,7 +5,7 @@ import ErrorMessage from './ErrorMessage';
 
 class InputField extends Component {
 	render() {
-		console.log('this.props in InputField', this.props);
+		//console.log('this.props in InputField', this.props);
 		const { colorTheme, label, input, width, meta, profile } = this.props;
 		return (
 			<div>

@@ -1,8 +1,8 @@
 import {
 	UPDATE_COLOR_THEME,
-	ON_PROFILE,
-	ON_TRAIN_AI,
-	ON_MATCHES
+	MOVE_TO_PROFILE,
+	MOVE_TO_TRAIN_AI,
+	MOVE_TO_MATCHES
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -10,8 +10,6 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	initialized: false,
-	profileInitialized: false,
 	backgroundColor: null,
 	key: null,
 	keyCompliment1: null,
@@ -72,7 +70,6 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case UPDATE_COLOR_THEME:
-			newState.initialized = true;
 			newState.backgroundColor = action.backgroundColor;
 			newState.keyBackgroundColor = action.keyBackgroundColor;
 			newState.keyCompliment1BackgroundColor =
@@ -101,16 +98,15 @@ export default function(state = initialState, action) {
 			newState.keyText8Color = action.keyText8Color;
 			newState = _getStateForSection(newState);
 			return newState;
-		case ON_PROFILE:
-			newState.profileInitialized = true;
+		case MOVE_TO_PROFILE:
 			newState.activeSection = 'profile';
 			newState = _getStateForSection(newState);
 			return newState;
-		case ON_TRAIN_AI:
+		case MOVE_TO_TRAIN_AI:
 			newState.activeSection = 'train_ai';
 			newState = _getStateForSection(newState);
 			return newState;
-		case ON_MATCHES:
+		case MOVE_TO_MATCHES:
 			newState.activeSection = 'matches';
 			newState = _getStateForSection(newState);
 			return newState;

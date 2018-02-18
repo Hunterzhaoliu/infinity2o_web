@@ -1,8 +1,8 @@
 import {
 	UPDATE_COLOR_THEME,
-	ON_PROFILE,
-	ON_TRAIN_AI,
-	ON_MATCHES
+	MOVE_TO_PROFILE,
+	MOVE_TO_TRAIN_AI,
+	MOVE_TO_MATCHES
 } from './types';
 import {
 	colors1,
@@ -27,20 +27,29 @@ import {
 
 export const onProfile = () => {
 	return function(dispatch) {
-		dispatch({ type: ON_PROFILE });
+		dispatch({ type: MOVE_TO_PROFILE });
 	};
 };
 
 export const onTrainAI = () => {
 	return function(dispatch) {
-		dispatch({ type: ON_TRAIN_AI });
+		dispatch({ type: MOVE_TO_TRAIN_AI });
 	};
 };
 
 export const onMatches = () => {
 	return function(dispatch) {
-		dispatch({ type: ON_MATCHES });
+		dispatch({ type: MOVE_TO_MATCHES });
 	};
+};
+
+export const generateRandomColorThemeWith = dispatch => {
+	let isGrey_1 = Math.floor(Math.random() * 2) < 0.5;
+	if (isGrey_1) {
+		dispatch(_generateColorThemeBasedOnBackground(GREY_1));
+	} else {
+		dispatch(_generateColorThemeBasedOnBackground(GREY_9));
+	}
 };
 
 export const generateRandomColorTheme = () => {

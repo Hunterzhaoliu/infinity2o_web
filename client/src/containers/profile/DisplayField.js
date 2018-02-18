@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Row, Col } from 'antd';
+import { Row, Col } from 'antd';
 
 class DisplayField extends Component {
 	renderValue(value) {

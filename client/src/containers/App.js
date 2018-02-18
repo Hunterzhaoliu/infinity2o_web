@@ -19,30 +19,11 @@ class App extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.fetchUser();
-		console.log('componentWillMount this.props = ', this.props);
+		//console.log('componentWillMount this.props = ', this.props);
 	}
 
 	render() {
 		//console.log('this.props inside App', this.props);
-		console.log('render this.props = ', this.props);
-
-		const { auth, profile, colorTheme } = this.props;
-		const loggedIn = auth.loggedIn;
-		const hasProfile = profile.name !== null && profile.name !== undefined;
-		console.log('hasProfile = ', hasProfile);
-		if (!loggedIn && !colorTheme.initialized) {
-			console.log('user not logged in');
-			this.props.generateRandomColorTheme();
-		} else if (loggedIn) {
-			if (!hasProfile) {
-				console.log('user logged in & has no profile');
-				//this.props.generateRandomColorTheme();
-				//this.props.onProfile();
-			} else if (hasProfile) {
-				console.log('user logged in & has profile');
-				//this.props.onTrainAI();
-			}
-		}
 		return (
 			<BrowserRouter>
 				<Layout style={styles.layout}>
@@ -72,7 +53,7 @@ class App extends Component {
 
 	componentDidMount() {
 		// run once after first render()
-		console.log('componentDidMount this.props = ', this.props);
+		//console.log('componentDidMount this.props = ', this.props);
 	}
 }
 
