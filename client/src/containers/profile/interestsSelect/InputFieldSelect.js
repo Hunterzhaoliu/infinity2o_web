@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import optionFields from './optionFields';
-import ErrorMessage from '../ErrorMessage';
 import { Row, Col, Select } from 'antd';
 const { Option } = Select;
 
@@ -18,14 +17,7 @@ class InputFieldSelect extends Component {
 	}
 
 	render() {
-		const {
-			colorTheme,
-			label,
-			input,
-			width,
-			meta,
-			placeholder
-		} = this.props;
+		const { colorTheme, label, width, placeholder } = this.props;
 		const test = ['art', 'music'];
 
 		return (
@@ -59,14 +51,13 @@ class InputFieldSelect extends Component {
 							}}
 							placeholder={placeholder}
 							defaultValue={test}
-							onChange={input.onChange}
-							onFocus={input.onFocus}
+							// onChange={input.onChange}
+							// onFocus={input.onFocus}
 						>
 							{this.renderOptions()}
 						</Select>
 					</Col>
 				</Row>
-				<ErrorMessage meta={meta} />
 			</div>
 		);
 	}

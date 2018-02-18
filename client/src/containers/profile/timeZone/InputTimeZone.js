@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TreeSelect, Row, Col } from 'antd';
 import timeZones from './timeZones';
-import ErrorMessage from '../ErrorMessage';
 
 class InputTimeZone extends Component {
 	render() {
 		//console.log('InputTimeZone this.props = ', this.props);
 		// <input onBlur={input.onBlur} onChange={input.onChange} />
-		const { colorTheme, label, width, input, meta } = this.props;
+		const { colorTheme, label, width } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -33,8 +32,6 @@ class InputTimeZone extends Component {
 						xl={{ span: 18, offset: 1 }}
 					>
 						<TreeSelect
-							{...input}
-							value={input.value}
 							style={{ width }}
 							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
 							treeData={timeZones}
@@ -42,7 +39,6 @@ class InputTimeZone extends Component {
 						/>
 					</Col>
 				</Row>
-				<ErrorMessage meta={meta} />
 			</div>
 		);
 	}

@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Input, Row, Col } from 'antd';
-import ErrorMessage from './ErrorMessage';
 
 class InputFieldNumber extends Component {
 	render() {
 		//console.log('this.props in InputFieldNumber', this.props);
-		const {
-			colorTheme,
-			label,
-			input,
-			width,
-			meta,
-			defaultValue
-		} = this.props;
+		const { colorTheme, label, width, defaultValue } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -39,8 +31,8 @@ class InputFieldNumber extends Component {
 					>
 						<Input
 							defaultValue={defaultValue}
-							onChange={input.onChange}
-							onFocus={input.onFocus}
+							// onChange={input.onChange}
+							// onFocus={input.onFocus}
 							style={{
 								width: width,
 								borderColor: colorTheme.text7Color,
@@ -50,7 +42,6 @@ class InputFieldNumber extends Component {
 						/>
 					</Col>
 				</Row>
-				<ErrorMessage meta={meta} />
 			</div>
 		);
 	}

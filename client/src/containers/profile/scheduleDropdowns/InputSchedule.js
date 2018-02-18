@@ -18,7 +18,7 @@ class InputSchedule extends Component {
 
 	render() {
 		//console.log('this.props in InputSchedule', this.props);
-		const { colorTheme, meta } = this.props;
+		const { colorTheme } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
@@ -41,9 +41,7 @@ class InputSchedule extends Component {
 									marginBottom: '10px',
 									color: colorTheme.keyText1Color
 								}}
-							>
-								{meta.error}
-							</div>
+							/>
 						</Row>
 						<Row type="flex" justify="space-around" align="middle">
 							<Col span={24}>
