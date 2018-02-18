@@ -10,6 +10,8 @@ let cloneObject = obj => {
 };
 
 let initialState = {
+	initialized: false,
+	profileInitialized: false,
 	backgroundColor: null,
 	key: null,
 	keyCompliment1: null,
@@ -70,6 +72,7 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case UPDATE_COLOR_THEME:
+			newState.initialized = true;
 			newState.backgroundColor = action.backgroundColor;
 			newState.keyBackgroundColor = action.keyBackgroundColor;
 			newState.keyCompliment1BackgroundColor =
@@ -99,6 +102,7 @@ export default function(state = initialState, action) {
 			newState = _getStateForSection(newState);
 			return newState;
 		case ON_PROFILE:
+			newState.profileInitialized = true;
 			newState.activeSection = 'profile';
 			newState = _getStateForSection(newState);
 			return newState;

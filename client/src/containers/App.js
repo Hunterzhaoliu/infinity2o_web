@@ -16,27 +16,32 @@ import { Layout } from 'antd';
 const { Footer } = Layout;
 
 class App extends Component {
-	componentDidMount() {
+	componentWillMount() {
+		// run once before first render()
 		this.props.fetchUser();
+		console.log('componentWillMount this.props = ', this.props);
 	}
 
 	render() {
 		//console.log('this.props inside App', this.props);
+		console.log('render this.props = ', this.props);
 
-		const { auth, profile } = this.props;
+		const { auth, profile, colorTheme } = this.props;
 		const loggedIn = auth.loggedIn;
-		const hasProfile = profile.name !== undefined && profile.name !== null;
-		console.log('this.props = ', this.props);
-		if (!loggedIn) {
+		const hasProfile = profile.name !== null && profile.name !== undefined;
+		console.log('hasProfile = ', hasProfile);
+		if (!loggedIn && !colorTheme.initialized) {
 			console.log('user not logged in');
-			//this.props.fetchUser();
-			//this.props.generateRandomColorTheme();
-		} else if (loggedIn && !hasProfile) {
-			console.log('user logged in & has no profile');
-			//this.props.onProfile();
-		} else if (loggedIn && hasProfile) {
-			console.log('user logged in & has profile');
-			//this.props.onTrainAI();
+			this.props.generateRandomColorTheme();
+		} else if (loggedIn) {
+			if (!hasProfile) {
+				console.log('user logged in & has no profile');
+				//this.props.generateRandomColorTheme();
+				//this.props.onProfile();
+			} else if (hasProfile) {
+				console.log('user logged in & has profile');
+				//this.props.onTrainAI();
+			}
 		}
 		return (
 			<BrowserRouter>
@@ -63,6 +68,11 @@ class App extends Component {
 				</Layout>
 			</BrowserRouter>
 		);
+	}
+
+	componentDidMount() {
+		// run once after first render()
+		console.log('componentDidMount this.props = ', this.props);
 	}
 }
 
