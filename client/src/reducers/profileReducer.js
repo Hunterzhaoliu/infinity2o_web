@@ -1,7 +1,7 @@
 import {
 	SAVE_PROFILE_START,
 	SAVE_PROFILE_DONE,
-	FETCH_USER_PROFILE
+	SAVE_FETCHED_USER_PROFILE
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -19,7 +19,7 @@ let initialState = {
 export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
-		case FETCH_USER_PROFILE:
+		case SAVE_FETCHED_USER_PROFILE:
 			newState = action.profile || false;
 			return newState;
 		case SAVE_PROFILE_START:

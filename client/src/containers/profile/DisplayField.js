@@ -40,7 +40,7 @@ class DisplayField extends Component {
 					<Col md={{ span: 18, offset: 1 }}>
 						<h3
 							style={{
-								color: colorTheme.keyText5Color
+								color: colorTheme.text3Color
 							}}
 						>
 							{this.renderValue(value)}

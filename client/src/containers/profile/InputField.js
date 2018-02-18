@@ -5,7 +5,7 @@ import ErrorMessage from './ErrorMessage';
 
 class InputField extends Component {
 	render() {
-		//console.log('this.props in InputField', this.props);
+		console.log('this.props in InputField', this.props);
 		const { colorTheme, label, input, width, meta, profile } = this.props;
 		return (
 			<div>
@@ -21,7 +21,7 @@ class InputField extends Component {
 					</Col>
 					<Col md={{ span: 18, offset: 1 }}>
 						<Input
-							defaultValue={profile.name}
+							placeholder={profile.name}
 							onChange={input.onChange}
 							onFocus={input.onFocus}
 							style={{
