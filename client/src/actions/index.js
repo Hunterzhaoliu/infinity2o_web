@@ -6,7 +6,7 @@ import {
 } from './types';
 import { generateRandomColorThemeWith } from './colorTheme';
 
-export const fetchUser = () => async dispatch => {
+export const initializeApp = () => async dispatch => {
 	const response = await axios.get('/api/current_user');
 	dispatch({ type: SAVE_FETCHED_USER_AUTH, auth: response.data.auth });
 	dispatch({
@@ -24,7 +24,6 @@ export const fetchUser = () => async dispatch => {
 			dispatch({ type: MOVE_TO_PROFILE });
 		}
 	} else {
-		console.log('user not logged in');
 		generateRandomColorThemeWith(dispatch);
 	}
 };

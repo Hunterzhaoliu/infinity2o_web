@@ -18,7 +18,7 @@ const { Footer } = Layout;
 class App extends Component {
 	componentWillMount() {
 		// run once before first render()
-		this.props.fetchUser();
+		this.props.initializeApp();
 		//console.log('componentWillMount this.props = ', this.props);
 	}
 
@@ -88,8 +88,8 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		fetchUser: () => {
-			indexDispatchers.fetchUser();
+		initializeApp: () => {
+			indexDispatchers.initializeApp();
 		},
 		generateRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();

@@ -38,7 +38,8 @@ class ProfileEdit extends Component {
 			colorTheme,
 			handleSubmit,
 			saveProfile,
-			newProfile
+			newProfile,
+			profile
 		} = this.props;
 		return (
 			<Content
@@ -58,6 +59,7 @@ class ProfileEdit extends Component {
 					>
 						<Col span={24}>
 							<Field
+								defaultValue={profile.name}
 								name="name"
 								label="Name:"
 								width={280}
@@ -76,6 +78,7 @@ class ProfileEdit extends Component {
 					>
 						<Col span={24}>
 							<Field
+								defaultValue={profile.age}
 								name="age"
 								label="Age:"
 								width={50}
@@ -169,7 +172,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		newProfile: state.form.profile.values
+		newProfile: state.form.profile.values,
+		profile: state.profile
 	};
 }
 

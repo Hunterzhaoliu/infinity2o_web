@@ -18,7 +18,16 @@ class InputFieldSelect extends Component {
 	}
 
 	render() {
-		//console.log('this.props in InputFieldSelect', this.props);
+		const {
+			colorTheme,
+			label,
+			input,
+			width,
+			meta,
+			placeholder
+		} = this.props;
+		const test = ['art', 'music'];
+
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -30,10 +39,10 @@ class InputFieldSelect extends Component {
 					>
 						<h3
 							style={{
-								color: this.props.colorTheme.keyText5Color
+								color: colorTheme.keyText5Color
 							}}
 						>
-							{this.props.label}
+							{label}
 						</h3>
 					</Col>
 					<Col
@@ -43,20 +52,21 @@ class InputFieldSelect extends Component {
 						xl={{ span: 18, offset: 1 }}
 					>
 						<Select
-							{...this.props.input}
-							value={this.props.input.value || []} // requires value to be an array
 							mode="multiple"
-							placeholder={this.props.placeholder}
 							style={{
-								width: this.props.width,
-								borderColor: this.props.colorTheme.text6Color
+								width: width,
+								borderColor: colorTheme.text6Color
 							}}
+							placeholder={placeholder}
+							defaultValue={test}
+							onChange={input.onChange}
+							onFocus={input.onFocus}
 						>
 							{this.renderOptions()}
 						</Select>
 					</Col>
 				</Row>
-				<ErrorMessage meta={this.props.meta} />
+				<ErrorMessage meta={meta} />
 			</div>
 		);
 	}
