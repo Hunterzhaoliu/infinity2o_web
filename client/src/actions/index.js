@@ -12,12 +12,13 @@ export const fetchUser = () => async dispatch => {
 	dispatch({ type: FETCH_USER_AUTH, auth: response.data.auth });
 	dispatch({ type: FETCH_USER_PROFILE, profile: response.data.profile });
 	const loggedIn = response.data.auth !== undefined;
-	const hasProfile = response.data.profile.name !== undefined;
 	if (loggedIn) {
 		generateRandomColorThemeWith(dispatch);
-		if (hasProfile) {
-			dispatch({ type: MOVE_TO_TRAIN_AI });
+		const hasProfile = response.data.profile.name !== undefined;
+		if (!hasProfile) {
+			dispatch({ type: MOVE_TO_PROFILE });
 		} else {
+			// TODO: change to move to Train AI & history.push(/train_ai)
 			dispatch({ type: MOVE_TO_PROFILE });
 		}
 	} else {
