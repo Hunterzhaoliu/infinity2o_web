@@ -3,19 +3,11 @@ import * as profileActionCreators from '../../actions/profile';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Input, Row, Col } from 'antd';
+import ErrorMessage from './ErrorMessage';
 
 class InputField extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			name: ''
-		};
-	}
-
 	onChangeName = e => {
 		this.props.onChangeName(e.target.value);
-		this.setState({ name: e.target.value });
-		console.log('e.target.value = ', e.target.value);
 	};
 
 	renderValue(profile) {
@@ -27,10 +19,9 @@ class InputField extends Component {
 	}
 
 	render() {
-		console.log('InputField this.props = ', this.props);
+		//console.log('InputField this.props = ', this.props);
 		const { colorTheme, label, width, profile } = this.props;
 
-		const { name } = this.state;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -57,6 +48,10 @@ class InputField extends Component {
 						/>
 					</Col>
 				</Row>
+				<ErrorMessage
+					message="Cool name! But we need 1 to 30 valid letters"
+					hasError={profile.hasNameError}
+				/>
 			</div>
 		);
 	}

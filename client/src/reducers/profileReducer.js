@@ -10,16 +10,19 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	newAge: null,
-	newName: null,
-	newTimeZone: null,
-	newAvailability: null,
-	newInterests: null,
-	age: null,
 	name: null,
+	age: null,
+	interests: null,
 	timeZone: null,
 	availability: null,
-	interests: null
+	newName: null,
+	newAge: null,
+	newInterests: null,
+	newTimeZone: null,
+	newAvailability: null,
+	hasAgeError: false,
+	hasNameError: false,
+	hasInterestsError: false
 };
 
 export default function(state = initialState, action) {
@@ -30,6 +33,7 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_CHANGE_NAME:
 			newState.newName = action.newName;
+			newState.hasNameError = action.hasError;
 			return newState;
 		case SAVE_PROFILE_START:
 			return newState;

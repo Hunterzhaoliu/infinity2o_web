@@ -1,8 +1,13 @@
 import axios from 'axios';
 import { ON_CHANGE_NAME, SAVE_PROFILE_START, SAVE_PROFILE_DONE } from './types';
+import { isValidName } from '../utils/validate';
 
 export const onChangeName = newName => dispatch => {
-	dispatch({ type: ON_CHANGE_NAME, newName: newName });
+	if (isValidName(newName)) {
+		dispatch({ type: ON_CHANGE_NAME, newName: newName, hasError: false });
+	} else {
+		dispatch({ type: ON_CHANGE_NAME, newName: newName, hasError: true });
+	}
 };
 
 export const saveProfile = values => async dispatch => {

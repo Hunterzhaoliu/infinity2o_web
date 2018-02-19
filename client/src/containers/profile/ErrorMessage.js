@@ -3,9 +3,16 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
 
 class ErrorMessage extends Component {
+	renderMessage(hasError, message) {
+		if (hasError) {
+			return message;
+		} else {
+			return;
+		}
+	}
 	render() {
 		//console.log('ErrorMessage this.props = ', this.props);
-		const { colorTheme } = this.props;
+		const { colorTheme, message, hasError } = this.props;
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col md={{ span: 6 }} />
@@ -15,7 +22,9 @@ class ErrorMessage extends Component {
 							marginBottom: '10px',
 							color: colorTheme.keyText1Color
 						}}
-					/>
+					>
+						{this.renderMessage(hasError, message)}
+					</div>
 				</Col>
 			</Row>
 		);
