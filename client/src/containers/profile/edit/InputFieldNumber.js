@@ -49,9 +49,9 @@ class InputFieldNumber extends Component {
 							onChange={this.onChangeAge}
 							style={{
 								width: width,
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text3Color
+								borderColor: colorTheme.text9Color,
+								background: colorTheme.text9Color,
+								color: colorTheme.text5Color
 							}}
 						/>
 					</Col>

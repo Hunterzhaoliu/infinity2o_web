@@ -2,57 +2,51 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Dropdown, Icon, Menu, Checkbox } from 'antd';
-//import TimeSlots from './TimeSlots';
 
-// const timeSlotOptions = [
-// 	'6-8 AM',
-// 	'8-10 AM',
-// 	'10-12 noon',
-// 	'12-2 PM',
-// 	'2-4 PM ',
-// 	'4-6 PM',
-// 	'6-8 PM ',
-// 	'8-10 PM',
-// 	'10-12 midnight'
-// ];
-
-const timeSlotOptions = ['6-8 AM', '8-10 AM'];
+const timeSlotOptions = [
+	'6-8 AM',
+	'8-10 AM',
+	'10-12 noon',
+	'12-2 PM',
+	'2-4 PM ',
+	'4-6 PM',
+	'6-8 PM ',
+	'8-10 PM',
+	'10-12 midnight'
+];
 
 class DayDropdown extends Component {
-	// renderMenuItems() {
-	//     return _.map(timeSlotOptions, timeSlot => {
-	//         console.log('day = ')
-	//     })
-	// }
+	renderMenuItems(day, preSelectedTimeSlots) {
+		//console.log('day.label = ', day.label);
+		console.log('preSelectedTimeSlots = ', preSelectedTimeSlots);
+		return _.map(timeSlotOptions, timeSlot => {
+			//console.log('timeSlot = ', timeSlot);
+			return (
+				<Menu.Item key={day.label + ' ' + timeSlot}>
+					<Checkbox
+						value={day.label + ' ' + timeSlot}
+						onChange={this.onChangeTimeSlot}
+					>
+						{timeSlot}
+					</Checkbox>
+				</Menu.Item>
+			);
+		});
+	}
+
+	isChecked(timeSlot, preSelectedTimeSlots) {
+		//return preSelectedTimeSlots.indexOf(timeSlot) !== -1;
+	}
 
 	onChangeTimeSlot = e => {
 		console.log('onChangeTimeSlot e.target.value = ', e.target.value);
 	};
 
 	render() {
-		console.log('this.props in DayDropdown', this.props);
+		//console.log('this.props in DayDropdown', this.props);
 		const { colorTheme, day, preSelectedTimeSlots } = this.props;
-		//const menu2 = <TimeSlots day={day} />;
 		const menu = (
-			<Menu>
-				<Menu.Item key="monday 6-8 AM">
-					<Checkbox
-						checked={true}
-						value={{ monday: '6-8 AM' }}
-						onChange={this.onChangeTimeSlot}
-					>
-						6-8 AM
-					</Checkbox>
-				</Menu.Item>
-				<Menu.Item key="monday 8-10 AM">
-					<Checkbox
-						value={{ monday: '8-10 AM' }}
-						onChange={this.onChangeTimeSlot}
-					>
-						8-10 AM
-					</Checkbox>
-				</Menu.Item>
-			</Menu>
+			<Menu>{this.renderMenuItems(day, preSelectedTimeSlots)}</Menu>
 		);
 		return (
 			<div>
