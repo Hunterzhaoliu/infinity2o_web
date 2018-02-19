@@ -50,6 +50,7 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_CHANGE_TIME_ZONE:
 			newState.newTimeZone = action.newTimeZone;
+			newState.hasTimeZoneError = action.hasError;
 			return newState;
 		case SAVE_PROFILE_START:
 			return newState;

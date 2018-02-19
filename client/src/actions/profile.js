@@ -47,7 +47,23 @@ export const onChangeInterests = newInterests => dispatch => {
 };
 
 export const onChangeTimeZone = newTimeZone => dispatch => {
-	dispatch({ type: ON_CHANGE_TIME_ZONE, newTimeZone: newTimeZone });
+	if (
+		newTimeZone !== 'europe' &&
+		newTimeZone !== 'canada' &&
+		newTimeZone !== 'united_states'
+	) {
+		dispatch({
+			type: ON_CHANGE_TIME_ZONE,
+			newTimeZone: newTimeZone,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_TIME_ZONE,
+			newTimeZone: newTimeZone,
+			hasError: true
+		});
+	}
 };
 
 export const saveProfile = values => async dispatch => {

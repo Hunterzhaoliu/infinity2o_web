@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { TreeSelect, Row, Col } from 'antd';
 import timeZones from './timeZones';
+import ErrorMessage from '../ErrorMessage';
 
 class InputTimeZone extends Component {
 	onChangeTimeZone = e => {
-		//console.log('e onChangeTimeZone = ', e);
-		this.props.onChangeTimeZone(e.target.value);
+		this.props.onChangeTimeZone(e);
 	};
 
 	renderValue(profile) {
@@ -55,6 +55,10 @@ class InputTimeZone extends Component {
 						/>
 					</Col>
 				</Row>
+				<ErrorMessage
+					message="Need a time zone instead of a country silly"
+					hasError={profile.hasTimeZoneError}
+				/>
 			</div>
 		);
 	}
