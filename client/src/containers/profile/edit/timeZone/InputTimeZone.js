@@ -52,7 +52,7 @@ class InputTimeZone extends Component {
 							value={this.renderValue(profile)}
 							onChange={this.onChangeTimeZone}
 							treeData={timeZones}
-							placeholder="Time Zone?"
+							placeholder="Time Zone???!"
 						/>
 					</Col>
 				</Row>
@@ -83,9 +83,6 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		saveProfile: values => {
-			profileDispatchers.saveProfile(values);
-		},
 		onChangeTimeZone: newTimeZone => {
 			profileDispatchers.onChangeTimeZone(newTimeZone);
 		}

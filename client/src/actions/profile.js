@@ -4,6 +4,7 @@ import {
 	ON_CHANGE_AGE,
 	ON_CHANGE_INTERESTS,
 	ON_CHANGE_TIME_ZONE,
+	ON_CHANGE_TIME_SLOT,
 	SAVE_PROFILE_START,
 	SAVE_PROFILE_DONE
 } from './types';
@@ -64,6 +65,14 @@ export const onChangeTimeZone = newTimeZone => dispatch => {
 			hasError: true
 		});
 	}
+};
+
+export const onChangeTimeSlot = newTimeSlot => dispatch => {
+	dispatch({
+		type: ON_CHANGE_TIME_SLOT,
+		newTimeSlot: newTimeSlot,
+		hasError: false
+	});
 };
 
 export const saveProfile = values => async dispatch => {

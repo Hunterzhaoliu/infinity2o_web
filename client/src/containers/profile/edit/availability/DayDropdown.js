@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import * as profileActionCreators from '../../../../actions/profile';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col, Dropdown, Icon, Menu, Checkbox } from 'antd';
 
@@ -24,6 +26,7 @@ class DayDropdown extends Component {
 			return (
 				<Menu.Item key={day.label + ' ' + timeSlot}>
 					<Checkbox
+						checked={this.isChecked(timeSlot, preSelectedTimeSlots)}
 						value={day.label + ' ' + timeSlot}
 						onChange={this.onChangeTimeSlot}
 					>
@@ -36,15 +39,24 @@ class DayDropdown extends Component {
 
 	isChecked(timeSlot, preSelectedTimeSlots) {
 		//return preSelectedTimeSlots.indexOf(timeSlot) !== -1;
+		if (
+			preSelectedTimeSlots !== undefined &&
+			preSelectedTimeSlots.includes(timeSlot)
+		) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	onChangeTimeSlot = e => {
 		console.log('onChangeTimeSlot e.target.value = ', e.target.value);
+		this.props.onChangeTimeSlot(e.target.value);
 	};
 
 	render() {
 		//console.log('this.props in DayDropdown', this.props);
-		const { colorTheme, day, preSelectedTimeSlots } = this.props;
+		const { colorTheme, day, preSelectedTimeSlots, profile } = this.props;
 		const menu = (
 			<Menu>{this.renderMenuItems(day, preSelectedTimeSlots)}</Menu>
 		);
@@ -74,8 +86,22 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		profile: state.profile
 	};
 }
 
-export default connect(mapStateToProps, null)(DayDropdown);
+function mapDispatchToProps(dispatch) {
+	const profileDispatchers = bindActionCreators(
+		profileActionCreators,
+		dispatch
+	);
+
+	return {
+		onChangeTimeSlot: newTimeSlots => {
+			profileDispatchers.onChangeTimeSlot(newTimeSlots);
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DayDropdown);

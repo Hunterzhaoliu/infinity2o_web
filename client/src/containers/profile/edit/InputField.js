@@ -79,9 +79,6 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		saveProfile: values => {
-			profileDispatchers.saveProfile(values);
-		},
 		onChangeName: newName => {
 			profileDispatchers.onChangeName(newName);
 		}

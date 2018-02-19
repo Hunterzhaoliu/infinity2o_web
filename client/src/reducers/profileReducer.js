@@ -4,6 +4,7 @@ import {
 	ON_CHANGE_AGE,
 	ON_CHANGE_INTERESTS,
 	ON_CHANGE_TIME_ZONE,
+	ON_CHANGE_TIME_SLOT,
 	SAVE_PROFILE_START,
 	SAVE_PROFILE_DONE
 } from '../actions/types';
@@ -22,7 +23,7 @@ let initialState = {
 	newAge: null,
 	newInterests: null,
 	newTimeZone: null,
-	newAvailability: null,
+	newTimeSlots: null,
 	hasAgeError: false,
 	hasNameError: false,
 	hasInterestsError: false,
@@ -51,6 +52,15 @@ export default function(state = initialState, action) {
 		case ON_CHANGE_TIME_ZONE:
 			newState.newTimeZone = action.newTimeZone;
 			newState.hasTimeZoneError = action.hasError;
+			return newState;
+		case ON_CHANGE_TIME_SLOT:
+			let i = newState.newTimeSlots.indexOf(action.newTimeSlot);
+			if (i !== -1) {
+				newState.newTimeSlots.splice(i, 1);
+			} else {
+				newState.newTimeSlots.push(action.newTimeSlot);
+			}
+
 			return newState;
 		case SAVE_PROFILE_START:
 			return newState;
