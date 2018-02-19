@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
+import * as profileActionCreators from '../../actions/profile';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Input, Row, Col } from 'antd';
 
 class InputFieldNumber extends Component {
+	onChangeAge = e => {
+		this.props.onChangeAge(e.target.value);
+	};
+
+	renderValue(profile) {
+		if (profile.newAge === undefined) {
+			return profile.age;
+		} else {
+			return profile.newAge;
+		}
+	}
+
 	render() {
 		//console.log('this.props in InputFieldNumber', this.props);
-		const { colorTheme, label, width, defaultValue } = this.props;
+		const { colorTheme, label, width, defaultValue, profile } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -30,9 +44,8 @@ class InputFieldNumber extends Component {
 						xl={{ span: 3, offset: 1 }}
 					>
 						<Input
-							defaultValue={defaultValue}
-							// onChange={input.onChange}
-							// onFocus={input.onFocus}
+							value={this.renderValue(profile)}
+							onChange={this.onChangeAge}
 							style={{
 								width: width,
 								borderColor: colorTheme.text7Color,
@@ -49,12 +62,30 @@ class InputFieldNumber extends Component {
 
 /*
 So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
+This function gives the UI the functions it will need to be called.
 */
+
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		profile: state.profile
 	};
 }
 
-export default connect(mapStateToProps, null)(InputFieldNumber);
+function mapDispatchToProps(dispatch) {
+	const profileDispatchers = bindActionCreators(
+		profileActionCreators,
+		dispatch
+	);
+
+	return {
+		saveProfile: values => {
+			profileDispatchers.saveProfile(values);
+		},
+		onChangeAge: newAge => {
+			profileDispatchers.onChangeAge(newAge);
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputFieldNumber);

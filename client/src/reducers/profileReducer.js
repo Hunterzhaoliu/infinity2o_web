@@ -1,6 +1,8 @@
 import {
 	SAVE_FETCHED_USER_PROFILE,
 	ON_CHANGE_NAME,
+	ON_CHANGE_AGE,
+	ON_CHANGE_INTERESTS,
 	SAVE_PROFILE_START,
 	SAVE_PROFILE_DONE
 } from '../actions/types';
@@ -30,6 +32,12 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_CHANGE_NAME:
 			newState.newName = action.newName;
+			return newState;
+		case ON_CHANGE_AGE:
+			newState.newAge = action.newAge;
+			return newState;
+		case ON_CHANGE_INTERESTS:
+			newState.newInterests = action.newInterests;
 			return newState;
 		case SAVE_PROFILE_START:
 			return newState;

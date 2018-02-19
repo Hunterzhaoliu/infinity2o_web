@@ -1,8 +1,22 @@
 import axios from 'axios';
-import { ON_CHANGE_NAME, SAVE_PROFILE_START, SAVE_PROFILE_DONE } from './types';
+import {
+	ON_CHANGE_NAME,
+	ON_CHANGE_AGE,
+	ON_CHANGE_INTERESTS,
+	SAVE_PROFILE_START,
+	SAVE_PROFILE_DONE
+} from './types';
 
 export const onChangeName = newName => dispatch => {
 	dispatch({ type: ON_CHANGE_NAME, newName: newName });
+};
+
+export const onChangeAge = newAge => dispatch => {
+	dispatch({ type: ON_CHANGE_AGE, newAge: newAge });
+};
+
+export const onChangeInterests = newInterests => dispatch => {
+	dispatch({ type: ON_CHANGE_INTERESTS, newInterests: newInterests });
 };
 
 export const saveProfile = values => async dispatch => {

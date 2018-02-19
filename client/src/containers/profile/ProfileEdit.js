@@ -63,7 +63,7 @@ class ProfileEdit extends Component {
 						}}
 					>
 						<Col span={24}>
-							<InputFieldNumber />
+							<InputFieldNumber width={280} label="Age:" />
 						</Col>
 					</Row>
 					<Row
@@ -75,7 +75,7 @@ class ProfileEdit extends Component {
 						}}
 					>
 						<Col span={24}>
-							<InputFieldSelect />
+							<InputFieldSelect width={280} label="Interest(s):" />
 						</Col>
 					</Row>
 					<Row

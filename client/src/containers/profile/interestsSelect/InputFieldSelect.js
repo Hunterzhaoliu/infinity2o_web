@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import * as profileActionCreators from '../../../actions/profile';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import optionFields from './optionFields';
 import { Row, Col, Select } from 'antd';
@@ -16,10 +18,20 @@ class InputFieldSelect extends Component {
 		});
 	}
 
-	render() {
-		const { colorTheme, label, width, placeholder } = this.props;
-		const test = ['art', 'music'];
+	onChangeInterests = e => {
+		this.props.onChangeInterests(e);
+	};
 
+	renderValue(profile) {
+		if (profile.newInterests === undefined) {
+			return profile.interests;
+		} else {
+			return profile.newInterests;
+		}
+	}
+
+	render() {
+		const { colorTheme, label, width, placeholder, profile } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -49,10 +61,8 @@ class InputFieldSelect extends Component {
 								width: width,
 								borderColor: colorTheme.text6Color
 							}}
-							placeholder={placeholder}
-							defaultValue={test}
-							// onChange={input.onChange}
-							// onFocus={input.onFocus}
+							value={this.renderValue(profile)}
+							onChange={this.onChangeInterests}
 						>
 							{this.renderOptions()}
 						</Select>
@@ -69,8 +79,25 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		profile: state.profile
 	};
 }
 
-export default connect(mapStateToProps, null)(InputFieldSelect);
+function mapDispatchToProps(dispatch) {
+	const profileDispatchers = bindActionCreators(
+		profileActionCreators,
+		dispatch
+	);
+
+	return {
+		saveProfile: values => {
+			profileDispatchers.saveProfile(values);
+		},
+		onChangeInterests: newInterests => {
+			profileDispatchers.onChangeInterests(newInterests);
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputFieldSelect);
