@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as profileActionCreators from '../../actions/profile';
+import * as profileActionCreators from '../../../actions/profile';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Input, Row, Col } from 'antd';
@@ -20,7 +20,7 @@ class InputFieldNumber extends Component {
 
 	render() {
 		//console.log('this.props in InputFieldNumber', this.props);
-		const { colorTheme, label, width, defaultValue, profile } = this.props;
+		const { colorTheme, label, width, profile } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">

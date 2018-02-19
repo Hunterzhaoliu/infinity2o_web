@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
 import Profile from './profile/Profile';
-import ProfileEdit from './profile/ProfileEdit';
+import ProfileEdit from './profile/edit/ProfileEdit';
 
 import Matches from './matches/Matches';
 

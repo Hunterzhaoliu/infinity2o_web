@@ -1,30 +1,30 @@
 export default [
 	{
 		value: 'monday',
-		name: 'Mon'
+		label: 'Mon'
 	},
 	{
 		value: 'tuesday',
-		name: 'Tues'
+		label: 'Tue'
 	},
 	{
 		value: 'wednesday',
-		name: 'Wed'
+		label: 'Wed'
 	},
 	{
 		value: 'thursday',
-		name: 'Thur'
+		label: 'Thu'
 	},
 	{
 		value: 'friday',
-		name: 'Fri'
+		label: 'Fri'
 	},
 	{
 		value: 'saturday',
-		name: 'Sat'
+		label: 'Sat'
 	},
 	{
 		value: 'sunday',
-		name: 'Sun'
+		label: 'Sun'
 	}
 ];

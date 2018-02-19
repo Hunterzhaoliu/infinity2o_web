@@ -10,8 +10,8 @@ import {
 import {
 	isValidName,
 	isValidAge,
-	isValidInterests,
-	isValidTimeSlots
+	isValidInterests
+	//isValidTimeSlots
 } from '../utils/validate';
 
 export const onChangeName = newName => dispatch => {
@@ -31,11 +31,39 @@ export const onChangeAge = newAge => dispatch => {
 };
 
 export const onChangeInterests = newInterests => dispatch => {
-	dispatch({ type: ON_CHANGE_INTERESTS, newInterests: newInterests });
+	if (isValidInterests(newInterests)) {
+		dispatch({
+			type: ON_CHANGE_INTERESTS,
+			newInterests: newInterests,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_INTERESTS,
+			newInterests: newInterests,
+			hasError: true
+		});
+	}
 };
 
 export const onChangeTimeZone = newTimeZone => dispatch => {
-	dispatch({ type: ON_CHANGE_TIME_ZONE, newTimeZone: newTimeZone });
+	if (
+		newTimeZone !== 'europe' &&
+		newTimeZone !== 'canada' &&
+		newTimeZone !== 'united_states'
+	) {
+		dispatch({
+			type: ON_CHANGE_TIME_ZONE,
+			newTimeZone: newTimeZone,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_TIME_ZONE,
+			newTimeZone: newTimeZone,
+			hasError: true
+		});
+	}
 };
 
 export const saveProfile = values => async dispatch => {

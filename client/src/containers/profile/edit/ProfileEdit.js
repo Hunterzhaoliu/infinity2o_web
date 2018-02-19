@@ -1,13 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DisplayField from './DisplayField';
+import * as profileActionCreators from '../../../actions/profile';
+import { bindActionCreators } from 'redux';
+import InputField from './InputField';
+import InputFieldNumber from './InputFieldNumber';
+import InputFieldSelect from './interests/InputFieldSelect';
+import InputSchedule from './availability/InputSchedule';
+import InputTimeZone from './timeZone/InputTimeZone';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
-class Profile extends Component {
+class ProfileEdit extends Component {
+	isSaveDisabled(newProfile) {
+		if (newProfile === undefined) {
+			return true;
+		} else {
+			const numProfileFieldsFilled = Object.keys(newProfile).length;
+			const allFieldsFilled = numProfileFieldsFilled === 5;
+			if (!allFieldsFilled) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
 	render() {
-		//console.log('this.props in Profile.js', this.props);
-		const { colorTheme, currentProfile } = this.props;
+		//console.log('this.props in ProfileEdit.js', this.props);
+		const { colorTheme } = this.props;
 		return (
 			<Content
 				style={{
@@ -23,11 +43,8 @@ class Profile extends Component {
 						padding: '3% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Name: "
-							value={currentProfile.name}
-						/>
+					<Col span={24}>
+						<InputField width={280} label="Name:" />
 					</Col>
 				</Row>
 				<Row
@@ -38,11 +55,8 @@ class Profile extends Component {
 						padding: '3% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Age: "
-							value={currentProfile.age}
-						/>
+					<Col span={24}>
+						<InputFieldNumber width={48} label="Age:" />
 					</Col>
 				</Row>
 				<Row
@@ -53,11 +67,8 @@ class Profile extends Component {
 						padding: '3% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Interest(s): "
-							value={currentProfile.interests}
-						/>
+					<Col span={24}>
+						<InputFieldSelect width={280} label="Interest(s):" />
 					</Col>
 				</Row>
 				<Row
@@ -68,11 +79,8 @@ class Profile extends Component {
 						padding: '3% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Time Zone: "
-							value={currentProfile.time_zone}
-						/>
+					<Col span={24}>
+						<InputTimeZone width={280} label="Time Zone:" />
 					</Col>
 				</Row>
 				<Row
@@ -83,11 +91,8 @@ class Profile extends Component {
 						padding: '3% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Availability: "
-							value={currentProfile.availability}
-						/>
+					<Col span={24}>
+						<InputSchedule />
 					</Col>
 				</Row>
 				<Row
@@ -104,8 +109,9 @@ class Profile extends Component {
 								background: colorTheme.key,
 								color: colorTheme.text1Color
 							}}
+							type="submit"
 						>
-							<a href="/profile/edit">Edit</a>
+							Save
 						</Button>
 					</Col>
 				</Row>
@@ -121,8 +127,25 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		currentProfile: state.profile
+		profile: state.profile
 	};
 }
 
-export default connect(mapStateToProps, null)(Profile);
+/*
+So we have a state and a UI(with props).
+This function gives the UI the functions it will need to be called.
+*/
+function mapDispatchToProps(dispatch) {
+	const profileDispatchers = bindActionCreators(
+		profileActionCreators,
+		dispatch
+	);
+
+	return {
+		saveProfile: values => {
+			profileDispatchers.saveProfile(values);
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);
