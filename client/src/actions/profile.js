@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { SAVE_PROFILE_START, SAVE_PROFILE_DONE } from './types';
+import { ON_CHANGE_NAME, SAVE_PROFILE_START, SAVE_PROFILE_DONE } from './types';
+
+export const onChangeName = newName => dispatch => {
+	dispatch({ type: ON_CHANGE_NAME, newName: newName });
+};
 
 export const saveProfile = values => async dispatch => {
 	dispatch({ type: SAVE_PROFILE_START });

@@ -51,11 +51,7 @@ class ProfileEdit extends Component {
 						}}
 					>
 						<Col span={24}>
-							<InputField
-								defaultValue={profile.name}
-								width={280}
-								label="Name:"
-							/>
+							<InputField width={280} label="Name:" />
 						</Col>
 					</Row>
 					<Row

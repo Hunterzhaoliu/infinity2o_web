@@ -1,7 +1,8 @@
 import {
+	SAVE_FETCHED_USER_PROFILE,
+	ON_CHANGE_NAME,
 	SAVE_PROFILE_START,
-	SAVE_PROFILE_DONE,
-	SAVE_FETCHED_USER_PROFILE
+	SAVE_PROFILE_DONE
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -9,9 +10,14 @@ let cloneObject = obj => {
 };
 
 let initialState = {
+	newAge: null,
+	newName: null,
+	newTimeZone: null,
+	newAvailability: null,
+	newInterests: null,
 	age: null,
 	name: null,
-	time_zone: null,
+	timeZone: null,
 	availability: null,
 	interests: null
 };
@@ -21,6 +27,9 @@ export default function(state = initialState, action) {
 	switch (action.type) {
 		case SAVE_FETCHED_USER_PROFILE:
 			newState = action.profile || false;
+			return newState;
+		case ON_CHANGE_NAME:
+			newState.newName = action.newName;
 			return newState;
 		case SAVE_PROFILE_START:
 			return newState;
