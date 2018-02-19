@@ -30,7 +30,19 @@ export const onChangeAge = newAge => dispatch => {
 };
 
 export const onChangeInterests = newInterests => dispatch => {
-	dispatch({ type: ON_CHANGE_INTERESTS, newInterests: newInterests });
+	if (isValidInterests(newInterests)) {
+		dispatch({
+			type: ON_CHANGE_INTERESTS,
+			newInterests: newInterests,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_INTERESTS,
+			newInterests: newInterests,
+			hasError: true
+		});
+	}
 };
 
 export const saveProfile = values => async dispatch => {

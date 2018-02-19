@@ -4,6 +4,7 @@ import * as profileActionCreators from '../../../actions/profile';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import optionFields from './optionFields';
+import ErrorMessage from '../ErrorMessage';
 import { Row, Col, Select } from 'antd';
 const { Option } = Select;
 
@@ -68,6 +69,10 @@ class InputFieldSelect extends Component {
 						</Select>
 					</Col>
 				</Row>
+				<ErrorMessage
+					message="1 to 5 interests pretty please"
+					hasError={profile.hasInterestsError}
+				/>
 			</div>
 		);
 	}

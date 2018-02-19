@@ -45,6 +45,7 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_CHANGE_INTERESTS:
 			newState.newInterests = action.newInterests;
+			newState.hasInterestsError = action.hasError;
 			return newState;
 		case SAVE_PROFILE_START:
 			return newState;
