@@ -24,7 +24,9 @@ let initialState = {
 	newAvailability: null,
 	hasAgeError: false,
 	hasNameError: false,
-	hasInterestsError: false
+	hasInterestsError: false,
+	hasTimeZoneError: false,
+	hasAvailabilityError: false
 };
 
 export default function(state = initialState, action) {
@@ -39,6 +41,7 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_CHANGE_AGE:
 			newState.newAge = action.newAge;
+			newState.hasAgeError = action.hasError;
 			return newState;
 		case ON_CHANGE_INTERESTS:
 			newState.newInterests = action.newInterests;

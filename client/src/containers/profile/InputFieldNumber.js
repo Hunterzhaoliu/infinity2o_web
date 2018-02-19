@@ -3,6 +3,7 @@ import * as profileActionCreators from '../../actions/profile';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Input, Row, Col } from 'antd';
+import ErrorMessage from './ErrorMessage';
 
 class InputFieldNumber extends Component {
 	onChangeAge = e => {
@@ -55,6 +56,10 @@ class InputFieldNumber extends Component {
 						/>
 					</Col>
 				</Row>
+				<ErrorMessage
+					message="Between 13 & 125. If your close you should lie ;)"
+					hasError={profile.hasAgeError}
+				/>
 			</div>
 		);
 	}
