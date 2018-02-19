@@ -18,6 +18,7 @@ class InputTimeZone extends Component {
 			return profile.newTimeZone;
 		}
 	}
+
 	render() {
 		//console.log('InputTimeZone this.props = ', this.props);
 		// <input onBlur={input.onBlur} onChange={input.onChange} />

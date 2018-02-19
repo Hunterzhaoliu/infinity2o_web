@@ -8,34 +8,22 @@ const timeSlotOptions2 = ['12-2 PM', '2-4 PM ', '4-6 PM'];
 const timeSlotOptions3 = ['6-8 PM ', '8-10 PM', '10-12 midnight'];
 
 class TimeSlots extends Component {
-	renderCheckboxs = ({ input, timeSlots }) => {
+	renderCheckboxs = () => {
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<CheckboxGroup
-							options={timeSlotOptions1}
-							onChange={input.onChange}
-							value={input.value || []}
-						/>
+						<CheckboxGroup options={timeSlotOptions1} />
 					</Col>
 				</Row>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<CheckboxGroup
-							options={timeSlotOptions2}
-							onChange={input.onChange}
-							value={input.value || []}
-						/>
+						<CheckboxGroup options={timeSlotOptions2} />
 					</Col>
 				</Row>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<CheckboxGroup
-							options={timeSlotOptions3}
-							onChange={input.onChange}
-							value={input.value || []}
-						/>
+						<CheckboxGroup options={timeSlotOptions3} />
 					</Col>
 				</Row>
 			</div>
@@ -44,6 +32,7 @@ class TimeSlots extends Component {
 
 	// renderTimeSlots(day) {
 	// 	return (
+	//         {this.renderCheckboxs}
 	// 		<Field
 	// 			name={'dayDropdowns.' + day.value}
 	// 			timeSlots={day.timeSlots}
@@ -54,12 +43,12 @@ class TimeSlots extends Component {
 
 	render() {
 		//console.log('this.props in TimeSlots', this.props);
-		const { day } = this.props;
+		//const { day } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						{/* <Menu>{this.renderTimeSlots(day)}</Menu> */}
+						<Menu />
 					</Col>
 				</Row>
 			</div>

@@ -56,7 +56,7 @@ class ProfileEdit extends Component {
 					}}
 				>
 					<Col span={24}>
-						<InputFieldNumber width={280} label="Age:" />
+						<InputFieldNumber width={48} label="Age:" />
 					</Col>
 				</Row>
 				<Row

@@ -6,19 +6,27 @@ import { Row, Col } from 'antd';
 import daysOfWeek from './daysOfWeek';
 
 class InputSchedule extends Component {
-	// renderDaysOfWeekDropdowns() {
-	// 	return _.map(daysOfWeek, day => {
-	// 		return (
-	// 			<Col span={3} key={day.name}>
-	// 				<DayDropdown day={day} />
-	// 			</Col>
-	// 		);
-	// 	});
-	// }
+	renderDaysOfWeekDropdowns(availability) {
+		return _.map(daysOfWeek, day => {
+			return (
+				<Col span={3} key={day.label}>
+					<DayDropdown
+						day={day}
+						preSelectedTimeSlots={availability[day.value]}
+					/>
+				</Col>
+			);
+		});
+	}
 
 	render() {
 		//console.log('this.props in InputSchedule', this.props);
-		const { colorTheme } = this.props;
+		const { colorTheme, profile } = this.props;
+		profile.availability = {
+			monday: ['6-8 AM', '12-2 PM'],
+			tuesday: ['6-8 AM', '12-2 PM'],
+			wednesday: ['6-8 AM']
+		};
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
@@ -45,7 +53,9 @@ class InputSchedule extends Component {
 						</Row>
 						<Row type="flex" justify="space-around" align="middle">
 							<Col span={24}>
-								{/* {this.renderDaysOfWeekDropdowns()} */}
+								{this.renderDaysOfWeekDropdowns(
+									profile.availability
+								)}
 							</Col>
 						</Row>
 					</Col>
@@ -61,7 +71,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		profile: state.profile
 	};
 }
 
