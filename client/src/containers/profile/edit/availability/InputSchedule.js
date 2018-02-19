@@ -6,6 +6,14 @@ import { Row, Col } from 'antd';
 import daysOfWeek from './daysOfWeek';
 
 class InputSchedule extends Component {
+	renderValue(profile) {
+		if (profile.newTimeZone === undefined) {
+			return profile.time_zone;
+		} else {
+			return profile.newTimeZone;
+		}
+	}
+
 	renderDaysOfWeekDropdowns(availability) {
 		return _.map(daysOfWeek, day => {
 			return (
@@ -22,11 +30,10 @@ class InputSchedule extends Component {
 	render() {
 		//console.log('this.props in InputSchedule', this.props);
 		const { colorTheme, profile } = this.props;
-		profile.availability = {
-			monday: ['6-8 AM', '12-2 PM'],
-			tuesday: ['6-8 AM', '12-2 PM'],
-			wednesday: ['6-8 AM']
-		};
+		profile.availability = {};
+		profile.availability['monday'] = ['6-8 AM', '12-2 PM'];
+		profile.availability['tuesday'] = ['6-8 AM', '8-10 AM'];
+
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">

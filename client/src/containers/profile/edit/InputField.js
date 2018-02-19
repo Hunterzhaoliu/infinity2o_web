@@ -41,9 +41,9 @@ class InputField extends Component {
 							// onFocus={input.onFocus}
 							style={{
 								width: width,
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text3Color
+								borderColor: colorTheme.text9Color,
+								background: colorTheme.text9Color,
+								color: colorTheme.text5Color
 							}}
 						/>
 					</Col>
@@ -79,9 +79,6 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		saveProfile: values => {
-			profileDispatchers.saveProfile(values);
-		},
 		onChangeName: newName => {
 			profileDispatchers.onChangeName(newName);
 		}

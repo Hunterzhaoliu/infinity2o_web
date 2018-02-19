@@ -97,9 +97,6 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		saveProfile: values => {
-			profileDispatchers.saveProfile(values);
-		},
 		onChangeInterests: newInterests => {
 			profileDispatchers.onChangeInterests(newInterests);
 		}
