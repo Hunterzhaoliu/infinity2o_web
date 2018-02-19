@@ -7,7 +7,12 @@ import {
 	SAVE_PROFILE_START,
 	SAVE_PROFILE_DONE
 } from './types';
-import { isValidName } from '../utils/validate';
+import {
+	isValidName,
+	isValidAge,
+	isValidInterests,
+	isValidTimeSlots
+} from '../utils/validate';
 
 export const onChangeName = newName => dispatch => {
 	if (isValidName(newName)) {
@@ -18,7 +23,11 @@ export const onChangeName = newName => dispatch => {
 };
 
 export const onChangeAge = newAge => dispatch => {
-	dispatch({ type: ON_CHANGE_AGE, newAge: newAge });
+	if (isValidAge(newAge)) {
+		dispatch({ type: ON_CHANGE_AGE, newAge: newAge, hasError: false });
+	} else {
+		dispatch({ type: ON_CHANGE_AGE, newAge: newAge, hasError: true });
+	}
 };
 
 export const onChangeInterests = newInterests => dispatch => {
