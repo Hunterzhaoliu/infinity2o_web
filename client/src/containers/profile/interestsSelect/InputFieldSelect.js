@@ -63,6 +63,7 @@ class InputFieldSelect extends Component {
 							}}
 							value={this.renderValue(profile)}
 							onChange={this.onChangeInterests}
+							placeholder="Select up to 5 interests!"
 						>
 							{this.renderOptions()}
 						</Select>

@@ -3,6 +3,7 @@ import {
 	ON_CHANGE_NAME,
 	ON_CHANGE_AGE,
 	ON_CHANGE_INTERESTS,
+	ON_CHANGE_TIME_ZONE,
 	SAVE_PROFILE_START,
 	SAVE_PROFILE_DONE
 } from './types';
@@ -22,6 +23,10 @@ export const onChangeAge = newAge => dispatch => {
 
 export const onChangeInterests = newInterests => dispatch => {
 	dispatch({ type: ON_CHANGE_INTERESTS, newInterests: newInterests });
+};
+
+export const onChangeTimeZone = newTimeZone => dispatch => {
+	dispatch({ type: ON_CHANGE_TIME_ZONE, newTimeZone: newTimeZone });
 };
 
 export const saveProfile = values => async dispatch => {

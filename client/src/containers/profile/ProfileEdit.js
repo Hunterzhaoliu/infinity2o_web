@@ -87,7 +87,7 @@ class ProfileEdit extends Component {
 						}}
 					>
 						<Col span={24}>
-							<InputTimeZone />
+							<InputTimeZone width={280} label="Time Zone:" />
 						</Col>
 					</Row>
 					<Row

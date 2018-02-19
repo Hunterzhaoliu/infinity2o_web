@@ -3,6 +3,7 @@ import {
 	ON_CHANGE_NAME,
 	ON_CHANGE_AGE,
 	ON_CHANGE_INTERESTS,
+	ON_CHANGE_TIME_ZONE,
 	SAVE_PROFILE_START,
 	SAVE_PROFILE_DONE
 } from '../actions/types';
@@ -42,6 +43,9 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_CHANGE_INTERESTS:
 			newState.newInterests = action.newInterests;
+			return newState;
+		case ON_CHANGE_TIME_ZONE:
+			newState.newTimeZone = action.newTimeZone;
 			return newState;
 		case SAVE_PROFILE_START:
 			return newState;

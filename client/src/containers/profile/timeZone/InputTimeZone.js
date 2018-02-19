@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
+import * as profileActionCreators from '../../../actions/profile';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { TreeSelect, Row, Col } from 'antd';
 import timeZones from './timeZones';
 
 class InputTimeZone extends Component {
+	onChangeTimeZone = e => {
+		//console.log('e onChangeTimeZone = ', e);
+		this.props.onChangeTimeZone(e.target.value);
+	};
+
+	renderValue(profile) {
+		if (profile.newTimeZone === undefined) {
+			return profile.time_zone;
+		} else {
+			return profile.newTimeZone;
+		}
+	}
 	render() {
 		//console.log('InputTimeZone this.props = ', this.props);
 		// <input onBlur={input.onBlur} onChange={input.onChange} />
-		const { colorTheme, label, width } = this.props;
+		const { colorTheme, label, width, profile } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -34,6 +48,8 @@ class InputTimeZone extends Component {
 						<TreeSelect
 							style={{ width }}
 							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+							value={this.renderValue(profile)}
+							onChange={this.onChangeTimeZone}
 							treeData={timeZones}
 							placeholder="Time Zone?"
 						/>
@@ -51,8 +67,24 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		userInfo: state.auth.userInfo
+		profile: state.profile
 	};
 }
 
-export default connect(mapStateToProps, null)(InputTimeZone);
+function mapDispatchToProps(dispatch) {
+	const profileDispatchers = bindActionCreators(
+		profileActionCreators,
+		dispatch
+	);
+
+	return {
+		saveProfile: values => {
+			profileDispatchers.saveProfile(values);
+		},
+		onChangeTimeZone: newTimeZone => {
+			profileDispatchers.onChangeTimeZone(newTimeZone);
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputTimeZone);
