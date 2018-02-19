@@ -1,31 +1,35 @@
 import React, { Component } from 'react';
-import * as profileActionCreators from '../../actions/profile';
+import * as profileActionCreators from '../../../actions/profile';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Input, Row, Col } from 'antd';
 import ErrorMessage from './ErrorMessage';
 
-class InputField extends Component {
-	onChangeName = e => {
-		this.props.onChangeName(e.target.value);
+class InputFieldNumber extends Component {
+	onChangeAge = e => {
+		this.props.onChangeAge(e.target.value);
 	};
 
 	renderValue(profile) {
-		if (profile.newName === undefined) {
-			return profile.name;
+		if (profile.newAge === undefined) {
+			return profile.age;
 		} else {
-			return profile.newName;
+			return profile.newAge;
 		}
 	}
 
 	render() {
-		//console.log('InputField this.props = ', this.props);
+		//console.log('this.props in InputFieldNumber', this.props);
 		const { colorTheme, label, width, profile } = this.props;
-
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col md={{ span: 5 }}>
+					<Col
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					>
 						<h3
 							style={{
 								color: colorTheme.keyText5Color
@@ -34,11 +38,15 @@ class InputField extends Component {
 							{label}
 						</h3>
 					</Col>
-					<Col md={{ span: 18, offset: 1 }}>
+					<Col
+						sm={{ span: 3, offset: 1 }}
+						md={{ span: 3, offset: 1 }}
+						lg={{ span: 3, offset: 1 }}
+						xl={{ span: 3, offset: 1 }}
+					>
 						<Input
 							value={this.renderValue(profile)}
-							onChange={this.onChangeName}
-							// onFocus={input.onFocus}
+							onChange={this.onChangeAge}
 							style={{
 								width: width,
 								borderColor: colorTheme.text7Color,
@@ -49,8 +57,8 @@ class InputField extends Component {
 					</Col>
 				</Row>
 				<ErrorMessage
-					message="Cool name! But we need 1 to 30 valid letters"
-					hasError={profile.hasNameError}
+					message="Between 13 & 125. If your close you should lie ;)"
+					hasError={profile.hasAgeError}
 				/>
 			</div>
 		);
@@ -59,8 +67,9 @@ class InputField extends Component {
 
 /*
 So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
+This function gives the UI the functions it will need to be called.
 */
+
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
@@ -68,10 +77,6 @@ function mapStateToProps(state) {
 	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
 function mapDispatchToProps(dispatch) {
 	const profileDispatchers = bindActionCreators(
 		profileActionCreators,
@@ -82,10 +87,10 @@ function mapDispatchToProps(dispatch) {
 		saveProfile: values => {
 			profileDispatchers.saveProfile(values);
 		},
-		onChangeName: newName => {
-			profileDispatchers.onChangeName(newName);
+		onChangeAge: newAge => {
+			profileDispatchers.onChangeAge(newAge);
 		}
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputField);
+export default connect(mapStateToProps, mapDispatchToProps)(InputFieldNumber);

@@ -6,7 +6,7 @@ const { Content } = Layout;
 
 class Profile extends Component {
 	render() {
-		console.log('this.props in Profile.js', this.props);
+		//console.log('this.props in Profile.js', this.props);
 		const { colorTheme, currentProfile } = this.props;
 		return (
 			<Content

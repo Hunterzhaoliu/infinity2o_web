@@ -6,15 +6,15 @@ import { Row, Col } from 'antd';
 import daysOfWeek from './daysOfWeek';
 
 class InputSchedule extends Component {
-	renderDaysOfWeekDropdowns() {
-		return _.map(daysOfWeek, day => {
-			return (
-				<Col span={3} key={day.name}>
-					<DayDropdown day={day} />
-				</Col>
-			);
-		});
-	}
+	// renderDaysOfWeekDropdowns() {
+	// 	return _.map(daysOfWeek, day => {
+	// 		return (
+	// 			<Col span={3} key={day.name}>
+	// 				<DayDropdown day={day} />
+	// 			</Col>
+	// 		);
+	// 	});
+	// }
 
 	render() {
 		//console.log('this.props in InputSchedule', this.props);
@@ -45,7 +45,7 @@ class InputSchedule extends Component {
 						</Row>
 						<Row type="flex" justify="space-around" align="middle">
 							<Col span={24}>
-								{this.renderDaysOfWeekDropdowns()}
+								{/* {this.renderDaysOfWeekDropdowns()} */}
 							</Col>
 						</Row>
 					</Col>

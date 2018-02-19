@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as profileActionCreators from '../../actions/profile';
+import * as profileActionCreators from '../../../actions/profile';
 import { bindActionCreators } from 'redux';
 import InputField from './InputField';
 import InputFieldNumber from './InputFieldNumber';
-import InputFieldSelect from './interestsSelect/InputFieldSelect';
-import InputSchedule from './scheduleDropdowns/InputSchedule';
+import InputFieldSelect from './interests/InputFieldSelect';
+import InputSchedule from './availability/InputSchedule';
 import InputTimeZone from './timeZone/InputTimeZone';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;

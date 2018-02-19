@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Row, Col, Menu, Checkbox } from 'antd';
 const CheckboxGroup = Checkbox.Group;
@@ -43,15 +42,15 @@ class TimeSlots extends Component {
 		);
 	};
 
-	renderTimeSlots(day) {
-		return (
-			<Field
-				name={'dayDropdowns.' + day.value}
-				timeSlots={day.timeSlots}
-				component={this.renderCheckboxs}
-			/>
-		);
-	}
+	// renderTimeSlots(day) {
+	// 	return (
+	// 		<Field
+	// 			name={'dayDropdowns.' + day.value}
+	// 			timeSlots={day.timeSlots}
+	// 			component={this.renderCheckboxs}
+	// 		/>
+	// 	);
+	// }
 
 	render() {
 		//console.log('this.props in TimeSlots', this.props);
@@ -60,7 +59,7 @@ class TimeSlots extends Component {
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Menu>{this.renderTimeSlots(day)}</Menu>
+						{/* <Menu>{this.renderTimeSlots(day)}</Menu> */}
 					</Col>
 				</Row>
 			</div>
