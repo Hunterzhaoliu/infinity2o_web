@@ -10,8 +10,8 @@ import {
 import {
 	isValidName,
 	isValidAge,
-	isValidInterests,
-	isValidTimeSlots
+	isValidInterests
+	//isValidTimeSlots
 } from '../utils/validate';
 
 export const onChangeName = newName => dispatch => {

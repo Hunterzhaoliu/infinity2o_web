@@ -32,7 +32,7 @@ class InputFieldSelect extends Component {
 	}
 
 	render() {
-		const { colorTheme, label, width, placeholder, profile } = this.props;
+		const { colorTheme, label, width, profile } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
