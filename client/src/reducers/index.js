@@ -7,6 +7,6 @@ import profileReducer from './profileReducer';
 export default combineReducers({
 	colorTheme: colorThemeReducer,
 	auth: authReducer,
-	form: formReducer,
+	//form: formReducer,
 	profile: profileReducer
 });

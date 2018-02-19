@@ -30,7 +30,7 @@ class DayDropdown extends Component {
 	};
 
 	render() {
-		console.log('this.props in DayDropdown', this.props);
+		//console.log('this.props in DayDropdown', this.props);
 		const { colorTheme, day, preSelectedTimeSlots } = this.props;
 		//const menu2 = <TimeSlots day={day} />;
 		const menu = (

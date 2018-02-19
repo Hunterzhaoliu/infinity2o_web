@@ -68,6 +68,7 @@ export const onChangeTimeZone = newTimeZone => dispatch => {
 
 export const saveProfile = values => async dispatch => {
 	dispatch({ type: SAVE_PROFILE_START });
+	console.log('values in profile reducer = ', values);
 	const { dayDropdowns } = values;
 
 	let allTimeSlots = [];

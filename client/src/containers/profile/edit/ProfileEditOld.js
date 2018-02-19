@@ -33,7 +33,7 @@ class ProfileEdit extends Component {
 	}
 
 	render() {
-		//console.log('this.props in ProfileEdit.js', this.props);
+		console.log('this.props in ProfileEdit.js', this.props);
 		const {
 			colorTheme,
 			handleSubmit,
@@ -131,10 +131,7 @@ class ProfileEdit extends Component {
 						}}
 					>
 						<Col span={24}>
-							<Field
-								name="input_schedule"
-								component={InputSchedule}
-							/>
+							<Field name="input_schedule" component={InputSchedule} />
 						</Col>
 					</Row>
 					<Row
