@@ -11,23 +11,25 @@ import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
 class ProfileEdit extends Component {
-	isSaveDisabled(profileEdit) {
-		if (profileEdit === undefined) {
+	isSaveDisabled(profile) {
+		if (
+			profile.hasNameError === undefined ||
+			profile.hasNameError ||
+			profile.hasAgeError === undefined ||
+			profile.hasAgeError ||
+			profile.hasInterestsError === undefined ||
+			profile.hasInterestsError ||
+			profile.hasTimeZoneError === undefined ||
+			profile.hasTimeZoneError
+		) {
 			return true;
 		} else {
-			const numProfileFieldsFilled = Object.keys(profileEdit).length;
-			const allFieldsFilled = numProfileFieldsFilled === 5;
-			if (!allFieldsFilled) {
-				return true;
-			} else {
-				return false;
-			}
+			return false;
 		}
 	}
-
 	render() {
 		//console.log('this.props in ProfileEdit.js', this.props);
-		const { colorTheme, saveProfile, profileEdit, state } = this.props;
+		const { colorTheme, saveProfile, profile, state } = this.props;
 		return (
 			<Content
 				style={{
@@ -110,8 +112,7 @@ class ProfileEdit extends Component {
 								color: colorTheme.text1Color
 							}}
 							type="submit"
-							disabled={this.isSaveDisabled(profileEdit)}
-							onClick={() => saveProfile(profileEdit)}
+							disabled={this.isSaveDisabled(profile)}
 						>
 							Save
 						</Button>
@@ -129,7 +130,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		profileEdit: state.profile
+		profile: state.profile
 	};
 }
 
