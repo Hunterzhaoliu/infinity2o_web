@@ -10,12 +10,13 @@ module.exports = app => {
 			newTimeZone,
 			newAvailability
 		} = request.body;
-		console.log('request.body = ', request.body);
 		request.user.profile.name = newName;
 		request.user.profile.age = newAge;
 		request.user.profile.interests = newInterests;
-		request.user.profile.time_zone = newTimeZone;
+		request.user.profile.timeZone = newTimeZone;
 		request.user.profile.availability = newAvailability;
+		console.log('request.body = ', request.body);
+
 		const user = await request.user.save();
 		response.send(user);
 	});

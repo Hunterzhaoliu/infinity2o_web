@@ -13,7 +13,7 @@ class InputTimeZone extends Component {
 
 	renderValue(profile) {
 		if (profile.newTimeZone === undefined) {
-			return profile.time_zone;
+			return profile.timeZone;
 		} else {
 			return profile.newTimeZone;
 		}

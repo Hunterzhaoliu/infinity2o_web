@@ -13,13 +13,9 @@ const { Content } = Layout;
 class ProfileEdit extends Component {
 	isSaveDisabled(profile) {
 		if (
-			profile.hasNameError === undefined ||
 			profile.hasNameError ||
-			profile.hasAgeError === undefined ||
 			profile.hasAgeError ||
-			profile.hasInterestsError === undefined ||
 			profile.hasInterestsError ||
-			profile.hasTimeZoneError === undefined ||
 			profile.hasTimeZoneError
 		) {
 			return true;
@@ -27,6 +23,7 @@ class ProfileEdit extends Component {
 			return false;
 		}
 	}
+
 	render() {
 		//console.log('this.props in ProfileEdit.js', this.props);
 		const { colorTheme, saveProfile, profile } = this.props;

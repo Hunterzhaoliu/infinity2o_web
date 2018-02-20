@@ -7,7 +7,7 @@ const { Content } = Layout;
 class Profile extends Component {
 	render() {
 		//console.log('this.props in Profile.js', this.props);
-		const { colorTheme, currentProfile } = this.props;
+		const { colorTheme, profile } = this.props;
 		return (
 			<Content
 				style={{
@@ -24,10 +24,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Name: "
-							value={currentProfile.name}
-						/>
+						<DisplayField label="Name: " value={profile.name} />
 					</Col>
 				</Row>
 				<Row
@@ -39,10 +36,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Age: "
-							value={currentProfile.age}
-						/>
+						<DisplayField label="Age: " value={profile.age} />
 					</Col>
 				</Row>
 				<Row
@@ -56,7 +50,7 @@ class Profile extends Component {
 					<Col md={{ span: 24 }}>
 						<DisplayField
 							label="Interest(s): "
-							value={currentProfile.interests}
+							value={profile.interests}
 						/>
 					</Col>
 				</Row>
@@ -71,7 +65,7 @@ class Profile extends Component {
 					<Col md={{ span: 24 }}>
 						<DisplayField
 							label="Time Zone: "
-							value={currentProfile.time_zone}
+							value={profile.timeZone}
 						/>
 					</Col>
 				</Row>
@@ -86,7 +80,7 @@ class Profile extends Component {
 					<Col md={{ span: 24 }}>
 						<DisplayField
 							label="Availability: "
-							value={currentProfile.availability}
+							value={profile.availability}
 						/>
 					</Col>
 				</Row>
@@ -121,7 +115,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		currentProfile: state.profile
+		profile: state.profile
 	};
 }
 

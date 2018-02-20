@@ -11,7 +11,7 @@ const userSchema = new Schema({
 		name: String,
 		age: { type: Number },
 		interests: [String],
-		time_zone: String,
+		timeZone: String,
 		availability: [String]
 	}
 });

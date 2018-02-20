@@ -45,7 +45,6 @@ class DayDropdown extends Component {
 	}
 
 	onChangeTimeSlot = e => {
-		//console.log('onChangeTimeSlot e.target.value = ', e.target.value);
 		this.props.onChangeTimeSlot(e.target.value);
 	};
 

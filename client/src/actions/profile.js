@@ -78,23 +78,22 @@ export const onChangeTimeSlot = newTimeSlot => dispatch => {
 export const saveProfile = values => async dispatch => {
 	dispatch({ type: SAVE_PROFILE_START });
 	console.log('values in profile reducer = ', values);
-	/*
-	const { dayDropdowns } = values;
+	if (values.newName === undefined) {
+		values.newName = values.name;
+	}
+	if (values.newAge === undefined) {
+		values.newAge = values.age;
+	}
+	if (values.newInterests === undefined) {
+		values.newInterests = values.interests;
+	}
+	if (values.newTimeZone === undefined) {
+		values.newTimeZone = values.timeZone;
+	}
+	if (values.newAvailability === undefined) {
+		values.newAvailability = values.availability;
+	}
 
-	let allTimeSlots = [];
-
-	Object.entries(dayDropdowns).forEach(function(dayTimePair) {
-		if (dayTimePair[1] !== undefined) {
-			dayTimePair[1].forEach(function(time) {
-				allTimeSlots.push(
-					dayTimePair[0].toString().substring(0, 3) + ' ' + time
-				);
-			});
-		}
-	});
-
-	values.availability = allTimeSlots;
-	*/
 	const response = await axios.post('/api/profile', values);
 	dispatch({ type: SAVE_PROFILE_DONE, profile: response.data.profile });
 };
