@@ -18,19 +18,12 @@ const timeSlotOptions = [
 ];
 
 class DayDropdown extends Component {
-	renderMenuItems(day, oldTimeSlots, newTimeSlots) {
-		//console.log('day.label = ', day.label);
-
+	renderMenuItems(day, newTimeSlots) {
 		return _.map(timeSlotOptions, timeSlot => {
-			//console.log('timeSlot = ', timeSlot);
 			return (
 				<Menu.Item key={day.value + ' ' + timeSlot}>
 					<Checkbox
-						checked={this.isChecked(
-							timeSlot,
-							oldTimeSlots,
-							newTimeSlots
-						)}
+						checked={this.isChecked(timeSlot, newTimeSlots)}
 						value={[day.value, timeSlot]}
 						onChange={this.onChangeTimeSlot}
 					>
@@ -41,11 +34,16 @@ class DayDropdown extends Component {
 		});
 	}
 
-	isChecked(timeSlot, oldTimeSlots, newTimeSlots) {
-		// console.log('oldTimeSlots = ', oldTimeSlots);
-		// console.log('newTimeSlots = ', newTimeSlots);
-		//return oldTimeSlots.indexOf(timeSlot) !== -1;
-		if (oldTimeSlots !== undefined && oldTimeSlots.includes(timeSlot)) {
+	renderValue(profile) {
+		if (profile.newTimeZone === undefined) {
+			return profile.time_zone;
+		} else {
+			return profile.newTimeZone;
+		}
+	}
+
+	isChecked(timeSlot, newTimeSlots) {
+		if (newTimeSlots !== undefined && newTimeSlots.includes(timeSlot)) {
 			return true;
 		} else {
 			return false;
@@ -53,20 +51,20 @@ class DayDropdown extends Component {
 	}
 
 	onChangeTimeSlot = e => {
-		console.log('onChangeTimeSlot e.target.value = ', e.target.value);
+		//console.log('onChangeTimeSlot e.target.value = ', e.target.value);
 		this.props.onChangeTimeSlot(e.target.value);
 	};
 
 	render() {
 		//console.log('this.props in DayDropdown', this.props);
 		const { colorTheme, day, oldTimeSlots, profile } = this.props;
+
+		// copy over initial old checked time slots
 		if (profile.newAvailability === undefined) {
-			profile.newAvailability = {};
+			profile.newAvailability = profile.availability;
 		}
 		const newTimeSlots = profile.newAvailability[day.value];
-		const menu = (
-			<Menu>{this.renderMenuItems(day, oldTimeSlots, newTimeSlots)}</Menu>
-		);
+		const menu = <Menu>{this.renderMenuItems(day, newTimeSlots)}</Menu>;
 		return (
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
