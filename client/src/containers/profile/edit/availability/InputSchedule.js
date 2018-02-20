@@ -20,7 +20,7 @@ class InputSchedule extends Component {
 				<Col span={3} key={day.label}>
 					<DayDropdown
 						day={day}
-						preSelectedTimeSlots={availability[day.value]}
+						oldTimeSlots={availability[day.value]}
 					/>
 				</Col>
 			);

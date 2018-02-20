@@ -18,15 +18,19 @@ const timeSlotOptions = [
 ];
 
 class DayDropdown extends Component {
-	renderMenuItems(day, preSelectedTimeSlots) {
+	renderMenuItems(day, oldTimeSlots, newTimeSlots) {
 		//console.log('day.label = ', day.label);
-		//console.log('preSelectedTimeSlots = ', preSelectedTimeSlots);
+
 		return _.map(timeSlotOptions, timeSlot => {
 			//console.log('timeSlot = ', timeSlot);
 			return (
 				<Menu.Item key={day.value + ' ' + timeSlot}>
 					<Checkbox
-						checked={this.isChecked(timeSlot, preSelectedTimeSlots)}
+						checked={this.isChecked(
+							timeSlot,
+							oldTimeSlots,
+							newTimeSlots
+						)}
 						value={[day.value, timeSlot]}
 						onChange={this.onChangeTimeSlot}
 					>
@@ -37,12 +41,11 @@ class DayDropdown extends Component {
 		});
 	}
 
-	isChecked(timeSlot, preSelectedTimeSlots) {
-		//return preSelectedTimeSlots.indexOf(timeSlot) !== -1;
-		if (
-			preSelectedTimeSlots !== undefined &&
-			preSelectedTimeSlots.includes(timeSlot)
-		) {
+	isChecked(timeSlot, oldTimeSlots, newTimeSlots) {
+		// console.log('oldTimeSlots = ', oldTimeSlots);
+		// console.log('newTimeSlots = ', newTimeSlots);
+		//return oldTimeSlots.indexOf(timeSlot) !== -1;
+		if (oldTimeSlots !== undefined && oldTimeSlots.includes(timeSlot)) {
 			return true;
 		} else {
 			return false;
@@ -56,9 +59,13 @@ class DayDropdown extends Component {
 
 	render() {
 		//console.log('this.props in DayDropdown', this.props);
-		const { colorTheme, day, preSelectedTimeSlots, profile } = this.props;
+		const { colorTheme, day, oldTimeSlots, profile } = this.props;
+		if (profile.newAvailability === undefined) {
+			profile.newAvailability = {};
+		}
+		const newTimeSlots = profile.newAvailability[day.value];
 		const menu = (
-			<Menu>{this.renderMenuItems(day, preSelectedTimeSlots)}</Menu>
+			<Menu>{this.renderMenuItems(day, oldTimeSlots, newTimeSlots)}</Menu>
 		);
 		return (
 			<div>
