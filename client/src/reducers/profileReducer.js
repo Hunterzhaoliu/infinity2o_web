@@ -16,14 +16,14 @@ let cloneObject = obj => {
 let initialState = {
 	name: null,
 	age: null,
-	interests: null,
+	interests: [],
 	timeZone: null,
-	availability: null,
+	availability: [],
 	newName: null,
 	newAge: null,
 	newInterests: null,
 	newTimeZone: null,
-	newTimeSlots: null,
+	newAvailability: [],
 	hasAgeError: false,
 	hasNameError: false,
 	hasInterestsError: false,
@@ -54,11 +54,26 @@ export default function(state = initialState, action) {
 			newState.hasTimeZoneError = action.hasError;
 			return newState;
 		case ON_CHANGE_TIME_SLOT:
-			let i = newState.newTimeSlots.indexOf(action.newTimeSlot);
-			if (i !== -1) {
-				newState.newTimeSlots.splice(i, 1);
+			console.log(
+				'ON_CHANGE_TIME_SLOT action.newTimeSlot = ',
+				action.newTimeSlot
+			);
+			const dayValue = action.newTimeSlot[0];
+			const timeSlot = action.newTimeSlot[1];
+			if (newState.newAvailability === undefined) {
+				newState.newAvailability = {};
+			}
+			if (newState.newAvailability[dayValue] !== undefined) {
+				let i = newState.newAvailability[dayValue].indexOf(timeSlot);
+				if (i !== -1) {
+					// time slot is already checked so uncheck by removind
+					newState.newAvailability[dayValue].splice(i, 1);
+				} else {
+					newState.newAvailability[dayValue].push(timeSlot);
+				}
 			} else {
-				newState.newTimeSlots.push(action.newTimeSlot);
+				newState.newAvailability[dayValue] = [];
+				newState.newAvailability[dayValue].push(timeSlot);
 			}
 
 			return newState;

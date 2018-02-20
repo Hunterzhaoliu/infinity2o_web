@@ -20,14 +20,14 @@ const timeSlotOptions = [
 class DayDropdown extends Component {
 	renderMenuItems(day, preSelectedTimeSlots) {
 		//console.log('day.label = ', day.label);
-		console.log('preSelectedTimeSlots = ', preSelectedTimeSlots);
+		//console.log('preSelectedTimeSlots = ', preSelectedTimeSlots);
 		return _.map(timeSlotOptions, timeSlot => {
 			//console.log('timeSlot = ', timeSlot);
 			return (
-				<Menu.Item key={day.label + ' ' + timeSlot}>
+				<Menu.Item key={day.value + ' ' + timeSlot}>
 					<Checkbox
 						checked={this.isChecked(timeSlot, preSelectedTimeSlots)}
-						value={day.label + ' ' + timeSlot}
+						value={[day.value, timeSlot]}
 						onChange={this.onChangeTimeSlot}
 					>
 						{timeSlot}
