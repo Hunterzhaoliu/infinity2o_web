@@ -12,7 +12,15 @@ const userSchema = new Schema({
 		age: { type: Number },
 		interests: [String],
 		timeZone: String,
-		availability: [String]
+		availability: {
+			monday: [String],
+			tuesday: [String],
+			wednesday: [String],
+			thursday: [String],
+			friday: [String],
+			saturday: [String],
+			sunday: [String]
+		}
 	}
 });
 
