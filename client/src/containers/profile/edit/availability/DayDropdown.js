@@ -18,6 +18,10 @@ const timeSlotOptions = [
 ];
 
 class DayDropdown extends Component {
+	state = {
+		visible: false
+	};
+
 	renderMenuItems(day, newTimeSlots) {
 		return _.map(timeSlotOptions, timeSlot => {
 			return (
@@ -34,14 +38,6 @@ class DayDropdown extends Component {
 		});
 	}
 
-	renderValue(profile) {
-		if (profile.newTimeZone === undefined) {
-			return profile.time_zone;
-		} else {
-			return profile.newTimeZone;
-		}
-	}
-
 	isChecked(timeSlot, newTimeSlots) {
 		if (newTimeSlots !== undefined && newTimeSlots.includes(timeSlot)) {
 			return true;
@@ -53,6 +49,10 @@ class DayDropdown extends Component {
 	onChangeTimeSlot = e => {
 		//console.log('onChangeTimeSlot e.target.value = ', e.target.value);
 		this.props.onChangeTimeSlot(e.target.value);
+	};
+
+	handleVisibleChange = flag => {
+		this.setState({ visible: flag });
 	};
 
 	render() {
@@ -69,7 +69,11 @@ class DayDropdown extends Component {
 			<div>
 				<Row type="flex" justify="space-between" align="middle">
 					<Col span={24}>
-						<Dropdown overlay={menu}>
+						<Dropdown
+							onVisibleChange={this.handleVisibleChange}
+							visible={this.state.visible}
+							overlay={menu}
+						>
 							<a
 								style={{
 									color: colorTheme.text5Color
