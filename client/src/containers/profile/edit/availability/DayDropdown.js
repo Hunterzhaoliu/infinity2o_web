@@ -20,7 +20,7 @@ const timeSlotOptions = [
 class DayDropdown extends Component {
 	renderMenuItems(day, preSelectedTimeSlots) {
 		//console.log('day.label = ', day.label);
-		console.log('preSelectedTimeSlots = ', preSelectedTimeSlots);
+		//console.log('preSelectedTimeSlots = ', preSelectedTimeSlots);
 		return _.map(timeSlotOptions, timeSlot => {
 			//console.log('timeSlot = ', timeSlot);
 			return (
@@ -50,7 +50,7 @@ class DayDropdown extends Component {
 	}
 
 	onChangeTimeSlot = e => {
-		console.log('onChangeTimeSlot e.target.value = ', e.target.value);
+		//console.log('onChangeTimeSlot e.target.value = ', e.target.value);
 		this.props.onChangeTimeSlot(e.target.value);
 	};
 
