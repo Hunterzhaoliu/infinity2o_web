@@ -44,13 +44,11 @@ class DayDropdown extends Component {
 			preSelectedTimeSlots.includes(timeSlot)
 		) {
 			return true;
-		} else {
-			return false;
 		}
 	}
 
 	onChangeTimeSlot = e => {
-		//console.log('onChangeTimeSlot e.target.value = ', e.target.value);
+		//console.log('onChangeTimeSlot e = ', e);
 		this.props.onChangeTimeSlot(e.target.value);
 	};
 
