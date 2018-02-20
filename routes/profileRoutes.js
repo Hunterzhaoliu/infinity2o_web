@@ -3,12 +3,19 @@ const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
 	app.post('/api/profile', requireLogin, async (request, response) => {
-		const { name, age, interests, time_zone, availability } = request.body;
-		request.user.profile.name = name;
-		request.user.profile.age = age;
-		request.user.profile.interests = interests;
-		request.user.profile.time_zone = time_zone;
-		request.user.profile.availability = availability;
+		const {
+			newName,
+			newAge,
+			newInterests,
+			newTimeZone,
+			newAvailability
+		} = request.body;
+		console.log('request.body = ', request.body);
+		request.user.profile.name = newName;
+		request.user.profile.age = newAge;
+		request.user.profile.interests = newInterests;
+		request.user.profile.time_zone = newTimeZone;
+		request.user.profile.availability = newAvailability;
 		const user = await request.user.save();
 		response.send(user);
 	});

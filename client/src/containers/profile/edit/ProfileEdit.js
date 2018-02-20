@@ -113,6 +113,7 @@ class ProfileEdit extends Component {
 							}}
 							type="submit"
 							disabled={this.isSaveDisabled(profile)}
+							onClick={() => saveProfile(profile)}
 						>
 							Save
 						</Button>
