@@ -77,6 +77,8 @@ export const onChangeTimeSlot = newTimeSlot => dispatch => {
 
 export const saveProfile = values => async dispatch => {
 	dispatch({ type: SAVE_PROFILE_START });
+	console.log('values in profile reducer = ', values);
+	/*
 	const { dayDropdowns } = values;
 
 	let allTimeSlots = [];
@@ -92,7 +94,7 @@ export const saveProfile = values => async dispatch => {
 	});
 
 	values.availability = allTimeSlots;
-
+	*/
 	const response = await axios.post('/api/profile', values);
 	dispatch({ type: SAVE_PROFILE_DONE, profile: response.data.profile });
 };

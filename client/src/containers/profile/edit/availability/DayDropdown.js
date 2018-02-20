@@ -41,8 +41,6 @@ class DayDropdown extends Component {
 	isChecked(timeSlot, newTimeSlots) {
 		if (newTimeSlots !== undefined && newTimeSlots.includes(timeSlot)) {
 			return true;
-		} else {
-			return false;
 		}
 	}
 
