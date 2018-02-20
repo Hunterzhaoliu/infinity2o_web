@@ -55,7 +55,7 @@ class DayDropdown extends Component {
 
 	render() {
 		//console.log('this.props in DayDropdown', this.props);
-		const { colorTheme, day, oldTimeSlots, profile } = this.props;
+		const { colorTheme, day, profile } = this.props;
 
 		// copy over initial old checked time slots
 		if (profile.newAvailability === undefined) {
