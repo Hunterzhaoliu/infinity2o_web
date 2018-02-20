@@ -24,7 +24,7 @@ class InputFieldSelect extends Component {
 	};
 
 	renderValue(profile) {
-		if (profile.newInterests === undefined) {
+		if (profile.newInterests.length === 0) {
 			return profile.interests;
 		} else {
 			return profile.newInterests;

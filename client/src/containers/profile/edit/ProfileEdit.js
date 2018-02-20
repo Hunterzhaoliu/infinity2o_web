@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as indexActionCreators from '../../../actions/index';
 import * as profileActionCreators from '../../../actions/profile';
 import { bindActionCreators } from 'redux';
 import InputField from './InputField';
@@ -11,6 +12,11 @@ import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
 class ProfileEdit extends Component {
+	componentWillMount() {
+		// run once before first render()
+		this.props.fetchUserProfile();
+	}
+
 	isSaveDisabled(profile) {
 		if (
 			profile.hasNameError ||
@@ -137,12 +143,17 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
+	const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
+
 	const profileDispatchers = bindActionCreators(
 		profileActionCreators,
 		dispatch
 	);
 
 	return {
+		fetchUserProfile: () => {
+			indexDispatchers.fetchUserProfile();
+		},
 		saveProfile: values => {
 			profileDispatchers.saveProfile(values);
 		}

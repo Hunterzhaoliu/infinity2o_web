@@ -19,7 +19,6 @@ class App extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.initializeApp();
-		//console.log('componentWillMount this.props = ', this.props);
 	}
 
 	render() {

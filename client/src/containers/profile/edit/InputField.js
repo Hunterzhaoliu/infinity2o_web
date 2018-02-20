@@ -11,7 +11,7 @@ class InputField extends Component {
 	};
 
 	renderValue(profile) {
-		if (profile.newName === undefined) {
+		if (profile.newName === null) {
 			return profile.name;
 		} else {
 			return profile.newName;

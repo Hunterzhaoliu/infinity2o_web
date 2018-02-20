@@ -18,12 +18,12 @@ let initialState = {
 	age: null,
 	interests: [],
 	timeZone: null,
-	availability: [],
+	availability: {},
 	newName: null,
 	newAge: null,
-	newInterests: null,
+	newInterests: [],
 	newTimeZone: null,
-	newAvailability: [],
+	newAvailability: {},
 	hasAgeError: false,
 	hasNameError: false,
 	hasInterestsError: false,
@@ -35,7 +35,11 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case SAVE_FETCHED_USER_PROFILE:
-			newState = action.profile || false;
+			newState.name = action.profile.name;
+			newState.age = action.profile.age;
+			newState.interests = action.profile.interests;
+			newState.timeZone = action.profile.timeZone;
+			newState.availability = action.profile.availability;
 			return newState;
 		case ON_CHANGE_NAME:
 			newState.newName = action.newName;
@@ -80,7 +84,6 @@ export default function(state = initialState, action) {
 		case SAVE_PROFILE_START:
 			return newState;
 		case SAVE_PROFILE_DONE:
-			newState = action.profile || false;
 			return newState;
 		default:
 			return state;

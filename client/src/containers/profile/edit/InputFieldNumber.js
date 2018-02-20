@@ -11,7 +11,7 @@ class InputFieldNumber extends Component {
 	};
 
 	renderValue(profile) {
-		if (profile.newAge === undefined) {
+		if (profile.newAge === null) {
 			return profile.age;
 		} else {
 			return profile.newAge;

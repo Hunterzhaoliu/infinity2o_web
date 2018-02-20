@@ -77,23 +77,26 @@ export const onChangeTimeSlot = newTimeSlot => dispatch => {
 
 export const saveProfile = values => async dispatch => {
 	dispatch({ type: SAVE_PROFILE_START });
-	console.log('values in profile reducer = ', values);
-	if (values.newName === undefined) {
+	// if the user already has profile data saved and makes a edit to one
+	// field we need to make sure we send the old unedited data for profile
+	if (values.newName === null) {
 		values.newName = values.name;
 	}
-	if (values.newAge === undefined) {
+	if (values.newAge === null) {
 		values.newAge = values.age;
 	}
-	if (values.newInterests === undefined) {
+	if (values.newInterests.length === 0) {
 		values.newInterests = values.interests;
 	}
-	if (values.newTimeZone === undefined) {
+	if (values.newTimeZone === null) {
 		values.newTimeZone = values.timeZone;
 	}
-	if (values.newAvailability === undefined) {
+	if (Object.keys(values.newAvailability).length === 0) {
 		values.newAvailability = values.availability;
 	}
-
 	const response = await axios.post('/api/profile', values);
-	dispatch({ type: SAVE_PROFILE_DONE, profile: response.data.profile });
+	console.log('response = ', response);
+	if (response.status === 200) {
+		dispatch({ type: SAVE_PROFILE_DONE });
+	}
 };

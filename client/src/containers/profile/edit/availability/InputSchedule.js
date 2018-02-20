@@ -22,9 +22,6 @@ class InputSchedule extends Component {
 	render() {
 		//console.log('this.props in InputSchedule', this.props);
 		const { colorTheme, profile } = this.props;
-		profile.availability = {};
-		// profile.availability['monday'] = ['6-8 AM', '12-2 PM'];
-		// profile.availability['tuesday'] = ['6-8 AM', '8-10 AM'];
 
 		return (
 			<div>

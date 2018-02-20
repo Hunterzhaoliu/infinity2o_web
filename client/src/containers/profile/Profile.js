@@ -5,6 +5,10 @@ import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
 class Profile extends Component {
+	componentWillMount() {
+		// run once before first render()
+	}
+
 	render() {
 		//console.log('this.props in Profile.js', this.props);
 		const { colorTheme, profile } = this.props;
