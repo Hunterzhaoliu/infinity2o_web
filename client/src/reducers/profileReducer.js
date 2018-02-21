@@ -6,7 +6,8 @@ import {
 	ON_CHANGE_TIME_ZONE,
 	ON_CHANGE_TIME_SLOT,
 	SAVE_PROFILE_START,
-	SAVE_PROFILE_DONE
+	SAVE_PROFILE_DONE,
+	SAVE_PROFILE_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -83,8 +84,13 @@ export default function(state = initialState, action) {
 
 			return newState;
 		case SAVE_PROFILE_START:
+			newState.save = 'save_start';
 			return newState;
 		case SAVE_PROFILE_DONE:
+			newState.save = 'save_success';
+			return newState;
+		case SAVE_PROFILE_ERROR:
+			newState.save = 'save_error';
 			return newState;
 		default:
 			return state;

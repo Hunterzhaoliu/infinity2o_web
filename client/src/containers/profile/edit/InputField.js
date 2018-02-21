@@ -10,14 +10,6 @@ class InputField extends Component {
 		this.props.onChangeName(e.target.value);
 	};
 
-	renderValue(profile) {
-		if (profile.newName === null) {
-			return profile.name;
-		} else {
-			return profile.newName;
-		}
-	}
-
 	render() {
 		//console.log('InputField this.props = ', this.props);
 		const { colorTheme, label, width, profile } = this.props;
@@ -36,7 +28,7 @@ class InputField extends Component {
 					</Col>
 					<Col md={{ span: 18, offset: 1 }}>
 						<Input
-							value={this.renderValue(profile)}
+							value={profile.newName}
 							onChange={this.onChangeName}
 							// onFocus={input.onFocus}
 							style={{

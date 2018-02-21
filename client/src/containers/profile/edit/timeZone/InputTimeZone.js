@@ -11,14 +11,6 @@ class InputTimeZone extends Component {
 		this.props.onChangeTimeZone(e);
 	};
 
-	renderValue(profile) {
-		if (profile.newTimeZone === null) {
-			return profile.timeZone;
-		} else {
-			return profile.newTimeZone;
-		}
-	}
-
 	render() {
 		//console.log('InputTimeZone this.props = ', this.props);
 		// <input onBlur={input.onBlur} onChange={input.onChange} />
@@ -49,7 +41,7 @@ class InputTimeZone extends Component {
 						<TreeSelect
 							style={{ width }}
 							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-							value={this.renderValue(profile)}
+							value={profile.newTimeZone}
 							onChange={this.onChangeTimeZone}
 							treeData={timeZones}
 							placeholder="Time Zone???!"

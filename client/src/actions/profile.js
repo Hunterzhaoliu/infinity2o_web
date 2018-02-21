@@ -6,7 +6,8 @@ import {
 	ON_CHANGE_TIME_ZONE,
 	ON_CHANGE_TIME_SLOT,
 	SAVE_PROFILE_START,
-	SAVE_PROFILE_DONE
+	SAVE_PROFILE_DONE,
+	SAVE_PROFILE_ERROR
 } from './types';
 import {
 	isValidName,
@@ -95,8 +96,9 @@ export const saveProfile = values => async dispatch => {
 		values.newAvailability = values.availability;
 	}
 	const response = await axios.post('/api/profile', values);
-	console.log('response = ', response);
 	if (response.status === 200) {
 		dispatch({ type: SAVE_PROFILE_DONE });
+	} else {
+		dispatch({ type: SAVE_PROFILE_ERROR });
 	}
 };

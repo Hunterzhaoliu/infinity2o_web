@@ -10,14 +10,6 @@ class InputFieldNumber extends Component {
 		this.props.onChangeAge(e.target.value);
 	};
 
-	renderValue(profile) {
-		if (profile.newAge === null) {
-			return profile.age;
-		} else {
-			return profile.newAge;
-		}
-	}
-
 	render() {
 		//console.log('this.props in InputFieldNumber', this.props);
 		const { colorTheme, label, width, profile } = this.props;
@@ -45,7 +37,7 @@ class InputFieldNumber extends Component {
 						xl={{ span: 3, offset: 1 }}
 					>
 						<Input
-							value={this.renderValue(profile)}
+							value={profile.newAge}
 							onChange={this.onChangeAge}
 							style={{
 								width: width,

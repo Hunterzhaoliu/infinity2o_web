@@ -8,7 +8,7 @@ import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './interests/InputFieldSelect';
 import InputSchedule from './availability/InputSchedule';
 import InputTimeZone from './timeZone/InputTimeZone';
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col, Button, Icon } from 'antd';
 const { Content } = Layout;
 
 class ProfileEdit extends Component {
@@ -27,6 +27,16 @@ class ProfileEdit extends Component {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	renderSaveIcon(saveState) {
+		if (saveState === 'save_start') {
+			return <Icon type="loading" />;
+		} else if (saveState === 'save_success') {
+			return <Icon type="check" />;
+		} else if (saveState === 'save_error') {
+			return <Icon type="warning" />;
 		}
 	}
 
@@ -118,7 +128,7 @@ class ProfileEdit extends Component {
 							disabled={this.isSaveDisabled(profile)}
 							onClick={() => saveProfile(profile)}
 						>
-							Save
+							Save {this.renderSaveIcon(profile.save)}
 						</Button>
 					</Col>
 				</Row>
