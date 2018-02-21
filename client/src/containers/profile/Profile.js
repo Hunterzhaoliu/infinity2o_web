@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as indexActionCreators from '../../actions/index';
+import { bindActionCreators } from 'redux';
 import DisplayField from './DisplayField';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
@@ -7,6 +9,7 @@ const { Content } = Layout;
 class Profile extends Component {
 	componentWillMount() {
 		// run once before first render()
+		this.props.fetchUserProfile();
 	}
 
 	render() {
@@ -123,4 +126,18 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(Profile);
+/*
+So we have a state and a UI(with props).
+This function gives the UI the functions it will need to be called.
+*/
+function mapDispatchToProps(dispatch) {
+	const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
+
+	return {
+		fetchUserProfile: () => {
+			indexDispatchers.fetchUserProfile();
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
