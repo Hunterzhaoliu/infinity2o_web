@@ -4,13 +4,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../actions/colorTheme';
 
-import { Layout, Row, Col, Button, Icon } from 'antd';
+import { Layout, Row, Col, Button } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
 	renderHeaderButtons() {
-		const loginState = this.props.auth.userInfo;
-		switch (loginState) {
+		const {
+			colorTheme,
+			onPressRandomColorTheme,
+			onPressProfile,
+			onPressTrainAI,
+			onPressMatches,
+			auth
+		} = this.props;
+		switch (auth) {
 			case null:
 				// show nothing when still signing in
 				return;
@@ -21,13 +28,11 @@ class CustomHeader extends Component {
 							<Col key="0">
 								<Button
 									style={{
-										borderColor: this.props.colorTheme
-											.text8Color,
-										background: this.props.colorTheme
-											.text8Color,
-										color: this.props.colorTheme.text5Color
+										borderColor: colorTheme.text7Color,
+										background: colorTheme.text7Color,
+										color: colorTheme.text4Color
 									}}
-									onClick={this.props.onPressRandomColorTheme}
+									onClick={onPressRandomColorTheme}
 								>
 									Change Theme
 								</Button>
@@ -38,91 +43,76 @@ class CustomHeader extends Component {
 			default:
 				return (
 					<div>
-						<Row type="flex" justify="space-around">
-							<Col
-								sm={{ span: 5 }}
-								md={{ span: 5 }}
-								lg={{ span: 4 }}
-								xl={{ span: 3 }}
-								key="0"
-							>
+						<Row type="flex" justify="space-between">
+							<Col md={{ span: 5 }} key="0">
 								<Button
 									style={{
-										borderColor: this.props.colorTheme
-											.text6Color,
-										background: this.props.colorTheme
-											.text6Color,
-										color: this.props.colorTheme.text2Color
+										borderColor: colorTheme.text7Color,
+										background: colorTheme.text7Color,
+										color: colorTheme.text4Color
 									}}
-									onClick={this.props.onPressRandomColorTheme}
+									onClick={onPressRandomColorTheme}
 								>
 									Change Theme
 								</Button>
 							</Col>
-							<Col
-								sm={{ span: 4, offset: 1 }}
-								md={{ span: 4, offset: 0 }}
-								lg={{ span: 3, offset: 0 }}
-								xl={{ span: 3, offset: 1 }}
-								key="1"
-							>
+							<Col md={{ span: 3, offset: 1 }} key="1">
 								<Button
 									style={{
-										borderColor: this.props.colorTheme.key,
-										background: this.props.colorTheme.key,
-										color: this.props.colorTheme.text1Color
+										borderColor:
+											colorTheme.profileButtonColor,
+										background:
+											colorTheme.profileButtonColor,
+										color: colorTheme.profileButtonTextColor
 									}}
+									onClick={onPressProfile}
 								>
-									<Link to="/dashboard/matches">
-										<div>
-											Matches{' '}
-											<Icon type="usergroup-add" />
-										</div>
+									<Link to="/profile">
+										<div>Profile</div>
 									</Link>
 								</Button>
 							</Col>
-							<Col
-								sm={{ span: 4, offset: 1 }}
-								md={{ span: 4, offset: 0 }}
-								lg={{ span: 3, offset: 0 }}
-								xl={{ span: 3, offset: 0 }}
-								key="2"
-							>
+							<Col md={{ span: 3, offset: 1 }} key="2">
 								<Button
 									style={{
-										borderColor: this.props.colorTheme
-											.keyCompliment1,
-										background: this.props.colorTheme
-											.keyCompliment1,
-										color: this.props.colorTheme.text1Color
+										borderColor:
+											colorTheme.trainAIButtonColor,
+										background:
+											colorTheme.trainAIButtonColor,
+										color: colorTheme.trainAIButtonTextColor
 									}}
+									onClick={onPressTrainAI}
 								>
-									<Link to="/dashboard/profile">
-										<div>
-											Profile <Icon type="profile" />
-										</div>
+									<Link to="/train_ai">
+										<div>Train AI</div>
 									</Link>
 								</Button>
 							</Col>
-							<Col
-								sm={{ span: 4, offset: 1 }}
-								md={{ span: 4, offset: 6 }}
-								lg={{ span: 3, offset: 11 }}
-								xl={{ span: 2, offset: 12 }}
-								key="4"
-							>
+							<Col md={{ span: 3, offset: 1 }} key="3">
 								<Button
 									style={{
-										borderColor: this.props.colorTheme
-											.thirdColor,
-										background: this.props.colorTheme
-											.thirdColor,
-										color: this.props.colorTheme.text2Color
+										borderColor:
+											colorTheme.matchesButtonColor,
+										background:
+											colorTheme.matchesButtonColor,
+										color: colorTheme.matchesButtonTextColor
+									}}
+									onClick={onPressMatches}
+								>
+									<Link to="/matches">
+										<div>Matches</div>
+									</Link>
+								</Button>
+							</Col>
+							<Col md={{ span: 3, offset: 4 }} key="4">
+								<Button
+									style={{
+										borderColor: colorTheme.text7Color,
+										background: colorTheme.text7Color,
+										color: colorTheme.text4Color
 									}}
 								>
-									<a href="/api/logout">
-										Logout <Icon type="logout" />
-									</a>
+									<a href="/api/logout">Logout</a>
 								</Button>
 							</Col>
 						</Row>
@@ -132,10 +122,11 @@ class CustomHeader extends Component {
 	}
 
 	render() {
+		const { colorTheme } = this.props;
 		return (
 			<Header
 				style={{
-					background: this.props.colorTheme.backgroundColor,
+					background: colorTheme.backgroundColor,
 					position: 'fixed',
 					width: '100%'
 				}}
@@ -170,6 +161,15 @@ function mapDispatchToProps(dispatch) {
 	return {
 		onPressRandomColorTheme: () => {
 			customHeaderDispatchers.generateRandomColorTheme();
+		},
+		onPressProfile: () => {
+			customHeaderDispatchers.onProfile();
+		},
+		onPressTrainAI: () => {
+			customHeaderDispatchers.onTrainAI();
+		},
+		onPressMatches: () => {
+			customHeaderDispatchers.onMatches();
 		}
 	};
 }

@@ -1,9 +1,19 @@
-import { UPDATE_COLOR_THEME } from './types';
 import {
-	//colorsHashtable1,
-	colorsHashtable3,
-	colorsHashtable7,
-	//colorsHashtable9,
+	UPDATE_COLOR_THEME,
+	MOVE_TO_PROFILE,
+	MOVE_TO_TRAIN_AI,
+	MOVE_TO_MATCHES
+} from './types';
+import {
+	colors1,
+	colors2,
+	colors3,
+	colors4,
+	colors5,
+	colors6,
+	colors7,
+	colors8,
+	colors9,
 	GREY_1,
 	GREY_2,
 	GREY_3,
@@ -14,6 +24,33 @@ import {
 	GREY_8,
 	GREY_9
 } from '../containers/styles/ColorConstants';
+
+export const onProfile = () => {
+	return function(dispatch) {
+		dispatch({ type: MOVE_TO_PROFILE });
+	};
+};
+
+export const onTrainAI = () => {
+	return function(dispatch) {
+		dispatch({ type: MOVE_TO_TRAIN_AI });
+	};
+};
+
+export const onMatches = () => {
+	return function(dispatch) {
+		dispatch({ type: MOVE_TO_MATCHES });
+	};
+};
+
+export const generateRandomColorThemeWith = dispatch => {
+	let isGrey_1 = Math.floor(Math.random() * 2) < 0.5;
+	if (isGrey_1) {
+		dispatch(_generateColorThemeBasedOnBackground(GREY_1));
+	} else {
+		dispatch(_generateColorThemeBasedOnBackground(GREY_9));
+	}
+};
 
 export const generateRandomColorTheme = () => {
 	return function(dispatch) {
@@ -29,10 +66,10 @@ export const generateRandomColorTheme = () => {
 function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 	const colorPallateIndex = Math.floor(Math.random() * 12);
 	let newBackgroundColor = GREY_1;
-	let newKey = colorsHashtable3[colorPallateIndex].key;
-	let newKeyCompliment1 = colorsHashtable3[colorPallateIndex].keyCompliment1;
-	let newKeyCompliment2 = colorsHashtable3[colorPallateIndex].keyCompliment2;
-	let newThirdColor = colorsHashtable3[colorPallateIndex].thirdColor;
+	let newKey = colors3[colorPallateIndex].key;
+	let newKeyCompliment1 = colors3[colorPallateIndex].keyCompliment1;
+	let newKeyCompliment2 = colors3[colorPallateIndex].keyCompliment2;
+	let newThirdColor = colors3[colorPallateIndex].thirdColor;
 	let newText1Color = GREY_9;
 	let newText2Color = GREY_8;
 	let newText3Color = GREY_7;
@@ -41,12 +78,21 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 	let newText6Color = GREY_4;
 	let newText7Color = GREY_3;
 	let newText8Color = GREY_2;
+	let newKeyText1Color = colors9[colorPallateIndex].key;
+	let newKeyText2Color = colors8[colorPallateIndex].key;
+	let newKeyText3Color = colors7[colorPallateIndex].key;
+	let newKeyText4Color = colors6[colorPallateIndex].key;
+	let newKeyText5Color = colors5[colorPallateIndex].key;
+	let newKeyText6Color = colors4[colorPallateIndex].key;
+	let newKeyText7Color = colors3[colorPallateIndex].key;
+	let newKeyText8Color = colors2[colorPallateIndex].key;
+
 	if (oldBackgroundColor === GREY_1) {
 		newBackgroundColor = GREY_9;
-		newKey = colorsHashtable7[colorPallateIndex].key;
-		newKeyCompliment1 = colorsHashtable7[colorPallateIndex].keyCompliment1;
-		newKeyCompliment2 = colorsHashtable7[colorPallateIndex].keyCompliment2;
-		newThirdColor = colorsHashtable7[colorPallateIndex].thirdColor;
+		newKey = colors7[colorPallateIndex].key;
+		newKeyCompliment1 = colors7[colorPallateIndex].keyCompliment1;
+		newKeyCompliment2 = colors7[colorPallateIndex].keyCompliment2;
+		newThirdColor = colors7[colorPallateIndex].thirdColor;
 		newText1Color = GREY_1;
 		newText2Color = GREY_2;
 		newText3Color = GREY_3;
@@ -55,15 +101,23 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 		newText6Color = GREY_6;
 		newText7Color = GREY_7;
 		newText8Color = GREY_8;
+		newKeyText1Color = colors1[colorPallateIndex].key;
+		newKeyText2Color = colors2[colorPallateIndex].key;
+		newKeyText3Color = colors3[colorPallateIndex].key;
+		newKeyText4Color = colors4[colorPallateIndex].key;
+		newKeyText5Color = colors5[colorPallateIndex].key;
+		newKeyText6Color = colors6[colorPallateIndex].key;
+		newKeyText7Color = colors7[colorPallateIndex].key;
+		newKeyText8Color = colors8[colorPallateIndex].key;
 	}
 
 	return {
 		type: UPDATE_COLOR_THEME,
+		backgroundColor: newBackgroundColor,
 		key: newKey,
 		keyCompliment1: newKeyCompliment1,
 		keyCompliment2: newKeyCompliment2,
 		thirdColor: newThirdColor,
-		backgroundColor: newBackgroundColor,
 		text1Color: newText1Color,
 		text2Color: newText2Color,
 		text3Color: newText3Color,
@@ -71,6 +125,14 @@ function _generateColorThemeBasedOnBackground(oldBackgroundColor) {
 		text5Color: newText5Color,
 		text6Color: newText6Color,
 		text7Color: newText7Color,
-		text8Color: newText8Color
+		text8Color: newText8Color,
+		keyText1Color: newKeyText1Color,
+		keyText2Color: newKeyText2Color,
+		keyText3Color: newKeyText3Color,
+		keyText4Color: newKeyText4Color,
+		keyText5Color: newKeyText5Color,
+		keyText6Color: newKeyText6Color,
+		keyText7Color: newKeyText7Color,
+		keyText8Color: newKeyText8Color
 	};
 }

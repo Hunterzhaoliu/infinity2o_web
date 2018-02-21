@@ -1,5 +1,4 @@
 import _ from 'lodash';
-//import { colorsHashtable } from './ColorConstants';
 import * as colors from './ColorConstants';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -8,48 +7,48 @@ const { Content } = Layout;
 
 const scaleFields = [
 	{
-		color: colors.GREY_0,
-		color2: colors.ORANGE_YELLOW_1
+		color: colors.RED_3,
+		color2: colors.BLUE_GREEN_7
 	},
 	{
 		color: colors.GREY_1,
-		color2: colors.ORANGE_YELLOW_1
+		color2: colors.RED_1
 	},
 	{
 		color: colors.GREY_2,
-		color2: colors.ORANGE_YELLOW_2
+		color2: colors.RED_2
 	},
 	{
 		color: colors.GREY_3,
-		color2: colors.ORANGE_YELLOW_3
+		color2: colors.RED_3
 	},
 	{
 		color: colors.GREY_4,
-		color2: colors.ORANGE_YELLOW_4
+		color2: colors.RED_4
 	},
 	{
 		color: colors.GREY_5,
-		color2: colors.ORANGE_YELLOW_5
+		color2: colors.RED_5
 	},
 	{
 		color: colors.GREY_6,
-		color2: colors.ORANGE_YELLOW_6
+		color2: colors.RED_6
 	},
 	{
 		color: colors.GREY_7,
-		color2: colors.ORANGE_YELLOW_7
+		color2: colors.RED_7
 	},
 	{
 		color: colors.GREY_8,
-		color2: colors.ORANGE_YELLOW_8
+		color2: colors.RED_8
 	},
 	{
 		color: colors.GREY_9,
-		color2: colors.ORANGE_YELLOW_9
+		color2: colors.RED_9
 	},
 	{
 		color: colors.GREY_10,
-		color2: colors.ORANGE_YELLOW_9
+		color2: colors.RED_9
 	}
 ];
 

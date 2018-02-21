@@ -1,7 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import * as profileActionCreators from '../../../../actions/profile';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import optionFields from './optionFields';
+import ErrorMessage from '../ErrorMessage';
 import { Row, Col, Select } from 'antd';
 const { Option } = Select;
 
@@ -16,8 +19,12 @@ class InputFieldSelect extends Component {
 		});
 	}
 
+	onChangeInterests = e => {
+		this.props.onChangeInterests(e);
+	};
+
 	render() {
-		//console.log('this.props in InputFieldSelect', this.props);
+		const { colorTheme, label, width, profile } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -27,13 +34,13 @@ class InputFieldSelect extends Component {
 						lg={{ span: 5 }}
 						xl={{ span: 5 }}
 					>
-						<label
+						<h3
 							style={{
-								color: this.props.colorTheme.text1Color
+								color: colorTheme.keyText5Color
 							}}
 						>
-							{this.props.label}
-						</label>
+							{label}
+						</h3>
 					</Col>
 					<Col
 						sm={{ span: 18, offset: 1 }}
@@ -43,16 +50,22 @@ class InputFieldSelect extends Component {
 					>
 						<Select
 							mode="multiple"
-							placeholder={this.props.placeholder}
 							style={{
-								width: this.props.width,
-								borderColor: this.props.colorTheme.text6Color
+								width: width,
+								borderColor: colorTheme.text6Color
 							}}
+							value={profile.newInterests}
+							onChange={this.onChangeInterests}
+							placeholder="Select up to 5 interests!"
 						>
 							{this.renderOptions()}
 						</Select>
 					</Col>
 				</Row>
+				<ErrorMessage
+					message="1 to 5 interests pretty please"
+					hasError={profile.hasInterestsError}
+				/>
 			</div>
 		);
 	}
@@ -64,8 +77,22 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		profile: state.profile
 	};
 }
 
-export default connect(mapStateToProps, null)(InputFieldSelect);
+function mapDispatchToProps(dispatch) {
+	const profileDispatchers = bindActionCreators(
+		profileActionCreators,
+		dispatch
+	);
+
+	return {
+		onChangeInterests: newInterests => {
+			profileDispatchers.onChangeInterests(newInterests);
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputFieldSelect);

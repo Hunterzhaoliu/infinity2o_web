@@ -7,19 +7,18 @@ import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
-import Dashboard from './dashboard/Dashboard';
-import DashboardMatches from './dashboard/matches/Matches';
-import DashboardProfile from './dashboard/profile/Profile';
-import GreyScale from './styles/GreyScale';
+import Profile from './profile/Profile';
+import ProfileEdit from './profile/edit/ProfileEdit';
+
+import Matches from './matches/Matches';
 
 import { Layout } from 'antd';
 const { Footer } = Layout;
 
 class App extends Component {
-	componentDidMount() {
-		this.props.fetchUser();
-		// set random color theme on initial login
-		this.props.generateRandomColorTheme();
+	componentWillMount() {
+		// run once before first render()
+		this.props.initializeApp();
 	}
 
 	render() {
@@ -29,26 +28,13 @@ class App extends Component {
 				<Layout style={styles.layout}>
 					<CustomHeader />
 					<Route exact={true} path="/" component={Landing} />
+					<Route exact={true} path="/profile" component={Profile} />
 					<Route
 						exact={true}
-						path="/dashboard"
-						component={Dashboard}
+						path="/profile/edit"
+						component={ProfileEdit}
 					/>
-					<Route
-						exact={true}
-						path="/dashboard/matches"
-						component={DashboardMatches}
-					/>
-					<Route
-						exact={true}
-						path="/dashboard/profile"
-						component={DashboardProfile}
-					/>
-					<Route
-						exact={true}
-						path="/greyscale"
-						component={GreyScale}
-					/>
+					<Route exact={true} path="/matches" component={Matches} />
 					<Footer
 						style={{
 							textAlign: 'center',
@@ -62,6 +48,11 @@ class App extends Component {
 				</Layout>
 			</BrowserRouter>
 		);
+	}
+
+	componentDidMount() {
+		// run once after first render()
+		//console.log('componentDidMount this.props = ', this.props);
 	}
 }
 
@@ -77,7 +68,9 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		auth: state.auth,
+		profile: state.profile
 	};
 }
 
@@ -94,11 +87,17 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		fetchUser: () => {
-			indexDispatchers.fetchUser();
+		initializeApp: () => {
+			indexDispatchers.initializeApp();
 		},
 		generateRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();
+		},
+		onProfile: () => {
+			colorThemeDispatchers.onProfile();
+		},
+		onTrainAI: () => {
+			colorThemeDispatchers.onTrainAI();
 		}
 	};
 }

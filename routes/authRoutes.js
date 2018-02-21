@@ -12,8 +12,8 @@ module.exports = app => {
 		'/auth/google/callback',
 		passport.authenticate('google'),
 		(request, response) => {
-			// after a user is logged in show them their dashboard
-			response.redirect('/dashboard');
+			// after a user is logged in show them...
+			response.redirect('/profile');
 		}
 	);
 	app.get('/auth/linkedIn/', passport.authenticate('linkedin'));
@@ -22,8 +22,8 @@ module.exports = app => {
 		'/auth/linkedIn/callback',
 		passport.authenticate('linkedin'),
 		(request, response) => {
-			// after a user is logged in show them their dashboard
-			response.redirect('/dashboard');
+			// after a user is logged in show them...
+			response.redirect('/profile');
 		}
 	);
 	app.get('/api/logout', (request, response) => {
