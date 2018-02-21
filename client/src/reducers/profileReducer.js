@@ -40,6 +40,11 @@ export default function(state = initialState, action) {
 			newState.interests = action.profile.interests;
 			newState.timeZone = action.profile.timeZone;
 			newState.availability = action.profile.availability;
+			newState.newName = action.profile.name;
+			newState.newAge = action.profile.age;
+			newState.newInterests = action.profile.interests;
+			newState.newTimeZone = action.profile.timeZone;
+			newState.newAvailability = action.profile.availability;
 			return newState;
 		case ON_CHANGE_NAME:
 			newState.newName = action.newName;
@@ -58,10 +63,6 @@ export default function(state = initialState, action) {
 			newState.hasTimeZoneError = action.hasError;
 			return newState;
 		case ON_CHANGE_TIME_SLOT:
-			console.log(
-				'ON_CHANGE_TIME_SLOT action.newTimeSlot = ',
-				action.newTimeSlot
-			);
 			const dayValue = action.newTimeSlot[0];
 			const timeSlot = action.newTimeSlot[1];
 			if (newState.newAvailability === undefined) {
