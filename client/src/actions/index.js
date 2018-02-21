@@ -9,10 +9,6 @@ import { generateRandomColorThemeWith } from './colorTheme';
 export const initializeApp = () => async dispatch => {
 	const response = await axios.get('/api/current_user');
 	dispatch({ type: SAVE_FETCHED_USER_AUTH, auth: response.data.auth });
-	dispatch({
-		type: SAVE_FETCHED_USER_PROFILE,
-		profile: response.data.profile
-	});
 	const loggedIn = response.data.auth !== undefined;
 	if (loggedIn) {
 		generateRandomColorThemeWith(dispatch);
@@ -20,10 +16,17 @@ export const initializeApp = () => async dispatch => {
 		if (!hasProfile) {
 			dispatch({ type: MOVE_TO_PROFILE });
 		} else {
-			// TODO: change to move to Train AI & history.push(/train_ai)
-			dispatch({ type: MOVE_TO_PROFILE });
+			dispatch({ type: MOVE_TO_PROFILE }); // TODO: consider moving componentWillMount()
 		}
 	} else {
 		generateRandomColorThemeWith(dispatch);
 	}
+};
+
+export const fetchUserProfile = () => async dispatch => {
+	const response = await axios.get('/api/current_user');
+	dispatch({
+		type: SAVE_FETCHED_USER_PROFILE,
+		profile: response.data.profile
+	});
 };

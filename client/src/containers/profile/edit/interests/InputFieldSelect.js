@@ -23,14 +23,6 @@ class InputFieldSelect extends Component {
 		this.props.onChangeInterests(e);
 	};
 
-	renderValue(profile) {
-		if (profile.newInterests === undefined) {
-			return profile.interests;
-		} else {
-			return profile.newInterests;
-		}
-	}
-
 	render() {
 		const { colorTheme, label, width, profile } = this.props;
 		return (
@@ -62,7 +54,7 @@ class InputFieldSelect extends Component {
 								width: width,
 								borderColor: colorTheme.text6Color
 							}}
-							value={this.renderValue(profile)}
+							value={profile.newInterests}
 							onChange={this.onChangeInterests}
 							placeholder="Select up to 5 interests!"
 						>

@@ -6,7 +6,8 @@ import {
 	ON_CHANGE_TIME_ZONE,
 	ON_CHANGE_TIME_SLOT,
 	SAVE_PROFILE_START,
-	SAVE_PROFILE_DONE
+	SAVE_PROFILE_DONE,
+	SAVE_PROFILE_ERROR
 } from './types';
 import {
 	isValidName,
@@ -77,24 +78,27 @@ export const onChangeTimeSlot = newTimeSlot => dispatch => {
 
 export const saveProfile = values => async dispatch => {
 	dispatch({ type: SAVE_PROFILE_START });
-	console.log('values in profile reducer = ', values);
-	/*
-	const { dayDropdowns } = values;
-
-	let allTimeSlots = [];
-
-	Object.entries(dayDropdowns).forEach(function(dayTimePair) {
-		if (dayTimePair[1] !== undefined) {
-			dayTimePair[1].forEach(function(time) {
-				allTimeSlots.push(
-					dayTimePair[0].toString().substring(0, 3) + ' ' + time
-				);
-			});
-		}
-	});
-
-	values.availability = allTimeSlots;
-	*/
+	// if the user already has profile data saved and makes a edit to one
+	// field we need to make sure we send the old unedited data for profile
+	if (values.newName === null) {
+		values.newName = values.name;
+	}
+	if (values.newAge === null) {
+		values.newAge = values.age;
+	}
+	if (values.newInterests.length === 0) {
+		values.newInterests = values.interests;
+	}
+	if (values.newTimeZone === null) {
+		values.newTimeZone = values.timeZone;
+	}
+	if (Object.keys(values.newAvailability).length === 0) {
+		values.newAvailability = values.availability;
+	}
 	const response = await axios.post('/api/profile', values);
-	dispatch({ type: SAVE_PROFILE_DONE, profile: response.data.profile });
+	if (response.status === 200) {
+		dispatch({ type: SAVE_PROFILE_DONE });
+	} else {
+		dispatch({ type: SAVE_PROFILE_ERROR });
+	}
 };

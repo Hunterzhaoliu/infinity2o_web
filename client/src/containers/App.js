@@ -12,14 +12,13 @@ import ProfileEdit from './profile/edit/ProfileEdit';
 
 import Matches from './matches/Matches';
 
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 const { Footer } = Layout;
 
 class App extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.initializeApp();
-		//console.log('componentWillMount this.props = ', this.props);
 	}
 
 	render() {
@@ -43,8 +42,19 @@ class App extends Component {
 							color: this.props.colorTheme.text7Color
 						}}
 					>
-						<p>Infinity2o Inc. © 2018 to year infinity</p>
-						<p>UI v0.2.0 | API v1.0.0</p>
+						<Row>
+							<Col span={24}>
+								<p>Infinity2o Inc. © 2018 to year infinity</p>
+							</Col>
+						</Row>
+						<Row type="flex" justify="center">
+							<Col span={6}>
+								<p>UI v0.2.0 | API v1.0.0</p>
+							</Col>
+							<Col span={3}>
+								<a href="https://medium.com/infinity2o">blog</a>
+							</Col>
+						</Row>
 					</Footer>
 				</Layout>
 			</BrowserRouter>

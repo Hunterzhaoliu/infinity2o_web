@@ -45,7 +45,6 @@ class DayDropdown extends Component {
 	}
 
 	onChangeTimeSlot = e => {
-		//console.log('onChangeTimeSlot e.target.value = ', e.target.value);
 		this.props.onChangeTimeSlot(e.target.value);
 	};
 
@@ -55,12 +54,9 @@ class DayDropdown extends Component {
 
 	render() {
 		//console.log('this.props in DayDropdown', this.props);
-		const { colorTheme, day, oldTimeSlots, profile } = this.props;
+		const { colorTheme, day, profile } = this.props;
 
 		// copy over initial old checked time slots
-		if (profile.newAvailability === undefined) {
-			profile.newAvailability = profile.availability;
-		}
 		const newTimeSlots = profile.newAvailability[day.value];
 		const menu = <Menu>{this.renderMenuItems(day, newTimeSlots)}</Menu>;
 		return (

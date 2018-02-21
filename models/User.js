@@ -11,8 +11,16 @@ const userSchema = new Schema({
 		name: String,
 		age: { type: Number },
 		interests: [String],
-		time_zone: String,
-		availability: [String]
+		timeZone: String,
+		availability: {
+			monday: [String],
+			tuesday: [String],
+			wednesday: [String],
+			thursday: [String],
+			friday: [String],
+			saturday: [String],
+			sunday: [String]
+		}
 	}
 });
 
