@@ -1,96 +1,32 @@
 export default [
 	// coursera.org 2/8/2018 categories
 	{
-		value: 'history',
-		name: 'History'
+		value: 'algorithms',
+		name: 'Algorithms'
 	},
 	{
-		value: 'music',
-		name: 'Music'
+		value: 'android',
+		name: 'Android'
+	},
+	{
+		value: 'arkit',
+		name: 'ARKit'
 	},
 	{
 		value: 'art',
 		name: 'Art'
 	},
 	{
-		value: 'philosophy',
-		name: 'Philosophy'
-	},
-	{
-		value: 'leadership',
-		name: 'Leadership'
-	},
-	{
-		value: 'finance',
-		name: 'Finance'
-	},
-	{
-		value: 'marketing',
-		name: 'Marketing'
-	},
-	{
-		value: 'entrepreneurship',
-		name: 'Entrepreneurship'
-	},
-	{
-		value: 'business',
-		name: 'Business'
-	},
-	{
-		value: 'computer_science',
-		name: 'Computer Science'
-	},
-	{
-		value: 'mobile_development',
-		name: 'Mobile Development'
-	},
-	{
-		value: 'web_development',
-		name: 'Web Development'
-	},
-	{
-		value: 'software_design',
-		name: 'Software Design'
-	},
-	{
-		value: 'data_structures',
-		name: 'Data Structures'
-	},
-	{
-		value: 'algorithms',
-		name: 'Algorithms'
-	},
-	{
-		value: 'computer_security',
-		name: 'Computer Security'
-	},
-	{
-		value: 'machine_learning',
-		name: 'Machine Learning'
-	},
-	{
 		value: 'artificial_intelligence',
 		name: 'Artificial Intelligence'
 	},
 	{
-		value: 'statistics',
-		name: 'Statistics'
+		value: 'artitecture',
+		name: 'Artitecture'
 	},
 	{
-		value: 'data_management',
-		name: 'Data Management'
-	},
-	{
-		value: 'computer_networking',
-		name: 'Computer Networking'
-	},
-	{
-		value: 'cloud_computing',
-		name: 'Cloud Computing'
-	},
-	{
-		value: 'veterinary_science',
-		name: 'Veterinary Science'
+		value: 'astronomy',
+		name: 'Astronomy'
 	},
 	{
 		value: 'bioinformatics',
@@ -101,76 +37,52 @@ export default [
 		name: 'Biology'
 	},
 	{
-		value: 'medicine',
-		name: 'Medicine'
-	},
-	{
-		value: 'health_care',
-		name: 'Health Care'
-	},
-	{
-		value: 'nutrition',
-		name: 'Nutrition'
-	},
-	{
-		value: 'clinical_science',
-		name: 'Clinical Science'
-	},
-	{
-		value: 'math',
-		name: 'Math'
-	},
-	{
-		value: 'logic',
-		name: 'Logic'
-	},
-	{
-		value: 'crytography',
-		name: 'Crytography'
-	},
-	{
-		value: 'robotics',
-		name: 'Robotics'
-	},
-	{
-		value: 'personal_development',
-		name: 'Personal Development'
-	},
-	{
-		value: 'photography',
-		name: 'Photography'
-	},
-	{
-		value: 'public_speaking',
-		name: 'Public Speaking'
-	},
-	{
-		value: 'languages',
-		name: 'Languages'
-	},
-	{
-		value: 'electrical_engineering',
-		name: 'Electrical Engineering'
-	},
-	{
-		value: 'mechanical_engineering',
-		name: 'Mechanical Engineering'
+		value: 'business',
+		name: 'Business'
 	},
 	{
 		value: 'chemistry',
 		name: 'Chemistry'
 	},
 	{
-		value: 'environmental_science',
-		name: 'Environmental Science'
+		value: 'clinical_science',
+		name: 'Clinical Science'
 	},
 	{
-		value: 'physics',
-		name: 'Physics'
+		value: 'cloud_computing',
+		name: 'Cloud Computing'
 	},
 	{
-		value: 'astronomy',
-		name: 'Astronomy'
+		value: 'communication',
+		name: 'Communication'
+	},
+	{
+		value: 'computer_networking',
+		name: 'Computer Networking'
+	},
+	{
+		value: 'computer_science',
+		name: 'Computer Science'
+	},
+	{
+		value: 'computer_security',
+		name: 'Computer Security'
+	},
+	{
+		value: 'cryptography',
+		name: 'Cryptography'
+	},
+	{
+		value: 'data_management',
+		name: 'Data Management'
+	},
+	{
+		value: 'data_structures',
+		name: 'Data Structures'
+	},
+	{
+		value: 'design',
+		name: 'Design'
 	},
 	{
 		value: 'economics',
@@ -181,40 +93,28 @@ export default [
 		name: 'Education'
 	},
 	{
-		value: 'governance',
-		name: 'Governance'
+		value: 'electrical_engineering',
+		name: 'Electrical Engineering'
 	},
 	{
-		value: 'law',
-		name: 'Law'
+		value: 'entrepreneurship',
+		name: 'Entrepreneurship'
 	},
 	{
-		value: 'psychology',
-		name: 'Psychology'
-	}, // additional edx.org 2/8/2018 categories
-	{
-		value: 'artitecture',
-		name: 'Artitecture'
-	},
-	{
-		value: 'communication',
-		name: 'Communication'
-	},
-	{
-		value: 'design',
-		name: 'Design'
+		value: 'environmental_science',
+		name: 'Environmental Science'
 	},
 	{
 		value: 'ethics',
 		name: 'Ethics'
 	},
 	{
-		value: 'literature',
-		name: 'Literature'
-	}, // additional udacity.com 2/8/2018 categories
+		value: 'finance',
+		name: 'Finance'
+	},
 	{
 		value: 'front_end_web_developer',
-		name: 'Font End Web Developer'
+		name: 'Front End Web Developer'
 	},
 	{
 		value: 'full_stack_web_developer',
@@ -225,23 +125,123 @@ export default [
 		name: 'Google Adwords'
 	},
 	{
-		value: 'android',
-		name: 'Android'
+		value: 'governance',
+		name: 'Governance'
+	},
+	{
+		value: 'health_care',
+		name: 'Health Care'
+	},
+	{
+		value: 'history',
+		name: 'History'
 	},
 	{
 		value: 'ios',
 		name: 'iOS'
 	},
 	{
-		value: 'arkit',
-		name: 'ARKit'
+		value: 'languages',
+		name: 'Languages'
+	},
+	{
+		value: 'law',
+		name: 'Law'
+	},
+	{
+		value: 'leadership',
+		name: 'Leadership'
+	},
+	{
+		value: 'literature',
+		name: 'Literature'
+	},
+	{
+		value: 'logic',
+		name: 'Logic'
+	},
+	{
+		value: 'machine_learning',
+		name: 'Machine Learning'
+	},
+	{
+		value: 'marketing',
+		name: 'Marketing'
+	},
+	{
+		value: 'math',
+		name: 'Math'
+	},
+	{
+		value: 'mechanical_engineering',
+		name: 'Mechanical Engineering'
+	},
+	{
+		value: 'medicine',
+		name: 'Medicine'
+	},
+	{
+		value: 'mobile_development',
+		name: 'Mobile Development'
+	},
+	{
+		value: 'music',
+		name: 'Music'
+	},
+	{
+		value: 'nutrition',
+		name: 'Nutrition'
+	},
+	{
+		value: 'personal_development',
+		name: 'Personal Development'
+	},
+	{
+		value: 'philosophy',
+		name: 'Philosophy'
+	},
+	{
+		value: 'photography',
+		name: 'Photography'
+	},
+	{
+		value: 'physics',
+		name: 'Physics'
+	},
+	{
+		value: 'psychology',
+		name: 'Psychology'
+	},
+	{
+		value: 'public_speaking',
+		name: 'Public Speaking'
+	},
+	{
+		value: 'robotics',
+		name: 'Robotics'
+	},
+	{
+		value: 'software_design',
+		name: 'Software Design'
+	},
+	{
+		value: 'statistics',
+		name: 'Statistics'
+	},
+	{
+		value: 'test_prep',
+		name: 'Test Prep'
+	},
+	{
+		value: 'veterinary_science',
+		name: 'Veterinary Science'
 	},
 	{
 		value: 'vr_developer',
 		name: 'VR developer'
-	}, // additional udemy.com 2/8/2018 categories
+	},
 	{
-		value: 'test_prep',
-		name: 'Test Prep'
+		value: 'web_development',
+		name: 'Web Development'
 	}
 ];
