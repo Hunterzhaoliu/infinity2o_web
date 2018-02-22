@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as indexActionCreators from '../../../actions/index';
+import * as colorThemeActionCreators from '../../../actions/colorTheme';
 import * as profileActionCreators from '../../../actions/profile';
 import { bindActionCreators } from 'redux';
 import InputField from './InputField';
@@ -15,6 +16,7 @@ class ProfileEdit extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.fetchUserProfile();
+		this.props.onProfile();
 	}
 
 	isSaveDisabled(profile) {
@@ -46,7 +48,7 @@ class ProfileEdit extends Component {
 		return (
 			<Content
 				style={{
-					padding: '10% 7% 0%', // top left&right bottom
+					padding: '100px 50px 50px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -159,10 +161,17 @@ function mapDispatchToProps(dispatch) {
 		profileActionCreators,
 		dispatch
 	);
+	const colorThemeDispatchers = bindActionCreators(
+		colorThemeActionCreators,
+		dispatch
+	);
 
 	return {
 		fetchUserProfile: () => {
 			indexDispatchers.fetchUserProfile();
+		},
+		onProfile: () => {
+			colorThemeDispatchers.onProfile();
 		},
 		saveProfile: values => {
 			profileDispatchers.saveProfile(values);

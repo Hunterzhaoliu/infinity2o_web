@@ -127,7 +127,7 @@ class Matches extends Component {
 			<Content
 				style={{
 					textAlign: 'center',
-					padding: '10% 5% 5%', // top left&right bottom
+					padding: '100px 50px 50px', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
