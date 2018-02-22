@@ -10,6 +10,7 @@ import Landing from './Landing';
 import Profile from './profile/Profile';
 import ProfileEdit from './profile/edit/ProfileEdit';
 import TrainAI from './train_ai/TrainAI';
+import Ask from './train_ai/Ask';
 import Matches from './matches/Matches';
 
 import { Layout, Row, Col } from 'antd';
@@ -35,6 +36,7 @@ class App extends Component {
 						component={ProfileEdit}
 					/>
 					<Route exact={true} path="/train_ai" component={TrainAI} />
+					<Route exact={true} path="/train_ai/ask" component={Ask} />
 					<Route exact={true} path="/matches" component={Matches} />
 					<Footer
 						style={{

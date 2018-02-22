@@ -29,7 +29,7 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>

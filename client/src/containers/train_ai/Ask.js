@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
-class TrainAI extends Component {
+class Ask extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.fetchUserProfile();
@@ -14,7 +14,7 @@ class TrainAI extends Component {
 	}
 
 	render() {
-		//console.log('this.props in TrainAI.js', this.props);
+		//console.log('this.props in Ask.js', this.props);
 		const { colorTheme } = this.props;
 		return (
 			<Content
@@ -38,36 +38,8 @@ class TrainAI extends Component {
 								color: colorTheme.text3Color
 							}}
 						>
-							We believe people are great partners because their
-							core beliefs are the same. Find great partners by
-							asking & voting on questions that matter to you.
+							Ask Question
 						</h3>
-					</Col>
-				</Row>
-				<Row type="flex" justify="space-around">
-					<Col md={{ span: 4, offset: 0 }}>
-						<Button
-							key="1"
-							style={{
-								borderColor: colorTheme.key,
-								background: colorTheme.key,
-								color: colorTheme.text1Color
-							}}
-						>
-							<a href="/train_ai/ask">Ask Question</a>
-						</Button>
-					</Col>
-					<Col md={{ span: 4, offset: 0 }}>
-						<Button
-							key="2"
-							style={{
-								borderColor: colorTheme.key,
-								background: colorTheme.key,
-								color: colorTheme.text1Color
-							}}
-						>
-							<a href="/train_ai/vote">Vote On Answers</a>
-						</Button>
 					</Col>
 				</Row>
 			</Content>
@@ -107,4 +79,4 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrainAI);
+export default connect(mapStateToProps, mapDispatchToProps)(Ask);
