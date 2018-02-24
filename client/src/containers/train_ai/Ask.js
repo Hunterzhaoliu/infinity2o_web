@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as indexActionCreators from '../../actions/index';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
-import { Layout, Row, Col, Button, Input } from 'antd';
+import { Layout, Row, Col, Button, Input, Icon } from 'antd';
 const { Content } = Layout;
 
 class Ask extends Component {
@@ -40,7 +40,7 @@ class Ask extends Component {
 							Question:
 						</h3>
 					</Col>
-					<Col md={{ span: 20, offset: 1 }}>
+					<Col md={{ span: 10, offset: 1 }}>
 						<Input
 							onChange={this.onChangeName}
 							style={{
@@ -50,6 +50,15 @@ class Ask extends Component {
 								color: colorTheme.text3Color
 							}}
 						/>
+					</Col>
+					<Col md={{ span: 2, offset: 1 }}>
+						<h5
+							style={{
+								color: colorTheme.text4Color
+							}}
+						>
+							100
+						</h5>
 					</Col>
 				</Row>
 				<Row
@@ -69,16 +78,51 @@ class Ask extends Component {
 							Answer 1:
 						</h3>
 					</Col>
-					<Col md={{ span: 20, offset: 1 }}>
+					<Col md={{ span: 6, offset: 1 }}>
 						<Input
 							onChange={this.onChangeName}
 							style={{
-								width: 300,
+								width: 180,
 								borderColor: colorTheme.text7Color,
 								background: colorTheme.text7Color,
 								color: colorTheme.text3Color
 							}}
 						/>
+					</Col>
+					<Col md={{ span: 2, offset: 1 }}>
+						<h5
+							style={{
+								color: colorTheme.text4Color
+							}}
+						>
+							20
+						</h5>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 1, offset: 4 }}>
+						<Icon
+							style={{
+								fontSize: 25,
+								color: colorTheme.text3Color
+							}}
+							type="plus-circle-o"
+						/>
+					</Col>
+					<Col md={{ span: 8, offset: 1 }}>
+						<h3
+							style={{
+								color: colorTheme.text3Color
+							}}
+						>
+							Add 0 to 4 possible answers
+						</h3>
 					</Col>
 				</Row>
 				<Row
@@ -96,7 +140,7 @@ class Ask extends Component {
 								color: colorTheme.text1Color
 							}}
 						>
-							Submit
+							Ask!
 						</Button>
 					</Col>
 				</Row>
