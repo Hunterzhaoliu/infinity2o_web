@@ -126,7 +126,6 @@ class ProfileEdit extends Component {
 								background: colorTheme.key,
 								color: colorTheme.text1Color
 							}}
-							type="submit"
 							disabled={this.isSaveDisabled(profile)}
 							onClick={() => saveProfile(profile)}
 						>

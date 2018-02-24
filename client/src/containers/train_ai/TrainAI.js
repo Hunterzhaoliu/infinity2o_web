@@ -34,7 +34,6 @@ class TrainAI extends Component {
 					<Col md={{ span: 24 }}>
 						<h3
 							style={{
-								textAlign: 'center',
 								color: colorTheme.text3Color
 							}}
 						>
@@ -44,7 +43,7 @@ class TrainAI extends Component {
 						</h3>
 					</Col>
 				</Row>
-				<Row type="flex" justify="space-around">
+				<Row type="flex" justify="start">
 					<Col md={{ span: 4, offset: 0 }}>
 						<Button
 							key="1"
@@ -57,17 +56,24 @@ class TrainAI extends Component {
 							<a href="/train_ai/ask">Ask Question</a>
 						</Button>
 					</Col>
-					<Col md={{ span: 4, offset: 0 }}>
-						<Button
-							key="2"
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						textAlign: 'center',
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 24 }}>
+						<h3
 							style={{
-								borderColor: colorTheme.key,
-								background: colorTheme.key,
-								color: colorTheme.text1Color
+								color: colorTheme.text3Color
 							}}
 						>
-							<a href="/train_ai/vote">Vote On Answers</a>
-						</Button>
+							Voting
+						</h3>
 					</Col>
 				</Row>
 			</Content>

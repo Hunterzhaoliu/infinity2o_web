@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as indexActionCreators from '../../actions/index';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col, Button, Input } from 'antd';
 const { Content } = Layout;
 
 class Ask extends Component {
@@ -31,15 +31,73 @@ class Ask extends Component {
 						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
+					<Col md={{ span: 3 }}>
 						<h3
 							style={{
-								textAlign: 'center',
-								color: colorTheme.text3Color
+								color: colorTheme.keyText5Color
 							}}
 						>
-							Ask Question
+							Question:
 						</h3>
+					</Col>
+					<Col md={{ span: 20, offset: 1 }}>
+						<Input
+							onChange={this.onChangeName}
+							style={{
+								width: 300,
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text3Color
+							}}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 3 }}>
+						<h3
+							style={{
+								color: colorTheme.keyText5Color
+							}}
+						>
+							Answer 1:
+						</h3>
+					</Col>
+					<Col md={{ span: 20, offset: 1 }}>
+						<Input
+							onChange={this.onChangeName}
+							style={{
+								width: 300,
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text3Color
+							}}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<Button
+							style={{
+								borderColor: colorTheme.key,
+								background: colorTheme.key,
+								color: colorTheme.text1Color
+							}}
+						>
+							Submit
+						</Button>
 					</Col>
 				</Row>
 			</Content>
