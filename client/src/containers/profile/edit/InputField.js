@@ -30,7 +30,6 @@ class InputField extends Component {
 						<Input
 							value={profile.newName}
 							onChange={this.onChangeName}
-							// onFocus={input.onFocus}
 							style={{
 								width: width,
 								borderColor: colorTheme.text9Color,
