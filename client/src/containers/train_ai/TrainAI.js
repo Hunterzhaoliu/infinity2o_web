@@ -4,6 +4,7 @@ import * as indexActionCreators from '../../actions/index';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import { Layout, Row, Col, Button } from 'antd';
+import InputVote from './InputVote';
 const { Content } = Layout;
 
 class TrainAI extends Component {
@@ -37,9 +38,9 @@ class TrainAI extends Component {
 								color: colorTheme.text3Color
 							}}
 						>
-							We believe people are great partners because their
-							core beliefs are the same. Find great partners by
-							asking & voting on questions that matter to you.
+							We believe people are great partners because their core beliefs
+							are the same. Find great partners by asking & voting on questions
+							that matter to you.
 						</h3>
 					</Col>
 				</Row>
@@ -72,7 +73,7 @@ class TrainAI extends Component {
 								color: colorTheme.text3Color
 							}}
 						>
-							Voting
+							<InputVote />
 						</h3>
 					</Col>
 				</Row>
