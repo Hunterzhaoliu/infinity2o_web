@@ -4,6 +4,7 @@ import { generateRandomColorThemeWith } from './colorTheme';
 
 export const initializeApp = () => async dispatch => {
 	const response = await axios.get('/api/current_user');
+	// TODO: store previous color theme into database so we don't constantly switch
 	generateRandomColorThemeWith(dispatch);
 	dispatch({ type: SAVE_FETCHED_USER_AUTH, auth: response.data.auth });
 };

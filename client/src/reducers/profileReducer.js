@@ -29,7 +29,8 @@ let initialState = {
 	hasNameError: false,
 	hasInterestsError: false,
 	hasTimeZoneError: false,
-	hasAvailabilityError: false
+	hasAvailabilityError: false,
+	save: null
 };
 
 export default function(state = initialState, action) {
