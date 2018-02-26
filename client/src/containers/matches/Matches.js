@@ -76,22 +76,14 @@ class Matches extends Component {
 							>
 								Resume: {match.resume}
 							</p>
-							<Row
-								type="flex"
-								justify="space-between"
-								align="top"
-							>
+							<Row type="flex" justify="space-between" align="top">
 								<Col span={11}>
 									<Button
 										style={{
-											borderColor: this.props.colorTheme
-												.key,
-											background: this.props.colorTheme
-												.key,
-											color: this.props.colorTheme
-												.text2Color
+											borderColor: this.props.colorTheme.key,
+											background: this.props.colorTheme.key,
+											color: this.props.colorTheme.text2Color
 										}}
-										//onClick={}
 									>
 										Swap
 										<Icon type="swap" />
@@ -100,14 +92,10 @@ class Matches extends Component {
 								<Col span={11}>
 									<Button
 										style={{
-											borderColor: this.props.colorTheme
-												.key,
-											background: this.props.colorTheme
-												.key,
-											color: this.props.colorTheme
-												.text2Color
+											borderColor: this.props.colorTheme.key,
+											background: this.props.colorTheme.key,
+											color: this.props.colorTheme.text2Color
 										}}
-										//onClick={}
 									>
 										Say Hi
 										<Icon type="message" />
@@ -141,8 +129,8 @@ class Matches extends Component {
 						padding: '0% 0% 5%'
 					}}
 				>
-					Teach our AI which study partner you prefer by swapping out
-					the partner you don't want.
+					Teach our AI which study partner you prefer by swapping out the
+					partner you dont want.
 				</h2>
 				<Row type="flex" justify="space-between" align="top">
 					<Col

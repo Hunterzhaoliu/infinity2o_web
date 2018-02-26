@@ -1,37 +1,68 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as indexActionCreators from '../../actions/index';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import { Button, Card, Col, Layout, Row } from 'antd';
+import questionList from './questionList.js';
 const { Content } = Layout;
 
 class InputVote extends Component {
-	render() {
-		//console.log('this.props in InputVote.js', this.props);
+	renderQuestion() {
 		const { colorTheme } = this.props;
-		let testTitle = 'Is there free will?';
+		return _.map(questionList, oneQuestion => {
+			return (
+				<Col key={oneQuestion.question} span={12}>
+					<Card
+						style={{
+							borderColor: colorTheme.text8Color,
+							background: colorTheme.text8Color,
+							color: colorTheme.text2Color
+						}}
+					>
+						<h2
+							style={{
+								color: colorTheme.text2Color
+							}}
+						>
+							{oneQuestion.question}
+						</h2>
+						{this.renderAnswer(oneQuestion.answers)}
+					</Card>
+				</Col>
+			);
+		});
+	}
+	renderAnswer(answers) {
+		const { colorTheme } = this.props;
+		return _.map(answers, answer => {
+			return (
+				<Row style={{ padding: '8px 0px 0px' }} key={answer}>
+					<Button
+						style={{
+							borderColor: colorTheme.text8Color,
+							background: colorTheme.text7Color,
+							color: colorTheme.text2Color
+						}}
+					>
+						{answer}
+					</Button>
+				</Row>
+			);
+		});
+	}
+	render() {
+		const { colorTheme } = this.props;
+		//console.log('this.props in InputVote.js', this.props);
 		return (
 			<Content
 				style={{
-					padding: '25px 50px 25px', // top left&right bottom
+					padding: '25px 25px 25px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Row gutter={36}>
-					<Col span={12}>
-						<Card title={testTitle}>
-							<Button ghost type="primary">
-								Answer
-							</Button>
-						</Card>
-					</Col>
-					<Col span={12}>
-						<Card title="Card title" bordered={false}>
-							Card content
-						</Card>
-					</Col>
-				</Row>
+				<Row gutter={36}>{this.renderQuestion()}</Row>
 			</Content>
 		);
 	}
