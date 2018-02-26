@@ -45,7 +45,7 @@ function _getStateForSection(newState) {
 		newState.profileButtonColor = newState.text7Color;
 		newState.profileButtonTextColor = newState.text4Color;
 		newState.trainAIButtonColor = newState.key;
-		newState.trainAIButtonTextColor = newState.keyText1Color;
+		newState.trainAIButtonTextColor = newState.text1Color;
 		newState.matchesButtonColor = newState.text7Color;
 		newState.matchesButtonTextColor = newState.text4Color;
 	} else if (newState.activeSection === 'matches') {
@@ -54,10 +54,10 @@ function _getStateForSection(newState) {
 		newState.trainAIButtonColor = newState.text7Color;
 		newState.trainAIButtonTextColor = newState.text4Color;
 		newState.matchesButtonColor = newState.key;
-		newState.matchesButtonTextColor = newState.keyText1Color;
+		newState.matchesButtonTextColor = newState.text1Color;
 	} else if (newState.activeSection === 'profile') {
 		newState.profileButtonColor = newState.key;
-		newState.profileButtonTextColor = newState.keyText1Color;
+		newState.profileButtonTextColor = newState.text1Color;
 		newState.trainAIButtonColor = newState.text7Color;
 		newState.trainAIButtonTextColor = newState.text4Color;
 		newState.matchesButtonColor = newState.text7Color;

@@ -22,6 +22,7 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case ON_CHANGE_QUESTION:
+			console.log('action = ', action);
 			newState.newQuestion = action.newQuestion;
 			newState.hasQuestionError = action.hasError;
 			return newState;
