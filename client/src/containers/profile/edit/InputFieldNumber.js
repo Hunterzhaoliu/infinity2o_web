@@ -79,8 +79,8 @@ function mapDispatchToProps(dispatch) {
 		saveProfile: values => {
 			profileDispatchers.saveProfile(values);
 		},
-		onChangeAge: newAge => {
-			profileDispatchers.onChangeAge(newAge);
+		onChangeAge: e => {
+			profileDispatchers.onChangeAge(e);
 		}
 	};
 }

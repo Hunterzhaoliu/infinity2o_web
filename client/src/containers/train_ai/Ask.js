@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as indexActionCreators from '../../actions/index';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
+import * as askActionCreators from '../../actions/ask';
 import { bindActionCreators } from 'redux';
-import { Layout, Row, Col, Button, Input, Icon } from 'antd';
+import { Layout, Row, Col, Button, Input } from 'antd';
 const { Content } = Layout;
 
 class Ask extends Component {
@@ -11,6 +12,56 @@ class Ask extends Component {
 		// run once before first render()
 		this.props.fetchUserProfile();
 		this.props.onTrainAI();
+	}
+
+	onChangeQuestion = e => {
+		//console.log('e.target.value = ', e.target.value);
+		this.props.onChangeQuestion(e.target.value);
+	};
+
+	renderAnswerInputs() {
+		const { colorTheme } = this.props;
+
+		return (
+			<Row
+				type="flex"
+				justify="start"
+				align="middle"
+				style={{
+					padding: '3% 0% 0%' // top left&right bottom
+				}}
+			>
+				<Col md={{ span: 3 }}>
+					<h3
+						style={{
+							color: colorTheme.keyText5Color
+						}}
+					>
+						Answer 1:
+					</h3>
+				</Col>
+				<Col md={{ span: 6, offset: 1 }}>
+					<Input
+						onChange={this.onChangeName}
+						style={{
+							width: 180,
+							borderColor: colorTheme.text7Color,
+							background: colorTheme.text7Color,
+							color: colorTheme.text3Color
+						}}
+					/>
+				</Col>
+				<Col md={{ span: 2, offset: 1 }}>
+					<h5
+						style={{
+							color: colorTheme.text4Color
+						}}
+					>
+						20
+					</h5>
+				</Col>
+			</Row>
+		);
 	}
 
 	render() {
@@ -42,7 +93,7 @@ class Ask extends Component {
 					</Col>
 					<Col md={{ span: 10, offset: 1 }}>
 						<Input
-							onChange={this.onChangeName}
+							onChange={this.onChangeQuestion}
 							style={{
 								width: 300,
 								borderColor: colorTheme.text7Color,
@@ -64,65 +115,20 @@ class Ask extends Component {
 				<Row
 					type="flex"
 					justify="start"
-					align="middle"
-					style={{
-						padding: '3% 0% 0%' // top left&right bottom
-					}}
-				>
-					<Col md={{ span: 3 }}>
-						<h3
-							style={{
-								color: colorTheme.keyText5Color
-							}}
-						>
-							Answer 1:
-						</h3>
-					</Col>
-					<Col md={{ span: 6, offset: 1 }}>
-						<Input
-							onChange={this.onChangeName}
-							style={{
-								width: 180,
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text3Color
-							}}
-						/>
-					</Col>
-					<Col md={{ span: 2, offset: 1 }}>
-						<h5
-							style={{
-								color: colorTheme.text4Color
-							}}
-						>
-							20
-						</h5>
-					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="start"
 					style={{
 						padding: '3% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 1, offset: 4 }}>
-						<Icon
+						<Button
 							style={{
-								fontSize: 25,
-								color: colorTheme.text3Color
-							}}
-							type="plus-circle-o"
-						/>
-					</Col>
-					<Col md={{ span: 8, offset: 1 }}>
-						<h3
-							style={{
-								color: colorTheme.text3Color
+								borderColor: colorTheme.key,
+								background: colorTheme.key,
+								color: colorTheme.text2Color
 							}}
 						>
-							Add 0 to 4 possible answers
-						</h3>
+							Add possible answer
+						</Button>
 					</Col>
 				</Row>
 				<Row
@@ -171,12 +177,17 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
+	const askDispatchers = bindActionCreators(askActionCreators, dispatch);
+
 	return {
 		fetchUserProfile: () => {
 			indexDispatchers.fetchUserProfile();
 		},
 		onTrainAI: () => {
 			colorThemeDispatchers.onTrainAI();
+		},
+		onChangeQuestion: e => {
+			askDispatchers.onChangeQuestion(e);
 		}
 	};
 }
