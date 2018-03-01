@@ -1,5 +1,6 @@
 import {
 	ON_CHANGE_QUESTION,
+	ON_CLICK_ADD_ANSWER,
 	ON_CHANGE_ANSWERS,
 	SAVE_QUESTION_START,
 	SAVE_QUESTION_DONE,
@@ -13,6 +14,7 @@ let cloneObject = obj => {
 let initialState = {
 	newQuestion: null,
 	newAnswers: [],
+	questionLength: 0,
 	hasQuestionError: false,
 	hasAnswersError: false,
 	save: null
@@ -22,9 +24,16 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case ON_CHANGE_QUESTION:
-			console.log('action = ', action);
 			newState.newQuestion = action.newQuestion;
-			newState.hasQuestionError = action.hasError;
+			newState.questionLength = action.newQuestion.length;
+			if (newState.questionLength > 50) {
+				newState.hasQuestionError = true;
+			} else {
+				newState.hasQuestionError = false;
+			}
+			return newState;
+		case ON_CLICK_ADD_ANSWER:
+			newState.newAnswers.push('');
 			return newState;
 		case ON_CHANGE_ANSWERS:
 			newState.newAnswers = action.newAnswers;

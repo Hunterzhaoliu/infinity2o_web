@@ -16,12 +16,7 @@ class InputFieldNumber extends Component {
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col
-						sm={{ span: 5 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
-					>
+					<Col md={{ span: 3 }}>
 						<h3
 							style={{
 								color: colorTheme.keyText5Color

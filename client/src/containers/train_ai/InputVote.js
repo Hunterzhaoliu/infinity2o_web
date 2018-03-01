@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as indexActionCreators from '../../actions/index';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
+import * as voteActionCreators from '../../actions/vote';
 import { bindActionCreators } from 'redux';
 import { Button, Card, Col, Layout, Row } from 'antd';
 import questionList from './questionList.js';
@@ -45,6 +46,7 @@ class InputVote extends Component {
 							background: colorTheme.text7Color,
 							color: colorTheme.text2Color
 						}}
+						onClick={this.onVote}
 					>
 						{answer}
 					</Button>
@@ -52,6 +54,10 @@ class InputVote extends Component {
 			);
 		});
 	}
+	onVote = e => {
+		console.log('onVote e = ', e);
+		this.props.onVote(e);
+	};
 	render() {
 		const { colorTheme } = this.props;
 		//console.log('this.props in InputVote.js', this.props);
@@ -90,12 +96,11 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
+	const voteDispatchers = bindActionCreators(voteActionCreators, dispatch);
+
 	return {
-		fetchUserProfile: () => {
-			indexDispatchers.fetchUserProfile();
-		},
-		onVote: () => {
-			colorThemeDispatchers.onVote();
+		onVote: e => {
+			voteDispatchers.onVote(e);
 		}
 	};
 }

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as indexActionCreators from '../../actions/index';
@@ -5,6 +6,7 @@ import * as colorThemeActionCreators from '../../actions/colorTheme';
 import * as askActionCreators from '../../actions/ask';
 import { bindActionCreators } from 'redux';
 import { Layout, Row, Col, Button, Input } from 'antd';
+import ErrorMessage from '../profile/edit/ErrorMessage';
 const { Content } = Layout;
 
 class Ask extends Component {
@@ -19,54 +21,69 @@ class Ask extends Component {
 		this.props.onChangeQuestion(e.target.value);
 	};
 
-	renderAnswerInputs() {
-		const { colorTheme } = this.props;
+	onClickAddAnswer = () => {
+		console.log('this.props = ', this.props);
+		this.props.onClickAddAnswer();
+	};
+	isAskDisabled(ask) {
+		if (ask.hasQuestionError || ask.hasAnswersError) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-		return (
-			<Row
-				type="flex"
-				justify="start"
-				align="middle"
-				style={{
-					padding: '3% 0% 0%' // top left&right bottom
-				}}
-			>
-				<Col md={{ span: 3 }}>
-					<h3
-						style={{
-							color: colorTheme.keyText5Color
-						}}
-					>
-						Answer 1:
-					</h3>
-				</Col>
-				<Col md={{ span: 6, offset: 1 }}>
-					<Input
-						onChange={this.onChangeName}
-						style={{
-							width: 180,
-							borderColor: colorTheme.text7Color,
-							background: colorTheme.text7Color,
-							color: colorTheme.text3Color
-						}}
-					/>
-				</Col>
-				<Col md={{ span: 2, offset: 1 }}>
-					<h5
-						style={{
-							color: colorTheme.text4Color
-						}}
-					>
-						20
-					</h5>
-				</Col>
-			</Row>
-		);
+	renderAnswerInputs(newAnswers) {
+		const { colorTheme } = this.props;
+		return _.map(newAnswers, (answer, key) => {
+			console.log('key = ', key);
+			return (
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+					key={key}
+				>
+					<Col md={{ span: 3 }}>
+						<h4
+							style={{
+								color: colorTheme.keyText5Color
+							}}
+						>
+							Possible Answer:
+						</h4>
+					</Col>
+					<Col md={{ span: 6, offset: 1 }}>
+						<Input
+							onChange={this.onChangePossibleAnswer}
+							style={{
+								width: 180,
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text3Color
+							}}
+						/>
+					</Col>
+					<Col md={{ span: 2, offset: 1 }}>
+						<h5
+							style={{
+								color: colorTheme.text4Color
+							}}
+						>
+							20
+						</h5>
+					</Col>
+				</Row>
+			);
+		});
 	}
 
 	render() {
 		//console.log('this.props in Ask.js', this.props);
-		const { colorTheme } = this.props;
+		const { colorTheme, ask } = this.props;
 		return (
 			<Content
 				style={{
@@ -108,10 +125,15 @@ class Ask extends Component {
 								color: colorTheme.text4Color
 							}}
 						>
-							100
+							{50 - ask.questionLength}
 						</h5>
 					</Col>
 				</Row>
+				<ErrorMessage
+					message="That's too loooooooong"
+					hasError={ask.hasQuestionError}
+				/>
+				{this.renderAnswerInputs(ask.newAnswers)}
 				<Row
 					type="flex"
 					justify="start"
@@ -126,8 +148,9 @@ class Ask extends Component {
 								background: colorTheme.key,
 								color: colorTheme.text2Color
 							}}
+							onClick={this.onClickAddAnswer}
 						>
-							Add possible answer
+							Add Answer
 						</Button>
 					</Col>
 				</Row>
@@ -146,7 +169,7 @@ class Ask extends Component {
 								color: colorTheme.text1Color
 							}}
 						>
-							Ask!
+							Ask
 						</Button>
 					</Col>
 				</Row>
@@ -161,7 +184,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		ask: state.ask
 	};
 }
 
@@ -188,6 +212,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		onChangeQuestion: e => {
 			askDispatchers.onChangeQuestion(e);
+		},
+		onClickAddAnswer: () => {
+			askDispatchers.onClickAddAnswer();
 		}
 	};
 }
