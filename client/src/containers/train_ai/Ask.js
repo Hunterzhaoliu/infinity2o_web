@@ -5,7 +5,7 @@ import * as indexActionCreators from '../../actions/index';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import * as askActionCreators from '../../actions/ask';
 import { bindActionCreators } from 'redux';
-import { Layout, Row, Col, Button, Input } from 'antd';
+import { Layout, Row, Col, Button, Input, Icon } from 'antd';
 import ErrorMessage from '../profile/edit/ErrorMessage';
 const { Content } = Layout;
 
@@ -31,14 +31,6 @@ class Ask extends Component {
 		console.log('e.target.name = ', e.target.name);
 		this.props.onChangeAnswer(e.target.value, e.target.name);
 	};
-
-	isAskDisabled(ask) {
-		if (ask.hasQuestionError || ask.hasAnswersError) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	renderAnswerInputs(newAnswers) {
 		const { colorTheme, ask } = this.props;
@@ -86,7 +78,7 @@ class Ask extends Component {
 						</Col>
 					</Row>
 					<ErrorMessage
-						message="That's too loooooooong"
+						message="Less than 20 characters"
 						hasError={ask.hasAnswersError[0][key]}
 					/>
 				</div>
@@ -94,9 +86,27 @@ class Ask extends Component {
 		});
 	}
 
+	isAskDisabled(ask) {
+		if (ask.hasQuestionError || ask.hasAnswersError) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	renderAskIcon(saveState) {
+		if (saveState === 'save_start') {
+			return <Icon type="loading" />;
+		} else if (saveState === 'save_success') {
+			return <Icon type="check" />;
+		} else if (saveState === 'save_error') {
+			return <Icon type="warning" />;
+		}
+	}
+
 	render() {
 		//console.log('this.props in Ask.js', this.props);
-		const { colorTheme, ask } = this.props;
+		const { colorTheme, saveAsk, ask } = this.props;
 		return (
 			<Content
 				style={{
@@ -143,7 +153,7 @@ class Ask extends Component {
 					</Col>
 				</Row>
 				<ErrorMessage
-					message="That's too loooooooong"
+					message="Between 5 to 50 characters"
 					hasError={ask.hasQuestionError}
 				/>
 				{this.renderAnswerInputs(ask.newAnswers)}
@@ -168,7 +178,7 @@ class Ask extends Component {
 					</Col>
 				</Row>
 				<ErrorMessage
-					message="That's too many answers"
+					message="Up to 20 characters"
 					hasError={ask.hasAnswersError[1]}
 				/>
 				<Row
@@ -185,8 +195,10 @@ class Ask extends Component {
 								background: colorTheme.key,
 								color: colorTheme.text1Color
 							}}
+							disabled={this.isAskDisabled(ask)}
+							onClick={() => saveAsk(ask)}
 						>
-							Ask
+							Ask {this.renderAskIcon(ask.save)}
 						</Button>
 					</Col>
 				</Row>
@@ -235,6 +247,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		onChangeAnswer: (newAnswer, answerIndex) => {
 			askDispatchers.onChangeAnswer(newAnswer, answerIndex);
+		},
+		saveAsk: values => {
+			askDispatchers.saveAsk(values);
 		}
 	};
 }

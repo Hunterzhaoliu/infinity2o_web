@@ -26,7 +26,11 @@ export default function(state = initialState, action) {
 		case ON_CHANGE_QUESTION:
 			newState.newQuestion = action.newQuestion;
 			newState.questionLength = action.newQuestion.length;
-			if (newState.questionLength > 50) {
+			if (
+				newState.questionLength > 50 ||
+				newState.questionLength < 5 ||
+				action.hasError
+			) {
 				newState.hasQuestionError = true;
 			} else {
 				newState.hasQuestionError = false;
@@ -41,7 +45,7 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_CHANGE_ANSWER:
 			newState.newAnswers[action.answerIndex] = action.newAnswer;
-			if (action.newAnswer.length > 20) {
+			if (action.newAnswer.length > 20 || action.hasError) {
 				newState.hasAnswersError[0][action.answerIndex] = true;
 			} else {
 				newState.hasAnswersError[0][action.answerIndex] = false;

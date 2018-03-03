@@ -14,7 +14,7 @@ import {
 	isValidAge,
 	isValidInterests
 	//isValidTimeSlots
-} from '../utils/validate';
+} from '../utils/validateProfileEdit';
 
 export const onChangeName = newName => dispatch => {
 	if (isValidName(newName)) {

@@ -44,7 +44,7 @@ class InputFieldNumber extends Component {
 					</Col>
 				</Row>
 				<ErrorMessage
-					message="Between 13 & 125. If your close you should lie ;)"
+					message="Between 13 & 125."
 					hasError={profile.hasAgeError}
 				/>
 			</div>

@@ -8,23 +8,44 @@ import {
 	SAVE_QUESTION_ERROR
 } from './types';
 
-export function onChangeQuestion(newQuestion) {
-	return function(dispatch) {
-		//console.log('newQuestion = ', newQuestion);
-		dispatch({ type: ON_CHANGE_QUESTION, newQuestion: newQuestion });
-	};
-}
+import { isValidQuestion, isValidAnswer } from '../utils/validateQAndA';
+
+export const onChangeQuestion = newQuestion => dispatch => {
+	if (isValidQuestion(newQuestion)) {
+		dispatch({
+			type: ON_CHANGE_QUESTION,
+			newQuestion: newQuestion,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_QUESTION,
+			newQuestion: newQuestion,
+			hasError: true
+		});
+	}
+};
 
 export const onClickAddAnswer = () => dispatch => {
 	dispatch({ type: ON_CLICK_ADD_ANSWER });
 };
 
 export const onChangeAnswer = (newAnswer, answerIndex) => dispatch => {
-	dispatch({
-		type: ON_CHANGE_ANSWER,
-		newAnswer: newAnswer,
-		answerIndex: answerIndex
-	});
+	if (isValidAnswer(newAnswer)) {
+		dispatch({
+			type: ON_CHANGE_ANSWER,
+			newAnswer: newAnswer,
+			answerIndex: answerIndex,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_ANSWER,
+			newAnswer: newAnswer,
+			answerIndex: answerIndex,
+			hasError: true
+		});
+	}
 };
 
 export const saveAsk = values => async dispatch => {
