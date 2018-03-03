@@ -87,7 +87,14 @@ class Ask extends Component {
 	}
 
 	isAskDisabled(ask) {
-		if (ask.hasQuestionError || ask.hasAnswersError) {
+		if (
+			ask.newQuestion === null ||
+			ask.hasQuestionError ||
+			ask.hasAnswersError[0] ||
+			ask.hasAnswersError[1] ||
+			ask.hasAnswersError[2] ||
+			ask.hasAnswersError[3]
+		) {
 			return true;
 		} else {
 			return false;
