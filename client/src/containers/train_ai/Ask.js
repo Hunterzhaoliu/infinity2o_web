@@ -17,7 +17,6 @@ class Ask extends Component {
 	}
 
 	onChangeQuestion = e => {
-		console.log('e.target.value = ', e.target.value);
 		this.props.onChangeQuestion(e.target.value);
 	};
 
@@ -27,8 +26,6 @@ class Ask extends Component {
 	};
 
 	onChangeAnswer = e => {
-		console.log('e.target.value = ', e.target.value);
-		console.log('e.target.name = ', e.target.name);
 		this.props.onChangeAnswer(e.target.value, e.target.name);
 	};
 
@@ -73,7 +70,7 @@ class Ask extends Component {
 									color: colorTheme.text4Color
 								}}
 							>
-								{20 - ask.newAnswers[key].length}
+								{25 - ask.newAnswers[key].length}
 							</h5>
 						</Col>
 					</Row>

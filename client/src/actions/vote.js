@@ -1,4 +1,4 @@
-import axios from 'axios';
+//import axios from 'axios';
 import { ON_VOTE } from './types';
 
 export function onVote(answerChoosen) {

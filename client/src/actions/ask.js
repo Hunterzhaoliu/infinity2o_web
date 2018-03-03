@@ -51,10 +51,10 @@ export const onChangeAnswer = (newAnswer, answerIndex) => dispatch => {
 export const saveAsk = values => async dispatch => {
 	dispatch({ type: SAVE_QUESTION_START });
 
-	//const response = await axios.post('/api/ask', values);
-	// if (response.status === 200) {
-	// 	dispatch({ type: SAVE_QUESTION_DONE });
-	// } else {
-	// 	dispatch({ type: SAVE_QUESTION_ERROR });
-	// }
+	const response = await axios.post('/api/ask', values);
+	if (response.status === 200) {
+		dispatch({ type: SAVE_QUESTION_DONE });
+	} else {
+		dispatch({ type: SAVE_QUESTION_ERROR });
+	}
 };
