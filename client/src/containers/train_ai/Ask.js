@@ -87,7 +87,7 @@ class Ask extends Component {
 					</Row>
 					<ErrorMessage
 						message="That's too loooooooong"
-						hasError={ask.hasAnswersError[key]}
+						hasError={ask.hasAnswersError[0][key]}
 					/>
 				</div>
 			);
@@ -167,6 +167,10 @@ class Ask extends Component {
 						</Button>
 					</Col>
 				</Row>
+				<ErrorMessage
+					message="That's too many answers"
+					hasError={ask.hasAnswersError[1]}
+				/>
 				<Row
 					type="flex"
 					justify="start"

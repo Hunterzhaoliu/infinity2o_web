@@ -16,7 +16,7 @@ let initialState = {
 	newAnswers: [],
 	questionLength: 0,
 	hasQuestionError: false,
-	hasAnswersError: [false, false, false, false],
+	hasAnswersError: [[false, false, false, false], false],
 	save: null
 };
 
@@ -33,14 +33,18 @@ export default function(state = initialState, action) {
 			}
 			return newState;
 		case ON_CLICK_ADD_ANSWER:
-			newState.newAnswers.push('');
+			if (newState.newAnswers.length < 4) {
+				newState.newAnswers.push('');
+			} else {
+				newState.hasAnswersError[1] = true;
+			}
 			return newState;
 		case ON_CHANGE_ANSWER:
 			newState.newAnswers[action.answerIndex] = action.newAnswer;
 			if (action.newAnswer.length > 20) {
-				newState.hasAnswersError[action.answerIndex] = true;
+				newState.hasAnswersError[0][action.answerIndex] = true;
 			} else {
-				newState.hasAnswersError[action.answerIndex] = false;
+				newState.hasAnswersError[0][action.answerIndex] = false;
 			}
 			return newState;
 		case SAVE_QUESTION_START:
