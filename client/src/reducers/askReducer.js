@@ -16,7 +16,8 @@ let initialState = {
 	newAnswers: [],
 	questionLength: 0,
 	hasQuestionError: false,
-	hasAnswersError: [[false, false, false, false], false],
+	hasAnswersError: [false, false, false, false],
+	displayAddAnswerButton: true,
 	save: null
 };
 
@@ -26,30 +27,19 @@ export default function(state = initialState, action) {
 		case ON_CHANGE_QUESTION:
 			newState.newQuestion = action.newQuestion;
 			newState.questionLength = action.newQuestion.length;
-			if (
-				newState.questionLength > 50 ||
-				newState.questionLength < 5 ||
-				action.hasError
-			) {
-				newState.hasQuestionError = true;
-			} else {
-				newState.hasQuestionError = false;
-			}
+			newState.hasQuestionError = action.hasError;
 			return newState;
 		case ON_CLICK_ADD_ANSWER:
 			if (newState.newAnswers.length < 4) {
 				newState.newAnswers.push('');
-			} else {
-				newState.hasAnswersError[1] = true;
+				if (newState.newAnswers.length === 4) {
+					newState.displayAddAnswerButton = false;
+				}
 			}
 			return newState;
 		case ON_CHANGE_ANSWER:
 			newState.newAnswers[action.answerIndex] = action.newAnswer;
-			if (action.newAnswer.length > 20 || action.hasError) {
-				newState.hasAnswersError[0][action.answerIndex] = true;
-			} else {
-				newState.hasAnswersError[0][action.answerIndex] = false;
-			}
+			newState.hasAnswersError[action.answerIndex] = action.hasError;
 			return newState;
 		case SAVE_QUESTION_START:
 			newState.save = 'save_start';

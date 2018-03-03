@@ -8,7 +8,7 @@ import {
 	SAVE_QUESTION_ERROR
 } from './types';
 
-import { isValidQuestion, isValidAnswer } from '../utils/validateQAndA';
+import { isValidQuestion, isValidAnswer } from '../utils/validateAsk';
 
 export const onChangeQuestion = newQuestion => dispatch => {
 	if (isValidQuestion(newQuestion)) {

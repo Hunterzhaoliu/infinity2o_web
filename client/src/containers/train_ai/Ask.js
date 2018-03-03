@@ -52,7 +52,7 @@ class Ask extends Component {
 									color: colorTheme.keyText5Color
 								}}
 							>
-								Possible Answer:
+								Answer {key + 1}:
 							</h4>
 						</Col>
 						<Col md={{ span: 6, offset: 1 }}>
@@ -78,8 +78,8 @@ class Ask extends Component {
 						</Col>
 					</Row>
 					<ErrorMessage
-						message="Less than 20 characters"
-						hasError={ask.hasAnswersError[0][key]}
+						message="Between 2 & 25 characters"
+						hasError={ask.hasAnswersError[key]}
 					/>
 				</div>
 			);
@@ -101,6 +101,35 @@ class Ask extends Component {
 			return <Icon type="check" />;
 		} else if (saveState === 'save_error') {
 			return <Icon type="warning" />;
+		}
+	}
+
+	renderAddAnswerButton(displayAddAnswerButton, colorTheme) {
+		if (displayAddAnswerButton) {
+			return (
+				<Row
+					type="flex"
+					justify="start"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 1, offset: 4 }}>
+						<Button
+							style={{
+								borderColor: colorTheme.key,
+								background: colorTheme.key,
+								color: colorTheme.text2Color
+							}}
+							onClick={this.onClickAddAnswer}
+						>
+							Add Answer
+						</Button>
+					</Col>
+				</Row>
+			);
+		} else {
+			return;
 		}
 	}
 
@@ -157,30 +186,10 @@ class Ask extends Component {
 					hasError={ask.hasQuestionError}
 				/>
 				{this.renderAnswerInputs(ask.newAnswers)}
-				<Row
-					type="flex"
-					justify="start"
-					style={{
-						padding: '3% 0% 0%' // top left&right bottom
-					}}
-				>
-					<Col md={{ span: 1, offset: 4 }}>
-						<Button
-							style={{
-								borderColor: colorTheme.key,
-								background: colorTheme.key,
-								color: colorTheme.text2Color
-							}}
-							onClick={this.onClickAddAnswer}
-						>
-							Add Answer
-						</Button>
-					</Col>
-				</Row>
-				<ErrorMessage
-					message="Up to 20 characters"
-					hasError={ask.hasAnswersError[1]}
-				/>
+				{this.renderAddAnswerButton(
+					ask.displayAddAnswerButton,
+					colorTheme
+				)}
 				<Row
 					type="flex"
 					justify="start"
