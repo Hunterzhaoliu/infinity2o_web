@@ -17,14 +17,21 @@ class Ask extends Component {
 	}
 
 	onChangeQuestion = e => {
-		//console.log('e.target.value = ', e.target.value);
+		console.log('e.target.value = ', e.target.value);
 		this.props.onChangeQuestion(e.target.value);
 	};
 
 	onClickAddAnswer = () => {
-		console.log('this.props = ', this.props);
+		//console.log('this.props = ', this.props);
 		this.props.onClickAddAnswer();
 	};
+
+	onChangeAnswer = e => {
+		console.log('e.target.value = ', e.target.value);
+		console.log('e.target.name = ', e.target.name);
+		this.props.onChangeAnswer(e.target.value, e.target.name);
+	};
+
 	isAskDisabled(ask) {
 		if (ask.hasQuestionError || ask.hasAnswersError) {
 			return true;
@@ -34,49 +41,55 @@ class Ask extends Component {
 	}
 
 	renderAnswerInputs(newAnswers) {
-		const { colorTheme } = this.props;
+		const { colorTheme, ask } = this.props;
 		return _.map(newAnswers, (answer, key) => {
-			console.log('key = ', key);
+			//console.log('key = ', key);
 			return (
-				<Row
-					type="flex"
-					justify="start"
-					align="middle"
-					style={{
-						padding: '3% 0% 0%' // top left&right bottom
-					}}
-					key={key}
-				>
-					<Col md={{ span: 3 }}>
-						<h4
-							style={{
-								color: colorTheme.keyText5Color
-							}}
-						>
-							Possible Answer:
-						</h4>
-					</Col>
-					<Col md={{ span: 6, offset: 1 }}>
-						<Input
-							onChange={this.onChangePossibleAnswer}
-							style={{
-								width: 180,
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text3Color
-							}}
-						/>
-					</Col>
-					<Col md={{ span: 2, offset: 1 }}>
-						<h5
-							style={{
-								color: colorTheme.text4Color
-							}}
-						>
-							20
-						</h5>
-					</Col>
-				</Row>
+				<div key={key}>
+					<Row
+						type="flex"
+						justify="start"
+						align="middle"
+						style={{
+							padding: '3% 0% 0%' // top left&right bottom
+						}}
+					>
+						<Col md={{ span: 3 }}>
+							<h4
+								style={{
+									color: colorTheme.keyText5Color
+								}}
+							>
+								Possible Answer:
+							</h4>
+						</Col>
+						<Col md={{ span: 6, offset: 1 }}>
+							<Input
+								name={key}
+								onChange={this.onChangeAnswer}
+								style={{
+									width: 180,
+									borderColor: colorTheme.text7Color,
+									background: colorTheme.text7Color,
+									color: colorTheme.text3Color
+								}}
+							/>
+						</Col>
+						<Col md={{ span: 2, offset: 1 }}>
+							<h5
+								style={{
+									color: colorTheme.text4Color
+								}}
+							>
+								{20 - ask.newAnswers[key].length}
+							</h5>
+						</Col>
+					</Row>
+					<ErrorMessage
+						message="That's too loooooooong"
+						hasError={ask.hasAnswersError[key]}
+					/>
+				</div>
 			);
 		});
 	}
@@ -210,11 +223,14 @@ function mapDispatchToProps(dispatch) {
 		onTrainAI: () => {
 			colorThemeDispatchers.onTrainAI();
 		},
-		onChangeQuestion: e => {
-			askDispatchers.onChangeQuestion(e);
+		onChangeQuestion: newQuestion => {
+			askDispatchers.onChangeQuestion(newQuestion);
 		},
 		onClickAddAnswer: () => {
 			askDispatchers.onClickAddAnswer();
+		},
+		onChangeAnswer: (newAnswer, answerIndex) => {
+			askDispatchers.onChangeAnswer(newAnswer, answerIndex);
 		}
 	};
 }

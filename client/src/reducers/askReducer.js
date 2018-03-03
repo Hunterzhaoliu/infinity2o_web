@@ -1,7 +1,7 @@
 import {
 	ON_CHANGE_QUESTION,
 	ON_CLICK_ADD_ANSWER,
-	ON_CHANGE_ANSWERS,
+	ON_CHANGE_ANSWER,
 	SAVE_QUESTION_START,
 	SAVE_QUESTION_DONE,
 	SAVE_QUESTION_ERROR
@@ -16,7 +16,7 @@ let initialState = {
 	newAnswers: [],
 	questionLength: 0,
 	hasQuestionError: false,
-	hasAnswersError: false,
+	hasAnswersError: [false, false, false, false],
 	save: null
 };
 
@@ -35,9 +35,13 @@ export default function(state = initialState, action) {
 		case ON_CLICK_ADD_ANSWER:
 			newState.newAnswers.push('');
 			return newState;
-		case ON_CHANGE_ANSWERS:
-			newState.newAnswers = action.newAnswers;
-			newState.hasAnswersError = action.hasError;
+		case ON_CHANGE_ANSWER:
+			newState.newAnswers[action.answerIndex] = action.newAnswer;
+			if (action.newAnswer.length > 20) {
+				newState.hasAnswersError[action.answerIndex] = true;
+			} else {
+				newState.hasAnswersError[action.answerIndex] = false;
+			}
 			return newState;
 		case SAVE_QUESTION_START:
 			newState.save = 'save_start';
