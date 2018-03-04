@@ -4,8 +4,9 @@ import * as indexActionCreators from '../../actions/index';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import DisplayField from './DisplayField';
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col, Button, Tabs } from 'antd';
 const { Content } = Layout;
+const { TabPane } = Tabs;
 
 class Profile extends Component {
 	componentWillMount() {
@@ -13,17 +14,12 @@ class Profile extends Component {
 		this.props.fetchUserProfile();
 		this.props.onProfile();
 	}
-
-	render() {
-		//console.log('this.props in Profile.js', this.props);
-		const { colorTheme, profile } = this.props;
+	callback(key) {
+		console.log(key);
+	}
+	renderProfile(colorTheme, profile) {
 		return (
-			<Content
-				style={{
-					padding: '100px 50px 50px', // top left&right bottom
-					background: colorTheme.backgroundColor
-				}}
-			>
+			<div>
 				<Row
 					type="flex"
 					justify="start"
@@ -112,6 +108,37 @@ class Profile extends Component {
 						</Button>
 					</Col>
 				</Row>
+			</div>
+		);
+	}
+	render() {
+		//console.log('this.props in Profile.js', this.props);
+		const { colorTheme, profile } = this.props;
+		return (
+			<Content
+				style={{
+					padding: '100px 50px 50px', // top left&right bottom
+					background: colorTheme.backgroundColor
+				}}
+			>
+				<Tabs
+					style={{
+						background: colorTheme.backgroundColor,
+						color: colorTheme.text1Color
+					}}
+					defaultActiveKey="1"
+					onChange={this.callback}
+				>
+					<TabPane
+						style={{
+							background: colorTheme.backgroundColor
+						}}
+						tab="Tab 1"
+						key="1"
+					>
+						{this.renderProfile(colorTheme, profile)}
+					</TabPane>
+				</Tabs>
 			</Content>
 		);
 	}
