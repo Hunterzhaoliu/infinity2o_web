@@ -6,4 +6,4 @@ const answerSchema = new Schema({
 	votes: { type: Number, default: 0 }
 });
 
-mongoose.model('asks', answerSchema);
+module.exports = answerSchema;

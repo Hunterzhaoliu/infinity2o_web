@@ -5,6 +5,8 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 require('./models/User');
+require('./models/Ask');
+require('./models/Answer');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
@@ -37,9 +39,7 @@ if (process.env.NODE_ENV === 'production') {
 	// Express will serve up the index.html file if it doesn't recognize the route
 	const path = require('path');
 	app.get('*', (request, response) => {
-		response.sendFile(
-			path.resolve(__dirname, 'client', 'build', 'index.html')
-		);
+		response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 	});
 }
 

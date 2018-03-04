@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose; // = const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 const AnswerSchema = require('./Answer');
 
 const asksSchema = new Schema({
-	question: [String],
+	question: String,
 	totalVotes: { type: Number, default: 0 },
 	answers: [AnswerSchema],
-	_user: { type: Schema.Types.ObjectId, ref: 'User' },
-	datsAsked: Date,
+	_userId: { type: Schema.Types.ObjectId, ref: 'User' },
+	dateAsked: Date,
 	lastVotedOn: Date
 });
 
+//mongoose class, ask collection
 mongoose.model('asks', asksSchema);
