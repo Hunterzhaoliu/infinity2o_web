@@ -211,7 +211,8 @@ class Ask extends Component {
 							disabled={this.isAskDisabled(ask)}
 							onClick={() => saveAsk(ask)}
 						>
-							Ask {this.renderAskIcon(ask.save)}
+							<a href="/train_ai">Ask</a>
+							{this.renderAskIcon(ask.save)}
 						</Button>
 					</Col>
 				</Row>

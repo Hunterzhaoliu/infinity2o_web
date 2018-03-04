@@ -26,8 +26,10 @@ module.exports = app => {
 		console.log('ask = ', ask);
 		try {
 			await ask.save();
-			console.log('saved ask!!!!!');
-			request.user.asks.questions.push(newQuestion);
+			request.user.asks.questions.push({
+				question: ask.question,
+				_askId: ask._id
+			});
 			//
 			//saves document ask in collection asks
 			const user = await request.user.save();

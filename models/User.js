@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose; // = const Schema = mongoose.Schema;
 //schema describes every property of a user
+const ProfileQuestionDisplay = require('./ProfileQuestionDisplay');
+
 const userSchema = new Schema({
 	auth: {
 		googleId: String,
@@ -23,7 +25,7 @@ const userSchema = new Schema({
 		}
 	},
 	asks: {
-		questions: [String]
+		questions: [ProfileQuestionDisplay]
 	}
 });
 
