@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const AnswerSchema = require('./Answer');
 
-const asksSchema = new Schema({
+const askSchema = new Schema({
 	question: String,
 	totalVotes: { type: Number, default: 0 },
 	answers: [AnswerSchema],
@@ -11,5 +11,4 @@ const asksSchema = new Schema({
 	lastVotedOn: Date
 });
 
-//mongoose class, ask collection
-mongoose.model('asks', asksSchema);
+mongoose.model('asks', askSchema);

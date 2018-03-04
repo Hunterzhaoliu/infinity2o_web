@@ -6,27 +6,32 @@ const Ask = mongoose.model('asks');
 
 module.exports = app => {
 	app.post('/api/ask', requireLogin, async (request, response) => {
-		console.log('request.body = ', request.body);
 		const { newQuestion, newAnswers } = request.body;
-		console.log('newQuestion = ', newQuestion);
-		console.log('newAnswers = ', newAnswers);
+
 		const answers = _.map(newAnswers, answer => {
 			return {
 				answer: answer,
-				votes: { type: Number, default: 0 }
+				votes: 0
 			};
 		});
+
 		const ask = new Ask({
 			question: newQuestion,
+			totalVotes: 0,
 			answers: answers,
 			_userId: request.user.id,
-			dateSent: Date.now()
+			dateAsked: Date.now(),
+			lastVotedOn: Date.now()
 		});
 		console.log('ask = ', ask);
 		try {
 			await ask.save();
+			console.log('saved ask!!!!!');
+			request.user.asks.questions.push(newQuestion);
+			//
 			//saves document ask in collection asks
-			response.send(ask);
+			const user = await request.user.save();
+			response.send(user);
 		} catch (error) {
 			response.status(422).send(error);
 		}

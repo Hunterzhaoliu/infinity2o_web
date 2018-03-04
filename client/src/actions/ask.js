@@ -52,6 +52,7 @@ export const saveAsk = values => async dispatch => {
 	dispatch({ type: SAVE_QUESTION_START });
 
 	const response = await axios.post('/api/ask', values);
+	console.log('action/ask.js response = ', response);
 	if (response.status === 200) {
 		dispatch({ type: SAVE_QUESTION_DONE });
 	} else {

@@ -21,6 +21,9 @@ const userSchema = new Schema({
 			saturday: [String],
 			sunday: [String]
 		}
+	},
+	asks: {
+		questions: [String]
 	}
 });
 
