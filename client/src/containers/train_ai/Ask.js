@@ -190,10 +190,7 @@ class Ask extends Component {
 					hasError={ask.hasQuestionError}
 				/>
 				{this.renderAnswerInputs(ask.newAnswers)}
-				{this.renderAddAnswerButton(
-					ask.displayAddAnswerButton,
-					colorTheme
-				)}
+				{this.renderAddAnswerButton(ask.displayAddAnswerButton, colorTheme)}
 				<Row
 					type="flex"
 					justify="start"
@@ -211,7 +208,14 @@ class Ask extends Component {
 							disabled={this.isAskDisabled(ask)}
 							onClick={() => saveAsk(ask)}
 						>
-							<a href="/train_ai">Ask</a>
+							<a
+								href="/train_ai"
+								style={{
+									color: colorTheme.text1Color
+								}}
+							>
+								Ask
+							</a>
 							{this.renderAskIcon(ask.save)}
 						</Button>
 					</Col>

@@ -30,7 +30,8 @@ let initialState = {
 	hasInterestsError: false,
 	hasTimeZoneError: false,
 	hasAvailabilityError: false,
-	save: null
+	save: null,
+	asks: null
 };
 
 export default function(state = initialState, action) {
@@ -47,6 +48,7 @@ export default function(state = initialState, action) {
 			newState.newInterests = action.profile.interests;
 			newState.newTimeZone = action.profile.timeZone;
 			newState.newAvailability = action.profile.availability;
+			newState.asks = action.profile.asks;
 			return newState;
 		case ON_CHANGE_NAME:
 			newState.newName = action.newName;

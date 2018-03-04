@@ -22,10 +22,10 @@ const userSchema = new Schema({
 			friday: [String],
 			saturday: [String],
 			sunday: [String]
+		},
+		asks: {
+			questions: [ProfileQuestionDisplay]
 		}
-	},
-	asks: {
-		questions: [ProfileQuestionDisplay]
 	}
 });
 

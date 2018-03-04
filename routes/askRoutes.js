@@ -26,7 +26,7 @@ module.exports = app => {
 		console.log('ask = ', ask);
 		try {
 			await ask.save();
-			request.user.asks.questions.push({
+			request.user.profile.asks.questions.push({
 				question: ask.question,
 				_askId: ask._id
 			});

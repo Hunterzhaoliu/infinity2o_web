@@ -1,12 +1,12 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as indexActionCreators from '../../actions/index';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import DisplayField from './DisplayField';
-import { Layout, Row, Col, Button, Tabs } from 'antd';
+import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
-const { TabPane } = Tabs;
 
 class Profile extends Component {
 	componentWillMount() {
@@ -53,10 +53,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Interest(s): "
-							value={profile.interests}
-						/>
+						<DisplayField label="Interest(s): " value={profile.interests} />
 					</Col>
 				</Row>
 				<Row
@@ -68,10 +65,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Time Zone: "
-							value={profile.timeZone}
-						/>
+						<DisplayField label="Time Zone: " value={profile.timeZone} />
 					</Col>
 				</Row>
 				<Row
@@ -83,10 +77,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Availability: "
-							value={profile.availability}
-						/>
+						<DisplayField label="Availability: " value={profile.availability} />
 					</Col>
 				</Row>
 				<Row
@@ -111,9 +102,22 @@ class Profile extends Component {
 			</div>
 		);
 	}
+
+	renderQuestion(asks) {
+		console.log('asks = ', asks);
+		if (asks != null) {
+			return _.map(asks.questions, (question, key) => {
+				return (
+					<Row key={key}>
+						<Col span={24}>{question.question}</Col>
+					</Row>
+				);
+			});
+		}
+	}
 	render() {
 		//console.log('this.props in Profile.js', this.props);
-		const { colorTheme, profile } = this.props;
+		const { colorTheme, profile, asks } = this.props;
 		return (
 			<Content
 				style={{
@@ -121,24 +125,18 @@ class Profile extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Tabs
-					style={{
-						background: colorTheme.backgroundColor,
-						color: colorTheme.text1Color
-					}}
-					defaultActiveKey="1"
-					onChange={this.callback}
-				>
-					<TabPane
+				{this.renderProfile(colorTheme, profile)}
+				<Row>
+					<h2
 						style={{
-							background: colorTheme.backgroundColor
+							textAlign: 'center',
+							color: colorTheme.text1Color
 						}}
-						tab="Tab 1"
-						key="1"
 					>
-						{this.renderProfile(colorTheme, profile)}
-					</TabPane>
-				</Tabs>
+						Your Questions
+					</h2>
+				</Row>
+				{this.renderQuestion(asks)}
 			</Content>
 		);
 	}
@@ -151,7 +149,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		profile: state.profile
+		profile: state.profile,
+		asks: state.profile.asks
 	};
 }
 

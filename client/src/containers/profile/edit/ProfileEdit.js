@@ -129,7 +129,15 @@ class ProfileEdit extends Component {
 							disabled={this.isSaveDisabled(profile)}
 							onClick={() => saveProfile(profile)}
 						>
-							Save {this.renderSaveIcon(profile.save)}
+							<a
+								href="/profile"
+								style={{
+									color: colorTheme.text1Color
+								}}
+							>
+								Save
+							</a>{' '}
+							{this.renderSaveIcon(profile.save)}
 						</Button>
 					</Col>
 				</Row>
