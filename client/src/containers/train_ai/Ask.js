@@ -139,7 +139,7 @@ class Ask extends Component {
 
 	render() {
 		//console.log('this.props in Ask.js', this.props);
-		const { colorTheme, saveAsk, ask } = this.props;
+		const { colorTheme, saveAsk, ask, history } = this.props;
 		return (
 			<Content
 				style={{
@@ -190,7 +190,10 @@ class Ask extends Component {
 					hasError={ask.hasQuestionError}
 				/>
 				{this.renderAnswerInputs(ask.newAnswers)}
-				{this.renderAddAnswerButton(ask.displayAddAnswerButton, colorTheme)}
+				{this.renderAddAnswerButton(
+					ask.displayAddAnswerButton,
+					colorTheme
+				)}
 				<Row
 					type="flex"
 					justify="start"
@@ -206,16 +209,9 @@ class Ask extends Component {
 								color: colorTheme.text1Color
 							}}
 							disabled={this.isAskDisabled(ask)}
-							onClick={() => saveAsk(ask)}
+							onClick={() => saveAsk(ask, history)}
 						>
-							<a
-								href="/train_ai"
-								style={{
-									color: colorTheme.text1Color
-								}}
-							>
-								Ask
-							</a>
+							Ask
 							{this.renderAskIcon(ask.save)}
 						</Button>
 					</Col>
@@ -266,8 +262,8 @@ function mapDispatchToProps(dispatch) {
 		onChangeAnswer: (newAnswer, answerIndex) => {
 			askDispatchers.onChangeAnswer(newAnswer, answerIndex);
 		},
-		saveAsk: values => {
-			askDispatchers.saveAsk(values);
+		saveAsk: (values, history) => {
+			askDispatchers.saveAsk(values, history);
 		}
 	};
 }

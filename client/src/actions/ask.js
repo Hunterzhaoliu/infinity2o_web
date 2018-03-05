@@ -48,12 +48,13 @@ export const onChangeAnswer = (newAnswer, answerIndex) => dispatch => {
 	}
 };
 
-export const saveAsk = values => async dispatch => {
+export const saveAsk = (values, history) => async dispatch => {
 	dispatch({ type: SAVE_QUESTION_START });
 
 	const response = await axios.post('/api/ask', values);
 	if (response.status === 200) {
 		dispatch({ type: SAVE_QUESTION_DONE });
+		history.push('/train_ai');
 	} else {
 		dispatch({ type: SAVE_QUESTION_ERROR });
 	}

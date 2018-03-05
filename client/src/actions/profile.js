@@ -76,7 +76,7 @@ export const onChangeTimeSlot = newTimeSlot => dispatch => {
 	});
 };
 
-export const saveProfile = values => async dispatch => {
+export const saveProfile = (values, history) => async dispatch => {
 	dispatch({ type: SAVE_PROFILE_START });
 	// if the user already has profile data saved and makes a edit to one
 	// field we need to make sure we send the old unedited data for profile
@@ -98,6 +98,7 @@ export const saveProfile = values => async dispatch => {
 	const response = await axios.post('/api/profile', values);
 	if (response.status === 200) {
 		dispatch({ type: SAVE_PROFILE_DONE });
+		history.push('/profile');
 	} else {
 		dispatch({ type: SAVE_PROFILE_ERROR });
 	}

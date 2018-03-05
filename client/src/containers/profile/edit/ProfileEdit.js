@@ -43,8 +43,8 @@ class ProfileEdit extends Component {
 	}
 
 	render() {
-		//console.log('this.props in ProfileEdit.js', this.props);
-		const { colorTheme, saveProfile, profile } = this.props;
+		console.log('this.props in ProfileEdit.js', this.props);
+		const { colorTheme, saveProfile, profile, history } = this.props;
 		return (
 			<Content
 				style={{
@@ -127,17 +127,9 @@ class ProfileEdit extends Component {
 								color: colorTheme.text1Color
 							}}
 							disabled={this.isSaveDisabled(profile)}
-							onClick={() => saveProfile(profile)}
+							onClick={() => saveProfile(profile, history)}
 						>
-							<a
-								href="/profile"
-								style={{
-									color: colorTheme.text1Color
-								}}
-							>
-								Save
-							</a>{' '}
-							{this.renderSaveIcon(profile.save)}
+							Save {this.renderSaveIcon(profile.save)}
 						</Button>
 					</Col>
 				</Row>
@@ -180,8 +172,8 @@ function mapDispatchToProps(dispatch) {
 		onProfile: () => {
 			colorThemeDispatchers.onProfile();
 		},
-		saveProfile: values => {
-			profileDispatchers.saveProfile(values);
+		saveProfile: (values, history) => {
+			profileDispatchers.saveProfile(values, history);
 		}
 	};
 }
