@@ -1,6 +1,8 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as indexActionCreators from '../../actions/index';
+import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import DisplayField from './DisplayField';
 import { Layout, Row, Col, Button } from 'antd';
@@ -10,24 +12,27 @@ class Profile extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.fetchUserProfile();
+		this.props.onProfile();
 	}
 
-	render() {
-		//console.log('this.props in Profile.js', this.props);
-		const { colorTheme, profile } = this.props;
+	renderProfile(colorTheme, profile) {
 		return (
-			<Content
-				style={{
-					padding: '10% 7% 0%', // top left&right bottom
-					background: colorTheme.backgroundColor
-				}}
-			>
+			<div>
+				<Row>
+					<h2
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						Match Info.:
+					</h2>
+				</Row>
 				<Row
 					type="flex"
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
@@ -39,7 +44,7 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
@@ -51,7 +56,7 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
@@ -66,7 +71,7 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
@@ -81,7 +86,7 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
@@ -95,7 +100,7 @@ class Profile extends Component {
 					type="flex"
 					justify="start"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -106,9 +111,65 @@ class Profile extends Component {
 								color: colorTheme.text1Color
 							}}
 						>
-							<a href="/profile/edit">Edit</a>
+							<a href="/profile/edit">Edit Match Info.</a>
 						</Button>
 					</Col>
+				</Row>
+			</div>
+		);
+	}
+
+	renderQuestion(asks, colorTheme) {
+		if (asks != null) {
+			return _.map(asks.questions, (question, key) => {
+				return (
+					<Row key={key}>
+						<Col span={24}>
+							<h3
+								style={{
+									color: colorTheme.text5Color
+								}}
+							>
+								{question.question}
+							</h3>
+						</Col>
+					</Row>
+				);
+			});
+		}
+	}
+
+	render() {
+		//console.log('this.props in Profile.js', this.props);
+		const { colorTheme, profile, asks } = this.props;
+		return (
+			<Content
+				style={{
+					padding: '75px 50px 50px', // top left&right bottom
+					background: colorTheme.backgroundColor
+				}}
+			>
+				{this.renderProfile(colorTheme, profile)}
+				<Row>
+					<h2
+						style={{
+							padding: '25px 0% 0%', // top left&right bottom
+							color: colorTheme.text3Color
+						}}
+					>
+						Your Questions
+					</h2>
+				</Row>
+				{this.renderQuestion(asks, colorTheme)}
+				<Row>
+					<h2
+						style={{
+							padding: '25px 0% 0%', // top left&right bottom
+							color: colorTheme.text3Color
+						}}
+					>
+						Your Votes
+					</h2>
 				</Row>
 			</Content>
 		);
@@ -122,7 +183,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		profile: state.profile
+		profile: state.profile,
+		asks: state.profile.asks
 	};
 }
 
@@ -132,10 +194,16 @@ This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
 	const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
-
+	const colorThemeDispatchers = bindActionCreators(
+		colorThemeActionCreators,
+		dispatch
+	);
 	return {
 		fetchUserProfile: () => {
 			indexDispatchers.fetchUserProfile();
+		},
+		onProfile: () => {
+			colorThemeDispatchers.onProfile();
 		}
 	};
 }

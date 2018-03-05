@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as indexActionCreators from '../../../actions/index';
+import * as colorThemeActionCreators from '../../../actions/colorTheme';
 import * as profileActionCreators from '../../../actions/profile';
 import { bindActionCreators } from 'redux';
 import InputField from './InputField';
@@ -15,6 +16,7 @@ class ProfileEdit extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.fetchUserProfile();
+		this.props.onProfile();
 	}
 
 	isSaveDisabled(profile) {
@@ -41,12 +43,12 @@ class ProfileEdit extends Component {
 	}
 
 	render() {
-		//console.log('this.props in ProfileEdit.js', this.props);
-		const { colorTheme, saveProfile, profile } = this.props;
+		console.log('this.props in ProfileEdit.js', this.props);
+		const { colorTheme, saveProfile, profile, history } = this.props;
 		return (
 			<Content
 				style={{
-					padding: '10% 7% 0%', // top left&right bottom
+					padding: '75px 50px 50px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -55,7 +57,7 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -124,9 +126,8 @@ class ProfileEdit extends Component {
 								background: colorTheme.key,
 								color: colorTheme.text1Color
 							}}
-							type="submit"
 							disabled={this.isSaveDisabled(profile)}
-							onClick={() => saveProfile(profile)}
+							onClick={() => saveProfile(profile, history)}
 						>
 							Save {this.renderSaveIcon(profile.save)}
 						</Button>
@@ -159,13 +160,20 @@ function mapDispatchToProps(dispatch) {
 		profileActionCreators,
 		dispatch
 	);
+	const colorThemeDispatchers = bindActionCreators(
+		colorThemeActionCreators,
+		dispatch
+	);
 
 	return {
 		fetchUserProfile: () => {
 			indexDispatchers.fetchUserProfile();
 		},
-		saveProfile: values => {
-			profileDispatchers.saveProfile(values);
+		onProfile: () => {
+			colorThemeDispatchers.onProfile();
+		},
+		saveProfile: (values, history) => {
+			profileDispatchers.saveProfile(values, history);
 		}
 	};
 }
