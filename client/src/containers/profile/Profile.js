@@ -14,12 +14,19 @@ class Profile extends Component {
 		this.props.fetchUserProfile();
 		this.props.onProfile();
 	}
-	callback(key) {
-		console.log(key);
-	}
+
 	renderProfile(colorTheme, profile) {
 		return (
 			<div>
+				<Row>
+					<h2
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						Matching Information:
+					</h2>
+				</Row>
 				<Row
 					type="flex"
 					justify="start"
@@ -37,7 +44,7 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
@@ -49,11 +56,14 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField label="Interest(s): " value={profile.interests} />
+						<DisplayField
+							label="Interest(s): "
+							value={profile.interests}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -61,11 +71,14 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField label="Time Zone: " value={profile.timeZone} />
+						<DisplayField
+							label="Time Zone: "
+							value={profile.timeZone}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -73,18 +86,21 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField label="Availability: " value={profile.availability} />
+						<DisplayField
+							label="Availability: "
+							value={profile.availability}
+						/>
 					</Col>
 				</Row>
 				<Row
 					type="flex"
 					justify="start"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -103,18 +119,26 @@ class Profile extends Component {
 		);
 	}
 
-	renderQuestion(asks) {
-		console.log('asks = ', asks);
+	renderQuestion(asks, colorTheme) {
 		if (asks != null) {
 			return _.map(asks.questions, (question, key) => {
 				return (
 					<Row key={key}>
-						<Col span={24}>{question.question}</Col>
+						<Col span={24}>
+							<h3
+								style={{
+									color: colorTheme.text5Color
+								}}
+							>
+								{question.question}
+							</h3>
+						</Col>
 					</Row>
 				);
 			});
 		}
 	}
+
 	render() {
 		//console.log('this.props in Profile.js', this.props);
 		const { colorTheme, profile, asks } = this.props;
@@ -129,14 +153,14 @@ class Profile extends Component {
 				<Row>
 					<h2
 						style={{
-							textAlign: 'center',
-							color: colorTheme.text1Color
+							padding: '50px 0% 0%', // top left&right bottom
+							color: colorTheme.text3Color
 						}}
 					>
 						Your Questions
 					</h2>
 				</Row>
-				{this.renderQuestion(asks)}
+				{this.renderQuestion(asks, colorTheme)}
 			</Content>
 		);
 	}
