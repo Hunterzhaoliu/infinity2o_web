@@ -1,15 +1,18 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import * as indexActionCreators from '../../actions/index';
-//import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as voteActionCreators from '../../actions/vote';
+import * as trainAIActionCreators from '../../actions/trainAI';
 import { bindActionCreators } from 'redux';
 import { Button, Card, Col, Layout, Row } from 'antd';
 import questionList from './questionList.js';
 const { Content } = Layout;
 
 class InputVote extends Component {
+	componentWillMount() {
+		// run once before first render()
+		// TODO: this.props.fetchUserTrainAIAsks();
+	}
+
 	onVote = e => {
 		console.log('onVote e.target.value = ', e.target.value);
 		//this.props.onVote(e);
@@ -42,6 +45,7 @@ class InputVote extends Component {
 				<Col key={oneQuestion.question} span={12}>
 					<Card
 						style={{
+							padding: '15px 0px 0px', // top left&right bottom
 							borderColor: colorTheme.text8Color,
 							background: colorTheme.text8Color,
 							color: colorTheme.text2Color
@@ -67,6 +71,7 @@ class InputVote extends Component {
 		return (
 			<Content
 				style={{
+					overflow: 'initial',
 					padding: '15px 0px 0px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
@@ -92,18 +97,14 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	//const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
-
-	// const colorThemeDispatchers = bindActionCreators(
-	// 	colorThemeActionCreators,
-	// 	dispatch
-	// );
-
-	const voteDispatchers = bindActionCreators(voteActionCreators, dispatch);
+	const trainAIDispatchers = bindActionCreators(
+		trainAIActionCreators,
+		dispatch
+	);
 
 	return {
 		onVote: e => {
-			voteDispatchers.onVote(e);
+			trainAIDispatchers.onVote(e);
 		}
 	};
 }

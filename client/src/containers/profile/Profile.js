@@ -24,7 +24,7 @@ class Profile extends Component {
 							color: colorTheme.text3Color
 						}}
 					>
-						Matching Information:
+						Match Info.:
 					</h2>
 				</Row>
 				<Row
@@ -111,7 +111,7 @@ class Profile extends Component {
 								color: colorTheme.text1Color
 							}}
 						>
-							<a href="/profile/edit">Edit</a>
+							<a href="/profile/edit">Edit Match Info.</a>
 						</Button>
 					</Col>
 				</Row>
@@ -161,6 +161,16 @@ class Profile extends Component {
 					</h2>
 				</Row>
 				{this.renderQuestion(asks, colorTheme)}
+				<Row>
+					<h2
+						style={{
+							padding: '25px 0% 0%', // top left&right bottom
+							color: colorTheme.text3Color
+						}}
+					>
+						Your Votes
+					</h2>
+				</Row>
 			</Content>
 		);
 	}

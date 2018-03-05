@@ -14,6 +14,7 @@ import Ask from './train_ai/Ask';
 import Matches from './matches/Matches';
 
 import { Layout, Row, Col } from 'antd';
+
 const { Footer } = Layout;
 
 class App extends Component {
@@ -47,7 +48,7 @@ class App extends Component {
 					>
 						<Row>
 							<Col span={24}>
-								<p>Infinity2o Inc. © 2018 -> infinity</p>
+								<p>Infinity2o Inc. © 2018 -> ∞</p>
 							</Col>
 						</Row>
 						<Row type="flex" justify="center">

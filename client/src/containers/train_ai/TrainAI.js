@@ -90,7 +90,7 @@ class TrainAI extends Component {
 								color: colorTheme.text3Color
 							}}
 						>
-							Or vote on questions that matter to you:
+							Or vote on answers that matter to you:
 						</h3>
 					</Col>
 				</Row>
