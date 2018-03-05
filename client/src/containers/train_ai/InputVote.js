@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as trainAIActionCreators from '../../actions/trainAI';
 import { bindActionCreators } from 'redux';
 import { Button, Card, Col, Layout, Row } from 'antd';
-import questionList from './questionList.js';
+import QandAsList from './QandAsList.js';
 const { Content } = Layout;
 
 class InputVote extends Component {
@@ -20,9 +20,9 @@ class InputVote extends Component {
 
 	renderAnswers(answers) {
 		const { colorTheme } = this.props;
-		return _.map(answers, answer => {
+		return _.map(answers, (answer, index) => {
 			return (
-				<Row style={{ padding: '8px 0px 0px' }} key={answer}>
+				<Row style={{ padding: '8px 0px 0px' }} key={index}>
 					<Button
 						style={{
 							borderColor: colorTheme.text7Color,
@@ -38,29 +38,39 @@ class InputVote extends Component {
 		});
 	}
 
-	renderQuestion() {
+	renderQandAs() {
 		const { colorTheme } = this.props;
-		return _.map(questionList, oneQuestion => {
+		return _.map(QandAsList, (QandAs, index) => {
 			return (
-				<Col key={oneQuestion.question} span={12}>
-					<Card
-						style={{
-							padding: '15px 0px 0px', // top left&right bottom
-							borderColor: colorTheme.text8Color,
-							background: colorTheme.text8Color,
-							color: colorTheme.text2Color
-						}}
-					>
-						<h2
+				<Row
+					style={{
+						padding: '15px 0px 0px' // top left&right bottom
+					}}
+					gutter={36}
+					key={index}
+				>
+					<Col span={12}>
+						<Card
 							style={{
+								borderColor: colorTheme.text8Color,
+								background: colorTheme.text8Color,
 								color: colorTheme.text2Color
 							}}
 						>
-							{oneQuestion.question}
-						</h2>
-						{this.renderAnswers(oneQuestion.answers)}
-					</Card>
-				</Col>
+							<h3
+								style={{
+									color: colorTheme.text2Color
+								}}
+							>
+								{QandAs.question}
+							</h3>
+							{this.renderAnswers(
+								QandAs.answers,
+								QandAs.questionId
+							)}
+						</Card>
+					</Col>
+				</Row>
 			);
 		});
 	}
@@ -76,7 +86,7 @@ class InputVote extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Row gutter={36}>{this.renderQuestion()}</Row>
+				{this.renderQandAs()}
 			</Content>
 		);
 	}
