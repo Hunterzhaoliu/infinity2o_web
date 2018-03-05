@@ -145,7 +145,7 @@ class Profile extends Component {
 		return (
 			<Content
 				style={{
-					padding: '100px 50px 50px', // top left&right bottom
+					padding: '75px 50px 50px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -153,7 +153,7 @@ class Profile extends Component {
 				<Row>
 					<h2
 						style={{
-							padding: '50px 0% 0%', // top left&right bottom
+							padding: '25px 0% 0%', // top left&right bottom
 							color: colorTheme.text3Color
 						}}
 					>

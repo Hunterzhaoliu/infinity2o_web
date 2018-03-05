@@ -10,6 +10,31 @@ import questionList from './questionList.js';
 const { Content } = Layout;
 
 class InputVote extends Component {
+	onVote = e => {
+		console.log('onVote e.target.value = ', e.target.value);
+		//this.props.onVote(e);
+	};
+
+	renderAnswers(answers) {
+		const { colorTheme } = this.props;
+		return _.map(answers, answer => {
+			return (
+				<Row style={{ padding: '8px 0px 0px' }} key={answer}>
+					<Button
+						style={{
+							borderColor: colorTheme.text7Color,
+							background: colorTheme.text7Color,
+							color: colorTheme.text2Color
+						}}
+						onClick={this.onVote}
+					>
+						{answer}
+					</Button>
+				</Row>
+			);
+		});
+	}
+
 	renderQuestion() {
 		const { colorTheme } = this.props;
 		return _.map(questionList, oneQuestion => {
@@ -29,42 +54,20 @@ class InputVote extends Component {
 						>
 							{oneQuestion.question}
 						</h2>
-						{this.renderAnswer(oneQuestion.answers)}
+						{this.renderAnswers(oneQuestion.answers)}
 					</Card>
 				</Col>
 			);
 		});
 	}
-	renderAnswer(answers) {
-		const { colorTheme } = this.props;
-		return _.map(answers, answer => {
-			return (
-				<Row style={{ padding: '8px 0px 0px' }} key={answer}>
-					<Button
-						style={{
-							borderColor: colorTheme.text8Color,
-							background: colorTheme.text7Color,
-							color: colorTheme.text2Color
-						}}
-						onClick={this.onVote}
-					>
-						{answer}
-					</Button>
-				</Row>
-			);
-		});
-	}
-	onVote = e => {
-		console.log('onVote e = ', e);
-		this.props.onVote(e);
-	};
+
 	render() {
 		const { colorTheme } = this.props;
 		//console.log('this.props in InputVote.js', this.props);
 		return (
 			<Content
 				style={{
-					padding: '25px 25px 25px', // top left&right bottom
+					padding: '15px 0px 0px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>

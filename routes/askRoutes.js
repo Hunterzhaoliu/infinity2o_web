@@ -23,7 +23,7 @@ module.exports = app => {
 			dateAsked: Date.now(),
 			lastVotedOn: Date.now()
 		});
-		console.log('ask = ', ask);
+
 		try {
 			await ask.save();
 			request.user.profile.asks.questions.push({

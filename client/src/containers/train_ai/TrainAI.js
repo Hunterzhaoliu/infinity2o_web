@@ -20,7 +20,7 @@ class TrainAI extends Component {
 		return (
 			<Content
 				style={{
-					padding: '100px 50px 50px', // top left&right bottom
+					padding: '75px 50px 50px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -29,22 +29,39 @@ class TrainAI extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '0% 0% 0%' // top left&right bottom
+						textAlign: 'center',
+						padding: '0% 0% 5px' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
+						<h2
+							style={{
+								color: colorTheme.text2Color
+							}}
+						>
+							We believe people are great partners because their
+							core beliefs align.
+						</h2>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					align="middle"
+					style={{
+						padding: '0% 0% 5px' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 16 }}>
 						<h3
 							style={{
 								color: colorTheme.text3Color
 							}}
 						>
-							We believe people are great partners because their core beliefs
-							are the same. Find great partners by asking & voting on questions
-							that matter to you.
+							Find partners by asking questions that matter to
+							you:
 						</h3>
 					</Col>
-				</Row>
-				<Row type="flex" justify="start">
 					<Col md={{ span: 4, offset: 0 }}>
 						<Button
 							key="1"
@@ -63,18 +80,31 @@ class TrainAI extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						textAlign: 'center',
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '50px 0px 0px' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
 						<h3
 							style={{
+								textAlign: 'center',
 								color: colorTheme.text3Color
 							}}
 						>
-							<InputVote />
+							Or vote on questions that matter to you:
 						</h3>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						textAlign: 'center',
+						padding: '0px 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col md={{ span: 24 }}>
+						<InputVote />
 					</Col>
 				</Row>
 			</Content>
