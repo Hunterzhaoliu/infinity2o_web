@@ -40,37 +40,31 @@ class InputVote extends Component {
 
 	renderQandAs() {
 		const { colorTheme } = this.props;
-		return _.map(QandAsList, (QandAs, index) => {
+		return _.map(QandAsList, (QandAs, key) => {
 			return (
-				<Row
-					style={{
-						padding: '15px 0px 0px' // top left&right bottom
-					}}
-					gutter={36}
-					key={index}
-				>
-					<Col span={12}>
-						<Card
+				<Col span={12} key={key}>
+					<Card
+						style={{
+							borderColor: colorTheme.text8Color,
+							background: colorTheme.text8Color,
+							color: colorTheme.text2Color
+						}}
+					>
+						<h3
 							style={{
-								borderColor: colorTheme.text8Color,
-								background: colorTheme.text8Color,
 								color: colorTheme.text2Color
 							}}
 						>
-							<h3
-								style={{
-									color: colorTheme.text2Color
-								}}
-							>
-								{QandAs.question}
-							</h3>
-							{this.renderAnswers(
-								QandAs.answers,
-								QandAs.questionId
-							)}
-						</Card>
-					</Col>
-				</Row>
+							{QandAs.question}
+						</h3>
+						{this.renderAnswers(QandAs.answers)}
+					</Card>
+					<Row
+						style={{
+							padding: '36px 0px 0px' // top left&right bottom
+						}}
+					/>
+				</Col>
 			);
 		});
 	}
@@ -86,7 +80,14 @@ class InputVote extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				{this.renderQandAs()}
+				<Row
+					style={{
+						padding: '15px 0px 0px' // top left&right bottom
+					}}
+					gutter={36}
+				>
+					{this.renderQandAs()}
+				</Row>
 			</Content>
 		);
 	}
