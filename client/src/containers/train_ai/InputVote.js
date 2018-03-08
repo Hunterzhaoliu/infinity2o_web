@@ -12,27 +12,37 @@ class InputVote extends Component {
 		this.props.fetchUserTrainAIAsks();
 	}
 
-	onVote = index => {
-		console.log('index = ', index);
-		//this.props.onVote();
-	};
+	onVote(e, answerIndex, questionIndex) {
+		//console.log('e = ', e);
+		console.log('answerIndex = ', answerIndex);
+		console.log('questionIndex = ', questionIndex);
 
-	renderAnswers(answers) {
+		//this.props.onVote();
+	}
+
+	onPass(e, questionIndex) {
+		console.log('pass pressed');
+		console.log('questionIndex = ', questionIndex);
+	}
+
+	renderAnswers(answers, questionIndex) {
 		const { colorTheme } = this.props;
-		return _.map(answers, (answerObject, index) => {
+		return _.map(answers, (answerObject, answerIndex) => {
 			let displayAnswer;
 			if (answerObject !== null) {
 				displayAnswer = answerObject.answer;
 			}
 			return (
-				<Row style={{ padding: '8px 0px 0px' }} key={index}>
+				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
 					<Button
 						style={{
 							borderColor: colorTheme.text7Color,
 							background: colorTheme.text7Color,
 							color: colorTheme.text2Color
 						}}
-						onClick={this.onVote}
+						onClick={e =>
+							this.onVote(e, answerIndex, questionIndex)
+						}
 					>
 						{displayAnswer}
 					</Button>
@@ -43,7 +53,7 @@ class InputVote extends Component {
 
 	renderQandAs() {
 		const { colorTheme, trainAI } = this.props;
-		return _.map(trainAI.current4DisplayedAsks, (Ask, key) => {
+		return _.map(trainAI.current4DisplayedAsks, (Ask, questionIndex) => {
 			let displayQuestion;
 			if (Ask !== null) {
 				displayQuestion = Ask.question;
@@ -54,7 +64,7 @@ class InputVote extends Component {
 			}
 
 			return (
-				<Col span={12} key={key}>
+				<Col span={12} key={questionIndex}>
 					<Card
 						style={{
 							borderColor: colorTheme.text8Color,
@@ -69,7 +79,7 @@ class InputVote extends Component {
 						>
 							{displayQuestion}
 						</h3>
-						{this.renderAnswers(displayAnswers)}
+						{this.renderAnswers(displayAnswers, questionIndex)}
 						<Row style={{ padding: '8px 0px 0px' }}>
 							<Button
 								style={{
@@ -77,7 +87,7 @@ class InputVote extends Component {
 									background: colorTheme.text7Color,
 									color: colorTheme.text2Color
 								}}
-								onClick={this.onPass}
+								onClick={e => this.onPass(e, questionIndex)}
 							>
 								Pass
 							</Button>
