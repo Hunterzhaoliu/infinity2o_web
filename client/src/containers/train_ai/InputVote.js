@@ -10,7 +10,7 @@ const { Content } = Layout;
 class InputVote extends Component {
 	componentWillMount() {
 		// run once before first render()
-		// TODO: this.props.fetchUserTrainAIAsks();
+		this.props.fetchUserTrainAIAsks();
 	}
 
 	onVote = e => {
@@ -125,6 +125,9 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
+		fetchUserTrainAIAsks: () => {
+			trainAIDispatchers.fetchUserTrainAIAsks();
+		},
 		onVote: e => {
 			trainAIDispatchers.onVote(e);
 		}
