@@ -13,9 +13,9 @@ class InputVote extends Component {
 		// TODO: this.props.fetchUserTrainAIAsks();
 	}
 
-	onVote = e => {
-		console.log('onVote e.target.value = ', e.target.value);
-		//this.props.onVote(e);
+	onVote = index => {
+		console.log('index = ', index);
+		//this.props.onVote();
 	};
 
 	renderAnswers(answers) {
@@ -114,8 +114,8 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		onVote: e => {
-			trainAIDispatchers.onVote(e);
+		onVote: answerChosen => {
+			trainAIDispatchers.onVote(answerChosen);
 		}
 	};
 }

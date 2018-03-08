@@ -13,7 +13,7 @@ export default function(state = initialState, action) {
 	switch (action.type) {
 		case ON_VOTE:
 			console.log('action = ', action);
-			newState.answerChoosen = action.answerChoosen;
+			//newState.answerChoosen = action.answerChoosen;
 			return newState;
 		default:
 			return state;
