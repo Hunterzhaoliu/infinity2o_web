@@ -10,7 +10,7 @@ const { Content } = Layout;
 class InputVote extends Component {
 	componentWillMount() {
 		// run once before first render()
-		// TODO: this.props.fetchUserTrainAIAsks();
+		this.props.fetchUserTrainAIAsks();
 	}
 
 	onVote = index => {
@@ -58,6 +58,18 @@ class InputVote extends Component {
 							{QandAs.question}
 						</h3>
 						{this.renderAnswers(QandAs.answers)}
+						<Row style={{ padding: '8px 0px 0px' }}>
+							<Button
+								style={{
+									borderColor: colorTheme.text7Color,
+									background: colorTheme.text7Color,
+									color: colorTheme.text2Color
+								}}
+								onClick={this.onPass}
+							>
+								Pass
+							</Button>
+						</Row>
 					</Card>
 					<Row
 						style={{
@@ -76,13 +88,12 @@ class InputVote extends Component {
 			<Content
 				style={{
 					overflow: 'initial',
-					padding: '15px 0px 0px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
 				<Row
 					style={{
-						padding: '15px 0px 0px' // top left&right bottom
+						padding: '5px 0px 0px' // top left&right bottom
 					}}
 					gutter={36}
 				>
@@ -114,8 +125,16 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
+<<<<<<< HEAD
 		onVote: answerChosen => {
 			trainAIDispatchers.onVote(answerChosen);
+=======
+		fetchUserTrainAIAsks: () => {
+			trainAIDispatchers.fetchUserTrainAIAsks();
+		},
+		onVote: e => {
+			trainAIDispatchers.onVote(e);
+>>>>>>> 0fc78c83486c2a37420c1b3ce0ab307dc1d2308b
 		}
 	};
 }
