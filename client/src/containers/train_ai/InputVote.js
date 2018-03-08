@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import * as trainAIActionCreators from '../../actions/trainAI';
 import { bindActionCreators } from 'redux';
 import { Button, Card, Col, Layout, Row } from 'antd';
-import QandAsList from './QandAsList.js';
 const { Content } = Layout;
 
 class InputVote extends Component {
@@ -20,7 +19,11 @@ class InputVote extends Component {
 
 	renderAnswers(answers) {
 		const { colorTheme } = this.props;
-		return _.map(answers, (answer, index) => {
+		return _.map(answers, (answerObject, index) => {
+			let displayAnswer;
+			if (answerObject !== null) {
+				displayAnswer = answerObject.answer;
+			}
 			return (
 				<Row style={{ padding: '8px 0px 0px' }} key={index}>
 					<Button
@@ -31,7 +34,7 @@ class InputVote extends Component {
 						}}
 						onClick={this.onVote}
 					>
-						{answer}
+						{displayAnswer}
 					</Button>
 				</Row>
 			);
@@ -39,8 +42,17 @@ class InputVote extends Component {
 	}
 
 	renderQandAs() {
-		const { colorTheme } = this.props;
-		return _.map(QandAsList, (QandAs, key) => {
+		const { colorTheme, trainAI } = this.props;
+		return _.map(trainAI.current4DisplayedAsks, (Ask, key) => {
+			let displayQuestion;
+			if (Ask !== null) {
+				displayQuestion = Ask.question;
+			}
+			let displayAnswers;
+			if (Ask !== null) {
+				displayAnswers = Ask.answers;
+			}
+
 			return (
 				<Col span={12} key={key}>
 					<Card
@@ -55,9 +67,9 @@ class InputVote extends Component {
 								color: colorTheme.text2Color
 							}}
 						>
-							{QandAs.question}
+							{displayQuestion}
 						</h3>
-						{this.renderAnswers(QandAs.answers)}
+						{this.renderAnswers(displayAnswers)}
 						<Row style={{ padding: '8px 0px 0px' }}>
 							<Button
 								style={{
@@ -110,7 +122,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		trainAI: state.trainAI
 	};
 }
 
