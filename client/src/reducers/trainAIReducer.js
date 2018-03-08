@@ -15,7 +15,8 @@ export default function(state = initialState, action) {
 			newState.current4DisplayedAsks = action.mostRecent4Asks.data;
 			return newState;
 		case ON_VOTE:
-			newState.answerChoosen = action.answerChoosen;
+			console.log('action = ', action);
+			//newState.answerChoosen = action.answerChoosen;
 			return newState;
 		default:
 			return state;
