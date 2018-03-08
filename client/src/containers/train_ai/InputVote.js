@@ -138,16 +138,11 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-<<<<<<< HEAD
-		onVote: answerChosen => {
-			trainAIDispatchers.onVote(answerChosen);
-=======
 		fetchUserTrainAIAsks: () => {
 			trainAIDispatchers.fetchUserTrainAIAsks();
 		},
 		onVote: e => {
 			trainAIDispatchers.onVote(e);
->>>>>>> 0fc78c83486c2a37420c1b3ce0ab307dc1d2308b
 		}
 	};
 }
