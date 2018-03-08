@@ -48,7 +48,7 @@ class ProfileEdit extends Component {
 		return (
 			<Content
 				style={{
-					padding: '75px 50px 50px', // top left&right bottom
+					padding: '75px 50px 0px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>

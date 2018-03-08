@@ -30,6 +30,7 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 //require('./routes/billingRoutes')(app);
 require('./routes/profileRoutes')(app);
+require('./routes/trainAIRoutes')(app);
 require('./routes/askRoutes')(app);
 require('./routes/legalRoutes')(app);
 

@@ -9,6 +9,9 @@ module.exports = app => {
 		const { newQuestion, newAnswers } = request.body;
 
 		const answers = _.map(newAnswers, answer => {
+			if (answer.length === 0) {
+				return;
+			}
 			return {
 				answer: answer,
 				votes: 0

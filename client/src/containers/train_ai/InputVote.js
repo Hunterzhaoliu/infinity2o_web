@@ -4,34 +4,47 @@ import { connect } from 'react-redux';
 import * as trainAIActionCreators from '../../actions/trainAI';
 import { bindActionCreators } from 'redux';
 import { Button, Card, Col, Layout, Row } from 'antd';
-import QandAsList from './QandAsList.js';
 const { Content } = Layout;
 
 class InputVote extends Component {
 	componentWillMount() {
 		// run once before first render()
-		// TODO: this.props.fetchUserTrainAIAsks();
+		this.props.fetchUserTrainAIAsks();
 	}
 
-	onVote = e => {
-		console.log('onVote e.target.value = ', e.target.value);
-		//this.props.onVote(e);
-	};
+	onVote(e, answerIndex, questionIndex) {
+		//console.log('e = ', e);
+		console.log('answerIndex = ', answerIndex);
+		console.log('questionIndex = ', questionIndex);
 
-	renderAnswers(answers) {
+		//this.props.onVote();
+	}
+
+	onPass(e, questionIndex) {
+		console.log('pass pressed');
+		console.log('questionIndex = ', questionIndex);
+	}
+
+	renderAnswers(answers, questionIndex) {
 		const { colorTheme } = this.props;
-		return _.map(answers, (answer, index) => {
+		return _.map(answers, (answerObject, answerIndex) => {
+			let displayAnswer;
+			if (answerObject !== null) {
+				displayAnswer = answerObject.answer;
+			}
 			return (
-				<Row style={{ padding: '8px 0px 0px' }} key={index}>
+				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
 					<Button
 						style={{
 							borderColor: colorTheme.text7Color,
 							background: colorTheme.text7Color,
 							color: colorTheme.text2Color
 						}}
-						onClick={this.onVote}
+						onClick={e =>
+							this.onVote(e, answerIndex, questionIndex)
+						}
 					>
-						{answer}
+						{displayAnswer}
 					</Button>
 				</Row>
 			);
@@ -39,38 +52,53 @@ class InputVote extends Component {
 	}
 
 	renderQandAs() {
-		const { colorTheme } = this.props;
-		return _.map(QandAsList, (QandAs, index) => {
+		const { colorTheme, trainAI } = this.props;
+		return _.map(trainAI.current4DisplayedAsks, (Ask, questionIndex) => {
+			let displayQuestion;
+			if (Ask !== null) {
+				displayQuestion = Ask.question;
+			}
+			let displayAnswers;
+			if (Ask !== null) {
+				displayAnswers = Ask.answers;
+			}
+
 			return (
-				<Row
-					style={{
-						padding: '15px 0px 0px' // top left&right bottom
-					}}
-					gutter={36}
-					key={index}
-				>
-					<Col span={12}>
-						<Card
+				<Col span={12} key={questionIndex}>
+					<Card
+						style={{
+							borderColor: colorTheme.text8Color,
+							background: colorTheme.text8Color,
+							color: colorTheme.text2Color
+						}}
+					>
+						<h3
 							style={{
-								borderColor: colorTheme.text8Color,
-								background: colorTheme.text8Color,
 								color: colorTheme.text2Color
 							}}
 						>
-							<h3
+							{displayQuestion}
+						</h3>
+						{this.renderAnswers(displayAnswers, questionIndex)}
+						<Row style={{ padding: '8px 0px 0px' }}>
+							<Button
 								style={{
+									borderColor: colorTheme.text7Color,
+									background: colorTheme.text7Color,
 									color: colorTheme.text2Color
 								}}
+								onClick={e => this.onPass(e, questionIndex)}
 							>
-								{QandAs.question}
-							</h3>
-							{this.renderAnswers(
-								QandAs.answers,
-								QandAs.questionId
-							)}
-						</Card>
-					</Col>
-				</Row>
+								Pass
+							</Button>
+						</Row>
+					</Card>
+					<Row
+						style={{
+							padding: '36px 0px 0px' // top left&right bottom
+						}}
+					/>
+				</Col>
 			);
 		});
 	}
@@ -82,11 +110,17 @@ class InputVote extends Component {
 			<Content
 				style={{
 					overflow: 'initial',
-					padding: '15px 0px 0px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
-				{this.renderQandAs()}
+				<Row
+					style={{
+						padding: '5px 0px 0px' // top left&right bottom
+					}}
+					gutter={36}
+				>
+					{this.renderQandAs()}
+				</Row>
 			</Content>
 		);
 	}
@@ -98,7 +132,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		trainAI: state.trainAI
 	};
 }
 
@@ -113,6 +148,9 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
+		fetchUserTrainAIAsks: () => {
+			trainAIDispatchers.fetchUserTrainAIAsks();
+		},
 		onVote: e => {
 			trainAIDispatchers.onVote(e);
 		}
