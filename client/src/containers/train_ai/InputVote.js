@@ -58,6 +58,18 @@ class InputVote extends Component {
 							{QandAs.question}
 						</h3>
 						{this.renderAnswers(QandAs.answers)}
+						<Row style={{ padding: '8px 0px 0px' }}>
+							<Button
+								style={{
+									borderColor: colorTheme.text7Color,
+									background: colorTheme.text7Color,
+									color: colorTheme.text2Color
+								}}
+								onClick={this.onPass}
+							>
+								Pass
+							</Button>
+						</Row>
 					</Card>
 					<Row
 						style={{
@@ -76,13 +88,12 @@ class InputVote extends Component {
 			<Content
 				style={{
 					overflow: 'initial',
-					padding: '15px 0px 0px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
 				<Row
 					style={{
-						padding: '15px 0px 0px' // top left&right bottom
+						padding: '5px 0px 0px' // top left&right bottom
 					}}
 					gutter={36}
 				>

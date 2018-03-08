@@ -20,7 +20,7 @@ class TrainAI extends Component {
 		return (
 			<Content
 				style={{
-					padding: '75px 50px 50px', // top left&right bottom
+					padding: '75px 50px 0px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -80,18 +80,18 @@ class TrainAI extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '50px 0px 0px' // top left&right bottom
+						padding: '25px 0px 0px' // top left&right bottom
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<h3
+						<h2
 							style={{
 								textAlign: 'center',
 								color: colorTheme.text3Color
 							}}
 						>
 							Or vote on answers that matter to you:
-						</h3>
+						</h2>
 					</Col>
 				</Row>
 				<Row
