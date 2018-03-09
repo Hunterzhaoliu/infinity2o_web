@@ -186,14 +186,11 @@ class Ask extends Component {
 					</Col>
 				</Row>
 				<ErrorMessage
-					message="Between 5 to 50 characters"
+					message="Between 8 to 50 characters"
 					hasError={ask.hasQuestionError}
 				/>
 				{this.renderAnswerInputs(ask.newAnswers)}
-				{this.renderAddAnswerButton(
-					ask.displayAddAnswerButton,
-					colorTheme
-				)}
+				{this.renderAddAnswerButton(ask.displayAddAnswerButton, colorTheme)}
 				<Row
 					type="flex"
 					justify="start"
@@ -262,8 +259,8 @@ function mapDispatchToProps(dispatch) {
 		onChangeAnswer: (newAnswer, answerIndex) => {
 			askDispatchers.onChangeAnswer(newAnswer, answerIndex);
 		},
-		saveAsk: (values, history) => {
-			askDispatchers.saveAsk(values, history);
+		saveAsk: (ask, history) => {
+			askDispatchers.saveAsk(ask, history);
 		}
 	};
 }

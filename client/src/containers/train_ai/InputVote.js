@@ -12,15 +12,14 @@ class InputVote extends Component {
 		this.props.fetchUserTrainAIAsks();
 	}
 
-	onVote(e, answerIndex, questionIndex) {
-		//console.log('e = ', e);
-		console.log('answerIndex = ', answerIndex);
-		console.log('questionIndex = ', questionIndex);
+	onVote(answerIndex, questionIndex) {
+		// console.log('answerIndex = ', answerIndex);
+		// console.log('questionIndex = ', questionIndex);
 
-		//this.props.onVote();
+		this.props.onVote(answerIndex, questionIndex);
 	}
 
-	onPass(e, questionIndex) {
+	onPass(questionIndex) {
 		console.log('pass pressed');
 		console.log('questionIndex = ', questionIndex);
 	}
@@ -40,9 +39,7 @@ class InputVote extends Component {
 							background: colorTheme.text7Color,
 							color: colorTheme.text2Color
 						}}
-						onClick={e =>
-							this.onVote(e, answerIndex, questionIndex)
-						}
+						onClick={e => this.onVote(answerIndex, questionIndex)}
 					>
 						{displayAnswer}
 					</Button>
@@ -53,6 +50,7 @@ class InputVote extends Component {
 
 	renderQandAs() {
 		const { colorTheme, trainAI } = this.props;
+
 		return _.map(trainAI.current4DisplayedAsks, (Ask, questionIndex) => {
 			let displayQuestion;
 			if (Ask !== null) {
@@ -87,7 +85,7 @@ class InputVote extends Component {
 									background: colorTheme.text7Color,
 									color: colorTheme.text2Color
 								}}
-								onClick={e => this.onPass(e, questionIndex)}
+								onClick={e => this.onPass(questionIndex)}
 							>
 								Pass
 							</Button>
@@ -151,8 +149,8 @@ function mapDispatchToProps(dispatch) {
 		fetchUserTrainAIAsks: () => {
 			trainAIDispatchers.fetchUserTrainAIAsks();
 		},
-		onVote: e => {
-			trainAIDispatchers.onVote(e);
+		onVote: (answerIndex, questionIndex) => {
+			trainAIDispatchers.onVote(answerIndex, questionIndex);
 		}
 	};
 }
