@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import * as trainAIActionCreators from '../../actions/trainAI';
 import { bindActionCreators } from 'redux';
 import { Button, Card, Col, Layout, Row } from 'antd';
-import QandAsList from './QandAsList.js';
 const { Content } = Layout;
 
 class InputVote extends Component {
@@ -13,25 +12,39 @@ class InputVote extends Component {
 		this.props.fetchUserTrainAIAsks();
 	}
 
-	onVote = index => {
-		console.log('index = ', index);
-		//this.props.onVote();
-	};
+	onVote(e, answerIndex, questionIndex) {
+		//console.log('e = ', e);
+		console.log('answerIndex = ', answerIndex);
+		console.log('questionIndex = ', questionIndex);
 
-	renderAnswers(answers) {
+		//this.props.onVote();
+	}
+
+	onPass(e, questionIndex) {
+		console.log('pass pressed');
+		console.log('questionIndex = ', questionIndex);
+	}
+
+	renderAnswers(answers, questionIndex) {
 		const { colorTheme } = this.props;
-		return _.map(answers, (answer, index) => {
+		return _.map(answers, (answerObject, answerIndex) => {
+			let displayAnswer;
+			if (answerObject !== null) {
+				displayAnswer = answerObject.answer;
+			}
 			return (
-				<Row style={{ padding: '8px 0px 0px' }} key={index}>
+				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
 					<Button
 						style={{
 							borderColor: colorTheme.text7Color,
 							background: colorTheme.text7Color,
 							color: colorTheme.text2Color
 						}}
-						onClick={this.onVote}
+						onClick={e =>
+							this.onVote(e, answerIndex, questionIndex)
+						}
 					>
-						{answer}
+						{displayAnswer}
 					</Button>
 				</Row>
 			);
@@ -39,10 +52,19 @@ class InputVote extends Component {
 	}
 
 	renderQandAs() {
-		const { colorTheme } = this.props;
-		return _.map(QandAsList, (QandAs, key) => {
+		const { colorTheme, trainAI } = this.props;
+		return _.map(trainAI.current4DisplayedAsks, (Ask, questionIndex) => {
+			let displayQuestion;
+			if (Ask !== null) {
+				displayQuestion = Ask.question;
+			}
+			let displayAnswers;
+			if (Ask !== null) {
+				displayAnswers = Ask.answers;
+			}
+
 			return (
-				<Col span={12} key={key}>
+				<Col span={12} key={questionIndex}>
 					<Card
 						style={{
 							borderColor: colorTheme.text8Color,
@@ -55,9 +77,9 @@ class InputVote extends Component {
 								color: colorTheme.text2Color
 							}}
 						>
-							{QandAs.question}
+							{displayQuestion}
 						</h3>
-						{this.renderAnswers(QandAs.answers)}
+						{this.renderAnswers(displayAnswers, questionIndex)}
 						<Row style={{ padding: '8px 0px 0px' }}>
 							<Button
 								style={{
@@ -65,7 +87,7 @@ class InputVote extends Component {
 									background: colorTheme.text7Color,
 									color: colorTheme.text2Color
 								}}
-								onClick={this.onPass}
+								onClick={e => this.onPass(e, questionIndex)}
 							>
 								Pass
 							</Button>
@@ -110,7 +132,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		trainAI: state.trainAI
 	};
 }
 
