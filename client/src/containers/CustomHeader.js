@@ -59,8 +59,10 @@ class CustomHeader extends Component {
 							<Col md={{ span: 3, offset: 1 }} key="1">
 								<Button
 									style={{
-										borderColor: colorTheme.profileButtonColor,
-										background: colorTheme.profileButtonColor,
+										borderColor:
+											colorTheme.profileButtonColor,
+										background:
+											colorTheme.profileButtonColor,
 										color: colorTheme.profileButtonTextColor
 									}}
 									onClick={onPressProfile}
@@ -73,8 +75,10 @@ class CustomHeader extends Component {
 							<Col md={{ span: 3, offset: 1 }} key="2">
 								<Button
 									style={{
-										borderColor: colorTheme.trainAIButtonColor,
-										background: colorTheme.trainAIButtonColor,
+										borderColor:
+											colorTheme.trainAIButtonColor,
+										background:
+											colorTheme.trainAIButtonColor,
 										color: colorTheme.trainAIButtonTextColor
 									}}
 									onClick={onPressTrainAI}
@@ -87,8 +91,10 @@ class CustomHeader extends Component {
 							<Col md={{ span: 3, offset: 1 }} key="3">
 								<Button
 									style={{
-										borderColor: colorTheme.matchesButtonColor,
-										background: colorTheme.matchesButtonColor,
+										borderColor:
+											colorTheme.matchesButtonColor,
+										background:
+											colorTheme.matchesButtonColor,
 										color: colorTheme.matchesButtonTextColor
 									}}
 									onClick={onPressMatches}
@@ -122,6 +128,7 @@ class CustomHeader extends Component {
 				style={{
 					background: colorTheme.backgroundColor,
 					position: 'fixed',
+					zIndex: 1, // make every display under the header
 					width: '100%'
 				}}
 			>

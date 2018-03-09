@@ -48,10 +48,17 @@ export const onChangeAnswer = (newAnswer, answerIndex) => dispatch => {
 	}
 };
 
-export const saveAsk = (values, history) => async dispatch => {
+export const saveAsk = (ask, history) => async dispatch => {
 	dispatch({ type: SAVE_QUESTION_START });
-
-	const response = await axios.post('/api/ask', values);
+	let validatedAnswers = [];
+	//remove empty answers
+	for (let i = 0; i < ask.newAnswers.length; i++) {
+		if (ask.newAnswers[i].length > 0) {
+			validatedAnswers.push(ask.newAnswers[i]);
+		}
+	}
+	ask.newAnswers = validatedAnswers;
+	const response = await axios.post('/api/ask', ask);
 	if (response.status === 200) {
 		dispatch({ type: SAVE_QUESTION_DONE });
 		history.push('/train_ai');
