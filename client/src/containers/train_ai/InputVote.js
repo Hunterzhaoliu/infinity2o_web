@@ -12,11 +12,11 @@ class InputVote extends Component {
 		this.props.fetchUserTrainAIAsks();
 	}
 
-	onVote(answerIndex, questionIndex) {
-		// console.log('answerIndex = ', answerIndex);
+	onVote(answerIndex, votedAnswerId, questionIndex, questionId) {
+		console.log('votedAnswerId inside onVote = ', votedAnswerId);
 		// console.log('questionIndex = ', questionIndex);
 
-		this.props.onVote(answerIndex, questionIndex);
+		this.props.onVote(answerIndex, votedAnswerId, questionIndex, questionId);
 	}
 
 	onPass(questionIndex) {
@@ -35,14 +35,15 @@ class InputVote extends Component {
 			const questionId = trainAI.current4DisplayedAsks[questionIndex]._id;
 			const currentAnswerId =
 				trainAI.current4DisplayedAsks[questionIndex].answers[answerIndex]._id;
-			if (
-				Object.keys(trainAI.votes).length > 0 &&
-				trainAI.votes[questionId] != undefined
-			) {
-				if (trainAI.votes[questionId].answerId === currentAnswerId) {
+			let votedAnswerId;
+			if (trainAI.votes[questionId] !== undefined) {
+				votedAnswerId = trainAI.votes[questionId].answerId;
+				console.log('votedAnswerId = ', votedAnswerId);
+				if (votedAnswerId === currentAnswerId) {
 					displayAnswerButtonColor = colorTheme.keyText7Color;
 				}
 			}
+			console.log('votedAnswerId out of if= ', votedAnswerId);
 			return (
 				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
 					<Button
@@ -51,7 +52,9 @@ class InputVote extends Component {
 							background: displayAnswerButtonColor,
 							color: colorTheme.text2Color
 						}}
-						onClick={e => this.onVote(answerIndex, questionIndex)}
+						onClick={e =>
+							this.onVote(answerIndex, votedAnswerId, questionIndex, questionId)
+						}
 					>
 						{displayAnswer}
 					</Button>
@@ -161,8 +164,13 @@ function mapDispatchToProps(dispatch) {
 		fetchUserTrainAIAsks: () => {
 			trainAIDispatchers.fetchUserTrainAIAsks();
 		},
-		onVote: (answerIndex, questionIndex) => {
-			trainAIDispatchers.onVote(answerIndex, questionIndex);
+		onVote: (answerIndex, answerId, questionIndex, questionId) => {
+			trainAIDispatchers.onVote(
+				answerIndex,
+				answerId,
+				questionIndex,
+				questionId
+			);
 		}
 	};
 }
