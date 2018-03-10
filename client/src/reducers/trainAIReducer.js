@@ -5,7 +5,8 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	current4DisplayedAsks: [null, null, null, null]
+	current4DisplayedAsks: [null, null, null, null],
+	votes: {}
 };
 
 export default function(state = initialState, action) {
@@ -15,8 +16,14 @@ export default function(state = initialState, action) {
 			newState.current4DisplayedAsks = action.mostRecent4Asks.data;
 			return newState;
 		case ON_VOTE:
-			console.log('action = ', action);
-			//newState.answerChoosen = action.answerChoosen;
+			let votedQuestion = newState.current4DisplayedAsks[action.questionIndex];
+			let votedQuestionId = votedQuestion._id;
+			let votedAnswer = votedQuestion.answers[action.answerIndex];
+			newState.votes[votedQuestionId] = {
+				question: votedQuestion.question,
+				answerId: votedAnswer._id,
+				answer: votedAnswer.answer
+			};
 			return newState;
 		default:
 			return state;

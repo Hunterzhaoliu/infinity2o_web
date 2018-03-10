@@ -25,18 +25,30 @@ class InputVote extends Component {
 	}
 
 	renderAnswers(answers, questionIndex) {
-		const { colorTheme } = this.props;
+		const { colorTheme, trainAI } = this.props;
 		return _.map(answers, (answerObject, answerIndex) => {
 			let displayAnswer;
 			if (answerObject !== null) {
 				displayAnswer = answerObject.answer;
 			}
+			let displayAnswerButtonColor = colorTheme.text7Color;
+			const questionId = trainAI.current4DisplayedAsks[questionIndex]._id;
+			const currentAnswerId =
+				trainAI.current4DisplayedAsks[questionIndex].answers[answerIndex]._id;
+			if (
+				Object.keys(trainAI.votes).length > 0 &&
+				trainAI.votes[questionId] != undefined
+			) {
+				if (trainAI.votes[questionId].answerId === currentAnswerId) {
+					displayAnswerButtonColor = colorTheme.keyText7Color;
+				}
+			}
 			return (
 				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
 					<Button
 						style={{
-							borderColor: colorTheme.text7Color,
-							background: colorTheme.text7Color,
+							borderColor: displayAnswerButtonColor,
+							background: displayAnswerButtonColor,
 							color: colorTheme.text2Color
 						}}
 						onClick={e => this.onVote(answerIndex, questionIndex)}
