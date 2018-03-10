@@ -17,11 +17,11 @@ module.exports = app => {
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
 		const { answerId, questionId } = request.body;
 		const question = await AskCollection.findOne({ _id: questionId });
-		//console.log('question.answers = ', question.answers);
-		//console.log('answerId = ', answerId);
+		//console.log('question.answers.length = ', question.answers.length);
+		//check if answerId = answerId in question.answers
 		for (let i = 0; i < question.answers.length; i++) {
-			if (question.answers[i]._id === answerId) {
-				console.log('inside if statement');
+			//need to convert to string in order to compare
+			if (String(question.answers[i]._id) === String(answerId)) {
 				question.answers[i].votes += 1;
 			}
 		}

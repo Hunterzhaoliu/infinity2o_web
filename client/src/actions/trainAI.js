@@ -12,7 +12,6 @@ export const onVote = (
 		answerIndex: answerIndex,
 		questionIndex: questionIndex
 	});
-	console.log('trainAi action answerId = ', answerId);
 	const indices = {
 		answerId: answerId,
 		questionId: questionId

@@ -18,7 +18,7 @@ class InputVote extends Component {
 		const question = trainAI.current4DisplayedAsks[questionIndex];
 		const answerId = question.answers[answerIndex]._id;
 
-		console.log('in onVote answerId = ', answerId);
+		//console.log('in onVote answerId = ', answerId);
 		this.props.onVote(answerIndex, answerId, questionIndex, questionId);
 	}
 
@@ -60,9 +60,7 @@ class InputVote extends Component {
 							background: displayAnswerButtonColor,
 							color: colorTheme.text2Color
 						}}
-						onClick={e =>
-							this.onVote(answerIndex, questionIndex, questionId)
-						}
+						onClick={e => this.onVote(answerIndex, questionIndex, questionId)}
 					>
 						{displayAnswer}
 					</Button>
@@ -172,8 +170,13 @@ function mapDispatchToProps(dispatch) {
 		fetchUserTrainAIAsks: () => {
 			trainAIDispatchers.fetchUserTrainAIAsks();
 		},
-		onVote: (answerIndex, questionIndex, questionId) => {
-			trainAIDispatchers.onVote(answerIndex, questionIndex, questionId);
+		onVote: (answerIndex, answerId, questionIndex, questionId) => {
+			trainAIDispatchers.onVote(
+				answerIndex,
+				answerId,
+				questionIndex,
+				questionId
+			);
 		}
 	};
 }
