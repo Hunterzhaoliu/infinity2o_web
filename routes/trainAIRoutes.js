@@ -17,15 +17,15 @@ module.exports = app => {
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
 		const { answerId, questionId } = request.body;
 		const question = await AskCollection.findOne({ _id: questionId });
-		console.log('question.answers = ', question.answers);
-		console.log('answerId = ', answerId);
+		//console.log('question.answers = ', question.answers);
+		//console.log('answerId = ', answerId);
 		for (let i = 0; i < question.answers.length; i++) {
 			if (question.answers[i]._id === answerId) {
 				console.log('inside if statement');
 				question.answers[i].votes += 1;
 			}
 		}
-		console.log('after question.answers = ', question.answers);
-		response.send(mostRecent4Asks);
+		//console.log('after question.answers = ', question.answers);
+		//response.send(mostRecent4Asks);
 	});
 };

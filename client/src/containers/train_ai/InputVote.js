@@ -12,11 +12,14 @@ class InputVote extends Component {
 		this.props.fetchUserTrainAIAsks();
 	}
 
-	onVote(answerIndex, votedAnswerId, questionIndex, questionId) {
-		console.log('votedAnswerId inside onVote = ', votedAnswerId);
-		// console.log('questionIndex = ', questionIndex);
+	onVote(answerIndex, questionIndex, questionId) {
+		const { trainAI } = this.props;
+		// now we know which answer user pressed so let's pass the answesId too
+		const question = trainAI.current4DisplayedAsks[questionIndex];
+		const answerId = question.answers[answerIndex]._id;
 
-		this.props.onVote(answerIndex, votedAnswerId, questionIndex, questionId);
+		console.log('in onVote answerId = ', answerId);
+		this.props.onVote(answerIndex, answerId, questionIndex, questionId);
 	}
 
 	onPass(questionIndex) {
@@ -27,23 +30,28 @@ class InputVote extends Component {
 	renderAnswers(answers, questionIndex) {
 		const { colorTheme, trainAI } = this.props;
 		return _.map(answers, (answerObject, answerIndex) => {
+			// displaying actual answers
 			let displayAnswer;
 			if (answerObject !== null) {
 				displayAnswer = answerObject.answer;
 			}
+
+			// displaying the change in voted answer button color
+			const question = trainAI.current4DisplayedAsks[questionIndex];
+			const questionId = question._id;
+			const currentAnswerId = question.answers[answerIndex]._id;
+
 			let displayAnswerButtonColor = colorTheme.text7Color;
-			const questionId = trainAI.current4DisplayedAsks[questionIndex]._id;
-			const currentAnswerId =
-				trainAI.current4DisplayedAsks[questionIndex].answers[answerIndex]._id;
-			let votedAnswerId;
+			// if user has voted on a question
+
 			if (trainAI.votes[questionId] !== undefined) {
-				votedAnswerId = trainAI.votes[questionId].answerId;
-				console.log('votedAnswerId = ', votedAnswerId);
+				const votedAnswerId = trainAI.votes[questionId].answerId;
 				if (votedAnswerId === currentAnswerId) {
 					displayAnswerButtonColor = colorTheme.keyText7Color;
 				}
 			}
-			console.log('votedAnswerId out of if= ', votedAnswerId);
+
+			//console.log('votedAnswerId out of if = ', votedAnswerId);
 			return (
 				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
 					<Button
@@ -53,7 +61,7 @@ class InputVote extends Component {
 							color: colorTheme.text2Color
 						}}
 						onClick={e =>
-							this.onVote(answerIndex, votedAnswerId, questionIndex, questionId)
+							this.onVote(answerIndex, questionIndex, questionId)
 						}
 					>
 						{displayAnswer}
@@ -164,13 +172,8 @@ function mapDispatchToProps(dispatch) {
 		fetchUserTrainAIAsks: () => {
 			trainAIDispatchers.fetchUserTrainAIAsks();
 		},
-		onVote: (answerIndex, answerId, questionIndex, questionId) => {
-			trainAIDispatchers.onVote(
-				answerIndex,
-				answerId,
-				questionIndex,
-				questionId
-			);
+		onVote: (answerIndex, questionIndex, questionId) => {
+			trainAIDispatchers.onVote(answerIndex, questionIndex, questionId);
 		}
 	};
 }
