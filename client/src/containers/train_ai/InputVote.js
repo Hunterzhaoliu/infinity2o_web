@@ -42,12 +42,14 @@ class InputVote extends Component {
 			const currentAnswerId = ask.answers[answerIndex]._id;
 
 			let displayAnswerButtonColor = colorTheme.text7Color;
+			let isDisplayingSaveIcon = false;
 			// if user has voted on a ask
 
 			if (trainAI.votes[askId] !== undefined) {
 				const votedAnswerId = trainAI.votes[askId].answerId;
 				if (votedAnswerId === currentAnswerId) {
 					displayAnswerButtonColor = colorTheme.keyText7Color;
+					isDisplayingSaveIcon = true;
 				}
 			}
 
@@ -62,7 +64,8 @@ class InputVote extends Component {
 						}}
 						onClick={e => this.onVote(answerIndex, askIndex, askId)}
 					>
-						{displayAnswer} {this.renderSaveIcon(trainAI.save, answerIndex, askIndex)}
+						{displayAnswer}{' '}
+						{this.renderSaveIcon(trainAI.save, isDisplayingSaveIcon)}
 					</Button>
 				</Row>
 			);
@@ -122,17 +125,16 @@ class InputVote extends Component {
 		});
 	}
 
-	renderSaveIcon(saveState, answerIndex, askIndex) {
-		const { trainAI } = this.props;
-		if ( ) {
-		if (saveState === 'save_start') {
-			return <Icon type="loading" />;
-		} else if (saveState === 'save_done') {
-			return <Icon type="check" />;
-		} else if (saveState === 'save_error') {
-			return <Icon type="warning" />;
+	renderSaveIcon(saveState, isDisplaying) {
+		if (isDisplaying) {
+			if (saveState === 'save_start') {
+				return <Icon type="loading" />;
+			} else if (saveState === 'save_done') {
+				return <Icon type="check" />;
+			} else if (saveState === 'save_error') {
+				return <Icon type="warning" />;
+			}
 		}
-	}
 	}
 
 	render() {
