@@ -4,13 +4,13 @@ import { ON_VOTE, SAVE_FETCHED_ASKS } from './types';
 export const onVote = (
 	answerIndex,
 	answerId,
-	questionIndex,
+	askIndex,
 	questionId
 ) => async dispatch => {
 	dispatch({
 		type: ON_VOTE,
 		answerIndex: answerIndex,
-		questionIndex: questionIndex
+		askIndex: askIndex
 	});
 	const indices = {
 		answerId: answerId,

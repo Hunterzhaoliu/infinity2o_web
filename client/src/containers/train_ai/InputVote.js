@@ -12,22 +12,22 @@ class InputVote extends Component {
 		this.props.fetchUserTrainAIAsks();
 	}
 
-	onVote(answerIndex, questionIndex, questionId) {
+	onVote(answerIndex, askIndex, questionId) {
 		const { trainAI } = this.props;
 		// now we know which answer user pressed so let's pass the answesId too
-		const question = trainAI.current4DisplayedAsks[questionIndex];
+		const question = trainAI.current4DisplayedAsks[askIndex];
 		const answerId = question.answers[answerIndex]._id;
 
 		//console.log('in onVote answerId = ', answerId);
-		this.props.onVote(answerIndex, answerId, questionIndex, questionId);
+		this.props.onVote(answerIndex, answerId, askIndex, questionId);
 	}
 
-	onPass(questionIndex) {
+	onPass(askIndex) {
 		console.log('pass pressed');
-		console.log('questionIndex = ', questionIndex);
+		console.log('askIndex = ', askIndex);
 	}
 
-	renderAnswers(answers, questionIndex) {
+	renderAnswers(answers, askIndex) {
 		const { colorTheme, trainAI } = this.props;
 		return _.map(answers, (answerObject, answerIndex) => {
 			// displaying actual answers
@@ -37,7 +37,7 @@ class InputVote extends Component {
 			}
 
 			// displaying the change in voted answer button color
-			const question = trainAI.current4DisplayedAsks[questionIndex];
+			const question = trainAI.current4DisplayedAsks[askIndex];
 			const questionId = question._id;
 			const currentAnswerId = question.answers[answerIndex]._id;
 
@@ -60,7 +60,7 @@ class InputVote extends Component {
 							background: displayAnswerButtonColor,
 							color: colorTheme.text2Color
 						}}
-						onClick={e => this.onVote(answerIndex, questionIndex, questionId)}
+						onClick={e => this.onVote(answerIndex, askIndex, questionId)}
 					>
 						{displayAnswer}
 					</Button>
@@ -72,7 +72,7 @@ class InputVote extends Component {
 	renderQandAs() {
 		const { colorTheme, trainAI } = this.props;
 
-		return _.map(trainAI.current4DisplayedAsks, (Ask, questionIndex) => {
+		return _.map(trainAI.current4DisplayedAsks, (Ask, askIndex) => {
 			let displayQuestion;
 			if (Ask !== null) {
 				displayQuestion = Ask.question;
@@ -83,7 +83,7 @@ class InputVote extends Component {
 			}
 
 			return (
-				<Col span={12} key={questionIndex}>
+				<Col span={12} key={askIndex}>
 					<Card
 						style={{
 							borderColor: colorTheme.text8Color,
@@ -98,7 +98,7 @@ class InputVote extends Component {
 						>
 							{displayQuestion}
 						</h3>
-						{this.renderAnswers(displayAnswers, questionIndex)}
+						{this.renderAnswers(displayAnswers, askIndex)}
 						<Row style={{ padding: '8px 0px 0px' }}>
 							<Button
 								style={{
@@ -106,7 +106,7 @@ class InputVote extends Component {
 									background: colorTheme.text7Color,
 									color: colorTheme.text2Color
 								}}
-								onClick={e => this.onPass(questionIndex)}
+								onClick={e => this.onPass(askIndex)}
 							>
 								Pass
 							</Button>
@@ -170,13 +170,8 @@ function mapDispatchToProps(dispatch) {
 		fetchUserTrainAIAsks: () => {
 			trainAIDispatchers.fetchUserTrainAIAsks();
 		},
-		onVote: (answerIndex, answerId, questionIndex, questionId) => {
-			trainAIDispatchers.onVote(
-				answerIndex,
-				answerId,
-				questionIndex,
-				questionId
-			);
+		onVote: (answerIndex, answerId, askIndex, questionId) => {
+			trainAIDispatchers.onVote(answerIndex, answerId, askIndex, questionId);
 		}
 	};
 }

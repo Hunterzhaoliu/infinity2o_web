@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
 			newState.current4DisplayedAsks = action.mostRecent4Asks.data;
 			return newState;
 		case ON_VOTE:
-			let votedQuestion = newState.current4DisplayedAsks[action.questionIndex];
+			let votedQuestion = newState.current4DisplayedAsks[action.askIndex];
 			let votedQuestionId = votedQuestion._id;
 			let votedAnswer = votedQuestion.answers[action.answerIndex];
 			newState.votes[votedQuestionId] = {
