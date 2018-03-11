@@ -27,5 +27,19 @@ module.exports = app => {
 		}
 		//console.log('after question.answers = ', question.answers);
 		//response.send(mostRecent4Asks);
+		try {
+			await AskCollection.updateOne(
+				{ _id: questionId },
+				{
+					$set: {
+						lastVotedOn: Date.now(),
+						answers: question.answers
+					}
+				}
+			);
+			response.send(question);
+		} catch (error) {
+			response.status(422).send(error);
+		}
 	});
 };
