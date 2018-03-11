@@ -37,7 +37,7 @@ export const onVote = (
 	dispatch({
 		type: UPDATE_VOTED_ASK,
 		askIndex: askIndex,
-		newAsk: response.data.ask
+		newAsk: response.data.askInDB
 	});
 
 	if (response.status === 200) {

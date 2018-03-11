@@ -26,17 +26,17 @@ module.exports = app => {
 
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
 		const { answerId, askId } = request.body;
-		const ask = await AskCollection.findOne({ _id: askId });
+		const askInDB = await AskCollection.findOne({ _id: askId });
 
-		//check if answerId = answerId in ask.answers
+		//check if answerId = answerId in askInDB.answers
 		let answer;
-		for (let i = 0; i < ask.answers.length; i++) {
+		for (let i = 0; i < askInDB.answers.length; i++) {
 			//need to convert to string in order to compare
-			if (String(ask.answers[i]._id) === String(answerId)) {
-				answer = ask.answers[i].answer;
-				ask.lastVotedOn = Date.now();
-				ask.answers[i].votes += 1;
-				ask.totalVotes += 1;
+			if (String(askInDB.answers[i]._id) === String(answerId)) {
+				answer = askInDB.answers[i].answer;
+				askInDB.lastVotedOn = Date.now();
+				askInDB.answers[i].votes += 1;
+				askInDB.totalVotes += 1;
 			}
 		}
 
@@ -45,22 +45,22 @@ module.exports = app => {
 				{ _id: askId },
 				{
 					$set: {
-						lastVotedOn: ask.lastVotedOn,
-						answers: ask.answers,
-						totalVotes: ask.totalVotes
+						lastVotedOn: askInDB.lastVotedOn,
+						answers: askInDB.answers,
+						totalVotes: askInDB.totalVotes
 					}
 				}
 			);
 
 			request.user.profile.asks.votes.push({
-				question: ask.question,
-				_askId: ask._id,
+				question: askInDB.question,
+				_askId: askInDB._id,
 				selectedAnswer: answer
 			});
 			const user = await request.user.save();
 			const responseObject = {
 				user,
-				ask
+				askInDB
 			};
 			response.send(responseObject);
 		} catch (error) {
