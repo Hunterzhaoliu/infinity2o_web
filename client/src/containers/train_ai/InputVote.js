@@ -27,7 +27,14 @@ class InputVote extends Component {
 		console.log('askIndex = ', askIndex);
 	}
 
-	renderAnswers(answers, askIndex, ask, askId, isDisplayingAskStats) {
+	renderAnswers(
+		answers,
+		askIndex,
+		ask,
+		askId,
+		isDisplayingAskStats,
+		askTotalVotes
+	) {
 		const { colorTheme, trainAI } = this.props;
 		return _.map(answers, (answerObject, answerIndex) => {
 			// displaying actual answers
@@ -80,7 +87,11 @@ class InputVote extends Component {
 						}}
 						span={this.renderSpanChange(isDisplayingAskStats)}
 					>
-						{this.renderAskStats(answerVotes, isDisplayingAskStats)}
+						{this.renderAskStats(
+							answerVotes,
+							askTotalVotes,
+							isDisplayingAskStats
+						)}
 					</Col>
 				</Row>
 			);
@@ -102,9 +113,10 @@ class InputVote extends Component {
 
 			let askId;
 			let isDisplayingAskStats = false;
-
+			let askTotalVotes;
 			if (Ask !== null) {
 				askId = Ask._id;
+				askTotalVotes = Ask.totalVotes;
 				if (trainAI.votes[askId] !== undefined) {
 					isDisplayingAskStats = true;
 				}
@@ -126,12 +138,20 @@ class InputVote extends Component {
 						>
 							{displayQuestion}
 						</h3>
+						<div
+							style={{
+								color: colorTheme.text3Color
+							}}
+						>
+							{this.renderTotalVotes(askTotalVotes, isDisplayingAskStats)}
+						</div>
 						{this.renderAnswers(
 							displayAnswers,
 							askIndex,
 							Ask,
 							askId,
-							isDisplayingAskStats
+							isDisplayingAskStats,
+							askTotalVotes
 						)}
 						<Row style={{ padding: '8px 0px 0px' }}>
 							<Button
@@ -168,9 +188,9 @@ class InputVote extends Component {
 		}
 	}
 
-	renderAskStats(answerVotes, isDisplayingAskStats) {
+	renderAskStats(answerVotes, askTotalVotes, isDisplayingAskStats) {
 		if (isDisplayingAskStats) {
-			return answerVotes;
+			return String((answerVotes / askTotalVotes * 100).toFixed(1)) + '%';
 		}
 	}
 
@@ -188,6 +208,11 @@ class InputVote extends Component {
 		}
 	}
 
+	renderTotalVotes(askTotalVotes, isDisplayingAskStats) {
+		if (isDisplayingAskStats) {
+			return 'Total Votes:  ' + String(askTotalVotes);
+		}
+	}
 	render() {
 		const { colorTheme } = this.props;
 		//console.log('this.props in InputVote.js', this.props);
