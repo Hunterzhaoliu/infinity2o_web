@@ -43,10 +43,13 @@ class InputVote extends Component {
 
 			let displayAnswerButtonColor = colorTheme.text7Color;
 			let isDisplayingSaveIcon = false;
+			let isDisplayingAskStats = false;
+			let answerVotes = answerObject.votes;
 			// if user has voted on a ask
 
 			if (trainAI.votes[askId] !== undefined) {
 				const votedAnswerId = trainAI.votes[askId].answerId;
+				isDisplayingAskStats = true;
 				if (votedAnswerId === currentAnswerId) {
 					displayAnswerButtonColor = colorTheme.keyText7Color;
 					isDisplayingSaveIcon = true;
@@ -56,17 +59,32 @@ class InputVote extends Component {
 			//console.log('votedAnswerId out of if = ', votedAnswerId);
 			return (
 				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
-					<Button
+					<Col
 						style={{
-							borderColor: displayAnswerButtonColor,
-							background: displayAnswerButtonColor,
 							color: colorTheme.text2Color
 						}}
-						onClick={e => this.onVote(answerIndex, askIndex, askId)}
+						span={this.renderSpanChange(isDisplayingAskStats)}
 					>
-						{displayAnswer}{' '}
-						{this.renderSaveIcon(trainAI.save, isDisplayingSaveIcon)}
-					</Button>
+						<Button
+							style={{
+								borderColor: displayAnswerButtonColor,
+								background: displayAnswerButtonColor,
+								color: colorTheme.text2Color
+							}}
+							onClick={e => this.onVote(answerIndex, askIndex, askId)}
+						>
+							{displayAnswer}
+							{this.renderSaveIcon(trainAI.save, isDisplayingSaveIcon)}
+						</Button>
+					</Col>
+					<Col
+						style={{
+							color: colorTheme.text2Color
+						}}
+						span={this.renderSpanChange(isDisplayingAskStats)}
+					>
+						{this.renderAskStats(answerVotes, isDisplayingAskStats)}
+					</Col>
 				</Row>
 			);
 		});
@@ -134,6 +152,18 @@ class InputVote extends Component {
 			} else if (saveState === 'save_error') {
 				return <Icon type="warning" />;
 			}
+		}
+	}
+
+	renderAskStats(answerVotes, isDisplayingAskStats) {
+		if (isDisplayingAskStats) {
+			return answerVotes;
+		}
+	}
+
+	renderSpanChange(isDisplayingAskStats) {
+		if (isDisplayingAskStats) {
+			return 12;
 		}
 	}
 
