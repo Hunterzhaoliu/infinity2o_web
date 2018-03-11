@@ -14,28 +14,38 @@ module.exports = app => {
 		response.send(mostRecent4Asks);
 	});
 
+	app.get(
+		'/api/train_ai/is_revote',
+		requireLogin,
+		async (request, response) => {
+			const { answerId, askId } = request.body;
+			const ask = await AskCollection.findOne({ _id: askId });
+			console.log('in is_revote ask = ', ask);
+		}
+	);
+
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
 		const { answerId, askId } = request.body;
 		const ask = await AskCollection.findOne({ _id: askId });
-		//console.log('ask.answers.length = ', ask.answers.length);
+
 		//check if answerId = answerId in ask.answers
 		let answer;
 		for (let i = 0; i < ask.answers.length; i++) {
 			//need to convert to string in order to compare
 			if (String(ask.answers[i]._id) === String(answerId)) {
 				answer = ask.answers[i].answer;
+				ask.lastVotedOn = Date.now();
 				ask.answers[i].votes += 1;
 				ask.totalVotes += 1;
 			}
 		}
-		//console.log('after ask.answers = ', ask.answers);
-		//response.send(mostRecent4Asks);
+
 		try {
 			await AskCollection.updateOne(
 				{ _id: askId },
 				{
 					$set: {
-						lastVotedOn: Date.now(),
+						lastVotedOn: ask.lastVotedOn,
 						answers: ask.answers,
 						totalVotes: ask.totalVotes
 					}
@@ -48,7 +58,11 @@ module.exports = app => {
 				selectedAnswer: answer
 			});
 			const user = await request.user.save();
-			response.send(user);
+			const responseObject = {
+				user,
+				ask
+			};
+			response.send(responseObject);
 		} catch (error) {
 			response.status(422).send(error);
 		}

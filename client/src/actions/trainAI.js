@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
 	ON_VOTE,
+	UPDATE_VOTED_ASK,
 	SAVE_FETCHED_ASKS,
 	SAVE_VOTE_START,
 	SAVE_VOTE_DONE,
@@ -19,11 +20,26 @@ export const onVote = (
 		answerIndex: answerIndex,
 		askIndex: askIndex
 	});
-	const indices = {
+
+	const values1 = {
 		answerId: answerId,
 		askId: askId
 	};
-	const response = await axios.put('/api/train_ai/vote', indices);
+	//const reponse = await axios.get('/api/train_ai/is_revote', values1);
+
+	const values2 = {
+		//isRevote: reponse.isRevote,
+		answerId: answerId,
+		askId: askId
+	};
+	const response = await axios.put('/api/train_ai/vote', values2);
+	//console.log('in action response.data.ask = ', response.data.ask);
+	dispatch({
+		type: UPDATE_VOTED_ASK,
+		askIndex: askIndex,
+		newAsk: response.data.ask
+	});
+
 	if (response.status === 200) {
 		dispatch({ type: SAVE_VOTE_DONE });
 	} else {

@@ -18,7 +18,6 @@ class InputVote extends Component {
 		const ask = trainAI.current4DisplayedAsks[askIndex];
 		const answerId = ask.answers[answerIndex]._id;
 
-		//console.log('in onVote answerId = ', answerId);
 		this.props.onVote(answerIndex, answerId, askIndex, askId);
 	}
 
@@ -75,10 +74,15 @@ class InputVote extends Component {
 								background: displayAnswerButtonColor,
 								color: colorTheme.text2Color
 							}}
-							onClick={e => this.onVote(answerIndex, askIndex, askId)}
+							onClick={e =>
+								this.onVote(answerIndex, askIndex, askId)
+							}
 						>
 							{displayAnswer}
-							{this.renderSaveIcon(trainAI.save, isDisplayingSaveIcon)}
+							{this.renderSaveIcon(
+								trainAI.save,
+								isDisplayingSaveIcon
+							)}
 						</Button>
 					</Col>
 					<Col
@@ -143,7 +147,10 @@ class InputVote extends Component {
 								color: colorTheme.text3Color
 							}}
 						>
-							{this.renderTotalVotes(askTotalVotes, isDisplayingAskStats)}
+							{this.renderTotalVotes(
+								askTotalVotes,
+								isDisplayingAskStats
+							)}
 						</div>
 						{this.renderAnswers(
 							displayAnswers,

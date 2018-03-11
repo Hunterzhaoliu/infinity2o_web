@@ -14,7 +14,7 @@ module.exports = app => {
 				votes: 0
 			};
 		});
-		console.log('answers = ', answers);
+		//console.log('answers = ', answers);
 		const ask = new Ask({
 			question: newQuestion,
 			totalVotes: 0,

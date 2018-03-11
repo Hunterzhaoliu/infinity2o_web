@@ -1,5 +1,6 @@
 import {
 	ON_VOTE,
+	UPDATE_VOTED_ASK,
 	SAVE_FETCHED_ASKS,
 	SAVE_VOTE_START,
 	SAVE_VOTE_DONE,
@@ -31,6 +32,9 @@ export default function(state = initialState, action) {
 				answerId: votedAnswer._id,
 				answer: votedAnswer.answer
 			};
+			return newState;
+		case UPDATE_VOTED_ASK:
+			newState.current4DisplayedAsks[action.askIndex] = action.newAsk;
 			return newState;
 		case SAVE_VOTE_START:
 			newState.save = 'save_start';

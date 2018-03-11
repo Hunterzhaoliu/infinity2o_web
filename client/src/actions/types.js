@@ -28,6 +28,7 @@ export const SAVE_QUESTION_ERROR = 'SAVE_QUESTION_ERROR';
 // train_ai/InputVote.js
 export const SAVE_FETCHED_ASKS = 'SAVE_FETCHED_ASKS';
 export const ON_VOTE = 'ON_VOTE';
+export const UPDATE_VOTED_ASK = 'UPDATE_VOTED_ASK';
 export const SAVE_VOTE_START = 'SAVE_VOTE_START';
 export const SAVE_VOTE_DONE = 'SAVE_VOTE_DONE';
 export const SAVE_VOTE_ERROR = 'SAVE_VOTE_ERROR';
