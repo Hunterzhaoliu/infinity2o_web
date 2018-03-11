@@ -21,18 +21,11 @@ export const onVote = (
 		askIndex: askIndex
 	});
 
-	const values1 = {
+	const voteInfo = {
 		answerId: answerId,
 		askId: askId
 	};
-	//const reponse = await axios.get('/api/train_ai/is_revote', values1);
-
-	const values2 = {
-		//isRevote: reponse.isRevote,
-		answerId: answerId,
-		askId: askId
-	};
-	const response = await axios.put('/api/train_ai/vote', values2);
+	const response = await axios.put('/api/train_ai/vote', voteInfo);
 	//console.log('in action response.data.ask = ', response.data.ask);
 	dispatch({
 		type: UPDATE_VOTED_ASK,

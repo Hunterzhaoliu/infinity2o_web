@@ -14,16 +14,6 @@ module.exports = app => {
 		response.send(mostRecent4Asks);
 	});
 
-	app.get(
-		'/api/train_ai/is_revote',
-		requireLogin,
-		async (request, response) => {
-			const { answerId, askId } = request.body;
-			const ask = await AskCollection.findOne({ _id: askId });
-			console.log('in is_revote ask = ', ask);
-		}
-	);
-
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
 		const { answerId, askId } = request.body;
 		const askInDB = await AskCollection.findOne({ _id: askId });
