@@ -101,7 +101,7 @@ class Ask extends Component {
 	renderAskIcon(saveState) {
 		if (saveState === 'save_start') {
 			return <Icon type="loading" />;
-		} else if (saveState === 'save_success') {
+		} else if (saveState === 'save_done') {
 			return <Icon type="check" />;
 		} else if (saveState === 'save_error') {
 			return <Icon type="warning" />;

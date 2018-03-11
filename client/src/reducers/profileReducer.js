@@ -90,7 +90,7 @@ export default function(state = initialState, action) {
 			newState.save = 'save_start';
 			return newState;
 		case SAVE_PROFILE_DONE:
-			newState.save = 'save_success';
+			newState.save = 'save_done';
 			return newState;
 		case SAVE_PROFILE_ERROR:
 			newState.save = 'save_error';

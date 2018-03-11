@@ -45,7 +45,7 @@ export default function(state = initialState, action) {
 			newState.save = 'save_start';
 			return newState;
 		case SAVE_QUESTION_DONE:
-			newState.save = 'save_success';
+			newState.save = 'save_done';
 			return newState;
 		case SAVE_QUESTION_ERROR:
 			newState.save = 'save_error';

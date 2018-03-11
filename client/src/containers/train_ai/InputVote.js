@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as trainAIActionCreators from '../../actions/trainAI';
 import { bindActionCreators } from 'redux';
-import { Button, Card, Col, Layout, Row } from 'antd';
+import { Button, Card, Col, Layout, Row, Icon } from 'antd';
 const { Content } = Layout;
 
 class InputVote extends Component {
@@ -15,8 +15,8 @@ class InputVote extends Component {
 	onVote(answerIndex, askIndex, askId) {
 		const { trainAI } = this.props;
 		// now we know which answer user pressed so let's pass the answesId too
-		const question = trainAI.current4DisplayedAsks[askIndex];
-		const answerId = question.answers[answerIndex]._id;
+		const ask = trainAI.current4DisplayedAsks[askIndex];
+		const answerId = ask.answers[answerIndex]._id;
 
 		//console.log('in onVote answerId = ', answerId);
 		this.props.onVote(answerIndex, answerId, askIndex, askId);
@@ -37,12 +37,12 @@ class InputVote extends Component {
 			}
 
 			// displaying the change in voted answer button color
-			const question = trainAI.current4DisplayedAsks[askIndex];
-			const askId = question._id;
-			const currentAnswerId = question.answers[answerIndex]._id;
+			const ask = trainAI.current4DisplayedAsks[askIndex];
+			const askId = ask._id;
+			const currentAnswerId = ask.answers[answerIndex]._id;
 
 			let displayAnswerButtonColor = colorTheme.text7Color;
-			// if user has voted on a question
+			// if user has voted on a ask
 
 			if (trainAI.votes[askId] !== undefined) {
 				const votedAnswerId = trainAI.votes[askId].answerId;
@@ -62,7 +62,7 @@ class InputVote extends Component {
 						}}
 						onClick={e => this.onVote(answerIndex, askIndex, askId)}
 					>
-						{displayAnswer}
+						{displayAnswer} {this.renderSaveIcon(trainAI.save, answerIndex, askIndex)}
 					</Button>
 				</Row>
 			);
@@ -120,6 +120,19 @@ class InputVote extends Component {
 				</Col>
 			);
 		});
+	}
+
+	renderSaveIcon(saveState, answerIndex, askIndex) {
+		const { trainAI } = this.props;
+		if ( ) {
+		if (saveState === 'save_start') {
+			return <Icon type="loading" />;
+		} else if (saveState === 'save_done') {
+			return <Icon type="check" />;
+		} else if (saveState === 'save_error') {
+			return <Icon type="warning" />;
+		}
+	}
 	}
 
 	render() {

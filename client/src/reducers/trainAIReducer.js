@@ -1,4 +1,10 @@
-import { ON_VOTE, SAVE_FETCHED_ASKS } from '../actions/types';
+import {
+	ON_VOTE,
+	SAVE_FETCHED_ASKS,
+	SAVE_VOTE_START,
+	SAVE_VOTE_DONE,
+	SAVE_VOTE_ERROR
+} from '../actions/types';
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
@@ -6,7 +12,8 @@ let cloneObject = obj => {
 
 let initialState = {
 	current4DisplayedAsks: [null, null, null, null],
-	votes: {}
+	votes: {},
+	save: null
 };
 
 export default function(state = initialState, action) {
@@ -24,6 +31,15 @@ export default function(state = initialState, action) {
 				answerId: votedAnswer._id,
 				answer: votedAnswer.answer
 			};
+			return newState;
+		case SAVE_VOTE_START:
+			newState.save = 'save_start';
+			return newState;
+		case SAVE_VOTE_DONE:
+			newState.save = 'save_done';
+			return newState;
+		case SAVE_VOTE_ERROR:
+			newState.save = 'save_error';
 			return newState;
 		default:
 			return state;
