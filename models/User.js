@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose; // = const Schema = mongoose.Schema;
 //schema describes every property of a user
 const ProfileQuestionDisplay = require('./ProfileQuestionDisplay');
+const ProfileVoteDisplay = require('./ProfileVoteDisplay');
 
 const userSchema = new Schema({
 	auth: {
@@ -24,7 +25,8 @@ const userSchema = new Schema({
 			sunday: [String]
 		},
 		asks: {
-			questions: [ProfileQuestionDisplay]
+			questions: [ProfileQuestionDisplay],
+			votes: [ProfileVoteDisplay]
 		}
 	}
 });
