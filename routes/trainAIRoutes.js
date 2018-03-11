@@ -23,6 +23,7 @@ module.exports = app => {
 			//need to convert to string in order to compare
 			if (String(question.answers[i]._id) === String(answerId)) {
 				question.answers[i].votes += 1;
+				question.totalVotes += 1;
 			}
 		}
 		//console.log('after question.answers = ', question.answers);
@@ -33,7 +34,8 @@ module.exports = app => {
 				{
 					$set: {
 						lastVotedOn: Date.now(),
-						answers: question.answers
+						answers: question.answers,
+						totalVotes: question.totalVotes
 					}
 				}
 			);
