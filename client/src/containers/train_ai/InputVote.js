@@ -27,7 +27,7 @@ class InputVote extends Component {
 		console.log('askIndex = ', askIndex);
 	}
 
-	renderAnswers(answers, askIndex) {
+	renderAnswers(answers, askIndex, ask, askId, isDisplayingAskStats) {
 		const { colorTheme, trainAI } = this.props;
 		return _.map(answers, (answerObject, answerIndex) => {
 			// displaying actual answers
@@ -37,13 +37,10 @@ class InputVote extends Component {
 			}
 
 			// displaying the change in voted answer button color
-			const ask = trainAI.current4DisplayedAsks[askIndex];
-			const askId = ask._id;
 			const currentAnswerId = ask.answers[answerIndex]._id;
 
 			let displayAnswerButtonColor = colorTheme.text7Color;
 			let isDisplayingSaveIcon = false;
-			let isDisplayingAskStats = false;
 			let answerVotes = answerObject.votes;
 			// if user has voted on a ask
 
@@ -103,6 +100,16 @@ class InputVote extends Component {
 				displayAnswers = Ask.answers;
 			}
 
+			let askId;
+			let isDisplayingAskStats = false;
+
+			if (Ask !== null) {
+				askId = Ask._id;
+				if (trainAI.votes[askId] !== undefined) {
+					isDisplayingAskStats = true;
+				}
+			}
+
 			return (
 				<Col span={12} key={askIndex}>
 					<Card
@@ -119,7 +126,13 @@ class InputVote extends Component {
 						>
 							{displayQuestion}
 						</h3>
-						{this.renderAnswers(displayAnswers, askIndex)}
+						{this.renderAnswers(
+							displayAnswers,
+							askIndex,
+							Ask,
+							askId,
+							isDisplayingAskStats
+						)}
 						<Row style={{ padding: '8px 0px 0px' }}>
 							<Button
 								style={{
@@ -129,7 +142,7 @@ class InputVote extends Component {
 								}}
 								onClick={e => this.onPass(askIndex)}
 							>
-								Pass
+								{this.renderAskDoneWord(isDisplayingAskStats)}
 							</Button>
 						</Row>
 					</Card>
@@ -164,6 +177,14 @@ class InputVote extends Component {
 	renderSpanChange(isDisplayingAskStats) {
 		if (isDisplayingAskStats) {
 			return 12;
+		}
+	}
+
+	renderAskDoneWord(isDisplayingAskStats) {
+		if (isDisplayingAskStats) {
+			return 'Next Question';
+		} else {
+			return 'Pass';
 		}
 	}
 
