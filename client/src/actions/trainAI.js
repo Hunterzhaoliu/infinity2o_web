@@ -5,7 +5,7 @@ export const onVote = (
 	answerIndex,
 	answerId,
 	askIndex,
-	questionId
+	askId
 ) => async dispatch => {
 	dispatch({
 		type: ON_VOTE,
@@ -14,7 +14,7 @@ export const onVote = (
 	});
 	const indices = {
 		answerId: answerId,
-		questionId: questionId
+		askId: askId
 	};
 	const response = await axios.put('/api/train_ai/vote', indices);
 };

@@ -12,14 +12,14 @@ class InputVote extends Component {
 		this.props.fetchUserTrainAIAsks();
 	}
 
-	onVote(answerIndex, askIndex, questionId) {
+	onVote(answerIndex, askIndex, askId) {
 		const { trainAI } = this.props;
 		// now we know which answer user pressed so let's pass the answesId too
 		const question = trainAI.current4DisplayedAsks[askIndex];
 		const answerId = question.answers[answerIndex]._id;
 
 		//console.log('in onVote answerId = ', answerId);
-		this.props.onVote(answerIndex, answerId, askIndex, questionId);
+		this.props.onVote(answerIndex, answerId, askIndex, askId);
 	}
 
 	onPass(askIndex) {
@@ -38,14 +38,14 @@ class InputVote extends Component {
 
 			// displaying the change in voted answer button color
 			const question = trainAI.current4DisplayedAsks[askIndex];
-			const questionId = question._id;
+			const askId = question._id;
 			const currentAnswerId = question.answers[answerIndex]._id;
 
 			let displayAnswerButtonColor = colorTheme.text7Color;
 			// if user has voted on a question
 
-			if (trainAI.votes[questionId] !== undefined) {
-				const votedAnswerId = trainAI.votes[questionId].answerId;
+			if (trainAI.votes[askId] !== undefined) {
+				const votedAnswerId = trainAI.votes[askId].answerId;
 				if (votedAnswerId === currentAnswerId) {
 					displayAnswerButtonColor = colorTheme.keyText7Color;
 				}
@@ -60,7 +60,7 @@ class InputVote extends Component {
 							background: displayAnswerButtonColor,
 							color: colorTheme.text2Color
 						}}
-						onClick={e => this.onVote(answerIndex, askIndex, questionId)}
+						onClick={e => this.onVote(answerIndex, askIndex, askId)}
 					>
 						{displayAnswer}
 					</Button>
@@ -170,8 +170,8 @@ function mapDispatchToProps(dispatch) {
 		fetchUserTrainAIAsks: () => {
 			trainAIDispatchers.fetchUserTrainAIAsks();
 		},
-		onVote: (answerIndex, answerId, askIndex, questionId) => {
-			trainAIDispatchers.onVote(answerIndex, answerId, askIndex, questionId);
+		onVote: (answerIndex, answerId, askIndex, askId) => {
+			trainAIDispatchers.onVote(answerIndex, answerId, askIndex, askId);
 		}
 	};
 }

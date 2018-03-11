@@ -15,8 +15,8 @@ module.exports = app => {
 	});
 
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
-		const { answerId, questionId } = request.body;
-		const question = await AskCollection.findOne({ _id: questionId });
+		const { answerId, askId } = request.body;
+		const question = await AskCollection.findOne({ _id: askId });
 		//console.log('question.answers.length = ', question.answers.length);
 		//check if answerId = answerId in question.answers
 		for (let i = 0; i < question.answers.length; i++) {
@@ -30,7 +30,7 @@ module.exports = app => {
 		//response.send(mostRecent4Asks);
 		try {
 			await AskCollection.updateOne(
-				{ _id: questionId },
+				{ _id: askId },
 				{
 					$set: {
 						lastVotedOn: Date.now(),
