@@ -29,7 +29,9 @@ let initialState = {
 	hasNameError: false,
 	hasInterestsError: false,
 	hasTimeZoneError: false,
-	hasAvailabilityError: false
+	hasAvailabilityError: false,
+	save: null,
+	asks: null
 };
 
 export default function(state = initialState, action) {
@@ -46,6 +48,7 @@ export default function(state = initialState, action) {
 			newState.newInterests = action.profile.interests;
 			newState.newTimeZone = action.profile.timeZone;
 			newState.newAvailability = action.profile.availability;
+			newState.asks = action.profile.asks;
 			return newState;
 		case ON_CHANGE_NAME:
 			newState.newName = action.newName;
@@ -87,7 +90,7 @@ export default function(state = initialState, action) {
 			newState.save = 'save_start';
 			return newState;
 		case SAVE_PROFILE_DONE:
-			newState.save = 'save_success';
+			newState.save = 'save_done';
 			return newState;
 		case SAVE_PROFILE_ERROR:
 			newState.save = 'save_error';

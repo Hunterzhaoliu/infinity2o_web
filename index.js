@@ -5,6 +5,10 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 require('./models/User');
+require('./models/Ask');
+require('./models/Answer');
+require('./models/ProfileQuestionDisplay');
+require('./models/ProfileVoteDisplay');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
@@ -27,6 +31,8 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 //require('./routes/billingRoutes')(app);
 require('./routes/profileRoutes')(app);
+require('./routes/trainAIRoutes')(app);
+require('./routes/askRoutes')(app);
 require('./routes/legalRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
@@ -36,7 +42,9 @@ if (process.env.NODE_ENV === 'production') {
 	// Express will serve up the index.html file if it doesn't recognize the route
 	const path = require('path');
 	app.get('*', (request, response) => {
-		response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+		response.sendFile(
+			path.resolve(__dirname, 'client', 'build', 'index.html')
+		);
 	});
 }
 

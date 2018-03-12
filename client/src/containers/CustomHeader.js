@@ -128,6 +128,7 @@ class CustomHeader extends Component {
 				style={{
 					background: colorTheme.backgroundColor,
 					position: 'fixed',
+					zIndex: 1, // make every display under the header
 					width: '100%'
 				}}
 			>

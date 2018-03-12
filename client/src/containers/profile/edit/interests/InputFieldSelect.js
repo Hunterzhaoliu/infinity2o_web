@@ -30,7 +30,7 @@ class InputFieldSelect extends Component {
 				<Row type="flex" justify="start" align="middle">
 					<Col
 						sm={{ span: 5 }}
-						md={{ span: 5 }}
+						md={{ span: 3 }}
 						lg={{ span: 5 }}
 						xl={{ span: 5 }}
 					>

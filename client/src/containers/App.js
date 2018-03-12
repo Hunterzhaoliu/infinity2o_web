@@ -9,10 +9,12 @@ import CustomHeader from './CustomHeader';
 import Landing from './Landing';
 import Profile from './profile/Profile';
 import ProfileEdit from './profile/edit/ProfileEdit';
-
+import TrainAI from './train_ai/TrainAI';
+import Ask from './train_ai/Ask';
 import Matches from './matches/Matches';
 
 import { Layout, Row, Col } from 'antd';
+
 const { Footer } = Layout;
 
 class App extends Component {
@@ -34,6 +36,8 @@ class App extends Component {
 						path="/profile/edit"
 						component={ProfileEdit}
 					/>
+					<Route exact={true} path="/train_ai" component={TrainAI} />
+					<Route exact={true} path="/train_ai/ask" component={Ask} />
 					<Route exact={true} path="/matches" component={Matches} />
 					<Footer
 						style={{
@@ -44,15 +48,22 @@ class App extends Component {
 					>
 						<Row>
 							<Col span={24}>
-								<p>Infinity2o Inc. © 2018 to year infinity</p>
+								<p>Infinity2o Inc. © 2018 -> ∞</p>
 							</Col>
 						</Row>
 						<Row type="flex" justify="center">
-							<Col span={6}>
-								<p>UI v0.2.0 | API v1.0.0</p>
-							</Col>
-							<Col span={3}>
-								<a href="https://medium.com/infinity2o">blog</a>
+							<Col span={24}>
+								<p>
+									<a
+										style={{
+											color: this.props.colorTheme
+												.keyText7Color
+										}}
+										href="https://medium.com/infinity2o"
+									>
+										blog
+									</a>
+								</p>
 							</Col>
 						</Row>
 					</Footer>

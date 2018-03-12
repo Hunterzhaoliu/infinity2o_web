@@ -223,7 +223,7 @@ class Landing extends Component {
 			<Content
 				style={{
 					textAlign: 'center',
-					padding: '100px 50px 81px', // top left&right bottom
+					padding: '100px 50px 50px', // top left&right bottom
 					minHeight: 82,
 					background: colorTheme.backgroundColor
 				}}

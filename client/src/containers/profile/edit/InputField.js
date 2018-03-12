@@ -17,7 +17,7 @@ class InputField extends Component {
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col md={{ span: 5 }}>
+					<Col md={{ span: 3 }}>
 						<h3
 							style={{
 								color: colorTheme.keyText5Color
@@ -30,7 +30,6 @@ class InputField extends Component {
 						<Input
 							value={profile.newName}
 							onChange={this.onChangeName}
-							// onFocus={input.onFocus}
 							style={{
 								width: width,
 								borderColor: colorTheme.text9Color,
