@@ -20,6 +20,7 @@ module.exports = app => {
 
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
 		const { answerId, askId } = request.body;
+
 		// detect if this vote is a revote
 		let isRevote = false;
 		let previousAnswerId;
@@ -29,16 +30,16 @@ module.exports = app => {
 		let votedAnswer;
 		let votedAnswerId;
 
-		//finds ask in database
+		// finds ask in database
 		const askInDB = await AskCollection.findOne({ _id: askId });
 
-		//finds currentUser's votedAsks
+		// finds currentUser's votedAsks
 		const userInDB = await UserCollection.findOne({
 			_id: request.user._id
 		});
 		const userVotedAsks = userInDB.profile.asks.votes;
-		//finds if the user has already answered the question
-		// TODO: try to optimize this search
+		// finds if the user has already answered the question
+		// TODO: optimize this search
 		for (let i = 0; i < userVotedAsks.length; i++) {
 			if (String(userVotedAsks[i]._askId) === String(askId)) {
 				askIndex = i;
@@ -97,7 +98,7 @@ module.exports = app => {
 				response.status(422).send(error);
 			}
 		} else {
-			// when not a revote updates the askInDB correctly
+			// when not revote updates the askInDB correctly
 			for (let i = 0; i < askInDB.answers.length; i++) {
 				//need to convert to string in order to compare
 				if (String(askInDB.answers[i]._id) === String(answerId)) {
