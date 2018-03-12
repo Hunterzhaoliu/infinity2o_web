@@ -4,7 +4,8 @@ import {
 	SAVE_FETCHED_ASKS,
 	SAVE_VOTE_START,
 	SAVE_VOTE_DONE,
-	SAVE_VOTE_ERROR
+	SAVE_VOTE_ERROR,
+	ON_NEXT_QUESTION
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -12,7 +13,7 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	current4DisplayedAsks: [null, null, null, null],
+	current4DisplayedAsks: [],
 	votes: {},
 	save: null
 };
@@ -21,7 +22,16 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case SAVE_FETCHED_ASKS:
-			newState.current4DisplayedAsks = action.mostRecent4Asks.data;
+			console.log('action.askIndex = ', action.askIndex);
+			if (action.askIndex === undefined) {
+				for (let i = 0; i < 4; i++) {
+					newState.current4DisplayedAsks.push(action.mostRecent16Asks.data[i]);
+				}
+			} else {
+				action.current4DisplayedAsks[action.askIndex] =
+					action.mostRecent16Asks.data[3 + action.askIndex];
+				newState.current4DisplayedAsks = action.current4DisplayedAsks;
+			}
 			return newState;
 		case ON_VOTE:
 			let votedAsk = newState.current4DisplayedAsks[action.askIndex];

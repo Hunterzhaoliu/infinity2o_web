@@ -5,7 +5,8 @@ import {
 	SAVE_FETCHED_ASKS,
 	SAVE_VOTE_START,
 	SAVE_VOTE_DONE,
-	SAVE_VOTE_ERROR
+	SAVE_VOTE_ERROR,
+	ON_NEXT_QUESTION
 } from './types';
 
 export const onVote = (
@@ -41,10 +42,15 @@ export const onVote = (
 	}
 };
 
-export const fetchUserTrainAIAsks = () => async dispatch => {
-	const response = await axios.get('/api/train_ai');
+export const fetchUserTrainAIAsks = (
+	askIndex,
+	current4DisplayedAsks
+) => async dispatch => {
+	const mostRecent16Asks = await axios.get('/api/train_ai');
 	dispatch({
 		type: SAVE_FETCHED_ASKS,
-		mostRecent4Asks: response
+		mostRecent16Asks: mostRecent16Asks,
+		askIndex: askIndex,
+		current4DisplayedAsks: current4DisplayedAsks
 	});
 };

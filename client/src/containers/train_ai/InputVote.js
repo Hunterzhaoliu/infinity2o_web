@@ -21,9 +21,9 @@ class InputVote extends Component {
 		this.props.onVote(answerIndex, answerId, askIndex, askId);
 	}
 
-	onPass(askIndex) {
-		console.log('pass pressed');
-		console.log('askIndex = ', askIndex);
+	onNextQuestion(askIndex, current4DisplayedAsks) {
+		//console.log('askIndex = ', askIndex);
+		this.props.fetchUserTrainAIAsks(askIndex, current4DisplayedAsks);
 	}
 
 	renderAnswers(
@@ -74,15 +74,10 @@ class InputVote extends Component {
 								background: displayAnswerButtonColor,
 								color: colorTheme.text2Color
 							}}
-							onClick={e =>
-								this.onVote(answerIndex, askIndex, askId)
-							}
+							onClick={e => this.onVote(answerIndex, askIndex, askId)}
 						>
 							{displayAnswer}
-							{this.renderSaveIcon(
-								trainAI.save,
-								isDisplayingSaveIcon
-							)}
+							{this.renderSaveIcon(trainAI.save, isDisplayingSaveIcon)}
 						</Button>
 					</Col>
 					<Col
@@ -147,10 +142,7 @@ class InputVote extends Component {
 								color: colorTheme.text3Color
 							}}
 						>
-							{this.renderTotalVotes(
-								askTotalVotes,
-								isDisplayingAskStats
-							)}
+							{this.renderTotalVotes(askTotalVotes, isDisplayingAskStats)}
 						</div>
 						{this.renderAnswers(
 							displayAnswers,
@@ -167,7 +159,9 @@ class InputVote extends Component {
 									background: colorTheme.text7Color,
 									color: colorTheme.text2Color
 								}}
-								onClick={e => this.onPass(askIndex)}
+								onClick={e =>
+									this.onNextQuestion(askIndex, trainAI.current4DisplayedAsks)
+								}
 							>
 								{this.renderAskDoneWord(isDisplayingAskStats)}
 							</Button>
@@ -265,8 +259,8 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		fetchUserTrainAIAsks: () => {
-			trainAIDispatchers.fetchUserTrainAIAsks();
+		fetchUserTrainAIAsks: (askIndex, current4DisplayedAsks) => {
+			trainAIDispatchers.fetchUserTrainAIAsks(askIndex, current4DisplayedAsks);
 		},
 		onVote: (answerIndex, answerId, askIndex, askId) => {
 			trainAIDispatchers.onVote(answerIndex, answerId, askIndex, askId);

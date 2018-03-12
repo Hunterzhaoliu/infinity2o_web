@@ -7,12 +7,12 @@ const UserCollection = mongoose.model('users');
 
 module.exports = app => {
 	app.get('/api/train_ai', requireLogin, async (request, response) => {
-		const mostRecent4Asks = await AskCollection.find()
+		const mostRecent16Asks = await AskCollection.find()
 			.sort({ $natural: -1 })
-			.limit(4);
+			.limit(16);
 		//console.log('mostRecent4Asks = ', mostRecent4Asks);
 
-		response.send(mostRecent4Asks);
+		response.send(mostRecent16Asks);
 	});
 
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
