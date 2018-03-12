@@ -92,19 +92,12 @@ module.exports = app => {
 					}
 				);
 
-				/*
-				request.user.profile.asks.votes[askIndex]({
-					selectedAnswer: votedAnswer,
-					_answerId: votedAnswerId
-				});
-				*/
-
 				response.send(askInDB);
 			} catch (error) {
 				response.status(422).send(error);
 			}
 		} else {
-			// updates the askInDB correctly
+			// when not a revote updates the askInDB correctly
 			for (let i = 0; i < askInDB.answers.length; i++) {
 				//need to convert to string in order to compare
 				if (String(askInDB.answers[i]._id) === String(answerId)) {
@@ -125,7 +118,6 @@ module.exports = app => {
 							}
 						);
 
-						//pushes this to User Collection?
 						request.user.profile.asks.votes.push({
 							question: askInDB.question,
 							_askId: askInDB._id,
@@ -133,11 +125,6 @@ module.exports = app => {
 							_answerId: votedAnswerId
 						});
 						const user = await request.user.save();
-
-						// const responseObject = {
-						// 	user,
-						// 	askInDB
-						// };
 
 						response.send(askInDB);
 					} catch (error) {
