@@ -4,8 +4,7 @@ import {
 	SAVE_FETCHED_ASKS,
 	SAVE_VOTE_START,
 	SAVE_VOTE_DONE,
-	SAVE_VOTE_ERROR,
-	ON_NEXT_QUESTION
+	SAVE_VOTE_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -22,14 +21,16 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case SAVE_FETCHED_ASKS:
-			console.log('action.askIndex = ', action.askIndex);
-			if (action.askIndex === undefined) {
+			console.log('action.askIndex = ', action.removeAskIndex);
+			if (action.removeAskIndex === undefined) {
 				for (let i = 0; i < 4; i++) {
-					newState.current4DisplayedAsks.push(action.mostRecent16Asks.data[i]);
+					newState.current4DisplayedAsks.push(
+						action.mostRecent16Asks.data[i]
+					);
 				}
 			} else {
-				action.current4DisplayedAsks[action.askIndex] =
-					action.mostRecent16Asks.data[3 + action.askIndex];
+				action.current4DisplayedAsks[action.removeAskIndex] =
+					action.mostRecent16Asks.data[3 + action.removeAskIndex];
 				newState.current4DisplayedAsks = action.current4DisplayedAsks;
 			}
 			return newState;

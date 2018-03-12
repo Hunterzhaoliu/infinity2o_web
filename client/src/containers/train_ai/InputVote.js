@@ -21,9 +21,9 @@ class InputVote extends Component {
 		this.props.onVote(answerIndex, answerId, askIndex, askId);
 	}
 
-	onNextQuestion(askIndex, current4DisplayedAsks) {
-		//console.log('askIndex = ', askIndex);
-		this.props.fetchUserTrainAIAsks(askIndex, current4DisplayedAsks);
+	onNextQuestion(removeAskIndex, current4DisplayedAsks) {
+		//console.log('removeAskIndex = ', removeAskIndex);
+		this.props.fetchUserTrainAIAsks(removeAskIndex, current4DisplayedAsks);
 	}
 
 	renderAnswers(
@@ -74,10 +74,15 @@ class InputVote extends Component {
 								background: displayAnswerButtonColor,
 								color: colorTheme.text2Color
 							}}
-							onClick={e => this.onVote(answerIndex, askIndex, askId)}
+							onClick={e =>
+								this.onVote(answerIndex, askIndex, askId)
+							}
 						>
 							{displayAnswer}
-							{this.renderSaveIcon(trainAI.save, isDisplayingSaveIcon)}
+							{this.renderSaveIcon(
+								trainAI.save,
+								isDisplayingSaveIcon
+							)}
 						</Button>
 					</Col>
 					<Col
@@ -142,7 +147,10 @@ class InputVote extends Component {
 								color: colorTheme.text3Color
 							}}
 						>
-							{this.renderTotalVotes(askTotalVotes, isDisplayingAskStats)}
+							{this.renderTotalVotes(
+								askTotalVotes,
+								isDisplayingAskStats
+							)}
 						</div>
 						{this.renderAnswers(
 							displayAnswers,
@@ -160,7 +168,10 @@ class InputVote extends Component {
 									color: colorTheme.text2Color
 								}}
 								onClick={e =>
-									this.onNextQuestion(askIndex, trainAI.current4DisplayedAsks)
+									this.onNextQuestion(
+										askIndex,
+										trainAI.current4DisplayedAsks
+									)
 								}
 							>
 								{this.renderAskDoneWord(isDisplayingAskStats)}
@@ -259,8 +270,11 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		fetchUserTrainAIAsks: (askIndex, current4DisplayedAsks) => {
-			trainAIDispatchers.fetchUserTrainAIAsks(askIndex, current4DisplayedAsks);
+		fetchUserTrainAIAsks: (removeAskIndex, current4DisplayedAsks) => {
+			trainAIDispatchers.fetchUserTrainAIAsks(
+				removeAskIndex,
+				current4DisplayedAsks
+			);
 		},
 		onVote: (answerIndex, answerId, askIndex, askId) => {
 			trainAIDispatchers.onVote(answerIndex, answerId, askIndex, askId);
