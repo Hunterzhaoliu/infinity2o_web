@@ -26,11 +26,12 @@ export const onVote = (
 		askId: askId
 	};
 	const response = await axios.put('/api/train_ai/vote', voteInfo);
-	//console.log('in action response.data.askInDB = ', response.data.askInDB);
+	// console.log('in action response.data = ', response.data);
+	//response.data === askInDB
 	dispatch({
 		type: UPDATE_VOTED_ASK,
 		askIndex: askIndex,
-		newAsk: response.data.askInDB
+		newAsk: response.data
 	});
 
 	if (response.status === 200) {

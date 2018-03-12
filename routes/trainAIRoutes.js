@@ -35,8 +35,10 @@ module.exports = app => {
 		});
 		const userVotedAsks = userInDB.profile.asks.votes;
 		//finds if the user has already answered the question
+		// TODO: try to optimize this search
 		for (let i = 0; i < userVotedAsks.length; i++) {
 			if (String(userVotedAsks[i]._askId) === String(askId)) {
+				askIndex = i;
 				previousAnswerId = userVotedAsks[i]._answerId;
 				votedAskId = userVotedAsks[i]._askId;
 				isRevote = true;
@@ -84,6 +86,15 @@ module.exports = app => {
 						}
 					}
 				);
+
+				/*
+				request.user.profile.asks.votes[askIndex]({
+					selectedAnswer: votedAnswer,
+					_answerId: votedAnswerId
+				});
+				*/
+
+				response.send(askInDB);
 			} catch (error) {
 				response.status(422).send(error);
 			}
@@ -92,7 +103,7 @@ module.exports = app => {
 			for (let i = 0; i < askInDB.answers.length; i++) {
 				//need to convert to string in order to compare
 				if (String(askInDB.answers[i]._id) === String(answerId)) {
-					answer = askInDB.answers[i].answer;
+					votedAnswer = askInDB.answers[i].answer;
 					votedAnswerId = askInDB.answers[i]._id;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes += 1;
@@ -108,20 +119,22 @@ module.exports = app => {
 								}
 							}
 						);
+
+						//pushes this to User Collection?
 						request.user.profile.asks.votes.push({
 							question: askInDB.question,
 							_askId: askInDB._id,
-							selectedAnswer: answer,
+							selectedAnswer: votedAnswer,
 							_answerId: votedAnswerId
 						});
-
 						const user = await request.user.save();
-						const responseObject = {
-							user,
-							askInDB
-						};
 
-						response.send(responseObject);
+						// const responseObject = {
+						// 	user,
+						// 	askInDB
+						// };
+
+						response.send(askInDB);
 					} catch (error) {
 						response.status(422).send(error);
 					}
