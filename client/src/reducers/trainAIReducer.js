@@ -1,10 +1,12 @@
 import {
+	SAVE_FETCHED_ASKS,
+	UPDATE_INITIAL_4_ASKS,
 	ON_VOTE,
 	UPDATE_VOTED_ASK,
-	SAVE_FETCHED_ASKS,
 	SAVE_VOTE_START,
 	SAVE_VOTE_DONE,
-	SAVE_VOTE_ERROR
+	SAVE_VOTE_ERROR,
+	ON_NEXT_ASK
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -21,33 +23,6 @@ let initialState = {
 export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
-		case SAVE_FETCHED_ASKS:
-			newState.nextAsks = action.nextAsks.data;
-
-			// we move the first 4 in nextAsks -> current4DisplayedAsks
-			for (let i = 0; i < 4; i++) {
-				const currentAsk = newState.nextAsks.shift();
-				newState.current4DisplayedAsks.push(currentAsk);
-			}
-
-			console.log(
-				'newState.current4DisplayedAsks = ',
-				newState.current4DisplayedAsks
-			);
-			console.log('newState.nextAsks = ', newState.nextAsks);
-
-			// if (action.removeAskIndex === undefined) {
-			// 	for (let i = 0; i < 4; i++) {
-			// 		newState.current4DisplayedAsks.push(
-			// 			action.nextAsks.data[i]
-			// 		);
-			// 	}
-			// } else {
-			// 	action.current4DisplayedAsks[action.removeAskIndex] =
-			// 		action.nextAsks.data[3 + action.removeAskIndex];
-			// 	newState.current4DisplayedAsks = action.current4DisplayedAsks;
-			// }
-			return newState;
 		case ON_VOTE:
 			let votedAsk = newState.current4DisplayedAsks[action.askIndex];
 			let votedAskId = votedAsk._id;
@@ -69,6 +44,24 @@ export default function(state = initialState, action) {
 			return newState;
 		case SAVE_VOTE_ERROR:
 			newState.save = 'save_error';
+			return newState;
+		case ON_NEXT_ASK:
+			const replacementAsk = newState.nextAsks.shift();
+			newState.current4DisplayedAsks[
+				action.removeAskIndex
+			] = replacementAsk;
+			return newState;
+		case SAVE_FETCHED_ASKS:
+			newState.nextAsks = action.nextAsks.data;
+			return newState;
+		case UPDATE_INITIAL_4_ASKS:
+			// we move the first 4 in nextAsks -> current4DisplayedAsks
+			for (let i = 0; i < 4; i++) {
+				const currentAsk = newState.nextAsks.shift();
+				if (currentAsk !== undefined) {
+					newState.current4DisplayedAsks.push(currentAsk);
+				}
+			}
 			return newState;
 		default:
 			return state;

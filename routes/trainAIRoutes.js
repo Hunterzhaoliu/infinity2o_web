@@ -6,13 +6,17 @@ const AskCollection = mongoose.model('asks');
 const UserCollection = mongoose.model('users');
 
 module.exports = app => {
-	app.get('/api/train_ai', requireLogin, async (request, response) => {
-		const nextAsks = await AskCollection.find()
-			.sort({ $natural: -1 })
-			.limit(16);
+	app.get(
+		'/api/train_ai/next_asks',
+		requireLogin,
+		async (request, response) => {
+			const nextAsks = await AskCollection.find()
+				.sort({ $natural: -1 })
+				.limit(16);
 
-		response.send(nextAsks);
-	});
+			response.send(nextAsks);
+		}
+	);
 
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
 		const { answerId, askId } = request.body;

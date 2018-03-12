@@ -21,9 +21,9 @@ class InputVote extends Component {
 		this.props.onVote(answerIndex, answerId, askIndex, askId);
 	}
 
-	onNextQuestion(removeAskIndex, current4DisplayedAsks) {
-		//console.log('removeAskIndex = ', removeAskIndex);
-		this.props.fetchUserTrainAIAsks(removeAskIndex, current4DisplayedAsks);
+	onNextAsk(removeAskIndex) {
+		const { trainAI } = this.props;
+		this.props.onNextAsk(trainAI.nextAsks, removeAskIndex);
 	}
 
 	renderAnswers(
@@ -167,12 +167,7 @@ class InputVote extends Component {
 									background: colorTheme.text7Color,
 									color: colorTheme.text2Color
 								}}
-								onClick={e =>
-									this.onNextQuestion(
-										askIndex,
-										trainAI.current4DisplayedAsks
-									)
-								}
+								onClick={e => this.onNextAsk(askIndex)}
 							>
 								{this.renderAskDoneWord(isDisplayingAskStats)}
 							</Button>
@@ -270,11 +265,11 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		fetchUserTrainAIAsks: (removeAskIndex, current4DisplayedAsks) => {
-			trainAIDispatchers.fetchUserTrainAIAsks(
-				removeAskIndex,
-				current4DisplayedAsks
-			);
+		fetchUserTrainAIAsks: () => {
+			trainAIDispatchers.fetchUserTrainAIAsks();
+		},
+		onNextAsk: (nextAsks, removeAskIndex) => {
+			trainAIDispatchers.onNextAsk(nextAsks, removeAskIndex);
 		},
 		onVote: (answerIndex, answerId, askIndex, askId) => {
 			trainAIDispatchers.onVote(answerIndex, answerId, askIndex, askId);

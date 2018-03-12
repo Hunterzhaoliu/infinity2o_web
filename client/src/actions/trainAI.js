@@ -3,9 +3,11 @@ import {
 	ON_VOTE,
 	UPDATE_VOTED_ASK,
 	SAVE_FETCHED_ASKS,
+	UPDATE_INITIAL_4_ASKS,
 	SAVE_VOTE_START,
 	SAVE_VOTE_DONE,
-	SAVE_VOTE_ERROR
+	SAVE_VOTE_ERROR,
+	ON_NEXT_ASK
 } from './types';
 
 export const onVote = (
@@ -41,15 +43,32 @@ export const onVote = (
 	}
 };
 
-export const fetchUserTrainAIAsks = (
-	removeAskIndex,
-	current4DisplayedAsks
-) => async dispatch => {
-	const nextAsks = await axios.get('/api/train_ai');
+export const fetchUserTrainAIAsks = () => async dispatch => {
+	const nextAsks = await axios.get('/api/train_ai/next_asks');
 	dispatch({
 		type: SAVE_FETCHED_ASKS,
-		nextAsks: nextAsks,
-		removeAskIndex: removeAskIndex,
-		current4DisplayedAsks: current4DisplayedAsks
+		nextAsks: nextAsks
 	});
+	dispatch({
+		type: UPDATE_INITIAL_4_ASKS
+	});
+};
+
+export const onNextAsk = (nextAsks, removeAskIndex) => async dispatch => {
+	if (nextAsks.length < 1) {
+		const newNextAsks = await axios.get('/api/train_ai/next_asks');
+		dispatch({
+			type: SAVE_FETCHED_ASKS,
+			nextAsks: newNextAsks
+		});
+		dispatch({
+			type: ON_NEXT_ASK,
+			removeAskIndex: removeAskIndex
+		});
+	} else {
+		dispatch({
+			type: ON_NEXT_ASK,
+			removeAskIndex: removeAskIndex
+		});
+	}
 };
