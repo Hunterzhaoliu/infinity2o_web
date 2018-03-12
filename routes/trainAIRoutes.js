@@ -35,7 +35,50 @@ module.exports = app => {
 		}
 
 		console.log('isRevote = ', isRevote);
+		let answer;
+		let votedAnswerId;
+		for (let i = 0; i < askInDB.answers.length; i++) {
+			//need to convert to string in order to compare
+			if (String(askInDB.answers[i]._id) === String(answerId)) {
+				answer = askInDB.answers[i].answer;
+				votedAnswerId = askInDB.answers[i]._id;
+				askInDB.lastVotedOn = Date.now();
+				askInDB.answers[i].votes += 1;
+				askInDB.totalVotes += 1;
+			}
+		}
+
+		try {
+			await AskCollection.updateOne(
+				{ _id: askId },
+				{
+					$set: {
+						lastVotedOn: askInDB.lastVotedOn,
+						answers: askInDB.answers,
+						totalVotes: askInDB.totalVotes
+					}
+				}
+			);
+
+			request.user.profile.asks.votes.push({
+				question: askInDB.question,
+				_askId: askInDB._id,
+				selectedAnswer: answer,
+				_answerId: votedAnswerId
+			});
+			const user = await request.user.save();
+			const responseObject = {
+				user,
+				askInDB
+			};
+			response.send(responseObject);
+		} catch (error) {
+			response.status(422).send(error);
+		}
+
+		/*
 		if (isRevote) {
+			/*
 			let answer;
 			for (let i = 0; i < askInDB.answers.length; i++) {
 				//need to convert to string in order to compare
@@ -50,6 +93,7 @@ module.exports = app => {
 					askInDB.answers[i].votes -= 1;
 				}
 			}
+
 		} else {
 			// updates the askInDB correctly
 			let answer;
@@ -93,5 +137,6 @@ module.exports = app => {
 				response.status(422).send(error);
 			}
 		}
+		*/
 	});
 };

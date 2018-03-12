@@ -26,7 +26,7 @@ export const onVote = (
 		askId: askId
 	};
 	const response = await axios.put('/api/train_ai/vote', voteInfo);
-	//console.log('in action response.data.ask = ', response.data.ask);
+	//console.log('in action response.data.askInDB = ', response.data.askInDB);
 	dispatch({
 		type: UPDATE_VOTED_ASK,
 		askIndex: askIndex,
