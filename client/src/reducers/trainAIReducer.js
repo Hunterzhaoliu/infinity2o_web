@@ -13,6 +13,7 @@ let cloneObject = obj => {
 
 let initialState = {
 	current4DisplayedAsks: [],
+	nextAsks: [],
 	votes: {},
 	save: null
 };
@@ -21,18 +22,31 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case SAVE_FETCHED_ASKS:
-			console.log('action.askIndex = ', action.removeAskIndex);
-			if (action.removeAskIndex === undefined) {
-				for (let i = 0; i < 4; i++) {
-					newState.current4DisplayedAsks.push(
-						action.mostRecent16Asks.data[i]
-					);
-				}
-			} else {
-				action.current4DisplayedAsks[action.removeAskIndex] =
-					action.mostRecent16Asks.data[3 + action.removeAskIndex];
-				newState.current4DisplayedAsks = action.current4DisplayedAsks;
+			newState.nextAsks = action.nextAsks.data;
+
+			// we move the first 4 in nextAsks -> current4DisplayedAsks
+			for (let i = 0; i < 4; i++) {
+				const currentAsk = newState.nextAsks.shift();
+				newState.current4DisplayedAsks.push(currentAsk);
 			}
+
+			console.log(
+				'newState.current4DisplayedAsks = ',
+				newState.current4DisplayedAsks
+			);
+			console.log('newState.nextAsks = ', newState.nextAsks);
+
+			// if (action.removeAskIndex === undefined) {
+			// 	for (let i = 0; i < 4; i++) {
+			// 		newState.current4DisplayedAsks.push(
+			// 			action.nextAsks.data[i]
+			// 		);
+			// 	}
+			// } else {
+			// 	action.current4DisplayedAsks[action.removeAskIndex] =
+			// 		action.nextAsks.data[3 + action.removeAskIndex];
+			// 	newState.current4DisplayedAsks = action.current4DisplayedAsks;
+			// }
 			return newState;
 		case ON_VOTE:
 			let votedAsk = newState.current4DisplayedAsks[action.askIndex];

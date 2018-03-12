@@ -45,10 +45,10 @@ export const fetchUserTrainAIAsks = (
 	removeAskIndex,
 	current4DisplayedAsks
 ) => async dispatch => {
-	const mostRecent16Asks = await axios.get('/api/train_ai');
+	const nextAsks = await axios.get('/api/train_ai');
 	dispatch({
 		type: SAVE_FETCHED_ASKS,
-		mostRecent16Asks: mostRecent16Asks,
+		nextAsks: nextAsks,
 		removeAskIndex: removeAskIndex,
 		current4DisplayedAsks: current4DisplayedAsks
 	});

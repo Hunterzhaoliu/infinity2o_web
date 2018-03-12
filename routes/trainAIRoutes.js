@@ -7,12 +7,11 @@ const UserCollection = mongoose.model('users');
 
 module.exports = app => {
 	app.get('/api/train_ai', requireLogin, async (request, response) => {
-		const mostRecent16Asks = await AskCollection.find()
+		const nextAsks = await AskCollection.find()
 			.sort({ $natural: -1 })
 			.limit(16);
-		//console.log('mostRecent4Asks = ', mostRecent4Asks);
 
-		response.send(mostRecent16Asks);
+		response.send(nextAsks);
 	});
 
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
@@ -56,7 +55,9 @@ module.exports = app => {
 					askInDB.answers[i].votes += 1;
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
-				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
+				if (
+					String(askInDB.answers[i]._id) === String(previousAnswerId)
+				) {
 					previousAnswer = askInDB.answers[i].answer;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
