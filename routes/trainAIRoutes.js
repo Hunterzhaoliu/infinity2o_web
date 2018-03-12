@@ -21,7 +21,6 @@ module.exports = app => {
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
 		const { answerId, askId } = request.body;
 
-		// detect if this vote is a revote
 		let isRevote = false;
 		let previousAnswerId;
 		let askIndex;
