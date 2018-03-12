@@ -17,10 +17,14 @@ module.exports = app => {
 
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
 		const { answerId, askId } = request.body;
-		console.log('answerId = ', answerId);
 		// detect if this vote is a revote
 		let isRevote = false;
 		let previousAnswerId;
+		let askIndex;
+		let votedAskId;
+		let previousAnswer;
+		let votedAnswer;
+		let votedAnswerId;
 
 		//finds ask in database
 		const askInDB = await AskCollection.findOne({ _id: askId });
@@ -30,51 +34,47 @@ module.exports = app => {
 			_id: request.user._id
 		});
 		const userVotedAsks = userInDB.profile.asks.votes;
+		//finds if the user has already answered the question
 		for (let i = 0; i < userVotedAsks.length; i++) {
 			if (String(userVotedAsks[i]._askId) === String(askId)) {
-				// console.log(
-				// 	'userVotedAsks[i]._answerId = ',
-				// 	userVotedAsks[i]._answerId
-				// );
-				//console.log('userVotedAsks[i]._askId) === String(askId)');
 				previousAnswerId = userVotedAsks[i]._answerId;
+				votedAskId = userVotedAsks[i]._askId;
 				isRevote = true;
 			}
 		}
-		console.log('previousAnswerId = ', previousAnswerId);
-		console.log('isRevote = ', isRevote);
-		let askIndex;
-		let answer;
-		let votedAnswerId;
 
 		if (isRevote) {
 			for (let i = 0; i < askInDB.answers.length; i++) {
 				//need to convert to string in order to compare
+				//looks for the newAnswer Id in ask to increment votes and update lastVotedOn
 				if (String(askInDB.answers[i]._id) === String(answerId)) {
-					console.log('increasing votes on new answer');
-					answer = askInDB.answers[i].answer;
+					votedAnswer = askInDB.answers[i].answer;
+					votedAnswerId = askInDB.answers[i]._id;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes += 1;
 				}
+				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
 				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
-					console.log('decreasing votes on old answer');
-
-					askIndex = i;
-					answer = askInDB.answers[i].answer;
+					previousAnswer = askInDB.answers[i].answer;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
 				}
 			}
 			try {
+				//updates the User Collection selectedAnswer and _answerId
 				await UserCollection.updateOne(
-					{ _id: request.user._id },
+					{
+						_id: request.user._id,
+						'profile.asks.votes._askId': votedAskId
+					},
 					{
 						$set: {
-							'profile.asks.votes.0.selectedAnswer': answer
+							'profile.asks.votes.$.selectedAnswer': votedAnswer,
+							'profile.asks.votes.$._answerId': votedAnswerId
 						}
 					}
 				);
-				console.log('just sent new selectedAnsewr to UserCollection');
+				//updates the Ask Collection lastVotedOn and votes
 				await AskCollection.updateOne(
 					{ _id: askId },
 					{
@@ -84,7 +84,6 @@ module.exports = app => {
 						}
 					}
 				);
-				console.log('just sent data to AskCollection');
 			} catch (error) {
 				response.status(422).send(error);
 			}
