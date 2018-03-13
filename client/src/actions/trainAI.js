@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
 	ON_VOTE,
 	UPDATE_VOTED_ASK,
-	SAVE_FETCHED_ASKS,
+	SAVE_FETCHED_INITIAL_ASKS,
+	SAVE_FETCHED_NEXT_ASKS,
 	UPDATE_INITIAL_4_ASKS,
 	SAVE_VOTE_START,
 	SAVE_VOTE_DONE,
@@ -44,9 +45,9 @@ export const onVote = (
 };
 
 export const fetchUserTrainAIAsks = () => async dispatch => {
-	const nextAsks = await axios.get('/api/train_ai/first_asks');
+	const nextAsks = await axios.get('/api/train_ai/initial_asks');
 	dispatch({
-		type: SAVE_FETCHED_ASKS,
+		type: SAVE_FETCHED_INITIAL_ASKS,
 		nextAsks: nextAsks
 	});
 	dispatch({
@@ -70,7 +71,7 @@ export const onNextAsk = (
 				nextAsksDateRange.oldestAskDate
 		);
 		dispatch({
-			type: SAVE_FETCHED_ASKS,
+			type: SAVE_FETCHED_NEXT_ASKS,
 			nextAsks: newNextAsks
 		});
 		dispatch({

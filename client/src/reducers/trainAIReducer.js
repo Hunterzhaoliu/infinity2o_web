@@ -1,5 +1,6 @@
 import {
-	SAVE_FETCHED_ASKS,
+	SAVE_FETCHED_INITIAL_ASKS,
+	SAVE_FETCHED_NEXT_ASKS,
 	UPDATE_INITIAL_4_ASKS,
 	ON_VOTE,
 	UPDATE_VOTED_ASK,
@@ -48,14 +49,22 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_NEXT_ASK:
 			const replacementAsk = newState.nextAsks.shift();
-			newState.current4DisplayedAsks[action.removeAskIndex] = replacementAsk;
+			newState.current4DisplayedAsks[
+				action.removeAskIndex
+			] = replacementAsk;
 			return newState;
-		case SAVE_FETCHED_ASKS:
+		case SAVE_FETCHED_NEXT_ASKS:
 			newState.nextAsks = action.nextAsks.data;
-			const nextAsksLastIndex = newState.nextAsks.length - 1;
-			newState.nextAsksDateRange.newestAskDate = newState.nextAsks[0].dateAsked;
-			newState.nextAsksDateRange.oldestAskDate =
-				newState.nextAsks[nextAsksLastIndex].dateAsked;
+			if (newState.nextAsks.length >= 1) {
+				const nextAsksLastIndex = newState.nextAsks.length - 1;
+				newState.nextAsksDateRange.newestAskDate =
+					newState.nextAsks[0].dateAsked;
+				newState.nextAsksDateRange.oldestAskDate =
+					newState.nextAsks[nextAsksLastIndex].dateAsked;
+			}
+			return newState;
+		case SAVE_FETCHED_INITIAL_ASKS:
+			newState.nextAsks = action.nextAsks.data;
 			return newState;
 		case UPDATE_INITIAL_4_ASKS:
 			// we move the first 4 in nextAsks -> current4DisplayedAsks

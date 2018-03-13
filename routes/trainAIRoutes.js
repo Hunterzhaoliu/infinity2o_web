@@ -7,34 +7,56 @@ const UserCollection = mongoose.model('users');
 
 module.exports = app => {
 	app.get(
-		'/api/train_ai/first_asks',
+		'/api/train_ai/initial_asks',
 		requireLogin,
 		async (request, response) => {
-			const nextAsks = await AskCollection.find()
-				.sort({ $natural: -1 })
-				.limit(16);
+			// const nextAsks = await AskCollection.find()
+			// 	.sort({ $natural: -1 })
+			// 	.limit(16);
+
+			// ====== WARNING REMOVE
+			const nextAsks = await AskCollection.find({
+				$or: [
+					{
+						dateAsked: {
+							$gt: new Date('2018-03-13T18:52:22.270Z')
+						}
+					},
+					{
+						dateAsked: {
+							$lt: new Date('2018-03-13T18:52:21.965Z')
+						}
+					}
+				]
+			}).limit(16);
+			// =====================
 
 			response.send(nextAsks);
 		}
 	);
+
 	app.get(
 		'/api/train_ai/next_asks',
 		requireLogin,
 		async (request, response) => {
-			/*
 			console.log(
-				'request.query.newestAskDate = ',
-				request.query.newestAskDate
+				'in /api/train_ai/next_asks request.query = ',
+				request.query
 			);
-			console.log(
-				'request.query.oldestAskDate = ',
-				request.query.oldestAskDate
-			);
-			*/
-
 			const nextAsks = await AskCollection.find({
-				dateAsked: { $gt: ISODate(newestAskDate) }
+				dateAsked: {
+					$gt: ISODate(request.query.newestAskDate)
+				}
 			}).limit(16);
+
+			// const nextAsks = await AskCollection.find({
+			// 	$or: [
+			// 		{
+			// 			dateAsked: { $gt: ISODate(request.query.newestAskDate) }
+			// 		},
+			// 		{ dateAsked: { $lt: ISODate(request.query.oldestAskDate) } }
+			// 	]
+			// }).limit(16);
 
 			console.log('nextAsks = ', nextAsks);
 			response.send(nextAsks);
@@ -96,7 +118,9 @@ module.exports = app => {
 					askInDB.answers[i].votes += 1;
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
-				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
+				if (
+					String(askInDB.answers[i]._id) === String(previousAnswerId)
+				) {
 					previousAnswer = askInDB.answers[i].answer;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
