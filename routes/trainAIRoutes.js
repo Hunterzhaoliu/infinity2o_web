@@ -10,8 +10,18 @@ module.exports = app => {
 		'/api/train_ai/next_asks',
 		requireLogin,
 		async (request, response) => {
+			/*
+			console.log(
+				'request.query.newestAskDate = ',
+				request.query.newestAskDate
+			);
+			console.log(
+				'request.query.oldestAskDate = ',
+				request.query.oldestAskDate
+			);
+			*/
 			const nextAsks = await AskCollection.find()
-				.sort({ $natural: -1 })
+				.sort({ $natural: 1 })
 				.limit(16);
 
 			response.send(nextAsks);

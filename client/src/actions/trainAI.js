@@ -54,9 +54,21 @@ export const fetchUserTrainAIAsks = () => async dispatch => {
 	});
 };
 
-export const onNextAsk = (nextAsks, removeAskIndex) => async dispatch => {
+export const onNextAsk = (
+	nextAsks,
+	removeAskIndex,
+	nextAsksDateRange
+) => async dispatch => {
 	if (nextAsks.length < 1) {
-		const newNextAsks = await axios.get('/api/train_ai/next_asks');
+		console.log('nextAsksDateRange in action = ', nextAsksDateRange);
+		const newNextAsks = await axios.get(
+			'/api/train_ai/next_asks?' +
+				'newestAskDate=' +
+				nextAsksDateRange.newestAskDate +
+				'&' +
+				'oldestAskDate=' +
+				nextAsksDateRange.oldestAskDate
+		);
 		dispatch({
 			type: SAVE_FETCHED_ASKS,
 			nextAsks: newNextAsks

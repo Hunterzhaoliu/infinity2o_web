@@ -16,6 +16,7 @@ let cloneObject = obj => {
 let initialState = {
 	current4DisplayedAsks: [],
 	nextAsks: [],
+	nextAsksDateRange: {},
 	votes: {},
 	save: null
 };
@@ -47,12 +48,14 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_NEXT_ASK:
 			const replacementAsk = newState.nextAsks.shift();
-			newState.current4DisplayedAsks[
-				action.removeAskIndex
-			] = replacementAsk;
+			newState.current4DisplayedAsks[action.removeAskIndex] = replacementAsk;
 			return newState;
 		case SAVE_FETCHED_ASKS:
 			newState.nextAsks = action.nextAsks.data;
+			const nextAsksLastIndex = newState.nextAsks.length - 1;
+			newState.nextAsksDateRange.newestAskDate = newState.nextAsks[0].dateAsked;
+			newState.nextAsksDateRange.oldestAskDate =
+				newState.nextAsks[nextAsksLastIndex].dateAsked;
 			return newState;
 		case UPDATE_INITIAL_4_ASKS:
 			// we move the first 4 in nextAsks -> current4DisplayedAsks
