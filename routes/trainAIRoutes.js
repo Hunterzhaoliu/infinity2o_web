@@ -7,6 +7,17 @@ const UserCollection = mongoose.model('users');
 
 module.exports = app => {
 	app.get(
+		'/api/train_ai/first_asks',
+		requireLogin,
+		async (request, response) => {
+			const nextAsks = await AskCollection.find()
+				.sort({ $natural: -1 })
+				.limit(16);
+
+			response.send(nextAsks);
+		}
+	);
+	app.get(
 		'/api/train_ai/next_asks',
 		requireLogin,
 		async (request, response) => {
@@ -20,10 +31,12 @@ module.exports = app => {
 				request.query.oldestAskDate
 			);
 			*/
-			const nextAsks = await AskCollection.find()
-				.sort({ $natural: 1 })
-				.limit(16);
 
+			const nextAsks = await AskCollection.find({
+				dateAsked: { $gt: ISODate(newestAskDate) }
+			}).limit(16);
+
+			console.log('nextAsks = ', nextAsks);
 			response.send(nextAsks);
 		}
 	);

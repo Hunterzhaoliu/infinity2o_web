@@ -44,7 +44,7 @@ export const onVote = (
 };
 
 export const fetchUserTrainAIAsks = () => async dispatch => {
-	const nextAsks = await axios.get('/api/train_ai/next_asks');
+	const nextAsks = await axios.get('/api/train_ai/first_asks');
 	dispatch({
 		type: SAVE_FETCHED_ASKS,
 		nextAsks: nextAsks
