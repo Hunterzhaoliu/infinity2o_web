@@ -23,14 +23,10 @@ module.exports = app => {
 
 		let isRevote = false;
 		let previousAnswerId;
-		let askIndex;
 		let votedAskId;
 		let previousAnswer;
 		let votedAnswer;
 		let votedAnswerId;
-
-		// finds ask in database
-		const askInDB = await AskCollection.findOne({ _id: askId });
 
 		// finds currentUser's votedAsks
 		const userInDB = await UserCollection.findOne({
@@ -41,12 +37,30 @@ module.exports = app => {
 		// TODO: optimize this search
 		for (let i = 0; i < userVotedAsks.length; i++) {
 			if (String(userVotedAsks[i]._askId) === String(askId)) {
-				askIndex = i;
 				previousAnswerId = userVotedAsks[i]._answerId;
 				votedAskId = userVotedAsks[i]._askId;
 				isRevote = true;
 			}
 		}
+
+		// const questionInUserProfile = await UserCollection.findOne(
+		// 	{
+		// 		_id: request.user._id,
+		// 		'profile.asks.votes._askId': askId
+		// 	},
+		// 	{
+		// 		'profile.asks': 1
+		// 	}
+		// );
+		//
+		// console.log('questionInUserProfile = ', questionInUserProfile);
+
+		// if (questionInUserProfile !== null) {
+		// 	previousAnswerId = questionInUserProfile.isRevote = true;
+		// }
+
+		// finds ask in database
+		const askInDB = await AskCollection.findOne({ _id: askId });
 
 		if (isRevote) {
 			for (let i = 0; i < askInDB.answers.length; i++) {
@@ -59,9 +73,7 @@ module.exports = app => {
 					askInDB.answers[i].votes += 1;
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
-				if (
-					String(askInDB.answers[i]._id) === String(previousAnswerId)
-				) {
+				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
 					previousAnswer = askInDB.answers[i].answer;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
