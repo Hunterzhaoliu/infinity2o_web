@@ -58,6 +58,7 @@ export const saveAsk = (ask, history) => async dispatch => {
 		}
 	}
 	ask.newAnswers = validatedAnswers;
+	console.log('ask in action = ', ask);
 	const response = await axios.post('/api/ask', ask);
 	if (response.status === 200) {
 		dispatch({ type: SAVE_QUESTION_DONE });

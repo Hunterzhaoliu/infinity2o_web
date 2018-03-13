@@ -51,13 +51,16 @@ Local development setup:
 When you want to add something...
 
 1. Create a `new-branch` off latest `master`
-1. Create `actions/types`
-1. Create `actions/actionCreator.js`
-1. Deal with action type in `reducers/actionReducer.js`
-1. Add `reducers/actionReducer.js` to `reducers/index.js`
-1. If state changes add `mapStateToProps` in `containers/Containers.js`
-1. If added functions to change state add `mapDispatchToProps` in `containers/Containers.js`
-1. Create a `pull request` for your `new-branch` to merge into `master`
+2. Create `actions/types`
+3. Create `actions/actionCreator.js`
+4. Deal with action type in `reducers/actionReducer.js`
+5. Add `reducers/actionReducer.js` to `reducers/index.js`
+6. If state changes add `mapStateToProps` in `containers/Containers.js`
+7. If added functions to change state add `mapDispatchToProps` in `containers/Containers.js`
+8. Test your new code with cypress by writing tests in `cypress/integration/`
+   & running the tests in a new terminal with `npm test`
+   in `infinity2o_server/`
+9. Create a `pull request` for your `new-branch` to merge into `master`
 
 ## Deployment checklist
 
