@@ -10,25 +10,25 @@ module.exports = app => {
 		'/api/train_ai/initial_asks',
 		requireLogin,
 		async (request, response) => {
-			// const nextAsks = await AskCollection.find()
-			// 	.sort({ $natural: -1 })
-			// 	.limit(16);
+			const nextAsks = await AskCollection.find()
+				.sort({ dateAsked: -1 }) // -1 = newest to oldest
+				.limit(16);
 
 			// ====== WARNING REMOVE
-			const nextAsks = await AskCollection.find({
-				$or: [
-					{
-						dateAsked: {
-							$gt: new Date('2018-03-13T18:52:22.270Z')
-						}
-					},
-					{
-						dateAsked: {
-							$lt: new Date('2018-03-13T18:52:21.965Z')
-						}
-					}
-				]
-			}).limit(16);
+			// const nextAsks = await AskCollection.find({
+			// 	$or: [
+			// 		{
+			// 			dateAsked: {
+			// 				$gt: new Date('2018-03-13T18:52:22.270Z')
+			// 			}
+			// 		},
+			// 		{
+			// 			dateAsked: {
+			// 				$lt: new Date('2018-03-13T18:52:21.965Z')
+			// 			}
+			// 		}
+			// 	]
+			// }).limit(16);
 			// =====================
 
 			response.send(nextAsks);
@@ -43,10 +43,25 @@ module.exports = app => {
 				'in /api/train_ai/next_asks request.query = ',
 				request.query
 			);
+			// const nextAsks = await AskCollection.find({
+			// 	dateAsked: {
+			// 		$gt: ISODate(request.query.newestAskDate)
+			// 	}
+			// }).limit(16);
+
 			const nextAsks = await AskCollection.find({
-				dateAsked: {
-					$gt: ISODate(request.query.newestAskDate)
-				}
+				$or: [
+					{
+						dateAsked: {
+							$gt: new Date(request.query.newestAskDate)
+						}
+					},
+					{
+						dateAsked: {
+							$lt: new Date(request.query.oldestAskDate)
+						}
+					}
+				]
 			}).limit(16);
 
 			// const nextAsks = await AskCollection.find({

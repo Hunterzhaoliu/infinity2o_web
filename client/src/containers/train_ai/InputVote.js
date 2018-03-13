@@ -78,10 +78,15 @@ class InputVote extends Component {
 								background: displayAnswerButtonColor,
 								color: colorTheme.text2Color
 							}}
-							onClick={e => this.onVote(answerIndex, askIndex, askId)}
+							onClick={e =>
+								this.onVote(answerIndex, askIndex, askId)
+							}
 						>
 							{displayAnswer}
-							{this.renderSaveIcon(trainAI.save, isDisplayingSaveIcon)}
+							{this.renderSaveIcon(
+								trainAI.save,
+								isDisplayingSaveIcon
+							)}
 						</Button>
 					</Col>
 					<Col
@@ -106,18 +111,15 @@ class InputVote extends Component {
 
 		return _.map(trainAI.current4DisplayedAsks, (Ask, askIndex) => {
 			let displayQuestion;
-			if (Ask !== null) {
-				displayQuestion = Ask.question;
-			}
 			let displayAnswers;
-			if (Ask !== null) {
-				displayAnswers = Ask.answers;
-			}
 
 			let askId;
-			let isDisplayingAskStats = false;
 			let askTotalVotes;
-			if (Ask !== null) {
+			let isDisplayingAskStats = false;
+
+			if (Ask !== null && Ask !== undefined) {
+				displayQuestion = Ask.question;
+				displayAnswers = Ask.answers;
 				askId = Ask._id;
 				askTotalVotes = Ask.totalVotes;
 				if (trainAI.votes[askId] !== undefined) {
@@ -146,7 +148,10 @@ class InputVote extends Component {
 								color: colorTheme.text3Color
 							}}
 						>
-							{this.renderTotalVotes(askTotalVotes, isDisplayingAskStats)}
+							{this.renderTotalVotes(
+								askTotalVotes,
+								isDisplayingAskStats
+							)}
 						</div>
 						{this.renderAnswers(
 							displayAnswers,
@@ -265,7 +270,11 @@ function mapDispatchToProps(dispatch) {
 			trainAIDispatchers.fetchUserTrainAIAsks();
 		},
 		onNextAsk: (nextAsks, removeAskIndex, nextAsksDateRange) => {
-			trainAIDispatchers.onNextAsk(nextAsks, removeAskIndex, nextAsksDateRange);
+			trainAIDispatchers.onNextAsk(
+				nextAsks,
+				removeAskIndex,
+				nextAsksDateRange
+			);
 		},
 		onVote: (answerIndex, answerId, askIndex, askId) => {
 			trainAIDispatchers.onVote(answerIndex, answerId, askIndex, askId);

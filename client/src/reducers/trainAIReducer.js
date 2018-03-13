@@ -64,7 +64,15 @@ export default function(state = initialState, action) {
 			}
 			return newState;
 		case SAVE_FETCHED_INITIAL_ASKS:
+			//TODO: put if statement in a function
 			newState.nextAsks = action.nextAsks.data;
+			if (newState.nextAsks.length >= 1) {
+				const nextAsksLastIndex = newState.nextAsks.length - 1;
+				newState.nextAsksDateRange.newestAskDate =
+					newState.nextAsks[0].dateAsked;
+				newState.nextAsksDateRange.oldestAskDate =
+					newState.nextAsks[nextAsksLastIndex].dateAsked;
+			}
 			return newState;
 		case UPDATE_INITIAL_4_ASKS:
 			// we move the first 4 in nextAsks -> current4DisplayedAsks
