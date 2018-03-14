@@ -21,11 +21,12 @@ class InputVote extends Component {
 	}
 
 	onNextAsk(removeAskIndex) {
-		const { trainAI } = this.props;
+		const { trainAI, mongoDBUserId } = this.props;
 		this.props.onNextAsk(
 			trainAI.nextAsks,
 			removeAskIndex,
-			trainAI.nextAsksDateRange
+			trainAI.nextAsksDateRange,
+			mongoDBUserId
 		);
 	}
 
@@ -77,15 +78,10 @@ class InputVote extends Component {
 								background: displayAnswerButtonColor,
 								color: colorTheme.text2Color
 							}}
-							onClick={e =>
-								this.onVote(answerIndex, askIndex, askId)
-							}
+							onClick={e => this.onVote(answerIndex, askIndex, askId)}
 						>
 							{displayAnswer}
-							{this.renderSaveIcon(
-								trainAI.save,
-								isDisplayingSaveIcon
-							)}
+							{this.renderSaveIcon(trainAI.save, isDisplayingSaveIcon)}
 						</Button>
 					</Col>
 					<Col
@@ -108,80 +104,87 @@ class InputVote extends Component {
 	renderQandAs() {
 		const { colorTheme, trainAI } = this.props;
 
-		return _.map(trainAI.current4DisplayedAsks, (Ask, askIndex) => {
-			let displayQuestion;
-			let displayAnswers;
+		if (trainAI.current4DisplayedAsks.length > 0) {
+			return _.map(trainAI.current4DisplayedAsks, (Ask, askIndex) => {
+				let displayQuestion;
+				let displayAnswers;
 
-			let askId;
-			let askTotalVotes;
-			let isDisplayingAskStats = false;
+				let askId;
+				let askTotalVotes;
+				let isDisplayingAskStats = false;
 
-			if (Ask !== null && Ask !== undefined) {
-				displayQuestion = Ask.question;
-				displayAnswers = Ask.answers;
-				askId = Ask._id;
-				askTotalVotes = Ask.totalVotes;
-				if (trainAI.votes[askId] !== undefined) {
-					isDisplayingAskStats = true;
-				}
-				return (
-					<Col span={12} key={askIndex}>
-						<Card
-							style={{
-								borderColor: colorTheme.text8Color,
-								background: colorTheme.text8Color,
-								color: colorTheme.text2Color
-							}}
-						>
-							<h3
+				if (Ask !== null && Ask !== undefined) {
+					displayQuestion = Ask.question;
+					displayAnswers = Ask.answers;
+					askId = Ask._id;
+					askTotalVotes = Ask.totalVotes;
+					if (trainAI.votes[askId] !== undefined) {
+						isDisplayingAskStats = true;
+					}
+					return (
+						<Col span={12} key={askIndex}>
+							<Card
 								style={{
+									borderColor: colorTheme.text8Color,
+									background: colorTheme.text8Color,
 									color: colorTheme.text2Color
 								}}
 							>
-								{displayQuestion}
-							</h3>
-							<div
-								style={{
-									color: colorTheme.text3Color
-								}}
-							>
-								{this.renderTotalVotes(
-									askTotalVotes,
-									isDisplayingAskStats
-								)}
-							</div>
-							{this.renderAnswers(
-								displayAnswers,
-								askIndex,
-								Ask,
-								askId,
-								isDisplayingAskStats,
-								askTotalVotes
-							)}
-							<Row style={{ padding: '8px 0px 0px' }}>
-								<Button
+								<h3
 									style={{
-										borderColor: colorTheme.text7Color,
-										background: colorTheme.text7Color,
 										color: colorTheme.text2Color
 									}}
-									onClick={e => this.onNextAsk(askIndex)}
 								>
-									{this.renderAskDoneWord(
-										isDisplayingAskStats
-									)}
-								</Button>
-							</Row>
-						</Card>
-						<Row
-							style={{
-								padding: '36px 0px 0px' // top left&right bottom
-							}}
-						/>
-					</Col>
-				);
-			}
-		});
+									{displayQuestion}
+								</h3>
+								<div
+									style={{
+										color: colorTheme.text3Color
+									}}
+								>
+									{this.renderTotalVotes(askTotalVotes, isDisplayingAskStats)}
+								</div>
+								{this.renderAnswers(
+									displayAnswers,
+									askIndex,
+									Ask,
+									askId,
+									isDisplayingAskStats,
+									askTotalVotes
+								)}
+								<Row style={{ padding: '8px 0px 0px' }}>
+									<Button
+										style={{
+											borderColor: colorTheme.text7Color,
+											background: colorTheme.text7Color,
+											color: colorTheme.text2Color
+										}}
+										onClick={e => this.onNextAsk(askIndex)}
+									>
+										{this.renderAskDoneWord(isDisplayingAskStats)}
+									</Button>
+								</Row>
+							</Card>
+							<Row
+								style={{
+									padding: '36px 0px 0px' // top left&right bottom
+								}}
+							/>
+						</Col>
+					);
+				}
+			});
+		} else {
+			return (
+				<h3
+					style={{
+						color: colorTheme.text2Color
+					}}
+				>
+					Looks like you have done a lot of voting, try asking a question!
+				</h3>
+			);
+		}
 	}
 
 	renderSaveIcon(saveState, isDisplaying) {
@@ -267,11 +270,12 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		onNextAsk: (nextAsks, removeAskIndex, nextAsksDateRange) => {
+		onNextAsk: (nextAsks, removeAskIndex, nextAsksDateRange, mongoDBUserId) => {
 			trainAIDispatchers.onNextAsk(
 				nextAsks,
 				removeAskIndex,
-				nextAsksDateRange
+				nextAsksDateRange,
+				mongoDBUserId
 			);
 		},
 		onVote: (answerIndex, answerId, askIndex, askId) => {

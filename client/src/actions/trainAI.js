@@ -29,7 +29,6 @@ export const onVote = (
 		askId: askId
 	};
 	const response = await axios.put('/api/train_ai/vote', voteInfo);
-	// console.log('in action response.data = ', response.data);
 	//response.data === askInDB
 	dispatch({
 		type: UPDATE_VOTED_ASK,
@@ -45,7 +44,6 @@ export const onVote = (
 };
 
 export const fetchUserTrainAIAsks = async (dispatch, mongoDBUserId) => {
-	//console.log('in fetchUserTrainAIAsks mongoDBUserId = ', mongoDBUserId);
 	const nextAsks = await axios.get(
 		'/api/train_ai/initial_asks?mongoDBUserId=' + mongoDBUserId
 	);
@@ -61,17 +59,17 @@ export const fetchUserTrainAIAsks = async (dispatch, mongoDBUserId) => {
 export const onNextAsk = (
 	nextAsks,
 	removeAskIndex,
-	nextAsksDateRange
+	nextAsksDateRange,
+	mongoDBUserId
 ) => async dispatch => {
 	if (nextAsks.length < 1) {
-		//console.log('nextAsksDateRange in action = ', nextAsksDateRange);
 		const newNextAsks = await axios.get(
-			'/api/train_ai/next_asks?' +
-				'newestAskDate=' +
+			'/api/train_ai/next_asks?newestAskDate=' +
 				nextAsksDateRange.newestAskDate +
-				'&' +
-				'oldestAskDate=' +
-				nextAsksDateRange.oldestAskDate
+				'&oldestAskDate=' +
+				nextAsksDateRange.oldestAskDate +
+				'&mongoDBUserId=' +
+				mongoDBUserId
 		);
 		dispatch({
 			type: SAVE_FETCHED_NEXT_ASKS,

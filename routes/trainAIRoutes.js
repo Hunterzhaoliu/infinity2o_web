@@ -5,6 +5,32 @@ const requireLogin = require('../middlewares/requireLogin');
 const AskCollection = mongoose.model('asks');
 const UserCollection = mongoose.model('users');
 
+const checkUserPastVotes = async (request, response, nextAsks) => {
+	//gets the userVotes
+	const user = await UserCollection.findOne({
+		_id: request.query.mongoDBUserId
+	});
+	const userVotes = user.profile.asks.votes;
+
+	//makes nextAsks into a hashtable
+	let nextAsksHT = {};
+	for (let i = 0; i < nextAsks.length; i++) {
+		nextAsksHT[nextAsks[i]._id] = nextAsks[i];
+	}
+
+	//sees if userVotes' askId(s) are in the nextAsks hashtable
+	for (let i = 0; i < userVotes.length; i++) {
+		const isAlreadyVotedAsk = nextAsksHT[userVotes[i]._askId] !== undefined;
+		if (isAlreadyVotedAsk) {
+			delete nextAsksHT[userVotes[i]._askId];
+		}
+	}
+
+	const nonVotedNextAsks = Object.values(nextAsksHT);
+
+	response.send(nonVotedNextAsks);
+};
+
 module.exports = app => {
 	app.get(
 		'/api/train_ai/initial_asks',
@@ -14,32 +40,7 @@ module.exports = app => {
 				.sort({ dateAsked: -1 }) // -1 = newest to oldest
 				.limit(16);
 
-			console.log(
-				'request.query.mongoDBUserId = ',
-				request.query.mongoDBUserId
-			);
-
-			const user = await UserCollection.findOne({
-				_id: request.query.mongoDBUserId
-			});
-
-			const userVotes = user.profile.asks.votes;
-
-			let nextAsksHT = {};
-			for (let i = 0; i < nextAsks.length; i++) {
-				nextAsksHT[nextAsks[i]._id] = nextAsks[i];
-			}
-
-			for (let i = 0; i < userVotes.length; i++) {
-				const isAlreadyVotedAsk = nextAsksHT[userVotes[i]._askId] !== undefined;
-				if (isAlreadyVotedAsk) {
-					delete nextAsksHT[userVotes[i]._askId];
-				}
-			}
-
-			const nonVotedNextAsks = Object.values(nextAsksHT);
-
-			response.send(nonVotedNextAsks);
+			checkUserPastVotes(request, response, nextAsks);
 		}
 	);
 
@@ -61,7 +62,8 @@ module.exports = app => {
 					}
 				]
 			}).limit(16);
-			response.send(nextAsks);
+
+			checkUserPastVotes(request, response, nextAsks);
 		}
 	);
 
