@@ -45,7 +45,7 @@ module.exports = app => {
 			const nonVotedAsksInfo = await getNonVotedAsks(request, nextAsks);
 			//console.log('nextAsksHT outside= ', nextAsksHT);
 			const oldestAskDate = nonVotedAsksInfo.oldestAskDate;
-			console.log('oldestAskDate = ', oldestAskDate);
+			// console.log('oldestAskDate = ', oldestAskDate);
 			const nextAsksHT = nonVotedAsksInfo.nextAsksHT;
 			// while (Object.keys(nextAsksHT).length < 4 ) {
 			// 	const nextAsks = await AskCollection.find()
