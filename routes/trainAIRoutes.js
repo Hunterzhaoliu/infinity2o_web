@@ -5,13 +5,13 @@ const requireLogin = require('../middlewares/requireLogin');
 const AskCollection = mongoose.model('asks');
 const UserCollection = mongoose.model('users');
 
-const getNonVotedAsks = async (request, nextAsks) => {
+const getNonVotedAsks = async (mongoDBUserId, nextAsks) => {
 	//console.log('nextAsks = ', nextAsks);
-	const oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
-	// console.log('oldestAskDate = ', oldestAskDate);
+	const oldestNextAsksDate = nextAsks[nextAsks.length - 1].dateAsked;
+	// console.log('oldestNextAsksDate = ', oldestNextAsksDate);
 	//gets the userVotes
 	const user = await UserCollection.findOne({
-		_id: request.query.mongoDBUserId
+		_id: mongoDBUserId
 	});
 	const userVotes = user.profile.asks.votes;
 
@@ -30,7 +30,7 @@ const getNonVotedAsks = async (request, nextAsks) => {
 	}
 
 	// console.log('nextAsksHT inside getNonVotedAsks= ', nextAsksHT);
-	return { nextAsksHT, oldestAskDate };
+	return { nextAsksHT, oldestNextAsksDate };
 };
 
 module.exports = app => {
@@ -42,15 +42,37 @@ module.exports = app => {
 				.sort({ dateAsked: -1 }) // -1 = newest to oldest
 				.limit(16);
 
-			const nonVotedAsksInfo = await getNonVotedAsks(request, nextAsks);
+			const nonVotedAsksInfo = await getNonVotedAsks(
+				request.query.mongoDBUserId,
+				nextAsks
+			);
 			//console.log('nextAsksHT outside= ', nextAsksHT);
-			const oldestAskDate = nonVotedAsksInfo.oldestAskDate;
-			// console.log('oldestAskDate = ', oldestAskDate);
-			const nextAsksHT = nonVotedAsksInfo.nextAsksHT;
-			// while (Object.keys(nextAsksHT).length < 4 ) {
-			// 	const nextAsks = await AskCollection.find()
-			//
-			// }
+			let oldestNextAsksDate = nonVotedAsksInfo.oldestNextAsksDate;
+			//console.log('oldestNextAsksDate = ', oldestNextAsksDate);
+			let nextAsksHT = nonVotedAsksInfo.nextAsksHT;
+			// console.log('nextAsksHT outside while loop= ', nextAsksHT);
+			while (Object.keys(nextAsksHT).length < 4) {
+				// console.log('inside while loop');
+				const olderAsks = await AskCollection.find({
+					dateAsked: {
+						$lt: new Date(oldestNextAsksDate)
+					}
+				}).limit(16);
+				//console.log('olderAsks = ', olderAsks);
+				const olderNonVotedAsksInfo = await getNonVotedAsks(
+					request.query.mongoDBUserId,
+					olderAsks
+				);
+				const olderNextAsksHT = olderNonVotedAsksInfo.nextAsksHT;
+				oldestNextAsksDate = olderNonVotedAsksInfo.oldestNextAsksDate;
+				nextAsksHT = Object.assign({}, nextAsksHT, olderNextAsksHT);
+				console.log('nextAsksHT inside while loop = ', nextAsksHT);
+				if (olderAsks.length < 16) {
+					//console.log('olderAsks.length < 16');
+					break;
+				}
+			}
+
 			const nonVotedNextAsks = Object.values(nextAsksHT);
 			response.send(nonVotedNextAsks);
 		}
@@ -69,13 +91,13 @@ module.exports = app => {
 					},
 					{
 						dateAsked: {
-							$lt: new Date(request.query.oldestAskDate)
+							$lt: new Date(request.query.oldestNextAsksDate)
 						}
 					}
 				]
 			}).limit(16);
 
-			// let nextAsksHT = getNonVotedAsks(request, nextAsks);
+			// let nextAsksHT = getNonVotedAsks(request.query.mongoDBUserId, nextAsks);
 			//
 			// const nonVotedNextAsks = Object.values(nextAsksHT);
 			// response.send(nonVotedNextAsks);
