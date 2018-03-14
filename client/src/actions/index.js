@@ -12,7 +12,10 @@ export const initializeApp = () => async dispatch => {
 		mongoDBUserId: response.data._id
 	});
 
-	fetchUserTrainAIAsks(dispatch, response.data._id);
+	console.log('response.data.id = ', response.data._id);
+	if (response.data._id !== undefined) {
+		fetchUserTrainAIAsks(dispatch, response.data._id);
+	}
 
 	// TODO: store previous color theme into database so we don't constantly switch
 	generateRandomColorThemeWith(dispatch);
