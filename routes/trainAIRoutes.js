@@ -6,9 +6,7 @@ const AskCollection = mongoose.model('asks');
 const UserCollection = mongoose.model('users');
 
 const getNonVotedAsks = async (mongoDBUserId, nextAsks) => {
-	//console.log('nextAsks = ', nextAsks);
 	const oldestNextAsksDate = nextAsks[nextAsks.length - 1].dateAsked;
-	// console.log('oldestNextAsksDate = ', oldestNextAsksDate);
 	//gets the userVotes
 	const user = await UserCollection.findOne({
 		_id: mongoDBUserId
@@ -29,9 +27,52 @@ const getNonVotedAsks = async (mongoDBUserId, nextAsks) => {
 		}
 	}
 
-	// console.log('nextAsksHT inside getNonVotedAsks= ', nextAsksHT);
 	return { nextAsksHT, oldestNextAsksDate };
 };
+
+const getMoreAsks = async (
+	nextAsksHT,
+	oldestNextAsksDate,
+	mongoDBUserId,
+	response
+) => {
+	//goes to find olderAsks if there aren't 4 recent asks
+	while (Object.keys(nextAsksHT).length < 4) {
+		//finds up 16 older Asks
+		const olderAsks = await AskCollection.find({
+			dateAsked: {
+				$lt: new Date(oldestNextAsksDate)
+			}
+		}).limit(16);
+
+		//checks if the user has voted on the older Asks
+		const olderNonVotedAsksInfo = await getNonVotedAsks(
+			mongoDBUserId,
+			olderAsks
+		);
+		const olderNextAsksHT = olderNonVotedAsksInfo.nextAsksHT;
+		oldestNextAsksDate = olderNonVotedAsksInfo.oldestNextAsksDate;
+
+		//combines the unanswered Asks together
+		nextAsksHT = Object.assign({}, nextAsksHT, olderNextAsksHT);
+
+		//leaves the loop if there aren't any more questions in the Ask collection
+		if (olderAsks.length < 16) {
+			break;
+		}
+	}
+
+	const nonVotedNextAsks = Object.values(nextAsksHT);
+	response.send(nonVotedNextAsks);
+};
+
+// findOlderAsks = async () => {
+//
+// }
+//
+// findMoreAsks = async () => {
+//
+// }
 
 module.exports = app => {
 	app.get(
@@ -42,39 +83,48 @@ module.exports = app => {
 				.sort({ dateAsked: -1 }) // -1 = newest to oldest
 				.limit(16);
 
+			//takes out the asks that the user has already voted on
 			const nonVotedAsksInfo = await getNonVotedAsks(
 				request.query.mongoDBUserId,
 				nextAsks
 			);
-			//console.log('nextAsksHT outside= ', nextAsksHT);
-			let oldestNextAsksDate = nonVotedAsksInfo.oldestNextAsksDate;
-			//console.log('oldestNextAsksDate = ', oldestNextAsksDate);
 			let nextAsksHT = nonVotedAsksInfo.nextAsksHT;
-			// console.log('nextAsksHT outside while loop= ', nextAsksHT);
-			while (Object.keys(nextAsksHT).length < 4) {
-				// console.log('inside while loop');
-				const olderAsks = await AskCollection.find({
-					dateAsked: {
-						$lt: new Date(oldestNextAsksDate)
-					}
-				}).limit(16);
-				//console.log('olderAsks = ', olderAsks);
-				const olderNonVotedAsksInfo = await getNonVotedAsks(
-					request.query.mongoDBUserId,
-					olderAsks
-				);
-				const olderNextAsksHT = olderNonVotedAsksInfo.nextAsksHT;
-				oldestNextAsksDate = olderNonVotedAsksInfo.oldestNextAsksDate;
-				nextAsksHT = Object.assign({}, nextAsksHT, olderNextAsksHT);
-				console.log('nextAsksHT inside while loop = ', nextAsksHT);
-				if (olderAsks.length < 16) {
-					//console.log('olderAsks.length < 16');
-					break;
-				}
-			}
+			let oldestNextAsksDate = nonVotedAsksInfo.oldestNextAsksDate;
 
-			const nonVotedNextAsks = Object.values(nextAsksHT);
-			response.send(nonVotedNextAsks);
+			getMoreAsks(
+				nextAsksHT,
+				oldestNextAsksDate,
+				request.query.mongoDBUserId,
+				response
+			);
+			// //goes to find olderAsks if there aren't 4 recent asks
+			// while (Object.keys(nextAsksHT).length < 4) {
+			// 	//finds up 16 older Asks
+			// 	const olderAsks = await AskCollection.find({
+			// 		dateAsked: {
+			// 			$lt: new Date(oldestNextAsksDate)
+			// 		}
+			// 	}).limit(16);
+			//
+			// 	//checks if the user has voted on the older Asks
+			// 	const olderNonVotedAsksInfo = await getNonVotedAsks(
+			// 		request.query.mongoDBUserId,
+			// 		olderAsks
+			// 	);
+			// 	const olderNextAsksHT = olderNonVotedAsksInfo.nextAsksHT;
+			// 	oldestNextAsksDate = olderNonVotedAsksInfo.oldestNextAsksDate;
+			//
+			// 	//combines the unanswered Asks together
+			// 	nextAsksHT = Object.assign({}, nextAsksHT, olderNextAsksHT);
+			//
+			// 	//leaves the loop if there aren't any more questions in the Ask collection
+			// 	if (olderAsks.length < 16) {
+			// 		break;
+			// 	}
+			// }
+			//
+			// const nonVotedNextAsks = Object.values(nextAsksHT);
+			// response.send(nonVotedNextAsks);
 		}
 	);
 
