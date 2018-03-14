@@ -91,7 +91,8 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		auth: state.auth,
-		profile: state.profile
+		profile: state.profile,
+		mongoDBUserId: state.auth.mongoDBUserId
 	};
 }
 

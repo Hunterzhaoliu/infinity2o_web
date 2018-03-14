@@ -9,9 +9,6 @@ const { Content } = Layout;
 class InputVote extends Component {
 	componentWillMount() {
 		// run once before first render()
-
-		const { mongoDBUserId } = this.props;
-		this.props.fetchUserTrainAIAsks(mongoDBUserId);
 	}
 
 	onVote(answerIndex, askIndex, askId) {
@@ -270,9 +267,6 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		fetchUserTrainAIAsks: mongoDBUserId => {
-			trainAIDispatchers.fetchUserTrainAIAsks(mongoDBUserId);
-		},
 		onNextAsk: (nextAsks, removeAskIndex, nextAsksDateRange) => {
 			trainAIDispatchers.onNextAsk(
 				nextAsks,

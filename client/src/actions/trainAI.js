@@ -44,7 +44,7 @@ export const onVote = (
 	}
 };
 
-export const fetchUserTrainAIAsks = mongoDBUserId => async dispatch => {
+export const fetchUserTrainAIAsks = async (dispatch, mongoDBUserId) => {
 	console.log('in fetchUserTrainAIAsks mongoDBUserId = ', mongoDBUserId);
 	const nextAsks = await axios.get(
 		'/api/train_ai/initial_asks?mongoDBUserId=' + mongoDBUserId
