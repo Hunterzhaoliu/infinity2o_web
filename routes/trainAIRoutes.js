@@ -5,7 +5,10 @@ const requireLogin = require('../middlewares/requireLogin');
 const AskCollection = mongoose.model('asks');
 const UserCollection = mongoose.model('users');
 
-const checkUserPastVotes = async (request, response, nextAsks) => {
+const getNonVotedAsks = async (request, nextAsks) => {
+	//console.log('nextAsks = ', nextAsks);
+	const oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
+	// console.log('oldestAskDate = ', oldestAskDate);
 	//gets the userVotes
 	const user = await UserCollection.findOne({
 		_id: request.query.mongoDBUserId
@@ -26,9 +29,8 @@ const checkUserPastVotes = async (request, response, nextAsks) => {
 		}
 	}
 
-	const nonVotedNextAsks = Object.values(nextAsksHT);
-
-	response.send(nonVotedNextAsks);
+	// console.log('nextAsksHT inside getNonVotedAsks= ', nextAsksHT);
+	return { nextAsksHT, oldestAskDate };
 };
 
 module.exports = app => {
@@ -40,7 +42,17 @@ module.exports = app => {
 				.sort({ dateAsked: -1 }) // -1 = newest to oldest
 				.limit(16);
 
-			checkUserPastVotes(request, response, nextAsks);
+			const nonVotedAsksInfo = await getNonVotedAsks(request, nextAsks);
+			//console.log('nextAsksHT outside= ', nextAsksHT);
+			const oldestAskDate = nonVotedAsksInfo.oldestAskDate;
+			console.log('oldestAskDate = ', oldestAskDate);
+			const nextAsksHT = nonVotedAsksInfo.nextAsksHT;
+			// while (Object.keys(nextAsksHT).length < 4 ) {
+			// 	const nextAsks = await AskCollection.find()
+			//
+			// }
+			const nonVotedNextAsks = Object.values(nextAsksHT);
+			response.send(nonVotedNextAsks);
 		}
 	);
 
@@ -63,7 +75,10 @@ module.exports = app => {
 				]
 			}).limit(16);
 
-			checkUserPastVotes(request, response, nextAsks);
+			// let nextAsksHT = getNonVotedAsks(request, nextAsks);
+			//
+			// const nonVotedNextAsks = Object.values(nextAsksHT);
+			// response.send(nonVotedNextAsks);
 		}
 	);
 
