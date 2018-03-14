@@ -14,22 +14,27 @@ module.exports = app => {
 				.sort({ dateAsked: -1 }) // -1 = newest to oldest
 				.limit(16);
 
-			// ====== WARNING REMOVE
-			// const nextAsks = await AskCollection.find({
-			// 	$or: [
-			// 		{
-			// 			dateAsked: {
-			// 				$gt: new Date('2018-03-13T18:52:22.270Z')
-			// 			}
-			// 		},
-			// 		{
-			// 			dateAsked: {
-			// 				$lt: new Date('2018-03-13T18:52:21.965Z')
-			// 			}
-			// 		}
-			// 	]
-			// }).limit(16);
-			// =====================
+			const user = await UserCollection.findOne({
+				_id: '5aa86e8fb2124d7fa0ca115c'
+			});
+			// console.log('user = ', user);
+			console.log('user.profile = ', user.profile);
+			// console.log('nextAsks = ', nextAsks);
+			const userVotes = user.profile.asks.votes;
+			console.log('userVotes = ', userVotes);
+
+			let nextAsksHT = {};
+			for (let i = 0; i < nextAsks.length; i++) {
+				nextAsksHT[nextAsks[i]._id] = i;
+			}
+			console.log('nextAsksHT = ', nextAsksHT);
+
+			// for (let i = 0; i < userVotes.length; i++) {
+			// 	const userVotesAskId = userVotes[i]._askId;
+			// 	console.log('userVotesAskId = ', userVotesAskId);
+			//
+			// 	console.log('userVotes[i]._askId = ', nextAsksHT[userVotes[i]._askId]);
+			// }
 
 			response.send(nextAsks);
 		}
@@ -39,16 +44,6 @@ module.exports = app => {
 		'/api/train_ai/next_asks',
 		requireLogin,
 		async (request, response) => {
-			console.log(
-				'in /api/train_ai/next_asks request.query = ',
-				request.query
-			);
-			// const nextAsks = await AskCollection.find({
-			// 	dateAsked: {
-			// 		$gt: ISODate(request.query.newestAskDate)
-			// 	}
-			// }).limit(16);
-
 			const nextAsks = await AskCollection.find({
 				$or: [
 					{
@@ -63,17 +58,6 @@ module.exports = app => {
 					}
 				]
 			}).limit(16);
-
-			// const nextAsks = await AskCollection.find({
-			// 	$or: [
-			// 		{
-			// 			dateAsked: { $gt: ISODate(request.query.newestAskDate) }
-			// 		},
-			// 		{ dateAsked: { $lt: ISODate(request.query.oldestAskDate) } }
-			// 	]
-			// }).limit(16);
-
-			console.log('nextAsks = ', nextAsks);
 			response.send(nextAsks);
 		}
 	);
@@ -103,22 +87,6 @@ module.exports = app => {
 			}
 		}
 
-		// const questionInUserProfile = await UserCollection.findOne(
-		// 	{
-		// 		_id: request.user._id,
-		// 		'profile.asks.votes._askId': askId
-		// 	},
-		// 	{
-		// 		'profile.asks': 1
-		// 	}
-		// );
-		//
-		// console.log('questionInUserProfile = ', questionInUserProfile);
-
-		// if (questionInUserProfile !== null) {
-		// 	previousAnswerId = questionInUserProfile.isRevote = true;
-		// }
-
 		// finds ask in database
 		const askInDB = await AskCollection.findOne({ _id: askId });
 
@@ -133,9 +101,7 @@ module.exports = app => {
 					askInDB.answers[i].votes += 1;
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
-				if (
-					String(askInDB.answers[i]._id) === String(previousAnswerId)
-				) {
+				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
 					previousAnswer = askInDB.answers[i].answer;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
