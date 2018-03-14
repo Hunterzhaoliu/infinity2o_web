@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as indexActionCreators from '../actions/index';
-import * as colorThemeActionCreators from '../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
@@ -103,23 +102,9 @@ This function gives the UI the functions it will need to be called.
 function mapDispatchToProps(dispatch) {
 	const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
 
-	const colorThemeDispatchers = bindActionCreators(
-		colorThemeActionCreators,
-		dispatch
-	);
-
 	return {
 		initializeApp: () => {
 			indexDispatchers.initializeApp();
-		},
-		generateRandomColorTheme: () => {
-			colorThemeDispatchers.generateRandomColorTheme();
-		},
-		onProfile: () => {
-			colorThemeDispatchers.onProfile();
-		},
-		onTrainAI: () => {
-			colorThemeDispatchers.onTrainAI();
 		}
 	};
 }

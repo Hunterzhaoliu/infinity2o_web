@@ -6,6 +6,7 @@ export const SAVE_FETCHED_USER_PROFILE = 'SAVE_FETCHED_USER_PROFILE';
 export const MOVE_TO_PROFILE = 'MOVE_TO_PROFILE';
 export const MOVE_TO_TRAIN_AI = 'MOVE_TO_TRAIN_AI';
 export const MOVE_TO_MATCHES = 'MOVE_TO_MATCHES';
+export const MOVE_TO_SIGNED_IN_LANDING = 'MOVE_TO_SIGNED_IN_LANDING';
 
 // profile/ProfileEdit.js
 export const ON_CHANGE_NAME = 'ON_CHANGE_NAME';

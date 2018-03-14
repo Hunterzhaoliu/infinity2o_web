@@ -8,7 +8,8 @@ let initialState = {
 	loggedIn: false,
 	googleId: null,
 	linkedInId: null,
-	location: null
+	location: null,
+	mongoDBUserId: null
 };
 
 export default function(state = initialState, action) {
@@ -22,6 +23,7 @@ export default function(state = initialState, action) {
 			) {
 				newState.loggedIn = true;
 			}
+			newState.mongoDBUserId = action.mongoDBUserId;
 			return newState;
 		default:
 			return state;

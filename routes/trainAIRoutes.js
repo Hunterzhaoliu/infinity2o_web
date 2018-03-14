@@ -14,6 +14,10 @@ module.exports = app => {
 				.sort({ dateAsked: -1 }) // -1 = newest to oldest
 				.limit(16);
 
+			console.log(
+				'request.query.mongoDBUserId = ',
+				request.query.mongoDBUserId
+			);
 			const user = await UserCollection.findOne({
 				_id: '5aa86f9bb4756c0a065fed90'
 			});

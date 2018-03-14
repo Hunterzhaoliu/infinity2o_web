@@ -2,7 +2,8 @@ import {
 	UPDATE_COLOR_THEME,
 	MOVE_TO_PROFILE,
 	MOVE_TO_TRAIN_AI,
-	MOVE_TO_MATCHES
+	MOVE_TO_MATCHES,
+	MOVE_TO_SIGNED_IN_LANDING
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -62,6 +63,13 @@ function _getStateForSection(newState) {
 		newState.trainAIButtonTextColor = newState.text4Color;
 		newState.matchesButtonColor = newState.text7Color;
 		newState.matchesButtonTextColor = newState.text4Color;
+	} else if (newState.activeSection === 'signed_in_landing') {
+		newState.profileButtonColor = newState.text7Color;
+		newState.profileButtonTextColor = newState.text4Color;
+		newState.trainAIButtonColor = newState.text7Color;
+		newState.trainAIButtonTextColor = newState.text4Color;
+		newState.matchesButtonColor = newState.text7Color;
+		newState.matchesButtonTextColor = newState.text4Color;
 	}
 	return newState;
 }
@@ -113,6 +121,10 @@ export default function(state = initialState, action) {
 			return newState;
 		case MOVE_TO_MATCHES:
 			newState.activeSection = 'matches';
+			newState = _getStateForSection(newState);
+			return newState;
+		case MOVE_TO_SIGNED_IN_LANDING:
+			newState.activeSection = 'signed_in_landing';
 			newState = _getStateForSection(newState);
 			return newState;
 		default:

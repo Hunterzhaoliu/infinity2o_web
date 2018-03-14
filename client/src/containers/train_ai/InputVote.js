@@ -9,7 +9,9 @@ const { Content } = Layout;
 class InputVote extends Component {
 	componentWillMount() {
 		// run once before first render()
-		this.props.fetchUserTrainAIAsks();
+
+		const { mongoDBUserId } = this.props;
+		this.props.fetchUserTrainAIAsks(mongoDBUserId);
 	}
 
 	onVote(answerIndex, askIndex, askId) {
@@ -78,10 +80,15 @@ class InputVote extends Component {
 								background: displayAnswerButtonColor,
 								color: colorTheme.text2Color
 							}}
-							onClick={e => this.onVote(answerIndex, askIndex, askId)}
+							onClick={e =>
+								this.onVote(answerIndex, askIndex, askId)
+							}
 						>
 							{displayAnswer}
-							{this.renderSaveIcon(trainAI.save, isDisplayingSaveIcon)}
+							{this.renderSaveIcon(
+								trainAI.save,
+								isDisplayingSaveIcon
+							)}
 						</Button>
 					</Col>
 					<Col
@@ -141,7 +148,10 @@ class InputVote extends Component {
 									color: colorTheme.text3Color
 								}}
 							>
-								{this.renderTotalVotes(askTotalVotes, isDisplayingAskStats)}
+								{this.renderTotalVotes(
+									askTotalVotes,
+									isDisplayingAskStats
+								)}
 							</div>
 							{this.renderAnswers(
 								displayAnswers,
@@ -160,7 +170,9 @@ class InputVote extends Component {
 									}}
 									onClick={e => this.onNextAsk(askIndex)}
 								>
-									{this.renderAskDoneWord(isDisplayingAskStats)}
+									{this.renderAskDoneWord(
+										isDisplayingAskStats
+									)}
 								</Button>
 							</Row>
 						</Card>
@@ -242,7 +254,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		trainAI: state.trainAI
+		trainAI: state.trainAI,
+		mongoDBUserId: state.auth.mongoDBUserId
 	};
 }
 
@@ -257,11 +270,15 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		fetchUserTrainAIAsks: () => {
-			trainAIDispatchers.fetchUserTrainAIAsks();
+		fetchUserTrainAIAsks: mongoDBUserId => {
+			trainAIDispatchers.fetchUserTrainAIAsks(mongoDBUserId);
 		},
 		onNextAsk: (nextAsks, removeAskIndex, nextAsksDateRange) => {
-			trainAIDispatchers.onNextAsk(nextAsks, removeAskIndex, nextAsksDateRange);
+			trainAIDispatchers.onNextAsk(
+				nextAsks,
+				removeAskIndex,
+				nextAsksDateRange
+			);
 		},
 		onVote: (answerIndex, answerId, askIndex, askId) => {
 			trainAIDispatchers.onVote(answerIndex, answerId, askIndex, askId);

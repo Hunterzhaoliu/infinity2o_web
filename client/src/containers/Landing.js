@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Typist from 'react-typist';
+import * as colorThemeActions from '../actions/colorTheme';
+import { bindActionCreators } from 'redux';
 import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
+	componentWillMount() {
+		// run once before first render()
+
+		this.props.onSignedInLanding();
+	}
+
 	renderMarketingInfo() {
 		const { colorTheme, auth } = this.props;
 		const why_part_0 = `Online classes from `;
@@ -246,4 +254,24 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(Landing);
+/*
+So we have a state and a UI(with props).
+This function gives the UI the functions it will need to be called.
+*/
+function mapDispatchToProps(dispatch) {
+	const customHeaderDispatchers = bindActionCreators(
+		colorThemeActions,
+		dispatch
+	);
+
+	return {
+		onPressRandomColorTheme: () => {
+			customHeaderDispatchers.generateRandomColorTheme();
+		},
+		onSignedInLanding: () => {
+			customHeaderDispatchers.onSignedInLanding();
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);
