@@ -15,28 +15,27 @@ module.exports = app => {
 				.limit(16);
 
 			const user = await UserCollection.findOne({
-				_id: '5aa86e8fb2124d7fa0ca115c'
+				_id: '5aa86f9bb4756c0a065fed90'
 			});
-			// console.log('user = ', user);
-			console.log('user.profile = ', user.profile);
-			// console.log('nextAsks = ', nextAsks);
+
 			const userVotes = user.profile.asks.votes;
-			console.log('userVotes = ', userVotes);
 
 			let nextAsksHT = {};
 			for (let i = 0; i < nextAsks.length; i++) {
-				nextAsksHT[nextAsks[i]._id] = i;
+				nextAsksHT[nextAsks[i]._id] = nextAsks[i];
 			}
-			console.log('nextAsksHT = ', nextAsksHT);
 
-			// for (let i = 0; i < userVotes.length; i++) {
-			// 	const userVotesAskId = userVotes[i]._askId;
-			// 	console.log('userVotesAskId = ', userVotesAskId);
-			//
-			// 	console.log('userVotes[i]._askId = ', nextAsksHT[userVotes[i]._askId]);
-			// }
+			for (let i = 0; i < userVotes.length; i++) {
+				const isAlreadyVotedAsk =
+					nextAsksHT[userVotes[i]._askId] !== undefined;
+				if (isAlreadyVotedAsk) {
+					delete nextAsksHT[userVotes[i]._askId];
+				}
+			}
 
-			response.send(nextAsks);
+			const nonVotedNextAsks = Object.values(nextAsksHT);
+
+			response.send(nonVotedNextAsks);
 		}
 	);
 
@@ -101,7 +100,9 @@ module.exports = app => {
 					askInDB.answers[i].votes += 1;
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
-				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
+				if (
+					String(askInDB.answers[i]._id) === String(previousAnswerId)
+				) {
 					previousAnswer = askInDB.answers[i].answer;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
