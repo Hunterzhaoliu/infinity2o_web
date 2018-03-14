@@ -22,8 +22,8 @@ export default function(state = initialState, action) {
 				(action.auth.googleId || action.auth.linkedInId)
 			) {
 				newState.loggedIn = true;
+				newState.mongoDBUserId = action.mongoDBUserId;
 			}
-			newState.mongoDBUserId = action.mongoDBUserId;
 			return newState;
 		default:
 			return state;

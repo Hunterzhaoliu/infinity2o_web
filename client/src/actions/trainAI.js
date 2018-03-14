@@ -45,7 +45,7 @@ export const onVote = (
 };
 
 export const fetchUserTrainAIAsks = async (dispatch, mongoDBUserId) => {
-	console.log('in fetchUserTrainAIAsks mongoDBUserId = ', mongoDBUserId);
+	//console.log('in fetchUserTrainAIAsks mongoDBUserId = ', mongoDBUserId);
 	const nextAsks = await axios.get(
 		'/api/train_ai/initial_asks?mongoDBUserId=' + mongoDBUserId
 	);
@@ -64,7 +64,7 @@ export const onNextAsk = (
 	nextAsksDateRange
 ) => async dispatch => {
 	if (nextAsks.length < 1) {
-		console.log('nextAsksDateRange in action = ', nextAsksDateRange);
+		//console.log('nextAsksDateRange in action = ', nextAsksDateRange);
 		const newNextAsks = await axios.get(
 			'/api/train_ai/next_asks?' +
 				'newestAskDate=' +

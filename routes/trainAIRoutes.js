@@ -18,8 +18,9 @@ module.exports = app => {
 				'request.query.mongoDBUserId = ',
 				request.query.mongoDBUserId
 			);
+
 			const user = await UserCollection.findOne({
-				_id: '5aa86f9bb4756c0a065fed90'
+				_id: request.query.mongoDBUserId
 			});
 
 			const userVotes = user.profile.asks.votes;
@@ -30,8 +31,7 @@ module.exports = app => {
 			}
 
 			for (let i = 0; i < userVotes.length; i++) {
-				const isAlreadyVotedAsk =
-					nextAsksHT[userVotes[i]._askId] !== undefined;
+				const isAlreadyVotedAsk = nextAsksHT[userVotes[i]._askId] !== undefined;
 				if (isAlreadyVotedAsk) {
 					delete nextAsksHT[userVotes[i]._askId];
 				}
@@ -104,9 +104,7 @@ module.exports = app => {
 					askInDB.answers[i].votes += 1;
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
-				if (
-					String(askInDB.answers[i]._id) === String(previousAnswerId)
-				) {
+				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
 					previousAnswer = askInDB.answers[i].answer;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
