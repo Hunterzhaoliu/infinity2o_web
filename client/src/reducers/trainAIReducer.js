@@ -49,11 +49,10 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_NEXT_ASK:
 			const replacementAsk = newState.nextAsks.shift();
-			newState.current4DisplayedAsks[
-				action.removeAskIndex
-			] = replacementAsk;
+			newState.current4DisplayedAsks[action.removeAskIndex] = replacementAsk;
 			return newState;
 		case SAVE_FETCHED_NEXT_ASKS:
+			console.log('action.nextAsks.date = ', action.nextAsks.data);
 			newState.nextAsks = action.nextAsks.data;
 			if (newState.nextAsks.length >= 1) {
 				const nextAsksLastIndex = newState.nextAsks.length - 1;
