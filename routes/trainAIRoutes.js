@@ -29,9 +29,9 @@ const getNonVotedAsks = async (mongoDBUserId, nextAsks) => {
 	return nextAsksHT;
 };
 
-const getMoreAsks = async (
+const getOlderAsks = async (
 	nextAsksHT,
-	oldestNextAsksDate,
+	oldestAskDate,
 	mongoDBUserId,
 	response
 ) => {
@@ -39,20 +39,25 @@ const getMoreAsks = async (
 	while (Object.keys(nextAsksHT).length < 4) {
 		//finds up 16 older Asks
 
-		const olderAsks = await findOlderAsks(oldestNextAsksDate);
-		oldestNextAsksDate = olderAsks[olderAsks.length - 1].dateAsked;
+		const olderAsks = await AskCollection.find({
+			dateAsked: {
+				$lt: new Date(oldestAskDate)
+			}
+		}).limit(16);
+
+		oldestAskDate = olderAsks[olderAsks.length - 1].dateAsked;
 
 		//console.log('olderAsks = ', olderAsks);
 		// await AskCollection.find({
 		// 	dateAsked: {
-		// 		$lt: new Date(oldestNextAsksDate)
+		// 		$lt: new Date(oldestAskDate)
 		// 	}
 		// }).limit(16);
 
 		//checks if the user has voted on the older Asks
 		const olderNextAsksHT = await getNonVotedAsks(mongoDBUserId, olderAsks);
 		// const olderNextAsksHT = olderNonVotedAsksInfo.nextAsksHT;
-		// oldestNextAsksDate = olderNonVotedAsksInfo.oldestNextAsksDate;
+		// oldestAskDate = olderNonVotedAsksInfo.oldestAskDate;
 
 		//combines the unanswered Asks together
 		nextAsksHT = Object.assign({}, nextAsksHT, olderNextAsksHT);
@@ -67,17 +72,58 @@ const getMoreAsks = async (
 	response.send(nonVotedNextAsks);
 };
 
-const findOlderAsks = async oldestNextAsksDate => {
-	//console.log('inside findOlderAsks function');
-	return await AskCollection.find({
-		dateAsked: {
-			$lt: new Date(oldestNextAsksDate)
+const getMoreAsks = async (
+	nextAsksHT,
+	newestAskDate,
+	oldestAskDate,
+	mongoDBUserId,
+	response
+) => {
+	//goes to find olderAsks if there aren't 4 recent asks
+	while (Object.keys(nextAsksHT).length < 4) {
+		//finds up 16 older Asks
+
+		const moreAsks = await findNewerAndOlderAsks(newestAskDate, oldesAskDate);
+
+		let newestAskDate = moreAsks[0].dateAsked;
+		let oldestAskDate = moreAsks[moreAsks.length - 1].dateAsked;
+
+		console.log('moreAsks = ', moreAsks);
+		//checks if the user has voted on the older Asks
+		const moreAsksHT = await getNonVotedAsks(mongoDBUserId, moreAsks);
+		// const olderNextAsksHT = olderNonVotedAsksInfo.nextAsksHT;
+		// oldestAskDate = olderNonVotedAsksInfo.oldestAskDate;
+
+		//combines the unanswered Asks together
+		nextAsksHT = Object.assign({}, nextAsksHT, moreAsksHT);
+
+		//leaves the loop if there aren't any more questions in the Ask collection
+		if (olderAsks.length < 16) {
+			break;
 		}
-	}).limit(16);
+	}
+
+	const nonVotedNextAsks = Object.values(nextAsksHT);
+	response.send(nonVotedNextAsks);
 };
 
-const findNewerAndOlderAsks = async (newestAskDate, oldestNextAsksDate) => {
-	await AskCollection.find({
+// const findOlderAsks = async oldestAskDate => {
+// 	//console.log('inside findOlderAsks function');
+// 	return await AskCollection.find({
+// 		dateAsked: {
+// 			$lt: new Date(oldestAskDate)
+// 		}
+// 	}).limit(16);
+// };
+
+const findNewerAndOlderAsks = async (newestAskDate, oldestAskDate) => {
+	// console.log('inside findNewerAndOlderAsks');
+	console.log('newestAskDate = ', newestAskDate);
+	console.log('oldestAskDate = ', oldestAskDate);
+	//
+	// console.log('inside findNewerAndOlderAsks');
+
+	const test = await AskCollection.find({
 		$or: [
 			{
 				dateAsked: {
@@ -86,11 +132,12 @@ const findNewerAndOlderAsks = async (newestAskDate, oldestNextAsksDate) => {
 			},
 			{
 				dateAsked: {
-					$lt: new Date(oldestNextAsksDate)
+					$lt: new Date(oldestAskDate)
 				}
 			}
 		]
 	}).limit(16);
+	console.log('test = ', test);
 };
 
 module.exports = app => {
@@ -102,7 +149,7 @@ module.exports = app => {
 				.sort({ dateAsked: -1 }) // -1 = newest to oldest
 				.limit(16);
 
-			let oldestNextAsksDate = nextAsks[nextAsks.length - 1].dateAsked;
+			let oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
 			//console.log('nextAsks = ', nextAsks);
 			//takes out the asks that the user has already voted on
 			const nextAsksHT = await getNonVotedAsks(
@@ -110,14 +157,14 @@ module.exports = app => {
 				nextAsks
 			);
 			// let nextAsksHT = nonVotedAsksInfo.nextAsksHT;
-			//let oldestNextAsksDate = nonVotedAsksInfo.oldestNextAsksDate;
+			//let oldestAskDate = nonVotedAsksInfo.oldestAskDate;
 			//console.log('nextAsksHT = ', nextAsksHT);
 
-			//console.log('oldestNextAsksDate = ', oldestNextAsksDate);
+			//console.log('oldestAskDate = ', oldestAskDate);
 
-			await getMoreAsks(
+			await getOlderAsks(
 				nextAsksHT,
-				oldestNextAsksDate,
+				oldestAskDate,
 				request.query.mongoDBUserId,
 				response
 			);
@@ -126,7 +173,7 @@ module.exports = app => {
 			// 	//finds up 16 older Asks
 			// 	const olderAsks = await AskCollection.find({
 			// 		dateAsked: {
-			// 			$lt: new Date(oldestNextAsksDate)
+			// 			$lt: new Date(oldestAskDate)
 			// 		}
 			// 	}).limit(16);
 			//
@@ -136,7 +183,7 @@ module.exports = app => {
 			// 		olderAsks
 			// 	);
 			// 	const olderNextAsksHT = olderNonVotedAsksInfo.nextAsksHT;
-			// 	oldestNextAsksDate = olderNonVotedAsksInfo.oldestNextAsksDate;
+			// 	oldestAskDate = olderNonVotedAsksInfo.oldestAskDate;
 			//
 			// 	//combines the unanswered Asks together
 			// 	nextAsksHT = Object.assign({}, nextAsksHT, olderNextAsksHT);
@@ -158,22 +205,19 @@ module.exports = app => {
 		async (request, response) => {
 			const nextAsks = await findNewerAndOlderAsks(
 				request.query.newestAskDate,
-				request.query.oldestNextAsksDate
+				request.query.oldestAskDate
 			);
-			console.log(
-				'request.query.mongoDBUserId = ',
-				request.query.mongoDBUserId
-			);
-			const nonVotedAsksInfo = await getNonVotedAsks(
+
+			console.log('nextAsks in next_asks = ', nextAsks);
+			const nextAsksHT = await getNonVotedAsks(
 				request.query.mongoDBUserId,
 				nextAsks
 			);
-			let nextAsksHT = nonVotedAsksInfo.nextAsksHT;
-			//let oldestNextAsksDate = nonVotedAsksInfo.oldestNextAsksDate;
 
 			await getMoreAsks(
 				nextAsksHT,
-				request.query.oldestNextAsksDate,
+				request.query.newestAskDate,
+				request.query.oldestAskDate,
 				request.query.mongoDBUserId,
 				response
 			);
@@ -186,11 +230,11 @@ module.exports = app => {
 			// 		},
 			// 		{
 			// 			dateAsked: {
-			// 				$lt: new Date(request.query.oldestNextAsksDate)
+			// 				$lt: new Date(request.query.oldestAskDate)
 			// 			}
 			// 		}
 			// 	]
-			// }).limit(16);
+			// }).limit(16)
 
 			// let nextAsksHT = getNonVotedAsks(request.query.mongoDBUserId, nextAsks);
 			//
