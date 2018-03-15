@@ -64,12 +64,7 @@ export const onNextAsk = (
 ) => async dispatch => {
 	if (nextAsks.length < 1) {
 		const newNextAsks = await axios.get(
-			'/api/train_ai/next_asks?newestAskDate=' +
-				nextAsksDateRange.newestAskDate +
-				'&oldestAskDate=' +
-				nextAsksDateRange.oldestAskDate +
-				'&mongoDBUserId=' +
-				mongoDBUserId
+			'/api/train_ai/next_asks?mongoDBUserId=' + mongoDBUserId
 		);
 		dispatch({
 			type: SAVE_FETCHED_NEXT_ASKS,

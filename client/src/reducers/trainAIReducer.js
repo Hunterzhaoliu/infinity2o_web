@@ -17,7 +17,6 @@ let cloneObject = obj => {
 let initialState = {
 	current4DisplayedAsks: [],
 	nextAsks: [],
-	nextAsksDateRange: {},
 	votes: {},
 	save: null
 };
@@ -48,30 +47,23 @@ export default function(state = initialState, action) {
 			newState.save = 'save_error';
 			return newState;
 		case ON_NEXT_ASK:
-			const replacementAsk = newState.nextAsks.shift();
-			newState.current4DisplayedAsks[action.removeAskIndex] = replacementAsk;
+			if (newState.nextAsks.length > 0) {
+				const replacementAsk = newState.nextAsks.shift();
+				newState.current4DisplayedAsks[
+					action.removeAskIndex
+				] = replacementAsk;
+			} else {
+				// no new replacementAsk so just remove ask from display
+				// splice removes one element from index action.removeAskIndex
+				newState.current4DisplayedAsks.splice(action.removeAskIndex, 1);
+			}
+
 			return newState;
 		case SAVE_FETCHED_NEXT_ASKS:
-			console.log('action.nextAsks.date = ', action.nextAsks.data);
 			newState.nextAsks = action.nextAsks.data;
-			if (newState.nextAsks.length >= 1) {
-				const nextAsksLastIndex = newState.nextAsks.length - 1;
-				newState.nextAsksDateRange.newestAskDate =
-					newState.nextAsks[0].dateAsked;
-				newState.nextAsksDateRange.oldestAskDate =
-					newState.nextAsks[nextAsksLastIndex].dateAsked;
-			}
 			return newState;
 		case SAVE_FETCHED_INITIAL_ASKS:
-			//TODO: put if statement in a function
 			newState.nextAsks = action.nextAsks.data;
-			if (newState.nextAsks.length >= 1) {
-				const nextAsksLastIndex = newState.nextAsks.length - 1;
-				newState.nextAsksDateRange.newestAskDate =
-					newState.nextAsks[0].dateAsked;
-				newState.nextAsksDateRange.oldestAskDate =
-					newState.nextAsks[nextAsksLastIndex].dateAsked;
-			}
 			return newState;
 		case UPDATE_INITIAL_4_ASKS:
 			// we move the first 4 in nextAsks -> current4DisplayedAsks
