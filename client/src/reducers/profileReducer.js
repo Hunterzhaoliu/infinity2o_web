@@ -38,17 +38,19 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case SAVE_FETCHED_USER_PROFILE:
-			newState.name = action.profile.name;
-			newState.age = action.profile.age;
-			newState.interests = action.profile.interests;
-			newState.timeZone = action.profile.timeZone;
-			newState.availability = action.profile.availability;
-			newState.newName = action.profile.name;
-			newState.newAge = action.profile.age;
-			newState.newInterests = action.profile.interests;
-			newState.newTimeZone = action.profile.timeZone;
-			newState.newAvailability = action.profile.availability;
-			newState.asks = action.profile.asks;
+			if (action.profile !== undefined) {
+				newState.name = action.profile.name;
+				newState.age = action.profile.age;
+				newState.interests = action.profile.interests;
+				newState.timeZone = action.profile.timeZone;
+				newState.availability = action.profile.availability;
+				newState.newName = action.profile.name;
+				newState.newAge = action.profile.age;
+				newState.newInterests = action.profile.interests;
+				newState.newTimeZone = action.profile.timeZone;
+				newState.newAvailability = action.profile.availability;
+				newState.asks = action.profile.asks;
+			}
 			return newState;
 		case ON_CHANGE_NAME:
 			newState.newName = action.newName;
@@ -90,7 +92,7 @@ export default function(state = initialState, action) {
 			newState.save = 'save_start';
 			return newState;
 		case SAVE_PROFILE_DONE:
-			newState.save = 'save_success';
+			newState.save = 'save_done';
 			return newState;
 		case SAVE_PROFILE_ERROR:
 			newState.save = 'save_error';

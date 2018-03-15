@@ -2,7 +2,8 @@ import {
 	UPDATE_COLOR_THEME,
 	MOVE_TO_PROFILE,
 	MOVE_TO_TRAIN_AI,
-	MOVE_TO_MATCHES
+	MOVE_TO_MATCHES,
+	MOVE_TO_SIGNED_IN_LANDING
 } from './types';
 import {
 	colors1,
@@ -40,6 +41,12 @@ export const onTrainAI = () => {
 export const onMatches = () => {
 	return function(dispatch) {
 		dispatch({ type: MOVE_TO_MATCHES });
+	};
+};
+
+export const onSignedInLanding = () => {
+	return function(dispatch) {
+		dispatch({ type: MOVE_TO_SIGNED_IN_LANDING });
 	};
 };
 

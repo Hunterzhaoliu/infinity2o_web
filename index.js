@@ -8,6 +8,7 @@ require('./models/User');
 require('./models/Ask');
 require('./models/Answer');
 require('./models/ProfileQuestionDisplay');
+require('./models/ProfileVoteDisplay');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
