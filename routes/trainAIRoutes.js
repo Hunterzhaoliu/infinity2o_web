@@ -30,15 +30,15 @@ const getNonVotedAsks = async (mongoDBUserId, nextAsks) => {
 	return nextAsksHT;
 };
 
-const getOlderAsks = async (
+const getOlderInitialAsks = async (
 	nextAsksHT,
 	oldestAskDate,
 	mongoDBUserId,
 	response
 ) => {
-	//goes to find olderAsks if there aren't 4 recent asks
+	// goes to find older Asks if there aren't 4 recent asks
 	while (Object.keys(nextAsksHT).length < 4) {
-		//finds up to 16 older Asks
+		// finds up to 16 older Asks
 		const olderAsks = await AskCollection.find({
 			dateAsked: {
 				$lt: new Date(oldestAskDate)
@@ -49,23 +49,20 @@ const getOlderAsks = async (
 
 		oldestAskDate = olderAsks[olderAsks.length - 1].dateAsked;
 
-		//checks if the user has voted on the older Asks
 		const olderNextAsksHT = await getNonVotedAsks(mongoDBUserId, olderAsks);
 
-		console.log('nextAsksHT = ', nextAsksHT);
-		console.log('olderNextAsksHT = ', olderNextAsksHT);
-		//combines the unanswered Asks together
+		// combines the unvoted Asks together
 		nextAsksHT = Object.assign({}, nextAsksHT, olderNextAsksHT);
 
-		//leaves the loop if there aren't any more questions in the Ask collection
+		// leaves the loop if there aren't any more questions in the Ask collection
 		if (olderAsks.length < 16) {
 			break;
 		}
 	}
 
-	//gets the date of the oldest initial ask that was checked
+	// gets the date of the oldest initial ask that was checked
 	oldestInitialAskChecked = oldestAskDate;
-	// console.log('oldestInitialAskChecked = ', oldestInitialAskChecked);
+
 	const nonVotedNextAsks = Object.values(nextAsksHT);
 	response.send(nonVotedNextAsks);
 };
@@ -81,7 +78,10 @@ const getMoreAsks = async (
 	while (Object.keys(nextAsksHT).length < 4) {
 		//finds up 16 older Asks
 
-		const moreAsks = await findNewerAndOlderAsks(newestAskDate, oldestAskDate);
+		const moreAsks = await findNewerAndOlderAsks(
+			newestAskDate,
+			oldestAskDate
+		);
 
 		newestAskDate = moreAsks[0].dateAsked;
 		oldestAskDate = moreAsks[moreAsks.length - 1].dateAsked;
@@ -137,13 +137,13 @@ module.exports = app => {
 
 			let oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
 
-			//takes out the asks that the user has already voted on
+			// takes out the asks that the user has already voted on
 			const nextAsksHT = await getNonVotedAsks(
 				request.query.mongoDBUserId,
 				nextAsks
 			);
 
-			await getOlderAsks(
+			await getOlderInitialAsks(
 				nextAsksHT,
 				oldestAskDate,
 				request.query.mongoDBUserId,
@@ -163,7 +163,6 @@ module.exports = app => {
 			);
 			console.log('nextAsks = ', nextAsks);
 			let newestAskDate = nextAsks[0].dateAsked;
-			// let oldestAskDate = oldestInitialAskChecked;
 			let oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
 
 			const nextAsksHT = await getNonVotedAsks(
@@ -222,7 +221,9 @@ module.exports = app => {
 					askInDB.answers[i].votes += 1;
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
-				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
+				if (
+					String(askInDB.answers[i]._id) === String(previousAnswerId)
+				) {
 					previousAnswer = askInDB.answers[i].answer;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
