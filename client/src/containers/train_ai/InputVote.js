@@ -22,12 +22,7 @@ class InputVote extends Component {
 
 	onNextAsk(removeAskIndex) {
 		const { trainAI, mongoDBUserId } = this.props;
-		this.props.onNextAsk(
-			trainAI.nextAsks,
-			removeAskIndex,
-			trainAI.nextAsksDateRange,
-			mongoDBUserId
-		);
+		this.props.onNextAsk(trainAI.nextAsks, removeAskIndex, mongoDBUserId);
 	}
 
 	renderAnswers(
@@ -78,10 +73,15 @@ class InputVote extends Component {
 								background: displayAnswerButtonColor,
 								color: colorTheme.text2Color
 							}}
-							onClick={e => this.onVote(answerIndex, askIndex, askId)}
+							onClick={e =>
+								this.onVote(answerIndex, askIndex, askId)
+							}
 						>
 							{displayAnswer}
-							{this.renderSaveIcon(trainAI.save, isDisplayingSaveIcon)}
+							{this.renderSaveIcon(
+								trainAI.save,
+								isDisplayingSaveIcon
+							)}
 						</Button>
 					</Col>
 					<Col
@@ -142,7 +142,10 @@ class InputVote extends Component {
 										color: colorTheme.text3Color
 									}}
 								>
-									{this.renderTotalVotes(askTotalVotes, isDisplayingAskStats)}
+									{this.renderTotalVotes(
+										askTotalVotes,
+										isDisplayingAskStats
+									)}
 								</div>
 								{this.renderAnswers(
 									displayAnswers,
@@ -161,7 +164,9 @@ class InputVote extends Component {
 										}}
 										onClick={e => this.onNextAsk(askIndex)}
 									>
-										{this.renderAskDoneWord(isDisplayingAskStats)}
+										{this.renderAskDoneWord(
+											isDisplayingAskStats
+										)}
 									</Button>
 								</Row>
 							</Card>
@@ -181,7 +186,8 @@ class InputVote extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					Looks like you have done a lot of voting, try asking a question!
+					Looks like you have done a lot of voting, try asking a
+					question!
 				</h3>
 			);
 		}
@@ -270,11 +276,10 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		onNextAsk: (nextAsks, removeAskIndex, nextAsksDateRange, mongoDBUserId) => {
+		onNextAsk: (nextAsks, removeAskIndex, mongoDBUserId) => {
 			trainAIDispatchers.onNextAsk(
 				nextAsks,
 				removeAskIndex,
-				nextAsksDateRange,
 				mongoDBUserId
 			);
 		},

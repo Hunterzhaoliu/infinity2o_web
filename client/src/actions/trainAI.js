@@ -59,7 +59,6 @@ export const fetchUserTrainAIAsks = async (dispatch, mongoDBUserId) => {
 export const onNextAsk = (
 	nextAsks,
 	removeAskIndex,
-	nextAsksDateRange,
 	mongoDBUserId
 ) => async dispatch => {
 	if (nextAsks.length < 1) {

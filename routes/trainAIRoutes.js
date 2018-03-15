@@ -33,12 +33,12 @@ const getNonVotedAsks = async (mongoDBUserId, nextAsks) => {
 	return nextAsksHT;
 };
 
-const getOlderInitialAsks = async (
-	nextAsksHT,
-	oldestAskDate,
-	mongoDBUserId,
-	response
-) => {
+const getOlderInitialAsks = async (nextAsks, mongoDBUserId, response) => {
+	let oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
+
+	// takes out the asks that the user has already voted on
+	const nextAsksHT = await getNonVotedAsks(mongoDBUserId, nextAsks);
+
 	// goes to find older Asks if there aren't 4 recent asks
 	while (Object.keys(nextAsksHT).length < 4) {
 		// finds up to 16 older Asks
@@ -148,20 +148,24 @@ module.exports = app => {
 				.sort({ dateAsked: -1 }) // -1 = newest to oldest
 				.limit(16);
 
-			let oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
-
-			// takes out the asks that the user has already voted on
-			const nextAsksHT = await getNonVotedAsks(
-				request.query.mongoDBUserId,
-				nextAsks
-			);
-
-			await getOlderInitialAsks(
-				nextAsksHT,
-				oldestAskDate,
-				request.query.mongoDBUserId,
-				response
-			);
+			//if (nextAsks.length > 0) {
+			// let oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
+			//
+			// // takes out the asks that the user has already voted on
+			// const nextAsksHT = await getNonVotedAsks(
+			// 	request.query.mongoDBUserId,
+			// 	nextAsks
+			// );
+			if (nextAsks.length > 0) {
+				await getOlderInitialAsks(
+					nextAsks,
+					request.query.mongoDBUserId,
+					response
+				);
+			} else {
+				// there are no more asks to display
+				response.send([]);
+			}
 		}
 	);
 
