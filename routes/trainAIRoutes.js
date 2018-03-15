@@ -51,14 +51,14 @@ const getOlderAsks = async (nextAsks, mongoDBUserId, response) => {
 	// this is the first update
 	newestRetrievedAskDate = new Date(nextAsks[0].dateAsked);
 	oldestRetrievedAskDate = new Date(nextAsks[nextAsks.length - 1].dateAsked);
-	console.log(
-		'initial_ask/ newestRetrievedAskDate = ',
-		newestRetrievedAskDate
-	);
-	console.log(
-		'initial_ask/ oldestRetrievedAskDate = ',
-		oldestRetrievedAskDate
-	);
+	// console.log(
+	// 	'initial_ask/ newestRetrievedAskDate = ',
+	// 	newestRetrievedAskDate
+	// );
+	// console.log(
+	// 	'initial_ask/ oldestRetrievedAskDate = ',
+	// 	oldestRetrievedAskDate
+	// );
 
 	// takes out the asks that the user has already voted on
 	const nextAsksHT = await getNonVotedAsks(mongoDBUserId, nextAsks);
@@ -98,18 +98,18 @@ const getOlderAsks = async (nextAsks, mongoDBUserId, response) => {
 };
 
 const getNewerAndOlderAsks = async (nextAsks, mongoDBUserId, response) => {
-	console.log('in getNewerAndOlderAsks nextAsks = ', nextAsks);
+	//console.log('in getNewerAndOlderAsks nextAsks = ', nextAsks);
 	if (nextAsks.length > 0) {
 		updateDate('newer', new Date(nextAsks[0].dateAsked));
 		updateDate('older', new Date(nextAsks[nextAsks.length - 1].dateAsked));
-		console.log(
-			'next_ask/ newestRetrievedAskDate = ',
-			newestRetrievedAskDate
-		);
-		console.log(
-			'next_ask/ oldestRetrievedAskDate = ',
-			oldestRetrievedAskDate
-		);
+		// console.log(
+		// 	'next_ask/ newestRetrievedAskDate = ',
+		// 	newestRetrievedAskDate
+		// );
+		// console.log(
+		// 	'next_ask/ oldestRetrievedAskDate = ',
+		// 	oldestRetrievedAskDate
+		// );
 	}
 
 	let nextAsksHT = await getNonVotedAsks(mongoDBUserId, nextAsks);
@@ -127,14 +127,14 @@ const getNewerAndOlderAsks = async (nextAsks, mongoDBUserId, response) => {
 		} else if (moreAsks.length > 0) {
 			updateDate('newer', moreAsks[0].dateAsked);
 			updateDate('older', moreAsks[moreAsks.length - 1].dateAsked);
-			console.log(
-				'next_ask/ newestRetrievedAskDate = ',
-				newestRetrievedAskDate
-			);
-			console.log(
-				'next_ask/ oldestRetrievedAskDate = ',
-				oldestRetrievedAskDate
-			);
+			// console.log(
+			// 	'next_ask/ newestRetrievedAskDate = ',
+			// 	newestRetrievedAskDate
+			// );
+			// console.log(
+			// 	'next_ask/ oldestRetrievedAskDate = ',
+			// 	oldestRetrievedAskDate
+			// );
 		}
 
 		// checks if the user has voted on the more asks
@@ -203,14 +203,14 @@ module.exports = app => {
 		'/api/train_ai/next_asks',
 		requireLogin,
 		async (request, response) => {
-			console.log(
-				'findNewerAndOlderAsks newestRetrievedAskDate = ',
-				newestRetrievedAskDate
-			);
-			console.log(
-				'findNewerAndOlderAsks oldestRetrievedAskDate= ',
-				oldestRetrievedAskDate
-			);
+			// console.log(
+			// 	'findNewerAndOlderAsks newestRetrievedAskDate = ',
+			// 	newestRetrievedAskDate
+			// );
+			// console.log(
+			// 	'findNewerAndOlderAsks oldestRetrievedAskDate= ',
+			// 	oldestRetrievedAskDate
+			// );
 
 			const nextAsks = await findNewerAndOlderAsks(
 				newestRetrievedAskDate,
