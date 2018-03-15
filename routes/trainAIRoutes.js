@@ -6,8 +6,20 @@ const AskCollection = mongoose.model('asks');
 const UserCollection = mongoose.model('users');
 
 // when the user first presses Train AI this will store...
-let oldestInitialAskDate; // the date of the oldest ask
-let newestInitialAskDate; // the date of the newest ask
+let newestRetrievedAskDate; // the date of the newest ask
+let oldestRetrievedAskDate; // the date of the oldest ask
+
+const updateDate = (newerOrOlder, newDate) => {
+	if (newerOrOlder === 'newer') {
+		if (newDate > newestRetrievedAskDate) {
+			newestRetrievedAskDate = newDate;
+		}
+	} else if (newerOrOlder === 'older') {
+		if (newDate < oldestRetrievedAskDate) {
+			oldestRetrievedAskDate = newDate;
+		}
+	}
+};
 
 const getNonVotedAsks = async (mongoDBUserId, nextAsks) => {
 	//gets the userVotes
@@ -33,8 +45,20 @@ const getNonVotedAsks = async (mongoDBUserId, nextAsks) => {
 	return nextAsksHT;
 };
 
-const getOlderInitialAsks = async (nextAsks, mongoDBUserId, response) => {
-	let oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
+const getOlderAsks = async (nextAsks, mongoDBUserId, response) => {
+	//console.log('in getOlderAsks nextAsks = ', nextAsks);
+	// don't need to check if new dates are actually older or newer since
+	// this is the first update
+	newestRetrievedAskDate = new Date(nextAsks[0].dateAsked);
+	oldestRetrievedAskDate = new Date(nextAsks[nextAsks.length - 1].dateAsked);
+	console.log(
+		'initial_ask/ newestRetrievedAskDate = ',
+		newestRetrievedAskDate
+	);
+	console.log(
+		'initial_ask/ oldestRetrievedAskDate = ',
+		oldestRetrievedAskDate
+	);
 
 	// takes out the asks that the user has already voted on
 	const nextAsksHT = await getNonVotedAsks(mongoDBUserId, nextAsks);
@@ -44,7 +68,7 @@ const getOlderInitialAsks = async (nextAsks, mongoDBUserId, response) => {
 		// finds up to 16 older Asks
 		const olderAsks = await AskCollection.find({
 			dateAsked: {
-				$lt: new Date(oldestAskDate)
+				$lt: oldestRetrievedAskDate
 			}
 		})
 			.sort({ dateAsked: -1 })
@@ -53,7 +77,9 @@ const getOlderInitialAsks = async (nextAsks, mongoDBUserId, response) => {
 		if (olderAsks.length === 0) {
 			break;
 		} else if (olderAsks.length > 0) {
-			oldestAskDate = olderAsks[olderAsks.length - 1].dateAsked;
+			oldestRetrievedAskDate = new Date(
+				olderAsks[olderAsks.length - 1].dateAsked
+			);
 		}
 
 		const olderNextAsksHT = await getNonVotedAsks(mongoDBUserId, olderAsks);
@@ -67,19 +93,23 @@ const getOlderInitialAsks = async (nextAsks, mongoDBUserId, response) => {
 		}
 	}
 
-	// gets the date of the oldest initial ask that was checked
-	oldestInitialAskDate = oldestAskDate;
-
 	const nonVotedNextAsks = Object.values(nextAsksHT);
 	response.send(nonVotedNextAsks);
 };
 
-const getMoreAsks = async (nextAsks, mongoDBUserId, response) => {
-	let newestAskDate;
-	let oldestAskDate;
+const getNewerAndOlderAsks = async (nextAsks, mongoDBUserId, response) => {
+	console.log('in getNewerAndOlderAsks nextAsks = ', nextAsks);
 	if (nextAsks.length > 0) {
-		newestAskDate = nextAsks[0].dateAsked;
-		oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
+		updateDate('newer', new Date(nextAsks[0].dateAsked));
+		updateDate('older', new Date(nextAsks[nextAsks.length - 1].dateAsked));
+		console.log(
+			'next_ask/ newestRetrievedAskDate = ',
+			newestRetrievedAskDate
+		);
+		console.log(
+			'next_ask/ oldestRetrievedAskDate = ',
+			oldestRetrievedAskDate
+		);
 	}
 
 	let nextAsksHT = await getNonVotedAsks(mongoDBUserId, nextAsks);
@@ -88,15 +118,23 @@ const getMoreAsks = async (nextAsks, mongoDBUserId, response) => {
 	while (Object.keys(nextAsksHT).length < 4) {
 		// finds up to 16 older Asks
 		const moreAsks = await findNewerAndOlderAsks(
-			newestAskDate,
-			oldestAskDate
+			newestRetrievedAskDate,
+			oldestRetrievedAskDate
 		);
 
 		if (moreAsks.length === 0) {
 			break;
 		} else if (moreAsks.length > 0) {
-			newestAskDate = moreAsks[0].dateAsked;
-			oldestAskDate = moreAsks[moreAsks.length - 1].dateAsked;
+			updateDate('newer', moreAsks[0].dateAsked);
+			updateDate('older', moreAsks[moreAsks.length - 1].dateAsked);
+			console.log(
+				'next_ask/ newestRetrievedAskDate = ',
+				newestRetrievedAskDate
+			);
+			console.log(
+				'next_ask/ oldestRetrievedAskDate = ',
+				oldestRetrievedAskDate
+			);
 		}
 
 		// checks if the user has voted on the more asks
@@ -110,8 +148,6 @@ const getMoreAsks = async (nextAsks, mongoDBUserId, response) => {
 			break;
 		}
 	}
-	// don't need to update newestInitialAskDate because it stays the same
-	oldestInitialAskDate = oldestAskDate;
 
 	const nonVotedNextAsks = Object.values(nextAsksHT);
 
@@ -119,17 +155,20 @@ const getMoreAsks = async (nextAsks, mongoDBUserId, response) => {
 	response.send(nonVotedNextAsks);
 };
 
-const findNewerAndOlderAsks = async (newestAskDate, oldestAskDate) => {
+const findNewerAndOlderAsks = async (
+	newestRetrievedAskDate,
+	oldestRetrievedAskDate
+) => {
 	return await AskCollection.find({
 		$or: [
 			{
 				dateAsked: {
-					$gt: new Date(newestAskDate)
+					$gt: newestRetrievedAskDate
 				}
 			},
 			{
 				dateAsked: {
-					$lt: new Date(oldestAskDate)
+					$lt: oldestRetrievedAskDate
 				}
 			}
 		]
@@ -143,21 +182,12 @@ module.exports = app => {
 		'/api/train_ai/initial_asks',
 		requireLogin,
 		async (request, response) => {
-			newestInitialAskDate = new Date().toISOString();
 			const nextAsks = await AskCollection.find()
 				.sort({ dateAsked: -1 }) // -1 = newest to oldest
 				.limit(16);
 
-			//if (nextAsks.length > 0) {
-			// let oldestAskDate = nextAsks[nextAsks.length - 1].dateAsked;
-			//
-			// // takes out the asks that the user has already voted on
-			// const nextAsksHT = await getNonVotedAsks(
-			// 	request.query.mongoDBUserId,
-			// 	nextAsks
-			// );
 			if (nextAsks.length > 0) {
-				await getOlderInitialAsks(
+				await getOlderAsks(
 					nextAsks,
 					request.query.mongoDBUserId,
 					response
@@ -173,16 +203,22 @@ module.exports = app => {
 		'/api/train_ai/next_asks',
 		requireLogin,
 		async (request, response) => {
-			console.log('newestInitialAskDate = ', newestInitialAskDate);
-			console.log('oldestInitialAskDate = ', oldestInitialAskDate);
-			const nextAsks = await findNewerAndOlderAsks(
-				newestInitialAskDate,
-				oldestInitialAskDate
+			console.log(
+				'findNewerAndOlderAsks newestRetrievedAskDate = ',
+				newestRetrievedAskDate
 			);
-			console.log('nextAsks = ', nextAsks);
+			console.log(
+				'findNewerAndOlderAsks oldestRetrievedAskDate= ',
+				oldestRetrievedAskDate
+			);
+
+			const nextAsks = await findNewerAndOlderAsks(
+				newestRetrievedAskDate,
+				oldestRetrievedAskDate
+			);
 
 			if (nextAsks.length > 0) {
-				await getMoreAsks(
+				await getNewerAndOlderAsks(
 					nextAsks,
 					request.query.mongoDBUserId,
 					response
