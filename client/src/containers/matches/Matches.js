@@ -2,13 +2,15 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import matchesFields from './matchesFields';
+import * as colorThemeActionCreators from '../../actions/colorTheme';
+import { bindActionCreators } from 'redux';
 import { Layout, Row, Col, Card, Button, Icon } from 'antd';
 const { Content } = Layout;
 
 class Matches extends Component {
 	componentWillMount() {
 		// run once before first render()
-		//this.props.onTrainAI();
+		this.props.onMatches();
 	}
 
 	renderMatches() {
@@ -35,16 +37,6 @@ class Matches extends Component {
 								borderColor: this.props.colorTheme.text8Color,
 								background: this.props.colorTheme.text8Color
 							}}
-							cover={
-								<img
-									style={{
-										height: '260px',
-										width: '260px'
-									}}
-									alt="example"
-									src={match.profile_pic_src}
-								/>
-							}
 						>
 							<h3
 								style={{
@@ -177,4 +169,21 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(Matches);
+/*
+So we have a state and a UI(with props).
+This function gives the UI the functions it will need to be called.
+*/
+function mapDispatchToProps(dispatch) {
+	const colorThemeDispatchers = bindActionCreators(
+		colorThemeActionCreators,
+		dispatch
+	);
+
+	return {
+		onMatches: () => {
+			colorThemeDispatchers.onMatches();
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Matches);
