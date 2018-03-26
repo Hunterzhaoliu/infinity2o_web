@@ -196,7 +196,7 @@ module.exports = app => {
 		let isRevote = false;
 		let previousAnswerId;
 		let votedAskId;
-		let previousAnswer;
+		//let previousAnswer;
 		let votedAnswer;
 		let votedAnswerId;
 
@@ -205,6 +205,7 @@ module.exports = app => {
 			_id: request.user._id
 		});
 		const userVotedAsks = userInDB.profile.asks.votes;
+
 		// finds if the user has already answered the question
 		// TODO: optimize this search
 		for (let i = 0; i < userVotedAsks.length; i++) {
@@ -230,13 +231,23 @@ module.exports = app => {
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
 				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
-					previousAnswer = askInDB.answers[i].answer;
+					//previousAnswer = askInDB.answers[i].answer;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
 				}
 			}
+
+			// replaces old answerId with new one inside of answerIdsUserVotedOn
+			let answerIdsUserVotedOn = userInDB.profile.asks.answerIdsUserVotedOn;
+			for (let i = 0; i < answerIdsUserVotedOn.length; i++) {
+				if (String(answerIdsUserVotedOn[i]) === String(previousAnswerId)) {
+					answerIdsUserVotedOn[i] = votedAnswerId;
+					break;
+				}
+			}
+
 			try {
-				//updates the User Collection selectedAnswer and _answerId
+				//updates the User Collection selectedAnswer, _answerId, and answerIdsUserVotedOn
 				await UserCollection.updateOne(
 					{
 						_id: request.user._id,
@@ -245,7 +256,8 @@ module.exports = app => {
 					{
 						$set: {
 							'profile.asks.votes.$.selectedAnswer': votedAnswer,
-							'profile.asks.votes.$._answerId': votedAnswerId
+							'profile.asks.votes.$._answerId': votedAnswerId,
+							'profile.asks.answerIdsUserVotedOn': answerIdsUserVotedOn
 						}
 					}
 				);
@@ -292,6 +304,11 @@ module.exports = app => {
 							selectedAnswer: votedAnswer,
 							_answerId: votedAnswerId
 						});
+
+						request.user.profile.asks.answerIdsUserVotedOn.push(votedAnswerId);
+						request.user.profile.asks.totalUserVotes =
+							request.user.profile.asks.totalUserVotes + 1;
+
 						const user = await request.user.save();
 
 						response.send(askInDB);

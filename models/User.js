@@ -26,7 +26,9 @@ const userSchema = new Schema({
 		},
 		asks: {
 			questions: [ProfileQuestionDisplay],
-			votes: [ProfileVoteDisplay]
+			votes: [ProfileVoteDisplay],
+			answerIdsUserVotedOn: [Schema.Types.ObjectId],
+			totalUserVotes: { type: Number, default: 0 }
 		}
 	}
 });
