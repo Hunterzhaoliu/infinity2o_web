@@ -6,6 +6,11 @@ import { Layout, Row, Col, Card, Button, Icon } from 'antd';
 const { Content } = Layout;
 
 class Matches extends Component {
+	componentWillMount() {
+		// run once before first render()
+		//this.props.onTrainAI();
+	}
+
 	renderMatches() {
 		return _.map(matchesFields, match => {
 			return (
@@ -76,13 +81,20 @@ class Matches extends Component {
 							>
 								Resume: {match.resume}
 							</p>
-							<Row type="flex" justify="space-between" align="top">
+							<Row
+								type="flex"
+								justify="space-between"
+								align="top"
+							>
 								<Col span={11}>
 									<Button
 										style={{
-											borderColor: this.props.colorTheme.key,
-											background: this.props.colorTheme.key,
-											color: this.props.colorTheme.text2Color
+											borderColor: this.props.colorTheme
+												.key,
+											background: this.props.colorTheme
+												.key,
+											color: this.props.colorTheme
+												.text2Color
 										}}
 									>
 										Swap
@@ -92,9 +104,12 @@ class Matches extends Component {
 								<Col span={11}>
 									<Button
 										style={{
-											borderColor: this.props.colorTheme.key,
-											background: this.props.colorTheme.key,
-											color: this.props.colorTheme.text2Color
+											borderColor: this.props.colorTheme
+												.key,
+											background: this.props.colorTheme
+												.key,
+											color: this.props.colorTheme
+												.text2Color
 										}}
 									>
 										Say Hi
@@ -129,8 +144,8 @@ class Matches extends Component {
 						padding: '0% 0% 5%'
 					}}
 				>
-					Teach our AI which study partner you prefer by swapping out the
-					partner you dont want.
+					Teach our AI which study partner you prefer by swapping out
+					the partner you dont want.
 				</h2>
 				<Row type="flex" justify="space-between" align="top">
 					<Col
