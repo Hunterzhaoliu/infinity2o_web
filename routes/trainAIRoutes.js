@@ -196,7 +196,6 @@ module.exports = app => {
 		let isRevote = false;
 		let previousAnswerId;
 		let votedAskId;
-		//let previousAnswer;
 		let votedAnswer;
 		let votedAnswerId;
 
@@ -231,7 +230,6 @@ module.exports = app => {
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
 				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
-					//previousAnswer = askInDB.answers[i].answer;
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
 				}
