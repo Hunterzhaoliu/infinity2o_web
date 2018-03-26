@@ -46,22 +46,13 @@ const getNonVotedAsks = async (mongoDBUserId, nextAsks) => {
 };
 
 const getOlderAsks = async (nextAsks, mongoDBUserId, response) => {
-	//console.log('in getOlderAsks nextAsks = ', nextAsks);
 	// don't need to check if new dates are actually older or newer since
 	// this is the first update
 	newestRetrievedAskDate = new Date(nextAsks[0].dateAsked);
 	oldestRetrievedAskDate = new Date(nextAsks[nextAsks.length - 1].dateAsked);
-	// console.log(
-	// 	'initial_ask/ newestRetrievedAskDate = ',
-	// 	newestRetrievedAskDate
-	// );
-	// console.log(
-	// 	'initial_ask/ oldestRetrievedAskDate = ',
-	// 	oldestRetrievedAskDate
-	// );
 
 	// takes out the asks that the user has already voted on
-	const nextAsksHT = await getNonVotedAsks(mongoDBUserId, nextAsks);
+	let nextAsksHT = await getNonVotedAsks(mongoDBUserId, nextAsks);
 
 	// goes to find older Asks if there aren't 4 recent asks
 	while (Object.keys(nextAsksHT).length < 4) {
@@ -98,18 +89,9 @@ const getOlderAsks = async (nextAsks, mongoDBUserId, response) => {
 };
 
 const getNewerAndOlderAsks = async (nextAsks, mongoDBUserId, response) => {
-	//console.log('in getNewerAndOlderAsks nextAsks = ', nextAsks);
 	if (nextAsks.length > 0) {
 		updateDate('newer', new Date(nextAsks[0].dateAsked));
 		updateDate('older', new Date(nextAsks[nextAsks.length - 1].dateAsked));
-		// console.log(
-		// 	'next_ask/ newestRetrievedAskDate = ',
-		// 	newestRetrievedAskDate
-		// );
-		// console.log(
-		// 	'next_ask/ oldestRetrievedAskDate = ',
-		// 	oldestRetrievedAskDate
-		// );
 	}
 
 	let nextAsksHT = await getNonVotedAsks(mongoDBUserId, nextAsks);
@@ -127,14 +109,6 @@ const getNewerAndOlderAsks = async (nextAsks, mongoDBUserId, response) => {
 		} else if (moreAsks.length > 0) {
 			updateDate('newer', moreAsks[0].dateAsked);
 			updateDate('older', moreAsks[moreAsks.length - 1].dateAsked);
-			// console.log(
-			// 	'next_ask/ newestRetrievedAskDate = ',
-			// 	newestRetrievedAskDate
-			// );
-			// console.log(
-			// 	'next_ask/ oldestRetrievedAskDate = ',
-			// 	oldestRetrievedAskDate
-			// );
 		}
 
 		// checks if the user has voted on the more asks
@@ -151,7 +125,6 @@ const getNewerAndOlderAsks = async (nextAsks, mongoDBUserId, response) => {
 
 	const nonVotedNextAsks = Object.values(nextAsksHT);
 
-	//console.log('nonVotedNextAsks = ', nonVotedNextAsks);
 	response.send(nonVotedNextAsks);
 };
 
@@ -187,11 +160,7 @@ module.exports = app => {
 				.limit(16);
 
 			if (nextAsks.length > 0) {
-				await getOlderAsks(
-					nextAsks,
-					request.query.mongoDBUserId,
-					response
-				);
+				await getOlderAsks(nextAsks, request.query.mongoDBUserId, response);
 			} else {
 				// there are no more asks to display
 				response.send([]);
@@ -203,15 +172,6 @@ module.exports = app => {
 		'/api/train_ai/next_asks',
 		requireLogin,
 		async (request, response) => {
-			// console.log(
-			// 	'findNewerAndOlderAsks newestRetrievedAskDate = ',
-			// 	newestRetrievedAskDate
-			// );
-			// console.log(
-			// 	'findNewerAndOlderAsks oldestRetrievedAskDate= ',
-			// 	oldestRetrievedAskDate
-			// );
-
 			const nextAsks = await findNewerAndOlderAsks(
 				newestRetrievedAskDate,
 				oldestRetrievedAskDate
@@ -236,7 +196,6 @@ module.exports = app => {
 		let isRevote = false;
 		let previousAnswerId;
 		let votedAskId;
-		let previousAnswer;
 		let votedAnswer;
 		let votedAnswerId;
 
@@ -245,6 +204,7 @@ module.exports = app => {
 			_id: request.user._id
 		});
 		const userVotedAsks = userInDB.profile.asks.votes;
+
 		// finds if the user has already answered the question
 		// TODO: optimize this search
 		for (let i = 0; i < userVotedAsks.length; i++) {
@@ -269,16 +229,23 @@ module.exports = app => {
 					askInDB.answers[i].votes += 1;
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
-				if (
-					String(askInDB.answers[i]._id) === String(previousAnswerId)
-				) {
-					previousAnswer = askInDB.answers[i].answer;
+				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
 				}
 			}
+
+			// replaces old answerId with new one inside of answerIdsUserVotedOn
+			let answerIdsUserVotedOn = userInDB.profile.asks.answerIdsUserVotedOn;
+			for (let i = 0; i < answerIdsUserVotedOn.length; i++) {
+				if (String(answerIdsUserVotedOn[i]) === String(previousAnswerId)) {
+					answerIdsUserVotedOn[i] = votedAnswerId;
+					break;
+				}
+			}
+
 			try {
-				//updates the User Collection selectedAnswer and _answerId
+				//updates the User Collection selectedAnswer, _answerId, and answerIdsUserVotedOn
 				await UserCollection.updateOne(
 					{
 						_id: request.user._id,
@@ -287,7 +254,8 @@ module.exports = app => {
 					{
 						$set: {
 							'profile.asks.votes.$.selectedAnswer': votedAnswer,
-							'profile.asks.votes.$._answerId': votedAnswerId
+							'profile.asks.votes.$._answerId': votedAnswerId,
+							'profile.asks.answerIdsUserVotedOn': answerIdsUserVotedOn
 						}
 					}
 				);
@@ -334,6 +302,11 @@ module.exports = app => {
 							selectedAnswer: votedAnswer,
 							_answerId: votedAnswerId
 						});
+
+						request.user.profile.asks.answerIdsUserVotedOn.push(votedAnswerId);
+						request.user.profile.asks.totalUserVotes =
+							request.user.profile.asks.totalUserVotes + 1;
+
 						const user = await request.user.save();
 
 						response.send(askInDB);

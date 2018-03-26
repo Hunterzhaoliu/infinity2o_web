@@ -15,8 +15,6 @@ class DisplayField extends Component {
 			// value is availability
 			let allTimeSlotsToRender = '';
 			const timeSlots = Object.entries(value);
-			//console.log('value.monday = ', value.monday);
-			//console.log('timeSlots = ', timeSlots);
 			timeSlots.forEach(function(day) {
 				const dayName = day[0];
 				const dayTimeSlots = day[1];
@@ -38,7 +36,6 @@ class DisplayField extends Component {
 					allTimeSlotsToRender += ' | ';
 				}
 			});
-			//console.log('allTimeSlotsToRender = ', allTimeSlotsToRender);
 			return allTimeSlotsToRender;
 		} else {
 			// value is interests
@@ -52,7 +49,6 @@ class DisplayField extends Component {
 	}
 
 	render() {
-		//console.log('this.props in DisplayField', this.props);
 		const { colorTheme, label, value } = this.props;
 		return (
 			<div>
