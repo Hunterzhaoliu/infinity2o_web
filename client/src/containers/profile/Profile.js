@@ -60,10 +60,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Interest(s): "
-							value={profile.interests}
-						/>
+						<DisplayField label="Interest(s): " value={profile.interests} />
 					</Col>
 				</Row>
 				<Row
@@ -75,10 +72,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Time Zone: "
-							value={profile.timeZone}
-						/>
+						<DisplayField label="Time Zone: " value={profile.timeZone} />
 					</Col>
 				</Row>
 				<Row
@@ -90,10 +84,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField
-							label="Availability: "
-							value={profile.availability}
-						/>
+						<DisplayField label="Availability: " value={profile.availability} />
 					</Col>
 				</Row>
 				<Row
@@ -119,15 +110,16 @@ class Profile extends Component {
 		);
 	}
 
-	renderQuestion(asks, colorTheme) {
+	renderQuestions(asks, colorTheme) {
 		if (asks != null) {
-			return _.map(asks.questions, (question, key) => {
+			const newest5Questions = asks.questions.splice(-5).reverse();
+			return _.map(newest5Questions, (question, key) => {
 				return (
 					<Row key={key}>
 						<Col span={24}>
 							<h3
 								style={{
-									color: colorTheme.text5Color
+									color: colorTheme.keyText6Color
 								}}
 							>
 								{question.question}
@@ -139,9 +131,40 @@ class Profile extends Component {
 		}
 	}
 
+	renderVotes(asks, colorTheme) {
+		if (asks != null) {
+			const newest5Votes = asks.votes.splice(-5).reverse();
+			return _.map(newest5Votes, (vote, key) => {
+				return (
+					<div key={key}>
+						<Row type="flex" justify="start" align="middle">
+							<Col md={{ span: 5 }}>
+								<h3
+									style={{
+										color: colorTheme.keyText6Color
+									}}
+								>
+									{vote.question}
+								</h3>
+							</Col>
+							<Col md={{ span: 18, offset: 1 }}>
+								<h3
+									style={{
+										color: colorTheme.keyText6Color
+									}}
+								>
+									{vote.selectedAnswer}
+								</h3>
+							</Col>
+						</Row>
+					</div>
+				);
+			});
+		}
+	}
+
 	render() {
-		//console.log('this.props in Profile.js', this.props);
-		const { colorTheme, profile, asks } = this.props;
+		const { colorTheme, profile } = this.props;
 		return (
 			<Content
 				style={{
@@ -160,7 +183,7 @@ class Profile extends Component {
 						Your Questions
 					</h2>
 				</Row>
-				{this.renderQuestion(asks, colorTheme)}
+				{this.renderQuestions(profile.asks, colorTheme)}
 				<Row>
 					<h2
 						style={{
@@ -171,6 +194,7 @@ class Profile extends Component {
 						Your Votes
 					</h2>
 				</Row>
+				{this.renderVotes(profile.asks, colorTheme)}
 			</Content>
 		);
 	}
@@ -183,8 +207,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		profile: state.profile,
-		asks: state.profile.asks
+		profile: state.profile
 	};
 }
 
