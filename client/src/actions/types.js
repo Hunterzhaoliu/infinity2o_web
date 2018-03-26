@@ -37,3 +37,8 @@ export const SAVE_VOTE_DONE = 'SAVE_VOTE_DONE';
 export const SAVE_VOTE_ERROR = 'SAVE_VOTE_ERROR';
 export const ON_NEXT_QUESTION = 'ON_NEXT_QUESTION';
 export const ON_NEXT_ASK = 'ON_NEXT_ASK';
+
+// matches/Matches.js
+export const SAVE_FETCHED_DAILY_MATCHES = 'SAVE_FETCHED_MATCHES';
+export const UPDATE_INITIAL_MATCH = 'UPDATE_INITIAL_MATCH';
+export const ON_NEXT_MATCH = 'ON_NEXT_MATCH';

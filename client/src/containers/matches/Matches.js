@@ -122,22 +122,18 @@ class Matches extends Component {
 			<Content
 				style={{
 					textAlign: 'center',
-					padding: '100px 50px 50px', // top left&right bottom
+					padding: '75px 50px 0px', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
 			>
-				<h1 key="0" style={{ color: this.props.colorTheme.text4Color }}>
-					Here are 2 matches our AI has selected for you.
-				</h1>
 				<h2
 					key="1"
 					style={{
-						color: this.props.colorTheme.text5Color,
+						color: this.props.colorTheme.text3Color,
 						padding: '0% 0% 5%'
 					}}
 				>
-					Teach our AI which study partner you prefer by swapping out
-					the partner you dont want.
+					Every 24 hours our AI generates the best partners for you.
 				</h2>
 				<Row type="flex" justify="space-between" align="top">
 					<Col
