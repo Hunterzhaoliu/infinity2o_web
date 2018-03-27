@@ -19,6 +19,10 @@ class Matches extends Component {
 		this.props.onNextMatch();
 	}
 
+	onStartChat() {
+		console.log('onStartChat');
+	}
+
 	renderMatches() {
 		//console.log('in Matches.js this.props.matches = ', this.props.matches);
 		const { current1DisplayedMatches } = this.props.matches;
@@ -102,6 +106,7 @@ class Matches extends Component {
 												color: this.props.colorTheme
 													.text2Color
 											}}
+											onClick={e => this.onStartChat()}
 										>
 											Say Hi :)
 										</Button>
