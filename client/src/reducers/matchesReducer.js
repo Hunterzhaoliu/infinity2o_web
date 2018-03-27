@@ -1,6 +1,7 @@
 import {
 	SAVE_FETCHED_DAILY_MATCHES,
-	UPDATE_INITIAL_MATCH
+	UPDATE_INITIAL_MATCH,
+	ON_NEXT_MATCH
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -29,6 +30,19 @@ export default function(state = initialState, action) {
 					//console.log('currentMatch = ', currentMatch);
 					newState.current1DisplayedMatches.push(currentMatch);
 				}
+			}
+			return newState;
+		case ON_NEXT_MATCH:
+			if (newState.nextMatches.length === 0) {
+				newState.current1DisplayedMatches.shift();
+			} else {
+				const currentMatch = newState.nextMatches.shift();
+				if (currentMatch.name === undefined) {
+					currentMatch.name = 'Anonymous';
+				}
+				//console.log('currentMatch = ', currentMatch);
+				newState.current1DisplayedMatches.shift();
+				newState.current1DisplayedMatches.push(currentMatch);
 			}
 			return newState;
 		default:

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import matchesFields from './matchesFields';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
+import * as matchesActionCreators from '../../actions/matches';
 import { bindActionCreators } from 'redux';
 import { Layout, Row, Col, Card, Button } from 'antd';
 const { Content } = Layout;
@@ -11,6 +12,11 @@ class Matches extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onMatches();
+	}
+
+	onNextMatch() {
+		console.log('onNextMatch');
+		this.props.onNextMatch();
 	}
 
 	renderMatches() {
@@ -81,6 +87,7 @@ class Matches extends Component {
 												color: this.props.colorTheme
 													.text2Color
 											}}
+											onClick={e => this.onNextMatch()}
 										>
 											Next
 										</Button>
@@ -112,7 +119,7 @@ class Matches extends Component {
 						color: this.props.colorTheme.text2Color
 					}}
 				>
-					Head over to Train AI first then come back after 24 hours.
+					Your out of matches for today. More coming tomorrow :)
 				</h3>
 			);
 		}
@@ -177,9 +184,17 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
+	const matchesDispatchers = bindActionCreators(
+		matchesActionCreators,
+		dispatch
+	);
+
 	return {
 		onMatches: () => {
 			colorThemeDispatchers.onMatches();
+		},
+		onNextMatch: () => {
+			matchesDispatchers.onNextMatch();
 		}
 	};
 }

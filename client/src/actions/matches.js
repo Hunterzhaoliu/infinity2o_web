@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { SAVE_FETCHED_DAILY_MATCHES, UPDATE_INITIAL_MATCH } from './types';
+import {
+	SAVE_FETCHED_DAILY_MATCHES,
+	UPDATE_INITIAL_MATCH,
+	ON_NEXT_MATCH
+} from './types';
 
 export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
 	const response = await axios.get(
@@ -11,5 +15,11 @@ export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
 	});
 	dispatch({
 		type: UPDATE_INITIAL_MATCH
+	});
+};
+
+export const onNextMatch = () => dispatch => {
+	dispatch({
+		type: ON_NEXT_MATCH
 	});
 };
