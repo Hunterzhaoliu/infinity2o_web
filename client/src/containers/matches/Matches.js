@@ -14,87 +14,111 @@ class Matches extends Component {
 	}
 
 	renderMatches() {
-		return _.map(matchesFields, match => {
+		//console.log('in Matches.js this.props.matches = ', this.props.matches);
+		const { current1DisplayedMatches } = this.props.matches;
+
+		if (current1DisplayedMatches.length > 0) {
+			return _.map(matchesFields, match => {
+				return (
+					<Col
+						key={match.name}
+						sm={{ span: 10 }}
+						md={{ span: 11, offset: 0 }}
+						lg={{ span: 9 }}
+						xl={{ span: 7 }}
+						style={{
+							height: '50%'
+						}}
+					>
+						<Row type="flex" justify="center" align="top">
+							<Card
+								hoverable={true}
+								borderded="false"
+								loading={false}
+								style={{
+									width: '260px',
+									color: this.props.colorTheme.text1Color,
+									borderColor: this.props.colorTheme
+										.text8Color,
+									background: this.props.colorTheme.text8Color
+								}}
+							>
+								<h3
+									style={{
+										color: this.props.colorTheme.text1Color
+									}}
+								>
+									{current1DisplayedMatches[0].name}
+								</h3>
+								<p
+									style={{
+										color: this.props.colorTheme.text3Color
+									}}
+								>
+									Interests:{' '}
+									{current1DisplayedMatches[0].interests}
+								</p>
+								<p
+									style={{
+										color: this.props.colorTheme.text3Color
+									}}
+								>
+									Total User Votes:{' '}
+									{current1DisplayedMatches[0].totalUserVotes}
+								</p>
+								<Row
+									type="flex"
+									justify="space-between"
+									align="top"
+								>
+									<Col span={11}>
+										<Button
+											style={{
+												borderColor: this.props
+													.colorTheme.text6Color,
+												background: this.props
+													.colorTheme.text6Color,
+												color: this.props.colorTheme
+													.text2Color
+											}}
+										>
+											Next
+										</Button>
+									</Col>
+									<Col span={11}>
+										<Button
+											style={{
+												borderColor: this.props
+													.colorTheme.text6Color,
+												background: this.props
+													.colorTheme.text6Color,
+												color: this.props.colorTheme
+													.text2Color
+											}}
+										>
+											Say Hi :)
+										</Button>
+									</Col>
+								</Row>
+							</Card>
+						</Row>
+					</Col>
+				);
+			});
+		} else {
 			return (
-				<Col
-					key={match.name}
-					sm={{ span: 10 }}
-					md={{ span: 11, offset: 0 }}
-					lg={{ span: 9 }}
-					xl={{ span: 7 }}
+				<h3
 					style={{
-						height: '50%'
+						color: this.props.colorTheme.text2Color
 					}}
 				>
-					<Row type="flex" justify="center" align="top">
-						<Card
-							hoverable={true}
-							borderded="false"
-							loading={false}
-							style={{
-								width: '260px',
-								color: this.props.colorTheme.text1Color,
-								borderColor: this.props.colorTheme.text8Color,
-								background: this.props.colorTheme.text8Color
-							}}
-						>
-							<h3
-								style={{
-									color: this.props.colorTheme.text1Color
-								}}
-							>
-								{match.name}
-							</h3>
-							<p
-								style={{
-									color: this.props.colorTheme.text3Color
-								}}
-							>
-								Interests: {match.interests}
-							</p>
-							<Row
-								type="flex"
-								justify="space-between"
-								align="top"
-							>
-								<Col span={11}>
-									<Button
-										style={{
-											borderColor: this.props.colorTheme
-												.text6Color,
-											background: this.props.colorTheme
-												.text6Color,
-											color: this.props.colorTheme
-												.text2Color
-										}}
-									>
-										Next
-									</Button>
-								</Col>
-								<Col span={11}>
-									<Button
-										style={{
-											borderColor: this.props.colorTheme
-												.text6Color,
-											background: this.props.colorTheme
-												.text6Color,
-											color: this.props.colorTheme
-												.text2Color
-										}}
-									>
-										Say Hi :)
-									</Button>
-								</Col>
-							</Row>
-						</Card>
-					</Row>
-				</Col>
+					Head over to Train AI first then come back after 24 hours.
+				</h3>
 			);
-		});
+		}
 	}
 
 	render() {
-		// console.log('this.props in Matches.js', this.props);
 		return (
 			<Content
 				style={{
@@ -138,7 +162,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		matches: state.matches
 	};
 }
 

@@ -19,6 +19,17 @@ export default function(state = initialState, action) {
 			newState.nextMatches = action.dailyMatches;
 			return newState;
 		case UPDATE_INITIAL_MATCH:
+			// we move the first 4 in nextAsks -> current4DisplayedAsks
+			for (let i = 0; i < 1; i++) {
+				const currentMatch = newState.nextMatches.shift();
+				if (currentMatch !== undefined) {
+					if (currentMatch.name === undefined) {
+						currentMatch.name = 'Anonymous';
+					}
+					//console.log('currentMatch = ', currentMatch);
+					newState.current1DisplayedMatches.push(currentMatch);
+				}
+			}
 			return newState;
 		default:
 			return state;

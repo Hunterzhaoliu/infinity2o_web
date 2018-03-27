@@ -5,7 +5,6 @@ export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
 	const response = await axios.get(
 		'/api/matches?mongoDBUserIds=' + mongoDBUserIds
 	);
-	console.log('response.data = ', response.data);
 	dispatch({
 		type: SAVE_FETCHED_DAILY_MATCHES,
 		dailyMatches: response.data
