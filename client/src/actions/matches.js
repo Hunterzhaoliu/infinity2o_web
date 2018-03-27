@@ -1,16 +1,14 @@
-import {
-	SAVE_FETCHED_DAILY_MATCHES,
-	UPDATE_INITIAL_MATCH,
-	ON_NEXT_MATCH
-} from './types';
+import axios from 'axios';
+import { SAVE_FETCHED_DAILY_MATCHES, UPDATE_INITIAL_MATCH } from './types';
 
-export const fetchUserMatches = async (dispatch, mongoDBUserId) => {
-	const dailyMatches = await axios.get(
-		'/api/matches?mongoDBUserId=' + mongoDBUserId
+export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
+	const response = await axios.get(
+		'/api/matches?mongoDBUserIds=' + mongoDBUserIds
 	);
+	console.log('response.data = ', response.data);
 	dispatch({
 		type: SAVE_FETCHED_DAILY_MATCHES,
-		nextAsks: dailyMatches
+		dailyMatches: response.data
 	});
 	dispatch({
 		type: UPDATE_INITIAL_MATCH

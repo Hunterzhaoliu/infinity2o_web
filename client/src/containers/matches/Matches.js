@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import matchesFields from './matchesFields';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
-import { Layout, Row, Col, Card, Button, Icon } from 'antd';
+import { Layout, Row, Col, Card, Button } from 'antd';
 const { Content } = Layout;
 
 class Matches extends Component {
@@ -50,28 +50,7 @@ class Matches extends Component {
 									color: this.props.colorTheme.text3Color
 								}}
 							>
-								Learning interests: {match.learning_interests}
-							</p>
-							<p
-								style={{
-									color: this.props.colorTheme.text3Color
-								}}
-							>
-								Class interest: {match.class_interests}
-							</p>
-							<p
-								style={{
-									color: this.props.colorTheme.text3Color
-								}}
-							>
-								# of hours/week free: {match.num_hrs_week_free}
-							</p>
-							<p
-								style={{
-									color: this.props.colorTheme.text3Color
-								}}
-							>
-								Resume: {match.resume}
+								Interests: {match.interests}
 							</p>
 							<Row
 								type="flex"
@@ -82,30 +61,28 @@ class Matches extends Component {
 									<Button
 										style={{
 											borderColor: this.props.colorTheme
-												.key,
+												.text6Color,
 											background: this.props.colorTheme
-												.key,
+												.text6Color,
 											color: this.props.colorTheme
 												.text2Color
 										}}
 									>
-										Swap
-										<Icon type="swap" />
+										Next
 									</Button>
 								</Col>
 								<Col span={11}>
 									<Button
 										style={{
 											borderColor: this.props.colorTheme
-												.key,
+												.text6Color,
 											background: this.props.colorTheme
-												.key,
+												.text6Color,
 											color: this.props.colorTheme
 												.text2Color
 										}}
 									>
-										Say Hi
-										<Icon type="message" />
+										Say Hi :)
 									</Button>
 								</Col>
 							</Row>
