@@ -4,11 +4,13 @@ import colorThemeReducer from './colorThemeReducer';
 import profileReducer from './profileReducer';
 import askReducer from './askReducer';
 import trainAIReducer from './trainAIReducer';
+import matchesReducer from './matchesReducer';
 
 export default combineReducers({
 	colorTheme: colorThemeReducer,
 	auth: authReducer,
 	profile: profileReducer,
 	ask: askReducer,
-	trainAI: trainAIReducer
+	trainAI: trainAIReducer,
+	matches: matchesReducer
 });

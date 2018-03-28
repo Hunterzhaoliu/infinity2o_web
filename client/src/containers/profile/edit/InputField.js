@@ -20,7 +20,7 @@ class InputField extends Component {
 					<Col md={{ span: 3 }}>
 						<h3
 							style={{
-								color: colorTheme.keyText5Color
+								color: colorTheme.text6Color
 							}}
 						>
 							{label}

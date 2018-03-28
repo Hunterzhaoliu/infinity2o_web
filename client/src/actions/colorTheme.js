@@ -1,9 +1,10 @@
 import {
+	MOVE_TO_SIGNED_IN_LANDING,
 	UPDATE_COLOR_THEME,
 	MOVE_TO_PROFILE,
 	MOVE_TO_TRAIN_AI,
 	MOVE_TO_MATCHES,
-	MOVE_TO_SIGNED_IN_LANDING
+	MOVE_TO_CONVERSATIONS
 } from './types';
 import {
 	colors1,
@@ -26,6 +27,12 @@ import {
 	GREY_9
 } from '../containers/styles/ColorConstants';
 
+export const onSignedInLanding = () => {
+	return function(dispatch) {
+		dispatch({ type: MOVE_TO_SIGNED_IN_LANDING });
+	};
+};
+
 export const onProfile = () => {
 	return function(dispatch) {
 		dispatch({ type: MOVE_TO_PROFILE });
@@ -44,9 +51,9 @@ export const onMatches = () => {
 	};
 };
 
-export const onSignedInLanding = () => {
+export const onPressConversations = () => {
 	return function(dispatch) {
-		dispatch({ type: MOVE_TO_SIGNED_IN_LANDING });
+		dispatch({ type: MOVE_TO_CONVERSATIONS });
 	};
 };
 

@@ -4,10 +4,28 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../actions/colorTheme';
 
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col, Button, Icon } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
+	renderChangeThemeButton() {
+		const { colorTheme, onPressRandomColorTheme } = this.props;
+		return (
+			<div>
+				<Button
+					style={{
+						borderColor: colorTheme.text7Color,
+						background: colorTheme.text7Color,
+						color: colorTheme.text4Color
+					}}
+					onClick={onPressRandomColorTheme}
+				>
+					Change Theme
+				</Button>
+			</div>
+		);
+	}
+
 	renderHeaderButtons() {
 		const {
 			colorTheme,
@@ -15,36 +33,23 @@ class CustomHeader extends Component {
 			onPressProfile,
 			onPressTrainAI,
 			onPressMatches,
+			onPressConversations,
 			auth
 		} = this.props;
-		switch (auth) {
-			case null:
-				// show nothing when still signing in
-				return;
-			case false:
+		switch (auth.loggedInState) {
+			case 'not_logged_in':
 				return (
 					<div>
 						<Row type="flex" justify="start">
-							<Col key="0">
-								<Button
-									style={{
-										borderColor: colorTheme.text7Color,
-										background: colorTheme.text7Color,
-										color: colorTheme.text4Color
-									}}
-									onClick={onPressRandomColorTheme}
-								>
-									Change Theme
-								</Button>
-							</Col>
+							<Col key="0">{this.renderChangeThemeButton()}</Col>
 						</Row>
 					</div>
 				);
-			default:
+			case 'logged_in':
 				return (
 					<div>
 						<Row type="flex" justify="space-between">
-							<Col md={{ span: 5 }} key="0">
+							<Col md={{ span: 4 }} key="0">
 								<Button
 									style={{
 										borderColor: colorTheme.text7Color,
@@ -56,7 +61,7 @@ class CustomHeader extends Component {
 									Change Theme
 								</Button>
 							</Col>
-							<Col md={{ span: 3, offset: 1 }} key="1">
+							<Col md={{ span: 2, offset: 1 }} key="1">
 								<Button
 									style={{
 										borderColor:
@@ -104,7 +109,26 @@ class CustomHeader extends Component {
 									</Link>
 								</Button>
 							</Col>
-							<Col md={{ span: 3, offset: 4 }} key="4">
+							<Col md={{ span: 1, offset: 1 }} key="4">
+								<Button
+									style={{
+										borderColor:
+											colorTheme.conversationsButtonColor,
+										background:
+											colorTheme.conversationsButtonColor,
+										color:
+											colorTheme.conversationsButtonTextColor
+									}}
+									onClick={onPressConversations}
+								>
+									<Link to="/conversations">
+										<div>
+											<Icon type="message" />
+										</div>
+									</Link>
+								</Button>
+							</Col>
+							<Col md={{ span: 3, offset: 4 }} key="5">
 								<Button
 									style={{
 										borderColor: colorTheme.text7Color,
@@ -118,6 +142,11 @@ class CustomHeader extends Component {
 						</Row>
 					</div>
 				);
+			default:
+				console.log(
+					'ERROR: site in invalid state = ',
+					auth.loggedInState
+				);
 		}
 	}
 
@@ -126,7 +155,7 @@ class CustomHeader extends Component {
 		return (
 			<Header
 				style={{
-					background: colorTheme.backgroundColor,
+					background: colorTheme.text8Color,
 					position: 'fixed',
 					zIndex: 1, // make every display under the header
 					width: '100%'
@@ -171,6 +200,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		onPressMatches: () => {
 			customHeaderDispatchers.onMatches();
+		},
+		onPressConversations: () => {
+			customHeaderDispatchers.onPressConversations();
 		}
 	};
 }

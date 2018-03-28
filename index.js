@@ -33,6 +33,7 @@ require('./routes/authRoutes')(app);
 require('./routes/profileRoutes')(app);
 require('./routes/trainAIRoutes')(app);
 require('./routes/askRoutes')(app);
+require('./routes/matchesRoutes')(app);
 require('./routes/legalRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {

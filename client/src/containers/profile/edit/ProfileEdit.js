@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as indexActionCreators from '../../../actions/index';
+import * as authActionCreators from '../../../actions/auth';
 import * as colorThemeActionCreators from '../../../actions/colorTheme';
 import * as profileActionCreators from '../../../actions/profile';
 import { bindActionCreators } from 'redux';
@@ -43,7 +43,7 @@ class ProfileEdit extends Component {
 	}
 
 	render() {
-		console.log('this.props in ProfileEdit.js', this.props);
+		//console.log('this.props in ProfileEdit.js', this.props);
 		const { colorTheme, saveProfile, profile, history } = this.props;
 		return (
 			<Content
@@ -154,7 +154,7 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
+	const indexDispatchers = bindActionCreators(authActionCreators, dispatch);
 
 	const profileDispatchers = bindActionCreators(
 		profileActionCreators,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as indexActionCreators from '../actions/index';
+import * as authActionCreators from '../actions/auth';
 import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
@@ -11,6 +11,7 @@ import ProfileEdit from './profile/edit/ProfileEdit';
 import TrainAI from './train_ai/TrainAI';
 import Ask from './train_ai/Ask';
 import Matches from './matches/Matches';
+import Conversations from './conversations/Conversations';
 
 import { Layout, Row, Col } from 'antd';
 
@@ -38,6 +39,11 @@ class App extends Component {
 					<Route exact={true} path="/train_ai" component={TrainAI} />
 					<Route exact={true} path="/train_ai/ask" component={Ask} />
 					<Route exact={true} path="/matches" component={Matches} />
+					<Route
+						exact={true}
+						path="/conversations"
+						component={Conversations}
+					/>
 					<Footer
 						style={{
 							textAlign: 'center',
@@ -101,11 +107,11 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
+	const authDispatchers = bindActionCreators(authActionCreators, dispatch);
 
 	return {
 		initializeApp: () => {
-			indexDispatchers.initializeApp();
+			authDispatchers.initializeApp();
 		}
 	};
 }

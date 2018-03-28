@@ -56,7 +56,7 @@ class DisplayField extends Component {
 					<Col md={{ span: 5 }}>
 						<h3
 							style={{
-								color: colorTheme.keyText6Color
+								color: colorTheme.text6Color
 							}}
 						>
 							{label}

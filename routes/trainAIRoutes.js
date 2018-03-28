@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 
@@ -160,7 +159,11 @@ module.exports = app => {
 				.limit(16);
 
 			if (nextAsks.length > 0) {
-				await getOlderAsks(nextAsks, request.query.mongoDBUserId, response);
+				await getOlderAsks(
+					nextAsks,
+					request.query.mongoDBUserId,
+					response
+				);
 			} else {
 				// there are no more asks to display
 				response.send([]);
@@ -229,16 +232,21 @@ module.exports = app => {
 					askInDB.answers[i].votes += 1;
 				}
 				//looks for the previousAnswer Id in ask to decrement votes and update lastVotedOn
-				if (String(askInDB.answers[i]._id) === String(previousAnswerId)) {
+				if (
+					String(askInDB.answers[i]._id) === String(previousAnswerId)
+				) {
 					askInDB.lastVotedOn = Date.now();
 					askInDB.answers[i].votes -= 1;
 				}
 			}
 
 			// replaces old answerId with new one inside of answerIdsUserVotedOn
-			let answerIdsUserVotedOn = userInDB.profile.asks.answerIdsUserVotedOn;
+			let answerIdsUserVotedOn =
+				userInDB.profile.asks.answerIdsUserVotedOn;
 			for (let i = 0; i < answerIdsUserVotedOn.length; i++) {
-				if (String(answerIdsUserVotedOn[i]) === String(previousAnswerId)) {
+				if (
+					String(answerIdsUserVotedOn[i]) === String(previousAnswerId)
+				) {
 					answerIdsUserVotedOn[i] = votedAnswerId;
 					break;
 				}
@@ -303,7 +311,9 @@ module.exports = app => {
 							_answerId: votedAnswerId
 						});
 
-						request.user.profile.asks.answerIdsUserVotedOn.push(votedAnswerId);
+						request.user.profile.asks.answerIdsUserVotedOn.push(
+							votedAnswerId
+						);
 						request.user.profile.asks.totalUserVotes =
 							request.user.profile.asks.totalUserVotes + 1;
 

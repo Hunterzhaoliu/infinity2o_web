@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as indexActionCreators from '../../actions/index';
+import * as authActionCreators from '../../actions/auth';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import DisplayField from './DisplayField';
@@ -21,7 +21,7 @@ class Profile extends Component {
 				<Row>
 					<h2
 						style={{
-							color: colorTheme.text3Color
+							color: colorTheme.keyText7Color
 						}}
 					>
 						Match Info.:
@@ -60,7 +60,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField label="Interest(s): " value={profile.interests} />
+						<DisplayField
+							label="Interest(s): "
+							value={profile.interests}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -72,7 +75,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField label="Time Zone: " value={profile.timeZone} />
+						<DisplayField
+							label="Time Zone: "
+							value={profile.timeZone}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -84,7 +90,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col md={{ span: 24 }}>
-						<DisplayField label="Availability: " value={profile.availability} />
+						<DisplayField
+							label="Availability: "
+							value={profile.availability}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -141,7 +150,7 @@ class Profile extends Component {
 							<Col md={{ span: 5 }}>
 								<h3
 									style={{
-										color: colorTheme.keyText6Color
+										color: colorTheme.text6Color
 									}}
 								>
 									{vote.question}
@@ -150,7 +159,7 @@ class Profile extends Component {
 							<Col md={{ span: 18, offset: 1 }}>
 								<h3
 									style={{
-										color: colorTheme.keyText6Color
+										color: colorTheme.text6Color
 									}}
 								>
 									{vote.selectedAnswer}
@@ -177,7 +186,7 @@ class Profile extends Component {
 					<h2
 						style={{
 							padding: '25px 0% 0%', // top left&right bottom
-							color: colorTheme.text3Color
+							color: colorTheme.keyText7Color
 						}}
 					>
 						Your Questions
@@ -188,7 +197,7 @@ class Profile extends Component {
 					<h2
 						style={{
 							padding: '25px 0% 0%', // top left&right bottom
-							color: colorTheme.text3Color
+							color: colorTheme.keyText7Color
 						}}
 					>
 						Your Votes
@@ -216,7 +225,7 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
+	const indexDispatchers = bindActionCreators(authActionCreators, dispatch);
 	const colorThemeDispatchers = bindActionCreators(
 		colorThemeActionCreators,
 		dispatch

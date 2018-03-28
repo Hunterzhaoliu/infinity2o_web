@@ -5,7 +5,7 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	loggedIn: false,
+	loggedInState: 'not_logged_in',
 	googleId: null,
 	linkedInId: null,
 	location: null,
@@ -16,12 +16,13 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case SAVE_FETCHED_USER_AUTH:
-			newState = action.auth || false;
+			// when action.auth is undefined newState = initialState
+			newState = action.auth || initialState;
 			if (
 				action.auth !== undefined &&
 				(action.auth.googleId || action.auth.linkedInId)
 			) {
-				newState.loggedIn = true;
+				newState.loggedInState = 'logged_in';
 				newState.mongoDBUserId = action.mongoDBUserId;
 			}
 			return newState;
