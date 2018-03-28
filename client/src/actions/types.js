@@ -43,6 +43,7 @@ export const ON_NEXT_ASK = 'ON_NEXT_ASK';
 export const SAVE_FETCHED_DAILY_MATCHES = 'SAVE_FETCHED_DAILY_MATCHES';
 export const UPDATE_INITIAL_MATCH = 'UPDATE_INITIAL_MATCH';
 export const ON_NEXT_MATCH = 'ON_NEXT_MATCH';
+export const MOVE_TO_CONVERSATIONS = 'MOVE_TO_CONVERSATIONS';
 
 // conversations/Conversations.js
-export const MOVE_TO_CONVERSATIONS = 'MOVE_TO_CONVERSATIONS';
+export const TEST = 'TEST';

@@ -5,6 +5,7 @@ import profileReducer from './profileReducer';
 import askReducer from './askReducer';
 import trainAIReducer from './trainAIReducer';
 import matchesReducer from './matchesReducer';
+import conversationsReducer from './conversationsReducer';
 
 export default combineReducers({
 	colorTheme: colorThemeReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
 	profile: profileReducer,
 	ask: askReducer,
 	trainAI: trainAIReducer,
-	matches: matchesReducer
+	matches: matchesReducer,
+	conversations: conversationsReducer
 });

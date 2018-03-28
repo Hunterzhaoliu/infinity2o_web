@@ -146,7 +146,8 @@ class Matches extends Component {
 						padding: '0% 0% 5%'
 					}}
 				>
-					Every 24 hours our AI generates the best partners for you.
+					Every 24 hours at 6 AM CT our AI generates the best partners
+					for you.
 				</h2>
 				<Row type="flex" justify="space-between" align="top">
 					<Col
