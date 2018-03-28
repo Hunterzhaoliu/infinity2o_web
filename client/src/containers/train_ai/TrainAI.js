@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as indexActionCreators from '../../actions/index';
+import * as authActionCreators from '../../actions/auth';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import { Layout, Row, Col, Button } from 'antd';
@@ -127,7 +127,7 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
+	const indexDispatchers = bindActionCreators(authActionCreators, dispatch);
 
 	const colorThemeDispatchers = bindActionCreators(
 		colorThemeActionCreators,

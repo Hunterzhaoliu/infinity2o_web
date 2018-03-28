@@ -25,12 +25,8 @@ class Landing extends Component {
 
 		const how = `Join our community and train an AI to find the best partners for you.`;
 		const why = `Online classes from the best teachers are amazing but too lonely.`;
-		switch (auth) {
-			case null:
-				// show nothing when still signing in
-				return;
-			case false:
-				// not logged in
+		switch (auth.loggedInState) {
+			case 'not_logged_in':
 				return (
 					<div>
 						<Row type="flex" justify="center">
@@ -158,11 +154,8 @@ class Landing extends Component {
 	renderLogin() {
 		const { colorTheme, auth } = this.props;
 
-		switch (auth) {
-			case null:
-				// show nothing when still signing in
-				return;
-			case false:
+		switch (auth.loggedInState) {
+			case 'not_logged_in':
 				return (
 					<div>
 						<Row type="flex" justify="space-around">

@@ -31,21 +31,13 @@ class InputSchedule extends Component {
 							<Col span={24}>
 								<h3
 									style={{
-										color: colorTheme.keyText5Color
+										color: colorTheme.text6Color
 									}}
 								>
 									When are you free to video chat for your
 									class?
 								</h3>
 							</Col>
-						</Row>
-						<Row type="flex" justify="start" align="middle">
-							<div
-								style={{
-									marginBottom: '10px',
-									color: colorTheme.keyText1Color
-								}}
-							/>
 						</Row>
 						<Row type="flex" justify="space-around" align="middle">
 							<Col span={24}>

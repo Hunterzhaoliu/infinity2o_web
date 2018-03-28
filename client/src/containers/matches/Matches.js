@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import matchesFields from './matchesFields';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import * as matchesActionCreators from '../../actions/matches';
 import { bindActionCreators } from 'redux';
@@ -15,20 +14,19 @@ class Matches extends Component {
 	}
 
 	onNextMatch() {
-		console.log('onNextMatch');
 		this.props.onNextMatch();
 	}
 
-	onStartChat() {
-		console.log('onStartChat');
+	onStartConversation(history) {
+		this.props.onStartConversation(history);
 	}
 
 	renderMatches() {
-		//console.log('in Matches.js this.props.matches = ', this.props.matches);
-		const { current1DisplayedMatches } = this.props.matches;
+		//console.log('in Matches.js this.props = ', this.props);
+		const { matches, history } = this.props;
 
-		if (current1DisplayedMatches.length > 0) {
-			return _.map(matchesFields, match => {
+		if (matches.current1DisplayedMatches.length > 0) {
+			return _.map(matches.current1DisplayedMatches, match => {
 				return (
 					<Col
 						key={match.name}
@@ -58,23 +56,21 @@ class Matches extends Component {
 										color: this.props.colorTheme.text1Color
 									}}
 								>
-									{current1DisplayedMatches[0].name}
+									{match.name}
 								</h3>
 								<p
 									style={{
 										color: this.props.colorTheme.text3Color
 									}}
 								>
-									Interests:{' '}
-									{current1DisplayedMatches[0].interests}
+									Interests: {match.interests}
 								</p>
 								<p
 									style={{
 										color: this.props.colorTheme.text3Color
 									}}
 								>
-									Total User Votes:{' '}
-									{current1DisplayedMatches[0].totalUserVotes}
+									Total User Votes: {match.totalUserVotes}
 								</p>
 								<Row
 									type="flex"
@@ -106,7 +102,11 @@ class Matches extends Component {
 												color: this.props.colorTheme
 													.text2Color
 											}}
-											onClick={e => this.onStartChat()}
+											onClick={e =>
+												this.onStartConversation(
+													history
+												)
+											}
 										>
 											Say Hi :)
 										</Button>
@@ -200,6 +200,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		onNextMatch: () => {
 			matchesDispatchers.onNextMatch();
+		},
+		onStartConversation: history => {
+			matchesDispatchers.onStartConversation(history);
 		}
 	};
 }

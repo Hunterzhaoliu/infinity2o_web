@@ -36,7 +36,7 @@ class InputFieldSelect extends Component {
 					>
 						<h3
 							style={{
-								color: colorTheme.keyText5Color
+								color: colorTheme.text6Color
 							}}
 						>
 							{label}

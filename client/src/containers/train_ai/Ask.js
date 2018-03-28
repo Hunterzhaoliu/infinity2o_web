@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as indexActionCreators from '../../actions/index';
+import * as authActionCreators from '../../actions/auth';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import * as askActionCreators from '../../actions/ask';
 import { bindActionCreators } from 'redux';
@@ -190,7 +190,10 @@ class Ask extends Component {
 					hasError={ask.hasQuestionError}
 				/>
 				{this.renderAnswerInputs(ask.newAnswers)}
-				{this.renderAddAnswerButton(ask.displayAddAnswerButton, colorTheme)}
+				{this.renderAddAnswerButton(
+					ask.displayAddAnswerButton,
+					colorTheme
+				)}
 				<Row
 					type="flex"
 					justify="start"
@@ -234,7 +237,7 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const indexDispatchers = bindActionCreators(indexActionCreators, dispatch);
+	const indexDispatchers = bindActionCreators(authActionCreators, dispatch);
 
 	const colorThemeDispatchers = bindActionCreators(
 		colorThemeActionCreators,
