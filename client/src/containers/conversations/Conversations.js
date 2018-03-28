@@ -19,17 +19,7 @@ class Conversations extends Component {
 					padding: '75px 50px 0px', // top left&right bottom
 					background: this.props.colorTheme.backgroundColor
 				}}
-			>
-				<h2
-					key="1"
-					style={{
-						color: this.props.colorTheme.text3Color,
-						padding: '0% 0% 5%'
-					}}
-				>
-					Conversations
-				</h2>
-			</Content>
+			/>
 		);
 	}
 }

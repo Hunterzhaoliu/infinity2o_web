@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../actions/colorTheme';
 
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col, Button, Icon } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
@@ -61,7 +61,7 @@ class CustomHeader extends Component {
 									Change Theme
 								</Button>
 							</Col>
-							<Col md={{ span: 3, offset: 1 }} key="1">
+							<Col md={{ span: 2, offset: 1 }} key="1">
 								<Button
 									style={{
 										borderColor:
@@ -109,7 +109,7 @@ class CustomHeader extends Component {
 									</Link>
 								</Button>
 							</Col>
-							<Col md={{ span: 3, offset: 1 }} key="4">
+							<Col md={{ span: 1, offset: 1 }} key="4">
 								<Button
 									style={{
 										borderColor:
@@ -122,11 +122,13 @@ class CustomHeader extends Component {
 									onClick={onPressConversations}
 								>
 									<Link to="/conversations">
-										<div>Convo</div>
+										<div>
+											<Icon type="message" />
+										</div>
 									</Link>
 								</Button>
 							</Col>
-							<Col md={{ span: 3, offset: 1 }} key="5">
+							<Col md={{ span: 3, offset: 4 }} key="5">
 								<Button
 									style={{
 										borderColor: colorTheme.text7Color,
