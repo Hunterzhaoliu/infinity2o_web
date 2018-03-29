@@ -41,9 +41,13 @@ class Conversations extends Component {
 
 		return _.map(conversation1, (message, index) => {
 			const nameAndMessage = message.senderName + ': ' + message.contents;
+			let justifyValue = 'start';
+			if (message.senderName === 'Hunter') {
+				justifyValue = 'end';
+			}
 			return (
 				<div key={index}>
-					<Row type="flex" justify="start" align="middle">
+					<Row type="flex" justify={justifyValue} align="middle">
 						<Col>
 							<p
 								style={{
