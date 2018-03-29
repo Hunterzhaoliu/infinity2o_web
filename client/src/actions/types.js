@@ -46,4 +46,4 @@ export const ON_NEXT_MATCH = 'ON_NEXT_MATCH';
 export const MOVE_TO_CONVERSATIONS = 'MOVE_TO_CONVERSATIONS';
 
 // conversations/Conversations.js
-export const TEST = 'TEST';
+export const ON_CHANGE_TYPED_MESSAGE = 'ON_CHANGE_TYPED_MESSAGE';

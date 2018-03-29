@@ -1,15 +1,20 @@
-import { TEST } from '../actions/types';
+import { ON_CHANGE_TYPED_MESSAGE } from '../actions/types';
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
 };
 
-let initialState = {};
+let initialState = {
+	contacts: [],
+	displayMessages: [],
+	typedMessage: null
+};
 
 export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
-		case TEST:
+		case ON_CHANGE_TYPED_MESSAGE:
+			newState.typedMessage = action.newMessage;
 			return newState;
 		default:
 			return state;
