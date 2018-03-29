@@ -4,10 +4,7 @@ let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
 };
 
-let initialState = {
-	current1DisplayedMatches: [],
-	nextMatches: []
-};
+let initialState = {};
 
 export default function(state = initialState, action) {
 	let newState = cloneObject(state);

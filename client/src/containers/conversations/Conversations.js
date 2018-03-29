@@ -5,7 +5,7 @@ import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import conversation1 from './conversation1';
 
-import { Layout, Input, Row, Col, Affix } from 'antd';
+import { Layout, Input, Row, Col, Affix, Icon } from 'antd';
 const { Content } = Layout;
 
 class Conversations extends Component {
@@ -14,11 +14,24 @@ class Conversations extends Component {
 		this.props.onPressConversations();
 	}
 
+	renderMessageStatusIcon(status) {
+		if (status === 'sending') {
+			return <Icon type="loading" />;
+		} else if (status === 'sent') {
+			return <Icon type="check-circle-o" />;
+		} else if (status === 'saved_in_db') {
+			return <Icon type="check-circle" />;
+		} else if (status === 'failed') {
+			return <Icon type="warning" />;
+		}
+	}
+
 	renderConversation() {
 		const { colorTheme } = this.props;
 
 		return _.map(conversation1, (message, index) => {
-			const nameAndMessage = message.senderName + ': ' + message.contents;
+			const nameAndMessage =
+				message.senderName + ': ' + message.contents + ' ';
 			return (
 				<div key={index}>
 					<Row type="flex" justify="start" align="middle">
@@ -27,12 +40,13 @@ class Conversations extends Component {
 								style={{
 									borderColor: colorTheme.text8Color,
 									background: colorTheme.text8Color,
-									color: colorTheme.text5Color,
+									color: colorTheme.text3Color,
 									borderRadius: '25px',
-									padding: '8px'
+									padding: '4px 15px 4px'
 								}}
 							>
-								{nameAndMessage}
+								{nameAndMessage}{' '}
+								{this.renderMessageStatusIcon('failed')}
 							</p>
 						</Col>
 					</Row>
@@ -66,9 +80,9 @@ class Conversations extends Component {
 								placeholder="type here..."
 								style={{
 									width: 492,
-									borderColor: colorTheme.text8Color,
-									background: colorTheme.text8Color,
-									color: colorTheme.text5Color
+									borderColor: colorTheme.text7Color,
+									background: colorTheme.text7Color,
+									color: colorTheme.text1Color
 								}}
 							/>
 						</Affix>
