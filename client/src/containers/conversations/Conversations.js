@@ -64,7 +64,7 @@ class Conversations extends Component {
 						<Col>
 							<p
 								style={{
-									color: colorTheme.text3Color,
+									color: colorTheme.text6Color,
 									padding: '12px 4px 0px'
 								}}
 							>
