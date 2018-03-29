@@ -5,7 +5,7 @@ import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import conversation1 from './conversation1';
 
-import { Layout, Input, Row, Col, Card, Affix } from 'antd';
+import { Layout, Input, Row, Col, Affix } from 'antd';
 const { Content } = Layout;
 
 class Conversations extends Component {
@@ -19,39 +19,26 @@ class Conversations extends Component {
 
 		return _.map(conversation1, (message, index) => {
 			const nameAndMessage = message.senderName + ': ' + message.contents;
-			const width = 50 + nameAndMessage.length * 6;
 			return (
 				<div key={index}>
-					<Row type="flex" justify="start">
+					<Row type="flex" justify="start" align="middle">
 						<Col>
 							<p
 								style={{
-									color: colorTheme.text5Color
-								}}
-							>
-								{message.senderName}
-							</p>
-						</Col>
-					</Row>
-					<Row type="flex" justify="start">
-						<Col md={{ span: 24, offset: 0 }}>
-							<Card
-								bordered={false}
-								style={{
 									borderColor: colorTheme.text8Color,
 									background: colorTheme.text8Color,
-									color: colorTheme.text2Color,
-									width: width,
-									height: 70
+									color: colorTheme.text5Color,
+									borderRadius: '25px',
+									padding: '8px'
 								}}
 							>
-								{message.contents}
-							</Card>
+								{nameAndMessage}
+							</p>
 						</Col>
 					</Row>
 					<Row
 						style={{
-							padding: '36px 0px 0px' // top left&right bottom
+							padding: '5px 0px 0px' // top left&right bottom
 						}}
 					/>
 				</div>
@@ -71,20 +58,16 @@ class Conversations extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Row type="flex" justify="end" align="middle">
-					<Col md={{ span: 24, offset: 0 }}>
-						{this.renderConversation()}
-					</Col>
-				</Row>
+				{this.renderConversation()}
 				<Row type="flex" justify="start" align="middle">
-					<Col md={{ span: 24, offset: 0 }}>
+					<Col>
 						<Affix offsetBottom={0}>
 							<Input
 								placeholder="type here..."
 								style={{
-									width: 700,
-									borderColor: colorTheme.text9Color,
-									background: colorTheme.text9Color,
+									width: 492,
+									borderColor: colorTheme.text8Color,
+									background: colorTheme.text8Color,
 									color: colorTheme.text5Color
 								}}
 							/>

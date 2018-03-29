@@ -23,10 +23,24 @@ class DayDropdown extends Component {
 	};
 
 	renderMenuItems(day, newTimeSlots) {
+		const { colorTheme } = this.props;
+
 		return _.map(timeSlotOptions, timeSlot => {
 			return (
-				<Menu.Item key={day.value + ' ' + timeSlot}>
+				<Menu.Item
+					style={{
+						borderColor: colorTheme.text8Color,
+						background: colorTheme.text8Color,
+						color: colorTheme.text4Color
+					}}
+					key={day.value + ' ' + timeSlot}
+				>
 					<Checkbox
+						style={{
+							borderColor: colorTheme.text8Color,
+							background: colorTheme.text8Color,
+							color: colorTheme.text4Color
+						}}
 						checked={this.isChecked(timeSlot, newTimeSlots)}
 						value={[day.value, timeSlot]}
 						onChange={this.onChangeTimeSlot}

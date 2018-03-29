@@ -39,12 +39,17 @@ class InputTimeZone extends Component {
 						xl={{ span: 18, offset: 1 }}
 					>
 						<TreeSelect
-							style={{ width }}
+							style={{
+								width: width
+								// borderColor: colorTheme.text8Color,
+								// background: colorTheme.text8Color,
+								// color: colorTheme.text4Color
+							}}
 							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
 							value={profile.newTimeZone}
 							onChange={this.onChangeTimeZone}
 							treeData={timeZones}
-							placeholder="Time Zone???!"
+							placeholder="Time Zone?"
 						/>
 					</Col>
 				</Row>
