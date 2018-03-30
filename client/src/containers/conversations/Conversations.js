@@ -26,7 +26,7 @@ class Conversation extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Row type="flex" justify="space-between" align="middle">
+				<Row type="flex" justify="space-between">
 					<Col
 						md={{ span: 8 }}
 						style={{

@@ -69,9 +69,10 @@ class Contacts extends Component {
 							renderItem={item => (
 								<List.Item
 									style={{
-										borderColor: colorTheme.text7Color,
-										background: colorTheme.text9Color,
-										color: colorTheme.text1Color
+										borderColor: colorTheme.backgroundColor,
+										background: colorTheme.backgroundColor,
+										color: colorTheme.text1Color,
+										padding: '5px 0px 0px'
 									}}
 								>
 									<Button
@@ -79,7 +80,9 @@ class Contacts extends Component {
 										style={{
 											borderColor: colorTheme.text7Color,
 											background: colorTheme.text7Color,
-											color: colorTheme.text3Color
+											color: colorTheme.text3Color,
+											height: '50px',
+											width: '220px'
 										}}
 										onClick={this.onClick}
 									>
