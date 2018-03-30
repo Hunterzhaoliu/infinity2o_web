@@ -128,7 +128,7 @@ class Chat extends Component {
 												</p>
 											</List.Item>
 										</Col>
-										<Col>
+										<Col xl={{ span: 1 }}>
 											<p
 												style={{
 													color:

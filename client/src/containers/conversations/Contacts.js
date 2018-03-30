@@ -44,7 +44,10 @@ class Contacts extends Component {
 		});
 	};
 
-	onClick = e => {};
+	onSelectContact = id => {
+		console.log('onSelectContact id = ', id);
+	};
+
 	render() {
 		//console.log('Contacts this.props = ', this.props);
 		const { colorTheme } = this.props;
@@ -66,29 +69,37 @@ class Contacts extends Component {
 					>
 						<List
 							dataSource={this.state.data}
-							renderItem={item => (
-								<List.Item
-									style={{
-										borderColor: colorTheme.backgroundColor,
-										background: colorTheme.backgroundColor,
-										padding: '5px 0px 0px'
-									}}
-								>
-									<Button
-										key={item.id}
+							renderItem={item => {
+								//console.log('item = ', item);
+								return (
+									<List.Item
 										style={{
-											borderColor: colorTheme.text8Color,
-											background: colorTheme.text8Color,
-											color: colorTheme.text4Color,
-											height: '50px',
-											width: '220px'
+											borderColor:
+												colorTheme.backgroundColor,
+											background:
+												colorTheme.backgroundColor,
+											padding: '5px 0px 0px'
 										}}
-										onClick={this.onClick}
 									>
-										{item.name}
-									</Button>
-								</List.Item>
-							)}
+										<Button
+											style={{
+												borderColor:
+													colorTheme.text8Color,
+												background:
+													colorTheme.text8Color,
+												color: colorTheme.text4Color,
+												height: '50px',
+												width: '220px'
+											}}
+											onClick={e =>
+												this.onSelectContact(item.id)
+											}
+										>
+											{item.name}
+										</Button>
+									</List.Item>
+								);
+							}}
 						>
 							{this.state.loading &&
 								this.state.hasMore && (
