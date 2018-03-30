@@ -15,7 +15,7 @@ class Chat extends Component {
 	}
 
 	onChangeTypedMessage = e => {
-		console.log('e.target.value = ', e.target.value);
+		// console.log('e.target.value = ', e.target.value);
 		this.props.onChangeTypedMessage(e.target.value);
 	};
 
@@ -41,6 +41,7 @@ class Chat extends Component {
 		return _.map(conversation1, (message, index) => {
 			const nameAndMessage = message.senderName + ': ' + message.contents;
 			let justifyValue = 'start';
+			// replace 'Hunter' with the user1's name
 			if (message.senderName === 'Hunter') {
 				justifyValue = 'end';
 			}
