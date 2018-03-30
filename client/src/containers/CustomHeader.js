@@ -49,7 +49,7 @@ class CustomHeader extends Component {
 				return (
 					<div>
 						<Row type="flex" justify="space-between">
-							<Col md={{ span: 4 }} xl={{ span: 3 }} key="0">
+							<Col md={{ span: 4 }} xl={{ span: 5 }} key="0">
 								<Button
 									style={{
 										borderColor: colorTheme.text7Color,
@@ -146,7 +146,7 @@ class CustomHeader extends Component {
 							</Col>
 							<Col
 								md={{ span: 3, offset: 4 }}
-								xl={{ span: 2, offset: 12 }}
+								xl={{ span: 2, offset: 9 }}
 								key="5"
 							>
 								<Button

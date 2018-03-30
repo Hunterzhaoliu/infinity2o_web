@@ -33,7 +33,8 @@ class TrainAI extends Component {
 						padding: '0% 0% 5px' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
+					<Col xl={{ span: 5 }} />
+					<Col xl={{ span: 14 }}>
 						<h2
 							style={{
 								color: colorTheme.text2Color
@@ -43,6 +44,7 @@ class TrainAI extends Component {
 							core beliefs align.
 						</h2>
 					</Col>
+					<Col xl={{ span: 5 }} />
 				</Row>
 				<Row
 					type="flex"
@@ -52,7 +54,8 @@ class TrainAI extends Component {
 						padding: '0% 0% 5px' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 16 }}>
+					<Col xl={{ span: 7 }} />
+					<Col xl={{ span: 8 }}>
 						<h3
 							style={{
 								color: colorTheme.text3Color
@@ -62,7 +65,7 @@ class TrainAI extends Component {
 							you:
 						</h3>
 					</Col>
-					<Col md={{ span: 4, offset: 0 }}>
+					<Col xl={{ span: 2, offset: 0 }}>
 						<Button
 							key="1"
 							style={{
@@ -74,6 +77,7 @@ class TrainAI extends Component {
 							<a href="/train_ai/ask">Ask Question</a>
 						</Button>
 					</Col>
+					<Col xl={{ span: 7 }} />
 				</Row>
 				<Row
 					type="flex"
@@ -103,9 +107,11 @@ class TrainAI extends Component {
 						padding: '0px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
+					<Col xl={{ span: 5 }} />
+					<Col md={{ span: 14 }}>
 						<InputVote />
 					</Col>
+					<Col xl={{ span: 5 }} />
 				</Row>
 			</Content>
 		);

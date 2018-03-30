@@ -181,29 +181,35 @@ class Profile extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				{this.renderProfile(colorTheme, profile)}
-				<Row>
-					<h2
-						style={{
-							padding: '25px 0% 0%', // top left&right bottom
-							color: colorTheme.keyText7Color
-						}}
-					>
-						Your Questions
-					</h2>
+				<Row type="flex" justify="start" align="middle">
+					<Col xl={{ span: 5 }} />
+					<Col xl={{ span: 14 }}>
+						{this.renderProfile(colorTheme, profile)}
+						<Row>
+							<h2
+								style={{
+									padding: '25px 0% 0%', // top left&right bottom
+									color: colorTheme.keyText7Color
+								}}
+							>
+								Your Questions
+							</h2>
+						</Row>
+						{this.renderQuestions(profile.asks, colorTheme)}
+						<Row>
+							<h2
+								style={{
+									padding: '25px 0% 0%', // top left&right bottom
+									color: colorTheme.keyText7Color
+								}}
+							>
+								Your Votes
+							</h2>
+						</Row>
+						{this.renderVotes(profile.asks, colorTheme)}
+					</Col>
+					<Col xl={{ span: 5 }} />
 				</Row>
-				{this.renderQuestions(profile.asks, colorTheme)}
-				<Row>
-					<h2
-						style={{
-							padding: '25px 0% 0%', // top left&right bottom
-							color: colorTheme.keyText7Color
-						}}
-					>
-						Your Votes
-					</h2>
-				</Row>
-				{this.renderVotes(profile.asks, colorTheme)}
 			</Content>
 		);
 	}
