@@ -1,21 +1,42 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 
-import Chat from './Chat';
-import Contacts from './Contacts';
-import { Layout, Row, Col } from 'antd';
+import contacts1 from './contacts1';
+import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
-class Conversation extends Component {
+const fakeDataUrl =
+	'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
+
+class Contacts extends Component {
 	componentWillMount() {
 		// run once before first render()
-		this.props.onPressConversations();
+	}
+
+	renderContacts() {
+		const { colorTheme } = this.props;
+
+		return _.map(contacts1, (contact, index) => {
+			return (
+				<Row
+					key={index}
+					style={{
+						padding: '5px 0px 0px' // top left&right bottom
+					}}
+				>
+					<Col>
+						<Button>{contact.name}</Button>
+					</Col>
+				</Row>
+			);
+		});
 	}
 
 	render() {
-		//console.log('Conversation this.props = ', this.props);
+		//console.log('Contacts this.props = ', this.props);
 		const { colorTheme } = this.props;
 
 		return (
@@ -26,17 +47,14 @@ class Conversation extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Row type="flex" justify="space-between" align="middle">
+				<Row type="flex" justify="start" align="middle">
 					<Col
-						md={{ span: 8 }}
 						style={{
 							color: colorTheme.text3Color
 						}}
 					>
-						<Contacts />
-					</Col>
-					<Col md={{ span: 16 }}>
-						<Chat />
+						<p>Contacts</p>
+						{this.renderContacts()}
 					</Col>
 				</Row>
 			</Content>
@@ -71,4 +89,4 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Conversation);
+export default connect(mapStateToProps, mapDispatchToProps)(Contacts);
