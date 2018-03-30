@@ -44,7 +44,7 @@ class App extends Component {
 						path="/conversations"
 						component={Conversations}
 					/>
-					{/* <Footer
+					<Footer
 						style={{
 							textAlign: 'center',
 							background: this.props.colorTheme.backgroundColor,
@@ -71,7 +71,7 @@ class App extends Component {
 								</p>
 							</Col>
 						</Row>
-					</Footer> */}
+					</Footer>
 				</Layout>
 			</BrowserRouter>
 		);

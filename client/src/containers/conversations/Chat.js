@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
@@ -137,18 +136,54 @@ class Chat extends Component {
 					>
 						<List
 							dataSource={this.state.data}
-							renderItem={item => (
-								<List.Item
-									style={{
-										borderColor: colorTheme.backgroundColor,
-										background: colorTheme.backgroundColor,
-										color: colorTheme.text1Color,
-										padding: '5px 0px 0px'
-									}}
-								>
-									{item.contents}
-								</List.Item>
-							)}
+							renderItem={item => {
+								console.log('test');
+								const nameAndMessage =
+									item.senderName + ': ' + item.contents;
+								let justifyValue = 'start';
+								// replace 'Hunter' with the user1's name
+								if (item.senderName === 'Hunter') {
+									justifyValue = 'end';
+								}
+								return (
+									<Row
+										type="flex"
+										justify={justifyValue}
+										align="middle"
+									>
+										<Col>
+											<List.Item
+												style={{
+													borderColor:
+														colorTheme.text8Color,
+													borderWidth: '2px',
+													background:
+														colorTheme.text8Color,
+													color:
+														colorTheme.text3Color,
+													borderRadius: '25px',
+													padding: '4px 15px 4px'
+												}}
+											>
+												{nameAndMessage}
+											</List.Item>
+										</Col>
+										<Col>
+											<p
+												style={{
+													color:
+														colorTheme.text8Color,
+													padding: '29px 4px 0px'
+												}}
+											>
+												{this.renderMessageStatusIcon(
+													'delivered'
+												)}
+											</p>
+										</Col>
+									</Row>
+								);
+							}}
 						>
 							{this.state.loading &&
 								this.state.hasMore && (
