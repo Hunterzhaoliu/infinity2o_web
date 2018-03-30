@@ -8,6 +8,10 @@ export default [
 		contents: 'Hey Q'
 	},
 	{
+		senderName: 'Hunter',
+		contents: 'Any class suggestions?'
+	},
+	{
 		senderName: 'Q',
 		contents: 'I found a cool AI class on coursera.org. interested?'
 	},
