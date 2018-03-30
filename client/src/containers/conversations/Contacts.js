@@ -1,15 +1,14 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
-import { Layout, Row, Col, List, message, Spin } from 'antd';
+import { Layout, List, Spin, Button } from 'antd';
 import contacts1 from './contacts1';
 import InfiniteScroll from 'react-infinite-scroller';
 import './Contacts.css';
 const { Content } = Layout;
 
-let i = 6;
+let i = 20;
 
 class Contacts extends Component {
 	state = {
@@ -21,7 +20,7 @@ class Contacts extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.setState({
-			data: contacts1.slice(0, 6)
+			data: contacts1.slice(0, 20)
 		});
 	}
 
@@ -30,8 +29,7 @@ class Contacts extends Component {
 		this.setState({
 			loading: true
 		});
-		if (data.length > 15) {
-			message.warning('Infinite List loaded all');
+		if (data.length === contacts1.length) {
 			this.setState({
 				hasMore: false,
 				loading: false
@@ -46,6 +44,7 @@ class Contacts extends Component {
 		});
 	};
 
+	onClick = e => {};
 	render() {
 		//console.log('Contacts this.props = ', this.props);
 		const { colorTheme } = this.props;
@@ -68,13 +67,31 @@ class Contacts extends Component {
 						<List
 							dataSource={this.state.data}
 							renderItem={item => (
-								<List.Item key={item.id}>
-									<p style={{ color: colorTheme.text3Color }}>{item.name}</p>
+								<List.Item
+									style={{
+										borderColor: colorTheme.text7Color,
+										background: colorTheme.text9Color,
+										color: colorTheme.text1Color
+									}}
+								>
+									<Button
+										key={item.id}
+										style={{
+											borderColor: colorTheme.text7Color,
+											background: colorTheme.text7Color,
+											color: colorTheme.text3Color
+										}}
+										onClick={this.onClick}
+									>
+										{item.name}
+									</Button>
 								</List.Item>
 							)}
 						>
 							{this.state.loading &&
-								this.state.hasMore && <Spin className="demo-loading" />}
+								this.state.hasMore && (
+									<Spin className="demo-loading" />
+								)}
 						</List>
 					</InfiniteScroll>
 				</div>

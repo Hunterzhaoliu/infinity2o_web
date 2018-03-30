@@ -6,7 +6,7 @@ import * as chatActionCreators from '../../actions/chat';
 import { bindActionCreators } from 'redux';
 import conversation1 from './conversation1';
 
-import { Layout, Input, Row, Col, Affix, Icon, List } from 'antd';
+import { Layout, Input, Row, Col, Affix, Icon } from 'antd';
 const { Content } = Layout;
 
 class Chat extends Component {
@@ -52,6 +52,7 @@ class Chat extends Component {
 							<p
 								style={{
 									borderColor: colorTheme.text8Color,
+									borderWidth: '2px',
 									background: colorTheme.text8Color,
 									color: colorTheme.text3Color,
 									borderRadius: '25px',
