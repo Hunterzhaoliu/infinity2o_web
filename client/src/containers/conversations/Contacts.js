@@ -16,25 +16,6 @@ class Contacts extends Component {
 		// run once before first render()
 	}
 
-	renderContacts() {
-		const { colorTheme } = this.props;
-
-		return _.map(contacts1, (contact, index) => {
-			return (
-				<Row
-					key={index}
-					style={{
-						padding: '5px 0px 0px' // top left&right bottom
-					}}
-				>
-					<Col>
-						<Button>{contact.name}</Button>
-					</Col>
-				</Row>
-			);
-		});
-	}
-
 	render() {
 		//console.log('Contacts this.props = ', this.props);
 		const { colorTheme } = this.props;
@@ -54,7 +35,6 @@ class Contacts extends Component {
 						}}
 					>
 						<p>Contacts</p>
-						{this.renderContacts()}
 					</Col>
 				</Row>
 			</Content>
