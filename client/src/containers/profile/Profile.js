@@ -24,7 +24,7 @@ class Profile extends Component {
 							color: colorTheme.keyText7Color
 						}}
 					>
-						Match Info.:
+						Profile:
 					</h2>
 				</Row>
 				<Row
@@ -111,7 +111,7 @@ class Profile extends Component {
 								color: colorTheme.text1Color
 							}}
 						>
-							<a href="/profile/edit">Edit Match Info.</a>
+							<a href="/profile/edit">Edit</a>
 						</Button>
 					</Col>
 				</Row>

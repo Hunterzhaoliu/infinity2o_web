@@ -71,16 +71,15 @@ class Contacts extends Component {
 									style={{
 										borderColor: colorTheme.backgroundColor,
 										background: colorTheme.backgroundColor,
-										color: colorTheme.text1Color,
 										padding: '5px 0px 0px'
 									}}
 								>
 									<Button
 										key={item.id}
 										style={{
-											borderColor: colorTheme.text7Color,
-											background: colorTheme.text7Color,
-											color: colorTheme.text3Color,
+											borderColor: colorTheme.text8Color,
+											background: colorTheme.text8Color,
+											color: colorTheme.text4Color,
 											height: '50px',
 											width: '220px'
 										}}
