@@ -67,54 +67,6 @@ class Chat extends Component {
 		}
 	}
 
-	// renderConversation() {
-	// 	const { colorTheme } = this.props;
-	//
-	// 	return _.map(conversation1, (message, index) => {
-	// 		const nameAndMessage = message.senderName + ': ' + message.contents;
-	// 		let justifyValue = 'start';
-	// 		// replace 'Hunter' with the user1's name
-	// 		if (message.senderName === 'Hunter') {
-	// 			justifyValue = 'end';
-	// 		}
-	// 		return (
-	//
-	// 		);
-	// 	});
-	// }
-
-	// <Row type="flex" justify={justifyValue} align="middle">
-	//     <Col>
-	//         <p
-	//             style={{
-	//                 borderColor: colorTheme.text8Color,
-	//                 borderWidth: '2px',
-	//                 background: colorTheme.text8Color,
-	//                 color: colorTheme.text3Color,
-	//                 borderRadius: '25px',
-	//                 padding: '4px 15px 4px'
-	//             }}
-	//         >
-	//             {nameAndMessage}
-	//         </p>
-	//     </Col>
-	//     <Col>
-	//         <p
-	//             style={{
-	//                 color: colorTheme.text8Color,
-	//                 padding: '12px 4px 0px'
-	//             }}
-	//         >
-	//             {this.renderMessageStatusIcon('delivered')}
-	//         </p>
-	//     </Col>
-	// </Row>
-	// <Row
-	//     style={{
-	//         padding: '5px 0px 0px' // top left&right bottom
-	//     }}
-	// />
-
 	render() {
 		//console.log('Chat this.props = ', this.props);
 		const { colorTheme, chat } = this.props;
@@ -137,7 +89,6 @@ class Chat extends Component {
 						<List
 							dataSource={this.state.data}
 							renderItem={item => {
-								console.log('test');
 								const nameAndMessage =
 									item.senderName + ': ' + item.contents;
 								let justifyValue = 'start';
@@ -150,22 +101,31 @@ class Chat extends Component {
 										type="flex"
 										justify={justifyValue}
 										align="middle"
+										style={{
+											padding: '0px 0px 0px'
+										}}
 									>
 										<Col>
 											<List.Item
 												style={{
-													borderColor:
-														colorTheme.text8Color,
-													borderWidth: '2px',
-													background:
-														colorTheme.text8Color,
-													color:
-														colorTheme.text3Color,
-													borderRadius: '25px',
-													padding: '4px 15px 4px'
+													padding: '0px 0px 0px'
 												}}
 											>
-												{nameAndMessage}
+												<p
+													style={{
+														borderColor:
+															colorTheme.text8Color,
+														borderWidth: '2px',
+														background:
+															colorTheme.text8Color,
+														color:
+															colorTheme.text3Color,
+														borderRadius: '25px',
+														padding: '4px 15px 4px'
+													}}
+												>
+													{nameAndMessage}
+												</p>
 											</List.Item>
 										</Col>
 										<Col>
@@ -173,7 +133,7 @@ class Chat extends Component {
 												style={{
 													color:
 														colorTheme.text8Color,
-													padding: '29px 4px 0px'
+													padding: '12px 4px 0px'
 												}}
 											>
 												{this.renderMessageStatusIcon(
