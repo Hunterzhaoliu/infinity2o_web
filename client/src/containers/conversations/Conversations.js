@@ -27,17 +27,19 @@ class Conversation extends Component {
 				}}
 			>
 				<Row type="flex" justify="space-between">
+					<Col md={{ span: 5 }} />
 					<Col
-						md={{ span: 8 }}
+						md={{ span: 4 }}
 						style={{
 							color: colorTheme.text3Color
 						}}
 					>
 						<Contacts />
 					</Col>
-					<Col md={{ span: 16 }}>
+					<Col md={{ span: 10 }}>
 						<Chat />
 					</Col>
+					<Col md={{ span: 5 }} />
 				</Row>
 			</Content>
 		);

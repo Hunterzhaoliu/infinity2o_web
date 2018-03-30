@@ -105,7 +105,7 @@ class Chat extends Component {
 								onChange={this.onChangeTypedMessage}
 								onPressEnter={this.onPressEnter}
 								style={{
-									width: 430,
+									width: 555,
 									borderColor: colorTheme.text7Color,
 									background: colorTheme.text7Color,
 									color: colorTheme.text1Color

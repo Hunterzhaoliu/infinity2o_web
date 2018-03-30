@@ -49,7 +49,7 @@ class CustomHeader extends Component {
 				return (
 					<div>
 						<Row type="flex" justify="space-between">
-							<Col md={{ span: 4 }} key="0">
+							<Col md={{ span: 4 }} xl={{ span: 3 }} key="0">
 								<Button
 									style={{
 										borderColor: colorTheme.text7Color,
@@ -61,7 +61,11 @@ class CustomHeader extends Component {
 									Change Theme
 								</Button>
 							</Col>
-							<Col md={{ span: 2, offset: 1 }} key="1">
+							<Col
+								md={{ span: 2, offset: 1 }}
+								xl={{ span: 2, offset: 0 }}
+								key="1"
+							>
 								<Button
 									style={{
 										borderColor:
@@ -77,7 +81,11 @@ class CustomHeader extends Component {
 									</Link>
 								</Button>
 							</Col>
-							<Col md={{ span: 3, offset: 1 }} key="2">
+							<Col
+								md={{ span: 3, offset: 1 }}
+								xl={{ span: 2, offset: 0 }}
+								key="2"
+							>
 								<Button
 									style={{
 										borderColor:
@@ -93,7 +101,11 @@ class CustomHeader extends Component {
 									</Link>
 								</Button>
 							</Col>
-							<Col md={{ span: 3, offset: 1 }} key="3">
+							<Col
+								md={{ span: 3, offset: 1 }}
+								xl={{ span: 2, offset: 0 }}
+								key="3"
+							>
 								<Button
 									style={{
 										borderColor:
@@ -109,7 +121,11 @@ class CustomHeader extends Component {
 									</Link>
 								</Button>
 							</Col>
-							<Col md={{ span: 1, offset: 1 }} key="4">
+							<Col
+								md={{ span: 1, offset: 1 }}
+								xl={{ span: 1, offset: 0 }}
+								key="4"
+							>
 								<Button
 									style={{
 										borderColor:
@@ -128,7 +144,11 @@ class CustomHeader extends Component {
 									</Link>
 								</Button>
 							</Col>
-							<Col md={{ span: 3, offset: 4 }} key="5">
+							<Col
+								md={{ span: 3, offset: 4 }}
+								xl={{ span: 2, offset: 12 }}
+								key="5"
+							>
 								<Button
 									style={{
 										borderColor: colorTheme.text7Color,

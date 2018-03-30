@@ -6,6 +6,7 @@ import askReducer from './askReducer';
 import trainAIReducer from './trainAIReducer';
 import matchesReducer from './matchesReducer';
 import chatReducer from './chatReducer';
+import conversationsReducer from './conversationsReducer';
 
 export default combineReducers({
 	colorTheme: colorThemeReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
 	ask: askReducer,
 	trainAI: trainAIReducer,
 	matches: matchesReducer,
-	chat: chatReducer
+	chat: chatReducer,
+	conversations: conversationsReducer
 });
