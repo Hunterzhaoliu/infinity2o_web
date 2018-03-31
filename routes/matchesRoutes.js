@@ -1,6 +1,6 @@
 const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
-const ObjectID = require('mongodb').ObjectID;
+const ObjectID = require('mongodb').ObjectID; // TODO: Delete this?
 const ConversationCollection = mongoose.model('conversations');
 const UserCollection = mongoose.model('users');
 
@@ -38,24 +38,47 @@ module.exports = app => {
 			userName = request.user.profile.name;
 		}
 
+		// sets new conversation document to conversation variable
 		const conversation = new ConversationCollection({
 			user1: { name: userName, id: userId },
 			user2: { name: matchName, id: matchId },
 			last50Messages: []
 		});
 
+		// finds userConversationList && matchConversationList
+		const userInDB = await UserCollection.findOne({ _id: userId });
+		let userConversationList = userInDB.conversations;
+		// console.log('userConversationList = ', userConversationList);
+		const matchInDB = await UserCollection.findOne({ _id: matchId });
+		let matchConversationList = matchInDB.conversations;
+		// console.log('matchConversationList = ', matchConversationList);
+
 		try {
 			const conversationInDB = await conversation.save();
-			console.log('conversationInDB = ', conversationInDB);
-			await UserCollection.updateOne({ _id: userId }, {}, { upsert: true });
-			// request.user.profile.asks.questions.push({
-			// 	question: ask.question,
-			// 	_askId: ask._id
-			// });
-			// //
-			//saves document ask in collection asks
-			// const user = await request.user.save();
-			// response.send(user);
+			// console.log('conversationInDB = ', conversationInDB);
+			userConversationList.push({
+				conversationId: conversationInDB._id,
+				matchName: matchName,
+				matchId: matchId
+			});
+			console.log('userConversationList = ', userConversationList);
+			await UserCollection.updateOne(
+				{ _id: userId },
+				{ $set: { conversations: userConversationList } },
+				{ upsert: true }
+			);
+			matchConversationList.push({
+				conversationId: conversationInDB._id,
+				matchName: userName,
+				matchId: userId
+			});
+			console.log('matchConversationList = ', matchConversationList);
+
+			await UserCollection.updateOne(
+				{ _id: matchId },
+				{ $set: { conversations: matchConversationList } },
+				{ upsert: true }
+			);
 		} catch (error) {
 			response.status(422).send(error);
 		}

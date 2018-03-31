@@ -3,6 +3,7 @@ const { Schema } = mongoose; // = const Schema = mongoose.Schema;
 //schema describes every property of a user
 const ProfileQuestionDisplay = require('./ProfileQuestionDisplay');
 const ProfileVoteDisplay = require('./ProfileVoteDisplay');
+const userConversationSchema = require('./UserConversation');
 
 const userSchema = new Schema({
 	auth: {
@@ -30,7 +31,8 @@ const userSchema = new Schema({
 			answerIdsUserVotedOn: [Schema.Types.ObjectId],
 			totalUserVotes: { type: Number, default: 0 }
 		}
-	}
+	},
+	conversations: [userConversationSchema]
 });
 
 mongoose.model('users', userSchema);
