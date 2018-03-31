@@ -4,7 +4,8 @@ import {
 	UPDATE_INITIAL_MATCH,
 	ON_NEXT_MATCH,
 	MOVE_TO_CONVERSATIONS,
-	MOVE_TO_CONVERSATIONS_ERROR
+	UPDATE_CONTACTS,
+	UPDATE_CONTACTS_ERROR
 } from './types';
 
 export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
@@ -35,16 +36,19 @@ export const onStartConversation = (
 		matchId: matchId,
 		matchName: matchName
 	};
-	//console.log('matchInfo inside matches action = ', matchInfo);
-
 	const response = await axios.post('/api/matches', matchInfo);
+
+	console.log('response.data = ', response.data);
 	if (response.status === 200) {
 		dispatch({
-			type: MOVE_TO_CONVERSATIONS,
-			conversations: response.data
+			type: MOVE_TO_CONVERSATIONS
+		});
+		dispatch({
+			type: UPDATE_CONTACTS,
+			contacts: response.data
 		});
 		history.push('/conversations');
 	} else {
-		dispatch({ type: MOVE_TO_CONVERSATIONS_ERROR });
+		dispatch({ type: UPDATE_CONTACTS_ERROR });
 	}
 };
