@@ -5,7 +5,6 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	contacts: [],
 	displayMessages: [],
 	typedMessage: null
 };
