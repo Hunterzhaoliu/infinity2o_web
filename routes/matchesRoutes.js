@@ -79,6 +79,7 @@ module.exports = app => {
 				{ $set: { conversations: matchConversationList } },
 				{ upsert: true }
 			);
+			response.send(userConversationList);
 		} catch (error) {
 			response.status(422).send(error);
 		}

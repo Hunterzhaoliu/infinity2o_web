@@ -40,7 +40,8 @@ export const onStartConversation = (
 	const response = await axios.post('/api/matches', matchInfo);
 	if (response.status === 200) {
 		dispatch({
-			type: MOVE_TO_CONVERSATIONS
+			type: MOVE_TO_CONVERSATIONS,
+			conversations: response.data
 		});
 		history.push('/conversations');
 	} else {
