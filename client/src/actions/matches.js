@@ -3,7 +3,8 @@ import {
 	SAVE_FETCHED_DAILY_MATCHES,
 	UPDATE_INITIAL_MATCH,
 	ON_NEXT_MATCH,
-	MOVE_TO_CONVERSATIONS
+	MOVE_TO_CONVERSATIONS,
+	MOVE_TO_CONVERSATIONS_ERROR
 } from './types';
 
 export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
@@ -25,9 +26,24 @@ export const onNextMatch = () => dispatch => {
 	});
 };
 
-export const onStartConversation = history => dispatch => {
-	dispatch({
-		type: MOVE_TO_CONVERSATIONS
-	});
-	history.push('/conversations');
+export const onStartConversation = (
+	history,
+	matchName,
+	matchId
+) => async dispatch => {
+	const matchInfo = {
+		matchId: matchId,
+		matchName: matchName
+	};
+	//console.log('matchInfo inside matches action = ', matchInfo);
+
+	const response = await axios.post('/api/matches', matchInfo);
+	if (response.status === 200) {
+		dispatch({
+			type: MOVE_TO_CONVERSATIONS
+		});
+		history.push('/conversations');
+	} else {
+		dispatch({ type: MOVE_TO_CONVERSATIONS_ERROR });
+	}
 };

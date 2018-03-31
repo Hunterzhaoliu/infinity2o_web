@@ -17,14 +17,13 @@ class Matches extends Component {
 		this.props.onNextMatch();
 	}
 
-	onStartConversation(history) {
-		this.props.onStartConversation(history);
+	onStartConversation(history, matchName, matchId) {
+		this.props.onStartConversation(history, matchName, matchId);
 	}
 
 	renderMatches() {
 		//console.log('in Matches.js this.props = ', this.props);
 		const { matches, history } = this.props;
-
 		if (matches.current1DisplayedMatches.length > 0) {
 			return _.map(matches.current1DisplayedMatches, match => {
 				return (
@@ -46,8 +45,7 @@ class Matches extends Component {
 								style={{
 									width: '260px',
 									color: this.props.colorTheme.text1Color,
-									borderColor: this.props.colorTheme
-										.text8Color,
+									borderColor: this.props.colorTheme.text8Color,
 									background: this.props.colorTheme.text8Color
 								}}
 							>
@@ -72,20 +70,13 @@ class Matches extends Component {
 								>
 									Total User Votes: {match.totalUserVotes}
 								</p>
-								<Row
-									type="flex"
-									justify="space-between"
-									align="top"
-								>
+								<Row type="flex" justify="space-between" align="top">
 									<Col span={11}>
 										<Button
 											style={{
-												borderColor: this.props
-													.colorTheme.text6Color,
-												background: this.props
-													.colorTheme.text6Color,
-												color: this.props.colorTheme
-													.text2Color
+												borderColor: this.props.colorTheme.text6Color,
+												background: this.props.colorTheme.text6Color,
+												color: this.props.colorTheme.text2Color
 											}}
 											onClick={e => this.onNextMatch()}
 										>
@@ -95,17 +86,12 @@ class Matches extends Component {
 									<Col span={11}>
 										<Button
 											style={{
-												borderColor: this.props
-													.colorTheme.text6Color,
-												background: this.props
-													.colorTheme.text6Color,
-												color: this.props.colorTheme
-													.text2Color
+												borderColor: this.props.colorTheme.text6Color,
+												background: this.props.colorTheme.text6Color,
+												color: this.props.colorTheme.text2Color
 											}}
 											onClick={e =>
-												this.onStartConversation(
-													history
-												)
+												this.onStartConversation(history, match.name, match.id)
 											}
 										>
 											Say Hi :)
@@ -146,8 +132,7 @@ class Matches extends Component {
 						padding: '0% 0% 5%'
 					}}
 				>
-					Every 24 hours at 6 AM CT our AI generates the best partners
-					for you.
+					Every 24 hours at 6 AM CT our AI generates the best partners for you.
 				</h2>
 				<Row type="flex" justify="space-between" align="top">
 					<Col
@@ -202,8 +187,8 @@ function mapDispatchToProps(dispatch) {
 		onNextMatch: () => {
 			matchesDispatchers.onNextMatch();
 		},
-		onStartConversation: history => {
-			matchesDispatchers.onStartConversation(history);
+		onStartConversation: (history, matchName, matchId) => {
+			matchesDispatchers.onStartConversation(history, matchName, matchId);
 		}
 	};
 }
