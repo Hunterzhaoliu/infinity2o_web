@@ -45,7 +45,9 @@ module.exports = app => {
 		});
 
 		try {
-			await conversation.save();
+			const conversationInDB = await conversation.save();
+			console.log('conversationInDB = ', conversationInDB);
+			await UserCollection.updateOne({ _id: userId }, {}, { upsert: true });
 			// request.user.profile.asks.questions.push({
 			// 	question: ask.question,
 			// 	_askId: ask._id
