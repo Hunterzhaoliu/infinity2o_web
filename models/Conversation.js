@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose; // = const Schema = mongoose.Schema;
+const { Schema } = mongoose;
+const MessageSchema = require('./Message');
 
 const conversationSchema = new Schema({
 	user1: {
@@ -10,7 +11,7 @@ const conversationSchema = new Schema({
 		name: String,
 		id: String
 	},
-	last50Messages: []
+	last50Messages: [MessageSchema]
 });
 
 mongoose.model('conversations', conversationSchema);
