@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
+import * as conversationsActionCreators from '../../actions/conversations';
 import { bindActionCreators } from 'redux';
 
 import Chat from './Chat';
@@ -12,7 +13,7 @@ class Conversation extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onPressConversations();
-		//this.props.fetchConversations();
+		this.props.fetchConversations();
 	}
 
 	render() {
@@ -67,9 +68,17 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
+	const conversationsDispatchers = bindActionCreators(
+		conversationsActionCreators,
+		dispatch
+	);
+
 	return {
 		onPressConversations: () => {
 			colorThemeDispatchers.onPressConversations();
+		},
+		fetchConversations: () => {
+			conversationsDispatchers.fetchConversations();
 		}
 	};
 }

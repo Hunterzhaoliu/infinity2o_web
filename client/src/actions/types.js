@@ -49,5 +49,9 @@ export const UPDATE_CONTACTS_ERROR = 'UPDATE_CONTACTS_ERROR ';
 export const DELETE_MATCH_IN_DB = 'DELETE_MATCH_IN_DB';
 export const DELETE_MATCH_IN_DB_ERROR = 'DELETE_MATCH_IN_DB_ERROR';
 
+// conversations/Chat.js
+export const UPDATE_CHAT = 'UPDATE_CHAT';
+export const UPDATE_CHAT_ERROR = 'UPDATE_CHAT_ERROR';
+
 // conversations/Conversations.js
 export const ON_CHANGE_TYPED_MESSAGE = 'ON_CHANGE_TYPED_MESSAGE';

@@ -1,4 +1,8 @@
-import { ON_CHANGE_TYPED_MESSAGE } from '../actions/types';
+import {
+	ON_CHANGE_TYPED_MESSAGE,
+	UPDATE_CHAT,
+	UPDATE_CHAT_ERROR
+} from '../actions/types';
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
@@ -6,7 +10,8 @@ let cloneObject = obj => {
 
 let initialState = {
 	displayMessages: [],
-	typedMessage: null
+	typedMessage: null,
+	hasUpdateChatError: false
 };
 
 export default function(state = initialState, action) {
@@ -14,6 +19,12 @@ export default function(state = initialState, action) {
 	switch (action.type) {
 		case ON_CHANGE_TYPED_MESSAGE:
 			newState.typedMessage = action.newMessage;
+			return newState;
+		case UPDATE_CHAT:
+			newState.displayMessages = action.last50Messages;
+			return newState;
+		case UPDATE_CHAT_ERROR:
+			newState.hasUpdateChatError = true;
 			return newState;
 		default:
 			return state;

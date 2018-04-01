@@ -1,6 +1,5 @@
 const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
-const ObjectID = require('mongodb').ObjectID; // TODO: Delete this?
 const ConversationCollection = mongoose.model('conversations');
 const UserCollection = mongoose.model('users');
 
