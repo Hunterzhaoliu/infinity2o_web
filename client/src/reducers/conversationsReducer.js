@@ -18,10 +18,10 @@ export default function(state = initialState, action) {
 		case ON_CHANGE_TYPED_MESSAGE:
 			return newState;
 		case UPDATE_CONTACTS:
-			console.log('contacts = ', action.contacts);
 			newState.contacts = action.contacts;
+			return newState;
 		case UPDATE_CONTACTS_ERROR:
-
+			return newState;
 		default:
 			return state;
 	}

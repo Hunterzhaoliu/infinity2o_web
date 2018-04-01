@@ -61,7 +61,6 @@ module.exports = app => {
 				matchName: matchName,
 				matchId: matchId
 			});
-			console.log('userConversationList = ', userConversationList);
 			await UserCollection.updateOne(
 				{ _id: userId },
 				{ $set: { conversations: userConversationList } },
@@ -72,7 +71,6 @@ module.exports = app => {
 				matchName: userName,
 				matchId: userId
 			});
-			console.log('matchConversationList = ', matchConversationList);
 
 			await UserCollection.updateOne(
 				{ _id: matchId },
