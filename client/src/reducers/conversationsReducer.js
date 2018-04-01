@@ -1,7 +1,9 @@
 import {
 	ON_CHANGE_TYPED_MESSAGE,
 	UPDATE_CONTACTS,
-	UPDATE_CONTACTS_ERROR
+	UPDATE_CONTACTS_ERROR,
+	DELETE_MATCH_IN_DB,
+	DELETE_MATCH_IN_DB_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -9,7 +11,9 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	contacts: []
+	contacts: [],
+	hasContactsError: false,
+	hasDeleteMatchInDBError: false
 };
 
 export default function(state = initialState, action) {
@@ -21,6 +25,12 @@ export default function(state = initialState, action) {
 			newState.contacts = action.contacts;
 			return newState;
 		case UPDATE_CONTACTS_ERROR:
+			newState.hasContactsError = true;
+			return newState;
+		case DELETE_MATCH_IN_DB:
+			return newState;
+		case DELETE_MATCH_IN_DB_ERROR:
+			newState.hasDeleteMatchInDBError = true;
 			return newState;
 		default:
 			return state;

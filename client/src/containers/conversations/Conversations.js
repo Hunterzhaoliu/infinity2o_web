@@ -12,6 +12,7 @@ class Conversation extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onPressConversations();
+		//this.props.fetchConversations();
 	}
 
 	render() {

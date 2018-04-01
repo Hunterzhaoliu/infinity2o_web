@@ -5,7 +5,9 @@ import {
 	ON_NEXT_MATCH,
 	MOVE_TO_CONVERSATIONS,
 	UPDATE_CONTACTS,
-	UPDATE_CONTACTS_ERROR
+	UPDATE_CONTACTS_ERROR,
+	DELETE_MATCH_IN_DB,
+	DELETE_MATCH_IN_DB_ERROR
 } from './types';
 
 export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
@@ -32,13 +34,19 @@ export const onStartConversation = (
 	matchName,
 	matchId
 ) => async dispatch => {
+	// 1) need to remove match from current user
+	// 2) need to remove current user from match's matches
+	// 3) update current user's conversations with new conversation
+	// 4) update match's conversations with new conversation
+
 	const matchInfo = {
 		matchId: matchId,
 		matchName: matchName
 	};
-	const response = await axios.post('/api/matches', matchInfo);
-
-	console.log('response.data = ', response.data);
+	const response = await axios.post(
+		'/api/matches/start_conversation',
+		matchInfo
+	);
 	if (response.status === 200) {
 		dispatch({
 			type: MOVE_TO_CONVERSATIONS
@@ -50,5 +58,14 @@ export const onStartConversation = (
 		history.push('/conversations');
 	} else {
 		dispatch({ type: UPDATE_CONTACTS_ERROR });
+	}
+
+	const response2 = await axios.delete('/api/matches/delete_match', matchId);
+	if (response2.status === 200) {
+		dispatch({
+			type: DELETE_MATCH_IN_DB
+		});
+	} else {
+		dispatch({ type: DELETE_MATCH_IN_DB_ERROR });
 	}
 };

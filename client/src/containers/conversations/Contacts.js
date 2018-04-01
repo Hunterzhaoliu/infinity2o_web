@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import { Layout, List, Spin, Button } from 'antd';
-import contacts1 from './contacts1';
 import InfiniteScroll from 'react-infinite-scroller';
 import './Contacts.css';
 const { Content } = Layout;
@@ -18,25 +17,28 @@ class Contacts extends Component {
 	};
 
 	componentWillMount() {
+		const { contacts } = this.props;
 		// run once before first render()
 		this.setState({
-			data: contacts1.slice(0, 20)
+			data: contacts.slice(0, 20)
 		});
 	}
 
 	handleInfiniteOnLoad = () => {
+		const { contacts } = this.props;
+
 		let data = this.state.data;
 		this.setState({
 			loading: true
 		});
-		if (data.length === contacts1.length) {
+		if (data.length === contacts.length) {
 			this.setState({
 				hasMore: false,
 				loading: false
 			});
 			return;
 		}
-		data = data.concat(contacts1.slice(i, i + 5));
+		data = data.concat(contacts.slice(i, i + 5));
 		i += 5;
 		this.setState({
 			data: data,
@@ -92,10 +94,12 @@ class Contacts extends Component {
 												width: '220px'
 											}}
 											onClick={e =>
-												this.onSelectContact(item.id)
+												this.onSelectContact(
+													item.conversationId
+												)
 											}
 										>
-											{item.name}
+											{item.matchName}
 										</Button>
 									</List.Item>
 								);
@@ -119,7 +123,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		contacts: state.conversations.contacts
 	};
 }
 
