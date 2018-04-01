@@ -8,8 +8,6 @@ import InfiniteScroll from 'react-infinite-scroller';
 import './Contacts.css';
 const { Content } = Layout;
 
-//let i = 20;
-
 class Contacts extends Component {
 	componentWillMount() {
 		// run once before first render()
@@ -24,30 +22,16 @@ class Contacts extends Component {
 			displayMoreContacts
 		} = this.props;
 
-		// let data = this.state.data;
-		// this.setState({
-		// 	loading: true
-		// });
 		setLoading(true);
 		if (displayedContacts.length === contacts.length) {
 			setLoading(false);
 			setHasMore(false);
-			// this.setState({
-			// 	hasMore: false,
-			// 	loading: false
-			// });
+
 			return;
 		}
 		displayMoreContacts(5);
-		// data = data.concat(contacts.slice(i, i + 5));
-		//
-		// i += 5;
 
 		setLoading(false);
-		// this.setState({
-		// 	data: data,
-		// 	loading: false
-		// });
 	};
 
 	onSelectContact = id => {
@@ -56,15 +40,7 @@ class Contacts extends Component {
 
 	render() {
 		//console.log('Contacts this.props = ', this.props);
-		const {
-			colorTheme,
-			contacts,
-			displayedContacts,
-			loading,
-			hasMore
-		} = this.props;
-		console.log('Contacts.js contacts = ', contacts);
-		console.log('Contacts.js displayedContacts = ', displayedContacts);
+		const { colorTheme, displayedContacts, loading, hasMore } = this.props;
 
 		return (
 			<Content

@@ -16,7 +16,7 @@ let cloneObject = obj => {
 let initialState = {
 	contacts: [],
 	displayedContacts: [],
-	i: 20, // initial number of contacts to display
+	i: 20, // initial max number of contacts to display
 	loading: false,
 	hasMore: true,
 	hasContactsError: false,
@@ -30,13 +30,7 @@ export default function(state = initialState, action) {
 			return newState;
 		case UPDATE_CONTACTS:
 			newState.contacts = action.contacts;
-			console.log('newState.contacts = ', newState.contacts);
-			console.log('newState.i = ', newState.i);
 			newState.displayedContacts = newState.contacts.slice(0, newState.i);
-			console.log(
-				'newState.displayedContacts = ',
-				newState.displayedContacts
-			);
 			return newState;
 		case UPDATE_CONTACTS_ERROR:
 			newState.hasContactsError = true;
