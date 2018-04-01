@@ -55,3 +55,6 @@ export const UPDATE_CHAT_ERROR = 'UPDATE_CHAT_ERROR';
 
 // conversations/Conversations.js
 export const ON_CHANGE_TYPED_MESSAGE = 'ON_CHANGE_TYPED_MESSAGE';
+export const SET_LOADING = 'SET_LOADING';
+export const SET_HAS_MORE = 'SET_HAS_MORE';
+export const DISPLAY_MORE_CONTACTS = 'DISPLAY_MORE_CONTACTS';

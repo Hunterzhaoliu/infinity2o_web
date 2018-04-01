@@ -18,7 +18,7 @@ class Conversation extends Component {
 
 	render() {
 		//console.log('Conversation this.props = ', this.props);
-		const { colorTheme } = this.props;
+		const { colorTheme, contacts, chat } = this.props;
 
 		return (
 			<Content
@@ -36,10 +36,10 @@ class Conversation extends Component {
 							color: colorTheme.text3Color
 						}}
 					>
-						<Contacts />
+						<Contacts contacts={contacts} />
 					</Col>
 					<Col md={{ span: 10 }}>
-						<Chat />
+						<Chat chat={chat} />
 					</Col>
 					<Col md={{ span: 5 }} />
 				</Row>
@@ -54,7 +54,9 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		contacts: state.conversations.contacts,
+		chat: state.displayMessages
 	};
 }
 

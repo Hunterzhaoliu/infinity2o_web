@@ -3,7 +3,10 @@ import {
 	UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
 	DELETE_MATCH_IN_DB,
-	DELETE_MATCH_IN_DB_ERROR
+	DELETE_MATCH_IN_DB_ERROR,
+	SET_LOADING,
+	SET_HAS_MORE,
+	DISPLAY_MORE_CONTACTS
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -12,6 +15,10 @@ let cloneObject = obj => {
 
 let initialState = {
 	contacts: [],
+	displayedContacts: [],
+	i: 20, // initial number of contacts to display
+	loading: false,
+	hasMore: true,
 	hasContactsError: false,
 	hasDeleteMatchInDBError: false
 };
@@ -23,6 +30,13 @@ export default function(state = initialState, action) {
 			return newState;
 		case UPDATE_CONTACTS:
 			newState.contacts = action.contacts;
+			console.log('newState.contacts = ', newState.contacts);
+			console.log('newState.i = ', newState.i);
+			newState.displayedContacts = newState.contacts.slice(0, newState.i);
+			console.log(
+				'newState.displayedContacts = ',
+				newState.displayedContacts
+			);
 			return newState;
 		case UPDATE_CONTACTS_ERROR:
 			newState.hasContactsError = true;
@@ -31,6 +45,21 @@ export default function(state = initialState, action) {
 			return newState;
 		case DELETE_MATCH_IN_DB_ERROR:
 			newState.hasDeleteMatchInDBError = true;
+			return newState;
+		case DISPLAY_MORE_CONTACTS:
+			newState.displayedContacts.concat(
+				newState.contacts.slice(
+					newState.i,
+					newState.i + action.numberOfContacts
+				)
+			);
+			newState.i += action.numberOfContacts;
+			return newState;
+		case SET_LOADING:
+			newState.loading = action.loading;
+			return newState;
+		case SET_HAS_MORE:
+			newState.hasMore = action.hasMore;
 			return newState;
 		default:
 			return state;

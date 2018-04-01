@@ -1,49 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
+import * as conversationsActionCreators from '../../actions/conversations';
 import { bindActionCreators } from 'redux';
 import { Layout, List, Spin, Button } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import './Contacts.css';
 const { Content } = Layout;
 
-let i = 20;
+//let i = 20;
 
 class Contacts extends Component {
-	state = {
-		data: [],
-		loading: false,
-		hasMore: true
-	};
-
 	componentWillMount() {
-		const { contacts } = this.props;
 		// run once before first render()
-		this.setState({
-			data: contacts.slice(0, 20)
-		});
 	}
 
 	handleInfiniteOnLoad = () => {
-		const { contacts } = this.props;
+		const {
+			contacts,
+			displayedContacts,
+			setLoading,
+			setHasMore,
+			displayMoreContacts
+		} = this.props;
 
-		let data = this.state.data;
-		this.setState({
-			loading: true
-		});
-		if (data.length === contacts.length) {
-			this.setState({
-				hasMore: false,
-				loading: false
-			});
+		// let data = this.state.data;
+		// this.setState({
+		// 	loading: true
+		// });
+		setLoading(true);
+		if (displayedContacts.length === contacts.length) {
+			setLoading(false);
+			setHasMore(false);
+			// this.setState({
+			// 	hasMore: false,
+			// 	loading: false
+			// });
 			return;
 		}
-		data = data.concat(contacts.slice(i, i + 5));
-		i += 5;
-		this.setState({
-			data: data,
-			loading: false
-		});
+		displayMoreContacts(5);
+		// data = data.concat(contacts.slice(i, i + 5));
+		//
+		// i += 5;
+
+		setLoading(false);
+		// this.setState({
+		// 	data: data,
+		// 	loading: false
+		// });
 	};
 
 	onSelectContact = id => {
@@ -52,7 +56,15 @@ class Contacts extends Component {
 
 	render() {
 		//console.log('Contacts this.props = ', this.props);
-		const { colorTheme } = this.props;
+		const {
+			colorTheme,
+			contacts,
+			displayedContacts,
+			loading,
+			hasMore
+		} = this.props;
+		console.log('Contacts.js contacts = ', contacts);
+		console.log('Contacts.js displayedContacts = ', displayedContacts);
 
 		return (
 			<Content
@@ -66,11 +78,11 @@ class Contacts extends Component {
 					<InfiniteScroll
 						initialLoad={false}
 						loadMore={this.handleInfiniteOnLoad}
-						hasMore={!this.state.loading && this.state.hasMore}
+						hasMore={!loading && hasMore}
 						useWindow={false}
 					>
 						<List
-							dataSource={this.state.data}
+							dataSource={displayedContacts}
 							renderItem={item => {
 								//console.log('item = ', item);
 								return (
@@ -105,10 +117,8 @@ class Contacts extends Component {
 								);
 							}}
 						>
-							{this.state.loading &&
-								this.state.hasMore && (
-									<Spin className="demo-loading" />
-								)}
+							{loading &&
+								hasMore && <Spin className="demo-loading" />}
 						</List>
 					</InfiniteScroll>
 				</div>
@@ -124,7 +134,12 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		contacts: state.conversations.contacts
+		conversations: state.conversations,
+		contacts: state.conversations.contacts,
+		displayedContacts: state.conversations.displayedContacts,
+		setLoading: state.conversations.setLoading,
+		setHasMore: state.conversations.setHasMore,
+		displayMoreContacts: state.conversations.displayMoreContacts
 	};
 }
 
@@ -138,9 +153,23 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
+	const conversationsDispatchers = bindActionCreators(
+		conversationsActionCreators,
+		dispatch
+	);
+
 	return {
 		onPressConversations: () => {
 			colorThemeDispatchers.onPressConversations();
+		},
+		setLoading: loading => {
+			conversationsDispatchers.setLoading(loading);
+		},
+		setHasMore: hasMore => {
+			conversationsDispatchers.setHasMore(hasMore);
+		},
+		displayMoreContacts: numberOfContacts => {
+			conversationsDispatchers.displayMoreContacts(numberOfContacts);
 		}
 	};
 }

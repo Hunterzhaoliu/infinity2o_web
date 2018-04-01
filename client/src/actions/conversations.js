@@ -3,7 +3,10 @@ import {
 	UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
 	UPDATE_CHAT,
-	UPDATE_CHAT_ERROR
+	UPDATE_CHAT_ERROR,
+	SET_LOADING,
+	SET_HAS_MORE,
+	DISPLAY_MORE_CONTACTS
 } from './types';
 
 export const fetchConversations = () => async dispatch => {
@@ -39,4 +42,25 @@ export const fetchConversations = () => async dispatch => {
 	} else {
 		dispatch({ type: UPDATE_CHAT_ERROR });
 	}
+};
+
+export const setLoading = (loading, dispatch) => {
+	dispatch({
+		type: SET_LOADING,
+		loading: loading
+	});
+};
+
+export const setHasMore = (hasMore, dispatch) => {
+	dispatch({
+		type: SET_HAS_MORE,
+		hasMore: hasMore
+	});
+};
+
+export const displayMoreContacts = (numberOfContacts, dispatch) => {
+	dispatch({
+		type: DISPLAY_MORE_CONTACTS,
+		numberOfContacts: numberOfContacts
+	});
 };
