@@ -15,6 +15,12 @@ require('./services/passport');
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
 
 const app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+io.on('connection', function(socket) {
+	console.log('a user connected');
+});
 
 // wiring middlewares
 // middlewares = small functions that modify incoming requests to our
