@@ -52,6 +52,9 @@ export const DELETE_MATCH_IN_DB_ERROR = 'DELETE_MATCH_IN_DB_ERROR';
 // conversations/Chat.js
 export const UPDATE_CHAT = 'UPDATE_CHAT';
 export const UPDATE_CHAT_ERROR = 'UPDATE_CHAT_ERROR';
+export const SET_CHAT_LOADING = 'SET_CHAT_LOADING';
+export const SET_CHAT_HAS_MORE = 'SET_CHAT_HAS_MORE';
+export const DISPLAY_MORE_MESSAGES = 'DISPLAY_MORE_MESSAGES';
 
 // conversations/Conversations.js
 export const ON_CHANGE_TYPED_MESSAGE = 'ON_CHANGE_TYPED_MESSAGE';

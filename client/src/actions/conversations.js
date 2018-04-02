@@ -44,21 +44,21 @@ export const fetchConversations = () => async dispatch => {
 	}
 };
 
-export const setLoading = (loading, dispatch) => {
+export const setLoading = loading => dispatch => {
 	dispatch({
 		type: SET_LOADING,
 		loading: loading
 	});
 };
 
-export const setHasMore = (hasMore, dispatch) => {
+export const setHasMore = hasMore => dispatch => {
 	dispatch({
 		type: SET_HAS_MORE,
 		hasMore: hasMore
 	});
 };
 
-export const displayMoreContacts = (numberOfContacts, dispatch) => {
+export const displayMoreContacts = numberOfContacts => dispatch => {
 	dispatch({
 		type: DISPLAY_MORE_CONTACTS,
 		numberOfContacts: numberOfContacts

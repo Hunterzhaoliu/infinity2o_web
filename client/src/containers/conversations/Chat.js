@@ -3,47 +3,33 @@ import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import * as chatActionCreators from '../../actions/chat';
 import { bindActionCreators } from 'redux';
-import conversation1 from './conversation1';
 import './Chat.css';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { Layout, Input, Row, Col, Affix, Icon, List, Spin } from 'antd';
 const { Content } = Layout;
 
-let i = 30;
-
 class Chat extends Component {
-	state = {
-		data: [],
-		loading: false,
-		hasMore: true
-	};
-
 	componentWillMount() {
 		// run once before first render()
-		this.setState({
-			data: conversation1.slice(0, 30)
-		});
 	}
 
 	handleInfiniteOnLoad = () => {
-		let data = this.state.data;
-		this.setState({
-			loading: true
-		});
-		if (data.length === conversation1.length) {
-			this.setState({
-				hasMore: false,
-				loading: false
-			});
+		const {
+			chat,
+			setLoading,
+			setHasMore,
+			displayMoreMessages
+		} = this.props;
+
+		setLoading(true);
+		if (chat.displayedMessages.length === chat.last50Messages.length) {
+			setLoading(false);
+			setHasMore(false);
 			return;
 		}
-		data = data.concat(conversation1.slice(i, i + 5));
-		i += 5;
-		this.setState({
-			data: data,
-			loading: false
-		});
+		displayMoreMessages(5);
+		setLoading(false);
 	};
 
 	onChangeTypedMessage = e => {
@@ -83,16 +69,16 @@ class Chat extends Component {
 					<InfiniteScroll
 						initialLoad={false}
 						loadMore={this.handleInfiniteOnLoad}
-						hasMore={!this.state.loading && this.state.hasMore}
+						hasMore={!chat.loading && chat.hasMore}
 						useWindow={false}
 					>
 						<List
-							dataSource={this.state.data}
+							dataSource={chat.displayMessages}
 							renderItem={item => {
 								const nameAndMessage =
 									item.senderName + ': ' + item.contents;
 								let justifyValue = 'start';
-								// replace 'Hunter' with the user1's name
+								// TODO: replace 'Hunter' with the user1's name
 								if (item.senderName === 'Hunter') {
 									justifyValue = 'end';
 								}
@@ -145,8 +131,8 @@ class Chat extends Component {
 								);
 							}}
 						>
-							{this.state.loading &&
-								this.state.hasMore && (
+							{chat.loading &&
+								chat.hasMore && (
 									<Spin className="chat-window-loading" />
 								)}
 						</List>
@@ -204,6 +190,15 @@ function mapDispatchToProps(dispatch) {
 		},
 		onChangeTypedMessage: newMessage => {
 			chatDispatchers.onChangeTypedMessage(newMessage);
+		},
+		setLoading: loading => {
+			chatDispatchers.setLoading(loading);
+		},
+		setHasMore: hasMore => {
+			chatDispatchers.setHasMore(hasMore);
+		},
+		displayMoreMessages: numberOfMessages => {
+			chatDispatchers.displayMoreMessages(numberOfMessages);
 		}
 	};
 }

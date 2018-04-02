@@ -15,22 +15,22 @@ class Contacts extends Component {
 
 	handleInfiniteOnLoad = () => {
 		const {
-			contacts,
-			displayedContacts,
+			conversations,
 			setLoading,
 			setHasMore,
 			displayMoreContacts
 		} = this.props;
 
 		setLoading(true);
-		if (displayedContacts.length === contacts.length) {
+		if (
+			conversations.displayedContacts.length ===
+			conversations.contacts.length
+		) {
 			setLoading(false);
 			setHasMore(false);
-
 			return;
 		}
 		displayMoreContacts(5);
-
 		setLoading(false);
 	};
 
@@ -40,7 +40,7 @@ class Contacts extends Component {
 
 	render() {
 		//console.log('Contacts this.props = ', this.props);
-		const { colorTheme, displayedContacts, loading, hasMore } = this.props;
+		const { colorTheme, conversations } = this.props;
 
 		return (
 			<Content
@@ -54,11 +54,13 @@ class Contacts extends Component {
 					<InfiniteScroll
 						initialLoad={false}
 						loadMore={this.handleInfiniteOnLoad}
-						hasMore={!loading && hasMore}
+						hasMore={
+							!conversations.loading && conversations.hasMore
+						}
 						useWindow={false}
 					>
 						<List
-							dataSource={displayedContacts}
+							dataSource={conversations.displayedContacts}
 							renderItem={item => {
 								//console.log('item = ', item);
 								return (
@@ -93,8 +95,10 @@ class Contacts extends Component {
 								);
 							}}
 						>
-							{loading &&
-								hasMore && <Spin className="demo-loading" />}
+							{conversations.loading &&
+								conversations.hasMore && (
+									<Spin className="demo-loading" />
+								)}
 						</List>
 					</InfiniteScroll>
 				</div>
@@ -110,12 +114,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		conversations: state.conversations,
-		contacts: state.conversations.contacts,
-		displayedContacts: state.conversations.displayedContacts,
-		setLoading: state.conversations.setLoading,
-		setHasMore: state.conversations.setHasMore,
-		displayMoreContacts: state.conversations.displayMoreContacts
+		conversations: state.conversations
 	};
 }
 

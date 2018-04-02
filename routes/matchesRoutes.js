@@ -98,9 +98,6 @@ module.exports = app => {
 			const matchInDB = await UserCollection.findOne({ _id: matchId });
 			let matchMatches = matchInDB.matches;
 
-			console.log('userMatches = ', userMatches);
-			console.log('matchMatches = ', matchMatches);
-
 			let matchIndex = userMatches.indexOf(matchId);
 			userMatches.splice(matchIndex, 1);
 
