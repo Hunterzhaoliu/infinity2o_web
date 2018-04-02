@@ -12,6 +12,7 @@ require('./models/ProfileVoteDisplay');
 require('./models/Conversation');
 require('./services/passport');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
 
 const app = express();

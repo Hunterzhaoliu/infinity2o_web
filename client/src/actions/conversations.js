@@ -14,7 +14,7 @@ export const fetchConversations = () => async dispatch => {
 	const response = await axios.get('/api/current_user');
 
 	if (response.status === 200) {
-		// dispatch user.conversation.contacts -> state
+		// dispatch user.conversations.contacts -> state
 		dispatch({
 			type: UPDATE_CONTACTS,
 			contacts: response.data.conversations
@@ -25,22 +25,28 @@ export const fetchConversations = () => async dispatch => {
 
 	// display chat log of first conversation
 	const contactChatDisplayIndex = 0;
-	const conversationId =
-		response.data.conversations[contactChatDisplayIndex].conversationId;
+	let conversationId;
+	if (
+		response.data.conversations !== undefined &&
+		response.data.conversations.length >= 1
+	) {
+		conversationId =
+			response.data.conversations[contactChatDisplayIndex].conversationId;
 
-	// get chat logs by hitting GET api/conversations
-	const response2 = await axios.get(
-		'/api/conversations?conversationId=' + conversationId
-	);
+		// get chat logs by hitting GET api/conversations
+		const response2 = await axios.get(
+			'/api/conversations?conversationId=' + conversationId
+		);
 
-	if (response2.status === 200) {
-		// dispatch chat logs for the latest message
-		dispatch({
-			type: UPDATE_CHAT,
-			last50Messages: response2.data.last50Messages
-		});
-	} else {
-		dispatch({ type: UPDATE_CHAT_ERROR });
+		if (response2.status === 200) {
+			// dispatch chat logs for the latest messages
+			dispatch({
+				type: UPDATE_CHAT,
+				last50Messages: response2.data.last50Messages
+			});
+		} else {
+			dispatch({ type: UPDATE_CHAT_ERROR });
+		}
 	}
 };
 

@@ -23,7 +23,7 @@ class Matches extends Component {
 
 	renderMatches() {
 		//console.log('in Matches.js this.props = ', this.props);
-		const { matches, history } = this.props;
+		const { colorTheme, matches, history } = this.props;
 		if (matches.current1DisplayedMatches.length > 0) {
 			return _.map(matches.current1DisplayedMatches, match => {
 				return (
@@ -44,39 +44,45 @@ class Matches extends Component {
 								loading={false}
 								style={{
 									width: '260px',
-									color: this.props.colorTheme.text1Color,
-									borderColor: this.props.colorTheme.text8Color,
-									background: this.props.colorTheme.text8Color
+									color: colorTheme.text1Color,
+									borderColor: colorTheme.text8Color,
+									background: colorTheme.text8Color
 								}}
 							>
 								<h3
 									style={{
-										color: this.props.colorTheme.text1Color
+										color: colorTheme.text1Color
 									}}
 								>
 									{match.name}
 								</h3>
 								<p
 									style={{
-										color: this.props.colorTheme.text3Color
+										color: colorTheme.text3Color
 									}}
 								>
 									Interests: {match.interests}
 								</p>
 								<p
 									style={{
-										color: this.props.colorTheme.text3Color
+										color: colorTheme.text3Color
 									}}
 								>
 									Total User Votes: {match.totalUserVotes}
 								</p>
-								<Row type="flex" justify="space-between" align="top">
+								<Row
+									type="flex"
+									justify="space-between"
+									align="top"
+								>
 									<Col span={11}>
 										<Button
 											style={{
-												borderColor: this.props.colorTheme.text6Color,
-												background: this.props.colorTheme.text6Color,
-												color: this.props.colorTheme.text2Color
+												borderColor:
+													colorTheme.text6Color,
+												background:
+													colorTheme.text6Color,
+												color: colorTheme.text2Color
 											}}
 											onClick={e => this.onNextMatch()}
 										>
@@ -86,12 +92,18 @@ class Matches extends Component {
 									<Col span={11}>
 										<Button
 											style={{
-												borderColor: this.props.colorTheme.text6Color,
-												background: this.props.colorTheme.text6Color,
-												color: this.props.colorTheme.text2Color
+												borderColor:
+													colorTheme.text6Color,
+												background:
+													colorTheme.text6Color,
+												color: colorTheme.text2Color
 											}}
 											onClick={e =>
-												this.onStartConversation(history, match.name, match.id)
+												this.onStartConversation(
+													history,
+													match.name,
+													match.id
+												)
 											}
 										>
 											Say Hi :)
@@ -107,32 +119,34 @@ class Matches extends Component {
 			return (
 				<h3
 					style={{
-						color: this.props.colorTheme.text2Color
+						color: colorTheme.text2Color
 					}}
 				>
-					Your out of matches for today. More coming tomorrow :)
+					Your out of matches for today. Check out Train AI for better
+					matches :)
 				</h3>
 			);
 		}
 	}
 
 	render() {
+		const { colorTheme } = this.props;
 		return (
 			<Content
 				style={{
 					textAlign: 'center',
 					padding: '75px 50px 0px', // top left&right bottom
-					background: this.props.colorTheme.backgroundColor
+					background: colorTheme.backgroundColor
 				}}
 			>
 				<h2
 					key="1"
 					style={{
-						color: this.props.colorTheme.text3Color,
-						padding: '0% 0% 5%'
+						color: colorTheme.text3Color
 					}}
 				>
-					Every 24 hours at 6 AM CT our AI generates the best partners for you.
+					Every 24 hours at 9 AM Central Time our AI generates the
+					best partners for you.
 				</h2>
 				<Row type="flex" justify="space-between" align="top">
 					<Col

@@ -32,6 +32,8 @@ module.exports = app => {
 		requireLogin,
 		async (request, response) => {
 			const { matchId, matchName } = request.body;
+			//console.log('start_conversation request.body = ', request.body);
+
 			const userId = request.user._id;
 			let userName;
 			if (request.user.profile.name === undefined) {
@@ -92,14 +94,25 @@ module.exports = app => {
 		async (request, response) => {
 			const { matchId } = request.body;
 			const userId = request.user._id;
+			console.log('matchId = ', matchId);
 
-			const userInDB = await UserCollection.findOne({ _id: userId });
-			let userMatches = userInDB.matches;
-			const matchInDB = await UserCollection.findOne({ _id: matchId });
-			let matchMatches = matchInDB.matches;
-
+			let userMatchesDict = await UserCollection.findOne(
+				{ _id: userId },
+				{ matches: true, _id: false }
+			);
+			console.log('userMatchesDict = ', userMatchesDict);
+			console.log(
+				"userMatchesDict['matches'] = ",
+				userMatchesDict['matches']
+			);
+			let userMatches = userMatchesDict.matches;
 			let matchIndex = userMatches.indexOf(matchId);
 			userMatches.splice(matchIndex, 1);
+			console.log('userMatches = ', userMatches);
+
+			// let userMatches = userInDB.matches;
+			const matchInDB = await UserCollection.findOne({ _id: matchId });
+			let matchMatches = matchInDB.matches;
 
 			let userIndex = matchMatches.indexOf(userId);
 			if (userIndex > -1) {

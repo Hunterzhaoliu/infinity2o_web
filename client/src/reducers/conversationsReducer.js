@@ -30,7 +30,12 @@ export default function(state = initialState, action) {
 			return newState;
 		case UPDATE_CONTACTS:
 			newState.contacts = action.contacts;
-			newState.displayedContacts = newState.contacts.slice(0, newState.i);
+			if (newState.contacts !== undefined) {
+				newState.displayedContacts = newState.contacts.slice(
+					0,
+					newState.i
+				);
+			}
 			return newState;
 		case UPDATE_CONTACTS_ERROR:
 			newState.hasContactsError = true;

@@ -16,9 +16,44 @@ class Conversation extends Component {
 		this.props.fetchConversations();
 	}
 
+	renderConversations() {
+		const { colorTheme, chat, conversations } = this.props;
+
+		if (conversations.contacts.length >= 1) {
+			return (
+				<Row type="flex" justify="space-between">
+					<Col md={{ span: 5 }} />
+					<Col
+						md={{ span: 4 }}
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						<Contacts contacts={conversations.contacts} />
+					</Col>
+					<Col md={{ span: 10 }}>
+						<Chat chat={chat} />
+					</Col>
+					<Col md={{ span: 5 }} />
+				</Row>
+			);
+		} else {
+			return (
+				<h2
+					style={{
+						color: colorTheme.text3Color
+					}}
+				>
+					You have no conversations right now. Start some by "Saying
+					Hi" in Matches.
+				</h2>
+			);
+		}
+	}
+
 	render() {
 		//console.log('Conversation this.props = ', this.props);
-		const { colorTheme, contacts, chat } = this.props;
+		const { colorTheme } = this.props;
 
 		return (
 			<Content
@@ -28,21 +63,7 @@ class Conversation extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Row type="flex" justify="space-between">
-					<Col md={{ span: 5 }} />
-					<Col
-						md={{ span: 4 }}
-						style={{
-							color: colorTheme.text3Color
-						}}
-					>
-						<Contacts contacts={contacts} />
-					</Col>
-					<Col md={{ span: 10 }}>
-						<Chat chat={chat} />
-					</Col>
-					<Col md={{ span: 5 }} />
-				</Row>
+				{this.renderConversations()}
 			</Content>
 		);
 	}
@@ -55,8 +76,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		contacts: state.conversations.contacts,
-		chat: state.displayMessages
+		chat: state.chat,
+		conversations: state.conversations
 	};
 }
 

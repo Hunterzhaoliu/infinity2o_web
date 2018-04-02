@@ -11,6 +11,7 @@ import {
 } from './types';
 
 export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
+	console.log('mongoDBUserIds = ', mongoDBUserIds);
 	const response = await axios.get(
 		'/api/matches?mongoDBUserIds=' + mongoDBUserIds
 	);
@@ -60,7 +61,9 @@ export const onStartConversation = (
 		dispatch({ type: UPDATE_CONTACTS_ERROR });
 	}
 
-	const response2 = await axios.delete('/api/matches/delete_match', matchId);
+	const response2 = await axios.delete('/api/matches/delete_match', {
+		data: { matchId: matchId }
+	});
 	if (response2.status === 200) {
 		dispatch({
 			type: DELETE_MATCH_IN_DB
