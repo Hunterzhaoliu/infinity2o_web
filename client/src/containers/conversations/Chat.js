@@ -57,7 +57,7 @@ class Chat extends Component {
 			return <Icon type="check-circle-o" />;
 		} else if (status === 'delivered') {
 			return <Icon type="check-circle" />;
-		} else if (status === 'failed') {
+		} else if (status === 'failed-delivery') {
 			return <Icon type="warning" />;
 		}
 	}

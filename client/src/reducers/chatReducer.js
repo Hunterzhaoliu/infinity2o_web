@@ -5,7 +5,9 @@ import {
 	DISPLAY_MORE_MESSAGES,
 	SET_CHAT_LOADING,
 	SET_CHAT_HAS_MORE,
-	DISPLAY_SENT_MESSAGE
+	DISPLAY_SENT_MESSAGE,
+	MESSAGE_SENT_SUCCESS,
+	MESSAGE_SENT_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -55,7 +57,8 @@ export default function(state = initialState, action) {
 		case DISPLAY_SENT_MESSAGE:
 			newState.last50Messages.push({
 				senderName: action.senderName,
-				contents: newState.currentMessage
+				contents: newState.currentMessage,
+				status: 'sent'
 			});
 			if (newState.last50Messages.length > 50) {
 				newState.last50Messages.shift();
@@ -63,12 +66,32 @@ export default function(state = initialState, action) {
 
 			newState.displayMessages.push({
 				senderName: action.senderName,
-				contents: newState.currentMessage
+				contents: newState.currentMessage,
+				status: 'sent'
 			});
 			if (newState.displayMessages.length > 50) {
 				newState.displayMessages.shift();
 			}
 			newState.currentMessage = null;
+			return newState;
+		case MESSAGE_SENT_SUCCESS:
+			const lastMessageIndex1 = newState.last50Messages.length - 1;
+			newState.last50Messages[lastMessageIndex1].status = 'delivered';
+
+			const lastDisplayMessagesIndex1 =
+				newState.displayMessages.length - 1;
+			newState.displayMessages[lastDisplayMessagesIndex1].status =
+				'delivered';
+			return newState;
+		case MESSAGE_SENT_ERROR:
+			const lastMessageIndex2 = newState.last50Messages.length - 1;
+			newState.last50Messages[lastMessageIndex2].status =
+				'failed-delivery';
+
+			const lastDisplayMessagesIndex2 =
+				newState.displayMessages.length - 1;
+			newState.displayMessages[lastDisplayMessagesIndex2].status =
+				'failed-delivery';
 			return newState;
 		default:
 			return state;

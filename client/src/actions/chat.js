@@ -4,7 +4,9 @@ import {
 	SET_CHAT_LOADING,
 	SET_CHAT_HAS_MORE,
 	DISPLAY_MORE_MESSAGES,
-	DISPLAY_SENT_MESSAGE
+	DISPLAY_SENT_MESSAGE,
+	MESSAGE_SENT_SUCCESS,
+	MESSAGE_SENT_ERROR
 } from './types';
 import io from 'socket.io-client';
 let socket = io('localhost:5000');
@@ -67,13 +69,12 @@ export const sendMessageToServer = (
 			'/api/conversations/chat',
 			messageInfo
 		);
-		// TODO:
-		// if (response.status === 200) {
-		// 	dispatch({
-		// 		type: MESSAGE_SENT_SUCCESS
-		// 	});
-		// } else {
-		// 	dispatch({ type: MESSAGE_SENT_ERROR });
-		// }
+		if (response.status === 200) {
+			dispatch({
+				type: MESSAGE_SENT_SUCCESS
+			});
+		} else {
+			dispatch({ type: MESSAGE_SENT_ERROR });
+		}
 	}
 };

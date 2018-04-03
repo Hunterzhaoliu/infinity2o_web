@@ -23,10 +23,13 @@ module.exports = app => {
 			} = request.body;
 
 			console.log('request.body = ', request.body);
+
+			// GOAL = save newMessage into correct conversation document
 			const newMessage = {
 				senderName: senderName,
 				content: message,
-				timeCreated: timeCreated
+				timeCreated: timeCreated,
+				status: 'delivered'
 			};
 
 			const conversation = await ConversationCollection.findOne(
