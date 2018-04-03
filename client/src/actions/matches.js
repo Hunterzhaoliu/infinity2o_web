@@ -11,7 +11,6 @@ import {
 } from './types';
 
 export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
-	console.log('mongoDBUserIds = ', mongoDBUserIds);
 	const response = await axios.get(
 		'/api/matches?mongoDBUserIds=' + mongoDBUserIds
 	);

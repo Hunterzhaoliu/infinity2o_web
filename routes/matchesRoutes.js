@@ -94,21 +94,16 @@ module.exports = app => {
 		async (request, response) => {
 			const { matchId } = request.body;
 			const userId = request.user._id;
-			console.log('matchId = ', matchId);
 
 			let userMatchesDict = await UserCollection.findOne(
 				{ _id: userId },
 				{ matches: true, _id: false }
 			);
-			console.log('userMatchesDict = ', userMatchesDict);
-			console.log(
-				"userMatchesDict['matches'] = ",
-				userMatchesDict['matches']
-			);
+
 			let userMatches = userMatchesDict.matches;
 			let matchIndex = userMatches.indexOf(matchId);
+
 			userMatches.splice(matchIndex, 1);
-			console.log('userMatches = ', userMatches);
 
 			// let userMatches = userInDB.matches;
 			const matchInDB = await UserCollection.findOne({ _id: matchId });
