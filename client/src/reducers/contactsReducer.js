@@ -6,7 +6,8 @@ import {
 	DELETE_MATCH_IN_DB_ERROR,
 	SET_LOADING,
 	SET_HAS_MORE,
-	DISPLAY_MORE_CONTACTS
+	DISPLAY_MORE_CONTACTS,
+	ON_SELECT_CONTACT
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -20,7 +21,8 @@ let initialState = {
 	loading: false,
 	hasMore: true,
 	hasContactsError: false,
-	hasDeleteMatchInDBError: false
+	hasDeleteMatchInDBError: false,
+	conversationId: null
 };
 
 export default function(state = initialState, action) {
@@ -59,6 +61,9 @@ export default function(state = initialState, action) {
 			return newState;
 		case SET_HAS_MORE:
 			newState.hasMore = action.hasMore;
+			return newState;
+		case ON_SELECT_CONTACT:
+			newState.conversationId = action.conversationId;
 			return newState;
 		default:
 			return state;

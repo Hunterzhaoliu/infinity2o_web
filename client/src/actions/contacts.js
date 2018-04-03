@@ -6,7 +6,8 @@ import {
 	UPDATE_CHAT_ERROR,
 	SET_LOADING,
 	SET_HAS_MORE,
-	DISPLAY_MORE_CONTACTS
+	DISPLAY_MORE_CONTACTS,
+	ON_SELECT_CONTACT
 } from './types';
 
 export const fetchConversations = () => async dispatch => {
@@ -68,5 +69,12 @@ export const displayMoreContacts = numberOfContacts => dispatch => {
 	dispatch({
 		type: DISPLAY_MORE_CONTACTS,
 		numberOfContacts: numberOfContacts
+	});
+};
+
+export const onSelectContact = conversationId => dispatch => {
+	dispatch({
+		type: ON_SELECT_CONTACT,
+		conversationId: conversationId
 	});
 };

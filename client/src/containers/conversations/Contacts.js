@@ -31,9 +31,37 @@ class Contacts extends Component {
 		setLoading(false);
 	};
 
-	onSelectContact = id => {
-		console.log('onSelectContact id = ', id);
+	onSelectContact = conversationId => {
+		this.props.onSelectContact(conversationId);
 	};
+
+	renderContactButton(item) {
+		const { colorTheme, contacts } = this.props;
+
+		let borderColor = colorTheme.text8Color;
+		let background = colorTheme.text8Color;
+		let color = colorTheme.text4Color;
+		if (contacts.conversationId === item.conversationId) {
+			borderColor = colorTheme.keyText8Color;
+			background = colorTheme.keyText8Color;
+			color = colorTheme.text2Color;
+		}
+
+		return (
+			<Button
+				style={{
+					borderColor: borderColor,
+					background: background,
+					color: color,
+					height: '50px',
+					width: '220px'
+				}}
+				onClick={e => this.onSelectContact(item.conversationId)}
+			>
+				{item.matchName}
+			</Button>
+		);
+	}
 
 	render() {
 		//console.log('Contacts this.props = ', this.props);
@@ -68,24 +96,7 @@ class Contacts extends Component {
 											padding: '5px 0px 0px'
 										}}
 									>
-										<Button
-											style={{
-												borderColor:
-													colorTheme.text8Color,
-												background:
-													colorTheme.text8Color,
-												color: colorTheme.text4Color,
-												height: '50px',
-												width: '220px'
-											}}
-											onClick={e =>
-												this.onSelectContact(
-													item.conversationId
-												)
-											}
-										>
-											{item.matchName}
-										</Button>
+										{this.renderContactButton(item)}
 									</List.Item>
 								);
 							}}
@@ -140,6 +151,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		displayMoreContacts: numberOfContacts => {
 			contactsDispatchers.displayMoreContacts(numberOfContacts);
+		},
+		onSelectContact: conversationId => {
+			contactsDispatchers.onSelectContact(conversationId);
 		}
 	};
 }

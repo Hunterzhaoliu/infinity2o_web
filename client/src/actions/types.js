@@ -55,9 +55,10 @@ export const UPDATE_CHAT_ERROR = 'UPDATE_CHAT_ERROR';
 export const SET_CHAT_LOADING = 'SET_CHAT_LOADING';
 export const SET_CHAT_HAS_MORE = 'SET_CHAT_HAS_MORE';
 export const DISPLAY_MORE_MESSAGES = 'DISPLAY_MORE_MESSAGES';
-
-// conversations/Conversations.js
 export const ON_CHANGE_TYPED_MESSAGE = 'ON_CHANGE_TYPED_MESSAGE';
+
+// conversations/Contacts.js
 export const SET_LOADING = 'SET_LOADING';
 export const SET_HAS_MORE = 'SET_HAS_MORE';
 export const DISPLAY_MORE_CONTACTS = 'DISPLAY_MORE_CONTACTS';
+export const ON_SELECT_CONTACT = 'ON_SELECT_CONTACT';
