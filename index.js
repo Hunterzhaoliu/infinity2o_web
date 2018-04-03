@@ -16,12 +16,6 @@ mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
 
 const app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-
-io.on('connection', function(socket) {
-	console.log('a user connected');
-});
 
 // wiring middlewares
 // middlewares = small functions that modify incoming requests to our
@@ -60,10 +54,16 @@ if (process.env.NODE_ENV === 'production') {
 
 // heroku dynamic port
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, function() {
+server = app.listen(PORT, function() {
 	console.log(
 		'Express server listening on port %d in %s mode',
 		this.address().port,
 		app.settings.env
 	);
+});
+
+var io = require('socket.io')(server);
+
+io.on('connection', function(socket) {
+	console.log('a user connected');
 });

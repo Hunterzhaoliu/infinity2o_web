@@ -5,9 +5,12 @@ import * as chatActionCreators from '../../actions/chat';
 import { bindActionCreators } from 'redux';
 import './Chat.css';
 import InfiniteScroll from 'react-infinite-scroller';
+import io from 'socket.io-client';
 
 import { Layout, Input, Row, Col, Affix, Icon, List, Spin } from 'antd';
 const { Content } = Layout;
+
+let socket = io('localhost:5000');
 
 class Chat extends Component {
 	componentWillMount() {
