@@ -57,7 +57,7 @@ export default function(state = initialState, action) {
 		case DISPLAY_SENT_MESSAGE:
 			newState.last50Messages.push({
 				senderName: action.senderName,
-				contents: newState.currentMessage,
+				content: newState.currentMessage,
 				status: 'sent'
 			});
 			if (newState.last50Messages.length > 50) {
@@ -66,7 +66,7 @@ export default function(state = initialState, action) {
 
 			newState.displayMessages.push({
 				senderName: action.senderName,
-				contents: newState.currentMessage,
+				content: newState.currentMessage,
 				status: 'sent'
 			});
 			if (newState.displayMessages.length > 50) {

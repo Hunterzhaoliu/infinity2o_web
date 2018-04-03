@@ -42,6 +42,10 @@ export const fetchConversations = () => async dispatch => {
 		if (response2.status === 200) {
 			// dispatch chat logs for the latest messages
 			dispatch({
+				type: ON_SELECT_CONTACT,
+				conversationId: conversationId
+			});
+			dispatch({
 				type: UPDATE_CHAT,
 				last50Messages: response2.data.last50Messages
 			});

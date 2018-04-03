@@ -85,7 +85,7 @@ class Chat extends Component {
 							dataSource={chat.displayMessages}
 							renderItem={item => {
 								const nameAndMessage =
-									item.senderName + ': ' + item.contents;
+									item.senderName + ': ' + item.content;
 								let justifyValue = 'start';
 								if (item.senderName === name) {
 									// TODO: what if both people's names are the senderName

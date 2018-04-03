@@ -22,8 +22,6 @@ module.exports = app => {
 				timeCreated
 			} = request.body;
 
-			console.log('request.body = ', request.body);
-
 			// GOAL = save newMessage into correct conversation document
 			const newMessage = {
 				senderName: senderName,
@@ -38,13 +36,11 @@ module.exports = app => {
 				},
 				{ last50Messages: true }
 			);
-			console.log('conversation = ', conversation);
 			let last50Messages = conversation.last50Messages;
 			last50Messages.push(newMessage);
 			if (last50Messages.length > 50) {
 				last50Messages.shift();
 			}
-			console.log('last50Messages = ', last50Messages);
 
 			try {
 				await ConversationCollection.updateOne(
