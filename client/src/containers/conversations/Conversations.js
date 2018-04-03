@@ -19,7 +19,10 @@ class Conversation extends Component {
 	renderConversations() {
 		const { colorTheme, chat, contacts } = this.props;
 
-		if (contacts.allContacts.length >= 1) {
+		if (
+			contacts.allContacts !== undefined &&
+			contacts.allContacts.length >= 1
+		) {
 			return (
 				<Row type="flex" justify="space-between">
 					<Col md={{ span: 5 }} />

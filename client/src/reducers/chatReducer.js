@@ -5,9 +5,8 @@ import {
 	DISPLAY_MORE_MESSAGES,
 	SET_CHAT_LOADING,
 	SET_CHAT_HAS_MORE,
-	SEND_MESSAGE_TO_SERVER
+	DISPLAY_SENT_MESSAGE
 } from '../actions/types';
-import io from 'socket.io-client';
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
@@ -18,10 +17,9 @@ let initialState = {
 	last50Messages: [],
 	displayMessages: [],
 	currentMessage: null,
-	hasUpdateChatError: false
+	hasUpdateChatError: false,
+	partnerOnline: false
 };
-
-let socket = io('localhost:5000');
 
 export default function(state = initialState, action) {
 	let newState = cloneObject(state);
@@ -54,13 +52,7 @@ export default function(state = initialState, action) {
 		case SET_CHAT_HAS_MORE:
 			newState.hasMore = action.hasMore;
 			return newState;
-		case SEND_MESSAGE_TO_SERVER:
-			console.log('action.senderName = ', action.senderName);
-			socket.emit('SEND_MESSAGE_FROM_CLIENT', {
-				senderName: action.senderName,
-				message: newState.currentMessage
-			});
-
+		case DISPLAY_SENT_MESSAGE:
 			newState.last50Messages.push({
 				senderName: action.senderName,
 				contents: newState.currentMessage

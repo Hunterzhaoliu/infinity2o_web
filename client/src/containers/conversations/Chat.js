@@ -41,9 +41,13 @@ class Chat extends Component {
 
 	onPressEnter = () => {
 		console.log('pressed enter');
-		const { name } = this.props;
-		console.log('onPressEnter name = ', name);
-		this.props.sendMessageToServer(name);
+		const { name, conversationId, chat } = this.props;
+		this.props.sendMessageToServer(
+			conversationId,
+			chat.partnerOnline,
+			name,
+			chat.currentMessage
+		);
 	};
 
 	renderMessageStatusIcon(status) {
@@ -83,8 +87,9 @@ class Chat extends Component {
 								const nameAndMessage =
 									item.senderName + ': ' + item.contents;
 								let justifyValue = 'start';
-								// TODO: replace 'Hunter' with the user1's name
 								if (item.senderName === name) {
+									// TODO: what if both people's names are the senderName
+									// need to switch to unique identifier
 									justifyValue = 'end';
 								}
 								return (
@@ -96,8 +101,7 @@ class Chat extends Component {
 											padding: '0px 0px 0px'
 										}}
 									>
-										<Col xl={{ span: 12 }} />
-										<Col xl={{ span: 11 }}>
+										<Col>
 											<List.Item
 												style={{
 													padding: '0px 0px 0px'
@@ -175,7 +179,8 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		chat: state.chat,
-		name: state.profile.name
+		name: state.profile.name,
+		conversationId: state.contacts.conversationId
 	};
 }
 
@@ -208,8 +213,18 @@ function mapDispatchToProps(dispatch) {
 		displayMoreMessages: numberOfMessages => {
 			chatDispatchers.displayMoreMessages(numberOfMessages);
 		},
-		sendMessageToServer: name => {
-			chatDispatchers.sendMessageToServer(name);
+		sendMessageToServer: (
+			conversationId,
+			partnerOnline,
+			name,
+			currentMessage
+		) => {
+			chatDispatchers.sendMessageToServer(
+				conversationId,
+				partnerOnline,
+				name,
+				currentMessage
+			);
 		},
 		fetchUserProfile: () => {
 			authDispatchers.fetchUserProfile();
