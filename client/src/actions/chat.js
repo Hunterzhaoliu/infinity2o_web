@@ -1,14 +1,14 @@
 import {
-	ON_CHANGE_TYPED_MESSAGE,
+	ON_CHANGE_CURRENT_MESSAGE,
 	SET_CHAT_LOADING,
 	SET_CHAT_HAS_MORE,
 	DISPLAY_MORE_MESSAGES,
 	SEND_MESSAGE_TO_SERVER
 } from './types';
 
-export const onChangeTypedMessage = newMessage => dispatch => {
+export const onChangeCurrentMessage = newMessage => dispatch => {
 	dispatch({
-		type: ON_CHANGE_TYPED_MESSAGE,
+		type: ON_CHANGE_CURRENT_MESSAGE,
 		newMessage: newMessage
 	});
 };

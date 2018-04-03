@@ -1,5 +1,4 @@
 import {
-	ON_CHANGE_TYPED_MESSAGE,
 	UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
 	DELETE_MATCH_IN_DB,
@@ -28,8 +27,6 @@ let initialState = {
 export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
-		case ON_CHANGE_TYPED_MESSAGE:
-			return newState;
 		case UPDATE_CONTACTS:
 			newState.allContacts = action.allContacts;
 			if (newState.allContacts !== undefined) {

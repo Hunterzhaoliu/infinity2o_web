@@ -32,9 +32,9 @@ class Chat extends Component {
 		setLoading(false);
 	};
 
-	onChangeTypedMessage = e => {
+	onChangeCurrentMessage = e => {
 		// console.log('e.target.value = ', e.target.value);
-		this.props.onChangeTypedMessage(e.target.value);
+		this.props.onChangeCurrentMessage(e.target.value);
 	};
 
 	onPressEnter = () => {
@@ -143,9 +143,9 @@ class Chat extends Component {
 					<Col>
 						<Affix offsetBottom={0}>
 							<Input
-								value={chat.typedMessage}
+								value={chat.currentMessage}
 								placeholder="type here..."
-								onChange={this.onChangeTypedMessage}
+								onChange={this.onChangeCurrentMessage}
 								onPressEnter={this.onPressEnter}
 								style={{
 									width: 555,
@@ -189,8 +189,8 @@ function mapDispatchToProps(dispatch) {
 		onPressConversations: () => {
 			colorThemeDispatchers.onPressConversations();
 		},
-		onChangeTypedMessage: newMessage => {
-			chatDispatchers.onChangeTypedMessage(newMessage);
+		onChangeCurrentMessage: newMessage => {
+			chatDispatchers.onChangeCurrentMessage(newMessage);
 		},
 		setLoading: loading => {
 			chatDispatchers.setLoading(loading);

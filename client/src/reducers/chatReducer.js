@@ -1,5 +1,5 @@
 import {
-	ON_CHANGE_TYPED_MESSAGE,
+	ON_CHANGE_CURRENT_MESSAGE,
 	UPDATE_CHAT,
 	UPDATE_CHAT_ERROR,
 	DISPLAY_MORE_MESSAGES,
@@ -17,7 +17,7 @@ let initialState = {
 	i: 30, // initial max number of messages to display
 	last50Messages: [],
 	displayMessages: [],
-	typedMessage: null,
+	currentMessage: null,
 	hasUpdateChatError: false
 };
 
@@ -26,8 +26,8 @@ let socket = io('localhost:5000');
 export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
-		case ON_CHANGE_TYPED_MESSAGE:
-			newState.typedMessage = action.newMessage;
+		case ON_CHANGE_CURRENT_MESSAGE:
+			newState.currentMessage = action.newMessage;
 			return newState;
 		case UPDATE_CHAT:
 			newState.last50Messages = action.last50Messages;
@@ -56,9 +56,9 @@ export default function(state = initialState, action) {
 			return newState;
 		case SEND_MESSAGE_TO_SERVER:
 			socket.emit('SEND_MESSAGE_FROM_CLIENT', {
-				message: newState.typedMessage
+				message: newState.currentMessage
 			});
-			newState.typedMessage = null;
+			newState.currentMessage = null;
 			return newState;
 		default:
 			return state;
