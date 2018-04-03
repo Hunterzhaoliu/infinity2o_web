@@ -77,4 +77,6 @@ export const onSelectContact = conversationId => dispatch => {
 		type: ON_SELECT_CONTACT,
 		conversationId: conversationId
 	});
+
+	// TODO: get previous messages in DB
 };
