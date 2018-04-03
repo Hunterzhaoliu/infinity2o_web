@@ -55,9 +55,27 @@ export default function(state = initialState, action) {
 			newState.hasMore = action.hasMore;
 			return newState;
 		case SEND_MESSAGE_TO_SERVER:
+			console.log('action.senderName = ', action.senderName);
 			socket.emit('SEND_MESSAGE_FROM_CLIENT', {
+				senderName: action.senderName,
 				message: newState.currentMessage
 			});
+
+			newState.last50Messages.push({
+				senderName: action.senderName,
+				contents: newState.currentMessage
+			});
+			if (newState.last50Messages.length > 50) {
+				newState.last50Messages.shift();
+			}
+
+			newState.displayMessages.push({
+				senderName: action.senderName,
+				contents: newState.currentMessage
+			});
+			if (newState.displayMessages.length > 50) {
+				newState.displayMessages.shift();
+			}
 			newState.currentMessage = null;
 			return newState;
 		default:

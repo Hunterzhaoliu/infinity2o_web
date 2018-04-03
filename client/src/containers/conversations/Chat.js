@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import * as chatActionCreators from '../../actions/chat';
+import * as authActionCreators from '../../actions/auth';
 import { bindActionCreators } from 'redux';
 import './Chat.css';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -12,6 +13,7 @@ const { Content } = Layout;
 class Chat extends Component {
 	componentWillMount() {
 		// run once before first render()
+		this.props.fetchUserProfile();
 	}
 
 	handleInfiniteOnLoad = () => {
@@ -39,7 +41,9 @@ class Chat extends Component {
 
 	onPressEnter = () => {
 		console.log('pressed enter');
-		this.props.sendMessageToServer();
+		const { name } = this.props;
+		console.log('onPressEnter name = ', name);
+		this.props.sendMessageToServer(name);
 	};
 
 	renderMessageStatusIcon(status) {
@@ -56,7 +60,7 @@ class Chat extends Component {
 
 	render() {
 		//console.log('Chat this.props = ', this.props);
-		const { colorTheme, chat } = this.props;
+		const { colorTheme, chat, name } = this.props;
 
 		return (
 			<Content
@@ -80,7 +84,7 @@ class Chat extends Component {
 									item.senderName + ': ' + item.contents;
 								let justifyValue = 'start';
 								// TODO: replace 'Hunter' with the user1's name
-								if (item.senderName === 'Hunter') {
+								if (item.senderName === name) {
 									justifyValue = 'end';
 								}
 								return (
@@ -92,7 +96,8 @@ class Chat extends Component {
 											padding: '0px 0px 0px'
 										}}
 									>
-										<Col>
+										<Col xl={{ span: 12 }} />
+										<Col xl={{ span: 11 }}>
 											<List.Item
 												style={{
 													padding: '0px 0px 0px'
@@ -169,7 +174,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		chat: state.chat
+		chat: state.chat,
+		name: state.profile.name
 	};
 }
 
@@ -184,6 +190,7 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	const chatDispatchers = bindActionCreators(chatActionCreators, dispatch);
+	const authDispatchers = bindActionCreators(authActionCreators, dispatch);
 
 	return {
 		onPressConversations: () => {
@@ -201,8 +208,11 @@ function mapDispatchToProps(dispatch) {
 		displayMoreMessages: numberOfMessages => {
 			chatDispatchers.displayMoreMessages(numberOfMessages);
 		},
-		sendMessageToServer: () => {
-			chatDispatchers.sendMessageToServer();
+		sendMessageToServer: name => {
+			chatDispatchers.sendMessageToServer(name);
+		},
+		fetchUserProfile: () => {
+			authDispatchers.fetchUserProfile();
 		}
 	};
 }

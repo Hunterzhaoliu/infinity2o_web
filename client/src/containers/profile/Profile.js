@@ -231,14 +231,14 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const indexDispatchers = bindActionCreators(authActionCreators, dispatch);
+	const authDispatchers = bindActionCreators(authActionCreators, dispatch);
 	const colorThemeDispatchers = bindActionCreators(
 		colorThemeActionCreators,
 		dispatch
 	);
 	return {
 		fetchUserProfile: () => {
-			indexDispatchers.fetchUserProfile();
+			authDispatchers.fetchUserProfile();
 		},
 		onProfile: () => {
 			colorThemeDispatchers.onProfile();

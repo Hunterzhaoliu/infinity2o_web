@@ -34,8 +34,10 @@ export const displayMoreMessages = (numberOfMessages, dispatch) => {
 	});
 };
 
-export const sendMessageToServer = () => dispatch => {
+export const sendMessageToServer = name => dispatch => {
+	console.log('action name = ', name);
 	dispatch({
-		type: SEND_MESSAGE_TO_SERVER
+		type: SEND_MESSAGE_TO_SERVER,
+		senderName: name
 	});
 };
