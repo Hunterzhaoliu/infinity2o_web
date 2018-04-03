@@ -17,7 +17,7 @@ export const fetchConversations = () => async dispatch => {
 		// dispatch user.conversations.contacts -> state
 		dispatch({
 			type: UPDATE_CONTACTS,
-			contacts: response.data.conversations
+			allContacts: response.data.conversations
 		});
 	} else {
 		dispatch({ type: UPDATE_CONTACTS_ERROR });

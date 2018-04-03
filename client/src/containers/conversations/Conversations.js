@@ -19,7 +19,7 @@ class Conversation extends Component {
 	renderConversations() {
 		const { colorTheme, chat, contacts } = this.props;
 
-		if (contacts.contacts.length >= 1) {
+		if (contacts.allContacts.length >= 1) {
 			return (
 				<Row type="flex" justify="space-between">
 					<Col md={{ span: 5 }} />
@@ -29,7 +29,7 @@ class Conversation extends Component {
 							color: colorTheme.text3Color
 						}}
 					>
-						<Contacts contacts={contacts.contacts} />
+						<Contacts contacts={contacts.allContacts} />
 					</Col>
 					<Col md={{ span: 10 }}>
 						<Chat chat={chat} />

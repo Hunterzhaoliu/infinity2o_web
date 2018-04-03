@@ -14,9 +14,9 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	contacts: [],
+	allContacts: [],
 	displayedContacts: [],
-	i: 20, // initial max number of contacts to display
+	i: 20, // initial max number of allContacts to display
 	loading: false,
 	hasMore: true,
 	hasContactsError: false,
@@ -29,9 +29,9 @@ export default function(state = initialState, action) {
 		case ON_CHANGE_TYPED_MESSAGE:
 			return newState;
 		case UPDATE_CONTACTS:
-			newState.contacts = action.contacts;
-			if (newState.contacts !== undefined) {
-				newState.displayedContacts = newState.contacts.slice(
+			newState.allContacts = action.allContacts;
+			if (newState.allContacts !== undefined) {
+				newState.displayedContacts = newState.allContacts.slice(
 					0,
 					newState.i
 				);
@@ -47,7 +47,7 @@ export default function(state = initialState, action) {
 			return newState;
 		case DISPLAY_MORE_CONTACTS:
 			newState.displayedContacts.concat(
-				newState.contacts.slice(
+				newState.allContacts.slice(
 					newState.i,
 					newState.i + action.numberOfContacts
 				)
