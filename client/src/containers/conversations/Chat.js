@@ -5,12 +5,9 @@ import * as chatActionCreators from '../../actions/chat';
 import { bindActionCreators } from 'redux';
 import './Chat.css';
 import InfiniteScroll from 'react-infinite-scroller';
-import io from 'socket.io-client';
 
 import { Layout, Input, Row, Col, Affix, Icon, List, Spin } from 'antd';
 const { Content } = Layout;
-
-let socket = io('localhost:5000');
 
 class Chat extends Component {
 	componentWillMount() {
@@ -40,9 +37,10 @@ class Chat extends Component {
 		this.props.onChangeTypedMessage(e.target.value);
 	};
 
-	onPressEnter() {
+	onPressEnter = () => {
 		console.log('pressed enter');
-	}
+		this.props.sendMessageToServer();
+	};
 
 	renderMessageStatusIcon(status) {
 		if (status === 'sending') {
@@ -202,6 +200,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		displayMoreMessages: numberOfMessages => {
 			chatDispatchers.displayMoreMessages(numberOfMessages);
+		},
+		sendMessageToServer: () => {
+			chatDispatchers.sendMessageToServer();
 		}
 	};
 }

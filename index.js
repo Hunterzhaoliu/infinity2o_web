@@ -65,5 +65,10 @@ server = app.listen(PORT, function() {
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
-	console.log('a user connected');
+	console.log('a user connected with socket.id = ', socket.id);
+
+	socket.on('SEND_MESSAGE_FROM_CLIENT', function(data) {
+		console.log('SEND_MESSAGE_FROM_CLIENT data = ', data);
+		//io.emit('RECEIVE_MESSAGE', data);
+	});
 });

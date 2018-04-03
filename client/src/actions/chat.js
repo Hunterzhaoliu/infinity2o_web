@@ -2,7 +2,8 @@ import {
 	ON_CHANGE_TYPED_MESSAGE,
 	SET_CHAT_LOADING,
 	SET_CHAT_HAS_MORE,
-	DISPLAY_MORE_MESSAGES
+	DISPLAY_MORE_MESSAGES,
+	SEND_MESSAGE_TO_SERVER
 } from './types';
 
 export const onChangeTypedMessage = newMessage => dispatch => {
@@ -30,5 +31,11 @@ export const displayMoreMessages = (numberOfMessages, dispatch) => {
 	dispatch({
 		type: DISPLAY_MORE_MESSAGES,
 		numberOfMessages: numberOfMessages
+	});
+};
+
+export const sendMessageToServer = () => dispatch => {
+	dispatch({
+		type: SEND_MESSAGE_TO_SERVER
 	});
 };
