@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as conversationsActionCreators from '../../actions/conversations';
+import * as contactsActionCreators from '../../actions/contacts';
 import { bindActionCreators } from 'redux';
 import { Layout, List, Spin, Button } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -15,17 +15,14 @@ class Contacts extends Component {
 
 	handleInfiniteOnLoad = () => {
 		const {
-			conversations,
+			contacts,
 			setLoading,
 			setHasMore,
 			displayMoreContacts
 		} = this.props;
 
 		setLoading(true);
-		if (
-			conversations.displayedContacts.length ===
-			conversations.contacts.length
-		) {
+		if (contacts.displayedContacts.length === contacts.contacts.length) {
 			setLoading(false);
 			setHasMore(false);
 			return;
@@ -40,7 +37,7 @@ class Contacts extends Component {
 
 	render() {
 		//console.log('Contacts this.props = ', this.props);
-		const { colorTheme, conversations } = this.props;
+		const { colorTheme, contacts } = this.props;
 
 		return (
 			<Content
@@ -54,13 +51,11 @@ class Contacts extends Component {
 					<InfiniteScroll
 						initialLoad={false}
 						loadMore={this.handleInfiniteOnLoad}
-						hasMore={
-							!conversations.loading && conversations.hasMore
-						}
+						hasMore={!contacts.loading && contacts.hasMore}
 						useWindow={false}
 					>
 						<List
-							dataSource={conversations.displayedContacts}
+							dataSource={contacts.displayedContacts}
 							renderItem={item => {
 								//console.log('item = ', item);
 								return (
@@ -95,8 +90,8 @@ class Contacts extends Component {
 								);
 							}}
 						>
-							{conversations.loading &&
-								conversations.hasMore && (
+							{contacts.loading &&
+								contacts.hasMore && (
 									<Spin className="demo-loading" />
 								)}
 						</List>
@@ -114,7 +109,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		conversations: state.conversations
+		contacts: state.contacts
 	};
 }
 
@@ -128,8 +123,8 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
-	const conversationsDispatchers = bindActionCreators(
-		conversationsActionCreators,
+	const contactsDispatchers = bindActionCreators(
+		contactsActionCreators,
 		dispatch
 	);
 
@@ -138,13 +133,13 @@ function mapDispatchToProps(dispatch) {
 			colorThemeDispatchers.onPressConversations();
 		},
 		setLoading: loading => {
-			conversationsDispatchers.setLoading(loading);
+			contactsDispatchers.setLoading(loading);
 		},
 		setHasMore: hasMore => {
-			conversationsDispatchers.setHasMore(hasMore);
+			contactsDispatchers.setHasMore(hasMore);
 		},
 		displayMoreContacts: numberOfContacts => {
-			conversationsDispatchers.displayMoreContacts(numberOfContacts);
+			contactsDispatchers.displayMoreContacts(numberOfContacts);
 		}
 	};
 }

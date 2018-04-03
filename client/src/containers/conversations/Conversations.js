@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as conversationsActionCreators from '../../actions/conversations';
+import * as contactsActionCreators from '../../actions/contacts';
 import { bindActionCreators } from 'redux';
 
 import Chat from './Chat';
@@ -17,9 +17,9 @@ class Conversation extends Component {
 	}
 
 	renderConversations() {
-		const { colorTheme, chat, conversations } = this.props;
+		const { colorTheme, chat, contacts } = this.props;
 
-		if (conversations.contacts.length >= 1) {
+		if (contacts.contacts.length >= 1) {
 			return (
 				<Row type="flex" justify="space-between">
 					<Col md={{ span: 5 }} />
@@ -29,7 +29,7 @@ class Conversation extends Component {
 							color: colorTheme.text3Color
 						}}
 					>
-						<Contacts contacts={conversations.contacts} />
+						<Contacts contacts={contacts.contacts} />
 					</Col>
 					<Col md={{ span: 10 }}>
 						<Chat chat={chat} />
@@ -77,7 +77,7 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		chat: state.chat,
-		conversations: state.conversations
+		contacts: state.contacts
 	};
 }
 
@@ -91,8 +91,8 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
-	const conversationsDispatchers = bindActionCreators(
-		conversationsActionCreators,
+	const contactsDispatchers = bindActionCreators(
+		contactsActionCreators,
 		dispatch
 	);
 
@@ -101,7 +101,7 @@ function mapDispatchToProps(dispatch) {
 			colorThemeDispatchers.onPressConversations();
 		},
 		fetchConversations: () => {
-			conversationsDispatchers.fetchConversations();
+			contactsDispatchers.fetchConversations();
 		}
 	};
 }
