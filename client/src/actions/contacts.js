@@ -46,7 +46,10 @@ export const fetchConversations = () => async dispatch => {
 			// dispatch chat logs for the latest messages
 			dispatch({
 				type: ON_SELECT_CONTACT,
-				conversationId: conversationId
+				conversationId: conversationId,
+				isOnline:
+					response.data.conversations[contactChatDisplayIndex]
+						.isOnline
 			});
 			dispatch({
 				type: UPDATE_CHAT,
@@ -79,10 +82,11 @@ export const displayMoreContacts = numberOfContacts => dispatch => {
 	});
 };
 
-export const onSelectContact = conversationId => async dispatch => {
+export const onSelectContact = (conversationId, isOnline) => async dispatch => {
 	dispatch({
 		type: ON_SELECT_CONTACT,
-		conversationId: conversationId
+		conversationId: conversationId,
+		isOnline: isOnline
 	});
 
 	// get previous messages in DB
@@ -103,10 +107,8 @@ export const onSelectContact = conversationId => async dispatch => {
 export const tellServerIAmInConversations = (
 	mongoDBUserId,
 	allContacts
-) => async dispatch => {
-	console.log('actions allContacts = ', allContacts);
-
-	socket.emit('TELL_SERVER_CLIENT_IS_ONLINE', {
+) => dispatch => {
+	socket.emit('TELL_SERVER_CLIENT_IS_IN_CONVERSATIONS', {
 		mongoDBUserId: mongoDBUserId,
 		allContacts: allContacts,
 		socketId: socket.id
@@ -114,8 +116,6 @@ export const tellServerIAmInConversations = (
 };
 
 socket.on('TELL_CLIENT_ONLINE_CONTACTS', async function(allContacts) {
-	console.log('TELL_CLIENT_ONLINE_CONTACTS allContacts = ', allContacts);
-
 	const response = await axios.put('/api/profile', allContacts);
 	if (response.status === 200) {
 		store.dispatch({

@@ -64,7 +64,8 @@ server = app.listen(PORT, function() {
 
 let io = require('socket.io')(server);
 
-let onlineUsers = {
+let clientsInConversations = {
+	// Example: 'mongoDBUserId': 'socketId'
 	// User 3
 	'5aaec67ecf6a1b0d7da62775': 'OA3kZDitw9y75UjYAAAA'
 };
@@ -72,17 +73,17 @@ let onlineUsers = {
 io.on('connection', function(socket) {
 	console.log('a user connected with socket.id = ', socket.id);
 
-	socket.on('TELL_SERVER_CLIENT_IS_ONLINE', function(data) {
+	socket.on('TELL_SERVER_CLIENT_IS_IN_CONVERSATIONS', function(data) {
 		const key = data.mongoDBUserId;
 		const value = data.socketId;
-		const isInitialConnect = onlineUsers[key] === undefined;
+		const isInitialConnect = clientsInConversations[key] === undefined;
 		if (key !== null && isInitialConnect) {
-			onlineUsers[key] = value;
+			clientsInConversations[key] = value;
 
 			// respond with which of the client's contacts can chat
 			let contactsOnline = [];
 			data.allContacts.forEach(function(contact) {
-				if (onlineUsers[contact.matchId] !== undefined) {
+				if (clientsInConversations[contact.matchId] !== undefined) {
 					// the current contact is online
 					contact['isOnline'] = true;
 					contactsOnline.push(contact);

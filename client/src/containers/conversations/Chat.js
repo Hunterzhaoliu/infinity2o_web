@@ -41,10 +41,15 @@ class Chat extends Component {
 
 	onPressEnter = () => {
 		console.log('pressed enter');
-		const { name, conversationId, chat } = this.props;
+		const {
+			name,
+			conversationId,
+			chat,
+			selectedContactOnline
+		} = this.props;
 		this.props.sendMessageToServer(
 			conversationId,
-			chat.partnerOnline,
+			selectedContactOnline,
 			name,
 			chat.currentMessage
 		);
@@ -180,7 +185,8 @@ function mapStateToProps(state) {
 		colorTheme: state.colorTheme,
 		chat: state.chat,
 		name: state.profile.name,
-		conversationId: state.contacts.conversationId
+		conversationId: state.contacts.conversationId,
+		selectedContactOnline: state.contacts.selectedContactOnline
 	};
 }
 
@@ -215,13 +221,13 @@ function mapDispatchToProps(dispatch) {
 		},
 		sendMessageToServer: (
 			conversationId,
-			partnerOnline,
+			selectedContactOnline,
 			name,
 			currentMessage
 		) => {
 			chatDispatchers.sendMessageToServer(
 				conversationId,
-				partnerOnline,
+				selectedContactOnline,
 				name,
 				currentMessage
 			);

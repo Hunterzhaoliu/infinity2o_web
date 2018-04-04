@@ -41,7 +41,7 @@ export const displayMoreMessages = (numberOfMessages, dispatch) => {
 
 export const sendMessageToServer = (
 	conversationId,
-	partnerOnline,
+	selectedContactOnline,
 	name,
 	currentMessage
 ) => async dispatch => {
@@ -50,13 +50,14 @@ export const sendMessageToServer = (
 		senderName: name
 	});
 
-	if (partnerOnline) {
+	if (selectedContactOnline) {
 		// use websockets for live chat
 		socket.emit('SEND_MESSAGE_FROM_CLIENT_TO_SERVER', {
 			senderName: name,
 			message: currentMessage,
 			timeCreated: Date.now()
 		});
+		console.log('sent live currentMessage = ', currentMessage);
 	} else {
 		// send message as POST request
 		const messageInfo = {

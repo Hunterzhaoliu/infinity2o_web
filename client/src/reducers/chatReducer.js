@@ -19,8 +19,7 @@ let initialState = {
 	last50Messages: [],
 	displayMessages: [],
 	currentMessage: null,
-	hasUpdateChatError: false,
-	partnerOnline: false
+	hasUpdateChatError: false
 };
 
 export default function(state = initialState, action) {

@@ -21,7 +21,8 @@ let initialState = {
 	hasMore: true,
 	hasContactsError: false,
 	hasDeleteMatchInDBError: false,
-	conversationId: null
+	conversationId: null,
+	selectedContactOnline: false
 };
 
 export default function(state = initialState, action) {
@@ -61,6 +62,7 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_SELECT_CONTACT:
 			newState.conversationId = action.conversationId;
+			newState.selectedContactOnline = action.isOnline;
 			return newState;
 		default:
 			return state;

@@ -31,10 +31,6 @@ class Contacts extends Component {
 		setLoading(false);
 	};
 
-	onSelectContact = conversationId => {
-		this.props.onSelectContact(conversationId);
-	};
-
 	renderOnline(contact) {
 		if (contact.isOnline) {
 			return contact.matchName + ' online';
@@ -44,7 +40,7 @@ class Contacts extends Component {
 	}
 
 	renderContactButton(contact) {
-		const { colorTheme, contacts } = this.props;
+		const { colorTheme, contacts, onSelectContact } = this.props;
 
 		let borderColor = colorTheme.text8Color;
 		let background = colorTheme.text8Color;
@@ -64,7 +60,9 @@ class Contacts extends Component {
 					height: '50px',
 					width: '220px'
 				}}
-				onClick={e => this.onSelectContact(contact.conversationId)}
+				onClick={e =>
+					onSelectContact(contact.conversationId, contact.isOnline)
+				}
 			>
 				{this.renderOnline(contact)}
 			</Button>
@@ -160,8 +158,8 @@ function mapDispatchToProps(dispatch) {
 		displayMoreContacts: numberOfContacts => {
 			contactsDispatchers.displayMoreContacts(numberOfContacts);
 		},
-		onSelectContact: conversationId => {
-			contactsDispatchers.onSelectContact(conversationId);
+		onSelectContact: (conversationId, isOnline) => {
+			contactsDispatchers.onSelectContact(conversationId, isOnline);
 		}
 	};
 }
