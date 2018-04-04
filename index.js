@@ -72,22 +72,27 @@ io.on('connection', function(socket) {
 	socket.on('TELL_SERVER_CLIENT_IS_ONLINE', function(data) {
 		const key = data.mongoDBUserId;
 		const value = data.socketId;
-		onlineUsers[key] = value;
+		const isInitialConnect = onlineUsers[key] === undefined;
+		if (key !== null && isInitialConnect) {
+			onlineUsers[key] = value;
 
-		// respond with which of the client's contacts can chat
-		console.log('data.allContacts = ', data.allContacts);
-		let contactsOnline = [];
-		// TODO: manual test
-		data.allContacts.forEach(function(contact) {
-			if (onlineUsers[contact.matchId] !== undefined) {
-				// the current contact is online
-				contact['isOnline'] = true;
-				contactsOnline.push(contact);
-			} else {
-				contactsOnline.push(contact);
-			}
-		});
-		socket.emit('TELL_CLIENT_ONLINE_CONTACTS', contactsOnline);
+			console.log('onlineUsers = ', onlineUsers);
+
+			// respond with which of the client's contacts can chat
+			//console.log('data.allContacts = ', data.allContacts);
+			let contactsOnline = [];
+			// TODO: manual test
+			data.allContacts.forEach(function(contact) {
+				if (onlineUsers[contact.matchId] !== undefined) {
+					// the current contact is online
+					contact['isOnline'] = true;
+					contactsOnline.push(contact);
+				} else {
+					contactsOnline.push(contact);
+				}
+			});
+			socket.emit('TELL_CLIENT_ONLINE_CONTACTS', contactsOnline);
+		}
 	});
 
 	socket.on('SEND_MESSAGE_FROM_CLIENT_TO_SERVER', function(data) {
