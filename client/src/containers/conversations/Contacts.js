@@ -35,13 +35,21 @@ class Contacts extends Component {
 		this.props.onSelectContact(conversationId);
 	};
 
-	renderContactButton(item) {
+	renderOnline(contact) {
+		if (contact.isOnline) {
+			return contact.matchName + ' online';
+		} else {
+			return contact.matchName;
+		}
+	}
+
+	renderContactButton(contact) {
 		const { colorTheme, contacts } = this.props;
 
 		let borderColor = colorTheme.text8Color;
 		let background = colorTheme.text8Color;
 		let color = colorTheme.text4Color;
-		if (contacts.conversationId === item.conversationId) {
+		if (contacts.conversationId === contact.conversationId) {
 			borderColor = colorTheme.keyText8Color;
 			background = colorTheme.keyText8Color;
 			color = colorTheme.text2Color;
@@ -56,9 +64,9 @@ class Contacts extends Component {
 					height: '50px',
 					width: '220px'
 				}}
-				onClick={e => this.onSelectContact(item.conversationId)}
+				onClick={e => this.onSelectContact(contact.conversationId)}
 			>
-				{item.matchName}
+				{this.renderOnline(contact)}
 			</Button>
 		);
 	}
@@ -84,8 +92,8 @@ class Contacts extends Component {
 					>
 						<List
 							dataSource={contacts.displayedContacts}
-							renderItem={item => {
-								//console.log('item = ', item);
+							renderItem={contact => {
+								//console.log('contact = ', contact);
 								return (
 									<List.Item
 										style={{
@@ -96,7 +104,7 @@ class Contacts extends Component {
 											padding: '5px 0px 0px'
 										}}
 									>
-										{this.renderContactButton(item)}
+										{this.renderContactButton(contact)}
 									</List.Item>
 								);
 							}}

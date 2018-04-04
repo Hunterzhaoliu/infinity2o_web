@@ -113,10 +113,16 @@ export const tellServerIAmInConversations = (
 	});
 };
 
-socket.on('TELL_CLIENT_ONLINE_CONTACTS', function(allContacts) {
+socket.on('TELL_CLIENT_ONLINE_CONTACTS', async function(allContacts) {
 	console.log('TELL_CLIENT_ONLINE_CONTACTS allContacts = ', allContacts);
-	store.dispatch({
-		type: UPDATE_CONTACTS,
-		allContacts: allContacts
-	});
+
+	const response = await axios.put('/api/profile', allContacts);
+	if (response.status === 200) {
+		store.dispatch({
+			type: UPDATE_CONTACTS,
+			allContacts: allContacts
+		});
+	} else {
+		store.dispatch({ type: UPDATE_CONTACTS_ERROR });
+	}
 });

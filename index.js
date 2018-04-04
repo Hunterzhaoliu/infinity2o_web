@@ -88,6 +88,7 @@ io.on('connection', function(socket) {
 					contactsOnline.push(contact);
 				} else {
 					contactsOnline.push(contact);
+					contact['isOnline'] = false;
 				}
 			});
 			socket.emit('TELL_CLIENT_ONLINE_CONTACTS', contactsOnline);

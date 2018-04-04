@@ -63,7 +63,8 @@ module.exports = app => {
 				userConversationList.push({
 					conversationId: conversationInDB._id,
 					matchName: matchName,
-					matchId: matchId
+					matchId: matchId,
+					isOnline: false
 				});
 				await UserCollection.updateOne(
 					{ _id: userId },
@@ -73,7 +74,8 @@ module.exports = app => {
 				matchConversationList.push({
 					conversationId: conversationInDB._id,
 					matchName: userName,
-					matchId: userId
+					matchId: userId,
+					isOnline: false
 				});
 
 				await UserCollection.updateOne(
