@@ -96,9 +96,9 @@ io.on('connection', function(socket) {
 		}
 	});
 
-	// socket.on('SEND_MESSAGE_FROM_CLIENT_TO_SERVER', function(data) {
-	// 	console.log('SEND_MESSAGE_FROM_CLIENT_TO_SERVER data = ', data);
-	//
-	// 	// TODO: socket.to(matchSocketId).emit('hey', 'I just met you');
-	// });
+	socket.on('SEND_MESSAGE_FROM_CLIENT_TO_SERVER', function(data) {
+		console.log('SEND_MESSAGE_FROM_CLIENT_TO_SERVER data = ', data);
+
+		// TODO: socket.to(matchSocketId).emit('hey', 'I just met you');
+	});
 });

@@ -55,15 +55,19 @@ class Chat extends Component {
 		);
 	};
 
-	renderMessageStatusIcon(status) {
-		if (status === 'sending') {
-			return <Icon type="loading" />;
-		} else if (status === 'sent') {
-			return <Icon type="check-circle-o" />;
-		} else if (status === 'delivered') {
-			return <Icon type="check-circle" />;
-		} else if (status === 'failed-delivery') {
-			return <Icon type="warning" />;
+	renderMessageStatusIcon(status, item, name) {
+		if (item.senderName === name) {
+			if (status === 'sending') {
+				return <Icon type="loading" />;
+			} else if (status === 'sent') {
+				return <Icon type="check-circle-o" />;
+			} else if (status === 'delivered') {
+				return <Icon type="check-circle" />;
+			} else if (status === 'failed-delivery') {
+				return <Icon type="warning" />;
+			}
+		} else {
+			// no need to show if partner's message successfully reached us to us
 		}
 	}
 
@@ -138,7 +142,9 @@ class Chat extends Component {
 												}}
 											>
 												{this.renderMessageStatusIcon(
-													'delivered'
+													'delivered',
+													item,
+													name
 												)}
 											</p>
 										</Col>

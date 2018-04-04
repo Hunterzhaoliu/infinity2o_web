@@ -50,32 +50,29 @@ export const sendMessageToServer = (
 		senderName: name
 	});
 
+	const timeCreated = Date.now();
 	if (selectedContactOnline) {
 		// use websockets for live chat
 		socket.emit('SEND_MESSAGE_FROM_CLIENT_TO_SERVER', {
 			senderName: name,
 			message: currentMessage,
-			timeCreated: Date.now()
+			timeCreated: timeCreated
 		});
 		console.log('sent live currentMessage = ', currentMessage);
+	}
+	// save sent message into database
+	const messageInfo = {
+		conversationId: conversationId,
+		senderName: name,
+		message: currentMessage,
+		timeCreated: timeCreated
+	};
+	const response = await axios.post('/api/conversations/chat', messageInfo);
+	if (response.status === 200) {
+		dispatch({
+			type: MESSAGE_SENT_SUCCESS
+		});
 	} else {
-		// send message as POST request
-		const messageInfo = {
-			conversationId: conversationId,
-			senderName: name,
-			message: currentMessage,
-			timeCreated: Date.now()
-		};
-		const response = await axios.post(
-			'/api/conversations/chat',
-			messageInfo
-		);
-		if (response.status === 200) {
-			dispatch({
-				type: MESSAGE_SENT_SUCCESS
-			});
-		} else {
-			dispatch({ type: MESSAGE_SENT_ERROR });
-		}
+		dispatch({ type: MESSAGE_SENT_ERROR });
 	}
 };
