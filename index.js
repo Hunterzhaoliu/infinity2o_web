@@ -62,7 +62,7 @@ server = app.listen(PORT, function() {
 	);
 });
 
-var io = require('socket.io')(server);
+let io = require('socket.io')(server);
 
 let onlineUsers = {};
 
@@ -75,10 +75,18 @@ io.on('connection', function(socket) {
 		onlineUsers[key] = value;
 
 		// respond with which of the client's contacts can chat
+		console.log('data.allContacts = ', data.allContacts);
 		let contactsOnline = [];
-		// socket
-		// 	.to(data.socketId)
-		// 	.emit('TELL_CLIENT_ONLINE_CONTACTS', contactsOnline);
+		// TODO: manual test
+		data.allContacts.forEach(function(contact) {
+			if (onlineUsers[contact.matchId] !== undefined) {
+				// the current contact is online
+				contact['isOnline'] = true;
+				contactsOnline.push(contact);
+			} else {
+				contactsOnline.push(contact);
+			}
+		});
 		socket.emit('TELL_CLIENT_ONLINE_CONTACTS', contactsOnline);
 	});
 

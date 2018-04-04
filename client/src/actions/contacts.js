@@ -15,6 +15,7 @@ export const fetchConversations = () => async dispatch => {
 	// get user by hitting GET api/current_user
 	const response = await axios.get('/api/current_user');
 
+	console.log('response.data = ', response.data);
 	if (response.status === 200) {
 		// dispatch user.conversations.contacts -> state
 		dispatch({

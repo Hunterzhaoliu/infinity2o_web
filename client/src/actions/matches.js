@@ -53,7 +53,7 @@ export const onStartConversation = (
 		});
 		dispatch({
 			type: UPDATE_CONTACTS,
-			contacts: response.data
+			allContacts: response.data
 		});
 		history.push('/conversations');
 	} else {
