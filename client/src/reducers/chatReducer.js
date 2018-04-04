@@ -7,7 +7,8 @@ import {
 	SET_CHAT_HAS_MORE,
 	DISPLAY_SENT_MESSAGE,
 	MESSAGE_SENT_SUCCESS,
-	MESSAGE_SENT_ERROR
+	MESSAGE_SENT_ERROR,
+	DISPLAY_RECIEVED_MESSAGE
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -91,6 +92,24 @@ export default function(state = initialState, action) {
 				newState.displayMessages.length - 1;
 			newState.displayMessages[lastDisplayMessagesIndex2].status =
 				'failed-delivery';
+			return newState;
+		case DISPLAY_RECIEVED_MESSAGE:
+			console.log('action.messageInfo = ', action.messageInfo);
+			// newState.last50Messages.push({
+			// 	senderName: action.senderName,
+			// 	content: newState.currentMessage,
+			// });
+			// if (newState.last50Messages.length > 50) {
+			// 	newState.last50Messages.shift();
+			// }
+			//
+			// newState.displayMessages.push({
+			// 	senderName: action.senderName,
+			// 	content: newState.currentMessage,
+			// });
+			// if (newState.displayMessages.length > 50) {
+			// 	newState.displayMessages.shift();
+			// }
 			return newState;
 		default:
 			return state;

@@ -45,11 +45,13 @@ class Chat extends Component {
 			name,
 			conversationId,
 			chat,
-			selectedContactOnline
+			selectedContactOnline,
+			selectedContactSocketId
 		} = this.props;
 		this.props.sendMessageToServer(
 			conversationId,
 			selectedContactOnline,
+			selectedContactSocketId,
 			name,
 			chat.currentMessage
 		);
@@ -192,7 +194,8 @@ function mapStateToProps(state) {
 		chat: state.chat,
 		name: state.profile.name,
 		conversationId: state.contacts.conversationId,
-		selectedContactOnline: state.contacts.selectedContactOnline
+		selectedContactOnline: state.contacts.selectedContactOnline,
+		selectedContactSocketId: state.contacts.selectedContactSocketId
 	};
 }
 
@@ -228,12 +231,14 @@ function mapDispatchToProps(dispatch) {
 		sendMessageToServer: (
 			conversationId,
 			selectedContactOnline,
+			selectedContactSocketId,
 			name,
 			currentMessage
 		) => {
 			chatDispatchers.sendMessageToServer(
 				conversationId,
 				selectedContactOnline,
+				selectedContactSocketId,
 				name,
 				currentMessage
 			);

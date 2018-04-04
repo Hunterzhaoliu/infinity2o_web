@@ -73,7 +73,7 @@ let clientsInConversations = {
 io.on('connection', function(socket) {
 	console.log('a user connected with socket.id = ', socket.id);
 
-	socket.on('TELL_SERVER_CLIENT_IS_IN_CONVERSATIONS', function(data) {
+	socket.on('TELL_SERVER:CLIENT_A_IS_IN_CONVERSATIONS', function(data) {
 		const key = data.mongoDBUserId;
 		const value = data.socketId;
 		const isInitialConnect = clientsInConversations[key] === undefined;
@@ -95,13 +95,20 @@ io.on('connection', function(socket) {
 					contact['socketId'] = null;
 				}
 			});
-			socket.emit('TELL_CLIENT_ONLINE_CONTACTS', contactsOnline);
+			socket.emit('TELL_CLIENT_A:ONLINE_CONTACTS', contactsOnline);
 		}
 	});
 
-	socket.on('SEND_MESSAGE_FROM_CLIENT_TO_SERVER', function(data) {
-		console.log('SEND_MESSAGE_FROM_CLIENT_TO_SERVER data = ', data);
+	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
+		messageInfo
+	) {
+		console.log(
+			'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo = ',
+			messageInfo
+		);
 
-		// TODO: socket.to(matchSocketId).emit('hey', 'I just met you');
+		socket
+			.to(messageInfo.selectedContactSocketId)
+			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
 	});
 });

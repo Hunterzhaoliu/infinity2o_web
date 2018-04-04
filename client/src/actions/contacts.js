@@ -116,14 +116,14 @@ export const tellServerIAmInConversations = (
 	mongoDBUserId,
 	allContacts
 ) => dispatch => {
-	socket.emit('TELL_SERVER_CLIENT_IS_IN_CONVERSATIONS', {
+	socket.emit('TELL_SERVER:CLIENT_A_IS_IN_CONVERSATIONS', {
 		mongoDBUserId: mongoDBUserId,
 		allContacts: allContacts,
 		socketId: socket.id
 	});
 };
 
-socket.on('TELL_CLIENT_ONLINE_CONTACTS', async function(allContacts) {
+socket.on('TELL_CLIENT_A:ONLINE_CONTACTS', async function(allContacts) {
 	const response = await axios.put('/api/profile', allContacts);
 	if (response.status === 200) {
 		store.dispatch({

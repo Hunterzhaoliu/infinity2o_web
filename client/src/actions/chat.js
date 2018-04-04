@@ -6,9 +6,11 @@ import {
 	DISPLAY_MORE_MESSAGES,
 	DISPLAY_SENT_MESSAGE,
 	MESSAGE_SENT_SUCCESS,
-	MESSAGE_SENT_ERROR
+	MESSAGE_SENT_ERROR,
+	DISPLAY_RECIEVED_MESSAGE
 } from './types';
 import io from 'socket.io-client';
+import { store } from '../index';
 export const socket = io('localhost:5000');
 
 export const onChangeCurrentMessage = newMessage => dispatch => {
@@ -42,6 +44,7 @@ export const displayMoreMessages = (numberOfMessages, dispatch) => {
 export const sendMessageToServer = (
 	conversationId,
 	selectedContactOnline,
+	selectedContactSocketId,
 	name,
 	currentMessage
 ) => async dispatch => {
@@ -53,7 +56,8 @@ export const sendMessageToServer = (
 	const timeCreated = Date.now();
 	if (selectedContactOnline) {
 		// use websockets for live chat
-		socket.emit('SEND_MESSAGE_FROM_CLIENT_TO_SERVER', {
+		socket.emit('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', {
+			selectedContactSocketId: selectedContactSocketId,
 			senderName: name,
 			message: currentMessage,
 			timeCreated: timeCreated
@@ -75,3 +79,12 @@ export const sendMessageToServer = (
 		dispatch({ type: MESSAGE_SENT_ERROR });
 	}
 };
+
+socket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', async function(messageInfo) {
+	// No need to save message into DB since the message was already
+	// saved by client A. We just need to display the message to us(Client B)
+	store.dispatch({
+		type: DISPLAY_RECIEVED_MESSAGE,
+		messageInfo: messageInfo
+	});
+});
