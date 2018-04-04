@@ -19,7 +19,8 @@ let initialState = {
 	hasMore: true,
 	hasContactsError: false,
 	conversationId: null,
-	selectedContactOnline: false
+	selectedContactOnline: false,
+	selectedContactSocketId: null
 };
 
 export default function(state = initialState, action) {
@@ -55,6 +56,7 @@ export default function(state = initialState, action) {
 		case ON_SELECT_CONTACT:
 			newState.conversationId = action.conversationId;
 			newState.selectedContactOnline = action.isOnline;
+			newState.selectedContactSocketId = action.socketId;
 			return newState;
 		default:
 			return state;

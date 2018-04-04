@@ -86,10 +86,13 @@ io.on('connection', function(socket) {
 				if (clientsInConversations[contact.matchId] !== undefined) {
 					// the current contact is online
 					contact['isOnline'] = true;
+					contact['socketId'] =
+						clientsInConversations[contact.matchId];
 					contactsOnline.push(contact);
 				} else {
 					contactsOnline.push(contact);
 					contact['isOnline'] = false;
+					contact['socketId'] = null;
 				}
 			});
 			socket.emit('TELL_CLIENT_ONLINE_CONTACTS', contactsOnline);

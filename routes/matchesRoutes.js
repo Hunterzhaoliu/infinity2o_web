@@ -64,7 +64,8 @@ module.exports = app => {
 					conversationId: conversationInDB._id,
 					matchName: matchName,
 					matchId: matchId,
-					isOnline: false
+					isOnline: false,
+					socketId: null
 				});
 				await UserCollection.updateOne(
 					{ _id: userId },
@@ -75,7 +76,8 @@ module.exports = app => {
 					conversationId: conversationInDB._id,
 					matchName: userName,
 					matchId: userId,
-					isOnline: false
+					isOnline: false,
+					socketId: null
 				});
 
 				await UserCollection.updateOne(

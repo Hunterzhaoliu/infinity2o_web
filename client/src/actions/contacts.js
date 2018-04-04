@@ -49,7 +49,10 @@ export const fetchConversations = () => async dispatch => {
 				conversationId: conversationId,
 				isOnline:
 					response.data.conversations[contactChatDisplayIndex]
-						.isOnline
+						.isOnline,
+				socketId:
+					response.data.conversations[contactChatDisplayIndex]
+						.socketId
 			});
 			dispatch({
 				type: UPDATE_CHAT,
@@ -82,11 +85,16 @@ export const displayMoreContacts = numberOfContacts => dispatch => {
 	});
 };
 
-export const onSelectContact = (conversationId, isOnline) => async dispatch => {
+export const onSelectContact = (
+	conversationId,
+	isOnline,
+	socketId
+) => async dispatch => {
 	dispatch({
 		type: ON_SELECT_CONTACT,
 		conversationId: conversationId,
-		isOnline: isOnline
+		isOnline: isOnline,
+		socketId: socketId
 	});
 
 	// get previous messages in DB

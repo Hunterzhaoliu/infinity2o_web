@@ -61,7 +61,11 @@ class Contacts extends Component {
 					width: '220px'
 				}}
 				onClick={e =>
-					onSelectContact(contact.conversationId, contact.isOnline)
+					onSelectContact(
+						contact.conversationId,
+						contact.isOnline,
+						contact.socketId
+					)
 				}
 			>
 				{this.renderOnline(contact)}
@@ -158,8 +162,12 @@ function mapDispatchToProps(dispatch) {
 		displayMoreContacts: numberOfContacts => {
 			contactsDispatchers.displayMoreContacts(numberOfContacts);
 		},
-		onSelectContact: (conversationId, isOnline) => {
-			contactsDispatchers.onSelectContact(conversationId, isOnline);
+		onSelectContact: (conversationId, isOnline, socketId) => {
+			contactsDispatchers.onSelectContact(
+				conversationId,
+				isOnline,
+				socketId
+			);
 		}
 	};
 }
