@@ -58,7 +58,6 @@ export const sendMessageToServer = (
 			message: currentMessage,
 			timeCreated: timeCreated
 		});
-		console.log('sent live currentMessage = ', currentMessage);
 	}
 	// save sent message into database
 	const messageInfo = {

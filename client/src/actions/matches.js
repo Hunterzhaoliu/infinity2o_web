@@ -34,39 +34,38 @@ export const onStartConversation = (
 	matchName,
 	matchId
 ) => async dispatch => {
-	// 1) need to remove match from current user
-	// 2) need to remove current user from match's matches
-	// 3) update current user's conversations with new conversation
-	// 4) update match's conversations with new conversation
-
 	const matchInfo = {
 		matchId: matchId,
 		matchName: matchName
 	};
-	const response = await axios.post(
-		'/api/matches/start_conversation',
-		matchInfo
-	);
-	if (response.status === 200) {
-		dispatch({
-			type: MOVE_TO_CONVERSATIONS
-		});
-		dispatch({
-			type: UPDATE_CONTACTS,
-			allContacts: response.data
-		});
-		history.push('/conversations');
-	} else {
-		dispatch({ type: UPDATE_CONTACTS_ERROR });
-	}
-
-	const response2 = await axios.delete('/api/matches/delete_match', {
+	// 1) need to remove match from current user
+	// 2) need to remove current user from match's matches
+	const response1 = await axios.delete('/api/matches/delete_match', {
 		data: { matchId: matchId }
 	});
-	if (response2.status === 200) {
+	if (response1.status === 200) {
 		dispatch({
 			type: DELETE_MATCH_IN_DB
 		});
+
+		// 3) update current user's conversations with new conversation
+		// 4) update match's conversations with new conversation
+		const response2 = await axios.post(
+			'/api/matches/start_conversation',
+			matchInfo
+		);
+		if (response2.status === 200) {
+			dispatch({
+				type: MOVE_TO_CONVERSATIONS
+			});
+			dispatch({
+				type: UPDATE_CONTACTS,
+				allContacts: response2.data
+			});
+			history.push('/conversations');
+		} else {
+			dispatch({ type: UPDATE_CONTACTS_ERROR });
+		}
 	} else {
 		dispatch({ type: DELETE_MATCH_IN_DB_ERROR });
 	}

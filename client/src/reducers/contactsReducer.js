@@ -1,8 +1,6 @@
 import {
 	UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
-	DELETE_MATCH_IN_DB,
-	DELETE_MATCH_IN_DB_ERROR,
 	SET_LOADING,
 	SET_HAS_MORE,
 	DISPLAY_MORE_CONTACTS,
@@ -20,7 +18,6 @@ let initialState = {
 	loading: false,
 	hasMore: true,
 	hasContactsError: false,
-	hasDeleteMatchInDBError: false,
 	conversationId: null,
 	selectedContactOnline: false
 };
@@ -39,11 +36,6 @@ export default function(state = initialState, action) {
 			return newState;
 		case UPDATE_CONTACTS_ERROR:
 			newState.hasContactsError = true;
-			return newState;
-		case DELETE_MATCH_IN_DB:
-			return newState;
-		case DELETE_MATCH_IN_DB_ERROR:
-			newState.hasDeleteMatchInDBError = true;
 			return newState;
 		case DISPLAY_MORE_CONTACTS:
 			newState.displayedContacts.concat(

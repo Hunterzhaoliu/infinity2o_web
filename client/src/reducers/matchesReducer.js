@@ -1,7 +1,9 @@
 import {
 	SAVE_FETCHED_DAILY_MATCHES,
 	UPDATE_INITIAL_MATCH,
-	ON_NEXT_MATCH
+	ON_NEXT_MATCH,
+	DELETE_MATCH_IN_DB,
+	DELETE_MATCH_IN_DB_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -10,7 +12,8 @@ let cloneObject = obj => {
 
 let initialState = {
 	current1DisplayedMatches: [],
-	nextMatches: []
+	nextMatches: [],
+	hasDeleteMatchInDBError: false
 };
 
 export default function(state = initialState, action) {
@@ -44,6 +47,12 @@ export default function(state = initialState, action) {
 				newState.current1DisplayedMatches.shift();
 				newState.current1DisplayedMatches.push(currentMatch);
 			}
+			return newState;
+		case DELETE_MATCH_IN_DB:
+			newState.hasDeleteMatchInDBError = false;
+			return newState;
+		case DELETE_MATCH_IN_DB_ERROR:
+			newState.hasDeleteMatchInDBError = true;
 			return newState;
 		default:
 			return state;
