@@ -64,8 +64,23 @@ server = app.listen(PORT, function() {
 
 var io = require('socket.io')(server);
 
+let onlineUsers = {};
+
 io.on('connection', function(socket) {
 	console.log('a user connected with socket.id = ', socket.id);
+
+	socket.on('TELL_SERVER_CLIENT_IS_ONLINE', function(data) {
+		const key = data.mongoDBUserId;
+		const value = data.socketId;
+		onlineUsers[key] = value;
+
+		// respond with which of the client's contacts can chat
+		let contactsOnline = [];
+		// socket
+		// 	.to(data.socketId)
+		// 	.emit('TELL_CLIENT_ONLINE_CONTACTS', contactsOnline);
+		socket.emit('TELL_CLIENT_ONLINE_CONTACTS', contactsOnline);
+	});
 
 	socket.on('SEND_MESSAGE_FROM_CLIENT_TO_SERVER', function(data) {
 		console.log('SEND_MESSAGE_FROM_CLIENT_TO_SERVER data = ', data);

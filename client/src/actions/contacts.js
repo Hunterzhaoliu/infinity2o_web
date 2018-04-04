@@ -9,6 +9,7 @@ import {
 	DISPLAY_MORE_CONTACTS,
 	ON_SELECT_CONTACT
 } from './types';
+import { socket } from './chat';
 
 export const fetchConversations = () => async dispatch => {
 	// get user by hitting GET api/current_user
@@ -96,3 +97,18 @@ export const onSelectContact = conversationId => async dispatch => {
 		dispatch({ type: UPDATE_CHAT_ERROR });
 	}
 };
+
+export const tellServerIAmInConversations = (
+	mongoDBUserId,
+	allContacts
+) => async dispatch => {
+	socket.emit('TELL_SERVER_CLIENT_IS_ONLINE', {
+		mongoDBUserId: mongoDBUserId,
+		allContacts: allContacts,
+		socketId: socket.id
+	});
+};
+
+socket.on('TELL_CLIENT_ONLINE_CONTACTS', function(data) {
+	console.log('TELL_CLIENT_ONLINE_CONTACTS data = ', data);
+});

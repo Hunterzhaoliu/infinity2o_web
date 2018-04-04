@@ -9,7 +9,7 @@ import {
 	MESSAGE_SENT_ERROR
 } from './types';
 import io from 'socket.io-client';
-let socket = io('localhost:5000');
+export const socket = io('localhost:5000');
 
 export const onChangeCurrentMessage = newMessage => dispatch => {
 	dispatch({

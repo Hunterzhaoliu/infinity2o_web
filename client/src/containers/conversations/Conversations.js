@@ -17,7 +17,12 @@ class Conversation extends Component {
 	}
 
 	renderConversations() {
-		const { colorTheme, chat, contacts } = this.props;
+		const { colorTheme, chat, contacts, mongoDBUserId } = this.props;
+
+		this.props.tellServerIAmInConversations(
+			mongoDBUserId,
+			contacts.allContacts
+		);
 
 		if (
 			contacts.allContacts !== undefined &&
@@ -80,7 +85,8 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		chat: state.chat,
-		contacts: state.contacts
+		contacts: state.contacts,
+		mongoDBUserId: state.auth.mongoDBUserId
 	};
 }
 
@@ -105,6 +111,12 @@ function mapDispatchToProps(dispatch) {
 		},
 		fetchConversations: () => {
 			contactsDispatchers.fetchConversations();
+		},
+		tellServerIAmInConversations: (mongoDBUserId, allContacts) => {
+			contactsDispatchers.tellServerIAmInConversations(
+				mongoDBUserId,
+				allContacts
+			);
 		}
 	};
 }
