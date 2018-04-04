@@ -9,6 +9,8 @@ import Contacts from './Contacts';
 import { Layout, Row, Col } from 'antd';
 const { Content } = Layout;
 
+let toldServerIamInConversations = false;
+
 class Conversation extends Component {
 	componentWillMount() {
 		// run once before first render()
@@ -19,10 +21,13 @@ class Conversation extends Component {
 	renderConversations() {
 		const { colorTheme, chat, contacts, mongoDBUserId } = this.props;
 
-		this.props.tellServerIAmInConversations(
-			mongoDBUserId,
-			contacts.allContacts
-		);
+		if (!toldServerIamInConversations && contacts.allContacts.length > 0) {
+			this.props.tellServerIAmInConversations(
+				mongoDBUserId,
+				contacts.allContacts
+			);
+			toldServerIamInConversations = true;
+		}
 
 		if (
 			contacts.allContacts !== undefined &&

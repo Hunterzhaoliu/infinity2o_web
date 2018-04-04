@@ -10,17 +10,18 @@ import {
 	ON_SELECT_CONTACT
 } from './types';
 import { socket } from './chat';
+import { store } from '../index';
 
 export const fetchConversations = () => async dispatch => {
 	// get user by hitting GET api/current_user
 	const response = await axios.get('/api/current_user');
 
-	console.log('response.data = ', response.data);
 	if (response.status === 200) {
 		// dispatch user.conversations.contacts -> state
+		let allContacts = response.data.conversations;
 		dispatch({
 			type: UPDATE_CONTACTS,
-			allContacts: response.data.conversations
+			allContacts: allContacts
 		});
 	} else {
 		dispatch({ type: UPDATE_CONTACTS_ERROR });
@@ -103,6 +104,8 @@ export const tellServerIAmInConversations = (
 	mongoDBUserId,
 	allContacts
 ) => async dispatch => {
+	console.log('actions allContacts = ', allContacts);
+
 	socket.emit('TELL_SERVER_CLIENT_IS_ONLINE', {
 		mongoDBUserId: mongoDBUserId,
 		allContacts: allContacts,
@@ -110,6 +113,10 @@ export const tellServerIAmInConversations = (
 	});
 };
 
-socket.on('TELL_CLIENT_ONLINE_CONTACTS', function(data) {
-	console.log('TELL_CLIENT_ONLINE_CONTACTS data = ', data);
+socket.on('TELL_CLIENT_ONLINE_CONTACTS', function(allContacts) {
+	console.log('TELL_CLIENT_ONLINE_CONTACTS allContacts = ', allContacts);
+	store.dispatch({
+		type: UPDATE_CONTACTS,
+		allContacts: allContacts
+	});
 });

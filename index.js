@@ -64,7 +64,10 @@ server = app.listen(PORT, function() {
 
 let io = require('socket.io')(server);
 
-let onlineUsers = {};
+let onlineUsers = {
+	// User 3
+	'5aaec67ecf6a1b0d7da62775': 'OA3kZDitw9y75UjYAAAA'
+};
 
 io.on('connection', function(socket) {
 	console.log('a user connected with socket.id = ', socket.id);
@@ -76,12 +79,8 @@ io.on('connection', function(socket) {
 		if (key !== null && isInitialConnect) {
 			onlineUsers[key] = value;
 
-			console.log('onlineUsers = ', onlineUsers);
-
 			// respond with which of the client's contacts can chat
-			//console.log('data.allContacts = ', data.allContacts);
 			let contactsOnline = [];
-			// TODO: manual test
 			data.allContacts.forEach(function(contact) {
 				if (onlineUsers[contact.matchId] !== undefined) {
 					// the current contact is online
@@ -95,9 +94,9 @@ io.on('connection', function(socket) {
 		}
 	});
 
-	socket.on('SEND_MESSAGE_FROM_CLIENT_TO_SERVER', function(data) {
-		console.log('SEND_MESSAGE_FROM_CLIENT_TO_SERVER data = ', data);
-
-		// TODO: socket.to(matchSocketId).emit('hey', 'I just met you');
-	});
+	// socket.on('SEND_MESSAGE_FROM_CLIENT_TO_SERVER', function(data) {
+	// 	console.log('SEND_MESSAGE_FROM_CLIENT_TO_SERVER data = ', data);
+	//
+	// 	// TODO: socket.to(matchSocketId).emit('hey', 'I just met you');
+	// });
 });
