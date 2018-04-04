@@ -76,11 +76,23 @@ export const displayMoreContacts = numberOfContacts => dispatch => {
 	});
 };
 
-export const onSelectContact = conversationId => dispatch => {
+export const onSelectContact = conversationId => async dispatch => {
 	dispatch({
 		type: ON_SELECT_CONTACT,
 		conversationId: conversationId
 	});
 
-	// TODO: get previous messages in DB
+	// get previous messages in DB
+	const response = await axios.get(
+		'/api/conversations?conversationId=' + conversationId
+	);
+
+	if (response.status === 200) {
+		dispatch({
+			type: UPDATE_CHAT,
+			last50Messages: response.data.last50Messages
+		});
+	} else {
+		dispatch({ type: UPDATE_CHAT_ERROR });
+	}
 };
