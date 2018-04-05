@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -26,45 +25,6 @@ class CustomHeader extends Component {
 
 	updateWindowDimensions() {
 		this.setState({ width: window.innerWidth, height: window.innerHeight });
-		console.log('width = ', window.innerWidth);
-	}
-
-	renderChangeThemeButton() {
-		const { colorTheme, onPressRandomColorTheme } = this.props;
-		return (
-			<div>
-				<Button
-					style={{
-						borderColor: colorTheme.text7Color,
-						background: colorTheme.text7Color,
-						color: colorTheme.text4Color
-					}}
-					onClick={onPressRandomColorTheme}
-				>
-					Change Theme
-				</Button>
-			</div>
-		);
-	}
-
-	renderMenuItems(Options) {
-		const { colorTheme } = this.props;
-
-		return _.map(Options, option => {
-			return console.log('option = ', option);
-			return (
-				<Menu.Item
-					style={{
-						borderColor: colorTheme.text8Color,
-						background: colorTheme.text8Color,
-						color: colorTheme.text4Color
-					}}
-					key={option.name}
-				>
-					{option.name}
-				</Menu.Item>
-			);
-		});
 	}
 
 	renderChangeThemeButton() {
@@ -178,17 +138,8 @@ class CustomHeader extends Component {
 	}
 
 	renderHeaderButtons() {
-		const {
-			colorTheme,
-			onPressRandomColorTheme,
-			onPressProfile,
-			onPressTrainAI,
-			onPressMatches,
-			onPressConversations,
-			auth
-		} = this.props;
+		const { colorTheme, auth } = this.props;
 
-		console.log('in render width = ', this.state.width);
 		if (this.state.width < 768) {
 			// show a dropdown with buttons instead of nav bar
 			const menu = (
@@ -223,7 +174,7 @@ class CustomHeader extends Component {
 							}}
 						>
 							<Dropdown overlay={menu} trigger={['click']}>
-								<a className="ant-dropdown-link" href="#">
+								<a className="ant-dropdown-link">
 									Options{' '}
 									<Icon
 										style={{
