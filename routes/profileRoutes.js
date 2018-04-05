@@ -26,10 +26,14 @@ module.exports = app => {
 		response.send(user);
 	});
 
-	app.put('/api/profile', requireLogin, async (request, response) => {
-		// request.body = allContacts
-		request.user.conversations = request.body;
-		const user = await request.user.save();
-		response.send(user);
-	});
+	app.put(
+		'/api/profile/conversations',
+		requireLogin,
+		async (request, response) => {
+			// request.body = onlineContacts
+			request.user.conversations = request.body;
+			const user = await request.user.save();
+			response.send(user);
+		}
+	);
 };

@@ -9,7 +9,9 @@ import {
 	DISPLAY_MORE_CONTACTS,
 	ON_SELECT_CONTACT,
 	TOLD_DB_CLIENT_IN_CONVERSATION,
-	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR
+	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR,
+	SAVE_PROFILE_DONE,
+	SAVE_PROFILE_ERROR
 } from './types';
 import { socket } from './chat';
 import { store } from '../index';
@@ -21,7 +23,6 @@ export const fetchConversations = () => async dispatch => {
 	if (response.status === 200) {
 		// dispatch user.conversations.contacts -> state
 		let allContacts = response.data.conversations;
-		console.log('fetchConversations allContacts = ', allContacts);
 		dispatch({
 			type: UPDATE_CONTACTS,
 			allContacts: allContacts
@@ -128,14 +129,24 @@ export const tellServerClientInConversations = (
 		clientInConversationInfo
 	);
 	if (response.status === 200) {
-		console.log('tellServerClientInConversations response = ', response);
 		store.dispatch({
 			type: TOLD_DB_CLIENT_IN_CONVERSATION
 		});
+		const onlineContacts = response.data;
 		store.dispatch({
 			type: UPDATE_CONTACTS,
-			allContacts: response.data
+			allContacts: onlineContacts
 		});
+
+		const response2 = await axios.put(
+			'/api/profile/conversations',
+			onlineContacts
+		);
+		if (response2.status === 200) {
+			dispatch({ type: SAVE_PROFILE_DONE });
+		} else {
+			dispatch({ type: SAVE_PROFILE_ERROR });
+		}
 	} else {
 		store.dispatch({ type: TOLD_DB_CLIENT_IN_CONVERSATION_ERROR });
 	}

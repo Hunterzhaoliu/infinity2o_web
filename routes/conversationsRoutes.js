@@ -11,8 +11,6 @@ const getOnlineContacts = async allContacts => {
 				mongoDBUserId: allContacts[i].matchId
 			}
 		);
-		console.log('contactInConversation = ', contactInConversation);
-		console.log('allContacts[i] = ', allContacts[i]);
 		if (contactInConversation !== null) {
 			// the current contact is online
 			allContacts[i]['isOnline'] = true;
@@ -42,7 +40,6 @@ module.exports = app => {
 		async (request, response) => {
 			const { mongoDBUserId, allContacts, socketId } = request.body;
 
-			console.log('request.body = ', request.body);
 			if (
 				mongoDBUserId !== null &&
 				socketId !== null &&
@@ -53,8 +50,6 @@ module.exports = app => {
 						mongoDBUserId: mongoDBUserId
 					}
 				);
-
-				console.log('clientInConversation = ', clientInConversation);
 
 				if (clientInConversation === null) {
 					// this is the client's initial connection
@@ -79,7 +74,6 @@ module.exports = app => {
 									}
 								}
 							);
-							console.log('new socketId = ', socketId);
 						} catch (error) {
 							response.status(422).send(error);
 						}
@@ -88,7 +82,6 @@ module.exports = app => {
 
 				// respond with which of the client's contacts can chat over websockets
 				const onlineContacts = await getOnlineContacts(allContacts);
-				console.log('onlineContacts = ', onlineContacts);
 				response.send(onlineContacts);
 			}
 		}
