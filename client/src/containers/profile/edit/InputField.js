@@ -17,7 +17,12 @@ class InputField extends Component {
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col md={{ span: 3 }}>
+					<Col
+						sm={{ span: 6 }}
+						md={{ span: 6 }}
+						lg={{ span: 6 }}
+						xl={{ span: 4 }}
+					>
 						<h3
 							style={{
 								color: colorTheme.text6Color
@@ -26,7 +31,12 @@ class InputField extends Component {
 							{label}
 						</h3>
 					</Col>
-					<Col md={{ span: 18, offset: 1 }}>
+					<Col
+						sm={{ span: 16, offset: 1 }}
+						md={{ span: 17, offset: 1 }}
+						lg={{ span: 17, offset: 1 }}
+						xl={{ span: 19, offset: 1 }}
+					>
 						<Input
 							value={profile.newName}
 							onChange={this.onChangeName}

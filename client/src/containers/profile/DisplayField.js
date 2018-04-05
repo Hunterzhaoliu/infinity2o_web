@@ -51,28 +51,26 @@ class DisplayField extends Component {
 	render() {
 		const { colorTheme, label, value } = this.props;
 		return (
-			<div>
-				<Row type="flex" justify="start" align="middle">
-					<Col md={{ span: 5 }}>
-						<h3
-							style={{
-								color: colorTheme.text6Color
-							}}
-						>
-							{label}
-						</h3>
-					</Col>
-					<Col md={{ span: 18, offset: 1 }}>
-						<h3
-							style={{
-								color: colorTheme.text3Color
-							}}
-						>
-							{this.renderValue(value)}
-						</h3>
-					</Col>
-				</Row>
-			</div>
+			<Row type="flex" justify="start" align="middle">
+				<Col xl={{ span: 5 }}>
+					<h3
+						style={{
+							color: colorTheme.text6Color
+						}}
+					>
+						{label}
+					</h3>
+				</Col>
+				<Col xl={{ span: 19 }}>
+					<h3
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						{this.renderValue(value)}
+					</h3>
+				</Col>
+			</Row>
 		);
 	}
 }

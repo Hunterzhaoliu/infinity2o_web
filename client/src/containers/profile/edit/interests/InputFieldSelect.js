@@ -39,10 +39,10 @@ class InputFieldSelect extends Component {
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col
-						sm={{ span: 5 }}
-						md={{ span: 3 }}
-						lg={{ span: 5 }}
-						xl={{ span: 3 }}
+						sm={{ span: 6 }}
+						md={{ span: 6 }}
+						lg={{ span: 6 }}
+						xl={{ span: 4 }}
 					>
 						<h3
 							style={{
@@ -53,10 +53,10 @@ class InputFieldSelect extends Component {
 						</h3>
 					</Col>
 					<Col
-						sm={{ span: 18, offset: 1 }}
-						md={{ span: 18, offset: 1 }}
-						lg={{ span: 18, offset: 1 }}
-						xl={{ span: 20, offset: 1 }}
+						sm={{ span: 16, offset: 1 }}
+						md={{ span: 17, offset: 1 }}
+						lg={{ span: 17, offset: 1 }}
+						xl={{ span: 19, offset: 1 }}
 					>
 						<Select
 							mode="multiple"

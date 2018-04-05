@@ -18,14 +18,16 @@ class Profile extends Component {
 	renderProfile(colorTheme, profile) {
 		return (
 			<div>
-				<Row>
-					<h2
-						style={{
-							color: colorTheme.keyText7Color
-						}}
-					>
-						Profile:
-					</h2>
+				<Row type="flex" justify="start" align="middle">
+					<Col xl={{ span: 24 }}>
+						<h2
+							style={{
+								color: colorTheme.keyText7Color
+							}}
+						>
+							Profile:
+						</h2>
+					</Col>
 				</Row>
 				<Row
 					type="flex"
@@ -35,7 +37,7 @@ class Profile extends Component {
 						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
+					<Col xl={{ span: 24 }}>
 						<DisplayField label="Name: " value={profile.name} />
 					</Col>
 				</Row>
@@ -47,7 +49,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
+					<Col xl={{ span: 24 }}>
 						<DisplayField label="Age: " value={profile.age} />
 					</Col>
 				</Row>
@@ -59,7 +61,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
+					<Col xl={{ span: 24 }}>
 						<DisplayField
 							label="Interest(s): "
 							value={profile.interests}
@@ -74,7 +76,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
+					<Col xl={{ span: 24 }}>
 						<DisplayField
 							label="Time Zone: "
 							value={profile.timeZone}
@@ -89,7 +91,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
+					<Col xl={{ span: 24 }}>
 						<DisplayField
 							label="Availability: "
 							value={profile.availability}
@@ -103,7 +105,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col span={24}>
+					<Col xl={{ span: 24 }}>
 						<Button
 							style={{
 								borderColor: colorTheme.key,
@@ -182,10 +184,20 @@ class Profile extends Component {
 				}}
 			>
 				<Row type="flex" justify="start" align="middle">
-					<Col xl={{ span: 5 }} />
-					<Col xl={{ span: 14 }}>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
+					<Col
+						sm={{ span: 24 }}
+						md={{ span: 14 }}
+						lg={{ span: 14 }}
+						xl={{ span: 14 }}
+					>
 						{this.renderProfile(colorTheme, profile)}
-						<Row>
+						{/* <Row>
 							<h2
 								style={{
 									padding: '25px 0% 0%', // top left&right bottom
@@ -206,9 +218,14 @@ class Profile extends Component {
 								Your Votes
 							</h2>
 						</Row>
-						{this.renderVotes(profile.asks, colorTheme)}
+						{this.renderVotes(profile.asks, colorTheme)} */}
 					</Col>
-					<Col xl={{ span: 5 }} />
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
 				</Row>
 			</Content>
 		);

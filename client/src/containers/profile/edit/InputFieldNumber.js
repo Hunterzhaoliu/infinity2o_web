@@ -16,7 +16,12 @@ class InputFieldNumber extends Component {
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col md={{ span: 3 }}>
+					<Col
+						sm={{ span: 6 }}
+						md={{ span: 6 }}
+						lg={{ span: 6 }}
+						xl={{ span: 4 }}
+					>
 						<h3
 							style={{
 								color: colorTheme.text6Color
@@ -26,10 +31,10 @@ class InputFieldNumber extends Component {
 						</h3>
 					</Col>
 					<Col
-						sm={{ span: 3, offset: 1 }}
-						md={{ span: 3, offset: 1 }}
-						lg={{ span: 3, offset: 1 }}
-						xl={{ span: 3, offset: 1 }}
+						sm={{ span: 16, offset: 1 }}
+						md={{ span: 17, offset: 1 }}
+						lg={{ span: 17, offset: 1 }}
+						xl={{ span: 19, offset: 1 }}
 					>
 						<Input
 							value={profile.newAge}
