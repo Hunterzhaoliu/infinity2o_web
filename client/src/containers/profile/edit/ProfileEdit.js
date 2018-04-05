@@ -134,7 +134,7 @@ class ProfileEdit extends Component {
 
 	render() {
 		//console.log('this.props in ProfileEdit.js', this.props);
-		const { colorTheme, saveProfile, profile, history } = this.props;
+		const { colorTheme } = this.props;
 		return (
 			<Content
 				style={{

@@ -8,6 +8,26 @@ import { Layout, Row, Col, Button, Icon } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { width: window.innerWidth, height: window.innerHeight };
+		this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+	}
+
+	componentDidMount() {
+		this.updateWindowDimensions();
+		window.addEventListener('resize', this.updateWindowDimensions);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.updateWindowDimensions);
+	}
+
+	updateWindowDimensions() {
+		this.setState({ width: window.innerWidth, height: window.innerHeight });
+		console.log('width = ', window.innerWidth);
+	}
+
 	renderChangeThemeButton() {
 		const { colorTheme, onPressRandomColorTheme } = this.props;
 		return (
@@ -36,6 +56,32 @@ class CustomHeader extends Component {
 			onPressConversations,
 			auth
 		} = this.props;
+
+		console.log('in render width = ', this.state.width);
+		if (this.state.width < 768) {
+			// show a dropdown with buttons instead of nav bar
+			return (
+				<Row type="flex" justify="start">
+					<Col key="0">
+						<Button
+							style={{
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text4Color
+							}}
+							onClick={onPressRandomColorTheme}
+						>
+							Options
+							<Icon
+								style={{ fontSize: 16, color: colorTheme.key }}
+								type="down-circle"
+							/>
+						</Button>
+					</Col>
+				</Row>
+			);
+		}
+
 		switch (auth.loggedInState) {
 			case 'not_logged_in':
 				return (
@@ -49,7 +95,12 @@ class CustomHeader extends Component {
 				return (
 					<div>
 						<Row type="flex" justify="space-between">
-							<Col md={{ span: 4 }} xl={{ span: 5 }} key="0">
+							<Col
+								md={{ span: 5 }}
+								lg={{ span: 4 }}
+								xl={{ span: 5 }}
+								key="0"
+							>
 								<Button
 									style={{
 										borderColor: colorTheme.text7Color,
@@ -62,7 +113,8 @@ class CustomHeader extends Component {
 								</Button>
 							</Col>
 							<Col
-								md={{ span: 2, offset: 1 }}
+								md={{ span: 3, offset: 1 }}
+								lg={{ span: 2, offset: 0 }}
 								xl={{ span: 2, offset: 0 }}
 								key="1"
 							>
@@ -83,6 +135,7 @@ class CustomHeader extends Component {
 							</Col>
 							<Col
 								md={{ span: 3, offset: 1 }}
+								lg={{ span: 2, offset: 1 }}
 								xl={{ span: 2, offset: 0 }}
 								key="2"
 							>
@@ -103,6 +156,7 @@ class CustomHeader extends Component {
 							</Col>
 							<Col
 								md={{ span: 3, offset: 1 }}
+								lg={{ span: 2, offset: 1 }}
 								xl={{ span: 2, offset: 0 }}
 								key="3"
 							>
@@ -122,7 +176,8 @@ class CustomHeader extends Component {
 								</Button>
 							</Col>
 							<Col
-								md={{ span: 1, offset: 1 }}
+								md={{ span: 2, offset: 1 }}
+								lg={{ span: 1, offset: 1 }}
 								xl={{ span: 1, offset: 0 }}
 								key="4"
 							>
@@ -145,7 +200,8 @@ class CustomHeader extends Component {
 								</Button>
 							</Col>
 							<Col
-								md={{ span: 3, offset: 4 }}
+								md={{ span: 3, offset: 1 }}
+								lg={{ span: 2, offset: 8 }}
 								xl={{ span: 2, offset: 9 }}
 								key="5"
 							>
@@ -203,26 +259,26 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const customHeaderDispatchers = bindActionCreators(
+	const colorThemeDispatchers = bindActionCreators(
 		colorThemeActions,
 		dispatch
 	);
 
 	return {
 		onPressRandomColorTheme: () => {
-			customHeaderDispatchers.generateRandomColorTheme();
+			colorThemeDispatchers.generateRandomColorTheme();
 		},
 		onPressProfile: () => {
-			customHeaderDispatchers.onProfile();
+			colorThemeDispatchers.onProfile();
 		},
 		onPressTrainAI: () => {
-			customHeaderDispatchers.onTrainAI();
+			colorThemeDispatchers.onTrainAI();
 		},
 		onPressMatches: () => {
-			customHeaderDispatchers.onMatches();
+			colorThemeDispatchers.onMatches();
 		},
 		onPressConversations: () => {
-			customHeaderDispatchers.onPressConversations();
+			colorThemeDispatchers.onPressConversations();
 		}
 	};
 }
