@@ -1,10 +1,11 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../actions/colorTheme';
 
-import { Layout, Row, Col, Button, Icon } from 'antd';
+import { Layout, Row, Col, Button, Icon, Dropdown, Menu } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
@@ -46,6 +47,136 @@ class CustomHeader extends Component {
 		);
 	}
 
+	renderMenuItems(Options) {
+		const { colorTheme } = this.props;
+
+		return _.map(Options, option => {
+			return console.log('option = ', option);
+			return (
+				<Menu.Item
+					style={{
+						borderColor: colorTheme.text8Color,
+						background: colorTheme.text8Color,
+						color: colorTheme.text4Color
+					}}
+					key={option.name}
+				>
+					{option.name}
+				</Menu.Item>
+			);
+		});
+	}
+
+	renderChangeThemeButton() {
+		const { colorTheme, onPressRandomColorTheme } = this.props;
+		return (
+			<Button
+				style={{
+					borderColor: colorTheme.text7Color,
+					background: colorTheme.text7Color,
+					color: colorTheme.text2Color
+				}}
+				onClick={onPressRandomColorTheme}
+			>
+				Change Theme
+			</Button>
+		);
+	}
+
+	renderProfileButton() {
+		const { colorTheme, onPressProfile } = this.props;
+
+		return (
+			<Button
+				style={{
+					borderColor: colorTheme.profileButtonColor,
+					background: colorTheme.profileButtonColor,
+					color: colorTheme.profileButtonTextColor
+				}}
+				onClick={onPressProfile}
+			>
+				<Link to="/profile">
+					<div>Profile</div>
+				</Link>
+			</Button>
+		);
+	}
+
+	renderTrainAIButton() {
+		const { colorTheme, onPressTrainAI } = this.props;
+
+		return (
+			<Button
+				style={{
+					borderColor: colorTheme.trainAIButtonColor,
+					background: colorTheme.trainAIButtonColor,
+					color: colorTheme.trainAIButtonTextColor
+				}}
+				onClick={onPressTrainAI}
+			>
+				<Link to="/train_ai">
+					<div>Train AI</div>
+				</Link>
+			</Button>
+		);
+	}
+
+	renderMatchesButton() {
+		const { colorTheme, onPressMatches } = this.props;
+
+		return (
+			<Button
+				style={{
+					borderColor: colorTheme.matchesButtonColor,
+					background: colorTheme.matchesButtonColor,
+					color: colorTheme.matchesButtonTextColor
+				}}
+				onClick={onPressMatches}
+			>
+				<Link to="/matches">
+					<div>Matches</div>
+				</Link>
+			</Button>
+		);
+	}
+
+	renderLogoutButton() {
+		const { colorTheme } = this.props;
+
+		return (
+			<Button
+				style={{
+					borderColor: colorTheme.text7Color,
+					background: colorTheme.text7Color,
+					color: colorTheme.text4Color
+				}}
+			>
+				<a href="/api/logout">Logout</a>
+			</Button>
+		);
+	}
+
+	renderConversationsButton() {
+		const { colorTheme, onPressConversations } = this.props;
+
+		return (
+			<Button
+				style={{
+					borderColor: colorTheme.conversationsButtonColor,
+					background: colorTheme.conversationsButtonColor,
+					color: colorTheme.conversationsButtonTextColor
+				}}
+				onClick={onPressConversations}
+			>
+				<Link to="/conversations">
+					<div>
+						<Icon type="message" />
+					</div>
+				</Link>
+			</Button>
+		);
+	}
+
 	renderHeaderButtons() {
 		const {
 			colorTheme,
@@ -60,6 +191,27 @@ class CustomHeader extends Component {
 		console.log('in render width = ', this.state.width);
 		if (this.state.width < 768) {
 			// show a dropdown with buttons instead of nav bar
+			const menu = (
+				<Menu
+					style={{
+						borderColor: colorTheme.text6Color,
+						background: colorTheme.text6Color,
+						color: colorTheme.text1Color
+					}}
+				>
+					<Menu.Item key="1">
+						{this.renderChangeThemeButton()}
+					</Menu.Item>
+					<Menu.Item key="2">{this.renderProfileButton()}</Menu.Item>
+					<Menu.Item key="3">{this.renderTrainAIButton()}</Menu.Item>
+					<Menu.Item key="4">{this.renderMatchesButton()}</Menu.Item>
+					<Menu.Item key="5">
+						{this.renderConversationsButton()}
+					</Menu.Item>
+					<Menu.Item key="6">{this.renderLogoutButton()}</Menu.Item>
+				</Menu>
+			);
+
 			return (
 				<Row type="flex" justify="start">
 					<Col key="0">
@@ -67,15 +219,21 @@ class CustomHeader extends Component {
 							style={{
 								borderColor: colorTheme.text7Color,
 								background: colorTheme.text7Color,
-								color: colorTheme.text4Color
+								color: colorTheme.text2Color
 							}}
-							onClick={onPressRandomColorTheme}
 						>
-							Options
-							<Icon
-								style={{ fontSize: 16, color: colorTheme.key }}
-								type="down-circle"
-							/>
+							<Dropdown overlay={menu} trigger={['click']}>
+								<a className="ant-dropdown-link" href="#">
+									Options{' '}
+									<Icon
+										style={{
+											fontSize: 16,
+											color: colorTheme.keyText2Color
+										}}
+										type="down-circle"
+									/>
+								</a>
+							</Dropdown>
 						</Button>
 					</Col>
 				</Row>
@@ -101,16 +259,7 @@ class CustomHeader extends Component {
 								xl={{ span: 5 }}
 								key="0"
 							>
-								<Button
-									style={{
-										borderColor: colorTheme.text7Color,
-										background: colorTheme.text7Color,
-										color: colorTheme.text4Color
-									}}
-									onClick={onPressRandomColorTheme}
-								>
-									Change Theme
-								</Button>
+								{this.renderChangeThemeButton()}
 							</Col>
 							<Col
 								md={{ span: 3, offset: 1 }}
@@ -118,20 +267,7 @@ class CustomHeader extends Component {
 								xl={{ span: 2, offset: 0 }}
 								key="1"
 							>
-								<Button
-									style={{
-										borderColor:
-											colorTheme.profileButtonColor,
-										background:
-											colorTheme.profileButtonColor,
-										color: colorTheme.profileButtonTextColor
-									}}
-									onClick={onPressProfile}
-								>
-									<Link to="/profile">
-										<div>Profile</div>
-									</Link>
-								</Button>
+								{this.renderProfileButton()}
 							</Col>
 							<Col
 								md={{ span: 3, offset: 1 }}
@@ -139,20 +275,7 @@ class CustomHeader extends Component {
 								xl={{ span: 2, offset: 0 }}
 								key="2"
 							>
-								<Button
-									style={{
-										borderColor:
-											colorTheme.trainAIButtonColor,
-										background:
-											colorTheme.trainAIButtonColor,
-										color: colorTheme.trainAIButtonTextColor
-									}}
-									onClick={onPressTrainAI}
-								>
-									<Link to="/train_ai">
-										<div>Train AI</div>
-									</Link>
-								</Button>
+								{this.renderTrainAIButton()}
 							</Col>
 							<Col
 								md={{ span: 3, offset: 1 }}
@@ -160,20 +283,7 @@ class CustomHeader extends Component {
 								xl={{ span: 2, offset: 0 }}
 								key="3"
 							>
-								<Button
-									style={{
-										borderColor:
-											colorTheme.matchesButtonColor,
-										background:
-											colorTheme.matchesButtonColor,
-										color: colorTheme.matchesButtonTextColor
-									}}
-									onClick={onPressMatches}
-								>
-									<Link to="/matches">
-										<div>Matches</div>
-									</Link>
-								</Button>
+								{this.renderMatchesButton()}
 							</Col>
 							<Col
 								md={{ span: 2, offset: 1 }}
@@ -181,23 +291,7 @@ class CustomHeader extends Component {
 								xl={{ span: 1, offset: 0 }}
 								key="4"
 							>
-								<Button
-									style={{
-										borderColor:
-											colorTheme.conversationsButtonColor,
-										background:
-											colorTheme.conversationsButtonColor,
-										color:
-											colorTheme.conversationsButtonTextColor
-									}}
-									onClick={onPressConversations}
-								>
-									<Link to="/conversations">
-										<div>
-											<Icon type="message" />
-										</div>
-									</Link>
-								</Button>
+								{this.renderConversationsButton()}
 							</Col>
 							<Col
 								md={{ span: 3, offset: 1 }}
@@ -205,15 +299,7 @@ class CustomHeader extends Component {
 								xl={{ span: 2, offset: 9 }}
 								key="5"
 							>
-								<Button
-									style={{
-										borderColor: colorTheme.text7Color,
-										background: colorTheme.text7Color,
-										color: colorTheme.text4Color
-									}}
-								>
-									<a href="/api/logout">Logout</a>
-								</Button>
+								{this.renderLogoutButton()}
 							</Col>
 						</Row>
 					</div>
