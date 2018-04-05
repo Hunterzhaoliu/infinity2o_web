@@ -42,7 +42,7 @@ class InputFieldSelect extends Component {
 						sm={{ span: 5 }}
 						md={{ span: 3 }}
 						lg={{ span: 5 }}
-						xl={{ span: 5 }}
+						xl={{ span: 3 }}
 					>
 						<h3
 							style={{
@@ -56,7 +56,7 @@ class InputFieldSelect extends Component {
 						sm={{ span: 18, offset: 1 }}
 						md={{ span: 18, offset: 1 }}
 						lg={{ span: 18, offset: 1 }}
-						xl={{ span: 18, offset: 1 }}
+						xl={{ span: 20, offset: 1 }}
 					>
 						<Select
 							mode="multiple"

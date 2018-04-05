@@ -42,16 +42,11 @@ class ProfileEdit extends Component {
 		}
 	}
 
-	render() {
-		//console.log('this.props in ProfileEdit.js', this.props);
+	renderContent() {
 		const { colorTheme, saveProfile, profile, history } = this.props;
+
 		return (
-			<Content
-				style={{
-					padding: '75px 50px 0px', // top left&right bottom
-					background: colorTheme.backgroundColor
-				}}
-			>
+			<div>
 				<Row
 					type="flex"
 					justify="start"
@@ -132,6 +127,25 @@ class ProfileEdit extends Component {
 							Save {this.renderSaveIcon(profile.save)}
 						</Button>
 					</Col>
+				</Row>
+			</div>
+		);
+	}
+
+	render() {
+		//console.log('this.props in ProfileEdit.js', this.props);
+		const { colorTheme, saveProfile, profile, history } = this.props;
+		return (
+			<Content
+				style={{
+					padding: '75px 50px 0px', // top left&right bottom
+					background: colorTheme.backgroundColor
+				}}
+			>
+				<Row type="flex" justify="start" align="middle">
+					<Col xl={{ span: 5 }} />
+					<Col xl={{ span: 14 }}>{this.renderContent()}</Col>
+					<Col xl={{ span: 5 }} />
 				</Row>
 			</Content>
 		);
