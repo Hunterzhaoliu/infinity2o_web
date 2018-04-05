@@ -35,19 +35,37 @@ class Conversation extends Component {
 		) {
 			return (
 				<Row type="flex" justify="space-between">
-					<Col md={{ span: 5 }} />
 					<Col
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
+					<Col
+						sm={{ span: 4 }}
 						md={{ span: 4 }}
+						lg={{ span: 4 }}
+						xl={{ span: 4 }}
 						style={{
 							color: colorTheme.text3Color
 						}}
 					>
 						<Contacts contacts={contacts.allContacts} />
 					</Col>
-					<Col md={{ span: 10 }}>
+					<Col
+						sm={{ span: 10 }}
+						md={{ span: 10 }}
+						lg={{ span: 10 }}
+						xl={{ span: 10 }}
+					>
 						<Chat chat={chat} />
 					</Col>
-					<Col md={{ span: 5 }} />
+					<Col
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
 				</Row>
 			);
 		} else {

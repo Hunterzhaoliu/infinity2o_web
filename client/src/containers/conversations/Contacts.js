@@ -57,8 +57,8 @@ class Contacts extends Component {
 					borderColor: borderColor,
 					background: background,
 					color: color,
-					height: '50px',
-					width: '220px'
+					height: '44px',
+					width: '180px'
 				}}
 				onClick={e =>
 					onSelectContact(
