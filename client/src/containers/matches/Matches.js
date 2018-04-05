@@ -29,10 +29,6 @@ class Matches extends Component {
 				return (
 					<Col
 						key={match.name}
-						sm={{ span: 10 }}
-						md={{ span: 11, offset: 0 }}
-						lg={{ span: 9 }}
-						xl={{ span: 7 }}
 						style={{
 							height: '50%'
 						}}
@@ -148,7 +144,7 @@ class Matches extends Component {
 					Every 24 hours at 9 AM Central Time our AI generates the
 					best partners for you.
 				</h2>
-				<Row type="flex" justify="space-between" align="top">
+				<Row type="flex" justify="center" align="top">
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 1 }}
