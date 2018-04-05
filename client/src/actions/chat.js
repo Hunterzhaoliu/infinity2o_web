@@ -7,7 +7,7 @@ import {
 	DISPLAY_SENT_MESSAGE,
 	MESSAGE_SENT_SUCCESS,
 	MESSAGE_SENT_ERROR,
-	DISPLAY_RECIEVED_MESSAGE
+	DISPLAY_RECEIVED_MESSAGE
 } from './types';
 import io from 'socket.io-client';
 import { store } from '../index';
@@ -80,11 +80,11 @@ export const sendMessageToServer = (
 	}
 };
 
-socket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', async function(messageInfo) {
+socket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(messageInfo) {
 	// No need to save message into DB since the message was already
 	// saved by client A. We just need to display the message to us(Client B)
 	store.dispatch({
-		type: DISPLAY_RECIEVED_MESSAGE,
+		type: DISPLAY_RECEIVED_MESSAGE,
 		messageInfo: messageInfo
 	});
 });

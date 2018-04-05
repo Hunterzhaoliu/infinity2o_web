@@ -10,6 +10,7 @@ require('./models/Answer');
 require('./models/ProfileQuestionDisplay');
 require('./models/ProfileVoteDisplay');
 require('./models/Conversation');
+require('./models/ClientInConversation');
 require('./services/passport');
 
 mongoose.Promise = global.Promise;
@@ -64,51 +65,19 @@ server = app.listen(PORT, function() {
 
 let io = require('socket.io')(server);
 
-let clientsInConversations = {
-	// Example: 'mongoDBUserId': 'socketId'
-	// User 3
-	'5aaec67ecf6a1b0d7da62775': 'OA3kZDitw9y75UjYAAAA'
-};
-
 io.on('connection', function(socket) {
 	console.log('a user connected with socket.id = ', socket.id);
 
-	socket.on('TELL_SERVER:CLIENT_A_IS_IN_CONVERSATIONS', function(data) {
-		const key = data.mongoDBUserId;
-		const value = data.socketId;
-		const isInitialConnect = clientsInConversations[key] === undefined;
-		if (key !== null && isInitialConnect) {
-			clientsInConversations[key] = value;
-
-			// respond with which of the client's contacts can chat
-			let contactsOnline = [];
-			data.allContacts.forEach(function(contact) {
-				if (clientsInConversations[contact.matchId] !== undefined) {
-					// the current contact is online
-					contact['isOnline'] = true;
-					contact['socketId'] =
-						clientsInConversations[contact.matchId];
-					contactsOnline.push(contact);
-				} else {
-					contactsOnline.push(contact);
-					contact['isOnline'] = false;
-					contact['socketId'] = null;
-				}
-			});
-			socket.emit('TELL_CLIENT_A:ONLINE_CONTACTS', contactsOnline);
-		}
-	});
-
-	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
-		messageInfo
-	) {
-		console.log(
-			'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo = ',
-			messageInfo
-		);
-
-		socket
-			.to(messageInfo.selectedContactSocketId)
-			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
-	});
+	// socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
+	// 	messageInfo
+	// ) {
+	// 	console.log(
+	// 		'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo = ',
+	// 		messageInfo
+	// 	);
+	//
+	// 	socket
+	// 		.to(messageInfo.selectedContactSocketId)
+	// 		.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
+	// });
 });

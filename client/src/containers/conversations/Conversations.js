@@ -22,7 +22,7 @@ class Conversation extends Component {
 		const { colorTheme, chat, contacts, mongoDBUserId } = this.props;
 
 		if (!toldServerIamInConversations && contacts.allContacts.length > 0) {
-			this.props.tellServerIAmInConversations(
+			this.props.tellServerClientInConversations(
 				mongoDBUserId,
 				contacts.allContacts
 			);
@@ -117,8 +117,8 @@ function mapDispatchToProps(dispatch) {
 		fetchConversations: () => {
 			contactsDispatchers.fetchConversations();
 		},
-		tellServerIAmInConversations: (mongoDBUserId, allContacts) => {
-			contactsDispatchers.tellServerIAmInConversations(
+		tellServerClientInConversations: (mongoDBUserId, allContacts) => {
+			contactsDispatchers.tellServerClientInConversations(
 				mongoDBUserId,
 				allContacts
 			);

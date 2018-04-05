@@ -7,7 +7,9 @@ import {
 	SET_LOADING,
 	SET_HAS_MORE,
 	DISPLAY_MORE_CONTACTS,
-	ON_SELECT_CONTACT
+	ON_SELECT_CONTACT,
+	TOLD_DB_CLIENT_IN_CONVERSATION,
+	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR
 } from './types';
 import { socket } from './chat';
 import { store } from '../index';
@@ -19,6 +21,7 @@ export const fetchConversations = () => async dispatch => {
 	if (response.status === 200) {
 		// dispatch user.conversations.contacts -> state
 		let allContacts = response.data.conversations;
+		console.log('fetchConversations allContacts = ', allContacts);
 		dispatch({
 			type: UPDATE_CONTACTS,
 			allContacts: allContacts
@@ -104,33 +107,36 @@ export const onSelectContact = (
 
 	if (response.status === 200) {
 		dispatch({
-			type: UPDATE_CHAT,
-			last50Messages: response.data.last50Messages
+			type: TOLD_DB_CLIENT_IN_CONVERSATION
 		});
 	} else {
-		dispatch({ type: UPDATE_CHAT_ERROR });
+		dispatch({ type: TOLD_DB_CLIENT_IN_CONVERSATION_ERROR });
 	}
 };
 
-export const tellServerIAmInConversations = (
+export const tellServerClientInConversations = (
 	mongoDBUserId,
 	allContacts
-) => dispatch => {
-	socket.emit('TELL_SERVER:CLIENT_A_IS_IN_CONVERSATIONS', {
+) => async dispatch => {
+	const clientInConversationInfo = {
 		mongoDBUserId: mongoDBUserId,
 		allContacts: allContacts,
 		socketId: socket.id
-	});
-};
-
-socket.on('TELL_CLIENT_A:ONLINE_CONTACTS', async function(allContacts) {
-	const response = await axios.put('/api/profile', allContacts);
+	};
+	const response = await axios.post(
+		'/api/conversations/clients_online',
+		clientInConversationInfo
+	);
 	if (response.status === 200) {
+		console.log('tellServerClientInConversations response = ', response);
+		store.dispatch({
+			type: TOLD_DB_CLIENT_IN_CONVERSATION
+		});
 		store.dispatch({
 			type: UPDATE_CONTACTS,
-			allContacts: allContacts
+			allContacts: response.data
 		});
 	} else {
-		store.dispatch({ type: UPDATE_CONTACTS_ERROR });
+		store.dispatch({ type: TOLD_DB_CLIENT_IN_CONVERSATION_ERROR });
 	}
-});
+};

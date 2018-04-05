@@ -4,7 +4,9 @@ import {
 	SET_LOADING,
 	SET_HAS_MORE,
 	DISPLAY_MORE_CONTACTS,
-	ON_SELECT_CONTACT
+	ON_SELECT_CONTACT,
+	TOLD_DB_CLIENT_IN_CONVERSATION,
+	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -20,7 +22,8 @@ let initialState = {
 	hasContactsError: false,
 	conversationId: null,
 	selectedContactOnline: false,
-	selectedContactSocketId: null
+	selectedContactSocketId: null,
+	hasToldDBClientInConversationError: false
 };
 
 export default function(state = initialState, action) {
@@ -57,6 +60,12 @@ export default function(state = initialState, action) {
 			newState.conversationId = action.conversationId;
 			newState.selectedContactOnline = action.isOnline;
 			newState.selectedContactSocketId = action.socketId;
+			return newState;
+		case TOLD_DB_CLIENT_IN_CONVERSATION:
+			newState.hasToldDBClientInConversationError = false;
+			return newState;
+		case TOLD_DB_CLIENT_IN_CONVERSATION_ERROR:
+			newState.hasToldDBClientInConversationError = true;
 			return newState;
 		default:
 			return state;

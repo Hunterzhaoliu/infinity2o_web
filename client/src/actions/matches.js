@@ -58,6 +58,7 @@ export const onStartConversation = (
 			dispatch({
 				type: MOVE_TO_CONVERSATIONS
 			});
+			console.log('matches response2.data = ', response2.data);
 			dispatch({
 				type: UPDATE_CONTACTS,
 				allContacts: response2.data
