@@ -68,16 +68,16 @@ let io = require('socket.io')(server);
 io.on('connection', function(socket) {
 	console.log('a user connected with socket.id = ', socket.id);
 
-	// socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
-	// 	messageInfo
-	// ) {
-	// 	console.log(
-	// 		'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo = ',
-	// 		messageInfo
-	// 	);
-	//
-	// 	socket
-	// 		.to(messageInfo.selectedContactSocketId)
-	// 		.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
-	// });
+	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
+		messageInfo
+	) {
+		console.log(
+			'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo = ',
+			messageInfo
+		);
+
+		socket
+			.to(messageInfo.selectedContactSocketId)
+			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
+	});
 });

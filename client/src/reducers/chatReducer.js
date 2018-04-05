@@ -95,7 +95,23 @@ export default function(state = initialState, action) {
 			return newState;
 		case DISPLAY_RECEIVED_MESSAGE:
 			console.log('action.messageInfo = ', action.messageInfo);
-			// TODO: display
+			const senderName = action.messageInfo.senderName;
+			const message = action.messageInfo.message;
+			newState.last50Messages.push({
+				senderName: senderName,
+				content: message
+			});
+			if (newState.last50Messages.length > 50) {
+				newState.last50Messages.shift();
+			}
+
+			newState.displayMessages.push({
+				senderName: senderName,
+				content: message
+			});
+			if (newState.displayMessages.length > 50) {
+				newState.displayMessages.shift();
+			}
 			return newState;
 		default:
 			return state;
