@@ -81,3 +81,5 @@ io.on('connection', function(socket) {
 			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
 	});
 });
+
+module.exports.io = io;

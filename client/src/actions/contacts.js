@@ -11,7 +11,9 @@ import {
 	TOLD_DB_CLIENT_IN_CONVERSATION,
 	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR,
 	SAVE_USER_CONVERSATIONS_SUCCESS,
-	SAVE_USER_CONVERSATIONS_ERROR
+	SAVE_USER_CONVERSATIONS_ERROR,
+	UPDATE_OUR_SOCKET_ID,
+	UPDATE_CONTACT_SOCKET_ID
 } from './types';
 import { store } from '../index';
 import io from 'socket.io-client';
@@ -136,11 +138,15 @@ export const tellServerClientInConversations = (
 		clientInConversationInfo
 	);
 	if (response.status === 200) {
-		store.dispatch({
+		dispatch({
+			type: UPDATE_OUR_SOCKET_ID,
+			ourSocketId: socket.id
+		});
+		dispatch({
 			type: TOLD_DB_CLIENT_IN_CONVERSATION
 		});
 		const onlineContacts = response.data;
-		store.dispatch({
+		dispatch({
 			type: UPDATE_CONTACTS,
 			allContacts: onlineContacts
 		});
@@ -158,3 +164,13 @@ export const tellServerClientInConversations = (
 		store.dispatch({ type: TOLD_DB_CLIENT_IN_CONVERSATION_ERROR });
 	}
 };
+
+socket.on('TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
+	newContactInfo
+) {
+	console.log('newContactInfo = ', newContactInfo);
+	store.dispatch({
+		type: UPDATE_CONTACT_SOCKET_ID,
+		newContactInfo: newContactInfo
+	});
+});

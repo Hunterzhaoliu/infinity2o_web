@@ -2,8 +2,9 @@ const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
 const ConversationCollection = mongoose.model('conversations');
 const ClientInConversationCollection = mongoose.model('clientsInConversation');
+let indexFile = require('../index');
 
-const getOnlineContacts = async allContacts => {
+const getOnlineContacts = async (allContacts, socketId) => {
 	let onlineContacts = [];
 	for (let i = 0; i < allContacts.length; i++) {
 		const contactInConversation = await ClientInConversationCollection.findOne(
@@ -16,6 +17,22 @@ const getOnlineContacts = async allContacts => {
 			allContacts[i]['isOnline'] = true;
 			allContacts[i]['socketId'] = contactInConversation.socketId;
 			onlineContacts.push(allContacts[i]);
+
+			// TODO: update contact with your new latest socketId
+			const newContactInfo = {
+				conversationId: contactInConversation.conversationId,
+				socketId: socketId
+			};
+
+			//console.log('indexFile.io = ', indexFile.io);
+			indexFile.io.on('connection', function(socket) {
+				socket
+					.to(contactInConversation.socketId)
+					.emit(
+						'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
+						newContactInfo
+					);
+			});
 		} else {
 			allContacts[i]['isOnline'] = false;
 			allContacts[i]['socketId'] = null;
@@ -84,7 +101,10 @@ module.exports = app => {
 				}
 
 				// respond with which of the client's contacts can chat over websockets
-				const onlineContacts = await getOnlineContacts(allContacts);
+				const onlineContacts = await getOnlineContacts(
+					allContacts,
+					socketId
+				);
 				response.send(onlineContacts);
 			}
 		}
