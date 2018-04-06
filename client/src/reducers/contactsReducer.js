@@ -6,7 +6,9 @@ import {
 	DISPLAY_MORE_CONTACTS,
 	ON_SELECT_CONTACT,
 	TOLD_DB_CLIENT_IN_CONVERSATION,
-	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR
+	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR,
+	SAVE_USER_CONVERSATIONS_SUCCESS,
+	SAVE_USER_CONVERSATIONS_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -23,7 +25,8 @@ let initialState = {
 	conversationId: null,
 	selectedContactOnline: false,
 	selectedContactSocketId: null,
-	hasToldDBClientInConversationError: false
+	hasToldDBClientInConversationError: false,
+	hasSaveUserConversationsError: false
 };
 
 export default function(state = initialState, action) {
@@ -66,6 +69,12 @@ export default function(state = initialState, action) {
 			return newState;
 		case TOLD_DB_CLIENT_IN_CONVERSATION_ERROR:
 			newState.hasToldDBClientInConversationError = true;
+			return newState;
+		case SAVE_USER_CONVERSATIONS_SUCCESS:
+			newState.hasSaveUserConversationsError = false;
+			return newState;
+		case SAVE_USER_CONVERSATIONS_ERROR:
+			newState.hasSaveUserConversationsError = true;
 			return newState;
 		default:
 			return state;

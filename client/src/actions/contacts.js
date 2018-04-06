@@ -10,8 +10,8 @@ import {
 	ON_SELECT_CONTACT,
 	TOLD_DB_CLIENT_IN_CONVERSATION,
 	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR,
-	SAVE_PROFILE_DONE,
-	SAVE_PROFILE_ERROR
+	SAVE_USER_CONVERSATIONS_SUCCESS,
+	SAVE_USER_CONVERSATIONS_ERROR
 } from './types';
 import { store } from '../index';
 import io from 'socket.io-client';
@@ -150,9 +150,9 @@ export const tellServerClientInConversations = (
 			onlineContacts
 		);
 		if (response2.status === 200) {
-			dispatch({ type: SAVE_PROFILE_DONE });
+			dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
 		} else {
-			dispatch({ type: SAVE_PROFILE_ERROR });
+			dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
 		}
 	} else {
 		store.dispatch({ type: TOLD_DB_CLIENT_IN_CONVERSATION_ERROR });
