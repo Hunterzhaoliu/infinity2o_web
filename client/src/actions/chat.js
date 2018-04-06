@@ -80,13 +80,11 @@ export const sendMessageToServer = (
 	}
 };
 
-if (socket !== null) {
-	socket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(messageInfo) {
-		// No need to save message into DB since the message was already
-		// saved by client A. We just need to display the message to us(Client B)
-		store.dispatch({
-			type: DISPLAY_RECEIVED_MESSAGE,
-			messageInfo: messageInfo
-		});
+socket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(messageInfo) {
+	// No need to save message into DB since the message was already
+	// saved by client A. We just need to display the message to us(Client B)
+	store.dispatch({
+		type: DISPLAY_RECEIVED_MESSAGE,
+		messageInfo: messageInfo
 	});
-}
+});

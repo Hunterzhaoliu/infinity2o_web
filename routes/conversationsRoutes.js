@@ -51,6 +51,8 @@ module.exports = app => {
 					}
 				);
 
+				console.log('clientInConversation = ', clientInConversation);
+
 				if (clientInConversation === null) {
 					// this is the client's initial connection
 					const newClientInConversation = {
@@ -62,6 +64,7 @@ module.exports = app => {
 					);
 				} else {
 					// update clientInConversation if socketId is newer
+					console.log('new socketId = ', socketId);
 					if (clientInConversation.socketId !== socketId) {
 						try {
 							await ClientInConversationCollection.updateOne(
