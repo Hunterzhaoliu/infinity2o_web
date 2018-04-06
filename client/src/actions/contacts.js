@@ -110,6 +110,10 @@ export const onSelectContact = (
 		dispatch({
 			type: TOLD_DB_CLIENT_IN_CONVERSATION
 		});
+		dispatch({
+			type: UPDATE_CHAT,
+			last50Messages: response.data.last50Messages
+		});
 	} else {
 		dispatch({ type: TOLD_DB_CLIENT_IN_CONVERSATION_ERROR });
 	}
