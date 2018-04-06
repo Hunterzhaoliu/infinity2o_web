@@ -11,7 +11,9 @@ import {
 } from './types';
 import io from 'socket.io-client';
 import { store } from '../index';
-export const socket = io('localhost:5000');
+import keys from '../config/keys';
+
+export const socket = io(keys.socketDomain);
 
 export const onChangeCurrentMessage = newMessage => dispatch => {
 	dispatch({
