@@ -9,11 +9,8 @@ import {
 	MESSAGE_SENT_ERROR,
 	DISPLAY_RECEIVED_MESSAGE
 } from './types';
-import io from 'socket.io-client';
 import { store } from '../index';
-import keys from '../config/keys';
-
-export const socket = io(keys.socketDomain);
+import { socket } from './contacts';
 
 export const onChangeCurrentMessage = newMessage => dispatch => {
 	dispatch({
@@ -83,11 +80,13 @@ export const sendMessageToServer = (
 	}
 };
 
-socket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(messageInfo) {
-	// No need to save message into DB since the message was already
-	// saved by client A. We just need to display the message to us(Client B)
-	store.dispatch({
-		type: DISPLAY_RECEIVED_MESSAGE,
-		messageInfo: messageInfo
+if (socket !== null) {
+	socket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(messageInfo) {
+		// No need to save message into DB since the message was already
+		// saved by client A. We just need to display the message to us(Client B)
+		store.dispatch({
+			type: DISPLAY_RECEIVED_MESSAGE,
+			messageInfo: messageInfo
+		});
 	});
-});
+}

@@ -13,8 +13,10 @@ import {
 	SAVE_PROFILE_DONE,
 	SAVE_PROFILE_ERROR
 } from './types';
-import { socket } from './chat';
 import { store } from '../index';
+import io from 'socket.io-client';
+import keys from '../config/keys';
+export let socket = null;
 
 export const fetchConversations = () => async dispatch => {
 	// get user by hitting GET api/current_user
@@ -123,6 +125,7 @@ export const tellServerClientInConversations = (
 	mongoDBUserId,
 	allContacts
 ) => async dispatch => {
+	socket = io(keys.socketDomain);
 	const clientInConversationInfo = {
 		mongoDBUserId: mongoDBUserId,
 		allContacts: allContacts,
