@@ -47,7 +47,9 @@ if (process.env.NODE_ENV === 'production') {
 	// Express will serve up the index.html file if it doesn't recognize the route
 	const path = require('path');
 	app.get('*', (request, response) => {
-		response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+		response.sendFile(
+			path.resolve(__dirname, 'client', 'build', 'index.html')
+		);
 	});
 }
 
@@ -65,6 +67,7 @@ let io = require('socket.io')(server);
 
 // turns on io
 io.on('connection', function(socket) {
+	app.set('socket', socket);
 	console.log('a user connected with socket.id = ', socket.id);
 	// console.log('socket = ', socket);
 	// listens for messages to be sent
@@ -82,5 +85,3 @@ io.on('connection', function(socket) {
 			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
 	});
 });
-
-module.exports.io = io;

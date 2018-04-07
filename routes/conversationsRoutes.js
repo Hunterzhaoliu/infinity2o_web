@@ -2,15 +2,16 @@ const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
 const ConversationCollection = mongoose.model('conversations');
 const ClientInConversationCollection = mongoose.model('clientsInConversation');
-let indexFile = require('../index');
 
-const getOnlineContacts = async (allContacts, socketId) => {
+const getOnlineContacts = async (allContacts, socketId, socket) => {
 	let onlineContacts = [];
 	for (let i = 0; i < allContacts.length; i++) {
 		// TODO: optimize this, don't want to be searching individually
-		const contactInConversation = await ClientInConversationCollection.findOne({
-			mongoDBUserId: allContacts[i].matchId
-		});
+		const contactInConversation = await ClientInConversationCollection.findOne(
+			{
+				mongoDBUserId: allContacts[i].matchId
+			}
+		);
 		if (contactInConversation !== null) {
 			// the current contact is online
 			allContacts[i]['isOnline'] = true;
@@ -23,12 +24,18 @@ const getOnlineContacts = async (allContacts, socketId) => {
 				socketId: socketId
 			};
 
-			//console.log('indexFile.io = ', indexFile.io);
-			indexFile.io.on('connection', function(socket) {
-				socket
-					.to(contactInConversation.socketId)
-					.emit('TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', newContactInfo);
-			});
+			console.log('newContactInfo = ', newContactInfo);
+			console.log(
+				'contactInConversation.socketId = ',
+				contactInConversation.socketId
+			);
+
+			socket
+				.to(contactInConversation.socketId)
+				.emit(
+					'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
+					newContactInfo
+				);
 		} else {
 			allContacts[i]['isOnline'] = false;
 			allContacts[i]['socketId'] = null;
@@ -53,7 +60,11 @@ module.exports = app => {
 		async (request, response) => {
 			const { mongoDBUserId, allContacts, socketId } = request.body;
 
-			if (mongoDBUserId !== null && socketId !== null && allContacts !== null) {
+			if (
+				mongoDBUserId !== null &&
+				socketId !== null &&
+				allContacts !== null
+			) {
 				const clientInConversation = await ClientInConversationCollection.findOne(
 					{
 						mongoDBUserId: mongoDBUserId
@@ -68,7 +79,9 @@ module.exports = app => {
 						mongoDBUserId: mongoDBUserId,
 						socketId: socketId
 					};
-					ClientInConversationCollection.create(newClientInConversation);
+					ClientInConversationCollection.create(
+						newClientInConversation
+					);
 				} else {
 					// update clientInConversation if socketId is newer
 					console.log('new socketId = ', socketId);
@@ -90,8 +103,14 @@ module.exports = app => {
 					}
 				}
 
+				let socket = request.app.get('socket');
+
 				// respond with which of the client's contacts can chat over websockets
-				const onlineContacts = await getOnlineContacts(allContacts, socketId);
+				const onlineContacts = await getOnlineContacts(
+					allContacts,
+					socketId,
+					socket
+				);
 				response.send(onlineContacts);
 			}
 		}
@@ -101,7 +120,12 @@ module.exports = app => {
 		'/api/conversations/chat',
 		requireLogin,
 		async (request, response) => {
-			const { conversationId, senderName, message, timeCreated } = request.body;
+			const {
+				conversationId,
+				senderName,
+				message,
+				timeCreated
+			} = request.body;
 
 			// GOAL = save newMessage into correct conversation document
 			const newMessage = {
