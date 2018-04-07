@@ -11,6 +11,7 @@ import {
 } from './types';
 import { store } from '../index';
 import { socket } from './contacts';
+import io from 'socket.io-client';
 
 export const onChangeCurrentMessage = newMessage => dispatch => {
 	dispatch({
@@ -83,15 +84,17 @@ export const sendMessageToServer = (
 	}
 };
 
-socket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(messageInfo) {
-	// No need to save message into DB since the message was already
-	// saved by client A. We just need to display the message to us(Client B)
-	console.log(
-		'TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A messageInfo = ',
-		messageInfo
-	);
-	store.dispatch({
-		type: DISPLAY_RECEIVED_MESSAGE,
-		messageInfo: messageInfo
+io.on('connection', function(socket) {
+	socket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(messageInfo) {
+		// No need to save message into DB since the message was already
+		// saved by client A. We just need to display the message to us(Client B)
+		console.log(
+			'TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A messageInfo = ',
+			messageInfo
+		);
+		store.dispatch({
+			type: DISPLAY_RECEIVED_MESSAGE,
+			messageInfo: messageInfo
+		});
 	});
 });
