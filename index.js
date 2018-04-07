@@ -64,8 +64,8 @@ server = app.listen(PORT, function() {
 });
 
 let io = require('socket.io')(server);
+const ClientInConversationCollection = mongoose.model('clientsInConversation');
 
-// turns on io
 io.on('connection', function(socket) {
 	app.set('socket', socket);
 	console.log('a user connected with socket.id = ', socket.id);
@@ -83,5 +83,21 @@ io.on('connection', function(socket) {
 		socket
 			.to(messageInfo.selectedContactSocketId)
 			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
+	});
+
+	socket.on('disconnect', async function() {
+		console.log('user disconnected with socket.id = ', socket.id);
+		// remove document from ClientInConversation collection
+		// console.log(
+		// 	'ClientInConversationCollection = ',
+		// 	ClientInConversationCollection
+		// );
+		try {
+			await ClientInConversationCollection.deleteOne({
+				socketId: socket.id
+			});
+		} catch (error) {
+			console.log('delete client in conversation DB error = ', error);
+		}
 	});
 });
