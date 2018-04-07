@@ -1,0 +1,11 @@
+.demo-infinite-container {
+	border-radius: 0px;
+	overflow: auto;
+	padding: 0px 0px;
+	height: 90vh;
+}
+.demo-loading {
+	position: absolute;
+	bottom: -40px;
+	left: 50%;
+}

@@ -10,9 +10,19 @@ const { Option } = Select;
 
 class InputFieldSelect extends Component {
 	renderOptions() {
+		const { colorTheme } = this.props;
+
 		return _.map(optionFields, option => {
 			return (
-				<Option value={option.value} key={option.value}>
+				<Option
+					style={{
+						borderColor: colorTheme.text8Color,
+						background: colorTheme.text8Color,
+						color: colorTheme.text5Color
+					}}
+					value={option.value}
+					key={option.value}
+				>
 					{option.name}
 				</Option>
 			);
@@ -29,10 +39,10 @@ class InputFieldSelect extends Component {
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col
-						sm={{ span: 5 }}
-						md={{ span: 3 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
+						sm={{ span: 6 }}
+						md={{ span: 6 }}
+						lg={{ span: 6 }}
+						xl={{ span: 4 }}
 					>
 						<h3
 							style={{
@@ -43,16 +53,17 @@ class InputFieldSelect extends Component {
 						</h3>
 					</Col>
 					<Col
-						sm={{ span: 18, offset: 1 }}
-						md={{ span: 18, offset: 1 }}
-						lg={{ span: 18, offset: 1 }}
-						xl={{ span: 18, offset: 1 }}
+						sm={{ span: 16, offset: 1 }}
+						md={{ span: 17, offset: 1 }}
+						lg={{ span: 17, offset: 1 }}
+						xl={{ span: 19, offset: 1 }}
 					>
 						<Select
 							mode="multiple"
 							style={{
 								width: width,
-								borderColor: colorTheme.text6Color
+								borderColor: colorTheme.text8Color,
+								background: colorTheme.text8Color
 							}}
 							value={profile.newInterests}
 							onChange={this.onChangeInterests}

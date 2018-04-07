@@ -7,6 +7,10 @@
 
 ## Backend & frontend development setup
 
+heroku.com:
+
+1.  1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+
 mlab.com databases:
 
 1. Login with `qliu` & password = `mxxxxFxxxxxIxxxxxx`

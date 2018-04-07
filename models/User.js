@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose; // = const Schema = mongoose.Schema;
-//schema describes every property of a user
+const { Schema } = mongoose;
 const ProfileQuestionDisplay = require('./ProfileQuestionDisplay');
 const ProfileVoteDisplay = require('./ProfileVoteDisplay');
+const userConversationSchema = require('./UserConversation');
 
 const userSchema = new Schema({
 	auth: {
@@ -30,8 +30,9 @@ const userSchema = new Schema({
 			answerIdsUserVotedOn: [Schema.Types.ObjectId],
 			totalUserVotes: { type: Number, default: 0 }
 		}
-	}
+	},
+	matches: [String],
+	conversations: [userConversationSchema]
 });
 
 mongoose.model('users', userSchema);
-//model class, user collection

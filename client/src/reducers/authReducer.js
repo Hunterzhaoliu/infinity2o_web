@@ -1,4 +1,4 @@
-import { SAVE_FETCHED_USER_AUTH } from '../actions/types';
+import { SAVE_FETCHED_USER_AUTH, UPDATE_OUR_SOCKET_ID } from '../actions/types';
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
@@ -9,7 +9,8 @@ let initialState = {
 	googleId: null,
 	linkedInId: null,
 	location: null,
-	mongoDBUserId: null
+	mongoDBUserId: null,
+	ourSocketId: null
 };
 
 export default function(state = initialState, action) {
@@ -25,6 +26,9 @@ export default function(state = initialState, action) {
 				newState.loggedInState = 'logged_in';
 				newState.mongoDBUserId = action.mongoDBUserId;
 			}
+			return newState;
+		case UPDATE_OUR_SOCKET_ID:
+			newState.ourSocketId = action.ourSocketId;
 			return newState;
 		default:
 			return state;

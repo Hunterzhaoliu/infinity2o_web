@@ -9,8 +9,11 @@ require('./models/Ask');
 require('./models/Answer');
 require('./models/ProfileQuestionDisplay');
 require('./models/ProfileVoteDisplay');
+require('./models/Conversation');
+require('./models/ClientInConversation');
 require('./services/passport');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
 
 const app = express();
@@ -34,6 +37,7 @@ require('./routes/profileRoutes')(app);
 require('./routes/trainAIRoutes')(app);
 require('./routes/askRoutes')(app);
 require('./routes/matchesRoutes')(app);
+require('./routes/conversationsRoutes')(app);
 require('./routes/legalRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
@@ -51,10 +55,33 @@ if (process.env.NODE_ENV === 'production') {
 
 // heroku dynamic port
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, function() {
+server = app.listen(PORT, function() {
 	console.log(
 		'Express server listening on port %d in %s mode',
 		this.address().port,
 		app.settings.env
 	);
+});
+
+let io = require('socket.io')(server);
+
+// turns on io
+io.on('connection', function(socket) {
+	app.set('socket', socket);
+	console.log('a user connected with socket.id = ', socket.id);
+	// console.log('socket = ', socket);
+	// listens for messages to be sent
+	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
+		messageInfo
+	) {
+		console.log(
+			'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo = ',
+			messageInfo
+		);
+
+		// sends private message to other client
+		socket
+			.to(messageInfo.selectedContactSocketId)
+			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
+	});
 });

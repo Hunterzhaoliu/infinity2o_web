@@ -15,7 +15,10 @@ export const initializeApp = () => async dispatch => {
 
 	if (response.data._id !== undefined) {
 		fetchUserTrainAIAsks(dispatch, response.data._id);
-		fetchUserMatches(dispatch, response.data.matches);
+
+		if (response.data.matches.length >= 1) {
+			fetchUserMatches(dispatch, response.data.matches);
+		}
 	}
 
 	// TODO: store previous color theme into database so we don't constantly switch

@@ -23,6 +23,45 @@ class App extends Component {
 		this.props.initializeApp();
 	}
 
+	renderFooter() {
+		const { colorTheme } = this.props;
+
+		if (colorTheme.activeSection === 'conversations') {
+			return;
+		} else {
+			return (
+				<Footer
+					style={{
+						textAlign: 'center',
+						background: this.props.colorTheme.backgroundColor,
+						color: this.props.colorTheme.text7Color
+					}}
+				>
+					<Row>
+						<Col span={24}>
+							<p>Infinity2o Inc. © 2018 -> ∞</p>
+						</Col>
+					</Row>
+					<Row type="flex" justify="center">
+						<Col span={24}>
+							<p>
+								<a
+									style={{
+										color: this.props.colorTheme
+											.keyText7Color
+									}}
+									href="https://medium.com/infinity2o"
+								>
+									blog
+								</a>
+							</p>
+						</Col>
+					</Row>
+				</Footer>
+			);
+		}
+	}
+
 	render() {
 		//console.log('this.props inside App', this.props);
 		return (
@@ -44,34 +83,7 @@ class App extends Component {
 						path="/conversations"
 						component={Conversations}
 					/>
-					<Footer
-						style={{
-							textAlign: 'center',
-							background: this.props.colorTheme.backgroundColor,
-							color: this.props.colorTheme.text7Color
-						}}
-					>
-						<Row>
-							<Col span={24}>
-								<p>Infinity2o Inc. © 2018 -> ∞</p>
-							</Col>
-						</Row>
-						<Row type="flex" justify="center">
-							<Col span={24}>
-								<p>
-									<a
-										style={{
-											color: this.props.colorTheme
-												.keyText7Color
-										}}
-										href="https://medium.com/infinity2o"
-									>
-										blog
-									</a>
-								</p>
-							</Col>
-						</Row>
-					</Footer>
+					{this.renderFooter()}
 				</Layout>
 			</BrowserRouter>
 		);

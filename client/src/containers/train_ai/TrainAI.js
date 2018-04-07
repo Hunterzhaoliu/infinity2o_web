@@ -33,7 +33,18 @@ class TrainAI extends Component {
 						padding: '0% 0% 5px' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 0 }}
+						lg={{ span: 3 }}
+						xl={{ span: 5 }}
+					/>
+					<Col
+						sm={{ span: 24 }}
+						md={{ span: 24 }}
+						lg={{ span: 18 }}
+						xl={{ span: 14 }}
+					>
 						<h2
 							style={{
 								color: colorTheme.text2Color
@@ -43,6 +54,12 @@ class TrainAI extends Component {
 							core beliefs align.
 						</h2>
 					</Col>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 0 }}
+						lg={{ span: 3 }}
+						xl={{ span: 5 }}
+					/>
 				</Row>
 				<Row
 					type="flex"
@@ -52,9 +69,21 @@ class TrainAI extends Component {
 						padding: '0% 0% 5px' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 16 }}>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 3 }}
+						lg={{ span: 5 }}
+						xl={{ span: 6 }}
+					/>
+					<Col
+						sm={{ span: 18 }}
+						md={{ span: 16 }}
+						lg={{ span: 12 }}
+						xl={{ span: 10 }}
+					>
 						<h3
 							style={{
+								textAlign: 'center',
 								color: colorTheme.text3Color
 							}}
 						>
@@ -62,7 +91,12 @@ class TrainAI extends Component {
 							you:
 						</h3>
 					</Col>
-					<Col md={{ span: 4, offset: 0 }}>
+					<Col
+						sm={{ span: 5 }}
+						md={{ span: 2 }}
+						lg={{ span: 2 }}
+						xl={{ span: 2 }}
+					>
 						<Button
 							key="1"
 							style={{
@@ -74,10 +108,16 @@ class TrainAI extends Component {
 							<a href="/train_ai/ask">Ask Question</a>
 						</Button>
 					</Col>
+					<Col
+						sm={{ span: 1 }}
+						md={{ span: 3 }}
+						lg={{ span: 5 }}
+						xl={{ span: 6 }}
+					/>
 				</Row>
 				<Row
 					type="flex"
-					justify="start"
+					justify="center"
 					align="middle"
 					style={{
 						padding: '25px 0px 0px' // top left&right bottom
@@ -103,9 +143,26 @@ class TrainAI extends Component {
 						padding: '0px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 24 }}>
+					<Col
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
+					<Col
+						sm={{ span: 14 }}
+						md={{ span: 14 }}
+						lg={{ span: 14 }}
+						xl={{ span: 14 }}
+					>
 						<InputVote />
 					</Col>
+					<Col
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
 				</Row>
 			</Content>
 		);

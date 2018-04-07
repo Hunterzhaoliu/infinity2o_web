@@ -1,25 +1,101 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
+import * as contactsActionCreators from '../../actions/contacts';
 import { bindActionCreators } from 'redux';
-import { Layout } from 'antd';
+
+import Chat from './Chat';
+import Contacts from './Contacts';
+import { Layout, Row, Col } from 'antd';
 const { Content } = Layout;
 
-class Conversations extends Component {
+let toldServerIamInConversations = false;
+
+class Conversation extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onPressConversations();
+		this.props.fetchConversations();
+	}
+
+	renderConversations() {
+		const { colorTheme, chat, contacts, mongoDBUserId } = this.props;
+
+		if (!toldServerIamInConversations && contacts.allContacts.length > 0) {
+			this.props.tellServerClientInConversations(
+				mongoDBUserId,
+				contacts.allContacts
+			);
+			toldServerIamInConversations = true;
+		}
+
+		if (
+			contacts.allContacts !== undefined &&
+			contacts.allContacts.length >= 1
+		) {
+			return (
+				<Row type="flex" justify="space-between">
+					<Col
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
+					<Col
+						sm={{ span: 4 }}
+						md={{ span: 4 }}
+						lg={{ span: 4 }}
+						xl={{ span: 4 }}
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						<Contacts contacts={contacts.allContacts} />
+					</Col>
+					<Col
+						sm={{ span: 10 }}
+						md={{ span: 10 }}
+						lg={{ span: 10 }}
+						xl={{ span: 10 }}
+					>
+						<Chat chat={chat} />
+					</Col>
+					<Col
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
+				</Row>
+			);
+		} else {
+			return (
+				<h2
+					style={{
+						color: colorTheme.text3Color
+					}}
+				>
+					You have no conversations right now. Start some by "Saying
+					Hi" in Matches.
+				</h2>
+			);
+		}
 	}
 
 	render() {
+		//console.log('Conversation this.props = ', this.props);
+		const { colorTheme } = this.props;
+
 		return (
 			<Content
 				style={{
 					textAlign: 'center',
 					padding: '75px 50px 0px', // top left&right bottom
-					background: this.props.colorTheme.backgroundColor
+					background: colorTheme.backgroundColor
 				}}
-			/>
+			>
+				{this.renderConversations()}
+			</Content>
 		);
 	}
 }
@@ -30,7 +106,10 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		chat: state.chat,
+		contacts: state.contacts,
+		mongoDBUserId: state.auth.mongoDBUserId
 	};
 }
 
@@ -44,11 +123,25 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
+	const contactsDispatchers = bindActionCreators(
+		contactsActionCreators,
+		dispatch
+	);
+
 	return {
 		onPressConversations: () => {
 			colorThemeDispatchers.onPressConversations();
+		},
+		fetchConversations: () => {
+			contactsDispatchers.fetchConversations();
+		},
+		tellServerClientInConversations: (mongoDBUserId, allContacts) => {
+			contactsDispatchers.tellServerClientInConversations(
+				mongoDBUserId,
+				allContacts
+			);
 		}
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Conversations);
+export default connect(mapStateToProps, mapDispatchToProps)(Conversation);
