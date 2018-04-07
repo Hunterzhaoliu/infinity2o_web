@@ -12,6 +12,8 @@ const getOnlineContacts = async (allContacts, socketId, socket) => {
 				mongoDBUserId: allContacts[i].matchId
 			}
 		);
+		console.log('allContacts[i].matchId = ', allContacts[i].matchId);
+		console.log('contactInConversation = ', contactInConversation);
 		if (contactInConversation !== null) {
 			// the current contact is online
 			allContacts[i]['isOnline'] = true;
@@ -19,29 +21,30 @@ const getOnlineContacts = async (allContacts, socketId, socket) => {
 			onlineContacts.push(allContacts[i]);
 
 			// TODO: update contact with your new latest socketId
-			const newContactInfo = {
-				conversationId: contactInConversation.conversationId,
-				socketId: socketId
-			};
-
-			console.log('newContactInfo = ', newContactInfo);
-			console.log(
-				'contactInConversation.socketId = ',
-				contactInConversation.socketId
-			);
-
-			socket
-				.to(contactInConversation.socketId)
-				.emit(
-					'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
-					newContactInfo
-				);
+			// const newContactInfo = {
+			// 	conversationId: contactInConversation.conversationId,
+			// 	socketId: socketId
+			// };
+			//
+			// console.log('newContactInfo = ', newContactInfo);
+			// console.log(
+			// 	'contactInConversation.socketId = ',
+			// 	contactInConversation.socketId
+			// );
+			//
+			// socket
+			// 	.to(contactInConversation.socketId)
+			// 	.emit(
+			// 		'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
+			// 		newContactInfo
+			// 	);
 		} else {
 			allContacts[i]['isOnline'] = false;
 			allContacts[i]['socketId'] = null;
 			onlineContacts.push(allContacts[i]);
 		}
 	}
+	console.log('onlineContacts = ', onlineContacts);
 	return onlineContacts;
 };
 
