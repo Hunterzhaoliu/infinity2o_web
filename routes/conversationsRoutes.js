@@ -12,8 +12,8 @@ const getOnlineContacts = async (allContacts, socketId, socket) => {
 				mongoDBUserId: allContacts[i].matchId
 			}
 		);
-		console.log('allContacts[i].matchId = ', allContacts[i].matchId);
-		console.log('contactInConversation = ', contactInConversation);
+		//console.log('allContacts[i].matchId = ', allContacts[i].matchId);
+		//console.log('contactInConversation = ', contactInConversation);
 		if (contactInConversation !== null) {
 			// the current contact is online
 			allContacts[i]['isOnline'] = true;
@@ -21,30 +21,26 @@ const getOnlineContacts = async (allContacts, socketId, socket) => {
 			onlineContacts.push(allContacts[i]);
 
 			// TODO: update contact with your new latest socketId
-			// const newContactInfo = {
-			// 	matchId: allContacts[i].matchId,
-			// 	socketId: socketId
-			// };
-			// console.log('newContactInfo = ', newContactInfo);
-			//
-			// socket.broadcast
-			// 	.to(contactInConversation.socketId)
-			// 	.emit('TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', 'hi');
-			// socket
-			// 	.to(contactInConversation.socketId)
-			// 	.emit(
-			// 		'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
-			// 		newContactInfo
-			// 	);
+			const newContactInfo = {
+				matchId: allContacts[i].matchId,
+				socketId: socketId
+			};
+
+			socket
+				.to(contactInConversation.socketId)
+				.emit(
+					'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
+					newContactInfo
+				);
+			console.log(
+				'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ',
+				newContactInfo
+			);
 		} else {
 			allContacts[i]['isOnline'] = false;
 			allContacts[i]['socketId'] = null;
 			onlineContacts.push(allContacts[i]);
 		}
-
-		socket.broadcast
-			.to(contactInConversation.socketId)
-			.emit('TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', 'hi');
 	}
 	//console.log('onlineContacts = ', onlineContacts);
 	return onlineContacts;
@@ -89,7 +85,7 @@ module.exports = app => {
 					);
 				} else {
 					// update clientInConversation if socketId is newer
-					console.log('new socketId = ', socketId);
+					//console.log('new socketId = ', socketId);
 					if (clientInConversation.socketId !== socketId) {
 						try {
 							await ClientInConversationCollection.updateOne(
