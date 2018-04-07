@@ -3,7 +3,12 @@ const mongoose = require('mongoose');
 const ConversationCollection = mongoose.model('conversations');
 const ClientInConversationCollection = mongoose.model('clientsInConversation');
 
-const getOnlineContacts = async (allContacts, socketId, socket) => {
+const getOnlineContacts = async (
+	allContacts,
+	socketId,
+	socket,
+	clientMongoDBUserId
+) => {
 	let onlineContacts = [];
 	for (let i = 0; i < allContacts.length; i++) {
 		// TODO: optimize this, don't want to be searching individually
@@ -22,7 +27,7 @@ const getOnlineContacts = async (allContacts, socketId, socket) => {
 
 			// TODO: update contact with your new latest socketId
 			const newContactInfo = {
-				matchId: allContacts[i].matchId,
+				matchId: clientMongoDBUserId,
 				socketId: socketId
 			};
 
@@ -32,6 +37,10 @@ const getOnlineContacts = async (allContacts, socketId, socket) => {
 					'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
 					newContactInfo
 				);
+			console.log(
+				'contactInConversation.socketId = ',
+				contactInConversation.socketId
+			);
 			console.log(
 				'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ',
 				newContactInfo
@@ -105,12 +114,13 @@ module.exports = app => {
 				}
 
 				let socket = request.app.get('socket');
-
+				let clientMongoDBUserId = request.user._id;
 				// respond with which of the client's contacts can chat over websockets
 				const onlineContacts = await getOnlineContacts(
 					allContacts,
 					socketId,
-					socket
+					socket,
+					clientMongoDBUserId
 				);
 				response.send(onlineContacts);
 			}
