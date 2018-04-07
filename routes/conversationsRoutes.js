@@ -22,16 +22,14 @@ const getOnlineContacts = async (allContacts, socketId, socket) => {
 
 			// TODO: update contact with your new latest socketId
 			// const newContactInfo = {
-			// 	conversationId: contactInConversation.conversationId,
+			// 	matchId: allContacts[i].matchId,
 			// 	socketId: socketId
 			// };
-			//
 			// console.log('newContactInfo = ', newContactInfo);
-			// console.log(
-			// 	'contactInConversation.socketId = ',
-			// 	contactInConversation.socketId
-			// );
 			//
+			// socket.broadcast
+			// 	.to(contactInConversation.socketId)
+			// 	.emit('TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', 'hi');
 			// socket
 			// 	.to(contactInConversation.socketId)
 			// 	.emit(
@@ -43,8 +41,12 @@ const getOnlineContacts = async (allContacts, socketId, socket) => {
 			allContacts[i]['socketId'] = null;
 			onlineContacts.push(allContacts[i]);
 		}
+
+		socket.broadcast
+			.to(contactInConversation.socketId)
+			.emit('TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', 'hi');
 	}
-	console.log('onlineContacts = ', onlineContacts);
+	//console.log('onlineContacts = ', onlineContacts);
 	return onlineContacts;
 };
 

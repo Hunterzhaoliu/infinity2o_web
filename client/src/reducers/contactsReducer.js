@@ -40,6 +40,14 @@ export default function(state = initialState, action) {
 					newState.i
 				);
 			}
+
+			newState.displayedContacts.forEach(function(contact) {
+				if (contact.conversationId === newState.conversationId) {
+					// we found the conversation both clients are in
+					newState.selectedContactOnline = contact.isOnline;
+					newState.selectedContactSocketId = contact.socketId;
+				}
+			});
 			return newState;
 		case UPDATE_CONTACTS_ERROR:
 			newState.hasContactsError = true;
