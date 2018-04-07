@@ -101,6 +101,7 @@ export default function(state = initialState, action) {
 					newState.i
 				);
 			}
+			return newState;
 		default:
 			return state;
 	}
