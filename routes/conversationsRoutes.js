@@ -7,11 +7,10 @@ let indexFile = require('../index');
 const getOnlineContacts = async (allContacts, socketId) => {
 	let onlineContacts = [];
 	for (let i = 0; i < allContacts.length; i++) {
-		const contactInConversation = await ClientInConversationCollection.findOne(
-			{
-				mongoDBUserId: allContacts[i].matchId
-			}
-		);
+		// TODO: optimize this, don't want to be searching individually
+		const contactInConversation = await ClientInConversationCollection.findOne({
+			mongoDBUserId: allContacts[i].matchId
+		});
 		if (contactInConversation !== null) {
 			// the current contact is online
 			allContacts[i]['isOnline'] = true;
@@ -28,10 +27,7 @@ const getOnlineContacts = async (allContacts, socketId) => {
 			indexFile.io.on('connection', function(socket) {
 				socket
 					.to(contactInConversation.socketId)
-					.emit(
-						'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
-						newContactInfo
-					);
+					.emit('TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', newContactInfo);
 			});
 		} else {
 			allContacts[i]['isOnline'] = false;
@@ -57,18 +53,14 @@ module.exports = app => {
 		async (request, response) => {
 			const { mongoDBUserId, allContacts, socketId } = request.body;
 
-			if (
-				mongoDBUserId !== null &&
-				socketId !== null &&
-				allContacts !== null
-			) {
+			if (mongoDBUserId !== null && socketId !== null && allContacts !== null) {
 				const clientInConversation = await ClientInConversationCollection.findOne(
 					{
 						mongoDBUserId: mongoDBUserId
 					}
 				);
 
-				console.log('clientInConversation = ', clientInConversation);
+				// console.log('clientInConversation = ', clientInConversation);
 
 				if (clientInConversation === null) {
 					// this is the client's initial connection
@@ -76,9 +68,7 @@ module.exports = app => {
 						mongoDBUserId: mongoDBUserId,
 						socketId: socketId
 					};
-					ClientInConversationCollection.create(
-						newClientInConversation
-					);
+					ClientInConversationCollection.create(newClientInConversation);
 				} else {
 					// update clientInConversation if socketId is newer
 					console.log('new socketId = ', socketId);
@@ -101,10 +91,7 @@ module.exports = app => {
 				}
 
 				// respond with which of the client's contacts can chat over websockets
-				const onlineContacts = await getOnlineContacts(
-					allContacts,
-					socketId
-				);
+				const onlineContacts = await getOnlineContacts(allContacts, socketId);
 				response.send(onlineContacts);
 			}
 		}
@@ -114,12 +101,7 @@ module.exports = app => {
 		'/api/conversations/chat',
 		requireLogin,
 		async (request, response) => {
-			const {
-				conversationId,
-				senderName,
-				message,
-				timeCreated
-			} = request.body;
+			const { conversationId, senderName, message, timeCreated } = request.body;
 
 			// GOAL = save newMessage into correct conversation document
 			const newMessage = {

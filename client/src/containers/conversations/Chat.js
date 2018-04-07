@@ -17,12 +17,7 @@ class Chat extends Component {
 	}
 
 	handleInfiniteOnLoad = () => {
-		const {
-			chat,
-			setLoading,
-			setHasMore,
-			displayMoreMessages
-		} = this.props;
+		const { chat, setLoading, setHasMore, displayMoreMessages } = this.props;
 
 		setLoading(true);
 		if (chat.displayedMessages.length === chat.last50Messages.length) {
@@ -95,8 +90,7 @@ class Chat extends Component {
 						<List
 							dataSource={chat.displayMessages}
 							renderItem={item => {
-								const nameAndMessage =
-									item.senderName + ': ' + item.content;
+								const nameAndMessage = item.senderName + ': ' + item.content;
 								let justifyValue = 'start';
 								if (item.senderName === name) {
 									// TODO: what if both people's names are the senderName
@@ -120,13 +114,10 @@ class Chat extends Component {
 											>
 												<p
 													style={{
-														borderColor:
-															colorTheme.text8Color,
+														borderColor: colorTheme.text8Color,
 														borderWidth: '2px',
-														background:
-															colorTheme.text8Color,
-														color:
-															colorTheme.text3Color,
+														background: colorTheme.text8Color,
+														color: colorTheme.text3Color,
 														borderRadius: '25px',
 														padding: '4px 15px 4px'
 													}}
@@ -138,16 +129,11 @@ class Chat extends Component {
 										<Col xl={{ span: 1 }}>
 											<p
 												style={{
-													color:
-														colorTheme.text8Color,
+													color: colorTheme.text8Color,
 													padding: '12px 4px 0px'
 												}}
 											>
-												{this.renderMessageStatusIcon(
-													'delivered',
-													item,
-													name
-												)}
+												{this.renderMessageStatusIcon('delivered', item, name)}
 											</p>
 										</Col>
 									</Row>
@@ -155,9 +141,7 @@ class Chat extends Component {
 							}}
 						>
 							{chat.loading &&
-								chat.hasMore && (
-									<Spin className="chat-window-loading" />
-								)}
+								chat.hasMore && <Spin className="chat-window-loading" />}
 						</List>
 					</InfiniteScroll>
 				</div>

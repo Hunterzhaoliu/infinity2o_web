@@ -47,9 +47,7 @@ if (process.env.NODE_ENV === 'production') {
 	// Express will serve up the index.html file if it doesn't recognize the route
 	const path = require('path');
 	app.get('*', (request, response) => {
-		response.sendFile(
-			path.resolve(__dirname, 'client', 'build', 'index.html')
-		);
+		response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 	});
 }
 
@@ -65,9 +63,11 @@ server = app.listen(PORT, function() {
 
 let io = require('socket.io')(server);
 
+// turns on io
 io.on('connection', function(socket) {
 	console.log('a user connected with socket.id = ', socket.id);
-
+	// console.log('socket = ', socket);
+	// listens for messages to be sent
 	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
 		messageInfo
 	) {
@@ -76,6 +76,7 @@ io.on('connection', function(socket) {
 			messageInfo
 		);
 
+		// sends private message to other client
 		socket
 			.to(messageInfo.selectedContactSocketId)
 			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);

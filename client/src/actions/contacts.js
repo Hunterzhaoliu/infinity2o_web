@@ -55,12 +55,8 @@ export const fetchConversations = () => async dispatch => {
 			dispatch({
 				type: ON_SELECT_CONTACT,
 				conversationId: conversationId,
-				isOnline:
-					response.data.conversations[contactChatDisplayIndex]
-						.isOnline,
-				socketId:
-					response.data.conversations[contactChatDisplayIndex]
-						.socketId
+				isOnline: response.data.conversations[contactChatDisplayIndex].isOnline,
+				socketId: response.data.conversations[contactChatDisplayIndex].socketId
 			});
 			dispatch({
 				type: UPDATE_CHAT,
@@ -132,7 +128,9 @@ export const tellServerClientInConversations = (
 		allContacts: allContacts,
 		socketId: socket.id
 	};
-	console.log('socket.id = ', socket.id);
+	// console.log('socket.id = ', socket.id);
+	// puts the client inside of mongoDB clinetInConversationInfo collection
+	// response holds the client's onlineContacts
 	const response = await axios.post(
 		'/api/conversations/clients_online',
 		clientInConversationInfo
