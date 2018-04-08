@@ -9,8 +9,6 @@ import Contacts from './Contacts';
 import { Layout, Row, Col } from 'antd';
 const { Content } = Layout;
 
-let toldServerIamInConversations = false;
-
 class Conversation extends Component {
 	componentWillMount() {
 		// run once before first render()
@@ -19,15 +17,7 @@ class Conversation extends Component {
 	}
 
 	renderConversations() {
-		const { colorTheme, chat, contacts, mongoDBUserId } = this.props;
-
-		if (!toldServerIamInConversations && contacts.allContacts.length > 0) {
-			this.props.tellServerClientInConversations(
-				mongoDBUserId,
-				contacts.allContacts
-			);
-			toldServerIamInConversations = true;
-		}
+		const { colorTheme, chat, contacts } = this.props;
 
 		if (
 			contacts.allContacts !== undefined &&
@@ -108,8 +98,7 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		chat: state.chat,
-		contacts: state.contacts,
-		mongoDBUserId: state.auth.mongoDBUserId
+		contacts: state.contacts
 	};
 }
 
@@ -134,12 +123,6 @@ function mapDispatchToProps(dispatch) {
 		},
 		fetchConversations: () => {
 			contactsDispatchers.fetchConversations();
-		},
-		tellServerClientInConversations: (mongoDBUserId, allContacts) => {
-			contactsDispatchers.tellServerClientInConversations(
-				mongoDBUserId,
-				allContacts
-			);
 		}
 	};
 }
