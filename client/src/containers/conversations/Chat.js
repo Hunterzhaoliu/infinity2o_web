@@ -5,9 +5,8 @@ import * as chatActionCreators from '../../actions/chat';
 import * as authActionCreators from '../../actions/auth';
 import { bindActionCreators } from 'redux';
 import './Chat.css';
-import InfiniteScroll from 'react-infinite-scroller';
 
-import { Layout, Input, Row, Col, Affix, Icon, List, Spin } from 'antd';
+import { Layout, Input, Row, Col, Affix, Icon, List } from 'antd';
 const { Content } = Layout;
 
 class Chat extends Component {
@@ -71,7 +70,8 @@ class Chat extends Component {
 					<List
 						dataSource={chat.last50Messages}
 						renderItem={item => {
-							const nameAndMessage = item.senderName + ': ' + item.content;
+							const nameAndMessage =
+								item.senderName + ': ' + item.content;
 							let justifyValue = 'start';
 							if (item.senderName === name) {
 								// TODO: what if both people's names are the senderName
@@ -95,10 +95,13 @@ class Chat extends Component {
 										>
 											<p
 												style={{
-													borderColor: colorTheme.text8Color,
+													borderColor:
+														colorTheme.text8Color,
 													borderWidth: '2px',
-													background: colorTheme.text8Color,
-													color: colorTheme.text3Color,
+													background:
+														colorTheme.text8Color,
+													color:
+														colorTheme.text3Color,
 													borderRadius: '25px',
 													padding: '4px 15px 4px'
 												}}
@@ -114,7 +117,11 @@ class Chat extends Component {
 												padding: '12px 4px 0px'
 											}}
 										>
-											{this.renderMessageStatusIcon('delivered', item, name)}
+											{this.renderMessageStatusIcon(
+												'delivered',
+												item,
+												name
+											)}
 										</p>
 									</Col>
 								</Row>

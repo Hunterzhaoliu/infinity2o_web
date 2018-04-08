@@ -2,9 +2,6 @@ import {
 	ON_CHANGE_CURRENT_MESSAGE,
 	UPDATE_CHAT,
 	UPDATE_CHAT_ERROR,
-	DISPLAY_MORE_MESSAGES,
-	SET_CHAT_LOADING,
-	SET_CHAT_HAS_MORE,
 	DISPLAY_SENT_MESSAGE,
 	MESSAGE_SENT_SUCCESS,
 	MESSAGE_SENT_ERROR,
@@ -33,12 +30,6 @@ export default function(state = initialState, action) {
 		case UPDATE_CHAT_ERROR:
 			newState.hasUpdateChatError = true;
 			return newState;
-		case SET_CHAT_LOADING:
-			newState.loading = action.loading;
-			return newState;
-		case SET_CHAT_HAS_MORE:
-			newState.hasMore = action.hasMore;
-			return newState;
 		case DISPLAY_SENT_MESSAGE:
 			newState.last50Messages.push({
 				senderName: action.senderName,
@@ -56,7 +47,8 @@ export default function(state = initialState, action) {
 			return newState;
 		case MESSAGE_SENT_ERROR:
 			const lastMessageIndex2 = newState.last50Messages.length - 1;
-			newState.last50Messages[lastMessageIndex2].status = 'failed-delivery';
+			newState.last50Messages[lastMessageIndex2].status =
+				'failed-delivery';
 			return newState;
 		case DISPLAY_RECEIVED_MESSAGE:
 			console.log('action.messageInfo = ', action.messageInfo);
