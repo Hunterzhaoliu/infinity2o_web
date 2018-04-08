@@ -11,21 +11,18 @@ const getOnlineContacts = async (
 ) => {
 	let onlineContacts = [];
 	for (let i = 0; i < allContacts.length; i++) {
-		// TODO: optimize this, don't want to be searching individually
 		const contactInConversation = await ClientInConversationCollection.findOne(
 			{
 				mongoDBUserId: allContacts[i].matchId
 			}
 		);
-		//console.log('allContacts[i].matchId = ', allContacts[i].matchId);
-		//console.log('contactInConversation = ', contactInConversation);
+
 		if (contactInConversation !== null) {
 			// the current contact is online
 			allContacts[i]['isOnline'] = true;
 			allContacts[i]['socketId'] = contactInConversation.socketId;
 			onlineContacts.push(allContacts[i]);
 
-			// TODO: update contact with your new latest socketId
 			const newContactInfo = {
 				matchId: clientMongoDBUserId,
 				socketId: socketId

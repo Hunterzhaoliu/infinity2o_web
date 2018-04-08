@@ -8,7 +8,8 @@ import {
 	TOLD_DB_CLIENT_IN_CONVERSATION,
 	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR,
 	SAVE_USER_CONVERSATIONS_SUCCESS,
-	SAVE_USER_CONVERSATIONS_ERROR
+	SAVE_USER_CONVERSATIONS_ERROR,
+	UPDATE_CONTACT_SOCKET_ID
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -83,6 +84,23 @@ export default function(state = initialState, action) {
 			return newState;
 		case SAVE_USER_CONVERSATIONS_ERROR:
 			newState.hasSaveUserConversationsError = true;
+			return newState;
+		case UPDATE_CONTACT_SOCKET_ID:
+			newState.allContacts.forEach(function(contact) {
+				if (contact.matchId === action.newContactInfo.matchId) {
+					// we found the contact we need to update socketId
+					contact.socketId = action.newContactInfo.socketId;
+					newState.selectedContactSocketId =
+						action.newContactInfo.socketId;
+				}
+			});
+
+			if (newState.allContacts !== undefined) {
+				newState.displayedContacts = newState.allContacts.slice(
+					0,
+					newState.i
+				);
+			}
 			return newState;
 		default:
 			return state;
