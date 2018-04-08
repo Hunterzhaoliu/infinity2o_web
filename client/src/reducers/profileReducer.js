@@ -7,7 +7,9 @@ import {
 	ON_CHANGE_TIME_SLOT,
 	SAVE_PROFILE_START,
 	SAVE_PROFILE_DONE,
-	SAVE_PROFILE_ERROR
+	SAVE_PROFILE_ERROR,
+	DECREMENT_NEURONS,
+	DECREMENT_NEURONS_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -31,7 +33,8 @@ let initialState = {
 	hasTimeZoneError: false,
 	hasAvailabilityError: false,
 	save: null,
-	asks: null
+	asks: null,
+	payment: {}
 };
 
 export default function(state = initialState, action) {
@@ -50,6 +53,8 @@ export default function(state = initialState, action) {
 				newState.newTimeZone = action.profile.timeZone;
 				newState.newAvailability = action.profile.availability;
 				newState.asks = action.profile.asks;
+				newState.payment.neuronsInBillions =
+					action.profile.payment.neuronsInBillions;
 			}
 			return newState;
 		case ON_CHANGE_NAME:
@@ -96,6 +101,12 @@ export default function(state = initialState, action) {
 			return newState;
 		case SAVE_PROFILE_ERROR:
 			newState.save = 'save_error';
+			return newState;
+		case DECREMENT_NEURONS:
+			newState.payment.neuronsInBillions -= action.decrementAmount;
+			return newState;
+		case DECREMENT_NEURONS_ERROR:
+			newState.payment.hasError = true;
 			return newState;
 		default:
 			return state;
