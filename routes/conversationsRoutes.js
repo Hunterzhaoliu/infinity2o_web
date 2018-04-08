@@ -11,11 +11,9 @@ const getOnlineContacts = async (
 ) => {
 	let onlineContacts = [];
 	for (let i = 0; i < allContacts.length; i++) {
-		const contactInConversation = await ClientInConversationCollection.findOne(
-			{
-				mongoDBUserId: allContacts[i].matchId
-			}
-		);
+		const contactInConversation = await ClientInConversationCollection.findOne({
+			mongoDBUserId: allContacts[i].matchId
+		});
 
 		if (contactInConversation !== null) {
 			// the current contact is online
@@ -30,10 +28,7 @@ const getOnlineContacts = async (
 
 			socket
 				.to(contactInConversation.socketId)
-				.emit(
-					'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
-					newContactInfo
-				);
+				.emit('TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', newContactInfo);
 			console.log(
 				'contactInConversation.socketId = ',
 				contactInConversation.socketId
@@ -57,7 +52,7 @@ module.exports = app => {
 		const conversation = await ConversationCollection.findOne({
 			_id: request.query.conversationId
 		});
-
+		console.log('conversation = ', conversation);
 		response.send(conversation);
 	});
 
@@ -67,11 +62,7 @@ module.exports = app => {
 		async (request, response) => {
 			const { mongoDBUserId, allContacts, socketId } = request.body;
 
-			if (
-				mongoDBUserId !== null &&
-				socketId !== null &&
-				allContacts !== null
-			) {
+			if (mongoDBUserId !== null && socketId !== null && allContacts !== null) {
 				const clientInConversation = await ClientInConversationCollection.findOne(
 					{
 						mongoDBUserId: mongoDBUserId
@@ -86,9 +77,7 @@ module.exports = app => {
 						mongoDBUserId: mongoDBUserId,
 						socketId: socketId
 					};
-					ClientInConversationCollection.create(
-						newClientInConversation
-					);
+					ClientInConversationCollection.create(newClientInConversation);
 				} else {
 					// update clientInConversation if socketId is newer
 					//console.log('new socketId = ', socketId);
@@ -128,12 +117,7 @@ module.exports = app => {
 		'/api/conversations/chat',
 		requireLogin,
 		async (request, response) => {
-			const {
-				conversationId,
-				senderName,
-				message,
-				timeCreated
-			} = request.body;
+			const { conversationId, senderName, message, timeCreated } = request.body;
 
 			// GOAL = save newMessage into correct conversation document
 			const newMessage = {
