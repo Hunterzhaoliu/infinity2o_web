@@ -22,7 +22,44 @@ export const fetchConversations = () => async dispatch => {
 	const userResponse = await axios.get('/api/current_user');
 
 	if (userResponse.status === 200) {
-		// 2) tell client in conversation DB we have a new client
+		// 2) display chat log of first conversation
+		const contactChatDisplayIndex = 0;
+		let conversationId;
+		if (
+			userResponse.data.conversations !== undefined &&
+			userResponse.data.conversations.length >= 1
+		) {
+			conversationId =
+				userResponse.data.conversations[contactChatDisplayIndex]
+					.conversationId;
+
+			// get chat logs by hitting GET api/conversations
+			const conversationsResponse = await axios.get(
+				'/api/conversations?conversationId=' + conversationId
+			);
+
+			if (conversationsResponse.status === 200) {
+				// dispatch chat logs for the latest messages
+				dispatch({
+					type: ON_SELECT_CONTACT,
+					conversationId: conversationId,
+					isOnline:
+						userResponse.data.conversations[contactChatDisplayIndex]
+							.isOnline,
+					socketId:
+						userResponse.data.conversations[contactChatDisplayIndex]
+							.socketId
+				});
+				dispatch({
+					type: UPDATE_CHAT,
+					last50Messages: conversationsResponse.data.last50Messages
+				});
+			} else {
+				dispatch({ type: UPDATE_CHAT_ERROR });
+			}
+		}
+
+		// 3) tell client in conversation DB we have a new client
 		// by hitting /api/conversations/clients_online to get allContacts with latest socketIds
 		const allContacts = userResponse.data.conversations;
 		const mongoDBUserId = store.getState().auth.mongoDBUserId;
@@ -36,7 +73,7 @@ export const fetchConversations = () => async dispatch => {
 			clientInConversationInfo
 		);
 		if (onlineContactsResponse.status === 200) {
-			// 3) update our socket id
+			// 4) update our socket id
 			dispatch({
 				type: UPDATE_OUR_SOCKET_ID,
 				ourSocketId: socket.id
@@ -45,14 +82,14 @@ export const fetchConversations = () => async dispatch => {
 				type: TOLD_DB_CLIENT_IN_CONVERSATION
 			});
 
-			// 4) dispatch allContacts (with lastest socketIds) to our state
+			// 5) dispatch allContacts (with lastest socketIds) to our state
 			const onlineContacts = onlineContactsResponse.data;
 			dispatch({
 				type: UPDATE_CONTACTS,
 				allContacts: onlineContacts
 			});
 
-			// 5) save allContacts (with lastest socketIds) to User DB
+			// 6) save allContacts (with lastest socketIds) to User DB
 			const updateUserDBResponse = await axios.put(
 				'/api/profile/conversations',
 				onlineContacts
@@ -61,47 +98,6 @@ export const fetchConversations = () => async dispatch => {
 				dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
 			} else {
 				dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
-			}
-
-			// 6) display chat log of first conversation
-			// display chat log of first conversation
-			const contactChatDisplayIndex = 0;
-			let conversationId;
-			if (
-				userResponse.data.conversations !== undefined &&
-				userResponse.data.conversations.length >= 1
-			) {
-				conversationId =
-					userResponse.data.conversations[contactChatDisplayIndex]
-						.conversationId;
-
-				// get chat logs by hitting GET api/conversations
-				const conversationsResponse = await axios.get(
-					'/api/conversations?conversationId=' + conversationId
-				);
-
-				if (conversationsResponse.status === 200) {
-					// dispatch chat logs for the latest messages
-					dispatch({
-						type: ON_SELECT_CONTACT,
-						conversationId: conversationId,
-						isOnline:
-							userResponse.data.conversations[
-								contactChatDisplayIndex
-							].isOnline,
-						socketId:
-							userResponse.data.conversations[
-								contactChatDisplayIndex
-							].socketId
-					});
-					dispatch({
-						type: UPDATE_CHAT,
-						last50Messages:
-							conversationsResponse.data.last50Messages
-					});
-				} else {
-					dispatch({ type: UPDATE_CHAT_ERROR });
-				}
 			}
 		} else {
 			store.dispatch({ type: TOLD_DB_CLIENT_IN_CONVERSATION_ERROR });
