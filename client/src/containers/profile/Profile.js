@@ -62,10 +62,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col xl={{ span: 24 }}>
-						<DisplayField
-							label="Interest(s): "
-							value={profile.interests}
-						/>
+						<DisplayField label="Interest(s): " value={profile.interests} />
 					</Col>
 				</Row>
 				<Row
@@ -77,10 +74,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col xl={{ span: 24 }}>
-						<DisplayField
-							label="Time Zone: "
-							value={profile.timeZone}
-						/>
+						<DisplayField label="Time Zone: " value={profile.timeZone} />
 					</Col>
 				</Row>
 				<Row
@@ -92,10 +86,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col xl={{ span: 24 }}>
-						<DisplayField
-							label="Availability: "
-							value={profile.availability}
-						/>
+						<DisplayField label="Availability: " value={profile.availability} />
 					</Col>
 				</Row>
 				<Row
@@ -123,7 +114,7 @@ class Profile extends Component {
 
 	renderQuestions(asks, colorTheme) {
 		if (asks != null) {
-			const newest5Questions = asks.questions.splice(-5).reverse();
+			const newest5Questions = asks.questions.slice(-5).reverse();
 			return _.map(newest5Questions, (question, key) => {
 				return (
 					<Row key={key}>
@@ -144,7 +135,7 @@ class Profile extends Component {
 
 	renderVotes(asks, colorTheme) {
 		if (asks != null) {
-			const newest5Votes = asks.votes.splice(-5).reverse();
+			const newest5Votes = asks.votes.slice(-5).reverse();
 			return _.map(newest5Votes, (vote, key) => {
 				return (
 					<div key={key}>
@@ -197,7 +188,7 @@ class Profile extends Component {
 						xl={{ span: 14 }}
 					>
 						{this.renderProfile(colorTheme, profile)}
-						{/* <Row>
+						<Row>
 							<h2
 								style={{
 									padding: '25px 0% 0%', // top left&right bottom
@@ -218,7 +209,7 @@ class Profile extends Component {
 								Your Votes
 							</h2>
 						</Row>
-						{this.renderVotes(profile.asks, colorTheme)} */}
+						{this.renderVotes(profile.asks, colorTheme)}
 					</Col>
 					<Col
 						sm={{ span: 0 }}
