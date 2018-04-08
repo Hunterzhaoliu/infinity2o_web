@@ -47,8 +47,8 @@ class InputVote extends Component {
 			let displayAnswerButtonColor = colorTheme.text7Color;
 			let isDisplayingSaveIcon = false;
 			let answerVotes = answerObject.votes;
-			// if user has voted on a ask
 
+			// if user has voted on an ask
 			if (trainAI.votes[askId] !== undefined) {
 				const votedAnswerId = trainAI.votes[askId].answerId;
 				isDisplayingAskStats = true;
@@ -58,7 +58,6 @@ class InputVote extends Component {
 				}
 			}
 
-			//console.log('votedAnswerId out of if = ', votedAnswerId);
 			return (
 				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
 					<Col
@@ -73,13 +72,12 @@ class InputVote extends Component {
 								background: displayAnswerButtonColor,
 								color: colorTheme.text2Color
 							}}
-							onClick={e =>
-								this.onVote(answerIndex, askIndex, askId)
-							}
+							onClick={e => this.onVote(answerIndex, askIndex, askId)}
 						>
 							{displayAnswer}
 							{this.renderSaveIcon(
 								trainAI.save,
+								askIndex,
 								isDisplayingSaveIcon
 							)}
 						</Button>
@@ -142,10 +140,7 @@ class InputVote extends Component {
 										color: colorTheme.text3Color
 									}}
 								>
-									{this.renderTotalVotes(
-										askTotalVotes,
-										isDisplayingAskStats
-									)}
+									{this.renderTotalVotes(askTotalVotes, isDisplayingAskStats)}
 								</div>
 								{this.renderAnswers(
 									displayAnswers,
@@ -164,9 +159,7 @@ class InputVote extends Component {
 										}}
 										onClick={e => this.onNextAsk(askIndex)}
 									>
-										{this.renderAskDoneWord(
-											isDisplayingAskStats
-										)}
+										{this.renderAskDoneWord(isDisplayingAskStats)}
 									</Button>
 								</Row>
 							</Card>
@@ -186,20 +179,19 @@ class InputVote extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					Looks like you have done a lot of voting, try asking a
-					question!
+					Looks like you have done a lot of voting, try asking a question!
 				</h3>
 			);
 		}
 	}
 
-	renderSaveIcon(saveState, isDisplaying) {
+	renderSaveIcon(saveState, saveIndex, isDisplaying) {
 		if (isDisplaying) {
-			if (saveState === 'save_start') {
+			if (saveState[saveIndex] === 'save_start') {
 				return <Icon type="loading" />;
-			} else if (saveState === 'save_done') {
+			} else if (saveState[saveIndex] === 'save_done') {
 				return <Icon type="check" />;
-			} else if (saveState === 'save_error') {
+			} else if (saveState[saveIndex] === 'save_error') {
 				return <Icon type="warning" />;
 			}
 		}
@@ -277,11 +269,7 @@ function mapDispatchToProps(dispatch) {
 
 	return {
 		onNextAsk: (nextAsks, removeAskIndex, mongoDBUserId) => {
-			trainAIDispatchers.onNextAsk(
-				nextAsks,
-				removeAskIndex,
-				mongoDBUserId
-			);
+			trainAIDispatchers.onNextAsk(nextAsks, removeAskIndex, mongoDBUserId);
 		},
 		onVote: (answerIndex, answerId, askIndex, askId) => {
 			trainAIDispatchers.onVote(answerIndex, answerId, askIndex, askId);
