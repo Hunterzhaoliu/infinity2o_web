@@ -46,6 +46,10 @@ Cloudflare.com
     * Name: `www` Value: `www.infinity2o.com.herokudns.com`
       TTL: `Automatic` Status: `Arrow through cloud`
 
+E-mail support:
+
+1. `askinfinity2o@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`. Recovery = Hunter's phone & `q42liu@gmail.com`
+
 Local development setup:
 
 1. `cd infinity2o_server` then `npm run dev`
