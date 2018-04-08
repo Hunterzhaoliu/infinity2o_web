@@ -66,18 +66,12 @@ class Matches extends Component {
 								>
 									Total User Votes: {match.totalUserVotes}
 								</p>
-								<Row
-									type="flex"
-									justify="space-between"
-									align="top"
-								>
+								<Row type="flex" justify="space-between" align="top">
 									<Col span={11}>
 										<Button
 											style={{
-												borderColor:
-													colorTheme.text6Color,
-												background:
-													colorTheme.text6Color,
+												borderColor: colorTheme.text6Color,
+												background: colorTheme.text6Color,
 												color: colorTheme.text2Color
 											}}
 											onClick={e => this.onNextMatch()}
@@ -88,18 +82,12 @@ class Matches extends Component {
 									<Col span={11}>
 										<Button
 											style={{
-												borderColor:
-													colorTheme.text6Color,
-												background:
-													colorTheme.text6Color,
+												borderColor: colorTheme.keyText6Color,
+												background: colorTheme.keyText6Color,
 												color: colorTheme.text2Color
 											}}
 											onClick={e =>
-												this.onStartConversation(
-													history,
-													match.name,
-													match.id
-												)
+												this.onStartConversation(history, match.name, match.id)
 											}
 										>
 											Say Hi :)
@@ -118,8 +106,8 @@ class Matches extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					Your out of matches for today. Check out Train AI for better
-					matches :)
+					Your out of matches for today. Check out Train AI for better matches
+					:)
 				</h3>
 			);
 		}
@@ -141,8 +129,8 @@ class Matches extends Component {
 						color: colorTheme.text3Color
 					}}
 				>
-					Every 24 hours at 9 AM Central Time our AI generates the
-					best partners for you.
+					Every 24 hours at 9 AM Central Time our AI generates the best partners
+					for you.
 				</h2>
 				<Row type="flex" justify="center" align="top">
 					<Col
