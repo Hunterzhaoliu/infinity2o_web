@@ -16,19 +16,6 @@ class Chat extends Component {
 		this.props.fetchUserProfile();
 	}
 
-	handleInfiniteOnLoad = () => {
-		const { chat, setLoading, setHasMore, displayMoreMessages } = this.props;
-
-		setLoading(true);
-		if (chat.displayedMessages.length === chat.last50Messages.length) {
-			setLoading(false);
-			setHasMore(false);
-			return;
-		}
-		displayMoreMessages(5);
-		setLoading(false);
-	};
-
 	onChangeCurrentMessage = e => {
 		// console.log('e.target.value = ', e.target.value);
 		this.props.onChangeCurrentMessage(e.target.value);
@@ -81,69 +68,59 @@ class Chat extends Component {
 				}}
 			>
 				<div className="chat-window-infinite-container">
-					<InfiniteScroll
-						initialLoad={false}
-						loadMore={this.handleInfiniteOnLoad}
-						hasMore={!chat.loading && chat.hasMore}
-						useWindow={false}
-					>
-						<List
-							dataSource={chat.displayMessages}
-							renderItem={item => {
-								const nameAndMessage = item.senderName + ': ' + item.content;
-								let justifyValue = 'start';
-								if (item.senderName === name) {
-									// TODO: what if both people's names are the senderName
-									// need to switch to unique identifier
-									justifyValue = 'end';
-								}
-								return (
-									<Row
-										type="flex"
-										justify={justifyValue}
-										align="middle"
-										style={{
-											padding: '0px 0px 0px'
-										}}
-									>
-										<Col>
-											<List.Item
-												style={{
-													padding: '0px 0px 0px'
-												}}
-											>
-												<p
-													style={{
-														borderColor: colorTheme.text8Color,
-														borderWidth: '2px',
-														background: colorTheme.text8Color,
-														color: colorTheme.text3Color,
-														borderRadius: '25px',
-														padding: '4px 15px 4px'
-													}}
-												>
-													{nameAndMessage}
-												</p>
-											</List.Item>
-										</Col>
-										<Col xl={{ span: 1 }}>
+					<List
+						dataSource={chat.last50Messages}
+						renderItem={item => {
+							const nameAndMessage = item.senderName + ': ' + item.content;
+							let justifyValue = 'start';
+							if (item.senderName === name) {
+								// TODO: what if both people's names are the senderName
+								// need to switch to unique identifier
+								justifyValue = 'end';
+							}
+							return (
+								<Row
+									type="flex"
+									justify={justifyValue}
+									align="middle"
+									style={{
+										padding: '0px 0px 0px'
+									}}
+								>
+									<Col>
+										<List.Item
+											style={{
+												padding: '0px 0px 0px'
+											}}
+										>
 											<p
 												style={{
-													color: colorTheme.text8Color,
-													padding: '12px 4px 0px'
+													borderColor: colorTheme.text8Color,
+													borderWidth: '2px',
+													background: colorTheme.text8Color,
+													color: colorTheme.text3Color,
+													borderRadius: '25px',
+													padding: '4px 15px 4px'
 												}}
 											>
-												{this.renderMessageStatusIcon('delivered', item, name)}
+												{nameAndMessage}
 											</p>
-										</Col>
-									</Row>
-								);
-							}}
-						>
-							{chat.loading &&
-								chat.hasMore && <Spin className="chat-window-loading" />}
-						</List>
-					</InfiniteScroll>
+										</List.Item>
+									</Col>
+									<Col xl={{ span: 1 }}>
+										<p
+											style={{
+												color: colorTheme.text8Color,
+												padding: '12px 4px 0px'
+											}}
+										>
+											{this.renderMessageStatusIcon('delivered', item, name)}
+										</p>
+									</Col>
+								</Row>
+							);
+						}}
+					/>
 				</div>
 				<Row type="flex" justify="start" align="middle">
 					<Col>
