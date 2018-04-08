@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import * as contactsActionCreators from '../../actions/contacts';
 import { bindActionCreators } from 'redux';
-import { Layout, List, Spin, Button } from 'antd';
-import InfiniteScroll from 'react-infinite-scroller';
+import { Layout, List, Button } from 'antd';
 import './Contacts.css';
 const { Content } = Layout;
 
@@ -12,24 +11,6 @@ class Contacts extends Component {
 	componentWillMount() {
 		// run once before first render()
 	}
-
-	handleInfiniteOnLoad = () => {
-		const {
-			contacts,
-			setLoading,
-			setHasMore,
-			displayMoreContacts
-		} = this.props;
-
-		setLoading(true);
-		if (contacts.displayedContacts.length === contacts.contacts.length) {
-			setLoading(false);
-			setHasMore(false);
-			return;
-		}
-		displayMoreContacts(5);
-		setLoading(false);
-	};
 
 	renderOnline(contact) {
 		if (contact.isOnline) {
@@ -86,37 +67,23 @@ class Contacts extends Component {
 				}}
 			>
 				<div className="demo-infinite-container">
-					<InfiniteScroll
-						initialLoad={false}
-						loadMore={this.handleInfiniteOnLoad}
-						hasMore={!contacts.loading && contacts.hasMore}
-						useWindow={false}
-					>
-						<List
-							dataSource={contacts.displayedContacts}
-							renderItem={contact => {
-								//console.log('contact = ', contact);
-								return (
-									<List.Item
-										style={{
-											borderColor:
-												colorTheme.backgroundColor,
-											background:
-												colorTheme.backgroundColor,
-											padding: '5px 0px 0px'
-										}}
-									>
-										{this.renderContactButton(contact)}
-									</List.Item>
-								);
-							}}
-						>
-							{contacts.loading &&
-								contacts.hasMore && (
-									<Spin className="demo-loading" />
-								)}
-						</List>
-					</InfiniteScroll>
+					<List
+						dataSource={contacts.allContacts}
+						renderItem={contact => {
+							//console.log('contact = ', contact);
+							return (
+								<List.Item
+									style={{
+										borderColor: colorTheme.backgroundColor,
+										background: colorTheme.backgroundColor,
+										padding: '5px 0px 0px'
+									}}
+								>
+									{this.renderContactButton(contact)}
+								</List.Item>
+							);
+						}}
+					/>
 				</div>
 			</Content>
 		);
@@ -152,15 +119,6 @@ function mapDispatchToProps(dispatch) {
 	return {
 		onPressConversations: () => {
 			colorThemeDispatchers.onPressConversations();
-		},
-		setLoading: loading => {
-			contactsDispatchers.setLoading(loading);
-		},
-		setHasMore: hasMore => {
-			contactsDispatchers.setHasMore(hasMore);
-		},
-		displayMoreContacts: numberOfContacts => {
-			contactsDispatchers.displayMoreContacts(numberOfContacts);
 		},
 		onSelectContact: (conversationId, isOnline, socketId) => {
 			contactsDispatchers.onSelectContact(

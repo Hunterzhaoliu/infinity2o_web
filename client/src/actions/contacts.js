@@ -4,9 +4,6 @@ import {
 	UPDATE_CONTACTS_ERROR,
 	UPDATE_CHAT,
 	UPDATE_CHAT_ERROR,
-	SET_LOADING,
-	SET_HAS_MORE,
-	DISPLAY_MORE_CONTACTS,
 	ON_SELECT_CONTACT,
 	TOLD_DB_CLIENT_IN_CONVERSATION,
 	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR,
@@ -70,27 +67,6 @@ export const fetchConversations = () => async dispatch => {
 			dispatch({ type: UPDATE_CHAT_ERROR });
 		}
 	}
-};
-
-export const setLoading = loading => dispatch => {
-	dispatch({
-		type: SET_LOADING,
-		loading: loading
-	});
-};
-
-export const setHasMore = hasMore => dispatch => {
-	dispatch({
-		type: SET_HAS_MORE,
-		hasMore: hasMore
-	});
-};
-
-export const displayMoreContacts = numberOfContacts => dispatch => {
-	dispatch({
-		type: DISPLAY_MORE_CONTACTS,
-		numberOfContacts: numberOfContacts
-	});
 };
 
 export const onSelectContact = (

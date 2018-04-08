@@ -47,7 +47,9 @@ if (process.env.NODE_ENV === 'production') {
 	// Express will serve up the index.html file if it doesn't recognize the route
 	const path = require('path');
 	app.get('*', (request, response) => {
-		response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+		response.sendFile(
+			path.resolve(__dirname, 'client', 'build', 'index.html')
+		);
 	});
 }
 
@@ -86,10 +88,6 @@ io.on('connection', function(socket) {
 	socket.on('disconnect', async function() {
 		console.log('user disconnected with socket.id = ', socket.id);
 		// remove document from ClientInConversation collection
-		// console.log(
-		// 	'ClientInConversationCollection = ',
-		// 	ClientInConversationCollection
-		// );
 		try {
 			await ClientInConversationCollection.deleteOne({
 				socketId: socket.id

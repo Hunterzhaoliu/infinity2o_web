@@ -187,15 +187,6 @@ function mapDispatchToProps(dispatch) {
 		onChangeCurrentMessage: newMessage => {
 			chatDispatchers.onChangeCurrentMessage(newMessage);
 		},
-		setLoading: loading => {
-			chatDispatchers.setLoading(loading);
-		},
-		setHasMore: hasMore => {
-			chatDispatchers.setHasMore(hasMore);
-		},
-		displayMoreMessages: numberOfMessages => {
-			chatDispatchers.displayMoreMessages(numberOfMessages);
-		},
 		sendMessageToServer: (
 			conversationId,
 			selectedContactOnline,
