@@ -60,8 +60,7 @@ export default function(state = initialState, action) {
 				newState.newTimeZone = action.profile.timeZone;
 				newState.newAvailability = action.profile.availability;
 				newState.asks = action.profile.asks;
-				newState.payment.neuronsInBillions =
-					action.profile.payment.neuronsInBillions;
+				newState.payment = action.profile.payment;
 			}
 			return newState;
 		case ON_CHANGE_NAME:
