@@ -14,6 +14,12 @@ class DisplayField extends Component {
 		) {
 			if (label === 'Neurons: ' && infinityStatus) {
 				return 'infinity';
+			} else if (label === 'Neurons: ' && !infinityStatus) {
+				let displayNeuronsInBillions = value;
+				if (displayNeuronsInBillions !== undefined) {
+					displayNeuronsInBillions *= 1000000000;
+				}
+				return displayNeuronsInBillions;
 			} else if (
 				value === null ||
 				value === undefined ||

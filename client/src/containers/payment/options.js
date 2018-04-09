@@ -15,8 +15,14 @@ class Options extends Component {
 	renderPaymentOptions() {
 		const { colorTheme, handlePayment } = this.props;
 		return (
-			<Row type="flex" justify="center" align="top">
-				<Col span={7} key="3">
+			<Row type="flex" justify="center" align="middle">
+				<Col
+					sm={{ span: 13 }}
+					md={{ span: 10 }}
+					lg={{ span: 7 }}
+					xl={{ span: 7 }}
+					key="3"
+				>
 					<Card
 						style={{
 							borderColor: colorTheme.text8Color,
@@ -66,14 +72,21 @@ class Options extends Component {
 							</StripeCheckout>
 						</Row>
 					</Card>
+					<Row style={{ padding: '16px 0px 0px' }} />
 				</Col>
 				<Col
-					sm={{ span: 0 }}
+					sm={{ span: 12 }}
 					md={{ span: 1 }}
-					lg={{ span: 3 }}
+					lg={{ span: 1 }}
 					xl={{ span: 1 }}
 				/>
-				<Col span={7} key="4">
+				<Col
+					sm={{ span: 13 }}
+					md={{ span: 10 }}
+					lg={{ span: 7 }}
+					xl={{ span: 7 }}
+					key="4"
+				>
 					<Card
 						style={{
 							borderColor: colorTheme.text8Color,
@@ -123,14 +136,21 @@ class Options extends Component {
 							</StripeCheckout>
 						</Row>
 					</Card>
+					<Row style={{ padding: '16px 0px 0px' }} />
 				</Col>
 				<Col
-					sm={{ span: 0 }}
-					md={{ span: 1 }}
-					lg={{ span: 3 }}
+					sm={{ span: 12 }}
+					md={{ span: 0 }}
+					lg={{ span: 1 }}
 					xl={{ span: 1 }}
 				/>
-				<Col span={7} key="5">
+				<Col
+					sm={{ span: 13 }}
+					md={{ span: 10 }}
+					lg={{ span: 7 }}
+					xl={{ span: 7 }}
+					key="5"
+				>
 					<Card
 						style={{
 							borderColor: colorTheme.text8Color,
