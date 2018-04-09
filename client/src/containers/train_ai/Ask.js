@@ -115,10 +115,21 @@ class Ask extends Component {
 					type="flex"
 					justify="start"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '1% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 1, offset: 4 }}>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 5 }}
+						lg={{ span: 4 }}
+						xl={{ span: 3 }}
+					/>
+					<Col
+						sm={{ span: 3 }}
+						md={{ span: 3 }}
+						lg={{ span: 3 }}
+						xl={{ span: 3 }}
+					>
 						<Button
 							style={{
 								borderColor: colorTheme.key,
@@ -137,16 +148,10 @@ class Ask extends Component {
 		}
 	}
 
-	render() {
-		//console.log('this.props in Ask.js', this.props);
+	renderAskForm() {
 		const { colorTheme, saveAsk, ask, history } = this.props;
 		return (
-			<Content
-				style={{
-					padding: '100px 50px 50px', // top left&right bottom
-					background: colorTheme.backgroundColor
-				}}
-			>
+			<div>
 				<Row
 					type="flex"
 					justify="start"
@@ -155,7 +160,12 @@ class Ask extends Component {
 						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col md={{ span: 3 }}>
+					<Col
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 4 }}
+						xl={{ span: 3 }}
+					>
 						<h3
 							style={{
 								color: colorTheme.keyText5Color
@@ -164,18 +174,27 @@ class Ask extends Component {
 							Question:
 						</h3>
 					</Col>
-					<Col md={{ span: 10, offset: 1 }}>
+					<Col
+						sm={{ span: 10 }}
+						md={{ span: 10 }}
+						lg={{ span: 10 }}
+						xl={{ span: 10 }}
+					>
 						<Input
 							onChange={this.onChangeQuestion}
 							style={{
-								width: 300,
 								borderColor: colorTheme.text7Color,
 								background: colorTheme.text7Color,
 								color: colorTheme.text3Color
 							}}
 						/>
 					</Col>
-					<Col md={{ span: 2, offset: 1 }}>
+					<Col
+						sm={{ span: 2, offset: 1 }}
+						md={{ span: 2, offset: 1 }}
+						lg={{ span: 2, offset: 1 }}
+						xl={{ span: 2, offset: 1 }}
+					>
 						<h5
 							style={{
 								color: colorTheme.text4Color
@@ -201,7 +220,18 @@ class Ask extends Component {
 						padding: '3% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col span={24}>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 5 }}
+						lg={{ span: 4 }}
+						xl={{ span: 3 }}
+					/>
+					<Col
+						sm={{ span: 3 }}
+						md={{ span: 19 }}
+						lg={{ span: 20 }}
+						xl={{ span: 21 }}
+					>
 						<Button
 							style={{
 								borderColor: colorTheme.key,
@@ -215,6 +245,49 @@ class Ask extends Component {
 							{this.renderAskIcon(ask.save)}
 						</Button>
 					</Col>
+				</Row>
+			</div>
+		);
+	}
+
+	render() {
+		//console.log('this.props in Ask.js', this.props);
+		const { colorTheme } = this.props;
+		return (
+			<Content
+				style={{
+					padding: '100px 50px 50px', // top left&right bottom
+					background: colorTheme.backgroundColor
+				}}
+			>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '0% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
+					<Col
+						sm={{ span: 24 }}
+						md={{ span: 14 }}
+						lg={{ span: 14 }}
+						xl={{ span: 14 }}
+					>
+						{this.renderAskForm()}
+					</Col>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
 				</Row>
 			</Content>
 		);
