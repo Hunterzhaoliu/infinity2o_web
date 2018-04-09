@@ -5,7 +5,14 @@ import * as colorThemeActionCreators from '../../actions/colorTheme';
 import * as matchesActionCreators from '../../actions/matches';
 import * as profileActionCreators from '../../actions/profile';
 import * as authActionCreators from '../../actions/auth';
+import * as paymentActionCreators from '../../actions/payment';
 import { bindActionCreators } from 'redux';
+import StripeCheckout from 'react-stripe-checkout';
+
+import {
+	NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
+	NUMBER_NEURONS_TO_SAY_HI
+} from '../payment/options';
 import { Layout, Row, Col, Card, Button, message } from 'antd';
 const { Content } = Layout;
 
@@ -22,14 +29,16 @@ class Matches extends Component {
 
 	displayNeedToPurchaseMoreNeurons = () => {
 		message.warn(
-			"You need 3 Billion neurons to 'Say Hi'. You can purchase neurons below or in Profile.",
+			'You need ' +
+				NUMBER_NEURONS_TO_SAY_HI +
+				" Million neurons to 'Say Hi'. You can purchase neurons below or in Profile.",
 			10
 		);
 	};
 
 	renderPaymentOptions() {
-		const { neuronsInBillions, colorTheme } = this.props;
-		if (neuronsInBillions < 3) {
+		const { neuronsInBillions, colorTheme, handlePayment } = this.props;
+		if (neuronsInBillions < NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS) {
 			return (
 				<div>
 					<h2
@@ -61,7 +70,7 @@ class Matches extends Component {
 										color: colorTheme.text2Color
 									}}
 								>
-									$2 for 8 Billion Neurons
+									$8 for 1 Billion Neurons
 								</h3>
 								<div
 									style={{
@@ -72,15 +81,34 @@ class Matches extends Component {
 								</div>
 
 								<Row style={{ padding: '8px 0px 0px' }}>
-									<Button
-										style={{
-											borderColor: colorTheme.text7Color,
-											background: colorTheme.text7Color,
-											color: colorTheme.text2Color
-										}}
+									<StripeCheckout
+										name="Infinity2o"
+										description="$8 for 1,000,000,000 Neurons"
+										amount={800} // 2 USD
+										token={token =>
+											handlePayment(
+												token,
+												800,
+												'$8 for 1,000,000,000 Neurons',
+												1
+											)
+										} // onToken() = expecting callback token from Stripe
+										stripeKey={
+											process.env.REACT_APP_STRIPE_KEY
+										}
 									>
-										Buy 8,000,000,000 Neurons
-									</Button>
+										<Button
+											style={{
+												borderColor:
+													colorTheme.text7Color,
+												background:
+													colorTheme.text7Color,
+												color: colorTheme.text2Color
+											}}
+										>
+											Buy 1,000,000,000 Neurons
+										</Button>
+									</StripeCheckout>
 								</Row>
 							</Card>
 						</Col>
@@ -103,7 +131,7 @@ class Matches extends Component {
 										color: colorTheme.text2Color
 									}}
 								>
-									$8 for 38.4 Billion Neurons
+									$24 for 3.6 Billion Neurons
 								</h3>
 								<div
 									style={{
@@ -114,15 +142,34 @@ class Matches extends Component {
 								</div>
 
 								<Row style={{ padding: '8px 0px 0px' }}>
-									<Button
-										style={{
-											borderColor: colorTheme.text7Color,
-											background: colorTheme.text7Color,
-											color: colorTheme.text2Color
-										}}
+									<StripeCheckout
+										name="Infinity2o"
+										description="$24 for 3,600,000,000 Neurons"
+										amount={2400} // 8 USD
+										token={token =>
+											handlePayment(
+												token,
+												2400,
+												'$24 for 3,600,000,000 Neurons',
+												3.6
+											)
+										} // onToken() = expecting callback token from Stripe
+										stripeKey={
+											process.env.REACT_APP_STRIPE_KEY
+										}
 									>
-										Buy 38,400,000,000 Neurons
-									</Button>
+										<Button
+											style={{
+												borderColor:
+													colorTheme.text7Color,
+												background:
+													colorTheme.text7Color,
+												color: colorTheme.text2Color
+											}}
+										>
+											Buy 3,600,000,000 Neurons
+										</Button>
+									</StripeCheckout>
 								</Row>
 							</Card>
 						</Col>
@@ -158,15 +205,35 @@ class Matches extends Component {
 								</div>
 
 								<Row style={{ padding: '8px 0px 0px' }}>
-									<Button
-										style={{
-											borderColor: colorTheme.text7Color,
-											background: colorTheme.text7Color,
-											color: colorTheme.text2Color
-										}}
+									<StripeCheckout
+										name="Infinity2o"
+										description="$2882 for Infinite Neurons & trip to HQ"
+										amount={288200} // 2882 USD
+										token={token =>
+											handlePayment(
+												token,
+												288200,
+												'$2882 for Infinite Neurons & trip to HQ',
+												88888888
+											)
+										} // onToken() = expecting callback token from Stripe
+										stripeKey={
+											process.env.REACT_APP_STRIPE_KEY
+										}
 									>
-										Buy &infin; Neurons
-									</Button>
+										<Button
+											style={{
+												borderColor:
+													colorTheme.text7Color,
+												background:
+													colorTheme.text7Color,
+												color: colorTheme.text2Color
+											}}
+										>
+											Buy &infin; Neurons & trip to
+											Infinty2o HQ
+										</Button>
+									</StripeCheckout>
 								</Row>
 							</Card>
 						</Col>
@@ -184,8 +251,11 @@ class Matches extends Component {
 
 	onStartConversation(history, matchName, matchId) {
 		const { neuronsInBillions, mongoDBUserId } = this.props;
-		if (neuronsInBillions >= 3) {
-			this.props.decrementNeurons(3, mongoDBUserId);
+		if (neuronsInBillions >= NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS) {
+			this.props.decrementNeurons(
+				NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
+				mongoDBUserId
+			);
 			this.props.onStartConversation(history, matchName, matchId);
 		} else {
 			this.displayNeedToPurchaseMoreNeurons();
@@ -246,9 +316,9 @@ class Matches extends Component {
 										<Button
 											style={{
 												borderColor:
-													colorTheme.text6Color,
+													colorTheme.text7Color,
 												background:
-													colorTheme.text6Color,
+													colorTheme.text7Color,
 												color: colorTheme.text2Color
 											}}
 											onClick={e => this.onNextMatch()}
@@ -260,10 +330,10 @@ class Matches extends Component {
 										<Button
 											style={{
 												borderColor:
-													colorTheme.keyText6Color,
+													colorTheme.keyText7Color,
 												background:
-													colorTheme.keyText6Color,
-												color: colorTheme.text2Color
+													colorTheme.keyText7Color,
+												color: colorTheme.text1Color
 											}}
 											onClick={e =>
 												this.onStartConversation(
@@ -371,6 +441,10 @@ function mapDispatchToProps(dispatch) {
 
 	const authDispatchers = bindActionCreators(authActionCreators, dispatch);
 
+	const paymentDispatchers = bindActionCreators(
+		paymentActionCreators,
+		dispatch
+	);
 	return {
 		onMatches: () => {
 			colorThemeDispatchers.onMatches();
@@ -389,6 +463,19 @@ function mapDispatchToProps(dispatch) {
 		},
 		fetchUserProfile: () => {
 			authDispatchers.fetchUserProfile();
+		},
+		handlePayment: (
+			token,
+			amountInUSDCents,
+			chargeDescription,
+			neuronsInBillionsToAdd
+		) => {
+			paymentDispatchers.handlePayment(
+				token,
+				amountInUSDCents,
+				chargeDescription,
+				neuronsInBillionsToAdd
+			);
 		}
 	};
 }

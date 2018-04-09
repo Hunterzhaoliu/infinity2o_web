@@ -9,7 +9,10 @@ import {
 	SAVE_PROFILE_DONE,
 	SAVE_PROFILE_ERROR,
 	DECREMENT_NEURONS,
-	DECREMENT_NEURONS_ERROR
+	DECREMENT_NEURONS_ERROR,
+	PAYMENT_SUCCESS,
+	UPDATE_NEURONS,
+	PAYMENT_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -34,7 +37,11 @@ let initialState = {
 	hasAvailabilityError: false,
 	save: null,
 	asks: null,
-	payment: {}
+	payment: {
+		hasDecrementNeuronsError: false,
+		hasPaymentError: false,
+		infinityStatus: false
+	}
 };
 
 export default function(state = initialState, action) {
@@ -104,9 +111,20 @@ export default function(state = initialState, action) {
 			return newState;
 		case DECREMENT_NEURONS:
 			newState.payment.neuronsInBillions -= action.decrementAmount;
+			newState.payment.hasDecrementNeuronsError = false;
 			return newState;
 		case DECREMENT_NEURONS_ERROR:
-			newState.payment.hasError = true;
+			newState.payment.hasDecrementNeuronsError = true;
+			return newState;
+		case PAYMENT_SUCCESS:
+			newState.payment.hasPaymentError = false;
+			return newState;
+		case UPDATE_NEURONS:
+			newState.payment.neuronsInBillions += action.neuronsInBillionsToAdd;
+			newState.payment.infinityStatus = action.infinityStatus;
+			return newState;
+		case PAYMENT_ERROR:
+			newState.payment.hasPaymentError = true;
 			return newState;
 		default:
 			return state;

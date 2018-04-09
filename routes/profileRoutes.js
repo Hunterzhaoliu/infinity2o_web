@@ -43,12 +43,15 @@ module.exports = app => {
 		requireLogin,
 		async (request, response) => {
 			const { decrementAmount, mongoDBUserId } = request.body;
-			// console.log('decrementAmount = ', decrementAmount);
-			// console.log('mongoDBUserId = ', mongoDBUserId);
+
 			try {
 				await UserCollection.findOneAndUpdate(
 					{ _id: mongoDBUserId },
-					{ $inc: { 'profile.payment.neuronsInBillions': -decrementAmount } }
+					{
+						$inc: {
+							'profile.payment.neuronsInBillions': -decrementAmount
+						}
+					}
 				);
 				response.send('done');
 			} catch (error) {

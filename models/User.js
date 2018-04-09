@@ -31,6 +31,7 @@ const userSchema = new Schema({
 			totalUserVotes: { type: Number, default: 0 }
 		},
 		payment: {
+			infinityStatus: Boolean,
 			neuronsInBillions: {
 				type: Number,
 				default: 3

@@ -44,8 +44,17 @@ class CustomHeader extends Component {
 	}
 
 	renderProfileButton() {
-		const { colorTheme, onPressProfile, neuronsInBillions } = this.props;
+		const {
+			colorTheme,
+			onPressProfile,
+			neuronsInBillions,
+			infinityStatus
+		} = this.props;
 
+		let displayText = 'Profile ' + neuronsInBillions + ' B';
+		if (infinityStatus) {
+			displayText = 'Profile ∞';
+		}
 		return (
 			<Button
 				style={{
@@ -56,7 +65,7 @@ class CustomHeader extends Component {
 				onClick={onPressProfile}
 			>
 				<Link to="/profile">
-					<div>{'Profile ' + neuronsInBillions + ' B'}</div>
+					<div>{displayText}</div>
 				</Link>
 			</Button>
 		);
@@ -288,7 +297,8 @@ function mapStateToProps(state) {
 	return {
 		auth: state.auth,
 		colorTheme: state.colorTheme,
-		neuronsInBillions: state.profile.payment.neuronsInBillions
+		neuronsInBillions: state.profile.payment.neuronsInBillions,
+		infinityStatus: state.profile.payment.infinityStatus
 	};
 }
 
