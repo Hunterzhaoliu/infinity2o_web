@@ -62,6 +62,12 @@ export const onStartConversation = (
 				type: UPDATE_CONTACTS,
 				allContacts: response2.data
 			});
+
+			// deletes the match from the state after Say Hi
+			dispatch({
+				type: ON_NEXT_MATCH,
+				matchId: matchId
+			});
 			history.push('/conversations');
 		} else {
 			dispatch({ type: UPDATE_CONTACTS_ERROR });
