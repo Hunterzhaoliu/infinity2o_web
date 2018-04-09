@@ -6,7 +6,7 @@ import * as matchesActionCreators from '../../actions/matches';
 import * as profileActionCreators from '../../actions/profile';
 import * as authActionCreators from '../../actions/auth';
 import { bindActionCreators } from 'redux';
-import { Layout, Row, Col, Card, Button, Popconfirm, message } from 'antd';
+import { Layout, Row, Col, Card, Button, message } from 'antd';
 const { Content } = Layout;
 
 class Matches extends Component {
@@ -20,44 +20,178 @@ class Matches extends Component {
 		this.props.onNextMatch();
 	}
 
+	displayNeedToPurchaseMoreNeurons = () => {
+		message.warn(
+			"You need 3 Billion neurons to 'Say Hi'. You can purchase neurons below or in Profile.",
+			10
+		);
+	};
+
+	renderPaymentOptions() {
+		const { neuronsInBillions, colorTheme } = this.props;
+		if (neuronsInBillions < 3) {
+			return (
+				<div>
+					<h2
+						style={{
+							padding: '20px 0px 0px',
+							color: colorTheme.text2Color
+						}}
+						key="2"
+					>
+						Neuron purchase options:
+					</h2>
+					<Row type="flex" justify="center" align="top">
+						<Col
+							sm={{ span: 0 }}
+							md={{ span: 1 }}
+							lg={{ span: 3 }}
+							xl={{ span: 0 }}
+						/>
+						<Col span={7} key="3">
+							<Card
+								style={{
+									borderColor: colorTheme.text8Color,
+									background: colorTheme.text8Color,
+									color: colorTheme.text2Color
+								}}
+							>
+								<h3
+									style={{
+										color: colorTheme.text2Color
+									}}
+								>
+									$2 for 8 Billion Neurons
+								</h3>
+								<div
+									style={{
+										color: colorTheme.text3Color
+									}}
+								>
+									If you're curious...
+								</div>
+
+								<Row style={{ padding: '8px 0px 0px' }}>
+									<Button
+										style={{
+											borderColor: colorTheme.text7Color,
+											background: colorTheme.text7Color,
+											color: colorTheme.text2Color
+										}}
+									>
+										Buy 8,000,000,000 Neurons
+									</Button>
+								</Row>
+							</Card>
+						</Col>
+						<Col
+							sm={{ span: 0 }}
+							md={{ span: 1 }}
+							lg={{ span: 3 }}
+							xl={{ span: 1 }}
+						/>
+						<Col span={7} key="4">
+							<Card
+								style={{
+									borderColor: colorTheme.text8Color,
+									background: colorTheme.text8Color,
+									color: colorTheme.text2Color
+								}}
+							>
+								<h3
+									style={{
+										color: colorTheme.text2Color
+									}}
+								>
+									$8 for 38.4 Billion Neurons
+								</h3>
+								<div
+									style={{
+										color: colorTheme.text3Color
+									}}
+								>
+									Save 20%
+								</div>
+
+								<Row style={{ padding: '8px 0px 0px' }}>
+									<Button
+										style={{
+											borderColor: colorTheme.text7Color,
+											background: colorTheme.text7Color,
+											color: colorTheme.text2Color
+										}}
+									>
+										Buy 38,400,000,000 Neurons
+									</Button>
+								</Row>
+							</Card>
+						</Col>
+						<Col
+							sm={{ span: 0 }}
+							md={{ span: 1 }}
+							lg={{ span: 3 }}
+							xl={{ span: 1 }}
+						/>
+						<Col span={7} key="5">
+							<Card
+								style={{
+									borderColor: colorTheme.text8Color,
+									background: colorTheme.text8Color,
+									color: colorTheme.text2Color
+								}}
+							>
+								<h3
+									style={{
+										color: colorTheme.text2Color
+									}}
+								>
+									$2882 for Infinite Neurons
+								</h3>
+								<div
+									style={{
+										color: colorTheme.text3Color
+									}}
+								>
+									You will be flown to Infinity2o HQ to join
+									the founders for a memorable adventure. This
+									is suprisingly our most popular option ;)
+								</div>
+
+								<Row style={{ padding: '8px 0px 0px' }}>
+									<Button
+										style={{
+											borderColor: colorTheme.text7Color,
+											background: colorTheme.text7Color,
+											color: colorTheme.text2Color
+										}}
+									>
+										Buy &infin; Neurons
+									</Button>
+								</Row>
+							</Card>
+						</Col>
+						<Col
+							sm={{ span: 0 }}
+							md={{ span: 1 }}
+							lg={{ span: 3 }}
+							xl={{ span: 0 }}
+						/>
+					</Row>
+				</div>
+			);
+		}
+	}
+
 	onStartConversation(history, matchName, matchId) {
 		const { neuronsInBillions, mongoDBUserId } = this.props;
 		if (neuronsInBillions >= 3) {
 			this.props.decrementNeurons(3, mongoDBUserId);
 			this.props.onStartConversation(history, matchName, matchId);
-		}
-	}
-
-	renderPaymentOptions() {}
-
-	renderSayHi() {
-		const { neuronsInBillions, colorTheme } = this.props;
-		if (neuronsInBillions < 3) {
-			return (
-				<Popconfirm>
-					<p
-						style={{
-							padding: '3px 0px 0px',
-							color: colorTheme.text2Color
-						}}
-					>
-						Say Hi :)
-					</p>
-				</Popconfirm>
-			);
 		} else {
-			return (
-				<p
-					style={{
-						padding: '3px 0px 0px',
-						color: colorTheme.text2Color
-					}}
-				>
-					Say Hi :)
-				</p>
-			);
+			this.displayNeedToPurchaseMoreNeurons();
 		}
 	}
+
 	renderMatches() {
 		//console.log('in Matches.js this.props = ', this.props);
 		const { colorTheme, matches, history } = this.props;
@@ -103,12 +237,18 @@ class Matches extends Component {
 								>
 									Total User Votes: {match.totalUserVotes}
 								</p>
-								<Row type="flex" justify="space-between" align="top">
+								<Row
+									type="flex"
+									justify="space-between"
+									align="top"
+								>
 									<Col span={11}>
 										<Button
 											style={{
-												borderColor: colorTheme.text6Color,
-												background: colorTheme.text6Color,
+												borderColor:
+													colorTheme.text6Color,
+												background:
+													colorTheme.text6Color,
 												color: colorTheme.text2Color
 											}}
 											onClick={e => this.onNextMatch()}
@@ -119,15 +259,21 @@ class Matches extends Component {
 									<Col span={11}>
 										<Button
 											style={{
-												borderColor: colorTheme.keyText6Color,
-												background: colorTheme.keyText6Color,
+												borderColor:
+													colorTheme.keyText6Color,
+												background:
+													colorTheme.keyText6Color,
 												color: colorTheme.text2Color
 											}}
 											onClick={e =>
-												this.onStartConversation(history, match.name, match.id)
+												this.onStartConversation(
+													history,
+													match.name,
+													match.id
+												)
 											}
 										>
-											{this.renderSayHi()}
+											Say Hi :)
 										</Button>
 									</Col>
 								</Row>
@@ -143,8 +289,8 @@ class Matches extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					Your out of matches for today. Check out Train AI for better matches
-					:)
+					Your out of matches for today. Check out Train AI for better
+					matches :)
 				</h3>
 			);
 		}
@@ -166,8 +312,8 @@ class Matches extends Component {
 						color: colorTheme.text3Color
 					}}
 				>
-					Every 24 hours at 9 AM Central Time our AI generates the best partners
-					for you.
+					Every day at 9 AM Central Time, our AI generates the best
+					partners for you.
 				</h2>
 				<Row type="flex" justify="center" align="top">
 					<Col
@@ -184,21 +330,7 @@ class Matches extends Component {
 						xl={{ span: 5 }}
 					/>
 				</Row>
-				<Row type="flex" justify="center" align="top">
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 1 }}
-						lg={{ span: 3 }}
-						xl={{ span: 5 }}
-					/>
-					{this.renderPaymentOptions()}
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 1 }}
-						lg={{ span: 3 }}
-						xl={{ span: 5 }}
-					/>
-				</Row>
+				{this.renderPaymentOptions()}
 			</Content>
 		);
 	}
@@ -250,7 +382,10 @@ function mapDispatchToProps(dispatch) {
 			matchesDispatchers.onStartConversation(history, matchName, matchId);
 		},
 		decrementNeurons: (neuronsInBillions, mongoDBUserId) => {
-			profileDispatchers.decrementNeurons(neuronsInBillions, mongoDBUserId);
+			profileDispatchers.decrementNeurons(
+				neuronsInBillions,
+				mongoDBUserId
+			);
 		},
 		fetchUserProfile: () => {
 			authDispatchers.fetchUserProfile();

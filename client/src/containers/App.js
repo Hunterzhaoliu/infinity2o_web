@@ -43,11 +43,17 @@ class App extends Component {
 						</Col>
 					</Row>
 					<Row type="flex" justify="center">
-						<Col span={1}>
+						<Col
+							sm={{ span: 2 }}
+							md={{ span: 1 }}
+							lg={{ span: 1 }}
+							xl={{ span: 1 }}
+						>
 							<p>
 								<a
 									style={{
-										color: this.props.colorTheme.keyText7Color
+										color: this.props.colorTheme
+											.keyText7Color
 									}}
 									href="https://medium.com/infinity2o"
 								>
@@ -55,7 +61,12 @@ class App extends Component {
 								</a>
 							</p>
 						</Col>
-						<Col span={5}>
+						<Col
+							sm={{ span: 12 }}
+							md={{ span: 10 }}
+							lg={{ span: 8 }}
+							xl={{ span: 6 }}
+						>
 							<p
 								style={{
 									color: this.props.colorTheme.text6Color
@@ -78,11 +89,19 @@ class App extends Component {
 					<CustomHeader />
 					<Route exact={true} path="/" component={Landing} />
 					<Route exact={true} path="/profile" component={Profile} />
-					<Route exact={true} path="/profile/edit" component={ProfileEdit} />
+					<Route
+						exact={true}
+						path="/profile/edit"
+						component={ProfileEdit}
+					/>
 					<Route exact={true} path="/train_ai" component={TrainAI} />
 					<Route exact={true} path="/train_ai/ask" component={Ask} />
 					<Route exact={true} path="/matches" component={Matches} />
-					<Route exact={true} path="/conversations" component={Conversations} />
+					<Route
+						exact={true}
+						path="/conversations"
+						component={Conversations}
+					/>
 					{this.renderFooter()}
 				</Layout>
 			</BrowserRouter>
