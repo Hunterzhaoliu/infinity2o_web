@@ -12,7 +12,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import {
 	NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
 	NUMBER_NEURONS_TO_SAY_HI
-} from '../payment/options';
+} from '../payment/prices';
 import { Layout, Row, Col, Card, Button, message } from 'antd';
 const { Content } = Layout;
 

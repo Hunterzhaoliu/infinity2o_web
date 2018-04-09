@@ -5,6 +5,7 @@ import * as authActionCreators from '../../actions/auth';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import DisplayField from './DisplayField';
+import Options from '../payment/Options';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
@@ -27,6 +28,21 @@ class Profile extends Component {
 						>
 							Profile:
 						</h2>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '0% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col xl={{ span: 24 }}>
+						<DisplayField
+							label="Neurons: "
+							value={profile.payment.neuronsInBillions}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -62,7 +78,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col xl={{ span: 24 }}>
-						<DisplayField label="Interest(s): " value={profile.interests} />
+						<DisplayField
+							label="Interest(s): "
+							value={profile.interests}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -74,7 +93,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col xl={{ span: 24 }}>
-						<DisplayField label="Time Zone: " value={profile.timeZone} />
+						<DisplayField
+							label="Time Zone: "
+							value={profile.timeZone}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -86,7 +108,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col xl={{ span: 24 }}>
-						<DisplayField label="Availability: " value={profile.availability} />
+						<DisplayField
+							label="Availability: "
+							value={profile.availability}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -174,6 +199,34 @@ class Profile extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
+				<Row type="flex" justify="start" align="middle">
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
+					<Col xl={{ span: 14 }}>
+						<h2
+							style={{
+								color: colorTheme.keyText7Color
+							}}
+						>
+							Purchase Neurons:
+						</h2>
+					</Col>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
+					/>
+				</Row>
+				<Row type="flex" justify="start" align="middle">
+					<Col xl={{ span: 24 }}>
+						<Options />
+					</Col>
+				</Row>
 				<Row type="flex" justify="start" align="middle">
 					<Col
 						sm={{ span: 0 }}
