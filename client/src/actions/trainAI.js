@@ -17,7 +17,7 @@ export const onVote = (
 	askIndex,
 	askId
 ) => async dispatch => {
-	dispatch({ type: SAVE_VOTE_START });
+	dispatch({ type: SAVE_VOTE_START, saveIndex: askIndex });
 	dispatch({
 		type: ON_VOTE,
 		answerIndex: answerIndex,
@@ -37,9 +37,9 @@ export const onVote = (
 	});
 
 	if (response.status === 200) {
-		dispatch({ type: SAVE_VOTE_DONE });
+		dispatch({ type: SAVE_VOTE_DONE, saveIndex: askIndex });
 	} else {
-		dispatch({ type: SAVE_VOTE_ERROR });
+		dispatch({ type: SAVE_VOTE_ERROR, saveIndex: askIndex });
 	}
 };
 

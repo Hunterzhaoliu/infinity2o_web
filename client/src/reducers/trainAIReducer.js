@@ -18,11 +18,12 @@ let initialState = {
 	current4DisplayedAsks: [],
 	nextAsks: [],
 	votes: {},
-	save: null
+	save: {}
 };
 
 export default function(state = initialState, action) {
 	let newState = cloneObject(state);
+	const saveIndex = action.saveIndex;
 	switch (action.type) {
 		case ON_VOTE:
 			let votedAsk = newState.current4DisplayedAsks[action.askIndex];
@@ -38,20 +39,18 @@ export default function(state = initialState, action) {
 			newState.current4DisplayedAsks[action.askIndex] = action.newAsk;
 			return newState;
 		case SAVE_VOTE_START:
-			newState.save = 'save_start';
+			newState.save[saveIndex] = 'save_start';
 			return newState;
 		case SAVE_VOTE_DONE:
-			newState.save = 'save_done';
+			newState.save[saveIndex] = 'save_done';
 			return newState;
 		case SAVE_VOTE_ERROR:
-			newState.save = 'save_error';
+			newState.save[saveIndex] = 'save_error';
 			return newState;
 		case ON_NEXT_ASK:
 			if (newState.nextAsks.length > 0) {
 				const replacementAsk = newState.nextAsks.shift();
-				newState.current4DisplayedAsks[
-					action.removeAskIndex
-				] = replacementAsk;
+				newState.current4DisplayedAsks[action.removeAskIndex] = replacementAsk;
 			} else {
 				// no new replacementAsk so just remove ask from display
 				// splice removes one element from index action.removeAskIndex

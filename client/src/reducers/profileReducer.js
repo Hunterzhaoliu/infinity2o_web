@@ -7,7 +7,12 @@ import {
 	ON_CHANGE_TIME_SLOT,
 	SAVE_PROFILE_START,
 	SAVE_PROFILE_DONE,
-	SAVE_PROFILE_ERROR
+	SAVE_PROFILE_ERROR,
+	DECREMENT_NEURONS,
+	DECREMENT_NEURONS_ERROR,
+	PAYMENT_SUCCESS,
+	UPDATE_NEURONS,
+	PAYMENT_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -31,7 +36,12 @@ let initialState = {
 	hasTimeZoneError: false,
 	hasAvailabilityError: false,
 	save: null,
-	asks: null
+	asks: null,
+	payment: {
+		hasDecrementNeuronsError: false,
+		hasPaymentError: false,
+		infinityStatus: false
+	}
 };
 
 export default function(state = initialState, action) {
@@ -50,6 +60,7 @@ export default function(state = initialState, action) {
 				newState.newTimeZone = action.profile.timeZone;
 				newState.newAvailability = action.profile.availability;
 				newState.asks = action.profile.asks;
+				newState.payment = action.profile.payment;
 			}
 			return newState;
 		case ON_CHANGE_NAME:
@@ -96,6 +107,23 @@ export default function(state = initialState, action) {
 			return newState;
 		case SAVE_PROFILE_ERROR:
 			newState.save = 'save_error';
+			return newState;
+		case DECREMENT_NEURONS:
+			newState.payment.neuronsInBillions -= action.decrementAmount;
+			newState.payment.hasDecrementNeuronsError = false;
+			return newState;
+		case DECREMENT_NEURONS_ERROR:
+			newState.payment.hasDecrementNeuronsError = true;
+			return newState;
+		case PAYMENT_SUCCESS:
+			newState.payment.hasPaymentError = false;
+			return newState;
+		case UPDATE_NEURONS:
+			newState.payment.neuronsInBillions += action.neuronsInBillionsToAdd;
+			newState.payment.infinityStatus = action.infinityStatus;
+			return newState;
+		case PAYMENT_ERROR:
+			newState.payment.hasPaymentError = true;
 			return newState;
 		default:
 			return state;

@@ -44,8 +44,17 @@ class CustomHeader extends Component {
 	}
 
 	renderProfileButton() {
-		const { colorTheme, onPressProfile } = this.props;
+		const {
+			colorTheme,
+			onPressProfile,
+			neuronsInBillions,
+			infinityStatus
+		} = this.props;
 
+		let displayText = 'Profile ' + neuronsInBillions + ' B';
+		if (infinityStatus) {
+			displayText = 'Profile ∞';
+		}
 		return (
 			<Button
 				style={{
@@ -56,7 +65,7 @@ class CustomHeader extends Component {
 				onClick={onPressProfile}
 			>
 				<Link to="/profile">
-					<div>Profile</div>
+					<div>{displayText}</div>
 				</Link>
 			</Button>
 		);
@@ -287,7 +296,9 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		auth: state.auth,
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		neuronsInBillions: state.profile.payment.neuronsInBillions,
+		infinityStatus: state.profile.payment.infinityStatus
 	};
 }
 

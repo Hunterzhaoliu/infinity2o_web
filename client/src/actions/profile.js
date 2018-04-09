@@ -7,7 +7,9 @@ import {
 	ON_CHANGE_TIME_SLOT,
 	SAVE_PROFILE_START,
 	SAVE_PROFILE_DONE,
-	SAVE_PROFILE_ERROR
+	SAVE_PROFILE_ERROR,
+	DECREMENT_NEURONS,
+	DECREMENT_NEURONS_ERROR
 } from './types';
 import {
 	isValidName,
@@ -101,5 +103,27 @@ export const saveProfile = (values, history) => async dispatch => {
 		history.push('/profile');
 	} else {
 		dispatch({ type: SAVE_PROFILE_ERROR });
+	}
+};
+
+export const decrementNeurons = (
+	decrementAmount,
+	mongoDBUserId
+) => async dispatch => {
+	const paymentInfo = {
+		decrementAmount: decrementAmount,
+		mongoDBUserId: mongoDBUserId
+	};
+	const response = await axios.put(
+		'/api/profile/decrease_neurons',
+		paymentInfo
+	);
+	if (response.status === 200) {
+		dispatch({
+			type: DECREMENT_NEURONS,
+			decrementAmount: decrementAmount
+		});
+	} else {
+		dispatch({ type: DECREMENT_NEURONS_ERROR });
 	}
 };

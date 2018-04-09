@@ -43,7 +43,12 @@ class App extends Component {
 						</Col>
 					</Row>
 					<Row type="flex" justify="center">
-						<Col span={24}>
+						<Col
+							sm={{ span: 2 }}
+							md={{ span: 1 }}
+							lg={{ span: 1 }}
+							xl={{ span: 1 }}
+						>
 							<p>
 								<a
 									style={{
@@ -54,6 +59,20 @@ class App extends Component {
 								>
 									blog
 								</a>
+							</p>
+						</Col>
+						<Col
+							sm={{ span: 12 }}
+							md={{ span: 10 }}
+							lg={{ span: 8 }}
+							xl={{ span: 6 }}
+						>
+							<p
+								style={{
+									color: this.props.colorTheme.text6Color
+								}}
+							>
+								Feedback? askinfinity2o@gmail.com
 							</p>
 						</Col>
 					</Row>

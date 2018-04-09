@@ -29,6 +29,13 @@ const userSchema = new Schema({
 			votes: [ProfileVoteDisplay],
 			answerIdsUserVotedOn: [Schema.Types.ObjectId],
 			totalUserVotes: { type: Number, default: 0 }
+		},
+		payment: {
+			infinityStatus: Boolean,
+			neuronsInBillions: {
+				type: Number,
+				default: 3
+			}
 		}
 	},
 	matches: [String],
