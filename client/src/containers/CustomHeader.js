@@ -50,8 +50,12 @@ class CustomHeader extends Component {
 			neuronsInBillions,
 			infinityStatus
 		} = this.props;
-
-		let displayText = 'Profile ' + neuronsInBillions + ' B';
+		console.log('neuronsInBillions = ', neuronsInBillions);
+		let shortNeuronsInBillions;
+		if (neuronsInBillions !== undefined) {
+			shortNeuronsInBillions = neuronsInBillions.toFixed(1);
+		}
+		let displayText = 'Profile ' + shortNeuronsInBillions + ' B';
 		if (infinityStatus) {
 			displayText = 'Profile ∞';
 		}
@@ -159,15 +163,11 @@ class CustomHeader extends Component {
 						color: colorTheme.text1Color
 					}}
 				>
-					<Menu.Item key="1">
-						{this.renderChangeThemeButton()}
-					</Menu.Item>
+					<Menu.Item key="1">{this.renderChangeThemeButton()}</Menu.Item>
 					<Menu.Item key="2">{this.renderProfileButton()}</Menu.Item>
 					<Menu.Item key="3">{this.renderTrainAIButton()}</Menu.Item>
 					<Menu.Item key="4">{this.renderMatchesButton()}</Menu.Item>
-					<Menu.Item key="5">
-						{this.renderConversationsButton()}
-					</Menu.Item>
+					<Menu.Item key="5">{this.renderConversationsButton()}</Menu.Item>
 					<Menu.Item key="6">{this.renderLogoutButton()}</Menu.Item>
 				</Menu>
 			);
@@ -213,12 +213,7 @@ class CustomHeader extends Component {
 				return (
 					<div>
 						<Row type="flex" justify="space-between">
-							<Col
-								md={{ span: 5 }}
-								lg={{ span: 4 }}
-								xl={{ span: 5 }}
-								key="0"
-							>
+							<Col md={{ span: 5 }} lg={{ span: 4 }} xl={{ span: 5 }} key="0">
 								{this.renderChangeThemeButton()}
 							</Col>
 							<Col
@@ -265,10 +260,7 @@ class CustomHeader extends Component {
 					</div>
 				);
 			default:
-				console.log(
-					'ERROR: site in invalid state = ',
-					auth.loggedInState
-				);
+				console.log('ERROR: site in invalid state = ', auth.loggedInState);
 		}
 	}
 
@@ -307,10 +299,7 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const colorThemeDispatchers = bindActionCreators(
-		colorThemeActions,
-		dispatch
-	);
+	const colorThemeDispatchers = bindActionCreators(colorThemeActions, dispatch);
 
 	return {
 		onPressRandomColorTheme: () => {
