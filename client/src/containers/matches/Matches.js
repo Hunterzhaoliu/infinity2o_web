@@ -6,7 +6,7 @@ import * as matchesActionCreators from '../../actions/matches';
 import * as profileActionCreators from '../../actions/profile';
 import * as authActionCreators from '../../actions/auth';
 import { bindActionCreators } from 'redux';
-import Options from '../payment/Options';
+//import Options from '../payment/Options';
 
 import {
 	NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
@@ -53,7 +53,7 @@ class Matches extends Component {
 							</h2>
 						</Col>
 					</Row>
-					<Options />
+					{/* <Options /> */}
 				</div>
 			);
 		}
