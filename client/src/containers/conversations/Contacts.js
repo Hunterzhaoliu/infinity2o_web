@@ -21,7 +21,12 @@ class Contacts extends Component {
 	}
 
 	renderContactButton(contact) {
-		const { colorTheme, contacts, onSelectContact } = this.props;
+		const {
+			colorTheme,
+			contacts,
+			onSelectContact,
+			windowWidth
+		} = this.props;
 
 		let borderColor = colorTheme.text8Color;
 		let background = colorTheme.text8Color;
@@ -31,7 +36,14 @@ class Contacts extends Component {
 			background = colorTheme.keyText8Color;
 			color = colorTheme.text2Color;
 		}
-
+		let buttonWidth = windowWidth * 0.152; // = 183.3/1200
+		if (windowWidth < 576) {
+			// 0.815 = 470/576
+			buttonWidth = windowWidth * 0.815;
+		} else if (windowWidth <= 768) {
+			// 0.2174 = 167/768
+			buttonWidth = windowWidth * 0.2174;
+		}
 		return (
 			<Button
 				style={{
@@ -39,7 +51,7 @@ class Contacts extends Component {
 					background: background,
 					color: color,
 					height: '44px',
-					width: '180px'
+					width: buttonWidth
 				}}
 				onClick={e =>
 					onSelectContact(
@@ -97,7 +109,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		contacts: state.contacts
+		contacts: state.contacts,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 

@@ -56,8 +56,17 @@ class Chat extends Component {
 
 	render() {
 		//console.log('Chat this.props = ', this.props);
-		const { colorTheme, chat, name } = this.props;
-
+		const { colorTheme, chat, name, windowWidth } = this.props;
+		// 0.3819 = 483.5/1200
+		// 0.3745 = 371.6/992
+		let inputWidth = windowWidth * 0.38; // = 483.5/1200
+		if (windowWidth < 576) {
+			// 0.815 = 470/576
+			inputWidth = windowWidth * 0.815;
+		} else if (windowWidth <= 768) {
+			// 0.6523 = 501/768
+			inputWidth = windowWidth * 0.6523;
+		}
 		return (
 			<Content
 				style={{
@@ -138,7 +147,7 @@ class Chat extends Component {
 								onChange={this.onChangeCurrentMessage}
 								onPressEnter={this.onPressEnter}
 								style={{
-									width: 555,
+									width: inputWidth,
 									borderColor: colorTheme.text7Color,
 									background: colorTheme.text7Color,
 									color: colorTheme.text1Color
@@ -163,7 +172,8 @@ function mapStateToProps(state) {
 		name: state.profile.name,
 		conversationId: state.contacts.conversationId,
 		selectedContactOnline: state.contacts.selectedContactOnline,
-		selectedContactSocketId: state.contacts.selectedContactSocketId
+		selectedContactSocketId: state.contacts.selectedContactSocketId,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 

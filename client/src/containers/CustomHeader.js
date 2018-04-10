@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as colorThemeActions from '../actions/colorTheme';
+import * as colorThemeActionCreators from '../actions/colorTheme';
 import * as authActionCreators from '../actions/auth';
+import * as customHeaderActionCreators from '../actions/customHeader';
 
 import { Layout, Row, Col, Button, Icon, Dropdown, Menu } from 'antd';
 const { Header } = Layout;
@@ -11,10 +12,8 @@ const { Header } = Layout;
 class CustomHeader extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { width: window.innerWidth, height: window.innerHeight };
-		this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-
 		this.props.fetchUserProfile(); // to show correct neuron number
+		this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 	}
 
 	componentDidMount() {
@@ -27,7 +26,7 @@ class CustomHeader extends Component {
 	}
 
 	updateWindowDimensions() {
-		this.setState({ width: window.innerWidth, height: window.innerHeight });
+		this.props.updateWindowWidth(window.innerWidth);
 	}
 
 	renderChangeThemeButton() {
@@ -153,9 +152,9 @@ class CustomHeader extends Component {
 	}
 
 	renderHeaderButtons() {
-		const { colorTheme, auth } = this.props;
+		const { colorTheme, auth, windowWidth } = this.props;
 
-		if (this.state.width < 768) {
+		if (windowWidth < 768) {
 			// show a dropdown with buttons instead of nav bar
 			const menu = (
 				<Menu
@@ -304,7 +303,8 @@ function mapStateToProps(state) {
 		auth: state.auth,
 		colorTheme: state.colorTheme,
 		neuronsInBillions: state.profile.payment.neuronsInBillions,
-		infinityStatus: state.profile.payment.infinityStatus
+		infinityStatus: state.profile.payment.infinityStatus,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 
@@ -314,11 +314,14 @@ This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
 	const colorThemeDispatchers = bindActionCreators(
-		colorThemeActions,
+		colorThemeActionCreators,
 		dispatch
 	);
 	const authDispatchers = bindActionCreators(authActionCreators, dispatch);
-
+	const customHeaderDispatchers = bindActionCreators(
+		customHeaderActionCreators,
+		dispatch
+	);
 	return {
 		onPressRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();
@@ -337,6 +340,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		fetchUserProfile: () => {
 			authDispatchers.fetchUserProfile();
+		},
+		updateWindowWidth: newWindowWidth => {
+			customHeaderDispatchers.updateWindowWidth(newWindowWidth);
 		}
 	};
 }
