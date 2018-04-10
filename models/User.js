@@ -34,7 +34,7 @@ const userSchema = new Schema({
 			infinityStatus: Boolean,
 			neuronsInBillions: {
 				type: Number,
-				default: 3
+				default: 0.22
 			}
 		}
 	},
