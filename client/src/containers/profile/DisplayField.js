@@ -3,16 +3,32 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
 
 class DisplayField extends Component {
-	renderValue(value) {
+	renderValue(label, value) {
+		const { infinityStatus } = this.props;
+
 		if (
-			value === null ||
-			value === undefined ||
-			typeof value === 'string' ||
-			typeof value === 'number'
+			label === 'Neurons: ' ||
+			label === 'Name: ' ||
+			label === 'Age: ' ||
+			'Time Zone: '
 		) {
-			return value; // value is name, age, or time zone
-		} else if (Object.keys(value).length === 7) {
-			// value is availability
+			if (label === 'Neurons: ' && infinityStatus) {
+				return 'infinity';
+			} else if (label === 'Neurons: ' && !infinityStatus) {
+				let displayNeuronsInBillions = value;
+				if (displayNeuronsInBillions !== undefined) {
+					displayNeuronsInBillions *= 1000000000;
+				}
+				return displayNeuronsInBillions;
+			} else if (
+				value === null ||
+				value === undefined ||
+				typeof value === 'string' ||
+				typeof value === 'number'
+			) {
+				return value;
+			}
+		} else if (label === 'Availability: ') {
 			let allTimeSlotsToRender = '';
 			const timeSlots = Object.entries(value);
 			timeSlots.forEach(function(day) {
@@ -37,8 +53,7 @@ class DisplayField extends Component {
 				}
 			});
 			return allTimeSlotsToRender;
-		} else {
-			// value is interests
+		} else if (label === 'Interest(s): ') {
 			let formattedValue = '';
 			let i;
 			for (i = 0; i < value.length; i++) {
@@ -52,7 +67,12 @@ class DisplayField extends Component {
 		const { colorTheme, label, value } = this.props;
 		return (
 			<Row type="flex" justify="start" align="middle">
-				<Col xl={{ span: 5 }}>
+				<Col
+					sm={{ span: 2 }}
+					md={{ span: 2 }}
+					lg={{ span: 2 }}
+					xl={{ span: 2 }}
+				>
 					<h3
 						style={{
 							color: colorTheme.text6Color
@@ -61,13 +81,18 @@ class DisplayField extends Component {
 						{label}
 					</h3>
 				</Col>
-				<Col xl={{ span: 19 }}>
+				<Col
+					sm={{ span: 21, offset: 1 }}
+					md={{ span: 21, offset: 1 }}
+					lg={{ span: 21, offset: 1 }}
+					xl={{ span: 21, offset: 1 }}
+				>
 					<h3
 						style={{
 							color: colorTheme.text3Color
 						}}
 					>
-						{this.renderValue(value)}
+						{this.renderValue(label, value)}
 					</h3>
 				</Col>
 			</Row>
@@ -81,7 +106,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		infinityStatus: state.profile.payment.infinityStatus
 	};
 }
 

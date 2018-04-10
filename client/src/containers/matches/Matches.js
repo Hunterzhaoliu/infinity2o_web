@@ -5,14 +5,13 @@ import * as colorThemeActionCreators from '../../actions/colorTheme';
 import * as matchesActionCreators from '../../actions/matches';
 import * as profileActionCreators from '../../actions/profile';
 import * as authActionCreators from '../../actions/auth';
-import * as paymentActionCreators from '../../actions/payment';
 import { bindActionCreators } from 'redux';
-import StripeCheckout from 'react-stripe-checkout';
+import Options from '../payment/Options';
 
 import {
 	NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
 	NUMBER_NEURONS_TO_SAY_HI
-} from '../payment/options';
+} from '../payment/prices';
 import { Layout, Row, Col, Card, Button, message } from 'antd';
 const { Content } = Layout;
 
@@ -37,213 +36,24 @@ class Matches extends Component {
 	};
 
 	renderPaymentOptions() {
-		const { neuronsInBillions, colorTheme, handlePayment } = this.props;
+		const { colorTheme, neuronsInBillions } = this.props;
 		if (neuronsInBillions < NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS) {
 			return (
 				<div>
-					<h2
-						style={{
-							padding: '20px 0px 0px',
-							color: colorTheme.text2Color
-						}}
-						key="2"
-					>
-						Neuron purchase options:
-					</h2>
-					<Row type="flex" justify="center" align="top">
-						<Col
-							sm={{ span: 0 }}
-							md={{ span: 1 }}
-							lg={{ span: 3 }}
-							xl={{ span: 0 }}
-						/>
-						<Col span={7} key="3">
-							<Card
+					<Row type="flex" justify="center" align="middle">
+						<Col>
+							<h2
 								style={{
-									borderColor: colorTheme.text8Color,
-									background: colorTheme.text8Color,
-									color: colorTheme.text2Color
+									textAlign: 'center',
+									padding: '10px 0px 0px',
+									color: colorTheme.text3Color
 								}}
 							>
-								<h3
-									style={{
-										color: colorTheme.text2Color
-									}}
-								>
-									$8 for 1 Billion Neurons
-								</h3>
-								<div
-									style={{
-										color: colorTheme.text3Color
-									}}
-								>
-									If you're curious...
-								</div>
-
-								<Row style={{ padding: '8px 0px 0px' }}>
-									<StripeCheckout
-										name="Infinity2o"
-										description="$8 for 1,000,000,000 Neurons"
-										amount={800} // 2 USD
-										token={token =>
-											handlePayment(
-												token,
-												800,
-												'$8 for 1,000,000,000 Neurons',
-												1
-											)
-										} // onToken() = expecting callback token from Stripe
-										stripeKey={
-											process.env.REACT_APP_STRIPE_KEY
-										}
-									>
-										<Button
-											style={{
-												borderColor:
-													colorTheme.text7Color,
-												background:
-													colorTheme.text7Color,
-												color: colorTheme.text2Color
-											}}
-										>
-											Buy 1,000,000,000 Neurons
-										</Button>
-									</StripeCheckout>
-								</Row>
-							</Card>
+								Purchase Neurons:
+							</h2>
 						</Col>
-						<Col
-							sm={{ span: 0 }}
-							md={{ span: 1 }}
-							lg={{ span: 3 }}
-							xl={{ span: 1 }}
-						/>
-						<Col span={7} key="4">
-							<Card
-								style={{
-									borderColor: colorTheme.text8Color,
-									background: colorTheme.text8Color,
-									color: colorTheme.text2Color
-								}}
-							>
-								<h3
-									style={{
-										color: colorTheme.text2Color
-									}}
-								>
-									$24 for 3.6 Billion Neurons
-								</h3>
-								<div
-									style={{
-										color: colorTheme.text3Color
-									}}
-								>
-									Save 20%
-								</div>
-
-								<Row style={{ padding: '8px 0px 0px' }}>
-									<StripeCheckout
-										name="Infinity2o"
-										description="$24 for 3,600,000,000 Neurons"
-										amount={2400} // 8 USD
-										token={token =>
-											handlePayment(
-												token,
-												2400,
-												'$24 for 3,600,000,000 Neurons',
-												3.6
-											)
-										} // onToken() = expecting callback token from Stripe
-										stripeKey={
-											process.env.REACT_APP_STRIPE_KEY
-										}
-									>
-										<Button
-											style={{
-												borderColor:
-													colorTheme.text7Color,
-												background:
-													colorTheme.text7Color,
-												color: colorTheme.text2Color
-											}}
-										>
-											Buy 3,600,000,000 Neurons
-										</Button>
-									</StripeCheckout>
-								</Row>
-							</Card>
-						</Col>
-						<Col
-							sm={{ span: 0 }}
-							md={{ span: 1 }}
-							lg={{ span: 3 }}
-							xl={{ span: 1 }}
-						/>
-						<Col span={7} key="5">
-							<Card
-								style={{
-									borderColor: colorTheme.text8Color,
-									background: colorTheme.text8Color,
-									color: colorTheme.text2Color
-								}}
-							>
-								<h3
-									style={{
-										color: colorTheme.text2Color
-									}}
-								>
-									$2882 for Infinite Neurons
-								</h3>
-								<div
-									style={{
-										color: colorTheme.text3Color
-									}}
-								>
-									You will be flown to Infinity2o HQ to join
-									the founders for a memorable adventure. This
-									is suprisingly our most popular option ;)
-								</div>
-
-								<Row style={{ padding: '8px 0px 0px' }}>
-									<StripeCheckout
-										name="Infinity2o"
-										description="$2882 for Infinite Neurons & trip to HQ"
-										amount={288200} // 2882 USD
-										token={token =>
-											handlePayment(
-												token,
-												288200,
-												'$2882 for Infinite Neurons & trip to HQ',
-												88888888
-											)
-										} // onToken() = expecting callback token from Stripe
-										stripeKey={
-											process.env.REACT_APP_STRIPE_KEY
-										}
-									>
-										<Button
-											style={{
-												borderColor:
-													colorTheme.text7Color,
-												background:
-													colorTheme.text7Color,
-												color: colorTheme.text2Color
-											}}
-										>
-											Buy &infin; Neurons & trip to
-											Infinty2o HQ
-										</Button>
-									</StripeCheckout>
-								</Row>
-							</Card>
-						</Col>
-						<Col
-							sm={{ span: 0 }}
-							md={{ span: 1 }}
-							lg={{ span: 3 }}
-							xl={{ span: 0 }}
-						/>
 					</Row>
+					<Options />
 				</div>
 			);
 		}
@@ -441,10 +251,6 @@ function mapDispatchToProps(dispatch) {
 
 	const authDispatchers = bindActionCreators(authActionCreators, dispatch);
 
-	const paymentDispatchers = bindActionCreators(
-		paymentActionCreators,
-		dispatch
-	);
 	return {
 		onMatches: () => {
 			colorThemeDispatchers.onMatches();
@@ -463,19 +269,6 @@ function mapDispatchToProps(dispatch) {
 		},
 		fetchUserProfile: () => {
 			authDispatchers.fetchUserProfile();
-		},
-		handlePayment: (
-			token,
-			amountInUSDCents,
-			chargeDescription,
-			neuronsInBillionsToAdd
-		) => {
-			paymentDispatchers.handlePayment(
-				token,
-				amountInUSDCents,
-				chargeDescription,
-				neuronsInBillionsToAdd
-			);
 		}
 	};
 }
