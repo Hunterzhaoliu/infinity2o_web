@@ -43,6 +43,9 @@ class Contacts extends Component {
 		} else if (windowWidth <= 768) {
 			// 0.2174 = 167/768
 			buttonWidth = windowWidth * 0.2174;
+		} else if (windowWidth < 992) {
+			// 0.2244 = 222.7/992
+			buttonWidth = windowWidth * 0.2244;
 		}
 		return (
 			<Button

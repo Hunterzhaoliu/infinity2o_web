@@ -63,9 +63,12 @@ class Chat extends Component {
 		if (windowWidth < 576) {
 			// 0.815 = 470/576
 			inputWidth = windowWidth * 0.815;
-		} else if (windowWidth <= 768) {
+		} else if (windowWidth < 768) {
 			// 0.6523 = 501/768
 			inputWidth = windowWidth * 0.6523;
+		} else if (windowWidth < 992) {
+			// 0.6523 = 668.2/992
+			inputWidth = windowWidth * 0.6735;
 		}
 		return (
 			<Content
