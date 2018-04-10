@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as authActionCreators from '../../actions/auth';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
-//import Options from '../payment/Options';
+import Options from '../payment/Options';
 import DisplayField from './DisplayField';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
@@ -238,7 +238,9 @@ class Profile extends Component {
 					/>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
-					<Col xl={{ span: 24 }}>{/* <Options /> */}</Col>
+					<Col xl={{ span: 24 }}>
+						<Options />
+					</Col>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
 					<Col
