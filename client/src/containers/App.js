@@ -37,11 +37,6 @@ class App extends Component {
 						color: this.props.colorTheme.text7Color
 					}}
 				>
-					<Row>
-						<Col span={24}>
-							<p>Infinity2o Inc. © 2018 -> ∞</p>
-						</Col>
-					</Row>
 					<Row type="flex" justify="center">
 						<Col
 							sm={{ span: 2 }}
@@ -74,6 +69,11 @@ class App extends Component {
 							>
 								Feedback? askinfinity2o@gmail.com
 							</p>
+						</Col>
+					</Row>
+					<Row>
+						<Col span={24}>
+							<p>Infinity2o © 2018 -> ∞</p>
 						</Col>
 					</Row>
 				</Footer>

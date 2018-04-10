@@ -26,14 +26,14 @@ class Conversation extends Component {
 			return (
 				<Row type="flex" justify="space-between">
 					<Col
-						sm={{ span: 5 }}
-						md={{ span: 5 }}
+						sm={{ span: 0 }}
+						md={{ span: 0 }}
 						lg={{ span: 5 }}
 						xl={{ span: 5 }}
 					/>
 					<Col
-						sm={{ span: 4 }}
-						md={{ span: 4 }}
+						sm={{ span: 6 }}
+						md={{ span: 6 }}
 						lg={{ span: 4 }}
 						xl={{ span: 4 }}
 						style={{
@@ -43,16 +43,16 @@ class Conversation extends Component {
 						<Contacts contacts={contacts.allContacts} />
 					</Col>
 					<Col
-						sm={{ span: 10 }}
-						md={{ span: 10 }}
+						sm={{ span: 18 }}
+						md={{ span: 18 }}
 						lg={{ span: 10 }}
 						xl={{ span: 10 }}
 					>
 						<Chat chat={chat} />
 					</Col>
 					<Col
-						sm={{ span: 5 }}
-						md={{ span: 5 }}
+						sm={{ span: 0 }}
+						md={{ span: 0 }}
 						lg={{ span: 5 }}
 						xl={{ span: 5 }}
 					/>

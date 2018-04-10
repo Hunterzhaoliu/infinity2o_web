@@ -109,8 +109,10 @@ export default function(state = initialState, action) {
 			newState.save = 'save_error';
 			return newState;
 		case DECREMENT_NEURONS:
-			newState.payment.neuronsInBillions -= action.decrementAmount;
-			newState.payment.hasDecrementNeuronsError = false;
+			if (!newState.payment.infinityStatus) {
+				newState.payment.neuronsInBillions -= action.decrementAmount;
+				newState.payment.hasDecrementNeuronsError = false;
+			} // do nothing if in infinityStatus is true
 			return newState;
 		case DECREMENT_NEURONS_ERROR:
 			newState.payment.hasDecrementNeuronsError = true;
@@ -119,8 +121,11 @@ export default function(state = initialState, action) {
 			newState.payment.hasPaymentError = false;
 			return newState;
 		case UPDATE_NEURONS:
-			newState.payment.neuronsInBillions += action.neuronsInBillionsToAdd;
-			newState.payment.infinityStatus = action.infinityStatus;
+			if (!newState.payment.infinityStatus) {
+				newState.payment.neuronsInBillions +=
+					action.neuronsInBillionsToAdd;
+				newState.payment.infinityStatus = action.infinityStatus;
+			} // do nothing if in infinityStatus is true
 			return newState;
 		case PAYMENT_ERROR:
 			newState.payment.hasPaymentError = true;

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as colorThemeActions from '../actions/colorTheme';
+import * as colorThemeActionCreators from '../actions/colorTheme';
+import * as authActionCreators from '../actions/auth';
+import * as customHeaderActionCreators from '../actions/customHeader';
 
 import { Layout, Row, Col, Button, Icon, Dropdown, Menu } from 'antd';
 const { Header } = Layout;
@@ -10,7 +12,7 @@ const { Header } = Layout;
 class CustomHeader extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { width: window.innerWidth, height: window.innerHeight };
+		this.props.fetchUserProfile(); // to show correct neuron number
 		this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 	}
 
@@ -24,7 +26,7 @@ class CustomHeader extends Component {
 	}
 
 	updateWindowDimensions() {
-		this.setState({ width: window.innerWidth, height: window.innerHeight });
+		this.props.updateWindowWidth(window.innerWidth);
 	}
 
 	renderChangeThemeButton() {
@@ -50,7 +52,6 @@ class CustomHeader extends Component {
 			neuronsInBillions,
 			infinityStatus
 		} = this.props;
-		console.log('neuronsInBillions = ', neuronsInBillions);
 		let shortNeuronsInBillions;
 		if (neuronsInBillions !== undefined) {
 			shortNeuronsInBillions = neuronsInBillions.toFixed(1);
@@ -151,9 +152,9 @@ class CustomHeader extends Component {
 	}
 
 	renderHeaderButtons() {
-		const { colorTheme, auth } = this.props;
+		const { colorTheme, auth, windowWidth } = this.props;
 
-		if (this.state.width < 768) {
+		if (windowWidth < 768) {
 			// show a dropdown with buttons instead of nav bar
 			const menu = (
 				<Menu
@@ -163,11 +164,15 @@ class CustomHeader extends Component {
 						color: colorTheme.text1Color
 					}}
 				>
-					<Menu.Item key="1">{this.renderChangeThemeButton()}</Menu.Item>
+					<Menu.Item key="1">
+						{this.renderChangeThemeButton()}
+					</Menu.Item>
 					<Menu.Item key="2">{this.renderProfileButton()}</Menu.Item>
 					<Menu.Item key="3">{this.renderTrainAIButton()}</Menu.Item>
 					<Menu.Item key="4">{this.renderMatchesButton()}</Menu.Item>
-					<Menu.Item key="5">{this.renderConversationsButton()}</Menu.Item>
+					<Menu.Item key="5">
+						{this.renderConversationsButton()}
+					</Menu.Item>
 					<Menu.Item key="6">{this.renderLogoutButton()}</Menu.Item>
 				</Menu>
 			);
@@ -213,13 +218,18 @@ class CustomHeader extends Component {
 				return (
 					<div>
 						<Row type="flex" justify="space-between">
-							<Col md={{ span: 5 }} lg={{ span: 4 }} xl={{ span: 5 }} key="0">
+							<Col
+								md={{ span: 5 }}
+								lg={{ span: 4 }}
+								xl={{ span: 5 }}
+								key="0"
+							>
 								{this.renderChangeThemeButton()}
 							</Col>
 							<Col
-								md={{ span: 3, offset: 1 }}
-								lg={{ span: 2, offset: 0 }}
-								xl={{ span: 2, offset: 0 }}
+								md={{ span: 4, offset: 0 }}
+								lg={{ span: 3, offset: 0 }}
+								xl={{ span: 3, offset: 0 }}
 								key="1"
 							>
 								{this.renderProfileButton()}
@@ -250,8 +260,8 @@ class CustomHeader extends Component {
 							</Col>
 							<Col
 								md={{ span: 3, offset: 1 }}
-								lg={{ span: 2, offset: 8 }}
-								xl={{ span: 2, offset: 9 }}
+								lg={{ span: 2, offset: 7 }}
+								xl={{ span: 2, offset: 8 }}
 								key="5"
 							>
 								{this.renderLogoutButton()}
@@ -260,7 +270,10 @@ class CustomHeader extends Component {
 					</div>
 				);
 			default:
-				console.log('ERROR: site in invalid state = ', auth.loggedInState);
+				console.log(
+					'ERROR: site in invalid state = ',
+					auth.loggedInState
+				);
 		}
 	}
 
@@ -290,7 +303,8 @@ function mapStateToProps(state) {
 		auth: state.auth,
 		colorTheme: state.colorTheme,
 		neuronsInBillions: state.profile.payment.neuronsInBillions,
-		infinityStatus: state.profile.payment.infinityStatus
+		infinityStatus: state.profile.payment.infinityStatus,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 
@@ -299,8 +313,15 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const colorThemeDispatchers = bindActionCreators(colorThemeActions, dispatch);
-
+	const colorThemeDispatchers = bindActionCreators(
+		colorThemeActionCreators,
+		dispatch
+	);
+	const authDispatchers = bindActionCreators(authActionCreators, dispatch);
+	const customHeaderDispatchers = bindActionCreators(
+		customHeaderActionCreators,
+		dispatch
+	);
 	return {
 		onPressRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();
@@ -316,6 +337,12 @@ function mapDispatchToProps(dispatch) {
 		},
 		onPressConversations: () => {
 			colorThemeDispatchers.onPressConversations();
+		},
+		fetchUserProfile: () => {
+			authDispatchers.fetchUserProfile();
+		},
+		updateWindowWidth: newWindowWidth => {
+			customHeaderDispatchers.updateWindowWidth(newWindowWidth);
 		}
 	};
 }
