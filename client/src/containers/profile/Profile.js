@@ -165,7 +165,12 @@ class Profile extends Component {
 				return (
 					<div key={key}>
 						<Row type="flex" justify="start" align="middle">
-							<Col md={{ span: 5 }}>
+							<Col
+								sm={{ span: 5 }}
+								md={{ span: 5 }}
+								lg={{ span: 5 }}
+								xl={{ span: 5 }}
+							>
 								<h3
 									style={{
 										color: colorTheme.text6Color
@@ -174,7 +179,12 @@ class Profile extends Component {
 									{vote.question}
 								</h3>
 							</Col>
-							<Col md={{ span: 18, offset: 1 }}>
+							<Col
+								sm={{ span: 18, offset: 1 }}
+								md={{ span: 18, offset: 1 }}
+								lg={{ span: 18, offset: 1 }}
+								xl={{ span: 18, offset: 1 }}
+							>
 								<h3
 									style={{
 										color: colorTheme.text6Color
@@ -202,11 +212,16 @@ class Profile extends Component {
 				<Row type="flex" justify="start" align="middle">
 					<Col
 						sm={{ span: 0 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
+						md={{ span: 0 }}
+						lg={{ span: 0 }}
+						xl={{ span: 0 }}
 					/>
-					<Col xl={{ span: 14 }}>
+					<Col
+						sm={{ span: 24 }}
+						md={{ span: 19 }}
+						lg={{ span: 19 }}
+						xl={{ span: 19 }}
+					>
 						<h2
 							style={{
 								color: colorTheme.keyText7Color
@@ -230,15 +245,15 @@ class Profile extends Component {
 				<Row type="flex" justify="start" align="middle">
 					<Col
 						sm={{ span: 0 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
+						md={{ span: 0 }}
+						lg={{ span: 0 }}
+						xl={{ span: 0 }}
 					/>
 					<Col
 						sm={{ span: 24 }}
-						md={{ span: 14 }}
-						lg={{ span: 14 }}
-						xl={{ span: 14 }}
+						md={{ span: 19 }}
+						lg={{ span: 19 }}
+						xl={{ span: 19 }}
 					>
 						{this.renderProfile(colorTheme, profile)}
 						<Row>

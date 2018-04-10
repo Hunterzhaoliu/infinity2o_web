@@ -67,7 +67,12 @@ class DisplayField extends Component {
 		const { colorTheme, label, value } = this.props;
 		return (
 			<Row type="flex" justify="start" align="middle">
-				<Col xl={{ span: 5 }}>
+				<Col
+					sm={{ span: 2 }}
+					md={{ span: 2 }}
+					lg={{ span: 2 }}
+					xl={{ span: 2 }}
+				>
 					<h3
 						style={{
 							color: colorTheme.text6Color
@@ -76,7 +81,12 @@ class DisplayField extends Component {
 						{label}
 					</h3>
 				</Col>
-				<Col xl={{ span: 19 }}>
+				<Col
+					sm={{ span: 21, offset: 1 }}
+					md={{ span: 21, offset: 1 }}
+					lg={{ span: 21, offset: 1 }}
+					xl={{ span: 21, offset: 1 }}
+				>
 					<h3
 						style={{
 							color: colorTheme.text3Color
