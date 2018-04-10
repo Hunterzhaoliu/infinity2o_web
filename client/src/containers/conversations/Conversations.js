@@ -12,7 +12,7 @@ const { Content } = Layout;
 class Conversation extends Component {
 	componentWillMount() {
 		// run once before first render()
-		this.props.onPressConversations();
+		this.props.onConversations();
 		this.props.fetchConversations();
 	}
 
@@ -118,8 +118,8 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		onPressConversations: () => {
-			colorThemeDispatchers.onPressConversations();
+		onConversations: () => {
+			colorThemeDispatchers.onConversations();
 		},
 		fetchConversations: () => {
 			contactsDispatchers.fetchConversations();

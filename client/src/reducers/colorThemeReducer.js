@@ -4,7 +4,8 @@ import {
 	MOVE_TO_TRAIN_AI,
 	MOVE_TO_MATCHES,
 	MOVE_TO_SIGNED_IN_LANDING,
-	MOVE_TO_CONVERSATIONS
+	MOVE_TO_CONVERSATIONS,
+	MOVE_TO_TOUR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -41,7 +42,9 @@ let initialState = {
 	matchesButtonColor: null,
 	matchesButtonTextColor: null,
 	conversationsButtonColor: null,
-	conversationsButtonTextColor: null
+	conversationsButtonTextColor: null,
+	tourButtonColor: null,
+	tourButtonTextColor: null
 };
 
 function _getStateForSection(newState) {
@@ -54,6 +57,8 @@ function _getStateForSection(newState) {
 		newState.matchesButtonTextColor = newState.text4Color;
 		newState.conversationsButtonColor = newState.text7Color;
 		newState.conversationsButtonTextColor = newState.text4Color;
+		newState.tourButtonColor = newState.text7Color;
+		newState.tourButtonTextColor = newState.text4Color;
 	} else if (newState.activeSection === 'matches') {
 		newState.profileButtonColor = newState.text7Color;
 		newState.profileButtonTextColor = newState.text4Color;
@@ -63,6 +68,8 @@ function _getStateForSection(newState) {
 		newState.matchesButtonTextColor = newState.text1Color;
 		newState.conversationsButtonColor = newState.text7Color;
 		newState.conversationsButtonTextColor = newState.text4Color;
+		newState.tourButtonColor = newState.text7Color;
+		newState.tourButtonTextColor = newState.text4Color;
 	} else if (newState.activeSection === 'profile') {
 		newState.profileButtonColor = newState.key;
 		newState.profileButtonTextColor = newState.text1Color;
@@ -72,6 +79,8 @@ function _getStateForSection(newState) {
 		newState.matchesButtonTextColor = newState.text4Color;
 		newState.conversationsButtonColor = newState.text7Color;
 		newState.conversationsButtonTextColor = newState.text4Color;
+		newState.tourButtonColor = newState.text7Color;
+		newState.tourButtonTextColor = newState.text4Color;
 	} else if (newState.activeSection === 'signed_in_landing') {
 		newState.profileButtonColor = newState.text7Color;
 		newState.profileButtonTextColor = newState.text4Color;
@@ -81,6 +90,8 @@ function _getStateForSection(newState) {
 		newState.matchesButtonTextColor = newState.text4Color;
 		newState.conversationsButtonColor = newState.text7Color;
 		newState.conversationsButtonTextColor = newState.text4Color;
+		newState.tourButtonColor = newState.text7Color;
+		newState.tourButtonTextColor = newState.text4Color;
 	} else if (newState.activeSection === 'conversations') {
 		newState.profileButtonColor = newState.text7Color;
 		newState.profileButtonTextColor = newState.text4Color;
@@ -90,6 +101,19 @@ function _getStateForSection(newState) {
 		newState.matchesButtonTextColor = newState.text4Color;
 		newState.conversationsButtonColor = newState.key;
 		newState.conversationsButtonTextColor = newState.text1Color;
+		newState.tourButtonColor = newState.text7Color;
+		newState.tourButtonTextColor = newState.text4Color;
+	} else if (newState.activeSection === 'tour') {
+		newState.profileButtonColor = newState.text7Color;
+		newState.profileButtonTextColor = newState.text4Color;
+		newState.trainAIButtonColor = newState.text7Color;
+		newState.trainAIButtonTextColor = newState.text4Color;
+		newState.matchesButtonColor = newState.text7Color;
+		newState.matchesButtonTextColor = newState.text4Color;
+		newState.conversationsButtonColor = newState.text7Color;
+		newState.conversationsButtonTextColor = newState.text4Color;
+		newState.tourButtonColor = newState.key;
+		newState.tourButtonTextColor = newState.text1Color;
 	}
 	return newState;
 }
@@ -130,6 +154,10 @@ export default function(state = initialState, action) {
 	switch (action.type) {
 		case UPDATE_COLOR_THEME:
 			newState = _updateColorTheme(newState, action);
+			return newState;
+		case MOVE_TO_TOUR:
+			newState.activeSection = 'tour';
+			newState = _getStateForSection(newState, action);
 			return newState;
 		case MOVE_TO_PROFILE:
 			newState.activeSection = 'profile';

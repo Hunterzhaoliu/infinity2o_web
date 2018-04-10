@@ -1,4 +1,5 @@
 import {
+	MOVE_TO_TOUR,
 	MOVE_TO_SIGNED_IN_LANDING,
 	UPDATE_COLOR_THEME,
 	MOVE_TO_PROFILE,
@@ -27,6 +28,12 @@ import {
 	GREY_9
 } from '../containers/styles/ColorConstants';
 
+export const onTour = () => {
+	return function(dispatch) {
+		dispatch({ type: MOVE_TO_TOUR });
+	};
+};
+
 export const onSignedInLanding = () => {
 	return function(dispatch) {
 		dispatch({ type: MOVE_TO_SIGNED_IN_LANDING });
@@ -51,7 +58,7 @@ export const onMatches = () => {
 	};
 };
 
-export const onPressConversations = () => {
+export const onConversations = () => {
 	return function(dispatch) {
 		dispatch({ type: MOVE_TO_CONVERSATIONS });
 	};

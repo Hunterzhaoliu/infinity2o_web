@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 
 import CustomHeader from './CustomHeader';
 import Landing from './Landing';
+import Tour from './help/Tour';
 import Profile from './profile/Profile';
 import ProfileEdit from './profile/edit/ProfileEdit';
 import TrainAI from './train_ai/TrainAI';
@@ -88,6 +89,7 @@ class App extends Component {
 				<Layout style={styles.layout}>
 					<CustomHeader />
 					<Route exact={true} path="/" component={Landing} />
+					<Route exact={true} path="/tour" component={Tour} />
 					<Route exact={true} path="/profile" component={Profile} />
 					<Route
 						exact={true}

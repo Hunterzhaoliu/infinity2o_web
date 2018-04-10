@@ -31,7 +31,7 @@ class Matches extends Component {
 			'You need ' +
 				NUMBER_NEURONS_TO_SAY_HI +
 				" Million neurons to 'Say Hi'. You can purchase neurons below or in Profile.",
-			10
+			5
 		);
 	};
 
