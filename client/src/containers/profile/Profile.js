@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import * as authActionCreators from '../../actions/auth';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
-import DisplayField from './DisplayField';
 import Options from '../payment/Options';
+import DisplayField from './DisplayField';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
