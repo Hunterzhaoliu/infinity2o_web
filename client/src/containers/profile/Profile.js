@@ -38,7 +38,7 @@ class Profile extends Component {
 						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col>
+					<Col span={24}>
 						<DisplayField
 							label="Neurons: "
 							value={profile.payment.neuronsInBillions}
@@ -53,7 +53,7 @@ class Profile extends Component {
 						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col>
+					<Col span={24}>
 						<DisplayField label="Name: " value={profile.name} />
 					</Col>
 				</Row>
@@ -65,7 +65,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col>
+					<Col span={24}>
 						<DisplayField label="Age: " value={profile.age} />
 					</Col>
 				</Row>
@@ -77,7 +77,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col>
+					<Col span={24}>
 						<DisplayField
 							label="Interest(s): "
 							value={profile.interests}
@@ -92,7 +92,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col>
+					<Col span={24}>
 						<DisplayField
 							label="Time Zone: "
 							value={profile.timeZone}
@@ -107,7 +107,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col>
+					<Col span={24}>
 						<DisplayField
 							label="Availability: "
 							value={profile.availability}
