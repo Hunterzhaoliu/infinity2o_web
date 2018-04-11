@@ -30,9 +30,9 @@ class Ask extends Component {
 	};
 
 	renderAnswerInputs(newAnswers) {
-		const { colorTheme, ask } = this.props;
+		const { colorTheme, ask, windowWidth } = this.props;
+		let answerInputWidth = windowWidth * 0.183; // = 220/1200
 		return _.map(newAnswers, (answer, key) => {
-			//console.log('key = ', key);
 			return (
 				<div key={key}>
 					<Row
@@ -43,7 +43,12 @@ class Ask extends Component {
 							padding: '3% 0% 0%' // top left&right bottom
 						}}
 					>
-						<Col md={{ span: 3 }}>
+						<Col
+							sm={{ span: 5 }}
+							md={{ span: 5 }}
+							lg={{ span: 5 }}
+							xl={{ span: 3 }}
+						>
 							<h4
 								style={{
 									color: colorTheme.keyText5Color
@@ -52,19 +57,29 @@ class Ask extends Component {
 								Answer {key + 1}:
 							</h4>
 						</Col>
-						<Col md={{ span: 6, offset: 1 }}>
+						<Col
+							sm={{ span: 6, offset: 0 }}
+							md={{ span: 9, offset: 0 }}
+							lg={{ span: 9, offset: 0 }}
+							xl={{ span: 9, offset: 0 }}
+						>
 							<Input
 								name={key}
 								onChange={this.onChangeAnswer}
 								style={{
-									width: 180,
+									width: answerInputWidth,
 									borderColor: colorTheme.text7Color,
 									background: colorTheme.text7Color,
 									color: colorTheme.text3Color
 								}}
 							/>
 						</Col>
-						<Col md={{ span: 2, offset: 1 }}>
+						<Col
+							sm={{ span: 1, offset: 0 }}
+							md={{ span: 1, offset: 0 }}
+							lg={{ span: 1, offset: 0 }}
+							xl={{ span: 1, offset: 0 }}
+						>
 							<h5
 								style={{
 									color: colorTheme.text4Color
@@ -75,7 +90,7 @@ class Ask extends Component {
 						</Col>
 					</Row>
 					<ErrorMessage
-						message="Between 2 & 25 characters"
+						message="Between 1 & 25 characters"
 						hasError={ask.hasAnswersError[key]}
 					/>
 				</div>
@@ -119,17 +134,12 @@ class Ask extends Component {
 					}}
 				>
 					<Col
-						sm={{ span: 0 }}
+						sm={{ span: 5 }}
 						md={{ span: 5 }}
-						lg={{ span: 4 }}
+						lg={{ span: 5 }}
 						xl={{ span: 3 }}
 					/>
-					<Col
-						sm={{ span: 3 }}
-						md={{ span: 3 }}
-						lg={{ span: 3 }}
-						xl={{ span: 3 }}
-					>
+					<Col>
 						<Button
 							style={{
 								borderColor: colorTheme.key,
@@ -149,7 +159,10 @@ class Ask extends Component {
 	}
 
 	renderAskForm() {
-		const { colorTheme, saveAsk, ask, history } = this.props;
+		const { colorTheme, saveAsk, ask, history, windowWidth } = this.props;
+		let answerInputWidth = windowWidth * 0.183; // = 220/1200
+		let questionInputWidth = answerInputWidth * 2;
+
 		return (
 			<div>
 				<Row
@@ -163,7 +176,7 @@ class Ask extends Component {
 					<Col
 						sm={{ span: 5 }}
 						md={{ span: 5 }}
-						lg={{ span: 4 }}
+						lg={{ span: 5 }}
 						xl={{ span: 3 }}
 					>
 						<h3
@@ -175,14 +188,15 @@ class Ask extends Component {
 						</h3>
 					</Col>
 					<Col
-						sm={{ span: 10 }}
-						md={{ span: 10 }}
-						lg={{ span: 10 }}
-						xl={{ span: 10 }}
+						sm={{ span: 11 }}
+						md={{ span: 18 }}
+						lg={{ span: 18 }}
+						xl={{ span: 17 }}
 					>
 						<Input
 							onChange={this.onChangeQuestion}
 							style={{
+								width: questionInputWidth,
 								borderColor: colorTheme.text7Color,
 								background: colorTheme.text7Color,
 								color: colorTheme.text3Color
@@ -190,10 +204,10 @@ class Ask extends Component {
 						/>
 					</Col>
 					<Col
-						sm={{ span: 2, offset: 1 }}
-						md={{ span: 2, offset: 1 }}
-						lg={{ span: 2, offset: 1 }}
-						xl={{ span: 2, offset: 1 }}
+						sm={{ span: 1 }}
+						md={{ span: 1 }}
+						lg={{ span: 1 }}
+						xl={{ span: 1 }}
 					>
 						<h5
 							style={{
@@ -220,18 +234,7 @@ class Ask extends Component {
 						padding: '3% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 5 }}
-						lg={{ span: 4 }}
-						xl={{ span: 3 }}
-					/>
-					<Col
-						sm={{ span: 3 }}
-						md={{ span: 19 }}
-						lg={{ span: 20 }}
-						xl={{ span: 21 }}
-					>
+					<Col>
 						<Button
 							style={{
 								borderColor: colorTheme.key,
@@ -270,7 +273,7 @@ class Ask extends Component {
 				>
 					<Col
 						sm={{ span: 0 }}
-						md={{ span: 5 }}
+						md={{ span: 0 }}
 						lg={{ span: 5 }}
 						xl={{ span: 5 }}
 					/>
@@ -301,7 +304,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		ask: state.ask
+		ask: state.ask,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 
