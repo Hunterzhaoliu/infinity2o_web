@@ -15,7 +15,7 @@ const stepValues = [
 	{
 		instructions: 'Save your profile',
 		src:
-			'https://user-images.githubusercontent.com/2585159/38621233-0a2b0e7a-3d66-11e8-92f8-0987f122fbbd.png'
+			'https://user-images.githubusercontent.com/2585159/38623287-e696bb8a-3d6a-11e8-826a-914ff9b6b210.png'
 	},
 	{
 		instructions: 'Ask questions that matter to you',
@@ -28,8 +28,15 @@ const stepValues = [
 			'https://user-images.githubusercontent.com/2585159/38622587-1cc4050c-3d69-11e8-9953-2945887cd73c.png'
 	},
 	{
-		instructions: 'Find your partner',
-		src: ''
+		instructions: "Every day you get 2 matches you can 'Say Hi' too",
+		src:
+			'https://user-images.githubusercontent.com/2585159/38624600-144881fa-3d6e-11e8-8fc3-203c925d04c4.png'
+	},
+	{
+		instructions:
+			'Then start chatting about online classes you want to take',
+		src:
+			'https://user-images.githubusercontent.com/2585159/38625186-823b5876-3d6f-11e8-89c3-17ed4c7b65e8.png'
 	}
 ];
 
