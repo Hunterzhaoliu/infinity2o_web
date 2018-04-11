@@ -6,6 +6,33 @@ import { bindActionCreators } from 'redux';
 import { Layout, Row, Col } from 'antd';
 const { Content } = Layout;
 
+const stepValues = [
+	{
+		instructions: 'Start by editing your profile',
+		src:
+			'https://user-images.githubusercontent.com/2585159/38621233-0a2b0e7a-3d66-11e8-92f8-0987f122fbbd.png'
+	},
+	{
+		instructions: 'Save your profile',
+		src:
+			'https://user-images.githubusercontent.com/2585159/38621233-0a2b0e7a-3d66-11e8-92f8-0987f122fbbd.png'
+	},
+	{
+		instructions: 'Ask questions that matter to you',
+		src:
+			'https://user-images.githubusercontent.com/2585159/38617158-e0d0db72-3d5b-11e8-8c2c-e5040d2dfe51.png'
+	},
+	{
+		instructions: 'Vote on questions to train your AI',
+		src:
+			'https://user-images.githubusercontent.com/2585159/38622587-1cc4050c-3d69-11e8-9953-2945887cd73c.png'
+	},
+	{
+		instructions: 'Find your partner',
+		src: ''
+	}
+];
+
 class Tour extends Component {
 	componentWillMount() {
 		// run once before first render()
@@ -15,28 +42,6 @@ class Tour extends Component {
 
 	renderSteps() {
 		const { colorTheme } = this.props;
-		const stepValues = [
-			{
-				instructions: 'Start by editing your profile',
-				src:
-					'https://user-images.githubusercontent.com/24757872/38593521-5a2f113c-3d07-11e8-85dd-3a0acd7bce29.png'
-			},
-			{
-				instructions: 'Save your profile',
-				src:
-					'https://user-images.githubusercontent.com/24757872/38592192-3e8a8a30-3d00-11e8-9de9-7707bbc9b022.png'
-			},
-			{
-				instructions: 'Answer Questions to Train your AI',
-				src:
-					'https://user-images.githubusercontent.com/24757872/38593334-7a0e9974-3d06-11e8-8155-0876a2ad196e.png'
-			},
-			{
-				instructions: 'Find your partner',
-				src:
-					'https://user-images.githubusercontent.com/24757872/38592192-3e8a8a30-3d00-11e8-9de9-7707bbc9b022.png'
-			}
-		];
 		return _.map(stepValues, (stepValue, index) => {
 			return (
 				<div key={index}>
@@ -45,7 +50,7 @@ class Tour extends Component {
 						justify="center"
 						align="middle"
 						style={{
-							padding: '1% 0% 0%' // top left&right bottom
+							padding: '2% 0% 0%' // top left&right bottom
 						}}
 					>
 						<Col span={24}>
@@ -58,18 +63,7 @@ class Tour extends Component {
 							</h2>
 						</Col>
 					</Row>
-					<Row
-						type="flex"
-						justify="center"
-						align="middle"
-						style={{
-							padding: '0% 0% 0%' // top left&right bottom
-						}}
-					>
-						<Col span={24}>
-							<img src={stepValue.src} alt="" />
-						</Col>
-					</Row>
+					<img style={{ height: 400 }} src={stepValue.src} alt="" />
 				</div>
 			);
 		});
@@ -83,17 +77,12 @@ class Tour extends Component {
 				style={{
 					textAlign: 'center',
 					padding: '100px 50px 50px', // top left&right bottom
-					minHeight: 82,
+					height: 3000,
 					background: colorTheme.backgroundColor
 				}}
 			>
 				<Row type="flex" justify="center">
-					<Col
-						sm={{ span: 13, offset: 0 }}
-						md={{ span: 10, offset: 0 }}
-						lg={{ span: 7, offset: 0 }}
-						xl={{ span: 24, offset: 0 }}
-					>
+					<Col span={24}>
 						<h1
 							key="0"
 							style={{
