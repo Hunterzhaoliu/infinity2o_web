@@ -13,7 +13,7 @@ module.exports = app => {
 		passport.authenticate('google'),
 		(request, response) => {
 			// after a user is logged in show them...
-			response.redirect('/profile');
+			response.redirect('/tour');
 		}
 	);
 	app.get('/auth/linkedIn/', passport.authenticate('linkedin'));

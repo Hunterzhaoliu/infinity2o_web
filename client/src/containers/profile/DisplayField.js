@@ -10,7 +10,7 @@ class DisplayField extends Component {
 			label === 'Neurons: ' ||
 			label === 'Name: ' ||
 			label === 'Age: ' ||
-			'Time Zone: '
+			label === 'Time Zone: '
 		) {
 			if (label === 'Neurons: ' && infinityStatus) {
 				return 'infinity';
@@ -57,7 +57,10 @@ class DisplayField extends Component {
 			let formattedValue = '';
 			let i;
 			for (i = 0; i < value.length; i++) {
-				formattedValue += value[i] + ', ';
+				formattedValue += value[i];
+				if (i !== value.length - 1) {
+					formattedValue += ', ';
+				}
 			}
 			return formattedValue;
 		}
@@ -68,9 +71,9 @@ class DisplayField extends Component {
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col
-					sm={{ span: 2 }}
-					md={{ span: 2 }}
-					lg={{ span: 2 }}
+					sm={{ span: 5 }}
+					md={{ span: 4 }}
+					lg={{ span: 3 }}
 					xl={{ span: 2 }}
 				>
 					<h3
@@ -82,9 +85,9 @@ class DisplayField extends Component {
 					</h3>
 				</Col>
 				<Col
-					sm={{ span: 21, offset: 1 }}
-					md={{ span: 21, offset: 1 }}
-					lg={{ span: 21, offset: 1 }}
+					sm={{ span: 18, offset: 1 }}
+					md={{ span: 19, offset: 1 }}
+					lg={{ span: 20, offset: 1 }}
 					xl={{ span: 21, offset: 1 }}
 				>
 					<h3

@@ -6,6 +6,7 @@ export const UPDATE_LOGGED_IN_STATE = 'UPDATE_LOGGED_IN_STATE';
 export const UPDATE_OUR_SOCKET_ID = 'UPDATE_OUR_SOCKET_ID';
 
 // CustomHeader.js
+export const MOVE_TO_TOUR = 'MOVE_TO_TOUR';
 export const MOVE_TO_PROFILE = 'MOVE_TO_PROFILE';
 export const MOVE_TO_TRAIN_AI = 'MOVE_TO_TRAIN_AI';
 export const MOVE_TO_MATCHES = 'MOVE_TO_MATCHES';

@@ -30,7 +30,7 @@ class CustomHeader extends Component {
 	}
 
 	renderChangeThemeButton() {
-		const { colorTheme, onPressRandomColorTheme } = this.props;
+		const { colorTheme, onRandomColorTheme } = this.props;
 		return (
 			<Button
 				style={{
@@ -38,9 +38,28 @@ class CustomHeader extends Component {
 					background: colorTheme.text7Color,
 					color: colorTheme.text2Color
 				}}
-				onClick={onPressRandomColorTheme}
+				onClick={onRandomColorTheme}
 			>
 				Change Theme
+			</Button>
+		);
+	}
+
+	renderTourButton() {
+		const { colorTheme, onTour } = this.props;
+
+		return (
+			<Button
+				style={{
+					borderColor: colorTheme.tourButtonColor,
+					background: colorTheme.tourButtonColor,
+					color: colorTheme.tourButtonTextColor
+				}}
+				onClick={onTour}
+			>
+				<Link to="/tour">
+					<Icon type="question-circle-o" />
+				</Link>
 			</Button>
 		);
 	}
@@ -48,7 +67,7 @@ class CustomHeader extends Component {
 	renderProfileButton() {
 		const {
 			colorTheme,
-			onPressProfile,
+			onProfile,
 			neuronsInBillions,
 			infinityStatus
 		} = this.props;
@@ -67,7 +86,7 @@ class CustomHeader extends Component {
 					background: colorTheme.profileButtonColor,
 					color: colorTheme.profileButtonTextColor
 				}}
-				onClick={onPressProfile}
+				onClick={onProfile}
 			>
 				<Link to="/profile">
 					<div>{displayText}</div>
@@ -77,7 +96,7 @@ class CustomHeader extends Component {
 	}
 
 	renderTrainAIButton() {
-		const { colorTheme, onPressTrainAI } = this.props;
+		const { colorTheme, onTrainAI } = this.props;
 
 		return (
 			<Button
@@ -86,7 +105,7 @@ class CustomHeader extends Component {
 					background: colorTheme.trainAIButtonColor,
 					color: colorTheme.trainAIButtonTextColor
 				}}
-				onClick={onPressTrainAI}
+				onClick={onTrainAI}
 			>
 				<Link to="/train_ai">
 					<div>Train AI</div>
@@ -96,7 +115,7 @@ class CustomHeader extends Component {
 	}
 
 	renderMatchesButton() {
-		const { colorTheme, onPressMatches } = this.props;
+		const { colorTheme, onMatches } = this.props;
 
 		return (
 			<Button
@@ -105,7 +124,7 @@ class CustomHeader extends Component {
 					background: colorTheme.matchesButtonColor,
 					color: colorTheme.matchesButtonTextColor
 				}}
-				onClick={onPressMatches}
+				onClick={onMatches}
 			>
 				<Link to="/matches">
 					<div>Matches</div>
@@ -167,13 +186,14 @@ class CustomHeader extends Component {
 					<Menu.Item key="1">
 						{this.renderChangeThemeButton()}
 					</Menu.Item>
-					<Menu.Item key="2">{this.renderProfileButton()}</Menu.Item>
-					<Menu.Item key="3">{this.renderTrainAIButton()}</Menu.Item>
-					<Menu.Item key="4">{this.renderMatchesButton()}</Menu.Item>
-					<Menu.Item key="5">
+					<Menu.Item key="2">{this.renderTourButton()}</Menu.Item>
+					<Menu.Item key="3">{this.renderProfileButton()}</Menu.Item>
+					<Menu.Item key="4">{this.renderTrainAIButton()}</Menu.Item>
+					<Menu.Item key="5">{this.renderMatchesButton()}</Menu.Item>
+					<Menu.Item key="6">
 						{this.renderConversationsButton()}
 					</Menu.Item>
-					<Menu.Item key="6">{this.renderLogoutButton()}</Menu.Item>
+					<Menu.Item key="7">{this.renderLogoutButton()}</Menu.Item>
 				</Menu>
 			);
 
@@ -221,14 +241,22 @@ class CustomHeader extends Component {
 							<Col
 								md={{ span: 5 }}
 								lg={{ span: 4 }}
-								xl={{ span: 5 }}
+								xl={{ span: 4 }}
 								key="0"
 							>
 								{this.renderChangeThemeButton()}
 							</Col>
 							<Col
+								md={{ span: 2, offset: 0 }}
+								lg={{ span: 1, offset: 1 }}
+								xl={{ span: 1, offset: 0 }}
+								key="-1"
+							>
+								{this.renderTourButton()}
+							</Col>
+							<Col
 								md={{ span: 4, offset: 0 }}
-								lg={{ span: 3, offset: 0 }}
+								lg={{ span: 3, offset: 1 }}
 								xl={{ span: 3, offset: 0 }}
 								key="1"
 							>
@@ -243,7 +271,7 @@ class CustomHeader extends Component {
 								{this.renderTrainAIButton()}
 							</Col>
 							<Col
-								md={{ span: 3, offset: 1 }}
+								md={{ span: 3, offset: 0 }}
 								lg={{ span: 2, offset: 1 }}
 								xl={{ span: 2, offset: 0 }}
 								key="3"
@@ -259,8 +287,8 @@ class CustomHeader extends Component {
 								{this.renderConversationsButton()}
 							</Col>
 							<Col
-								md={{ span: 3, offset: 1 }}
-								lg={{ span: 2, offset: 7 }}
+								md={{ span: 3, offset: 0 }}
+								lg={{ span: 2, offset: 4 }}
 								xl={{ span: 2, offset: 8 }}
 								key="5"
 							>
@@ -323,20 +351,23 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 	return {
-		onPressRandomColorTheme: () => {
+		onRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();
 		},
-		onPressProfile: () => {
+		onProfile: () => {
 			colorThemeDispatchers.onProfile();
 		},
-		onPressTrainAI: () => {
+		onTrainAI: () => {
 			colorThemeDispatchers.onTrainAI();
 		},
-		onPressMatches: () => {
+		onMatches: () => {
 			colorThemeDispatchers.onMatches();
 		},
 		onPressConversations: () => {
-			colorThemeDispatchers.onPressConversations();
+			colorThemeDispatchers.onConversations();
+		},
+		onTour: () => {
+			colorThemeDispatchers.onTour();
 		},
 		fetchUserProfile: () => {
 			authDispatchers.fetchUserProfile();

@@ -31,7 +31,7 @@ class Matches extends Component {
 			'You need ' +
 				NUMBER_NEURONS_TO_SAY_HI +
 				" Million neurons to 'Say Hi'. You can purchase neurons below or in Profile.",
-			10
+			5
 		);
 	};
 
@@ -72,6 +72,18 @@ class Matches extends Component {
 		}
 	}
 
+	formatInterests(interests) {
+		let formattedInterests = '';
+		let i;
+		for (i = 0; i < interests.length; i++) {
+			formattedInterests += interests[i];
+			if (i !== interests.length - 1) {
+				formattedInterests += ', ';
+			}
+		}
+		return formattedInterests;
+	}
+
 	renderMatches() {
 		//console.log('in Matches.js this.props = ', this.props);
 		const { colorTheme, matches, history } = this.props;
@@ -108,7 +120,8 @@ class Matches extends Component {
 										color: colorTheme.text3Color
 									}}
 								>
-									Interests: {match.interests}
+									Interests:{' '}
+									{this.formatInterests(match.interests)}
 								</p>
 								<p
 									style={{

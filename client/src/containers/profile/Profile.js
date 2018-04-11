@@ -17,10 +17,14 @@ class Profile extends Component {
 	}
 
 	renderProfile(colorTheme, profile) {
+		let neuronsInBillions = profile.payment.neuronsInBillions;
+		if (neuronsInBillions !== undefined) {
+			neuronsInBillions = neuronsInBillions.toFixed(1);
+		}
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col xl={{ span: 24 }}>
+					<Col>
 						<h2
 							style={{
 								color: colorTheme.keyText7Color
@@ -38,11 +42,8 @@ class Profile extends Component {
 						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col xl={{ span: 24 }}>
-						<DisplayField
-							label="Neurons: "
-							value={profile.payment.neuronsInBillions}
-						/>
+					<Col span={24}>
+						<DisplayField label="Neurons: " value={neuronsInBillions} />
 					</Col>
 				</Row>
 				<Row
@@ -53,7 +54,7 @@ class Profile extends Component {
 						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col xl={{ span: 24 }}>
+					<Col span={24}>
 						<DisplayField label="Name: " value={profile.name} />
 					</Col>
 				</Row>
@@ -65,7 +66,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col xl={{ span: 24 }}>
+					<Col span={24}>
 						<DisplayField label="Age: " value={profile.age} />
 					</Col>
 				</Row>
@@ -77,11 +78,8 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col xl={{ span: 24 }}>
-						<DisplayField
-							label="Interest(s): "
-							value={profile.interests}
-						/>
+					<Col span={24}>
+						<DisplayField label="Interest(s): " value={profile.interests} />
 					</Col>
 				</Row>
 				<Row
@@ -92,11 +90,8 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col xl={{ span: 24 }}>
-						<DisplayField
-							label="Time Zone: "
-							value={profile.timeZone}
-						/>
+					<Col span={24}>
+						<DisplayField label="Time Zone: " value={profile.timeZone} />
 					</Col>
 				</Row>
 				<Row
@@ -107,11 +102,8 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col xl={{ span: 24 }}>
-						<DisplayField
-							label="Availability: "
-							value={profile.availability}
-						/>
+					<Col span={24}>
+						<DisplayField label="Availability: " value={profile.availability} />
 					</Col>
 				</Row>
 				<Row
@@ -121,7 +113,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col xl={{ span: 24 }}>
+					<Col>
 						<Button
 							style={{
 								borderColor: colorTheme.key,
@@ -238,7 +230,7 @@ class Profile extends Component {
 					/>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
-					<Col xl={{ span: 24 }}>
+					<Col>
 						<Options />
 					</Col>
 				</Row>
