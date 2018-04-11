@@ -13,7 +13,9 @@ class Tour extends Component {
 	}
 
 	render() {
-		const { colorTheme, label, value } = this.props;
+		const { colorTheme } = this.props;
+		const welcome = `How do I use infinity2o?`;
+		const step1 = `1) Start by editing your profile`;
 		return (
 			<Content
 				style={{
@@ -23,7 +25,23 @@ class Tour extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				hi
+				<Row type="flex" justify="center">
+					<Col
+						sm={{ span: 13, offset: 0 }}
+						md={{ span: 10, offset: 0 }}
+						lg={{ span: 7, offset: 0 }}
+						xl={{ span: 24, offset: 0 }}
+					>
+						<h1
+							key="0"
+							style={{
+								color: colorTheme.text2Color
+							}}
+						>
+							{welcome}
+						</h1>
+					</Col>
+				</Row>
 			</Content>
 		);
 	}
