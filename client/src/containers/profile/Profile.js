@@ -42,8 +42,16 @@ class Profile extends Component {
 						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
+<<<<<<< HEAD
 					<Col>
 						<DisplayField label="Neurons: " value={neuronsInBillions} />
+=======
+					<Col span={24}>
+						<DisplayField
+							label="Neurons: "
+							value={profile.payment.neuronsInBillions}
+						/>
+>>>>>>> af2d3701728e7509314da0b900cfa3287fb13580
 					</Col>
 				</Row>
 				<Row
@@ -54,7 +62,7 @@ class Profile extends Component {
 						padding: '0% 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col>
+					<Col span={24}>
 						<DisplayField label="Name: " value={profile.name} />
 					</Col>
 				</Row>
@@ -66,7 +74,7 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
-					<Col>
+					<Col span={24}>
 						<DisplayField label="Age: " value={profile.age} />
 					</Col>
 				</Row>
@@ -78,8 +86,16 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
+<<<<<<< HEAD
 					<Col>
 						<DisplayField label="Interest(s): " value={profile.interests} />
+=======
+					<Col span={24}>
+						<DisplayField
+							label="Interest(s): "
+							value={profile.interests}
+						/>
+>>>>>>> af2d3701728e7509314da0b900cfa3287fb13580
 					</Col>
 				</Row>
 				<Row
@@ -90,8 +106,16 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
+<<<<<<< HEAD
 					<Col>
 						<DisplayField label="Time Zone: " value={profile.timeZone} />
+=======
+					<Col span={24}>
+						<DisplayField
+							label="Time Zone: "
+							value={profile.timeZone}
+						/>
+>>>>>>> af2d3701728e7509314da0b900cfa3287fb13580
 					</Col>
 				</Row>
 				<Row
@@ -102,8 +126,16 @@ class Profile extends Component {
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
+<<<<<<< HEAD
 					<Col>
 						<DisplayField label="Availability: " value={profile.availability} />
+=======
+					<Col span={24}>
+						<DisplayField
+							label="Availability: "
+							value={profile.availability}
+						/>
+>>>>>>> af2d3701728e7509314da0b900cfa3287fb13580
 					</Col>
 				</Row>
 				<Row
@@ -230,7 +262,7 @@ class Profile extends Component {
 					/>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
-					<Col xl={{ span: 24 }}>
+					<Col>
 						<Options />
 					</Col>
 				</Row>

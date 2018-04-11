@@ -42,8 +42,6 @@ class InputField extends Component {
 							onChange={this.onChangeName}
 							style={{
 								width: width,
-								borderColor: colorTheme.text8Color,
-								background: colorTheme.text8Color,
 								color: colorTheme.text4Color
 							}}
 						/>
