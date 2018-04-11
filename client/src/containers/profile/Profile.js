@@ -17,6 +17,10 @@ class Profile extends Component {
 	}
 
 	renderProfile(colorTheme, profile) {
+		let neuronsInBillions = profile.payment.neuronsInBillions;
+		if (neuronsInBillions !== undefined) {
+			neuronsInBillions = neuronsInBillions.toFixed(1);
+		}
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -39,10 +43,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col>
-						<DisplayField
-							label="Neurons: "
-							value={profile.payment.neuronsInBillions}
-						/>
+						<DisplayField label="Neurons: " value={neuronsInBillions} />
 					</Col>
 				</Row>
 				<Row
@@ -78,10 +79,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col>
-						<DisplayField
-							label="Interest(s): "
-							value={profile.interests}
-						/>
+						<DisplayField label="Interest(s): " value={profile.interests} />
 					</Col>
 				</Row>
 				<Row
@@ -93,10 +91,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col>
-						<DisplayField
-							label="Time Zone: "
-							value={profile.timeZone}
-						/>
+						<DisplayField label="Time Zone: " value={profile.timeZone} />
 					</Col>
 				</Row>
 				<Row
@@ -108,10 +103,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col>
-						<DisplayField
-							label="Availability: "
-							value={profile.availability}
-						/>
+						<DisplayField label="Availability: " value={profile.availability} />
 					</Col>
 				</Row>
 				<Row
