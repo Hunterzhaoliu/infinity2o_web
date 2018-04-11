@@ -68,7 +68,7 @@ class DisplayField extends Component {
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col
-					sm={{ span: 14 }}
+					sm={{ span: 18 }}
 					md={{ span: 2 }}
 					lg={{ span: 2 }}
 					xl={{ span: 2 }}
@@ -82,7 +82,7 @@ class DisplayField extends Component {
 					</h3>
 				</Col>
 				<Col
-					sm={{ span: 8, offset: 1 }}
+					sm={{ span: 5, offset: 1 }}
 					md={{ span: 21, offset: 1 }}
 					lg={{ span: 21, offset: 1 }}
 					xl={{ span: 21, offset: 1 }}

@@ -238,7 +238,7 @@ class Profile extends Component {
 					/>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
-					<Col xl={{ span: 24 }}>
+					<Col>
 						<Options />
 					</Col>
 				</Row>
