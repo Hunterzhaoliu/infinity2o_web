@@ -50,6 +50,18 @@ E-mail support:
 
 1. `askinfinity2o@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`. Recovery = Hunter's phone & `q42liu@gmail.com`
 
+Fake accounts for posting on coursera.org, etc.
+
+1. Coursera.org username = `emn1over12@gmail.com` & password = `21xxxxx@ix`
+
+```
+Hi ,
+
+Have you heard about this website called www.infinity2o.com? I heard about it from my friend. It's suppose to connect people that want to take online classes together. I've joined it and it uses an AI to match you with someone else to take online classes with based on your beliefs.
+
+~ Samantha
+```
+
 Local development setup:
 
 1. `cd infinity2o_server` then `npm run dev`
