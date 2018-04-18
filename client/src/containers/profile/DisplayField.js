@@ -57,7 +57,10 @@ class DisplayField extends Component {
 			let formattedValue = '';
 			let i;
 			for (i = 0; i < value.length; i++) {
-				formattedValue += value[i] + ', ';
+				formattedValue += value[i];
+				if (i !== value.length - 1) {
+					formattedValue += ', ';
+				}
 			}
 			return formattedValue;
 		}

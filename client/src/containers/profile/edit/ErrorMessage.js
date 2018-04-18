@@ -15,8 +15,13 @@ class ErrorMessage extends Component {
 		const { colorTheme, message, hasError } = this.props;
 		return (
 			<Row type="flex" justify="start" align="middle">
-				<Col md={{ span: 4 }} />
-				<Col md={{ span: 20 }}>
+				<Col
+					sm={{ span: 3 }}
+					md={{ span: 3 }}
+					lg={{ span: 5 }}
+					xl={{ span: 3 }}
+				/>
+				<Col>
 					<div
 						style={{
 							marginBottom: '10px',
