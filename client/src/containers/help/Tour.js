@@ -8,33 +8,34 @@ const { Content } = Layout;
 
 const stepValues = [
 	{
-		instructions: 'Start by editing your profile',
+		instructions: 'Step 1: Start by editing your profile',
 		src:
 			'https://user-images.githubusercontent.com/2585159/38621233-0a2b0e7a-3d66-11e8-92f8-0987f122fbbd.png'
 	},
 	{
-		instructions: 'Save your profile',
+		instructions: 'Step 2: Save your profile',
 		src:
 			'https://user-images.githubusercontent.com/2585159/38623287-e696bb8a-3d6a-11e8-826a-914ff9b6b210.png'
 	},
 	{
-		instructions: 'Ask questions that matter to you',
+		instructions: 'Step 3: Ask questions that matter to you',
 		src:
 			'https://user-images.githubusercontent.com/2585159/38617158-e0d0db72-3d5b-11e8-8c2c-e5040d2dfe51.png'
 	},
 	{
-		instructions: 'Vote on questions to train your AI',
+		instructions: 'Step 4: Vote on questions to train your AI',
 		src:
 			'https://user-images.githubusercontent.com/2585159/38622587-1cc4050c-3d69-11e8-9953-2945887cd73c.png'
 	},
 	{
-		instructions: "Every day you get 2 matches you can 'Say Hi' too",
+		instructions:
+			"Step 5: Every day you get 2 matches you can 'Say Hi' too",
 		src:
 			'https://user-images.githubusercontent.com/2585159/38624600-144881fa-3d6e-11e8-8fc3-203c925d04c4.png'
 	},
 	{
 		instructions:
-			'Then start chatting about online classes you want to take',
+			'Step 6: Then start chatting about online classes you want to take',
 		src:
 			'https://user-images.githubusercontent.com/2585159/38625186-823b5876-3d6f-11e8-89c3-17ed4c7b65e8.png'
 	}

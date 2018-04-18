@@ -20,6 +20,7 @@ let initialState = {
 	hasAnswersError: [false, false, false, false],
 	displayAddAnswerButton: true,
 	displayRemoveAnswerButton: false,
+	hasSameAnswerError: false,
 	save: null
 };
 
@@ -45,6 +46,23 @@ export default function(state = initialState, action) {
 		case ON_CHANGE_ANSWER:
 			newState.newAnswers[action.answerIndex] = action.newAnswer;
 			newState.hasAnswersError[action.answerIndex] = action.hasError;
+
+			const currentAnswer = newState.newAnswers[action.answerIndex];
+			// check current answer with all other answers
+			for (let i = 0; i < newState.newAnswers.length; i++) {
+				console.log('i = ', i);
+				console.log('action.answerIndex = ', action.answerIndex);
+				if (i !== action.answerIndex) {
+					console.log('currentAnswer = ', currentAnswer);
+					console.log(
+						'newState.newAnswers[i] = ',
+						newState.newAnswers[i]
+					);
+					if (currentAnswer === newState.newAnswers[i]) {
+						newState.hasSameAnswerError = true;
+					}
+				}
+			}
 			return newState;
 		case ON_CLICK_REMOVE_ANSWER:
 			newState.newAnswers.pop();

@@ -6,7 +6,7 @@ import * as colorThemeActionCreators from '../../actions/colorTheme';
 import * as askActionCreators from '../../actions/ask';
 import { bindActionCreators } from 'redux';
 import { Layout, Row, Col, Button, Input, Icon } from 'antd';
-import ErrorMessage from '../profile/edit/ErrorMessage';
+import ErrorMessage from './ErrorMessage';
 const { Content } = Layout;
 
 class Ask extends Component {
