@@ -43,7 +43,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col span={24}>
-						<DisplayField label="Neurons: " value={neuronsInBillions} />
+						<DisplayField
+							label="Neurons: "
+							value={neuronsInBillions}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -79,7 +82,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col span={24}>
-						<DisplayField label="Interest(s): " value={profile.interests} />
+						<DisplayField
+							label="Interest(s): "
+							value={profile.interests}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -91,7 +97,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col span={24}>
-						<DisplayField label="Time Zone: " value={profile.timeZone} />
+						<DisplayField
+							label="Time Zone: "
+							value={profile.timeZone}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -103,7 +112,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col span={24}>
-						<DisplayField label="Availability: " value={profile.availability} />
+						<DisplayField
+							label="Availability: "
+							value={profile.availability}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -138,7 +150,7 @@ class Profile extends Component {
 						<Col span={24}>
 							<h3
 								style={{
-									color: colorTheme.keyText6Color
+									color: colorTheme.text6Color
 								}}
 							>
 								{question.question}
@@ -255,7 +267,7 @@ class Profile extends Component {
 									color: colorTheme.keyText7Color
 								}}
 							>
-								Your Questions
+								Last 5 Questions
 							</h2>
 						</Row>
 						{this.renderQuestions(profile.asks, colorTheme)}
@@ -266,7 +278,7 @@ class Profile extends Component {
 									color: colorTheme.keyText7Color
 								}}
 							>
-								Your Votes
+								Last 5 Votes
 							</h2>
 						</Row>
 						{this.renderVotes(profile.asks, colorTheme)}
