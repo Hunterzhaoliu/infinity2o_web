@@ -13,7 +13,7 @@ let cloneObject = obj => {
 
 let initialState = {
 	newQuestion: null,
-	newAnswers: [],
+	newAnswers: ['', ''],
 	questionLength: 0,
 	hasQuestionError: false,
 	hasAnswersError: [false, false, false, false],
