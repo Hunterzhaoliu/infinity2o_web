@@ -213,7 +213,7 @@ class CustomHeader extends Component {
 									<Icon
 										style={{
 											fontSize: 16,
-											color: colorTheme.keyText2Color
+											color: colorTheme.keyText6Color
 										}}
 										type="down-circle"
 									/>

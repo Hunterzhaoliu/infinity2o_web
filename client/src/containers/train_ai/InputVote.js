@@ -72,7 +72,9 @@ class InputVote extends Component {
 								background: displayAnswerButtonColor,
 								color: colorTheme.text2Color
 							}}
-							onClick={e => this.onVote(answerIndex, askIndex, askId)}
+							onClick={e =>
+								this.onVote(answerIndex, askIndex, askId)
+							}
 						>
 							{displayAnswer}
 							{this.renderSaveIcon(
@@ -99,11 +101,71 @@ class InputVote extends Component {
 		});
 	}
 
+	getHeightBetweenCards(current4DisplayedAsks, askIndex) {
+		if (askIndex === 0 || askIndex === 1) {
+			// to display to second Ask with the same height as the first Ask
+			const numberOfAsOn1stAsk = current4DisplayedAsks[0].answers.length;
+			let numberOfAsOn2ndAsk = 0;
+			if (current4DisplayedAsks.length > 1) {
+				numberOfAsOn2ndAsk = current4DisplayedAsks[1].answers.length;
+			}
+
+			// add height below card on 1st or 2nd Ask to match each other
+			const numberOfAsDiffBetween1stAnd2ndAsk =
+				numberOfAsOn1stAsk - numberOfAsOn2ndAsk;
+			console.log('askIndex = ', askIndex);
+			console.log(
+				'numberOfAsDiffBetween1stAnd2ndAsk = ',
+				numberOfAsDiffBetween1stAnd2ndAsk
+			);
+			// can equal -2, -1, 0, 1, or 2
+			if (askIndex === 0) {
+				switch (numberOfAsDiffBetween1stAnd2ndAsk) {
+					case -2:
+						return '108px';
+					case -1:
+						return '72px';
+					case 0:
+						return '36px';
+					case 1:
+						return '36px';
+					case 2:
+						return '36px';
+					default:
+						return '36px';
+				}
+			} else {
+				// askIndex = 1
+				switch (numberOfAsDiffBetween1stAnd2ndAsk) {
+					case -2:
+						return '36px';
+					case -1:
+						return '36px';
+					case 0:
+						return '36px';
+					case 1:
+						return '72px';
+					case 2:
+						return '108px';
+					default:
+						return '36px';
+				}
+			}
+		} else {
+			return '36px';
+		}
+	}
+
 	renderQandAs() {
 		const { colorTheme, trainAI } = this.props;
 
 		if (trainAI.current4DisplayedAsks.length > 0) {
 			return _.map(trainAI.current4DisplayedAsks, (Ask, askIndex) => {
+				const heightBetweenCards = this.getHeightBetweenCards(
+					trainAI.current4DisplayedAsks,
+					askIndex
+				);
+
 				let displayQuestion;
 				let displayAnswers;
 
@@ -119,6 +181,7 @@ class InputVote extends Component {
 					if (trainAI.votes[askId] !== undefined) {
 						isDisplayingAskStats = true;
 					}
+
 					return (
 						<Col span={12} key={askIndex}>
 							<Card
@@ -140,7 +203,10 @@ class InputVote extends Component {
 										color: colorTheme.text3Color
 									}}
 								>
-									{this.renderTotalVotes(askTotalVotes, isDisplayingAskStats)}
+									{this.renderTotalVotes(
+										askTotalVotes,
+										isDisplayingAskStats
+									)}
 								</div>
 								{this.renderAnswers(
 									displayAnswers,
@@ -159,13 +225,15 @@ class InputVote extends Component {
 										}}
 										onClick={e => this.onNextAsk(askIndex)}
 									>
-										{this.renderAskDoneWord(isDisplayingAskStats)}
+										{this.renderAskDoneWord(
+											isDisplayingAskStats
+										)}
 									</Button>
 								</Row>
 							</Card>
 							<Row
 								style={{
-									padding: '36px 0px 0px' // top left&right bottom
+									padding: heightBetweenCards + ' 0px 0px' // top left&right bottom
 								}}
 							/>
 						</Col>
@@ -179,7 +247,8 @@ class InputVote extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					Looks like you have done a lot of voting, try asking a question!
+					Looks like you have done a lot of voting, try asking a
+					question!
 				</h3>
 			);
 		}
@@ -269,7 +338,11 @@ function mapDispatchToProps(dispatch) {
 
 	return {
 		onNextAsk: (nextAsks, removeAskIndex, mongoDBUserId) => {
-			trainAIDispatchers.onNextAsk(nextAsks, removeAskIndex, mongoDBUserId);
+			trainAIDispatchers.onNextAsk(
+				nextAsks,
+				removeAskIndex,
+				mongoDBUserId
+			);
 		},
 		onVote: (answerIndex, answerId, askIndex, askId) => {
 			trainAIDispatchers.onVote(answerIndex, answerId, askIndex, askId);
