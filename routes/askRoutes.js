@@ -30,10 +30,10 @@ module.exports = app => {
 				question: ask.question,
 				_askId: ask._id
 			});
-			//
-			//saves document ask in collection asks
+			// console.log('ask = ', ask);
+			// saves document ask in collection asks
 			const user = await request.user.save();
-			response.send(user);
+			response.send(ask);
 		} catch (error) {
 			response.status(422).send(error);
 		}
