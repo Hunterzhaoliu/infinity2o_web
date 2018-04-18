@@ -102,6 +102,8 @@ class Ask extends Component {
 		if (
 			ask.newQuestion === null ||
 			ask.hasQuestionError ||
+			ask.newAnswers[0].length === 0 ||
+			ask.newAnswers[1].length === 0 ||
 			ask.hasAnswersError[0] ||
 			ask.hasAnswersError[1] ||
 			ask.hasAnswersError[2] ||

@@ -7,7 +7,8 @@ import {
 	SAVE_VOTE_START,
 	SAVE_VOTE_DONE,
 	SAVE_VOTE_ERROR,
-	ON_NEXT_ASK
+	ON_NEXT_ASK,
+	ADD_NEW_ASK_TO_STATE
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -72,6 +73,14 @@ export default function(state = initialState, action) {
 					newState.current4DisplayedAsks.push(currentAsk);
 				}
 			}
+			return newState;
+		case ADD_NEW_ASK_TO_STATE:
+			// adds the new user ask into the current4DisplayedAsks
+			newState.current4DisplayedAsks.unshift(action.ask);
+
+			// removes the fifth (old) ask and puts it into the nextAsks
+			const replacedCurrent4DisplayedAsk = newState.current4DisplayedAsks.pop();
+			newState.nextAsks.unshift(replacedCurrent4DisplayedAsk);
 			return newState;
 		default:
 			return state;
