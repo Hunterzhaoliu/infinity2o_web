@@ -102,7 +102,8 @@ class InputVote extends Component {
 	}
 
 	getHeightBetweenCards(current4DisplayedAsks, askIndex) {
-		if (askIndex === 0 || askIndex === 1) {
+		const { windowWidth } = this.props;
+		if (windowWidth >= 1200 && (askIndex === 0 || askIndex === 1)) {
 			// to display to second Ask with the same height as the first Ask
 			const numberOfAsOn1stAsk = current4DisplayedAsks[0].answers.length;
 			let numberOfAsOn2ndAsk = 0;
@@ -113,11 +114,11 @@ class InputVote extends Component {
 			// add height below card on 1st or 2nd Ask to match each other
 			const numberOfAsDiffBetween1stAnd2ndAsk =
 				numberOfAsOn1stAsk - numberOfAsOn2ndAsk;
-			console.log('askIndex = ', askIndex);
-			console.log(
-				'numberOfAsDiffBetween1stAnd2ndAsk = ',
-				numberOfAsDiffBetween1stAnd2ndAsk
-			);
+			// console.log('askIndex = ', askIndex);
+			// console.log(
+			// 	'numberOfAsDiffBetween1stAnd2ndAsk = ',
+			// 	numberOfAsDiffBetween1stAnd2ndAsk
+			// );
 			// can equal -2, -1, 0, 1, or 2
 			if (askIndex === 0) {
 				switch (numberOfAsDiffBetween1stAnd2ndAsk) {
@@ -134,8 +135,7 @@ class InputVote extends Component {
 					default:
 						return '36px';
 				}
-			} else {
-				// askIndex = 1
+			} else if (askIndex === 1) {
 				switch (numberOfAsDiffBetween1stAnd2ndAsk) {
 					case -2:
 						return '36px';
@@ -183,7 +183,13 @@ class InputVote extends Component {
 					}
 
 					return (
-						<Col span={12} key={askIndex}>
+						<Col
+							sm={{ span: 24 }}
+							md={{ span: 24 }}
+							lg={{ span: 24 }}
+							xl={{ span: 12 }}
+							key={askIndex}
+						>
 							<Card
 								style={{
 									borderColor: colorTheme.text8Color,
@@ -233,7 +239,7 @@ class InputVote extends Component {
 							</Card>
 							<Row
 								style={{
-									padding: heightBetweenCards + ' 0px 0px' // top left&right bottom
+									padding: '0px 0px ' + heightBetweenCards // top left&right bottom
 								}}
 							/>
 						</Col>
@@ -302,6 +308,9 @@ class InputVote extends Component {
 				}}
 			>
 				<Row
+					type="flex"
+					justify="center"
+					align="top"
 					style={{
 						padding: '5px 0px 0px' // top left&right bottom
 					}}
@@ -322,7 +331,8 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		trainAI: state.trainAI,
-		mongoDBUserId: state.auth.mongoDBUserId
+		mongoDBUserId: state.auth.mongoDBUserId,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 

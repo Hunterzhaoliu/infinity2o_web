@@ -144,13 +144,13 @@ class TrainAI extends Component {
 					}}
 				>
 					<Col
-						sm={{ span: 5 }}
+						sm={{ span: 0 }}
 						md={{ span: 5 }}
 						lg={{ span: 5 }}
 						xl={{ span: 5 }}
 					/>
 					<Col
-						sm={{ span: 14 }}
+						sm={{ span: 24 }}
 						md={{ span: 14 }}
 						lg={{ span: 14 }}
 						xl={{ span: 14 }}
@@ -158,7 +158,7 @@ class TrainAI extends Component {
 						<InputVote />
 					</Col>
 					<Col
-						sm={{ span: 5 }}
+						sm={{ span: 0 }}
 						md={{ span: 5 }}
 						lg={{ span: 5 }}
 						xl={{ span: 5 }}
