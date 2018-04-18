@@ -6,7 +6,8 @@ import {
 	SAVE_QUESTION_START,
 	SAVE_QUESTION_DONE,
 	SAVE_QUESTION_ERROR,
-	ADD_NEW_ASK_TO_STATE
+	ADD_NEW_ASK_TO_STATE,
+	ON_CLICK_REMOVE_ANSWER
 } from './types';
 
 import { isValidQuestion, isValidAnswer } from '../utils/validateAsk';
@@ -29,6 +30,10 @@ export const onChangeQuestion = newQuestion => dispatch => {
 
 export const onClickAddAnswer = () => dispatch => {
 	dispatch({ type: ON_CLICK_ADD_ANSWER });
+};
+
+export const onClickRemoveAnswer = () => dispatch => {
+	dispatch({ type: ON_CLICK_REMOVE_ANSWER });
 };
 
 export const onChangeAnswer = (newAnswer, answerIndex) => dispatch => {
@@ -64,7 +69,7 @@ export const saveAsk = (ask, history) => async dispatch => {
 	const response = await axios.post('/api/ask', ask);
 	if (response.status === 200) {
 		// sends new Ask to trainAI reducer
-		dispatch({ type: ADD_NEW_ASK_TO_STATE, ask: response.data})
+		dispatch({ type: ADD_NEW_ASK_TO_STATE, ask: response.data });
 		dispatch({ type: SAVE_QUESTION_DONE });
 		history.push('/train_ai');
 	} else {

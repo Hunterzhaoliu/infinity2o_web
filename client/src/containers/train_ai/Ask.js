@@ -20,11 +20,6 @@ class Ask extends Component {
 		this.props.onChangeQuestion(e.target.value);
 	};
 
-	onClickAddAnswer = () => {
-		//console.log('this.props = ', this.props);
-		this.props.onClickAddAnswer();
-	};
-
 	onChangeAnswer = e => {
 		this.props.onChangeAnswer(e.target.value, e.target.name);
 	};
@@ -49,13 +44,13 @@ class Ask extends Component {
 							lg={{ span: 5 }}
 							xl={{ span: 3 }}
 						>
-							<h4
+							<h3
 								style={{
-									color: colorTheme.keyText5Color
+									color: colorTheme.text5Color
 								}}
 							>
 								Answer {key + 1}:
-							</h4>
+							</h3>
 						</Col>
 						<Col
 							sm={{ span: 6, offset: 0 }}
@@ -125,14 +120,15 @@ class Ask extends Component {
 		}
 	}
 
-	renderAddAnswerButton(displayAddAnswerButton, colorTheme) {
-		if (displayAddAnswerButton) {
+	renderRemoveAnswerButton(displayRemoveAnswerButton, colorTheme) {
+		const { onClickRemoveAnswer } = this.props;
+		if (displayRemoveAnswerButton) {
 			return (
 				<Row
 					type="flex"
 					justify="start"
 					style={{
-						padding: '1% 0% 0%' // top left&right bottom
+						padding: '3% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col
@@ -148,7 +144,43 @@ class Ask extends Component {
 								background: colorTheme.key,
 								color: colorTheme.text2Color
 							}}
-							onClick={this.onClickAddAnswer}
+							onClick={onClickRemoveAnswer}
+						>
+							Remove Answer
+						</Button>
+					</Col>
+				</Row>
+			);
+		} else {
+			return;
+		}
+	}
+
+	renderAddAnswerButton(displayAddAnswerButton, colorTheme) {
+		const { onClickAddAnswer } = this.props;
+		if (displayAddAnswerButton) {
+			return (
+				<Row
+					type="flex"
+					justify="start"
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col
+						sm={{ span: 5 }}
+						md={{ span: 5 }}
+						lg={{ span: 5 }}
+						xl={{ span: 3 }}
+					/>
+					<Col>
+						<Button
+							style={{
+								borderColor: colorTheme.key,
+								background: colorTheme.key,
+								color: colorTheme.text2Color
+							}}
+							onClick={onClickAddAnswer}
 						>
 							Add Answer
 						</Button>
@@ -183,7 +215,7 @@ class Ask extends Component {
 					>
 						<h3
 							style={{
-								color: colorTheme.keyText5Color
+								color: colorTheme.text5Color
 							}}
 						>
 							Question:
@@ -229,6 +261,10 @@ class Ask extends Component {
 					ask.displayAddAnswerButton,
 					colorTheme
 				)}
+				{this.renderRemoveAnswerButton(
+					ask.displayRemoveAnswerButton,
+					colorTheme
+				)}
 				<Row
 					type="flex"
 					justify="start"
@@ -268,7 +304,6 @@ class Ask extends Component {
 				<Row
 					type="flex"
 					justify="start"
-					align="middle"
 					style={{
 						padding: '0% 0% 0%' // top left&right bottom
 					}}
@@ -337,6 +372,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		onClickAddAnswer: () => {
 			askDispatchers.onClickAddAnswer();
+		},
+		onClickRemoveAnswer: () => {
+			askDispatchers.onClickRemoveAnswer();
 		},
 		onChangeAnswer: (newAnswer, answerIndex) => {
 			askDispatchers.onChangeAnswer(newAnswer, answerIndex);
