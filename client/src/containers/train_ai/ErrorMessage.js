@@ -16,20 +16,19 @@ class ErrorMessage extends Component {
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col
-					sm={{ span: 7 }}
-					md={{ span: 7 }}
-					lg={{ span: 7 }}
-					xl={{ span: 5 }}
+					sm={{ span: 5 }}
+					md={{ span: 5 }}
+					lg={{ span: 5 }}
+					xl={{ span: 3 }}
 				/>
 				<Col
-					sm={{ span: 17 }}
-					md={{ span: 17 }}
-					lg={{ span: 17 }}
-					xl={{ span: 19 }}
+					sm={{ span: 19 }}
+					md={{ span: 19 }}
+					lg={{ span: 19 }}
+					xl={{ span: 21 }}
 				>
 					<div
 						style={{
-							marginBottom: '10px',
 							color: colorTheme.keyText1Color
 						}}
 					>

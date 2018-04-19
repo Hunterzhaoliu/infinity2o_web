@@ -4,7 +4,9 @@ import {
 	ON_CHANGE_ANSWER,
 	SAVE_QUESTION_START,
 	SAVE_QUESTION_DONE,
-	SAVE_QUESTION_ERROR
+	SAVE_QUESTION_ERROR,
+	ON_CLICK_REMOVE_ANSWER,
+	DUPLICATE_ANSWER_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -13,11 +15,13 @@ let cloneObject = obj => {
 
 let initialState = {
 	newQuestion: null,
-	newAnswers: [],
+	newAnswers: ['', ''],
 	questionLength: 0,
 	hasQuestionError: false,
 	hasAnswersError: [false, false, false, false],
 	displayAddAnswerButton: true,
+	displayRemoveAnswerButton: false,
+	hasDuplicateAnswerError: false,
 	save: null
 };
 
@@ -35,11 +39,39 @@ export default function(state = initialState, action) {
 				if (newState.newAnswers.length === 4) {
 					newState.displayAddAnswerButton = false;
 				}
+				if (newState.newAnswers.length >= 3) {
+					newState.displayRemoveAnswerButton = true;
+				}
 			}
 			return newState;
 		case ON_CHANGE_ANSWER:
 			newState.newAnswers[action.answerIndex] = action.newAnswer;
 			newState.hasAnswersError[action.answerIndex] = action.hasError;
+			return newState;
+		case DUPLICATE_ANSWER_ERROR:
+			newState.hasDuplicateAnswerError = action.has;
+			return newState;
+		case ON_CLICK_REMOVE_ANSWER:
+			newState.newAnswers.pop();
+			if (newState.newAnswers.length <= 2) {
+				newState.displayRemoveAnswerButton = false;
+			}
+			if (newState.newAnswers.length < 4) {
+				newState.displayAddAnswerButton = true;
+			}
+
+			let foundDuplicate = false;
+			const answerIndex = 0;
+			const newAnswer = newState.newAnswers[answerIndex];
+			for (let i = 0; i < newState.newAnswers.length; i++) {
+				if (newAnswer === newState.newAnswers[i] && i !== answerIndex) {
+					newState.hasDuplicateAnswerError = true;
+					foundDuplicate = true;
+				}
+			}
+			if (!foundDuplicate) {
+				newState.hasDuplicateAnswerError = false;
+			}
 			return newState;
 		case SAVE_QUESTION_START:
 			newState.save = 'save_start';

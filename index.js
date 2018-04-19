@@ -86,7 +86,6 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on('disconnect', async function() {
-		console.log('user disconnected with socket.id = ', socket.id);
 		// remove document from ClientInConversation collection
 		try {
 			await ClientInConversationCollection.deleteOne({
