@@ -21,7 +21,12 @@ class Ask extends Component {
 	};
 
 	onChangeAnswer = e => {
-		this.props.onChangeAnswer(e.target.value, e.target.name);
+		const { ask } = this.props;
+		this.props.onChangeAnswer(
+			e.target.value,
+			e.target.name,
+			ask.newAnswers
+		);
 	};
 
 	renderAnswerInputs(newAnswers) {
@@ -87,6 +92,10 @@ class Ask extends Component {
 					<ErrorMessage
 						message="Between 1 & 25 characters"
 						hasError={ask.hasAnswersError[key]}
+					/>
+					<ErrorMessage
+						message="No duplicate answers pretty please"
+						hasError={ask.hasDuplicateAnswerError}
 					/>
 				</div>
 			);
@@ -376,8 +385,12 @@ function mapDispatchToProps(dispatch) {
 		onClickRemoveAnswer: () => {
 			askDispatchers.onClickRemoveAnswer();
 		},
-		onChangeAnswer: (newAnswer, answerIndex) => {
-			askDispatchers.onChangeAnswer(newAnswer, answerIndex);
+		onChangeAnswer: (newAnswer, answerIndex, previousAnswers) => {
+			askDispatchers.onChangeAnswer(
+				newAnswer,
+				answerIndex,
+				previousAnswers
+			);
 		},
 		saveAsk: (ask, history) => {
 			askDispatchers.saveAsk(ask, history);

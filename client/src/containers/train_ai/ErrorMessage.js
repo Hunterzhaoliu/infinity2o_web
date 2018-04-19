@@ -29,7 +29,6 @@ class ErrorMessage extends Component {
 				>
 					<div
 						style={{
-							marginBottom: '10px',
 							color: colorTheme.keyText1Color
 						}}
 					>

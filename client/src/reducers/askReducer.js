@@ -5,7 +5,8 @@ import {
 	SAVE_QUESTION_START,
 	SAVE_QUESTION_DONE,
 	SAVE_QUESTION_ERROR,
-	ON_CLICK_REMOVE_ANSWER
+	ON_CLICK_REMOVE_ANSWER,
+	DUPLICATE_ANSWER_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -20,7 +21,7 @@ let initialState = {
 	hasAnswersError: [false, false, false, false],
 	displayAddAnswerButton: true,
 	displayRemoveAnswerButton: false,
-	hasSameAnswerError: false,
+	hasDuplicateAnswerError: false,
 	save: null
 };
 
@@ -46,23 +47,9 @@ export default function(state = initialState, action) {
 		case ON_CHANGE_ANSWER:
 			newState.newAnswers[action.answerIndex] = action.newAnswer;
 			newState.hasAnswersError[action.answerIndex] = action.hasError;
-
-			const currentAnswer = newState.newAnswers[action.answerIndex];
-			// check current answer with all other answers
-			for (let i = 0; i < newState.newAnswers.length; i++) {
-				console.log('i = ', i);
-				console.log('action.answerIndex = ', action.answerIndex);
-				if (i !== action.answerIndex) {
-					console.log('currentAnswer = ', currentAnswer);
-					console.log(
-						'newState.newAnswers[i] = ',
-						newState.newAnswers[i]
-					);
-					if (currentAnswer === newState.newAnswers[i]) {
-						newState.hasSameAnswerError = true;
-					}
-				}
-			}
+			return newState;
+		case DUPLICATE_ANSWER_ERROR:
+			newState.hasDuplicateAnswerError = action.has;
 			return newState;
 		case ON_CLICK_REMOVE_ANSWER:
 			newState.newAnswers.pop();
@@ -71,6 +58,19 @@ export default function(state = initialState, action) {
 			}
 			if (newState.newAnswers.length < 4) {
 				newState.displayAddAnswerButton = true;
+			}
+
+			let foundDuplicate = false;
+			const answerIndex = 0;
+			const newAnswer = newState.newAnswers[answerIndex];
+			for (let i = 0; i < newState.newAnswers.length; i++) {
+				if (newAnswer === newState.newAnswers[i] && i !== answerIndex) {
+					newState.hasDuplicateAnswerError = true;
+					foundDuplicate = true;
+				}
+			}
+			if (!foundDuplicate) {
+				newState.hasDuplicateAnswerError = false;
 			}
 			return newState;
 		case SAVE_QUESTION_START:

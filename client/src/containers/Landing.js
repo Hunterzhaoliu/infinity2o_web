@@ -23,7 +23,7 @@ class Landing extends Component {
 		const why_part_5 = `the best teachers`;
 		const why_part_6 = `are amazing but too lonely.`;
 
-		const how = `Join our community and train an AI to find the best partners for you.`;
+		const how = `Join our community and train an AI to find the best study partners for you.`;
 		const why = `Online classes from the best teachers are amazing but too lonely.`;
 		switch (auth.loggedInState) {
 			case 'not_logged_in':
