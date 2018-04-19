@@ -81,7 +81,7 @@ class TrainAI extends Component {
 						lg={{ span: 12 }}
 						xl={{ span: 10 }}
 					>
-						<h3
+						<h2
 							style={{
 								textAlign: 'center',
 								color: colorTheme.text3Color
@@ -89,7 +89,7 @@ class TrainAI extends Component {
 						>
 							Find partners by asking questions that matter to
 							you:
-						</h3>
+						</h2>
 					</Col>
 					<Col
 						sm={{ span: 5 }}

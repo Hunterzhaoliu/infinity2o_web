@@ -3,13 +3,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as trainAIActionCreators from '../../actions/trainAI';
 import { bindActionCreators } from 'redux';
-import { Button, Card, Col, Layout, Row, Icon, Input } from 'antd';
-const Search = Input.Search;
+import { Button, Card, Col, Layout, Row, Icon } from 'antd';
 const { Content } = Layout;
 
 class InputVote extends Component {
 	componentWillMount() {
 		// run once before first render()
+	}
+
+	componentDidMount() {
+		// run once after first render()
+		this.props.onNewestAsks();
 	}
 
 	onVote(answerIndex, askIndex, askId) {
@@ -298,8 +302,15 @@ class InputVote extends Component {
 			return 'Total Votes:  ' + String(askTotalVotes);
 		}
 	}
+
 	render() {
-		const { colorTheme } = this.props;
+		const {
+			colorTheme,
+			onNewestAsks,
+			onPopularAsks,
+			onControversialAsks,
+			theme
+		} = this.props;
 		//console.log('this.props in InputVote.js', this.props);
 		return (
 			<Content
@@ -316,63 +327,56 @@ class InputVote extends Component {
 						padding: '0px 0px 15px' // top left&right bottom
 					}}
 				>
-					<Col span={2}>
+					<Col
+						sm={{ span: 7 }}
+						md={{ span: 6 }}
+						lg={{ span: 5 }}
+						xl={{ span: 4 }}
+					>
 						<Button
-							key="1"
 							style={{
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text1Color
+								borderColor: theme.newestButtonColor,
+								background: theme.newestButtonColor,
+								color: theme.newestButtonTextColor
 							}}
+							onClick={onNewestAsks}
 						>
 							Newest
 						</Button>
 					</Col>
-					<Col span={4}>
+					<Col
+						sm={{ span: 7 }}
+						md={{ span: 6 }}
+						lg={{ span: 5 }}
+						xl={{ span: 4 }}
+					>
 						<Button
-							key="1"
 							style={{
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text1Color
+								borderColor: theme.popularButtonColor,
+								background: theme.popularButtonColor,
+								color: theme.popularButtonTextColor
 							}}
+							onClick={onPopularAsks}
 						>
 							Popular
 						</Button>
 					</Col>
-					<Col span={4}>
+					<Col
+						sm={{ span: 8 }}
+						md={{ span: 7 }}
+						lg={{ span: 6 }}
+						xl={{ span: 5 }}
+					>
 						<Button
-							key="1"
 							style={{
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text1Color
+								borderColor: theme.controversialButtonColor,
+								background: theme.controversialButtonColor,
+								color: theme.controversialButtonTextColor
 							}}
+							onClick={onControversialAsks}
 						>
 							Controversial
 						</Button>
-					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="center"
-					align="top"
-					style={{
-						padding: '0px 0px 15px' // top left&right bottom
-					}}
-				>
-					<Col>
-						<Search
-							style={{
-								borderColor: colorTheme.key,
-								background: colorTheme.key,
-								color: colorTheme.key,
-								width: 400
-							}}
-							placeholder="Search for a question"
-							onSearch={value => console.log(value)}
-							enterButton
-						/>
 					</Col>
 				</Row>
 				<Row
@@ -400,7 +404,8 @@ function mapStateToProps(state) {
 		colorTheme: state.colorTheme,
 		trainAI: state.trainAI,
 		mongoDBUserId: state.auth.mongoDBUserId,
-		windowWidth: state.customHeader.windowWidth
+		windowWidth: state.customHeader.windowWidth,
+		theme: state.trainAI.theme
 	};
 }
 
@@ -415,6 +420,15 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
+		onNewestAsks: () => {
+			trainAIDispatchers.onNewestAsks();
+		},
+		onPopularAsks: () => {
+			trainAIDispatchers.onPopularAsks();
+		},
+		onControversialAsks: () => {
+			trainAIDispatchers.onControversialAsks();
+		},
 		onNextAsk: (nextAsks, removeAskIndex, mongoDBUserId) => {
 			trainAIDispatchers.onNextAsk(
 				nextAsks,

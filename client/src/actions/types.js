@@ -30,6 +30,11 @@ export const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS';
 export const UPDATE_NEURONS = 'UPDATE_NEURONS';
 export const PAYMENT_ERROR = 'PAYMENT_ERROR';
 
+// train_ai/InputVote.js
+export const ON_NEWEST_ASKS = 'ON_NEWEST_ASKS';
+export const ON_POPULAR_ASKS = 'ON_POPULAR_ASKS';
+export const ON_CONTROVERSIAL_ASKS = 'ON_CONTROVERSIAL_ASKS';
+
 // train_ai/Ask.js
 export const ON_CHANGE_QUESTION = 'ON_CHANGE_QUESTION';
 export const ON_CLICK_ADD_ANSWER = 'ON_CLICK_ADD_ANSWER';

@@ -8,8 +8,29 @@ import {
 	SAVE_VOTE_START,
 	SAVE_VOTE_DONE,
 	SAVE_VOTE_ERROR,
-	ON_NEXT_ASK
+	ON_NEXT_ASK,
+	ON_NEWEST_ASKS,
+	ON_POPULAR_ASKS,
+	ON_CONTROVERSIAL_ASKS
 } from './types';
+
+export const onNewestAsks = colorTheme => dispatch => {
+	dispatch({
+		type: ON_NEWEST_ASKS
+	});
+};
+
+export const onPopularAsks = colorTheme => dispatch => {
+	dispatch({
+		type: ON_POPULAR_ASKS
+	});
+};
+
+export const onControversialAsks = colorTheme => dispatch => {
+	dispatch({
+		type: ON_CONTROVERSIAL_ASKS
+	});
+};
 
 export const onVote = (
 	answerIndex,

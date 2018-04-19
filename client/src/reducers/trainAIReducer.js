@@ -8,8 +8,13 @@ import {
 	SAVE_VOTE_DONE,
 	SAVE_VOTE_ERROR,
 	ON_NEXT_ASK,
-	ADD_NEW_ASK_TO_STATE
+	ADD_NEW_ASK_TO_STATE,
+	ON_NEWEST_ASKS,
+	ON_POPULAR_ASKS,
+	ON_CONTROVERSIAL_ASKS
 } from '../actions/types';
+
+import { store } from '../index';
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
@@ -19,7 +24,15 @@ let initialState = {
 	current4DisplayedAsks: [],
 	nextAsks: [],
 	votes: {},
-	save: {}
+	save: {},
+	theme: {
+		newestButtonColor: null,
+		newestButtonTextColor: null,
+		popularButtonColor: null,
+		popularButtonTextColor: null,
+		controversialButtonColor: null,
+		controversialButtonTextColor: null
+	}
 };
 
 export default function(state = initialState, action) {
@@ -51,7 +64,9 @@ export default function(state = initialState, action) {
 		case ON_NEXT_ASK:
 			if (newState.nextAsks.length > 0) {
 				const replacementAsk = newState.nextAsks.shift();
-				newState.current4DisplayedAsks[action.removeAskIndex] = replacementAsk;
+				newState.current4DisplayedAsks[
+					action.removeAskIndex
+				] = replacementAsk;
 			} else {
 				// no new replacementAsk so just remove ask from display
 				// splice removes one element from index action.removeAskIndex
@@ -81,6 +96,37 @@ export default function(state = initialState, action) {
 			// removes the fifth (old) ask and puts it into the nextAsks
 			const replacedCurrent4DisplayedAsk = newState.current4DisplayedAsks.pop();
 			newState.nextAsks.unshift(replacedCurrent4DisplayedAsk);
+			return newState;
+		case ON_NEWEST_ASKS:
+			const currentTheme = store.getState().colorTheme;
+			newState.theme.newestButtonColor = currentTheme.keyText6Color;
+			newState.theme.newestButtonTextColor = currentTheme.text1Color;
+			newState.theme.popularButtonColor = currentTheme.text8Color;
+			newState.theme.popularButtonTextColor = currentTheme.text5Color;
+			newState.theme.controversialButtonColor = currentTheme.text8Color;
+			newState.theme.controversialButtonTextColor =
+				currentTheme.text5Color;
+			return newState;
+		case ON_POPULAR_ASKS:
+			const currentTheme2 = store.getState().colorTheme;
+			newState.theme.newestButtonColor = currentTheme2.text8Color;
+			newState.theme.newestButtonTextColor = currentTheme2.text5Color;
+			newState.theme.popularButtonColor = currentTheme2.keyText6Color;
+			newState.theme.popularButtonTextColor = currentTheme2.text1Color;
+			newState.theme.controversialButtonColor = currentTheme2.text8Color;
+			newState.theme.controversialButtonTextColor =
+				currentTheme2.text5Color;
+			return newState;
+		case ON_CONTROVERSIAL_ASKS:
+			const currentTheme3 = store.getState().colorTheme;
+			newState.theme.newestButtonColor = currentTheme3.text8Color;
+			newState.theme.newestButtonTextColor = currentTheme3.text5Color;
+			newState.theme.popularButtonColor = currentTheme3.text8Color;
+			newState.theme.popularButtonTextColor = currentTheme3.text5Color;
+			newState.theme.controversialButtonColor =
+				currentTheme3.keyText6Color;
+			newState.theme.controversialButtonTextColor =
+				currentTheme3.text1Color;
 			return newState;
 		default:
 			return state;
