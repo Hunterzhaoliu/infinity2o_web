@@ -128,9 +128,9 @@ class Profile extends Component {
 					<Col>
 						<Button
 							style={{
-								borderColor: colorTheme.key,
-								background: colorTheme.key,
-								color: colorTheme.text1Color
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text3Color
 							}}
 						>
 							<a href="/profile/edit">Edit</a>

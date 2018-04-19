@@ -100,8 +100,8 @@ class TrainAI extends Component {
 						<Button
 							key="1"
 							style={{
-								borderColor: colorTheme.key,
-								background: colorTheme.key,
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
 								color: colorTheme.text1Color
 							}}
 						>
@@ -130,7 +130,7 @@ class TrainAI extends Component {
 								color: colorTheme.text3Color
 							}}
 						>
-							Or vote on answers that matter to you:
+							Or vote on questions that matter to you:
 						</h2>
 					</Col>
 				</Row>

@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as trainAIActionCreators from '../../actions/trainAI';
 import { bindActionCreators } from 'redux';
-import { Button, Card, Col, Layout, Row, Icon } from 'antd';
+import { Button, Card, Col, Layout, Row, Icon, Input } from 'antd';
+const Search = Input.Search;
 const { Content } = Layout;
 
 class InputVote extends Component {
@@ -307,6 +308,73 @@ class InputVote extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
+				<Row
+					type="flex"
+					justify="center"
+					align="middle"
+					style={{
+						padding: '0px 0px 15px' // top left&right bottom
+					}}
+				>
+					<Col span={2}>
+						<Button
+							key="1"
+							style={{
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text1Color
+							}}
+						>
+							Newest
+						</Button>
+					</Col>
+					<Col span={4}>
+						<Button
+							key="1"
+							style={{
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text1Color
+							}}
+						>
+							Popular
+						</Button>
+					</Col>
+					<Col span={4}>
+						<Button
+							key="1"
+							style={{
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text1Color
+							}}
+						>
+							Controversial
+						</Button>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					align="top"
+					style={{
+						padding: '0px 0px 15px' // top left&right bottom
+					}}
+				>
+					<Col>
+						<Search
+							style={{
+								borderColor: colorTheme.key,
+								background: colorTheme.key,
+								color: colorTheme.key,
+								width: 400
+							}}
+							placeholder="Search for a question"
+							onSearch={value => console.log(value)}
+							enterButton
+						/>
+					</Col>
+				</Row>
 				<Row
 					type="flex"
 					justify="center"
