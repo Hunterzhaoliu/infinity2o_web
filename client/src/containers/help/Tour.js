@@ -76,7 +76,7 @@ class Tour extends Component {
 
 	render() {
 		const { colorTheme } = this.props;
-		const welcome = `How do I use infinity2o?`;
+		const welcome = `Welcome to Infinity2o`;
 		return (
 			<Content
 				style={{
