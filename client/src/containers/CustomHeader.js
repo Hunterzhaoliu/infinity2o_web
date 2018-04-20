@@ -29,20 +29,52 @@ class CustomHeader extends Component {
 		this.props.updateWindowWidth(window.innerWidth);
 	}
 
+	renderSaveIcon(saveState) {
+		if (saveState === 'save_start') {
+			return <Icon type="loading" />;
+		} else if (saveState === 'save_done') {
+			return <Icon type="check" />;
+		} else if (saveState === 'save_error') {
+			return <Icon type="warning" />;
+		}
+	}
+
 	renderChangeThemeButton() {
-		const { colorTheme, onRandomColorTheme } = this.props;
-		return (
-			<Button
-				style={{
-					borderColor: colorTheme.text7Color,
-					background: colorTheme.text7Color,
-					color: colorTheme.text2Color
-				}}
-				onClick={onRandomColorTheme}
-			>
-				Change Theme
-			</Button>
-		);
+		const {
+			colorTheme,
+			onRandomColorTheme,
+			loggedInState,
+			nonLoggedInGenerateRandomColorTheme,
+			colorThemeSave
+		} = this.props;
+		if (loggedInState === 'not_logged_in') {
+			return (
+				<Button
+					style={{
+						borderColor: colorTheme.text7Color,
+						background: colorTheme.text7Color,
+						color: colorTheme.text2Color
+					}}
+					onClick={nonLoggedInGenerateRandomColorTheme}
+				>
+					Change Theme
+				</Button>
+			);
+		} else if (loggedInState === 'logged_in') {
+			return (
+				<Button
+					style={{
+						borderColor: colorTheme.text7Color,
+						background: colorTheme.text7Color,
+						color: colorTheme.text2Color
+					}}
+					onClick={onRandomColorTheme}
+				>
+					Change Theme
+					{this.renderSaveIcon(colorThemeSave)}
+				</Button>
+			);
+		}
 	}
 
 	renderTourButton() {
@@ -332,7 +364,9 @@ function mapStateToProps(state) {
 		colorTheme: state.colorTheme,
 		neuronsInBillions: state.profile.payment.neuronsInBillions,
 		infinityStatus: state.profile.payment.infinityStatus,
-		windowWidth: state.customHeader.windowWidth
+		windowWidth: state.customHeader.windowWidth,
+		loggedInState: state.auth.loggedInState,
+		colorThemeSave: state.profile.colorThemeSave
 	};
 }
 
@@ -353,6 +387,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		onRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();
+		},
+		nonLoggedInGenerateRandomColorTheme: () => {
+			colorThemeDispatchers.nonLoggedInGenerateRandomColorTheme();
 		},
 		onProfile: () => {
 			colorThemeDispatchers.onProfile();

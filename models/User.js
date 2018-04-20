@@ -11,6 +11,10 @@ const userSchema = new Schema({
 		location: String
 	},
 	profile: {
+		colorTheme: {
+			savedBackgroundColor: String,
+			savedColorPallateIndex: { type: Number }
+		},
 		name: String,
 		age: { type: Number },
 		interests: [String],

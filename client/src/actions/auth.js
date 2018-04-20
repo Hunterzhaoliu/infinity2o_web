@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { SAVE_FETCHED_USER_AUTH, SAVE_FETCHED_USER_PROFILE } from './types';
-import { generateRandomColorThemeWith } from './colorTheme';
+import {
+	generateRandomColorThemeWith,
+	updateWithSavedColorTheme
+} from './colorTheme';
 import { fetchUserTrainAIAsks } from './trainAI';
 import { fetchUserMatches } from './matches';
+import { store } from '../index';
 
 export const initializeApp = () => async dispatch => {
 	const response = await axios.get('/api/current_user');
@@ -21,8 +25,11 @@ export const initializeApp = () => async dispatch => {
 		}
 	}
 
-	// TODO: store previous color theme into database so we don't constantly switch
-	generateRandomColorThemeWith(dispatch);
+	if (store.getState().auth.loggedInState === 'not_logged_in') {
+		generateRandomColorThemeWith(dispatch);
+	} else {
+		updateWithSavedColorTheme(dispatch, response.data.profile.colorTheme);
+	}
 };
 
 export const fetchUserProfile = () => async dispatch => {
