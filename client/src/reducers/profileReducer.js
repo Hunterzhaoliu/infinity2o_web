@@ -12,7 +12,10 @@ import {
 	DECREMENT_NEURONS_ERROR,
 	PAYMENT_SUCCESS,
 	UPDATE_NEURONS,
-	PAYMENT_ERROR
+	PAYMENT_ERROR,
+	SAVE_COLOR_THEME_START,
+	SAVE_COLOR_THEME_DONE,
+	SAVE_COLOR_THEME_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -41,7 +44,8 @@ let initialState = {
 		hasDecrementNeuronsError: false,
 		hasPaymentError: false,
 		infinityStatus: false
-	}
+	},
+	colorThemeSave: null
 };
 
 export default function(state = initialState, action) {
@@ -62,6 +66,15 @@ export default function(state = initialState, action) {
 				newState.asks = action.profile.asks;
 				newState.payment = action.profile.payment;
 			}
+			return newState;
+		case SAVE_COLOR_THEME_START:
+			newState.colorThemeSave = 'save_start';
+			return newState;
+		case SAVE_COLOR_THEME_DONE:
+			newState.colorThemeSave = 'save_done';
+			return newState;
+		case SAVE_COLOR_THEME_ERROR:
+			newState.colorThemeSave = 'save_error';
 			return newState;
 		case ON_CHANGE_NAME:
 			newState.newName = action.newName;
