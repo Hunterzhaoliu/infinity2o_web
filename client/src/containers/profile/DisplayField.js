@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
 
 class DisplayField extends Component {
+	numberWithCommas = x => {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	};
+
 	renderValue(label, value) {
 		const { infinityStatus } = this.props;
 
@@ -18,8 +22,14 @@ class DisplayField extends Component {
 				let displayNeuronsInBillions = value;
 				if (displayNeuronsInBillions !== undefined) {
 					displayNeuronsInBillions *= 1000000000;
+					let finalDisplayString =
+						this.numberWithCommas(displayNeuronsInBillions) +
+						' (' +
+						value +
+						' Billion)';
+
+					return finalDisplayString;
 				}
-				return displayNeuronsInBillions;
 			} else if (
 				value === null ||
 				value === undefined ||

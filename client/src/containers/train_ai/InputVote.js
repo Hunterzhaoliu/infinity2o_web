@@ -11,11 +11,6 @@ class InputVote extends Component {
 		// run once before first render()
 	}
 
-	componentDidMount() {
-		// run once after first render()
-		this.props.onNewestAsks();
-	}
-
 	onVote(answerIndex, askIndex, askId) {
 		const { trainAI } = this.props;
 		// now we know which answer user pressed so let's pass the answesId too
@@ -303,14 +298,80 @@ class InputVote extends Component {
 		}
 	}
 
-	render() {
+	renderAskCategories() {
 		const {
-			colorTheme,
 			onNewestAsks,
 			onPopularAsks,
 			onControversialAsks,
 			theme
 		} = this.props;
+
+		return (
+			<Row
+				type="flex"
+				justify="center"
+				align="middle"
+				style={{
+					padding: '0px 0px 15px' // top left&right bottom
+				}}
+			>
+				<Col
+					sm={{ span: 7 }}
+					md={{ span: 6 }}
+					lg={{ span: 5 }}
+					xl={{ span: 4 }}
+				>
+					<Button
+						style={{
+							borderColor: theme.newestButtonColor,
+							background: theme.newestButtonColor,
+							color: theme.newestButtonTextColor
+						}}
+						onClick={onNewestAsks}
+					>
+						Newest
+					</Button>
+				</Col>
+				<Col
+					sm={{ span: 7 }}
+					md={{ span: 6 }}
+					lg={{ span: 5 }}
+					xl={{ span: 4 }}
+				>
+					<Button
+						style={{
+							borderColor: theme.popularButtonColor,
+							background: theme.popularButtonColor,
+							color: theme.popularButtonTextColor
+						}}
+						onClick={onPopularAsks}
+					>
+						Popular
+					</Button>
+				</Col>
+				<Col
+					sm={{ span: 8 }}
+					md={{ span: 7 }}
+					lg={{ span: 6 }}
+					xl={{ span: 5 }}
+				>
+					<Button
+						style={{
+							borderColor: theme.controversialButtonColor,
+							background: theme.controversialButtonColor,
+							color: theme.controversialButtonTextColor
+						}}
+						onClick={onControversialAsks}
+					>
+						Controversial
+					</Button>
+				</Col>
+			</Row>
+		);
+	}
+
+	render() {
+		const { colorTheme } = this.props;
 		//console.log('this.props in InputVote.js', this.props);
 		return (
 			<Content
@@ -319,66 +380,7 @@ class InputVote extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Row
-					type="flex"
-					justify="center"
-					align="middle"
-					style={{
-						padding: '0px 0px 15px' // top left&right bottom
-					}}
-				>
-					<Col
-						sm={{ span: 7 }}
-						md={{ span: 6 }}
-						lg={{ span: 5 }}
-						xl={{ span: 4 }}
-					>
-						<Button
-							style={{
-								borderColor: theme.newestButtonColor,
-								background: theme.newestButtonColor,
-								color: theme.newestButtonTextColor
-							}}
-							onClick={onNewestAsks}
-						>
-							Newest
-						</Button>
-					</Col>
-					<Col
-						sm={{ span: 7 }}
-						md={{ span: 6 }}
-						lg={{ span: 5 }}
-						xl={{ span: 4 }}
-					>
-						<Button
-							style={{
-								borderColor: theme.popularButtonColor,
-								background: theme.popularButtonColor,
-								color: theme.popularButtonTextColor
-							}}
-							onClick={onPopularAsks}
-						>
-							Popular
-						</Button>
-					</Col>
-					<Col
-						sm={{ span: 8 }}
-						md={{ span: 7 }}
-						lg={{ span: 6 }}
-						xl={{ span: 5 }}
-					>
-						<Button
-							style={{
-								borderColor: theme.controversialButtonColor,
-								background: theme.controversialButtonColor,
-								color: theme.controversialButtonTextColor
-							}}
-							onClick={onControversialAsks}
-						>
-							Controversial
-						</Button>
-					</Col>
-				</Row>
+				{/* {this.renderAskCategories()} */}
 				<Row
 					type="flex"
 					justify="center"

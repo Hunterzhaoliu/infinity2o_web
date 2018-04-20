@@ -16,7 +16,9 @@ class Profile extends Component {
 		this.props.onProfile();
 	}
 
-	renderProfile(colorTheme, profile) {
+	renderProfile() {
+		const { colorTheme, profile } = this.props;
+
 		let neuronsInBillions = profile.payment.neuronsInBillions;
 		if (neuronsInBillions !== undefined) {
 			neuronsInBillions = neuronsInBillions.toFixed(1);
@@ -204,13 +206,12 @@ class Profile extends Component {
 		}
 	}
 
-	render() {
-		const { colorTheme, profile } = this.props;
+	renderPurchaseNeurons() {
+		const { colorTheme } = this.props;
 		return (
-			<Content
+			<div
 				style={{
-					padding: '75px 50px 0px', // top left&right bottom
-					background: colorTheme.backgroundColor
+					padding: '25px 0px 0px' // top left&right bottom
 				}}
 			>
 				<Row type="flex" justify="start" align="middle">
@@ -246,6 +247,19 @@ class Profile extends Component {
 						<Options />
 					</Col>
 				</Row>
+			</div>
+		);
+	}
+
+	render() {
+		const { colorTheme, profile } = this.props;
+		return (
+			<Content
+				style={{
+					padding: '75px 50px 0px', // top left&right bottom
+					background: colorTheme.backgroundColor
+				}}
+			>
 				<Row type="flex" justify="start" align="middle">
 					<Col
 						sm={{ span: 0 }}
@@ -259,7 +273,8 @@ class Profile extends Component {
 						lg={{ span: 19 }}
 						xl={{ span: 19 }}
 					>
-						{this.renderProfile(colorTheme, profile)}
+						{this.renderProfile()}
+						{this.renderPurchaseNeurons()}
 						<Row>
 							<h2
 								style={{

@@ -12,8 +12,11 @@ const userSchema = new Schema({
 	},
 	profile: {
 		colorTheme: {
-			savedBackgroundColor: String,
-			savedColorPallateIndex: { type: Number }
+			savedBackgroundColor: {
+				type: String,
+				default: 'rgb(229, 229, 229)'
+			},
+			savedColorPallateIndex: { type: Number, default: 4 }
 		},
 		name: String,
 		age: { type: Number },
