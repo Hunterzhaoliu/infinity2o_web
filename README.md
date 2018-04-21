@@ -55,11 +55,11 @@ Fake accounts for posting on coursera.org, etc.
 1. Coursera.org username = `emn1over12@gmail.com` & password = `21xxxxx@ix`
 
 ```
-Hi ,
+Created a website to help you find someone to take online classes with www.infinity2o.com
 
-Have you heard about this website called www.infinity2o.com? I heard about it from my friend. It's suppose to connect people that want to take online classes together. I've joined it and it uses an AI to match you with someone else to take online classes with based on your beliefs.
+I love taking online classes from coursera.org and edx.org but I ended up not finishing a lot of them because it was too lonely. I created a site www.infinity2o.com to match people with each other based on their beliefs to take online classes together.
 
-~ Samantha
+~ Q
 ```
 
 Local development setup:
