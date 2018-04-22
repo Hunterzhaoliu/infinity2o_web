@@ -49,7 +49,6 @@ class InputTimeZone extends Component {
 							value={profile.newTimeZone}
 							onChange={this.onChangeTimeZone}
 							treeData={timeZones}
-							placeholder="Time Zone?"
 						/>
 					</Col>
 				</Row>
