@@ -9,6 +9,7 @@ import InputFieldNumber from './InputFieldNumber';
 import InputFieldSelect from './interests/InputFieldSelect';
 import InputSchedule from './availability/InputSchedule';
 import InputTimeZone from './timeZone/InputTimeZone';
+import './ProfileEdit.css';
 import { Layout, Row, Col, Button, Icon } from 'antd';
 const { Content } = Layout;
 

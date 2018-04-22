@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import optionFields from './optionFields';
 import ErrorMessage from '../ErrorMessage';
+import '../ProfileEdit.css';
+
 import { Row, Col, Select } from 'antd';
 const { Option } = Select;
 
@@ -16,9 +18,8 @@ class InputFieldSelect extends Component {
 			return (
 				<Option
 					style={{
-						borderColor: colorTheme.text8Color,
 						background: colorTheme.text8Color,
-						color: colorTheme.text5Color
+						color: colorTheme.text4Color
 					}}
 					value={option.value}
 					key={option.value}
@@ -35,6 +36,14 @@ class InputFieldSelect extends Component {
 
 	render() {
 		const { colorTheme, label, width, profile } = this.props;
+		document.documentElement.style.setProperty(
+			`--select-color`,
+			colorTheme.text8Color
+		);
+		document.documentElement.style.setProperty(
+			`--color`,
+			colorTheme.text4Color
+		);
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
@@ -59,15 +68,13 @@ class InputFieldSelect extends Component {
 						xl={{ span: 19, offset: 1 }}
 					>
 						<Select
+							className="ant-select-selection"
 							mode="multiple"
 							style={{
-								width: width,
-								borderColor: colorTheme.text8Color,
-								background: colorTheme.text8Color
+								width: width
 							}}
 							value={profile.newInterests}
 							onChange={this.onChangeInterests}
-							placeholder="Select up to 5 interests!"
 						>
 							{this.renderOptions()}
 						</Select>
