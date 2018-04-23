@@ -1,9 +1,5 @@
-/* :root {
-	--select-color: '----';
-} */
-
 .ant-select-selection {
-	border-color: var(--select-color);
-	background-color: var(--select-color);
-	color: var(--color);
+  border-color: var(--select-color);
+  background-color: var(--select-color);
+  color: var(--color);
 }
