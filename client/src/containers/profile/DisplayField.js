@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Card } from "antd";
+import { Row, Col, Table } from "antd";
 
 class DisplayField extends Component {
   numberWithCommas = x => {
@@ -50,27 +50,31 @@ class DisplayField extends Component {
         "sunday"
       ];
 
-      // values = state.profile.availability
-
-      return _.map(daysOfWeek, (day, index) => {
-        let timeSlots = "";
-        _.map(value.day, (timeSlot, index) => {
-          timeSlots += timeSlot;
+      const columnHeaders = [
+        { title: "Mon", dataIndex: "monday" },
+        { title: "Tues", dataIndex: "tuesday" },
+        { title: "Wed", dataIndex: "wednesday" },
+        { title: "Thurs", dataIndex: "thursday" },
+        { title: "Fri", dataIndex: "friday" },
+        { title: "Sat", dataIndex: "saturday" },
+        { title: "Sun", dataIndex: "sunday" }
+      ];
+      // console.log("value = ", value);
+      // value = state.profile.availability
+      let timeSlots = [];
+      // Object.keys(value).forEach(day => {
+      //   value[day].forEach(timeSlot => {
+      //     console.log("timeSlot = ", timeSlot);
+      //   });
+      // });
+      daysOfWeek.forEach(day => {
+        _.map(value[day], timeSlot => {
+          const indexInTimeSlots = timeSlots.length;
+          timeSlots.push({ key: indexInTimeSlots, [day]: timeSlot });
         });
-        console.log("timeSlots = ", timeSlots);
-        return (
-          <Card style={{ span: 3 }} key={index} title={day}>
-            {timeSlots}
-          </Card>
-        );
       });
-      // return (
-      //   <div>
-      //     <Card title="one">Test</Card>
-      //     <Card title="two">Test</Card>
-      //     <Card title="three">Test</Card>
-      //   </div>
-      // );
+      console.log("timeSlots = ", timeSlots);
+      return <Table dataSource={timeSlots} columns={columnHeaders} bordered />;
     } else if (label === "Interest(s): ") {
       let formattedValue = "";
       let i;
