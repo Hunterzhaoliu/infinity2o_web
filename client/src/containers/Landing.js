@@ -16,32 +16,17 @@ class Landing extends Component {
 	renderMarketingInfo() {
 		const { colorTheme, auth } = this.props;
 		const why_part_0 = `Online classes from `;
-		const why_part_1 = `udacity.com`;
-		const why_part_2 = `edx.org`;
-		const why_part_3 = `udemy.com`;
-		const why_part_4 = `coursera.org`;
-		const why_part_5 = `the best teachers`;
-		const why_part_6 = `are amazing but too lonely.`;
+		const why_part_1 = `udacity.com, edx.org, udemy.com, & coursera.org`;
+		const why_part_2 = `are amazing but too lonely.`;
 
-		const how = `Join our community and train an artificial intelligence to find the best study partners for you.`;
+		const how = `Join our growing community and train an artificial intelligence to find the best study partners for you.`;
 		const why = `Online classes from the best teachers are amazing but too lonely.`;
 		switch (auth.loggedInState) {
 			case 'not_logged_in':
 				return (
 					<div>
 						<Row type="flex" justify="center">
-							<Col
-								sm={{ span: 0, offset: 0 }}
-								md={{ span: 3, offset: 0 }}
-								lg={{ span: 5, offset: 0 }}
-								xl={{ span: 6, offset: 0 }}
-							/>
-							<Col
-								sm={{ span: 13, offset: 0 }}
-								md={{ span: 10, offset: 0 }}
-								lg={{ span: 7, offset: 0 }}
-								xl={{ span: 6, offset: 0 }}
-							>
+							<Col>
 								<h1
 									key="0"
 									style={{
@@ -51,12 +36,9 @@ class Landing extends Component {
 									{why_part_0}
 								</h1>
 							</Col>
-							<Col
-								sm={{ span: 11, offset: 0 }}
-								md={{ span: 8, offset: 0 }}
-								lg={{ span: 6, offset: 0 }}
-								xl={{ span: 5, offset: 0 }}
-							>
+						</Row>
+						<Row type="flex" justify="center">
+							<Col>
 								<h1
 									key="0"
 									style={{
@@ -71,34 +53,12 @@ class Landing extends Component {
 									>
 										{why_part_1}
 										<Typist.Backspace
-											count={why_part_1.length}
+											count={0}
 											delay={200}
 										/>
-										{why_part_2}
-										<Typist.Backspace
-											count={why_part_2.length}
-											delay={200}
-										/>
-										{why_part_3}
-										<Typist.Backspace
-											count={why_part_3.length}
-											delay={200}
-										/>
-										{why_part_4}
-										<Typist.Backspace
-											count={why_part_4.length}
-											delay={200}
-										/>
-										{why_part_5}
 									</Typist>
 								</h1>
 							</Col>
-							<Col
-								sm={{ span: 0, offset: 0 }}
-								md={{ span: 3, offset: 0 }}
-								lg={{ span: 6, offset: 0 }}
-								xl={{ span: 7, offset: 0 }}
-							/>
 						</Row>
 						<Row type="flex" justify="center">
 							<h1
@@ -107,27 +67,19 @@ class Landing extends Component {
 									color: colorTheme.text2Color
 								}}
 							>
-								{why_part_6}
+								{why_part_2}
 							</h1>
 						</Row>
 						<Row type="flex" justify="center">
-							<Typist
-								avgTypingDelay={35}
-								cursor={{
-									show: false
+							<h2
+								key="1"
+								style={{
+									color: colorTheme.text4Color,
+									padding: '0% 0% 1%'
 								}}
 							>
-								<Typist.Delay ms={6000} />
-								<h2
-									key="1"
-									style={{
-										color: colorTheme.text4Color,
-										padding: '0% 0% 3%'
-									}}
-								>
-									{how}
-								</h2>
-							</Typist>
+								{how}
+							</h2>
 						</Row>
 					</div>
 				);
