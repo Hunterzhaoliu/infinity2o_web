@@ -9,7 +9,7 @@ class DisplayField extends Component {
   };
 
   renderValue(label, value) {
-    const { infinityStatus } = this.props;
+    const { colorTheme, infinityStatus } = this.props;
 
     if (
       label === "Neurons: " ||
@@ -82,7 +82,9 @@ class DisplayField extends Component {
         { key: 7 },
         { key: 8 }
       ];
+      // iterates through each day
       daysOfWeek.forEach(day => {
+        // iterates through each timeSlot
         _.map(value[day], timeSlot => {
           console.log("timeSlot = ", timeSlot);
           const indexInTimeSlots = indexInTimeSlot[timeSlot];
@@ -92,10 +94,14 @@ class DisplayField extends Component {
       });
       return (
         <Table
+          style={{
+            backgroundColor: colorTheme.text7Color
+          }}
           dataSource={timeSlots}
           columns={columnHeaders}
           bordered
           pagination={false}
+          size="medium"
         />
       );
     } else if (label === "Interest(s): ") {
