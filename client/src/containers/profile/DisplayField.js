@@ -51,30 +51,53 @@ class DisplayField extends Component {
       ];
 
       const columnHeaders = [
-        { title: "Mon", dataIndex: "monday" },
-        { title: "Tues", dataIndex: "tuesday" },
-        { title: "Wed", dataIndex: "wednesday" },
-        { title: "Thurs", dataIndex: "thursday" },
-        { title: "Fri", dataIndex: "friday" },
-        { title: "Sat", dataIndex: "saturday" },
-        { title: "Sun", dataIndex: "sunday" }
+        { title: "Mon", dataIndex: "monday", align: "center" },
+        { title: "Tues", dataIndex: "tuesday", align: "center" },
+        { title: "Wed", dataIndex: "wednesday", align: "center" },
+        { title: "Thurs", dataIndex: "thursday", align: "center" },
+        { title: "Fri", dataIndex: "friday", align: "center" },
+        { title: "Sat", dataIndex: "saturday", align: "center" },
+        { title: "Sun", dataIndex: "sunday", align: "center" }
       ];
-      // console.log("value = ", value);
-      // value = state.profile.availability
-      let timeSlots = [];
-      // Object.keys(value).forEach(day => {
-      //   value[day].forEach(timeSlot => {
-      //     console.log("timeSlot = ", timeSlot);
-      //   });
-      // });
+
+      const indexInTimeSlot = {
+        "6-8 AM": 0,
+        "8-10 AM": 1,
+        "10-12 noon": 2,
+        "12-2 PM": 3,
+        "2-4 PM": 4,
+        "4-6 PM": 5,
+        "6-8 PM": 6,
+        "8-10 PM": 7,
+        "10-12 midnight": 8
+      };
+      let timeSlots = [
+        { key: 0 },
+        { key: 1 },
+        { key: 2 },
+        { key: 3 },
+        { key: 4 },
+        { key: 5 },
+        { key: 6 },
+        { key: 7 },
+        { key: 8 }
+      ];
       daysOfWeek.forEach(day => {
         _.map(value[day], timeSlot => {
-          const indexInTimeSlots = timeSlots.length;
-          timeSlots.push({ key: indexInTimeSlots, [day]: timeSlot });
+          console.log("timeSlot = ", timeSlot);
+          const indexInTimeSlots = indexInTimeSlot[timeSlot];
+          console.log("indexInTimeSlots = ", indexInTimeSlots);
+          timeSlots[indexInTimeSlots][day] = timeSlot;
         });
       });
-      console.log("timeSlots = ", timeSlots);
-      return <Table dataSource={timeSlots} columns={columnHeaders} bordered />;
+      return (
+        <Table
+          dataSource={timeSlots}
+          columns={columnHeaders}
+          bordered
+          pagination={false}
+        />
+      );
     } else if (label === "Interest(s): ") {
       let formattedValue = "";
       let i;
