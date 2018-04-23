@@ -2,6 +2,7 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col, Table } from "antd";
+import "./DisplayField.css";
 
 class DisplayField extends Component {
   numberWithCommas = x => {
@@ -10,7 +11,14 @@ class DisplayField extends Component {
 
   renderValue(label, value) {
     const { colorTheme, infinityStatus } = this.props;
-
+    document.documentElement.style.setProperty(
+      `--table-border-color`,
+      colorTheme.text2Color
+    );
+    document.documentElement.style.setProperty(
+      `--table-color`,
+      colorTheme.text4Color
+    );
     if (
       label === "Neurons: " ||
       label === "Name: " ||
@@ -86,14 +94,13 @@ class DisplayField extends Component {
       daysOfWeek.forEach(day => {
         // iterates through each timeSlot
         _.map(value[day], timeSlot => {
-          console.log("timeSlot = ", timeSlot);
           const indexInTimeSlots = indexInTimeSlot[timeSlot];
-          console.log("indexInTimeSlots = ", indexInTimeSlots);
           timeSlots[indexInTimeSlots][day] = timeSlot;
         });
       });
       return (
         <Table
+          className="table"
           style={{
             backgroundColor: colorTheme.text7Color
           }}
