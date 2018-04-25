@@ -48,97 +48,96 @@ class DisplayField extends Component {
         return value;
       }
     } else if (label === "Availability: ") {
-      const daysOfWeek = [
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday",
-        "sunday"
-      ];
+      if (value !== {}) {
+        const daysOfWeek = [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday",
+          "saturday",
+          "sunday"
+        ];
 
-      let columnHeaders = [
-        { title: "Mon", dataIndex: "monday", align: "center" },
-        { title: "Tues", dataIndex: "tuesday", align: "center" },
-        { title: "Wed", dataIndex: "wednesday", align: "center" },
-        { title: "Thurs", dataIndex: "thursday", align: "center" },
-        { title: "Fri", dataIndex: "friday", align: "center" },
-        { title: "Sat", dataIndex: "saturday", align: "center" },
-        { title: "Sun", dataIndex: "sunday", align: "center" }
-      ];
+        let columnHeaders = [
+          { title: "Mon", dataIndex: "monday", align: "center" },
+          { title: "Tues", dataIndex: "tuesday", align: "center" },
+          { title: "Wed", dataIndex: "wednesday", align: "center" },
+          { title: "Thurs", dataIndex: "thursday", align: "center" },
+          { title: "Fri", dataIndex: "friday", align: "center" },
+          { title: "Sat", dataIndex: "saturday", align: "center" },
+          { title: "Sun", dataIndex: "sunday", align: "center" }
+        ];
 
-      const indexInTimeSlot = {
-        "6-8 AM": 0,
-        "8-10 AM": 1,
-        "10-12 noon": 2,
-        "12-2 PM": 3,
-        "2-4 PM": 4,
-        "4-6 PM": 5,
-        "6-8 PM": 6,
-        "8-10 PM": 7,
-        "10-12 midnight": 8
-      };
-      let timeSlots = [
-        { key: 0 },
-        { key: 1 },
-        { key: 2 },
-        { key: 3 },
-        { key: 4 },
-        { key: 5 },
-        { key: 6 },
-        { key: 7 },
-        { key: 8 }
-      ];
-      console.log("columnHeaders before = ", columnHeaders);
+        const indexInTimeSlot = {
+          "6-8 AM": 0,
+          "8-10 AM": 1,
+          "10-12 noon": 2,
+          "12-2 PM": 3,
+          "2-4 PM": 4,
+          "4-6 PM": 5,
+          "6-8 PM": 6,
+          "8-10 PM": 7,
+          "10-12 midnight": 8
+        };
 
-      // tells what index to splice from columnHeaders
-      let i = 0;
-      daysOfWeek.forEach(day => {
-        if (value[day] !== undefined) {
-          console.log("day = ", day);
-          console.log("i before subtraction = ", i);
+        let timeSlots = [
+          { key: 0 },
+          { key: 1 },
+          { key: 2 },
+          { key: 3 },
+          { key: 4 },
+          { key: 5 },
+          { key: 6 },
+          { key: 7 },
+          { key: 8 }
+        ];
 
-          if (value[day].length > 0) {
-            value[day].forEach(timeSlot => {
-              const indexInTimeSlots = indexInTimeSlot[timeSlot];
-              timeSlots[indexInTimeSlots][day] = timeSlot;
-            });
-            i++;
-            console.log("columnHeaders inside if = ", columnHeaders);
-          } else {
-            columnHeaders.splice(i, 1);
+        // tells what index to splice from columnHeaders
+        let i = 0;
+
+        // fills in timeSlots (all of the data)
+        daysOfWeek.forEach(day => {
+          if (value[day] !== undefined) {
+            if (value[day].length > 0) {
+              value[day].forEach(timeSlot => {
+                const indexInTimeSlots = indexInTimeSlot[timeSlot];
+                timeSlots[indexInTimeSlots][day] = timeSlot;
+              });
+              i++;
+            } else {
+              columnHeaders.splice(i, 1);
+            }
+
+            //deletes all of the unnecessary rows
+            if (day === "sunday") {
+              for (i = 0; i < timeSlots.length; ) {
+                const row = timeSlots[i];
+                if (Object.keys(row).length > 1) {
+                  i++;
+                } else {
+                  timeSlots.splice(i, 1);
+                }
+              }
+            }
           }
-        }
-      });
-      // // iterates through each day
-      // daysOfWeek.forEach(day => {
-      //   // iterates through each timeSlot
-      //   if (value[day] !== undefined) {
-      //     console.log("day = ", day);
-      //     console.log("value[day] = ", value[day]);
-      //     if (value[day].length > 0) {
-      //       _.map(value[day], timeSlot => {
-      //         const indexInTimeSlots = indexInTimeSlot[timeSlot];
-      //         timeSlots[indexInTimeSlots][day] = timeSlot;
-      //       });
-      //     } else {
-      //       console.log("inside else statement");
-      //     }
-      //   }
-      // });
-      return (
-        <Table
-          style={{
-            backgroundColor: colorTheme.text7Color
-          }}
-          dataSource={timeSlots}
-          columns={columnHeaders}
-          bordered
-          pagination={false}
-          size="medium"
-        />
-      );
+        });
+
+        return (
+          <Table
+            style={{
+              backgroundColor: colorTheme.text7Color
+            }}
+            dataSource={timeSlots}
+            columns={columnHeaders}
+            bordered
+            pagination={false}
+            size="medium"
+          />
+        );
+      } else {
+        return;
+      }
     } else if (label === "Interest(s): ") {
       let formattedValue = "";
       let i;
