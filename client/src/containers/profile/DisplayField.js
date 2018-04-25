@@ -11,14 +11,14 @@ class DisplayField extends Component {
 
   renderValue(label, value) {
     const { colorTheme, infinityStatus } = this.props;
-    document.documentElement.style.setProperty(
-      `--table-border-color`,
-      colorTheme.text2Color
-    );
-    document.documentElement.style.setProperty(
-      `--table-color`,
-      colorTheme.text4Color
-    );
+    // document.documentElement.style.setProperty(
+    //   `--table-border-color`,
+    //   colorTheme.text2Color
+    // );
+    // document.documentElement.style.setProperty(
+    //   `--table-color`,
+    //   colorTheme.text4Color
+    // );
     if (
       label === "Neurons: " ||
       label === "Name: " ||
@@ -58,7 +58,7 @@ class DisplayField extends Component {
         "sunday"
       ];
 
-      const columnHeaders = [
+      let columnHeaders = [
         { title: "Mon", dataIndex: "monday", align: "center" },
         { title: "Tues", dataIndex: "tuesday", align: "center" },
         { title: "Wed", dataIndex: "wednesday", align: "center" },
@@ -90,17 +90,45 @@ class DisplayField extends Component {
         { key: 7 },
         { key: 8 }
       ];
-      // iterates through each day
+      console.log("columnHeaders before = ", columnHeaders);
+
+      // tells what index to splice from columnHeaders
+      let i = 0;
       daysOfWeek.forEach(day => {
-        // iterates through each timeSlot
-        _.map(value[day], timeSlot => {
-          const indexInTimeSlots = indexInTimeSlot[timeSlot];
-          timeSlots[indexInTimeSlots][day] = timeSlot;
-        });
+        if (value[day] !== undefined) {
+          console.log("day = ", day);
+          console.log("i before subtraction = ", i);
+
+          if (value[day].length > 0) {
+            value[day].forEach(timeSlot => {
+              const indexInTimeSlots = indexInTimeSlot[timeSlot];
+              timeSlots[indexInTimeSlots][day] = timeSlot;
+            });
+            i++;
+            console.log("columnHeaders inside if = ", columnHeaders);
+          } else {
+            columnHeaders.splice(i, 1);
+          }
+        }
       });
+      // // iterates through each day
+      // daysOfWeek.forEach(day => {
+      //   // iterates through each timeSlot
+      //   if (value[day] !== undefined) {
+      //     console.log("day = ", day);
+      //     console.log("value[day] = ", value[day]);
+      //     if (value[day].length > 0) {
+      //       _.map(value[day], timeSlot => {
+      //         const indexInTimeSlots = indexInTimeSlot[timeSlot];
+      //         timeSlots[indexInTimeSlots][day] = timeSlot;
+      //       });
+      //     } else {
+      //       console.log("inside else statement");
+      //     }
+      //   }
+      // });
       return (
         <Table
-          className="table"
           style={{
             backgroundColor: colorTheme.text7Color
           }}
