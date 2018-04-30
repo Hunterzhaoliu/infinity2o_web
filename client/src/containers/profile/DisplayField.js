@@ -124,7 +124,7 @@ class DisplayField extends Component {
 
         return (
           <Table
-            className="ant-table ant-table-thead"
+            // TODO: className="ant-table ant-table-thead"
             style={{
               backgroundColor: colorTheme.text8Color
             }}
