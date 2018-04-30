@@ -4,20 +4,19 @@ import { Row, Col, Table } from "antd";
 import "./DisplayField.css";
 
 class DisplayField extends Component {
-  numberWithCommas = x => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
+	numberWithCommas = x => {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	};
   renderValue(label, value) {
     const { colorTheme, infinityStatus } = this.props;
-    // document.documentElement.style.setProperty(
-    //   `--table-border-color`,
-    //   colorTheme.text2Color
-    // );
-    // document.documentElement.style.setProperty(
-    //   `--table-color`,
-    //   colorTheme.text4Color
-    // );
+    document.documentElement.style.setProperty(
+      `--table-border-color`,
+      colorTheme.text8Color
+    );
+    document.documentElement.style.setProperty(
+      `--table-text-color`,
+      colorTheme.text3Color
+    );
     if (
       label === "Neurons: " ||
       label === "Name: " ||
@@ -47,7 +46,7 @@ class DisplayField extends Component {
         return value;
       }
     } else if (label === "Availability: ") {
-      if (value !== {}) {
+      if (Object.keys(value).length !== 0) {
         const daysOfWeek = [
           "monday",
           "tuesday",
@@ -58,6 +57,16 @@ class DisplayField extends Component {
           "sunday"
         ];
 
+        // makes sure user has atleast one open timeSlot
+        let totalTimeSlots = 0;
+        daysOfWeek.forEach(day => {
+          totalTimeSlots += value[day].length
+        })
+        if (totalTimeSlots === 0) {
+          return;
+        }
+
+        // sets up availability table
         let columnHeaders = [
           { title: "Mon", dataIndex: "monday", align: "center" },
           { title: "Tues", dataIndex: "tuesday", align: "center" },
@@ -124,10 +133,7 @@ class DisplayField extends Component {
 
         return (
           <Table
-            // TODO: className="ant-table ant-table-thead"
-            style={{
-              backgroundColor: colorTheme.text8Color
-            }}
+            className="ant-table ant-table-thead"
             dataSource={timeSlots}
             columns={columnHeaders}
             bordered
@@ -135,8 +141,6 @@ class DisplayField extends Component {
             size="medium"
           />
         );
-      } else {
-        return;
       }
     } else if (label === "Interest(s): ") {
       let formattedValue = "";
@@ -151,41 +155,41 @@ class DisplayField extends Component {
     }
   }
 
-  render() {
-    const { colorTheme, label, value } = this.props;
-    return (
-      <Row type="flex" justify="start" align="middle">
-        <Col
-          sm={{ span: 5 }}
-          md={{ span: 4 }}
-          lg={{ span: 3 }}
-          xl={{ span: 2 }}
-        >
-          <h3
-            style={{
-              color: colorTheme.text6Color
-            }}
-          >
-            {label}
-          </h3>
-        </Col>
-        <Col
-          sm={{ span: 18, offset: 1 }}
-          md={{ span: 19, offset: 1 }}
-          lg={{ span: 20, offset: 1 }}
-          xl={{ span: 21, offset: 1 }}
-        >
-          <h3
-            style={{
-              color: colorTheme.text3Color
-            }}
-          >
-            {this.renderValue(label, value)}
-          </h3>
-        </Col>
-      </Row>
-    );
-  }
+	render() {
+		const { colorTheme, label, value } = this.props;
+		return (
+			<Row type="flex" justify="start" align="middle">
+				<Col
+					sm={{ span: 5 }}
+					md={{ span: 4 }}
+					lg={{ span: 3 }}
+					xl={{ span: 2 }}
+				>
+					<h3
+						style={{
+							color: colorTheme.text6Color
+						}}
+					>
+						{label}
+					</h3>
+				</Col>
+				<Col
+					sm={{ span: 18, offset: 1 }}
+					md={{ span: 19, offset: 1 }}
+					lg={{ span: 20, offset: 1 }}
+					xl={{ span: 21, offset: 1 }}
+				>
+					<h3
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						{this.renderValue(label, value)}
+					</h3>
+				</Col>
+			</Row>
+		);
+	}
 }
 
 /*
@@ -193,10 +197,10 @@ So we have a state and a UI(with props).
 This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
-  return {
-    colorTheme: state.colorTheme,
-    infinityStatus: state.profile.payment.infinityStatus
-  };
+	return {
+		colorTheme: state.colorTheme,
+		infinityStatus: state.profile.payment.infinityStatus
+	};
 }
 
 export default connect(mapStateToProps, null)(DisplayField);
