@@ -1,8 +1,10 @@
-/* .ant-table-content {
-  border-color: rgb(127, 127, 127);
+.ant-table-content {
+  border-color: var(--table-border-color);
   background-color: var(--table-border-color);
   color: var(--table-text-color);
 }
+
+/*
 .ant-table {
   color: rgb(127, 127, 127);
 }

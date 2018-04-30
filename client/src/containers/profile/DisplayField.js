@@ -9,14 +9,14 @@ class DisplayField extends Component {
 	};
   renderValue(label, value) {
     const { colorTheme, infinityStatus } = this.props;
-    // document.documentElement.style.setProperty(
-    //   `--table-border-color`,
-    //   colorTheme.text2Color
-    // );
-    // document.documentElement.style.setProperty(
-    //   `--table-color`,
-    //   colorTheme.text4Color
-    // );
+    document.documentElement.style.setProperty(
+      `--table-border-color`,
+      colorTheme.text8Color
+    );
+    document.documentElement.style.setProperty(
+      `--table-text-color`,
+      colorTheme.text3Color
+    );
     if (
       label === "Neurons: " ||
       label === "Name: " ||
@@ -46,7 +46,7 @@ class DisplayField extends Component {
         return value;
       }
     } else if (label === "Availability: ") {
-      if (value !== {}) {
+      if (Object.keys(value).length !== 0) {
         const daysOfWeek = [
           "monday",
           "tuesday",
@@ -57,6 +57,16 @@ class DisplayField extends Component {
           "sunday"
         ];
 
+        // makes sure user has atleast one open timeSlot
+        let totalTimeSlots = 0;
+        daysOfWeek.forEach(day => {
+          totalTimeSlots += value[day].length
+        })
+        if (totalTimeSlots === 0) {
+          return;
+        }
+
+        // sets up availability table
         let columnHeaders = [
           { title: "Mon", dataIndex: "monday", align: "center" },
           { title: "Tues", dataIndex: "tuesday", align: "center" },
@@ -123,10 +133,7 @@ class DisplayField extends Component {
 
         return (
           <Table
-            // TODO: className="ant-table ant-table-thead"
-            style={{
-              backgroundColor: colorTheme.text8Color
-            }}
+            className="ant-table ant-table-thead"
             dataSource={timeSlots}
             columns={columnHeaders}
             bordered
@@ -134,8 +141,6 @@ class DisplayField extends Component {
             size="medium"
           />
         );
-      } else {
-        return;
       }
     } else if (label === "Interest(s): ") {
       let formattedValue = "";
