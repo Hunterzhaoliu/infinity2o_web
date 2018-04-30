@@ -124,8 +124,9 @@ class DisplayField extends Component {
 
         return (
           <Table
+            className="ant-table ant-table-thead"
             style={{
-              backgroundColor: colorTheme.text7Color
+              backgroundColor: colorTheme.text8Color
             }}
             dataSource={timeSlots}
             columns={columnHeaders}
