@@ -13,8 +13,9 @@ import {
 	ON_POPULAR_ASKS,
 	ON_CONTROVERSIAL_ASKS,
 	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
-	RUNNING_INITIAL_MINERVA_FOR_USER,
-	FINISHED_RUNNING_INITIAL_MINERVA_FOR_USER
+	RUNNING_INITIAL_MINERVA_FOR_USER_START,
+	RUNNING_INITIAL_MINERVA_FOR_USER_DONE,
+	RUNNING_INITIAL_MINERVA_FOR_USER_ERROR
 } from './types';
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../utils/constants';
 import { store } from '../index';
@@ -75,20 +76,25 @@ export const onVote = (
 	});
 
 	if (
-		!store.getState().profile.ranInitialMinerva &&
-		store.getState().matches.totalUserVotesAcrossAllSessions >=
-			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
+		true ||
+		(!store.getState().profile.ranInitialMinerva &&
+			store.getState().matches.totalUserVotesAcrossAllSessions >=
+				MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH)
 	) {
 		dispatch({
-			type: RUNNING_INITIAL_MINERVA_FOR_USER
+			type: RUNNING_INITIAL_MINERVA_FOR_USER_START
 		});
-		// send message to minerva server to run minerva
-		// for a specific user
-		// TODO: rabbitMQ publish
+		const response = await axios.post('/api/matches/initial');
 
-		// TODO: dispatch({
-		// 	type: FINISHED_RUNNING_INITIAL_MINERVA_FOR_USER
-		// });
+		if (response.status === 200) {
+			dispatch({
+				type: RUNNING_INITIAL_MINERVA_FOR_USER_DONE
+			});
+		} else {
+			dispatch({
+				type: RUNNING_INITIAL_MINERVA_FOR_USER_ERROR
+			});
+		}
 	}
 };
 

@@ -5,8 +5,9 @@ import {
 	DELETE_MATCH_IN_DB,
 	DELETE_MATCH_IN_DB_ERROR,
 	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
-	RUNNING_INITIAL_MINERVA_FOR_USER,
-	FINISHED_RUNNING_INITIAL_MINERVA_FOR_USER
+	RUNNING_INITIAL_MINERVA_FOR_USER_START,
+	RUNNING_INITIAL_MINERVA_FOR_USER_DONE,
+	RUNNING_INITIAL_MINERVA_FOR_USER_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -19,7 +20,8 @@ let initialState = {
 	hasDeleteMatchInDBError: false,
 	hasUpdateTotalUserVotesFromDB: false,
 	totalUserVotesAcrossAllSessions: 0,
-	runningInitialMinervaForUser: false
+	runningInitialMinervaForUser: false,
+	hasErrorRunningInitialMinervaForUser: false
 };
 
 export default function(state = initialState, action) {
@@ -62,11 +64,17 @@ export default function(state = initialState, action) {
 			newState.totalUserVotesAcrossAllSessions += action.additionalVotes;
 			newState.hasUpdateTotalUserVotesFromDB = true;
 			return newState;
-		case RUNNING_INITIAL_MINERVA_FOR_USER:
+		case RUNNING_INITIAL_MINERVA_FOR_USER_START:
 			newState.runningInitialMinervaForUser = true;
+			newState.hasErrorRunningInitialMinervaForUser = false;
 			return newState;
-		case FINISHED_RUNNING_INITIAL_MINERVA_FOR_USER:
+		case RUNNING_INITIAL_MINERVA_FOR_USER_DONE:
 			newState.runningInitialMinervaForUser = false;
+			newState.hasErrorRunningInitialMinervaForUser = false;
+			return newState;
+		case RUNNING_INITIAL_MINERVA_FOR_USER_ERROR:
+			newState.runningInitialMinervaForUser = false;
+			newState.hasErrorRunningInitialMinervaForUser = true;
 			return newState;
 		default:
 			return state;

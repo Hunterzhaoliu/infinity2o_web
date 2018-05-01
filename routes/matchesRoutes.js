@@ -133,4 +133,14 @@ module.exports = app => {
 			}
 		}
 	);
+
+	app.post(
+		'/api/matches/initial',
+		requireLogin,
+		async (request, response) => {
+			// send message to minerva server to run minerva
+			// for a specific user
+			// TODO: rabbitMQ publish
+		}
+	);
 };
