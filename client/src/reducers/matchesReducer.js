@@ -15,6 +15,7 @@ let initialState = {
 	current1DisplayedMatches: [],
 	nextMatches: [],
 	hasDeleteMatchInDBError: false,
+	hasUpdateTotalUserVotesFromDB: false,
 	totalUserVotesAcrossAllSessions: 0
 };
 
@@ -56,6 +57,7 @@ export default function(state = initialState, action) {
 			return newState;
 		case UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS:
 			newState.totalUserVotesAcrossAllSessions += action.additionalVotes;
+			newState.hasUpdateTotalUserVotesFromDB = true;
 			return newState;
 		default:
 			return state;

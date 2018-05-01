@@ -43,8 +43,10 @@ export const fetchUserProfile = () => async dispatch => {
 		profile: response.data.profile
 	});
 
-	dispatch({
-		type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
-		additionalVotes: response.data.profile.asks.totalUserVotes
-	});
+	if (!store.getState().matches.hasUpdateTotalUserVotesFromDB) {
+		dispatch({
+			type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
+			additionalVotes: response.data.profile.asks.totalUserVotes
+		});
+	}
 };

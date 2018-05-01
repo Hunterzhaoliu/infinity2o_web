@@ -40,10 +40,10 @@ class App extends Component {
 				>
 					<Row type="flex" justify="center">
 						<Col
-							sm={{ span: 2 }}
-							md={{ span: 1 }}
-							lg={{ span: 1 }}
-							xl={{ span: 1 }}
+							sm={{ span: 4 }}
+							md={{ span: 3 }}
+							lg={{ span: 2 }}
+							xl={{ span: 2 }}
 						>
 							<p>
 								<a
@@ -53,7 +53,7 @@ class App extends Component {
 									}}
 									href="https://medium.com/infinity2o"
 								>
-									blog
+									tech blog
 								</a>
 							</p>
 						</Col>
