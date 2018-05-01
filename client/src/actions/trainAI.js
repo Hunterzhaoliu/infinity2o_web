@@ -11,7 +11,8 @@ import {
 	ON_NEXT_ASK,
 	ON_NEWEST_ASKS,
 	ON_POPULAR_ASKS,
-	ON_CONTROVERSIAL_ASKS
+	ON_CONTROVERSIAL_ASKS,
+	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS
 } from './types';
 
 export const onNewestAsks = colorTheme => dispatch => {
@@ -43,6 +44,10 @@ export const onVote = (
 		type: ON_VOTE,
 		answerIndex: answerIndex,
 		askIndex: askIndex
+	});
+	dispatch({
+		type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
+		additionalVotes: 1
 	});
 
 	const voteInfo = {

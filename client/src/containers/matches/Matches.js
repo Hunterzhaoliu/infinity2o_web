@@ -86,8 +86,16 @@ class Matches extends Component {
 
 	renderMatches() {
 		//console.log('in Matches.js this.props = ', this.props);
-		const { colorTheme, matches, history } = this.props;
-		if (matches.current1DisplayedMatches.length > 0) {
+		const {
+			colorTheme,
+			matches,
+			history,
+			totalUserVotesAcrossAllSessions
+		} = this.props;
+		if (totalUserVotesAcrossAllSessions === 0) {
+			// display progress bar showing user needs to vote X more times
+			// before we run minerva for them
+		} else if (matches.current1DisplayedMatches.length > 0) {
 			return _.map(matches.current1DisplayedMatches, match => {
 				return (
 					<Col
@@ -182,8 +190,8 @@ class Matches extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					Your out of matches for today. Check out Train AI for better
-					matches :)
+					You're out of matches for today. Vote on questions in Train
+					AI to get better matches :)
 				</h3>
 			);
 		}
