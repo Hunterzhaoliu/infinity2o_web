@@ -7,7 +7,7 @@ import * as profileActionCreators from '../../actions/profile';
 import * as authActionCreators from '../../actions/auth';
 import { bindActionCreators } from 'redux';
 import Options from '../payment/Options';
-
+import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
 import {
 	NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
 	NUMBER_NEURONS_TO_SAY_HI
@@ -89,11 +89,10 @@ class Matches extends Component {
 			colorTheme,
 			matches,
 			history,
-			totalUserVotesAcrossAllSessions
+			totalUserVotesAcrossAllSessions,
+			runningInitialMinervaForUser
 		} = this.props;
 
-		const MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH = 8;
-		const isCurrentlyRunningInitialMinervaForUser = true;
 		if (
 			totalUserVotesAcrossAllSessions <
 			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
@@ -124,7 +123,7 @@ class Matches extends Component {
 							color: colorTheme.text3Color
 						}}
 					>
-						You have {votesToGo} votes to go!
+						You have {votesToGo} to go!
 					</h3>
 					<Progress
 						style={{}}
@@ -134,7 +133,7 @@ class Matches extends Component {
 					/>
 				</Col>
 			);
-		} else if (isCurrentlyRunningInitialMinervaForUser) {
+		} else if (runningInitialMinervaForUser) {
 			return (
 				<Col>
 					<h2
@@ -302,7 +301,8 @@ function mapStateToProps(state) {
 		neuronsInBillions: state.profile.payment.neuronsInBillions,
 		mongoDBUserId: state.auth.mongoDBUserId,
 		totalUserVotesAcrossAllSessions:
-			state.matches.totalUserVotesAcrossAllSessions
+			state.matches.totalUserVotesAcrossAllSessions,
+		runningInitialMinervaForUser: state.matches.runningInitialMinervaForUser
 	};
 }
 

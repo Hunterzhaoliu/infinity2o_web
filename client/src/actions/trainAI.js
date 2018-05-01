@@ -12,8 +12,12 @@ import {
 	ON_NEWEST_ASKS,
 	ON_POPULAR_ASKS,
 	ON_CONTROVERSIAL_ASKS,
-	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS
+	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
+	RUNNING_INITIAL_MINERVA_FOR_USER,
+	FINISHED_RUNNING_INITIAL_MINERVA_FOR_USER
 } from './types';
+import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../utils/constants';
+import { store } from '../index';
 
 export const onNewestAsks = colorTheme => dispatch => {
 	dispatch({
@@ -45,10 +49,6 @@ export const onVote = (
 		answerIndex: answerIndex,
 		askIndex: askIndex
 	});
-	dispatch({
-		type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
-		additionalVotes: 1
-	});
 
 	const voteInfo = {
 		answerId: answerId,
@@ -66,6 +66,29 @@ export const onVote = (
 		dispatch({ type: SAVE_VOTE_DONE, saveIndex: askIndex });
 	} else {
 		dispatch({ type: SAVE_VOTE_ERROR, saveIndex: askIndex });
+	}
+
+	// for running minerva the first time user logins and votes
+	dispatch({
+		type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
+		additionalVotes: 1
+	});
+
+	if (
+		!store.getState().profile.ranInitialMinerva &&
+		store.getState().matches.totalUserVotesAcrossAllSessions >=
+			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
+	) {
+		dispatch({
+			type: RUNNING_INITIAL_MINERVA_FOR_USER
+		});
+		// send message to minerva server to run minerva
+		// for a specific user
+		// TODO: rabbitMQ publish
+
+		// TODO: dispatch({
+		// 	type: FINISHED_RUNNING_INITIAL_MINERVA_FOR_USER
+		// });
 	}
 };
 

@@ -45,7 +45,8 @@ let initialState = {
 		hasPaymentError: false,
 		infinityStatus: false
 	},
-	colorThemeSave: null
+	colorThemeSave: null,
+	ranInitialMinerva: false
 };
 
 export default function(state = initialState, action) {
@@ -65,6 +66,8 @@ export default function(state = initialState, action) {
 				newState.newAvailability = action.profile.availability;
 				newState.asks = action.profile.asks;
 				newState.payment = action.profile.payment;
+				newState.ranInitialMinerva =
+					action.profile.minerva.ranInitialMinerva;
 			}
 			return newState;
 		case SAVE_COLOR_THEME_START:

@@ -4,7 +4,9 @@ import {
 	ON_NEXT_MATCH,
 	DELETE_MATCH_IN_DB,
 	DELETE_MATCH_IN_DB_ERROR,
-	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS
+	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
+	RUNNING_INITIAL_MINERVA_FOR_USER,
+	FINISHED_RUNNING_INITIAL_MINERVA_FOR_USER
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -16,7 +18,8 @@ let initialState = {
 	nextMatches: [],
 	hasDeleteMatchInDBError: false,
 	hasUpdateTotalUserVotesFromDB: false,
-	totalUserVotesAcrossAllSessions: 0
+	totalUserVotesAcrossAllSessions: 0,
+	runningInitialMinervaForUser: false
 };
 
 export default function(state = initialState, action) {
@@ -58,6 +61,12 @@ export default function(state = initialState, action) {
 		case UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS:
 			newState.totalUserVotesAcrossAllSessions += action.additionalVotes;
 			newState.hasUpdateTotalUserVotesFromDB = true;
+			return newState;
+		case RUNNING_INITIAL_MINERVA_FOR_USER:
+			newState.runningInitialMinervaForUser = true;
+			return newState;
+		case FINISHED_RUNNING_INITIAL_MINERVA_FOR_USER:
+			newState.runningInitialMinervaForUser = false;
 			return newState;
 		default:
 			return state;
