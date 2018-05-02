@@ -90,7 +90,7 @@ class Matches extends Component {
 			matches,
 			history,
 			totalUserVotesAcrossAllSessions,
-			runningInitialMinervaForUser
+			runningAthenaForUser
 		} = this.props;
 
 		if (
@@ -133,7 +133,7 @@ class Matches extends Component {
 					/>
 				</Col>
 			);
-		} else if (runningInitialMinervaForUser) {
+		} else if (runningAthenaForUser) {
 			return (
 				<Col>
 					<h2
@@ -302,7 +302,7 @@ function mapStateToProps(state) {
 		mongoDBUserId: state.auth.mongoDBUserId,
 		totalUserVotesAcrossAllSessions:
 			state.matches.totalUserVotesAcrossAllSessions,
-		runningInitialMinervaForUser: state.matches.runningInitialMinervaForUser
+		runningAthenaForUser: state.matches.runningAthenaForUser
 	};
 }
 

@@ -141,7 +141,7 @@ module.exports = app => {
 		async (request, response) => {
 			// send message to minerva server to run minerva
 			// for a specific user
-			console.log('CLIENT -> MINERVA');
+			console.log('CLIENT -> MINERVA SERVER');
 			const { mongoDBUserId } = request.body;
 			console.log('request.body = ', request.body);
 			await amqp.connect(

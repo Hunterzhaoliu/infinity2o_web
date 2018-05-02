@@ -13,9 +13,9 @@ import {
 	ON_POPULAR_ASKS,
 	ON_CONTROVERSIAL_ASKS,
 	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
-	RUNNING_INITIAL_MINERVA_FOR_USER_START,
-	RUNNING_INITIAL_MINERVA_FOR_USER_DONE,
-	RUNNING_INITIAL_MINERVA_FOR_USER_ERROR
+	RUNNING_ATHENA_FOR_USER_START,
+	RUNNING_ATHENA_FOR_USER_DONE,
+	RUNNING_ATHENA_FOR_USER_ERROR
 } from './types';
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../utils/constants';
 import { store } from '../index';
@@ -81,7 +81,7 @@ export const onVote = (
 			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
 	) {
 		dispatch({
-			type: RUNNING_INITIAL_MINERVA_FOR_USER_START
+			type: RUNNING_ATHENA_FOR_USER_START
 		});
 		const info = {
 			mongoDBUserId: store.getState().auth.mongoDBUserId
@@ -90,11 +90,11 @@ export const onVote = (
 
 		if (response.status === 200) {
 			dispatch({
-				type: RUNNING_INITIAL_MINERVA_FOR_USER_DONE
+				type: RUNNING_ATHENA_FOR_USER_DONE
 			});
 		} else {
 			dispatch({
-				type: RUNNING_INITIAL_MINERVA_FOR_USER_ERROR
+				type: RUNNING_ATHENA_FOR_USER_ERROR
 			});
 		}
 	}
