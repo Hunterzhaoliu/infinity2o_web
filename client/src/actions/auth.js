@@ -43,7 +43,10 @@ export const fetchUserProfile = () => async dispatch => {
 		profile: response.data.profile
 	});
 
-	if (!store.getState().matches.hasUpdateTotalUserVotesFromDB) {
+	if (
+		response.data.profile !== undefined &&
+		!store.getState().matches.hasUpdateTotalUserVotesFromDB
+	) {
 		dispatch({
 			type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
 			additionalVotes: response.data.profile.asks.totalUserVotes
