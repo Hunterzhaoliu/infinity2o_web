@@ -156,7 +156,7 @@ module.exports = app => {
 					});
 					setTimeout(function() {
 						conn.close();
-						process.exit(0);
+						//process.exit(0);
 					}, 500);
 				}
 			);
