@@ -76,10 +76,9 @@ export const onVote = (
 	});
 
 	if (
-		true ||
-		(!store.getState().profile.ranInitialMinerva &&
-			store.getState().matches.totalUserVotesAcrossAllSessions >=
-				MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH)
+		!store.getState().profile.ranInitialMinerva &&
+		store.getState().matches.totalUserVotesAcrossAllSessions >=
+			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
 	) {
 		dispatch({
 			type: RUNNING_INITIAL_MINERVA_FOR_USER_START
