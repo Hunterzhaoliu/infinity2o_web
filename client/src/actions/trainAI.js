@@ -84,7 +84,10 @@ export const onVote = (
 		dispatch({
 			type: RUNNING_INITIAL_MINERVA_FOR_USER_START
 		});
-		const response = await axios.post('/api/matches/initial');
+		const info = {
+			mongoDBUserId: store.getState().auth.mongoDBUserId
+		};
+		const response = await axios.post('/api/matches/initial', info);
 
 		if (response.status === 200) {
 			dispatch({

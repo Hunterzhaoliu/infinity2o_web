@@ -2,6 +2,7 @@ const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
 const ConversationCollection = mongoose.model('conversations');
 const UserCollection = mongoose.model('users');
+const amqp = require('amqplib/callback_api');
 
 const getMatchesInfo = async mongoDBUserIds => {
 	let matches_info = [];
@@ -140,7 +141,26 @@ module.exports = app => {
 		async (request, response) => {
 			// send message to minerva server to run minerva
 			// for a specific user
-			// TODO: rabbitMQ publish
+			console.log('CLIENT -> MINERVA');
+			const { mongoDBUserId } = request.body;
+			console.log('request.body = ', request.body);
+			await amqp.connect(
+				'amqp://infinity2o:2134711@52.4.101.52:5672',
+				function(err, conn) {
+					conn.createChannel(function(err, ch) {
+						let q = 'run_minerva_for_new_user_queue';
+						let msg = mongoDBUserId;
+						ch.assertQueue(q, { durable: false });
+						ch.sendToQueue(q, new Buffer(msg));
+						console.log(' [x] Sent %s', msg);
+					});
+					setTimeout(function() {
+						conn.close();
+						process.exit(0);
+					}, 500);
+				}
+			);
+			response.send('successful');
 		}
 	);
 };
