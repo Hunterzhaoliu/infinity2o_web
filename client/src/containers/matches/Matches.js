@@ -93,60 +93,7 @@ class Matches extends Component {
 			runningAthenaForUser
 		} = this.props;
 
-		if (
-			totalUserVotesAcrossAllSessions <
-			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
-		) {
-			// display progress bar showing user needs to vote X more times
-			// before we run minerva for them
-			const votesToGo =
-				MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH -
-				totalUserVotesAcrossAllSessions;
-			const percentVotes = 100 / 8 * totalUserVotesAcrossAllSessions;
-			return (
-				<Col
-					sm={{ span: 24 }}
-					md={{ span: 22 }}
-					lg={{ span: 18 }}
-					xl={{ span: 14 }}
-				>
-					<h2
-						style={{
-							color: colorTheme.text2Color
-						}}
-					>
-						Recieve your first match by voting on 8 questions in
-						Train AI
-					</h2>
-					<h3
-						style={{
-							color: colorTheme.text3Color
-						}}
-					>
-						You have {votesToGo} to go!
-					</h3>
-					<Progress
-						style={{}}
-						percent={percentVotes}
-						showInfo={false}
-						status="active"
-					/>
-				</Col>
-			);
-		} else if (runningAthenaForUser) {
-			return (
-				<Col>
-					<h2
-						style={{
-							color: colorTheme.text2Color
-						}}
-					>
-						Thanks for training the AI. We'll have matches for you
-						in a moment ... <Icon type="loading" />
-					</h2>
-				</Col>
-			);
-		} else if (matches.current1DisplayedMatches.length > 0) {
+		if (matches.current1DisplayedMatches.length > 0) {
 			return _.map(matches.current1DisplayedMatches, match => {
 				return (
 					<Col
@@ -234,6 +181,59 @@ class Matches extends Component {
 					</Col>
 				);
 			});
+		} else if (runningAthenaForUser) {
+			return (
+				<Col>
+					<h2
+						style={{
+							color: colorTheme.text2Color
+						}}
+					>
+						Thanks for training the AI. We'll have matches for you
+						in a moment ... <Icon type="loading" />
+					</h2>
+				</Col>
+			);
+		} else if (
+			totalUserVotesAcrossAllSessions <
+			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
+		) {
+			// display progress bar showing user needs to vote X more times
+			// before we run minerva for them
+			const votesToGo =
+				MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH -
+				totalUserVotesAcrossAllSessions;
+			const percentVotes = 100 / 8 * totalUserVotesAcrossAllSessions;
+			return (
+				<Col
+					sm={{ span: 24 }}
+					md={{ span: 22 }}
+					lg={{ span: 18 }}
+					xl={{ span: 14 }}
+				>
+					<h2
+						style={{
+							color: colorTheme.text2Color
+						}}
+					>
+						Recieve your first match by voting on 8 questions in
+						Train AI
+					</h2>
+					<h3
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						You have {votesToGo} to go!
+					</h3>
+					<Progress
+						style={{}}
+						percent={percentVotes}
+						showInfo={false}
+						status="active"
+					/>
+				</Col>
+			);
 		} else {
 			return (
 				<div>
