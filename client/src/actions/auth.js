@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { SAVE_FETCHED_USER_AUTH, SAVE_FETCHED_USER_PROFILE } from './types';
+import {
+	SAVE_FETCHED_USER_AUTH,
+	SAVE_FETCHED_USER_PROFILE,
+	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS
+} from './types';
 import {
 	generateRandomColorThemeWith,
 	updateWithSavedColorTheme
@@ -38,4 +42,14 @@ export const fetchUserProfile = () => async dispatch => {
 		type: SAVE_FETCHED_USER_PROFILE,
 		profile: response.data.profile
 	});
+
+	if (
+		response.data.profile !== undefined &&
+		!store.getState().matches.hasUpdateTotalUserVotesFromDB
+	) {
+		dispatch({
+			type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
+			additionalVotes: response.data.profile.asks.totalUserVotes
+		});
+	}
 };

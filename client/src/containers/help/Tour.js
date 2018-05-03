@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../../actions/colorTheme';
@@ -39,7 +38,15 @@ class Tour extends Component {
 				</Row>
 				<Row type="flex" justify="center">
 					<Col span={24}>
-						<iframe width="840" height="472.5" src="https://www.youtube.com/embed/_bCDOyo4ZOo?&autoplay=1" allow="autoplay; encrypted-media" frameBorder="0" allowFullScreen></iframe>
+						<iframe
+							title="tour-video"
+							width="840"
+							height="472.5"
+							src="https://www.youtube.com/embed/_bCDOyo4ZOo?&autoplay=1"
+							allow="autoplay; encrypted-media"
+							frameBorder="0"
+							allowFullScreen
+						/>
 					</Col>
 				</Row>
 			</Content>

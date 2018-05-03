@@ -3,7 +3,11 @@ import {
 	UPDATE_INITIAL_MATCH,
 	ON_NEXT_MATCH,
 	DELETE_MATCH_IN_DB,
-	DELETE_MATCH_IN_DB_ERROR
+	DELETE_MATCH_IN_DB_ERROR,
+	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
+	RUNNING_ATHENA_FOR_USER_START,
+	RUNNING_ATHENA_FOR_USER_DONE,
+	RUNNING_ATHENA_FOR_USER_ERROR
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -13,7 +17,11 @@ let cloneObject = obj => {
 let initialState = {
 	current1DisplayedMatches: [],
 	nextMatches: [],
-	hasDeleteMatchInDBError: false
+	hasDeleteMatchInDBError: false,
+	hasUpdateTotalUserVotesFromDB: false,
+	totalUserVotesAcrossAllSessions: 0,
+	runningAthenaForUser: false,
+	hasErrorRunningAthenaForUser: false
 };
 
 export default function(state = initialState, action) {
@@ -30,7 +38,6 @@ export default function(state = initialState, action) {
 					if (currentMatch.name === undefined) {
 						currentMatch.name = 'Anonymous';
 					}
-					//console.log('currentMatch = ', currentMatch);
 					newState.current1DisplayedMatches.push(currentMatch);
 				}
 			}
@@ -43,7 +50,6 @@ export default function(state = initialState, action) {
 				if (currentMatch.name === undefined) {
 					currentMatch.name = 'Anonymous';
 				}
-				//console.log('currentMatch = ', currentMatch);
 				newState.current1DisplayedMatches.shift();
 				newState.current1DisplayedMatches.push(currentMatch);
 			}
@@ -53,6 +59,22 @@ export default function(state = initialState, action) {
 			return newState;
 		case DELETE_MATCH_IN_DB_ERROR:
 			newState.hasDeleteMatchInDBError = true;
+			return newState;
+		case UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS:
+			newState.totalUserVotesAcrossAllSessions += action.additionalVotes;
+			newState.hasUpdateTotalUserVotesFromDB = true;
+			return newState;
+		case RUNNING_ATHENA_FOR_USER_START:
+			newState.runningAthenaForUser = true;
+			newState.hasErrorRunningAthenaForUser = false;
+			return newState;
+		case RUNNING_ATHENA_FOR_USER_DONE:
+			newState.runningAthenaForUser = false;
+			newState.hasErrorRunningAthenaForUser = false;
+			return newState;
+		case RUNNING_ATHENA_FOR_USER_ERROR:
+			newState.runningAthenaForUser = false;
+			newState.hasErrorRunningAthenaForUser = true;
 			return newState;
 		default:
 			return state;

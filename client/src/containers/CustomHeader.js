@@ -33,7 +33,7 @@ class CustomHeader extends Component {
 		if (saveState === 'save_start') {
 			return <Icon type="loading" />;
 		} else if (saveState === 'save_done') {
-			return <Icon type="check" />;
+			return;
 		} else if (saveState === 'save_error') {
 			return <Icon type="warning" />;
 		}

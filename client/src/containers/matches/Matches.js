@@ -7,18 +7,17 @@ import * as profileActionCreators from '../../actions/profile';
 import * as authActionCreators from '../../actions/auth';
 import { bindActionCreators } from 'redux';
 import Options from '../payment/Options';
-
+import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
 import {
 	NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
 	NUMBER_NEURONS_TO_SAY_HI
 } from '../payment/prices';
-import { Layout, Row, Col, Card, Button, message } from 'antd';
+import { Layout, Row, Col, Card, Button, message, Progress, Icon } from 'antd';
 const { Content } = Layout;
 
 class Matches extends Component {
 	componentWillMount() {
 		// run once before first render()
-		this.props.fetchUserProfile();
 		this.props.onMatches();
 	}
 
@@ -86,7 +85,14 @@ class Matches extends Component {
 
 	renderMatches() {
 		//console.log('in Matches.js this.props = ', this.props);
-		const { colorTheme, matches, history } = this.props;
+		const {
+			colorTheme,
+			matches,
+			history,
+			totalUserVotesAcrossAllSessions,
+			runningAthenaForUser
+		} = this.props;
+
 		if (matches.current1DisplayedMatches.length > 0) {
 			return _.map(matches.current1DisplayedMatches, match => {
 				return (
@@ -175,16 +181,80 @@ class Matches extends Component {
 					</Col>
 				);
 			});
+		} else if (runningAthenaForUser) {
+			return (
+				<Col>
+					<h2
+						style={{
+							color: colorTheme.text2Color
+						}}
+					>
+						Thanks for training the AI. We'll have matches for you
+						in a moment ... <Icon type="loading" />
+					</h2>
+				</Col>
+			);
+		} else if (
+			totalUserVotesAcrossAllSessions <
+			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
+		) {
+			// display progress bar showing user needs to vote X more times
+			// before we run minerva for them
+			const votesToGo =
+				MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH -
+				totalUserVotesAcrossAllSessions;
+			const percentVotes = 100 / 8 * totalUserVotesAcrossAllSessions;
+			return (
+				<Col
+					sm={{ span: 24 }}
+					md={{ span: 22 }}
+					lg={{ span: 18 }}
+					xl={{ span: 14 }}
+				>
+					<h2
+						style={{
+							color: colorTheme.text2Color
+						}}
+					>
+						Recieve your first match by voting on 8 questions in
+						Train AI
+					</h2>
+					<h3
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						You have {votesToGo} to go!
+					</h3>
+					<Progress
+						style={{}}
+						percent={percentVotes}
+						showInfo={false}
+						status="active"
+					/>
+				</Col>
+			);
 		} else {
 			return (
-				<h3
-					style={{
-						color: colorTheme.text2Color
-					}}
-				>
-					Your out of matches for today. Check out Train AI for better
-					matches :)
-				</h3>
+				<div>
+					<h2
+						style={{
+							color: colorTheme.text2Color
+						}}
+					>
+						You're out of matches for today. Vote on questions in
+						Train AI to get better matches :)
+					</h2>
+					<h3
+						key="1"
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						Every day at 9 AM Central Time, our AI generates the
+						best partners for you.
+					</h3>
+				</div>
 			);
 		}
 	}
@@ -199,15 +269,6 @@ class Matches extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<h2
-					key="1"
-					style={{
-						color: colorTheme.text3Color
-					}}
-				>
-					Every day at 9 AM Central Time, our AI generates the best
-					partners for you.
-				</h2>
 				<Row type="flex" justify="center" align="top">
 					<Col
 						sm={{ span: 0 }}
@@ -238,7 +299,10 @@ function mapStateToProps(state) {
 		colorTheme: state.colorTheme,
 		matches: state.matches,
 		neuronsInBillions: state.profile.payment.neuronsInBillions,
-		mongoDBUserId: state.auth.mongoDBUserId
+		mongoDBUserId: state.auth.mongoDBUserId,
+		totalUserVotesAcrossAllSessions:
+			state.matches.totalUserVotesAcrossAllSessions,
+		runningAthenaForUser: state.matches.runningAthenaForUser
 	};
 }
 

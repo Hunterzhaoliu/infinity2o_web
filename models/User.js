@@ -43,6 +43,11 @@ const userSchema = new Schema({
 				type: Number,
 				default: 0.22
 			}
+		},
+		minerva: {
+			ranInitialMinerva: { type: Boolean, default: false }
+			// after a new user votes on 8 asks we run
+			// minerva for them for the first time immediately
 		}
 	},
 	matches: [String],

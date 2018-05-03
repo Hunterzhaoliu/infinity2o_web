@@ -11,8 +11,14 @@ import {
 	ON_NEXT_ASK,
 	ON_NEWEST_ASKS,
 	ON_POPULAR_ASKS,
-	ON_CONTROVERSIAL_ASKS
+	ON_CONTROVERSIAL_ASKS,
+	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
+	RUNNING_ATHENA_FOR_USER_START,
+	RUNNING_ATHENA_FOR_USER_DONE,
+	RUNNING_ATHENA_FOR_USER_ERROR
 } from './types';
+import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../utils/constants';
+import { store } from '../index';
 
 export const onNewestAsks = colorTheme => dispatch => {
 	dispatch({
@@ -61,6 +67,36 @@ export const onVote = (
 		dispatch({ type: SAVE_VOTE_DONE, saveIndex: askIndex });
 	} else {
 		dispatch({ type: SAVE_VOTE_ERROR, saveIndex: askIndex });
+	}
+
+	// for running minerva the first time user logins and votes
+	dispatch({
+		type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
+		additionalVotes: 1
+	});
+
+	if (
+		!store.getState().profile.ranInitialMinerva &&
+		store.getState().matches.totalUserVotesAcrossAllSessions >=
+			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
+	) {
+		dispatch({
+			type: RUNNING_ATHENA_FOR_USER_START
+		});
+		const info = {
+			mongoDBUserId: store.getState().auth.mongoDBUserId
+		};
+		const response = await axios.post('/api/matches/initial', info);
+
+		if (response.status === 200) {
+			dispatch({
+				type: RUNNING_ATHENA_FOR_USER_DONE
+			});
+		} else {
+			dispatch({
+				type: RUNNING_ATHENA_FOR_USER_ERROR
+			});
+		}
 	}
 };
 
