@@ -15,7 +15,7 @@ import {
 import { store } from '../index';
 import io from 'socket.io-client';
 import keys from '../config/keys';
-export let socket = io(keys.socketDomain, {transports: ['websocket']});
+export let socket = io(keys.socketDomain);
 
 export const fetchConversations = () => async dispatch => {
 	// 1) hit /api/current_user to get allContacts
