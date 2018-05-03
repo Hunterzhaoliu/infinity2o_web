@@ -156,10 +156,10 @@ module.exports = app => {
 					});
 					setTimeout(function() {
 						conn.close();
-						//process.exit(0);
 					}, 500);
 				}
 			);
+
 			response.send('successful');
 		}
 	);
