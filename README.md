@@ -21,7 +21,7 @@ mlab.com databases:
 Google OAuth:
 
 1. Login `console.developers.google.com` with `q42liu@gmail.com` under projects
-   `infinity2o-dev` & `infinity2o-prod`
+   `infinity2o-dev`, `infinity2o-staging`, & `infinity2o-prod`
 
 Stripe.com login:
 
