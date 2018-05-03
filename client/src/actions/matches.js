@@ -9,7 +9,7 @@ import {
 	DELETE_MATCH_IN_DB,
 	DELETE_MATCH_IN_DB_ERROR
 } from './types';
-const amqp = require('amqplib/callback_api');
+// const amqp = require('amqplib/callback_api');
 
 // amqp.connect('amqp://infinity2o:2134711@52.4.101.52:5672', function(err, conn) {
 // 	conn.createChannel(function(err, ch) {
