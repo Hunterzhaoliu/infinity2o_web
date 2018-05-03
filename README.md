@@ -23,6 +23,10 @@ Google OAuth:
 1. Login `console.developers.google.com` with `q42liu@gmail.com` under projects
    `infinity2o-dev`, `infinity2o-staging`, & `infinity2o-prod`
 
+LinkedIn OAuth:
+
+1. Login
+
 Stripe.com login:
 
 1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
