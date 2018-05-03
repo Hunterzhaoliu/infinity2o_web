@@ -15,7 +15,8 @@ mlab.com databases:
 
 1. Login with `qliu` & password = `mxxxxFxxxxxIxxxxxx`
 2. `infinity2o-dev` database username = `infinity2o-dev` & password = `2134711p`
-3. `infinity2o-prod` database username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
+3. `infinity2o-staging` database username = `infinity2o-staging` & password = `2134711p`
+4. `infinity2o-prod` database username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
 
 Google OAuth:
 
@@ -73,11 +74,17 @@ When you want to add something...
 ## Deployment checklist
 
 1. `cd infinity2o_server`
-2. `git checkout master`
-3. `heroku login` username = `qn1over12@gmail.com` & password = `exxxxxIxxFxxx`
-4. `git push heroku master`
-5. Check code is deployed on https://infinity2o.herokuapp.com/
-6. Check code is deployed on https://www.infinity2o.com/
+2. `heroku login` username = `qn1over12@gmail.com` & password = `exxxxxIxxFxxx`
+3. `git checkout staging`
+4. `git push origin staging`
+5. `git push heroku-staging staging:master`
+6. Check code is deployed on https://infinity2o-staging.herokuapp.com/
+7. `git checkout master`
+8. `git merge staging`
+9. `git push origin master`
+10. `git push heroku master`
+11. Check code is deployed on https://infinity2o.herokuapp.com/
+12. Check code is deployed on https://www.infinity2o.com/
 
 ## Design principles
 
