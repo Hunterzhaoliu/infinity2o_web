@@ -9,7 +9,7 @@
 
 heroku.com:
 
-1.  1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1. 1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
 mlab.com databases:
 
@@ -46,10 +46,10 @@ Cloudflare.com
 
 1. Login with `qn1over12@gmail.com` & password = `21xxxxx@ix`
 2. Already added 2 CNAMEs.
-    * Name: `infinity2o.com` Value: `www.infinity2o.com.herokudns.com`
-      TTL: `Automatic` Status: `Arrow through cloud`
-    * Name: `www` Value: `www.infinity2o.com.herokudns.com`
-      TTL: `Automatic` Status: `Arrow through cloud`
+   * Name: `infinity2o.com` Value: `www.infinity2o.com.herokudns.com`
+     TTL: `Automatic` Status: `Arrow through cloud`
+   * Name: `www` Value: `www.infinity2o.com.herokudns.com`
+     TTL: `Automatic` Status: `Arrow through cloud`
 
 E-mail support:
 
@@ -78,7 +78,7 @@ When you want to add something...
 ## Deployment checklist
 
 1. `cd infinity2o_server`
-2. `heroku login` username = `qn1over12@gmail.com` & password = `exxxxxIxxFxxx`
+2. `heroku login` username = `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 3. `git checkout staging`
 4. `git push origin staging`
 5. `git push heroku-staging staging:master`
