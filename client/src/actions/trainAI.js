@@ -42,7 +42,8 @@ export const onVote = (
 	answerIndex,
 	answerId,
 	askIndex,
-	askId
+	askId,
+	history
 ) => async dispatch => {
 	dispatch({ type: SAVE_VOTE_START, saveIndex: askIndex });
 	dispatch({
@@ -83,6 +84,7 @@ export const onVote = (
 		dispatch({
 			type: RUNNING_ATHENA_FOR_USER_START
 		});
+		history.push('/matches');
 		const info = {
 			mongoDBUserId: store.getState().auth.mongoDBUserId
 		};
