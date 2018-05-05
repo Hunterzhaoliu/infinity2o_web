@@ -16,8 +16,8 @@ import { store } from "../index";
 import io from "socket.io-client";
 import keys from "../config/keys";
 
-console.log("keys.socketDomain = ", keys.socketDomain);
-export let socket = io(keys.socketDomain, {
+console.log("keys.redirectDomain = ", keys.redirectDomain);
+export let socket = io(keys.redirectDomain, {
   reconnect: true,
   transports: ["websocket", "polling"]
 });
