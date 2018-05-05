@@ -14,10 +14,8 @@ import {
 } from "./types";
 import { store } from "../index";
 import io from "socket.io-client";
-import keys from "../config/keys";
 
-console.log("keys.socketDomain = ", keys.socketDomain);
-export let socket = io(keys.socketDomain, {
+export let socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
   reconnect: true,
   transports: ["websocket", "polling"]
 });
@@ -142,10 +140,10 @@ export const onSelectContact = (
 socket.on("TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE", function(
   newContactInfo
 ) {
-  console.log(
-    "TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ",
-    newContactInfo
-  );
+  // console.log(
+  //   "TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ",
+  //   newContactInfo
+  // );
   store.dispatch({
     type: UPDATE_CONTACT_SOCKET_ID,
     newContactInfo: newContactInfo
