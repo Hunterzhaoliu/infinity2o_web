@@ -14,10 +14,13 @@ import {
 } from "./types";
 import { store } from "../index";
 import io from "socket.io-client";
-import keys from "../config/keys";
 
-console.log("keys.socketDomain = ", keys.socketDomain);
-export let socket = io(keys.socketDomain, {
+console.log("process.env = ", process.env);
+console.log(
+  "process.env.REACT_APP_REDIRECT_DOMAIN = ",
+  process.env.REACT_APP_REDIRECT_DOMAIN
+);
+export let socket = io(process.env.REACT_APP_REDIRECT_DOMAIN, {
   reconnect: true,
   transports: ["websocket", "polling"]
 });
