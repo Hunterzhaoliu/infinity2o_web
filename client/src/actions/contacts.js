@@ -140,10 +140,10 @@ export const onSelectContact = (
 socket.on("TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE", function(
   newContactInfo
 ) {
-  console.log(
-    "TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ",
-    newContactInfo
-  );
+  // console.log(
+  //   "TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ",
+  //   newContactInfo
+  // );
   store.dispatch({
     type: UPDATE_CONTACT_SOCKET_ID,
     newContactInfo: newContactInfo
