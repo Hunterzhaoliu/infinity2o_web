@@ -1,3 +1,3 @@
 module.exports = {
-	socketDomain: process.env.SOCKET_DOMAIN
+  redirectDomain: process.env.REDIRECT_DOMAIN
 };
