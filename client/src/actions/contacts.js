@@ -15,12 +15,7 @@ import {
 import { store } from "../index";
 import io from "socket.io-client";
 
-console.log("process.env = ", process.env);
-console.log(
-  "process.env.REACT_APP_REDIRECT_DOMAIN = ",
-  process.env.REACT_APP_REDIRECT_DOMAIN
-);
-export let socket = io(process.env.REACT_APP_REDIRECT_DOMAIN, {
+export let socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
   reconnect: true,
   transports: ["websocket", "polling"]
 });
@@ -145,10 +140,10 @@ export const onSelectContact = (
 socket.on("TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE", function(
   newContactInfo
 ) {
-  console.log(
-    "TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ",
-    newContactInfo
-  );
+  // console.log(
+  //   "TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ",
+  //   newContactInfo
+  // );
   store.dispatch({
     type: UPDATE_CONTACT_SOCKET_ID,
     newContactInfo: newContactInfo
