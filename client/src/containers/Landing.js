@@ -17,10 +17,10 @@ class Landing extends Component {
 		const { colorTheme, auth } = this.props;
 		const why_part_0 = `Online classes from `;
 		const why_part_1 = `udacity.com, edx.org, udemy.com, & coursera.org`;
-		const why_part_2 = `are amazing but too lonely.`;
+		const why_part_2 = `are amazing but miss the opportunity to work with new people.`;
 
-		const how = `Join our growing community and train an artificial intelligence to find the best study partners for you.`;
-		const why = `Online classes from the best teachers are amazing but too lonely.`;
+		const how = `Join our growing community of online learners to take online classes together.`;
+		const why = `Online classes from the best teachers are amazing but miss the opportunity to work with new people.`;
 		switch (auth.loggedInState) {
 			case 'not_logged_in':
 				return (

@@ -21,6 +21,14 @@ const getMatchesInfo = async mongoDBUserIds => {
 	return matches_info;
 };
 
+const generateUniqueUID = () => {
+	return (
+		Math.random().toString() +
+		Math.random().toString() +
+		Math.random().toString()
+	);
+};
+
 module.exports = app => {
 	app.get('/api/matches', requireLogin, async (request, response) => {
 		const mongoDBUserIds = request.query.mongoDBUserIds.split(',');
@@ -141,26 +149,69 @@ module.exports = app => {
 		async (request, response) => {
 			// send message to minerva server to run minerva
 			// for a specific user
-			console.log('CLIENT -> MINERVA SERVER');
+			console.log('CLIENT -> ATHENA SERVER');
 			const { mongoDBUserId } = request.body;
 			console.log('request.body = ', request.body);
-			await amqp.connect(
-				'amqp://infinity2o:2134711@52.4.101.52:5672',
-				function(err, conn) {
-					conn.createChannel(function(err, ch) {
-						let q = 'run_minerva_for_new_user_queue';
-						let msg = mongoDBUserId;
-						ch.assertQueue(q, { durable: false });
-						ch.sendToQueue(q, new Buffer(msg));
-						console.log(' [x] Sent %s', msg);
-					});
-					setTimeout(function() {
-						conn.close();
-					}, 500);
-				}
-			);
+			const URL = 'amqp://infinity2o:2134711@52.4.101.52:5672';
+			await amqp.connect(URL, function(error, connection) {
+				connection.createChannel(function(error, channel) {
+					let sendToQueueName = 'run_athena_for_new_user_queue';
+					channel.assertQueue('', { exclusive: true }, function(
+						error,
+						replyToQueueObject
+					) {
+						const correlationId = generateUniqueUID();
 
-			response.send('successful');
+						console.log(
+							' [x] Requesting Athena matches for mongoDBUserId=%s',
+							mongoDBUserId
+						);
+
+						channel.consume(
+							replyToQueueObject.queue,
+							function(messageFromServer) {
+								if (
+									messageFromServer.properties
+										.correlationId == correlationId
+								) {
+									const mongoDBUserIdFromAthenaServer = messageFromServer.content.toString();
+									console.log(
+										' [.] Got messageFromServer=%s',
+										mongoDBUserIdFromAthenaServer
+									);
+
+									if (
+										mongoDBUserIdFromAthenaServer !== null
+									) {
+										response.send(
+											mongoDBUserIdFromAthenaServer
+										);
+									} else {
+										response
+											.status(422)
+											.send(
+												'ERROR: Athena ran unsuccessfully'
+											);
+									}
+									setTimeout(function() {
+										connection.close();
+									}, 500);
+								}
+							},
+							{ noAck: true }
+						);
+
+						channel.sendToQueue(
+							sendToQueueName,
+							new Buffer(mongoDBUserId),
+							{
+								correlationId: correlationId,
+								replyTo: replyToQueueObject.queue
+							}
+						);
+					});
+				});
+			});
 		}
 	);
 };

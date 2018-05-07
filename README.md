@@ -2,8 +2,9 @@
 
 ## Setup
 
-1. `node -v` = v8.9.3 & `npm -v` = 5.6.0
-2. `heroku -v` = `heroku-cli/6.15.13-3dce47c (darwin-x64) node-v9.3.0`
+1. Get a Mac
+2. `node -v` = v8.9.3 & `npm -v` = 5.6.0
+3. `heroku -v` = `heroku-cli/6.15.13-3dce47c (darwin-x64) node-v9.3.0`
 
 ## Backend & frontend development setup
 

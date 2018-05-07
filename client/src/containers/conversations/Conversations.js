@@ -65,8 +65,7 @@ class Conversation extends Component {
 						color: colorTheme.text3Color
 					}}
 				>
-					You have no conversations right now. Start some by "Saying
-					Hi" in Matches.
+					You have no conversations right now. Start one in Matches.
 				</h2>
 			);
 		}

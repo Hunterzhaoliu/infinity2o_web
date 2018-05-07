@@ -172,7 +172,7 @@ class Matches extends Component {
 												)
 											}
 										>
-											Say Hi :)
+											Say Hi
 										</Button>
 									</Col>
 								</Row>
@@ -189,8 +189,8 @@ class Matches extends Component {
 							color: colorTheme.text2Color
 						}}
 					>
-						Thanks for training the AI. We'll have matches for you
-						in a moment ... <Icon type="loading" />
+						We'll have matches for you in a moment{' '}
+						<Icon type="loading" />
 					</h2>
 				</Col>
 			);
@@ -213,15 +213,15 @@ class Matches extends Component {
 				>
 					<h2
 						style={{
-							color: colorTheme.text2Color
+							color: colorTheme.text3Color
 						}}
 					>
-						Recieve your first match by voting on 8 questions in
+						Recieve your first 2 matches by voting on 8 questions in
 						Train AI
 					</h2>
 					<h3
 						style={{
-							color: colorTheme.text3Color
+							color: colorTheme.text4Color
 						}}
 					>
 						You have {votesToGo} to go!
@@ -236,25 +236,30 @@ class Matches extends Component {
 			);
 		} else {
 			return (
-				<div>
+				<Col
+					sm={{ span: 24 }}
+					md={{ span: 22 }}
+					lg={{ span: 18 }}
+					xl={{ span: 14 }}
+				>
 					<h2
-						style={{
-							color: colorTheme.text2Color
-						}}
-					>
-						You're out of matches for today. Vote on questions in
-						Train AI to get better matches :)
-					</h2>
-					<h3
-						key="1"
 						style={{
 							color: colorTheme.text3Color
 						}}
 					>
-						Every day at 9 AM Central Time, our AI generates the
-						best partners for you.
+						You're out of matches for today. Vote on questions in
+						Train AI to get better matches.
+					</h2>
+					<h3
+						style={{
+							color: colorTheme.text4Color
+						}}
+					>
+						Every day at 9 AM Central Time, our artificial
+						intelligence (AI) generates the 2 best study partners
+						for you.
 					</h3>
-				</div>
+				</Col>
 			);
 		}
 	}
@@ -269,6 +274,35 @@ class Matches extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
+				<Row type="flex" justify="center" align="top">
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 1 }}
+						lg={{ span: 3 }}
+						xl={{ span: 5 }}
+					/>
+					<Col
+						sm={{ span: 24 }}
+						md={{ span: 22 }}
+						lg={{ span: 18 }}
+						xl={{ span: 14 }}
+					>
+						<h2
+							style={{
+								color: colorTheme.text2Color
+							}}
+						>
+							We use your profile to give you the 2 best matches
+							everyday
+						</h2>
+					</Col>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 1 }}
+						lg={{ span: 3 }}
+						xl={{ span: 5 }}
+					/>
+				</Row>
 				<Row type="flex" justify="center" align="top">
 					<Col
 						sm={{ span: 0 }}
