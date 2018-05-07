@@ -26,7 +26,7 @@ Google OAuth:
 
 LinkedIn OAuth:
 
-1. Login
+1. Login TODO:
 
 Stripe.com login:
 
