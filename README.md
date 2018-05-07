@@ -10,7 +10,7 @@
 
 heroku.com:
 
-1.  1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1. 1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
 mlab.com databases:
 
@@ -23,6 +23,10 @@ Google OAuth:
 
 1. Login `console.developers.google.com` with `q42liu@gmail.com` under projects
    `infinity2o-dev`, `infinity2o-staging`, & `infinity2o-prod`
+
+LinkedIn OAuth:
+
+1. Login TODO:
 
 Stripe.com login:
 
@@ -43,10 +47,10 @@ Cloudflare.com
 
 1. Login with `qn1over12@gmail.com` & password = `21xxxxx@ix`
 2. Already added 2 CNAMEs.
-    * Name: `infinity2o.com` Value: `www.infinity2o.com.herokudns.com`
-      TTL: `Automatic` Status: `Arrow through cloud`
-    * Name: `www` Value: `www.infinity2o.com.herokudns.com`
-      TTL: `Automatic` Status: `Arrow through cloud`
+   * Name: `infinity2o.com` Value: `www.infinity2o.com.herokudns.com`
+     TTL: `Automatic` Status: `Arrow through cloud`
+   * Name: `www` Value: `www.infinity2o.com.herokudns.com`
+     TTL: `Automatic` Status: `Arrow through cloud`
 
 E-mail support:
 
@@ -75,17 +79,19 @@ When you want to add something...
 ## Deployment checklist
 
 1. `cd infinity2o_server`
-2. `heroku login` username = `qn1over12@gmail.com` & password = `exxxxxIxxFxxx`
-3. `git checkout staging`
-4. `git push origin staging`
-5. `git push heroku-staging staging:master`
-6. Check code is deployed on https://infinity2o-staging.herokuapp.com/
-7. `git checkout master`
-8. `git merge staging`
-9. `git push origin master`
-10. `git push heroku master`
-11. Check code is deployed on https://infinity2o.herokuapp.com/
-12. Check code is deployed on https://www.infinity2o.com/
+2. `heroku login` username = `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+
+3. If first time, `git remote add heroku-staging https://git.heroku.com/infinity2o-staging.git` and `git remote add heroku https://git.heroku.com/infinity2o.git`
+4. `git checkout staging`
+5. `git push origin staging`
+6. `git push heroku-staging staging:master`
+7. Check code is deployed on https://infinity2o-staging.herokuapp.com/
+8. `git checkout master`
+9. `git merge staging`
+10. `git push origin master`
+11. `git push heroku master`
+12. Check code is deployed on https://infinity2o.herokuapp.com/
+13. Check code is deployed on https://www.infinity2o.com/
 
 ## Design principles
 
