@@ -93,7 +93,9 @@ class Matches extends Component {
 			runningAthenaForUser
 		} = this.props;
 
-		if (matches.current1DisplayedMatches.length > 0) {
+		const hasMatches = matches.current1DisplayedMatches.length > 0;
+
+		if (hasMatches) {
 			return _.map(matches.current1DisplayedMatches, match => {
 				return (
 					<Col
