@@ -13,6 +13,7 @@ class InputVote extends Component {
 
 	onVote(answerIndex, askIndex, askId) {
 		const { trainAI, history } = this.props;
+		//console.log('onVote this.props = ', this.props);
 		// now we know which answer user pressed so let's pass the answesId too
 		const ask = trainAI.current4DisplayedAsks[askIndex];
 		const answerId = ask.answers[answerIndex]._id;
