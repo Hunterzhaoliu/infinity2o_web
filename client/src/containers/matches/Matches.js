@@ -189,8 +189,8 @@ class Matches extends Component {
 							color: colorTheme.text2Color
 						}}
 					>
-						Thanks for training the AI. We'll have matches for you
-						in a moment ... <Icon type="loading" />
+						We'll have matches for you in a moment{' '}
+						<Icon type="loading" />
 					</h2>
 				</Col>
 			);
@@ -236,25 +236,30 @@ class Matches extends Component {
 			);
 		} else {
 			return (
-				<div>
+				<Col
+					sm={{ span: 24 }}
+					md={{ span: 22 }}
+					lg={{ span: 18 }}
+					xl={{ span: 14 }}
+				>
 					<h2
-						style={{
-							color: colorTheme.text2Color
-						}}
-					>
-						You're out of matches for today. Vote on questions in
-						Train AI to get better matches :)
-					</h2>
-					<h3
-						key="1"
 						style={{
 							color: colorTheme.text3Color
 						}}
 					>
+						You're out of matches for today. Vote on questions in
+						Train AI to get better matches.
+					</h2>
+					<h3
+						style={{
+							color: colorTheme.text4Color
+						}}
+					>
 						Every day at 9 AM Central Time, our artificial
-						intelligence (AI) generates the best partners for you.
+						intelligence (AI) generates the 2 best study partners
+						for you.
 					</h3>
-				</div>
+				</Col>
 			);
 		}
 	}
@@ -287,9 +292,8 @@ class Matches extends Component {
 								color: colorTheme.text2Color
 							}}
 						>
-							We used your profile to train an artificial
-							intelligence (AI) to give you the 2 best matches
-							daily.
+							We use your profile to give you the 2 best matches
+							everyday
 						</h2>
 					</Col>
 					<Col

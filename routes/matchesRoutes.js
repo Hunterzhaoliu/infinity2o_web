@@ -174,10 +174,25 @@ module.exports = app => {
 									messageFromServer.properties
 										.correlationId == correlationId
 								) {
+									const mongoDBUserIdFromAthenaServer = messageFromServer.content.toString();
 									console.log(
 										' [.] Got messageFromServer=%s',
-										messageFromServer.content.toString()
+										mongoDBUserIdFromAthenaServer
 									);
+
+									if (
+										mongoDBUserIdFromAthenaServer !== null
+									) {
+										response.send(
+											mongoDBUserIdFromAthenaServer
+										);
+									} else {
+										response
+											.status(422)
+											.send(
+												'ERROR: Athena ran unsuccessfully'
+											);
+									}
 									setTimeout(function() {
 										connection.close();
 									}, 500);
@@ -197,8 +212,6 @@ module.exports = app => {
 					});
 				});
 			});
-
-			response.send('successful');
 		}
 	);
 };

@@ -10,7 +10,6 @@ const { Content } = Layout;
 class TrainAI extends Component {
 	componentWillMount() {
 		// run once before first render()
-		this.props.fetchUserProfile();
 		this.props.onTrainAI();
 	}
 
