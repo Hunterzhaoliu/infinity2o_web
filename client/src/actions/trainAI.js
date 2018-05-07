@@ -19,6 +19,7 @@ import {
 } from './types';
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../utils/constants';
 import { store } from '../index';
+import { fetchUserMatches } from './matches';
 
 export const onNewestAsks = colorTheme => dispatch => {
 	dispatch({
@@ -42,7 +43,8 @@ export const onVote = (
 	answerIndex,
 	answerId,
 	askIndex,
-	askId
+	askId,
+	history
 ) => async dispatch => {
 	dispatch({ type: SAVE_VOTE_START, saveIndex: askIndex });
 	dispatch({
@@ -83,12 +85,20 @@ export const onVote = (
 		dispatch({
 			type: RUNNING_ATHENA_FOR_USER_START
 		});
+		history.push('/matches');
 		const info = {
 			mongoDBUserId: store.getState().auth.mongoDBUserId
 		};
-		const response = await axios.post('/api/matches/initial', info);
+		const initialMatchesResponse = await axios.post(
+			'/api/matches/initial',
+			info
+		);
 
-		if (response.status === 200) {
+		if (initialMatchesResponse.status === 200) {
+			const currentUserResponse = await axios.get('/api/current_user');
+			if (currentUserResponse.data.matches.length >= 1) {
+				fetchUserMatches(dispatch, currentUserResponse.data.matches);
+			}
 			dispatch({
 				type: RUNNING_ATHENA_FOR_USER_DONE
 			});

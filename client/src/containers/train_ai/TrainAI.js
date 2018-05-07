@@ -10,13 +10,12 @@ const { Content } = Layout;
 class TrainAI extends Component {
 	componentWillMount() {
 		// run once before first render()
-		this.props.fetchUserProfile();
 		this.props.onTrainAI();
 	}
 
 	render() {
 		//console.log('this.props in TrainAI.js', this.props);
-		const { colorTheme } = this.props;
+		const { colorTheme, history } = this.props;
 		return (
 			<Content
 				style={{
@@ -51,7 +50,8 @@ class TrainAI extends Component {
 							}}
 						>
 							We believe people are great partners because their
-							core beliefs align.
+							beliefs align. Here you train an artificial
+							intelligence (AI) by...
 						</h2>
 					</Col>
 					<Col
@@ -76,19 +76,18 @@ class TrainAI extends Component {
 						xl={{ span: 6 }}
 					/>
 					<Col
-						sm={{ span: 18 }}
-						md={{ span: 16 }}
-						lg={{ span: 12 }}
-						xl={{ span: 10 }}
+						sm={{ span: 17 }}
+						md={{ span: 12 }}
+						lg={{ span: 9 }}
+						xl={{ span: 8 }}
 					>
 						<h2
 							style={{
 								textAlign: 'center',
-								color: colorTheme.text3Color
+								color: colorTheme.text4Color
 							}}
 						>
-							Find partners by asking questions that matter to
-							you:
+							Asking questions that matter to you:
 						</h2>
 					</Col>
 					<Col
@@ -102,7 +101,7 @@ class TrainAI extends Component {
 							style={{
 								borderColor: colorTheme.text7Color,
 								background: colorTheme.text7Color,
-								color: colorTheme.text1Color
+								color: colorTheme.text2Color
 							}}
 						>
 							<a href="/train_ai/ask">Ask Question</a>
@@ -127,10 +126,10 @@ class TrainAI extends Component {
 						<h2
 							style={{
 								textAlign: 'center',
-								color: colorTheme.text3Color
+								color: colorTheme.text4Color
 							}}
 						>
-							Or vote on questions that matter to you:
+							Or voting on questions that matter to you:
 						</h2>
 					</Col>
 				</Row>
@@ -155,7 +154,7 @@ class TrainAI extends Component {
 						lg={{ span: 14 }}
 						xl={{ span: 14 }}
 					>
-						<InputVote />
+						<InputVote history={history} />
 					</Col>
 					<Col
 						sm={{ span: 0 }}

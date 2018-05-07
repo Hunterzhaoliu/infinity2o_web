@@ -9,23 +9,6 @@ import {
 	DELETE_MATCH_IN_DB,
 	DELETE_MATCH_IN_DB_ERROR
 } from './types';
-// const amqp = require('amqplib/callback_api');
-
-// amqp.connect('amqp://infinity2o:2134711@52.4.101.52:5672', function(err, conn) {
-// 	conn.createChannel(function(err, ch) {
-// 		var q = 'hello';
-//
-// 		ch.assertQueue(q, { durable: false });
-// 		console.log(' [*] Waiting for messages in %s. To exit press CTRL+C', q);
-// 		ch.consume(
-// 			q,
-// 			function(msg) {
-// 				console.log(' [x] Received %s', msg.content.toString());
-// 			},
-// 			{ noAck: true }
-// 		);
-// 	});
-// });
 
 export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
 	const response = await axios.get(
