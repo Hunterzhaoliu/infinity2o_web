@@ -19,6 +19,9 @@ const userSchema = new Schema({
 			savedColorPallateIndex: { type: Number, default: 4 }
 		},
 		name: String,
+		email: String,
+		linkedInPublicProfileUrl: String,
+		githubPublicProfileUrl: String,
 		age: { type: Number },
 		interests: [String],
 		timeZone: String,
