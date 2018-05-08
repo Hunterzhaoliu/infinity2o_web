@@ -26,7 +26,7 @@ class InputTimeZone extends Component {
 					>
 						<h3
 							style={{
-								color: colorTheme.text6Color
+								color: colorTheme.text4Color
 							}}
 						>
 							{label}
@@ -41,9 +41,6 @@ class InputTimeZone extends Component {
 						<TreeSelect
 							style={{
 								width: width
-								// borderColor: colorTheme.text8Color,
-								// background: colorTheme.text8Color,
-								// color: colorTheme.text4Color
 							}}
 							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
 							value={profile.newTimeZone}

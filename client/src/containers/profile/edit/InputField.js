@@ -25,7 +25,7 @@ class InputField extends Component {
 					>
 						<h3
 							style={{
-								color: colorTheme.text6Color
+								color: colorTheme.text4Color
 							}}
 						>
 							{label}
@@ -42,7 +42,7 @@ class InputField extends Component {
 							onChange={this.onChangeName}
 							style={{
 								width: width,
-								color: colorTheme.text4Color,
+								color: colorTheme.text2Color,
 								borderColor: colorTheme.text8Color,
 								backgroundColor: colorTheme.text8Color
 							}}

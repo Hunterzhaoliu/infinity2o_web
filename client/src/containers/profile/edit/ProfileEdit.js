@@ -65,7 +65,19 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField width={280} label="E-mail:" />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -77,7 +89,7 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '1% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -89,7 +101,43 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField width={280} label="LinkedIn:" />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField width={280} label="Github:" />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField width={280} label="Website:" />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -101,7 +149,7 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '2% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -112,7 +160,7 @@ class ProfileEdit extends Component {
 					type="flex"
 					justify="start"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>

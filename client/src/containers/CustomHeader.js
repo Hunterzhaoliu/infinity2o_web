@@ -83,6 +83,7 @@ class CustomHeader extends Component {
 		return (
 			<Button
 				style={{
+					fontSize: 17,
 					borderColor: colorTheme.tourButtonColor,
 					background: colorTheme.tourButtonColor,
 					color: colorTheme.tourButtonTextColor
@@ -187,6 +188,7 @@ class CustomHeader extends Component {
 		return (
 			<Button
 				style={{
+					fontSize: 17,
 					borderColor: colorTheme.conversationsButtonColor,
 					background: colorTheme.conversationsButtonColor,
 					color: colorTheme.conversationsButtonTextColor

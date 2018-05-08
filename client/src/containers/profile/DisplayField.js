@@ -166,13 +166,13 @@ class DisplayField extends Component {
 					lg={{ span: 3 }}
 					xl={{ span: 2 }}
 				>
-					<h3
+					<h4
 						style={{
 							color: colorTheme.text4Color
 						}}
 					>
 						{label}
-					</h3>
+					</h4>
 				</Col>
 				<Col
 					sm={{ span: 18, offset: 1 }}
@@ -180,13 +180,13 @@ class DisplayField extends Component {
 					lg={{ span: 20, offset: 1 }}
 					xl={{ span: 21, offset: 1 }}
 				>
-					<h3
+					<h4
 						style={{
 							color: colorTheme.text2Color
 						}}
 					>
 						{this.renderValue(label, value)}
-					</h3>
+					</h4>
 				</Col>
 			</Row>
 		);

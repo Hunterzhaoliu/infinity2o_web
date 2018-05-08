@@ -6,6 +6,7 @@ import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import Options from '../payment/Options';
 import DisplayField from './DisplayField';
+import DisplayLinkField from './DisplayLinkField';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
@@ -68,6 +69,18 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
+						padding: '0% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<DisplayField label="E-mail: " />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
@@ -88,6 +101,42 @@ class Profile extends Component {
 							label="Interest(s): "
 							value={profile.interests}
 						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '5px 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<DisplayLinkField label="LinkedIn: " />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '5px 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<DisplayLinkField label="Github: " />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '5px 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<DisplayLinkField label="Website: " />
 					</Col>
 				</Row>
 				<Row
