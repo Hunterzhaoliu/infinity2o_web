@@ -29,7 +29,7 @@ class Profile extends Component {
 					<Col>
 						<h2
 							style={{
-								color: colorTheme.keyText7Color
+								color: colorTheme.keyText6Color
 							}}
 						>
 							Profile:
@@ -229,7 +229,7 @@ class Profile extends Component {
 					>
 						<h2
 							style={{
-								color: colorTheme.keyText7Color
+								color: colorTheme.keyText6Color
 							}}
 						>
 							Purchase Neurons:
@@ -279,7 +279,7 @@ class Profile extends Component {
 							<h2
 								style={{
 									padding: '25px 0% 0%', // top left&right bottom
-									color: colorTheme.keyText7Color
+									color: colorTheme.keyText6Color
 								}}
 							>
 								Last 5 Questions
@@ -290,7 +290,7 @@ class Profile extends Component {
 							<h2
 								style={{
 									padding: '25px 0% 0%', // top left&right bottom
-									color: colorTheme.keyText7Color
+									color: colorTheme.keyText6Color
 								}}
 							>
 								Last 5 Votes

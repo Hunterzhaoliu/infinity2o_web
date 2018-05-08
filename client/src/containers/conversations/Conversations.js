@@ -62,7 +62,7 @@ class Conversation extends Component {
 			return (
 				<h2
 					style={{
-						color: colorTheme.text3Color
+						color: colorTheme.text2Color
 					}}
 				>
 					You have no conversations right now. Start one in Matches.
