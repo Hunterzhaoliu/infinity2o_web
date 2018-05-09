@@ -53,7 +53,7 @@ class CustomHeader extends Component {
 					style={{
 						borderColor: colorTheme.text7Color,
 						background: colorTheme.text7Color,
-						color: colorTheme.text2Color
+						color: colorTheme.text4Color
 					}}
 					onClick={nonLoggedInGenerateRandomColorTheme}
 				>
@@ -66,7 +66,7 @@ class CustomHeader extends Component {
 					style={{
 						borderColor: colorTheme.text7Color,
 						background: colorTheme.text7Color,
-						color: colorTheme.text2Color
+						color: colorTheme.text4Color
 					}}
 					onClick={onRandomColorTheme}
 				>

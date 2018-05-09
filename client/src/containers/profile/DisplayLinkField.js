@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Button } from 'antd';
+import { Row, Col } from 'antd';
 
 class DisplayLinkField extends Component {
 	renderValue(label, value) {
-		const { colorTheme } = this.props;
+		//const { colorTheme } = this.props;
 	}
 
 	render() {
