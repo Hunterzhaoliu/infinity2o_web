@@ -112,7 +112,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col span={24}>
-						<DisplayLinkField label="LinkedIn: " />
+						<DisplayLinkField
+							label="LinkedIn: "
+							value={profile.linkedInPublicProfileUrl}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -124,7 +127,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col span={24}>
-						<DisplayLinkField label="Github: " />
+						<DisplayLinkField
+							label="Github: "
+							value={profile.githubPublicProfileUrl}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -136,7 +142,10 @@ class Profile extends Component {
 					}}
 				>
 					<Col span={24}>
-						<DisplayLinkField label="Website: " />
+						<DisplayLinkField
+							label="Website: "
+							value={profile.websiteUrl}
+						/>
 					</Col>
 				</Row>
 				<Row

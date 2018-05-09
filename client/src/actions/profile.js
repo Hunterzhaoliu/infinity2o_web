@@ -9,13 +9,14 @@ import {
 	SAVE_PROFILE_DONE,
 	SAVE_PROFILE_ERROR,
 	DECREMENT_NEURONS,
-	DECREMENT_NEURONS_ERROR
+	DECREMENT_NEURONS_ERROR,
+	ON_CHANGE_EMAIL
 } from './types';
 import {
 	isValidName,
 	isValidAge,
-	isValidInterests
-	//isValidTimeSlots
+	isValidInterests,
+	isValidEmail
 } from '../utils/validateProfileEdit';
 
 export const onChangeName = newName => dispatch => {
@@ -23,6 +24,18 @@ export const onChangeName = newName => dispatch => {
 		dispatch({ type: ON_CHANGE_NAME, newName: newName, hasError: false });
 	} else {
 		dispatch({ type: ON_CHANGE_NAME, newName: newName, hasError: true });
+	}
+};
+
+export const onChangeEmail = newEmail => dispatch => {
+	if (isValidEmail(newEmail)) {
+		dispatch({
+			type: ON_CHANGE_EMAIL,
+			newEmail: newEmail,
+			hasError: false
+		});
+	} else {
+		dispatch({ type: ON_CHANGE_EMAIL, newEmail: newEmail, hasError: true });
 	}
 };
 

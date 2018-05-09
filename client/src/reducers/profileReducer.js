@@ -15,7 +15,8 @@ import {
 	PAYMENT_ERROR,
 	SAVE_COLOR_THEME_START,
 	SAVE_COLOR_THEME_DONE,
-	SAVE_COLOR_THEME_ERROR
+	SAVE_COLOR_THEME_ERROR,
+	ON_CHANGE_EMAIL
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -33,12 +34,14 @@ let initialState = {
 	timeZone: null,
 	availability: {},
 	newName: null,
+	newEmail: null,
 	newAge: null,
 	newInterests: [],
 	newTimeZone: null,
 	newAvailability: {},
 	hasAgeError: false,
 	hasNameError: false,
+	hasEmailError: false,
 	hasInterestsError: false,
 	hasTimeZoneError: false,
 	hasAvailabilityError: false,
@@ -70,6 +73,7 @@ export default function(state = initialState, action) {
 				newState.timeZone = action.profile.timeZone;
 				newState.availability = action.profile.availability;
 				newState.newName = action.profile.name;
+				newState.newEmail = action.profile.email;
 				newState.newAge = action.profile.age;
 				newState.newInterests = action.profile.interests;
 				newState.newTimeZone = action.profile.timeZone;
@@ -92,6 +96,10 @@ export default function(state = initialState, action) {
 		case ON_CHANGE_NAME:
 			newState.newName = action.newName;
 			newState.hasNameError = action.hasError;
+			return newState;
+		case ON_CHANGE_EMAIL:
+			newState.newEmail = action.newEmail;
+			newState.hasEmailError = action.hasError;
 			return newState;
 		case ON_CHANGE_AGE:
 			newState.newAge = action.newAge;

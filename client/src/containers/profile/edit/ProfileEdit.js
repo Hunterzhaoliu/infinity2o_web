@@ -44,7 +44,14 @@ class ProfileEdit extends Component {
 	}
 
 	renderContent() {
-		const { colorTheme, saveProfile, profile, history } = this.props;
+		const {
+			colorTheme,
+			saveProfile,
+			profile,
+			history,
+			onChangeName,
+			onChangeEmail
+		} = this.props;
 
 		return (
 			<div>
@@ -57,7 +64,14 @@ class ProfileEdit extends Component {
 					}}
 				>
 					<Col span={24}>
-						<InputField width={280} label="Name:" />
+						<InputField
+							value={profile.newName}
+							width={280}
+							label="Name:"
+							errorMessage="Cool name! But we need 1 to 30 valid letters"
+							hasError={profile.hasNameError}
+							onChange={onChangeName}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -69,7 +83,14 @@ class ProfileEdit extends Component {
 					}}
 				>
 					<Col span={24}>
-						<InputField width={280} label="E-mail:" />
+						<InputField
+							value={profile.newEmail}
+							width={280}
+							label="E-mail:"
+							errorMessage="Invalid e-mail format"
+							hasError={profile.hasEmailError}
+							onChange={onChangeEmail}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -105,7 +126,11 @@ class ProfileEdit extends Component {
 					}}
 				>
 					<Col span={24}>
-						<InputField width={280} label="LinkedIn:" />
+						<InputField
+							width={280}
+							label="LinkedIn:"
+							errorMessage="Invalid LinkedIn link"
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -117,7 +142,11 @@ class ProfileEdit extends Component {
 					}}
 				>
 					<Col span={24}>
-						<InputField width={280} label="Github:" />
+						<InputField
+							width={280}
+							label="Github:"
+							errorMessage="Invalid github link"
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -129,7 +158,11 @@ class ProfileEdit extends Component {
 					}}
 				>
 					<Col span={24}>
-						<InputField width={280} label="Website:" />
+						<InputField
+							width={280}
+							label="Website:"
+							errorMessage="Invalid website link"
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -237,6 +270,12 @@ function mapDispatchToProps(dispatch) {
 		},
 		saveProfile: (values, history) => {
 			profileDispatchers.saveProfile(values, history);
+		},
+		onChangeName: newName => {
+			profileDispatchers.onChangeName(newName);
+		},
+		onChangeEmail: newEmail => {
+			profileDispatchers.onChangeEmail(newEmail);
 		}
 	};
 }

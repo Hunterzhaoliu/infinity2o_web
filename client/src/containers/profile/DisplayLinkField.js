@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col } from 'antd';
+import { Row, Col, Button } from 'antd';
 
 class DisplayLinkField extends Component {
 	renderValue(label, value) {
-		//const { colorTheme } = this.props;
+		const { colorTheme } = this.props;
+		console.log('value = ', value);
+		if (value !== undefined && value !== null) {
+			return (
+				<Button
+					style={{
+						borderColor: colorTheme.text7Color,
+						background: colorTheme.text7Color,
+						color: colorTheme.text3Color
+					}}
+				>
+					<a href={value}>value</a>
+				</Button>
+			);
+		} else {
+			return;
+		}
 	}
 
 	render() {
@@ -17,13 +33,13 @@ class DisplayLinkField extends Component {
 					lg={{ span: 3 }}
 					xl={{ span: 2 }}
 				>
-					<h4
+					<h3
 						style={{
 							color: colorTheme.text4Color
 						}}
 					>
 						{label}
-					</h4>
+					</h3>
 				</Col>
 				<Col
 					sm={{ span: 18, offset: 1 }}
@@ -31,13 +47,13 @@ class DisplayLinkField extends Component {
 					lg={{ span: 20, offset: 1 }}
 					xl={{ span: 21, offset: 1 }}
 				>
-					<h4
+					<h3
 						style={{
 							color: colorTheme.text2Color
 						}}
 					>
 						{this.renderValue(label, value)}
-					</h4>
+					</h3>
 				</Col>
 			</Row>
 		);
