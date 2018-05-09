@@ -3,3 +3,9 @@
 	background-color: var(--table-border-color);
 	color: var(--table-text-color);
 }
+
+/* .ant-table-thead {
+	border-color: var(--table-border-color);
+	background-color: var(--table-border-color);
+	color: var(--table-text-color);
+}*/

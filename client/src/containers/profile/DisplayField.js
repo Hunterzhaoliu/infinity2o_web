@@ -70,13 +70,41 @@ class DisplayField extends Component {
 
 				// sets up availability table
 				let columnHeaders = [
-					{ title: 'Mon', dataIndex: 'monday', align: 'center' },
-					{ title: 'Tues', dataIndex: 'tuesday', align: 'center' },
-					{ title: 'Wed', dataIndex: 'wednesday', align: 'center' },
-					{ title: 'Thurs', dataIndex: 'thursday', align: 'center' },
-					{ title: 'Fri', dataIndex: 'friday', align: 'center' },
-					{ title: 'Sat', dataIndex: 'saturday', align: 'center' },
-					{ title: 'Sun', dataIndex: 'sunday', align: 'center' }
+					{
+						title: 'Mon',
+						dataIndex: 'monday',
+						align: 'center'
+					},
+					{
+						title: 'Tues',
+						dataIndex: 'tuesday',
+						align: 'center'
+					},
+					{
+						title: 'Wed',
+						dataIndex: 'wednesday',
+						align: 'center'
+					},
+					{
+						title: 'Thurs',
+						dataIndex: 'thursday',
+						align: 'center'
+					},
+					{
+						title: 'Fri',
+						dataIndex: 'friday',
+						align: 'center'
+					},
+					{
+						title: 'Sat',
+						dataIndex: 'saturday',
+						align: 'center'
+					},
+					{
+						title: 'Sun',
+						dataIndex: 'sunday',
+						align: 'center'
+					}
 				];
 
 				const indexInTimeSlot = {
@@ -136,12 +164,12 @@ class DisplayField extends Component {
 
 				return (
 					<Table
-						className="ant-table ant-table-thead"
 						dataSource={timeSlots}
 						columns={columnHeaders}
-						bordered
+						bordered={true}
 						pagination={false}
 						size="medium"
+						showHeader={true}
 					/>
 				);
 			}

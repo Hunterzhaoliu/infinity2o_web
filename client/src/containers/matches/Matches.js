@@ -12,6 +12,7 @@ import {
 	NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
 	NUMBER_NEURONS_TO_SAY_HI
 } from '../payment/prices';
+import './Matches.css';
 import { Layout, Row, Col, Card, Button, message, Progress, Icon } from 'antd';
 const { Content } = Layout;
 
@@ -92,6 +93,16 @@ class Matches extends Component {
 			totalUserVotesAcrossAllSessions,
 			runningAthenaForUser
 		} = this.props;
+
+		document.documentElement.style.setProperty(
+			`--progress-color`,
+			colorTheme.keyText7Color
+		);
+
+		document.documentElement.style.setProperty(
+			`--progress-remaining-color`,
+			colorTheme.text8Color
+		);
 
 		const hasMatches = matches.current1DisplayedMatches.length > 0;
 
