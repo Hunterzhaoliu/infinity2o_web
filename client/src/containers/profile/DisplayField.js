@@ -21,6 +21,7 @@ class DisplayField extends Component {
 		if (
 			label === 'Neurons: ' ||
 			label === 'Name: ' ||
+			label === 'E-mail: ' ||
 			label === 'Age: ' ||
 			label === 'Time Zone: '
 		) {

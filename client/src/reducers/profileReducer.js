@@ -24,8 +24,12 @@ let cloneObject = obj => {
 
 let initialState = {
 	name: null,
+	email: null,
 	age: null,
 	interests: [],
+	linkedInPublicProfileUrl: null,
+	githubPublicProfileUrl: null,
+	websiteUrl: null,
 	timeZone: null,
 	availability: {},
 	newName: null,
@@ -55,8 +59,14 @@ export default function(state = initialState, action) {
 		case SAVE_FETCHED_USER_PROFILE:
 			if (action.profile !== undefined) {
 				newState.name = action.profile.name;
+				newState.email = action.profile.email;
 				newState.age = action.profile.age;
 				newState.interests = action.profile.interests;
+				newState.linkedInPublicProfileUrl =
+					action.profile.linkedInPublicProfileUrl;
+				newState.githubPublicProfileUrl =
+					action.profile.githubPublicProfileUrl;
+				newState.websiteUrl = action.profile.websiteUrl;
 				newState.timeZone = action.profile.timeZone;
 				newState.availability = action.profile.availability;
 				newState.newName = action.profile.name;

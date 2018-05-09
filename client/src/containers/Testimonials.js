@@ -62,8 +62,6 @@ class Testimonials extends Component {
 	}
 
 	render() {
-		const { colorTheme } = this.props;
-
 		const settings = {
 			dots: true,
 			adaptiveHeight: true,

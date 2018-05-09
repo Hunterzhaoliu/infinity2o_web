@@ -229,7 +229,6 @@ class Matches extends Component {
 						You have {votesToGo} to go!
 					</h3>
 					<Progress
-						style={{}}
 						percent={percentVotes}
 						showInfo={false}
 						status="active"

@@ -14,8 +14,6 @@ class Landing extends Component {
 	}
 
 	renderTestimonials() {
-		const { windowWidth } = this.props;
-
 		return (
 			<div>
 				<Row
@@ -230,8 +228,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		auth: state.auth,
-		windowWidth: state.customHeader.windowWidth
+		auth: state.auth
 	};
 }
 

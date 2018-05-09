@@ -73,7 +73,7 @@ class Profile extends Component {
 					}}
 				>
 					<Col span={24}>
-						<DisplayField label="E-mail: " />
+						<DisplayField label="E-mail: " value={profile.email} />
 					</Col>
 				</Row>
 				<Row
