@@ -340,13 +340,23 @@ class CustomHeader extends Component {
 	}
 
 	render() {
-		const { colorTheme } = this.props;
+		const { colorTheme, auth } = this.props;
+		let headerBackground;
+		switch (auth.loggedInState) {
+			case 'not_logged_in':
+				headerBackground = colorTheme.backgroundColor;
+				break;
+			case 'logged_in':
+				headerBackground = colorTheme.text8Color;
+				break;
+			default:
+		}
 		return (
 			<Header
 				style={{
-					background: colorTheme.text8Color,
+					background: headerBackground,
 					position: 'fixed',
-					zIndex: 1, // make every display under the header
+					zIndex: 1, // make every component display under the header
 					width: '100%'
 				}}
 			>

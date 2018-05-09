@@ -1,9 +1,10 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import anime from 'animejs';
-import { Layout, Button, Row, Col, Icon, Card } from 'antd';
+import { Layout, Button, Row, Col, Icon, Card, Avatar } from 'antd';
 const { Content } = Layout;
 
 const testimonials = [
@@ -11,14 +12,28 @@ const testimonials = [
 		testimonial:
 			'I love taking classes from Coursera but could never find ' +
 			'the motivation to finish one. But after meeting someone ' +
-			'from infinity2o we finished the Coursera Deep Learning ' +
-			'class together. ~ Q'
+			'from Infinity2o with similar interests we finished the Coursera Deep Learning ' +
+			'class together. ~ Q',
+		avatarProfilePicUrl:
+			'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
 	},
 	{
 		testimonial:
 			'Ya I got caught with too much cocaine in my pants so had ' +
 			'to drop out of high school. Now I take online classes' +
-			'with strangers. ~ Hunter'
+			'with strangers. ~ Hunter',
+		avatarProfilePicUrl:
+			'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+	},
+	{
+		testimonial: 'I fucking love Infinity2o ~ Jessica',
+		avatarProfilePicUrl:
+			'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+	},
+	{
+		testimonial: 'Good job sons. ~ Shuyu',
+		avatarProfilePicUrl:
+			'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
 	}
 ];
 
@@ -29,30 +44,68 @@ class Landing extends Component {
 		this.props.onSignedInLanding();
 	}
 
+	renderAvatars() {
+		return _.map(testimonials, testimonial => {
+			return (
+				<Col
+					style={{
+						padding: '0px 4px 0px' // top left&right bottom
+					}}
+				>
+					<Avatar src={testimonial['avatarProfilePicUrl']} />
+				</Col>
+			);
+		});
+	}
+
 	renderTestimonials() {
 		const { colorTheme } = this.props;
 
 		return (
 			<div>
-				<Card
-					hoverable={true}
-					borderded="false"
-					loading={false}
+				<Row
 					style={{
-						width: '314px',
-						textAlign: 'center',
-						borderColor: colorTheme.text8Color,
-						background: colorTheme.text8Color
+						padding: '3% 0% 0%' // top left&right bottom
 					}}
+					type="flex"
+					justify="center"
 				>
-					<p
-						style={{
-							color: colorTheme.text3Color
-						}}
-					>
-						{testimonials[0]['testimonial']}
-					</p>
-				</Card>
+					<Col>
+						<Card
+							id="testimonial"
+							hoverable={true}
+							borderded="false"
+							loading={false}
+							style={{
+								width: '314px',
+								textAlign: 'center',
+								borderColor: colorTheme.text8Color,
+								background: colorTheme.text8Color
+							}}
+						>
+							<Avatar
+								size="large"
+								src={testimonials[0]['avatarProfilePicUrl']}
+							/>
+							<p
+								style={{
+									color: colorTheme.text3Color
+								}}
+							>
+								{testimonials[0]['testimonial']}
+							</p>
+						</Card>
+					</Col>
+				</Row>
+				<Row
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+					type="flex"
+					justify="center"
+				>
+					{this.renderAvatars()}
+				</Row>
 			</div>
 		);
 	}
@@ -94,15 +147,7 @@ class Landing extends Component {
 								</h2>
 							</Col>
 						</Row>
-						<Row
-							style={{
-								padding: '3% 0% 0%' // top left&right bottom
-							}}
-							type="flex"
-							justify="center"
-						>
-							<Col>{this.renderTestimonials()}</Col>
-						</Row>
+						{this.renderTestimonials()}
 					</div>
 				);
 			default:
@@ -235,7 +280,6 @@ class Landing extends Component {
 			<Content
 				style={{
 					padding: '120px 50px 50px', // top left&right bottom
-					minHeight: 720,
 					background: colorTheme.backgroundColor
 				}}
 			>
