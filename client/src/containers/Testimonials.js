@@ -25,7 +25,7 @@ class Testimonials extends Component {
 				<div key={index}>
 					<Row
 						style={{
-							padding: '1% 0% 0%' // top left&right bottom
+							padding: '0% 0% 0%' // top left&right bottom
 						}}
 						type="flex"
 						justify="center"
@@ -62,10 +62,11 @@ class Testimonials extends Component {
 	}
 
 	render() {
+		const { colorTheme } = this.props;
+
 		const settings = {
 			dots: true,
-			fade: true,
-			dotsClass: 'slick-dots slick-thumb',
+			adaptiveHeight: true,
 			infinite: true,
 			autoplay: true,
 			pauseOnHover: true,
@@ -74,12 +75,7 @@ class Testimonials extends Component {
 			slidesToShow: 1,
 			slidesToScroll: 1,
 			nextArrow: <SampleNextArrow />,
-			prevArrow: <SamplePrevArrow />,
-			customPaging: i => {
-				return (
-					<Avatar src={testimonialData[i]['avatarProfilePicUrl']} />
-				);
-			}
+			prevArrow: <SamplePrevArrow />
 		};
 		return (
 			<Content>

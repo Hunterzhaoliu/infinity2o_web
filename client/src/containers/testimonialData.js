@@ -13,15 +13,5 @@ export const testimonialData = [
 			'with people with similar beliefs. ~ Hunter',
 		avatarProfilePicUrl:
 			'https://user-images.githubusercontent.com/2585159/39833353-6a0b7958-538f-11e8-89d2-396103285a73.png'
-	},
-	{
-		quote: 'Surpringly good way to make a new friend. ~ Jessica',
-		avatarProfilePicUrl:
-			'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-	},
-	{
-		quote: 'Good job sons. ~ Shuyu',
-		avatarProfilePicUrl:
-			'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
 	}
 ];

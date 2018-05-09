@@ -15,23 +15,7 @@ class Landing extends Component {
 
 	renderTestimonials() {
 		const { windowWidth } = this.props;
-		if (windowWidth < 576) {
-			return (
-				<div>
-					<Row
-						style={{
-							padding: '3% 0% 0%' // top left&right bottom
-						}}
-						type="flex"
-						justify="center"
-					>
-						<Col>
-							<Testimonials />
-						</Col>
-					</Row>
-				</div>
-			);
-		}
+
 		return (
 			<div>
 				<Row
@@ -42,6 +26,7 @@ class Landing extends Component {
 					justify="center"
 				>
 					<Col
+						xs={{ span: 24 }}
 						sm={{ span: 24 }}
 						md={{ span: 18 }}
 						lg={{ span: 12 }}
@@ -125,7 +110,7 @@ class Landing extends Component {
 					<div>
 						<Row
 							style={{
-								padding: '5% 0% 0%' // top left&right bottom
+								padding: '3% 0% 0%' // top left&right bottom
 							}}
 							type="flex"
 							justify="center"
@@ -150,12 +135,14 @@ class Landing extends Component {
 							justify="space-around"
 						>
 							<Col
+								xs={{ span: 0 }}
 								sm={{ span: 3, offset: 0 }}
 								md={{ span: 5, offset: 0 }}
 								lg={{ span: 7, offset: 0 }}
 								xl={{ span: 8, offset: 0 }}
 							/>
 							<Col
+								xs={{ span: 12 }}
 								sm={{ span: 9, offset: 0 }}
 								md={{ span: 7, offset: 0 }}
 								lg={{ span: 5, offset: 0 }}
@@ -180,6 +167,7 @@ class Landing extends Component {
 								</Button>
 							</Col>
 							<Col
+								xs={{ span: 13 }}
 								sm={{ span: 9, offset: 0 }}
 								md={{ span: 7, offset: 0 }}
 								lg={{ span: 4, offset: 0 }}
@@ -204,6 +192,7 @@ class Landing extends Component {
 								</Button>
 							</Col>
 							<Col
+								xs={{ span: 0 }}
 								sm={{ span: 3, offset: 0 }}
 								md={{ span: 5, offset: 0 }}
 								lg={{ span: 7, offset: 0 }}
