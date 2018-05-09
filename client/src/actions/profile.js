@@ -10,7 +10,10 @@ import {
 	SAVE_PROFILE_ERROR,
 	DECREMENT_NEURONS,
 	DECREMENT_NEURONS_ERROR,
-	ON_CHANGE_EMAIL
+	ON_CHANGE_EMAIL,
+	ON_CHANGE_LINKEDIN_PROFILE_URL,
+	ON_CHANGE_GITHUB_PROFILE_URL,
+	ON_CHANGE_WEBSITE_URL
 } from './types';
 import {
 	isValidName,
@@ -18,6 +21,7 @@ import {
 	isValidInterests,
 	isValidEmail
 } from '../utils/validateProfileEdit';
+import validUrl from 'valid-url';
 
 export const onChangeName = newName => dispatch => {
 	if (isValidName(newName)) {
@@ -36,6 +40,52 @@ export const onChangeEmail = newEmail => dispatch => {
 		});
 	} else {
 		dispatch({ type: ON_CHANGE_EMAIL, newEmail: newEmail, hasError: true });
+	}
+};
+
+export const onChangeLinkedInPublicProfileUrl = newLinkedInPublicProfileUrl => dispatch => {
+	if (validUrl.isUri(newLinkedInPublicProfileUrl)) {
+		dispatch({
+			type: ON_CHANGE_LINKEDIN_PROFILE_URL,
+			newLinkedInPublicProfileUrl: newLinkedInPublicProfileUrl,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_LINKEDIN_PROFILE_URL,
+			newLinkedInPublicProfileUrl: newLinkedInPublicProfileUrl,
+			hasError: true
+		});
+	}
+};
+export const onChangeGithubPublicProfileUrl = newGithubPublicProfileUrl => dispatch => {
+	if (validUrl.isUri(newGithubPublicProfileUrl)) {
+		dispatch({
+			type: ON_CHANGE_GITHUB_PROFILE_URL,
+			newGithubPublicProfileUrl: newGithubPublicProfileUrl,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_GITHUB_PROFILE_URL,
+			newGithubPublicProfileUrl: newGithubPublicProfileUrl,
+			hasError: true
+		});
+	}
+};
+export const onChangeWebsiteUrl = newWebsiteUrl => dispatch => {
+	if (validUrl.isUri(newWebsiteUrl)) {
+		dispatch({
+			type: ON_CHANGE_WEBSITE_URL,
+			newWebsiteUrl: newWebsiteUrl,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_WEBSITE_URL,
+			newWebsiteUrl: newWebsiteUrl,
+			hasError: true
+		});
 	}
 };
 

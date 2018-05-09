@@ -50,7 +50,10 @@ class ProfileEdit extends Component {
 			profile,
 			history,
 			onChangeName,
-			onChangeEmail
+			onChangeEmail,
+			onChangeLinkedInPublicProfileUrl,
+			onChangeGithubPublicProfileUrl,
+			onChangeWebsiteUrl
 		} = this.props;
 
 		return (
@@ -127,9 +130,12 @@ class ProfileEdit extends Component {
 				>
 					<Col span={24}>
 						<InputField
+							value={profile.newLinkedInPublicProfileUrl}
 							width={280}
 							label="LinkedIn:"
 							errorMessage="Invalid LinkedIn link"
+							hasError={profile.hasLinkedInPublicProfileUrlError}
+							onChange={onChangeLinkedInPublicProfileUrl}
 						/>
 					</Col>
 				</Row>
@@ -143,9 +149,12 @@ class ProfileEdit extends Component {
 				>
 					<Col span={24}>
 						<InputField
+							value={profile.newGithubPublicProfileUrl}
 							width={280}
 							label="Github:"
 							errorMessage="Invalid github link"
+							hasError={profile.hasGithubPublicProfileUrlError}
+							onChange={onChangeGithubPublicProfileUrl}
 						/>
 					</Col>
 				</Row>
@@ -159,9 +168,12 @@ class ProfileEdit extends Component {
 				>
 					<Col span={24}>
 						<InputField
+							value={profile.newWebsiteUrl}
 							width={280}
 							label="Website:"
 							errorMessage="Invalid website link"
+							hasError={profile.hasWebsiteUrlError}
+							onChange={onChangeWebsiteUrl}
 						/>
 					</Col>
 				</Row>
@@ -276,6 +288,19 @@ function mapDispatchToProps(dispatch) {
 		},
 		onChangeEmail: newEmail => {
 			profileDispatchers.onChangeEmail(newEmail);
+		},
+		onChangeLinkedInPublicProfileUrl: newLinkedInPublicProfileUrl => {
+			profileDispatchers.onChangeLinkedInPublicProfileUrl(
+				newLinkedInPublicProfileUrl
+			);
+		},
+		onChangeGithubPublicProfileUrl: newGithubPublicProfileUrl => {
+			profileDispatchers.onChangeGithubPublicProfileUrl(
+				newGithubPublicProfileUrl
+			);
+		},
+		onChangeWebsiteUrl: newWebsiteUrl => {
+			profileDispatchers.onChangeWebsiteUrl(newWebsiteUrl);
 		}
 	};
 }

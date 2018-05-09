@@ -1,6 +1,7 @@
 // https://stackoverflow.com/questions/14088714/regular-expression-for-name-field-in-javascript-validation
 const isValidNameRegex = /^[a-zA-Z ]{1,30}$/;
 const isValidEmailRegex = /\S+@\S+\.\S+/;
+const isValidUrlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
 export const isValidName = name => {
 	const isValidName = isValidNameRegex.test(name) === true;
@@ -16,6 +17,16 @@ export const isValidEmail = email => {
 	const isValidEmail = isValidEmailRegex.test(email) === true;
 
 	if (isValidEmail) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
+export const isValidUrl = url => {
+	const isValidUrl = isValidUrlRegex.test(url) === true;
+
+	if (isValidUrl) {
 		return true;
 	} else {
 		return false;

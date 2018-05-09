@@ -16,7 +16,10 @@ import {
 	SAVE_COLOR_THEME_START,
 	SAVE_COLOR_THEME_DONE,
 	SAVE_COLOR_THEME_ERROR,
-	ON_CHANGE_EMAIL
+	ON_CHANGE_EMAIL,
+	ON_CHANGE_LINKEDIN_PROFILE_URL,
+	ON_CHANGE_GITHUB_PROFILE_URL,
+	ON_CHANGE_WEBSITE_URL
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -37,12 +40,18 @@ let initialState = {
 	newEmail: null,
 	newAge: null,
 	newInterests: [],
+	newLinkedInPublicProfileUrl: null,
+	newGithubPublicProfileUrl: null,
+	newWebsiteUrl: null,
 	newTimeZone: null,
 	newAvailability: {},
 	hasAgeError: false,
 	hasNameError: false,
 	hasEmailError: false,
 	hasInterestsError: false,
+	hasLinkedInPublicProfileUrlError: false,
+	hasGithubPublicProfileUrlError: false,
+	hasWebsiteUrlError: false,
 	hasTimeZoneError: false,
 	hasAvailabilityError: false,
 	save: null,
@@ -76,6 +85,11 @@ export default function(state = initialState, action) {
 				newState.newEmail = action.profile.email;
 				newState.newAge = action.profile.age;
 				newState.newInterests = action.profile.interests;
+				newState.newLinkedInPublicProfileUrl =
+					action.profile.linkedInPublicProfileUrl;
+				newState.newGithubPublicProfileUrl =
+					action.profile.githubPublicProfileUrl;
+				newState.newWebsiteUrl = action.profile.websiteUrl;
 				newState.newTimeZone = action.profile.timeZone;
 				newState.newAvailability = action.profile.availability;
 				newState.asks = action.profile.asks;
@@ -108,6 +122,20 @@ export default function(state = initialState, action) {
 		case ON_CHANGE_INTERESTS:
 			newState.newInterests = action.newInterests;
 			newState.hasInterestsError = action.hasError;
+			return newState;
+		case ON_CHANGE_LINKEDIN_PROFILE_URL:
+			newState.newLinkedInPublicProfileUrl =
+				action.newLinkedInPublicProfileUrl;
+			newState.hasLinkedInPublicProfileUrlError = action.hasError;
+			return newState;
+		case ON_CHANGE_GITHUB_PROFILE_URL:
+			newState.newGithubPublicProfileUrl =
+				action.newGithubPublicProfileUrl;
+			newState.hasGithubPublicProfileUrlError = action.hasError;
+			return newState;
+		case ON_CHANGE_WEBSITE_URL:
+			newState.newWebsiteUrl = action.newWebsiteUrl;
+			newState.hasWebsiteUrlError = action.hasError;
 			return newState;
 		case ON_CHANGE_TIME_ZONE:
 			newState.newTimeZone = action.newTimeZone;
