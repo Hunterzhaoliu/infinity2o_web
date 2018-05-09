@@ -7,6 +7,7 @@ class DisplayField extends Component {
 	numberWithCommas = x => {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	};
+
 	renderValue(label, value) {
 		const { colorTheme, infinityStatus } = this.props;
 		document.documentElement.style.setProperty(

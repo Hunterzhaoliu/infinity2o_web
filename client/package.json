@@ -11,7 +11,6 @@
 		}
 	},
 	"dependencies": {
-		"animejs": "^2.2.0",
 		"antd": "^3.1.4",
 		"axios": "^0.17.1",
 		"babel-plugin-import": "^1.6.3",
@@ -22,10 +21,12 @@
 		"react-redux": "^5.0.6",
 		"react-router-dom": "^4.2.2",
 		"react-scripts": "1.1.0",
+		"react-slick": "^0.23.1",
 		"react-stripe-checkout": "^2.6.3",
 		"redux": "^3.7.2",
 		"redux-form": "^7.2.1",
 		"redux-thunk": "^2.2.0",
+		"slick-carousel": "^1.8.1",
 		"socket.io-client": "^2.1.0"
 	},
 	"scripts": {

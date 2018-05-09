@@ -1,41 +1,10 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../actions/colorTheme';
 import { bindActionCreators } from 'redux';
-import anime from 'animejs';
-import { Layout, Button, Row, Col, Icon, Card, Avatar } from 'antd';
+import Testimonials from './Testimonials';
+import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
-
-const testimonials = [
-	{
-		testimonial:
-			'I love taking classes from Coursera but could never find ' +
-			'the motivation to finish one. But after meeting someone ' +
-			'from Infinity2o with similar interests we finished the Coursera Deep Learning ' +
-			'class together. ~ Q',
-		avatarProfilePicUrl:
-			'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-	},
-	{
-		testimonial:
-			'Ya I got caught with too much cocaine in my pants so had ' +
-			'to drop out of high school. Now I take online classes' +
-			'with strangers. ~ Hunter',
-		avatarProfilePicUrl:
-			'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-	},
-	{
-		testimonial: 'I fucking love Infinity2o ~ Jessica',
-		avatarProfilePicUrl:
-			'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-	},
-	{
-		testimonial: 'Good job sons. ~ Shuyu',
-		avatarProfilePicUrl:
-			'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-	}
-];
 
 class Landing extends Component {
 	componentWillMount() {
@@ -44,23 +13,25 @@ class Landing extends Component {
 		this.props.onSignedInLanding();
 	}
 
-	renderAvatars() {
-		return _.map(testimonials, testimonial => {
-			return (
-				<Col
-					style={{
-						padding: '0px 4px 0px' // top left&right bottom
-					}}
-				>
-					<Avatar src={testimonial['avatarProfilePicUrl']} />
-				</Col>
-			);
-		});
-	}
-
 	renderTestimonials() {
-		const { colorTheme } = this.props;
-
+		const { windowWidth } = this.props;
+		if (windowWidth < 576) {
+			return (
+				<div>
+					<Row
+						style={{
+							padding: '3% 0% 0%' // top left&right bottom
+						}}
+						type="flex"
+						justify="center"
+					>
+						<Col>
+							<Testimonials />
+						</Col>
+					</Row>
+				</div>
+			);
+		}
 		return (
 			<div>
 				<Row
@@ -70,41 +41,14 @@ class Landing extends Component {
 					type="flex"
 					justify="center"
 				>
-					<Col>
-						<Card
-							id="testimonial"
-							hoverable={true}
-							borderded="false"
-							loading={false}
-							style={{
-								width: '314px',
-								textAlign: 'center',
-								borderColor: colorTheme.text8Color,
-								background: colorTheme.text8Color
-							}}
-						>
-							<Avatar
-								size="large"
-								src={testimonials[0]['avatarProfilePicUrl']}
-							/>
-							<p
-								style={{
-									color: colorTheme.text3Color
-								}}
-							>
-								{testimonials[0]['testimonial']}
-							</p>
-						</Card>
+					<Col
+						sm={{ span: 24 }}
+						md={{ span: 18 }}
+						lg={{ span: 12 }}
+						xl={{ span: 6 }}
+					>
+						<Testimonials />
 					</Col>
-				</Row>
-				<Row
-					style={{
-						padding: '1% 0% 0%' // top left&right bottom
-					}}
-					type="flex"
-					justify="center"
-				>
-					{this.renderAvatars()}
 				</Row>
 			</div>
 		);
@@ -181,7 +125,7 @@ class Landing extends Component {
 					<div>
 						<Row
 							style={{
-								padding: '3% 0% 0%' // top left&right bottom
+								padding: '5% 0% 0%' // top left&right bottom
 							}}
 							type="flex"
 							justify="center"
@@ -297,7 +241,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		auth: state.auth
+		auth: state.auth,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 
