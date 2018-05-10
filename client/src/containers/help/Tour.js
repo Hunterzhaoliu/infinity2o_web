@@ -26,14 +26,14 @@ class Tour extends Component {
 			>
 				<Row type="flex" justify="center">
 					<Col span={24}>
-						<h1
+						<h2
 							key="0"
 							style={{
 								color: colorTheme.text2Color
 							}}
 						>
 							{welcome}
-						</h1>
+						</h2>
 					</Col>
 				</Row>
 				<Row type="flex" justify="center">

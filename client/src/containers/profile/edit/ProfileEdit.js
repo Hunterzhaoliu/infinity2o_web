@@ -44,7 +44,17 @@ class ProfileEdit extends Component {
 	}
 
 	renderContent() {
-		const { colorTheme, saveProfile, profile, history } = this.props;
+		const {
+			colorTheme,
+			saveProfile,
+			profile,
+			history,
+			onChangeName,
+			onChangeEmail,
+			onChangeLinkedInPublicProfileUrl,
+			onChangeGithubPublicProfileUrl,
+			onChangeWebsiteUrl
+		} = this.props;
 
 		return (
 			<div>
@@ -57,7 +67,14 @@ class ProfileEdit extends Component {
 					}}
 				>
 					<Col span={24}>
-						<InputField width={280} label="Name:" />
+						<InputField
+							value={profile.newName}
+							width={280}
+							label="Name:"
+							errorMessage="Cool name! But we need 1 to 30 valid letters"
+							hasError={profile.hasNameError}
+							onChange={onChangeName}
+						/>
 					</Col>
 				</Row>
 				<Row
@@ -65,7 +82,26 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField
+							value={profile.newEmail}
+							width={280}
+							label="E-mail:"
+							errorMessage="Invalid e-mail format"
+							hasError={profile.hasEmailError}
+							onChange={onChangeEmail}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -77,7 +113,7 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '1% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -89,7 +125,64 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField
+							value={profile.newLinkedInPublicProfileUrl}
+							width={280}
+							label="LinkedIn:"
+							errorMessage="Invalid LinkedIn link. Needs to start with http:// or https://"
+							hasError={profile.hasLinkedInPublicProfileUrlError}
+							onChange={onChangeLinkedInPublicProfileUrl}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField
+							value={profile.newGithubPublicProfileUrl}
+							width={280}
+							label="Github:"
+							errorMessage="Invalid github link. Needs to start with http:// or https://"
+							hasError={profile.hasGithubPublicProfileUrlError}
+							onChange={onChangeGithubPublicProfileUrl}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField
+							value={profile.newWebsiteUrl}
+							width={280}
+							label="Website:"
+							errorMessage="Invalid website link. Needs to start with http:// or https://"
+							hasError={profile.hasWebsiteUrlError}
+							onChange={onChangeWebsiteUrl}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -101,7 +194,7 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '2% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -112,7 +205,7 @@ class ProfileEdit extends Component {
 					type="flex"
 					justify="start"
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '5% 0% 0%' // top left&right bottom
 					}}
 				>
 					<Col span={24}>
@@ -189,6 +282,25 @@ function mapDispatchToProps(dispatch) {
 		},
 		saveProfile: (values, history) => {
 			profileDispatchers.saveProfile(values, history);
+		},
+		onChangeName: newName => {
+			profileDispatchers.onChangeName(newName);
+		},
+		onChangeEmail: newEmail => {
+			profileDispatchers.onChangeEmail(newEmail);
+		},
+		onChangeLinkedInPublicProfileUrl: newLinkedInPublicProfileUrl => {
+			profileDispatchers.onChangeLinkedInPublicProfileUrl(
+				newLinkedInPublicProfileUrl
+			);
+		},
+		onChangeGithubPublicProfileUrl: newGithubPublicProfileUrl => {
+			profileDispatchers.onChangeGithubPublicProfileUrl(
+				newGithubPublicProfileUrl
+			);
+		},
+		onChangeWebsiteUrl: newWebsiteUrl => {
+			profileDispatchers.onChangeWebsiteUrl(newWebsiteUrl);
 		}
 	};
 }

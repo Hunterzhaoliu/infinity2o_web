@@ -14,7 +14,7 @@ import Ask from './train_ai/Ask';
 import Matches from './matches/Matches';
 import Conversations from './conversations/Conversations';
 
-import { Layout, Row, Col } from 'antd';
+import { Layout, Row, Col, Button } from 'antd';
 
 const { Footer } = Layout;
 
@@ -45,17 +45,22 @@ class App extends Component {
 							lg={{ span: 2 }}
 							xl={{ span: 2 }}
 						>
-							<p>
+							<Button
+								size={'small'}
+								style={{
+									borderColor: colorTheme.text8Color,
+									background: colorTheme.text8Color
+								}}
+							>
 								<a
 									style={{
-										color: this.props.colorTheme
-											.keyText7Color
+										color: this.props.colorTheme.text6Color
 									}}
 									href="https://medium.com/infinity2o"
 								>
 									tech blog
 								</a>
-							</p>
+							</Button>
 						</Col>
 						<Col
 							sm={{ span: 12 }}

@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import * as profileActionCreators from '../../../actions/profile';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Input, Row, Col } from 'antd';
 import ErrorMessage from './ErrorMessage';
 
 class InputField extends Component {
-	onChangeName = e => {
-		this.props.onChangeName(e.target.value);
+	onChange = e => {
+		const { onChange } = this.props;
+		onChange(e.target.value);
 	};
 
 	render() {
 		//console.log('InputField this.props = ', this.props);
-		const { colorTheme, label, width, profile } = this.props;
+		const {
+			value,
+			colorTheme,
+			label,
+			width,
+			errorMessage,
+			hasError
+		} = this.props;
 
 		return (
 			<div>
@@ -25,7 +31,7 @@ class InputField extends Component {
 					>
 						<h3
 							style={{
-								color: colorTheme.text6Color
+								color: colorTheme.text4Color
 							}}
 						>
 							{label}
@@ -38,21 +44,18 @@ class InputField extends Component {
 						xl={{ span: 19, offset: 1 }}
 					>
 						<Input
-							value={profile.newName}
-							onChange={this.onChangeName}
+							value={value}
+							onChange={this.onChange}
 							style={{
 								width: width,
-								color: colorTheme.text4Color,
+								color: colorTheme.text2Color,
 								borderColor: colorTheme.text8Color,
 								backgroundColor: colorTheme.text8Color
 							}}
 						/>
 					</Col>
 				</Row>
-				<ErrorMessage
-					message="Cool name! But we need 1 to 30 valid letters"
-					hasError={profile.hasNameError}
-				/>
+				<ErrorMessage message={errorMessage} hasError={hasError} />
 			</div>
 		);
 	}
@@ -69,21 +72,4 @@ function mapStateToProps(state) {
 	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-function mapDispatchToProps(dispatch) {
-	const profileDispatchers = bindActionCreators(
-		profileActionCreators,
-		dispatch
-	);
-
-	return {
-		onChangeName: newName => {
-			profileDispatchers.onChangeName(newName);
-		}
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(InputField);
+export default connect(mapStateToProps, null)(InputField);

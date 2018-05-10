@@ -12,6 +12,7 @@ import {
 	NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
 	NUMBER_NEURONS_TO_SAY_HI
 } from '../payment/prices';
+import './Matches.css';
 import { Layout, Row, Col, Card, Button, message, Progress, Icon } from 'antd';
 const { Content } = Layout;
 
@@ -83,6 +84,49 @@ class Matches extends Component {
 		return formattedInterests;
 	}
 
+	renderLinks(match) {
+		const { colorTheme } = this.props;
+		const linkData = [
+			{
+				display: 'LinkedIn',
+				href: match.linkedInPublicProfileUrl
+			},
+			{
+				display: 'Github',
+				href: match.githubPublicProfileUrl
+			},
+			{
+				display: 'Website',
+				href: match.websiteUrl
+			}
+		];
+		return _.map(linkData, (link, index) => {
+			return (
+				<Row
+					style={{ padding: '0px 0px 15px' }}
+					key={index}
+					type="flex"
+					justify="center"
+					align="top"
+				>
+					<Col>
+						<Button
+							style={{
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text3Color
+							}}
+						>
+							<a target="_blank" href={link['href']}>
+								{link['display']}
+							</a>
+						</Button>
+					</Col>
+				</Row>
+			);
+		});
+	}
+
 	renderMatches() {
 		//console.log('in Matches.js this.props = ', this.props);
 		const {
@@ -93,90 +137,101 @@ class Matches extends Component {
 			runningAthenaForUser
 		} = this.props;
 
-		if (matches.current1DisplayedMatches.length > 0) {
+		document.documentElement.style.setProperty(
+			`--progress-color`,
+			colorTheme.keyText7Color
+		);
+
+		document.documentElement.style.setProperty(
+			`--progress-remaining-color`,
+			colorTheme.text8Color
+		);
+
+		const hasMatches = matches.current1DisplayedMatches.length > 0;
+
+		if (hasMatches) {
 			return _.map(matches.current1DisplayedMatches, match => {
 				return (
-					<Col
-						key={match.name}
-						style={{
-							height: '50%'
-						}}
-					>
+					<Col key={match.name}>
 						<Row type="flex" justify="center" align="top">
-							<Card
-								hoverable={true}
-								borderded="false"
-								loading={false}
-								style={{
-									width: '260px',
-									color: colorTheme.text1Color,
-									borderColor: colorTheme.text8Color,
-									background: colorTheme.text8Color
-								}}
-							>
-								<h3
+							<Col>
+								<Card
+									hoverable={true}
+									borderded="false"
+									loading={false}
 									style={{
-										color: colorTheme.text1Color
+										color: colorTheme.text1Color,
+										borderColor: colorTheme.text8Color,
+										background: colorTheme.text8Color
 									}}
 								>
-									{match.name}
-								</h3>
-								<p
-									style={{
-										color: colorTheme.text3Color
-									}}
-								>
-									Interests:{' '}
-									{this.formatInterests(match.interests)}
-								</p>
-								<p
-									style={{
-										color: colorTheme.text3Color
-									}}
-								>
-									Total User Votes: {match.totalUserVotes}
-								</p>
-								<Row
-									type="flex"
-									justify="space-between"
-									align="top"
-								>
-									<Col span={11}>
-										<Button
-											style={{
-												borderColor:
-													colorTheme.text7Color,
-												background:
-													colorTheme.text7Color,
-												color: colorTheme.text2Color
-											}}
-											onClick={e => this.onNextMatch()}
-										>
-											Next
-										</Button>
-									</Col>
-									<Col span={11}>
-										<Button
-											style={{
-												borderColor:
-													colorTheme.keyText7Color,
-												background:
-													colorTheme.keyText7Color,
-												color: colorTheme.text1Color
-											}}
-											onClick={e =>
-												this.onStartConversation(
-													history,
-													match.name,
-													match.id
-												)
-											}
-										>
-											Say Hi
-										</Button>
-									</Col>
-								</Row>
-							</Card>
+									<h3
+										style={{
+											color: colorTheme.text1Color
+										}}
+									>
+										{match.name}
+									</h3>
+									<p
+										style={{
+											color: colorTheme.text3Color
+										}}
+									>
+										Interests:{' '}
+										{this.formatInterests(match.interests)}
+									</p>
+									<p
+										style={{
+											color: colorTheme.text3Color
+										}}
+									>
+										Total User Votes: {match.totalUserVotes}
+									</p>
+									{this.renderLinks(match)}
+									<Row
+										type="flex"
+										justify="space-between"
+										align="top"
+									>
+										<Col span={11}>
+											<Button
+												style={{
+													borderColor:
+														colorTheme.text7Color,
+													background:
+														colorTheme.text7Color,
+													color: colorTheme.text2Color
+												}}
+												onClick={e =>
+													this.onNextMatch()
+												}
+											>
+												Next
+											</Button>
+										</Col>
+										<Col span={11}>
+											<Button
+												style={{
+													borderColor:
+														colorTheme.keyText7Color,
+													background:
+														colorTheme.keyText7Color,
+													color: colorTheme.text1Color
+												}}
+												onClick={e =>
+													this.onStartConversation(
+														history,
+														match.name,
+														match.id
+													)
+												}
+											>
+												Say Hi
+											</Button>
+										</Col>
+									</Row>
+								</Card>
+							</Col>
 						</Row>
 					</Col>
 				);
@@ -227,7 +282,6 @@ class Matches extends Component {
 						You have {votesToGo} to go!
 					</h3>
 					<Progress
-						style={{}}
 						percent={percentVotes}
 						showInfo={false}
 						status="active"

@@ -31,7 +31,7 @@ class InputSchedule extends Component {
 							<Col span={24}>
 								<h3
 									style={{
-										color: colorTheme.text6Color
+										color: colorTheme.text4Color
 									}}
 								>
 									When are you free to video chat for your
