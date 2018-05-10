@@ -160,6 +160,18 @@ export const saveProfile = (values, history) => async dispatch => {
 	if (Object.keys(values.newAvailability).length === 0) {
 		values.newAvailability = values.availability;
 	}
+	if (values.newEmail === null) {
+		values.newEmail = values.email;
+	}
+	if (values.newLinkedInPublicProfileUrl === null) {
+		values.newLinkedInPublicProfileUrl = values.linkedInPublicProfileUrl;
+	}
+	if (values.newGithubPublicProfileUrl === null) {
+		values.newGithubPublicProfileUrl = values.githubPublicProfileUrl;
+	}
+	if (values.newWebsiteUrl === null) {
+		values.newWebsiteUrl = values.websiteUrl;
+	}
 	const response = await axios.post('/api/profile', values);
 	if (response.status === 200) {
 		dispatch({ type: SAVE_PROFILE_DONE });

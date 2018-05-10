@@ -133,7 +133,7 @@ class ProfileEdit extends Component {
 							value={profile.newLinkedInPublicProfileUrl}
 							width={280}
 							label="LinkedIn:"
-							errorMessage="Invalid LinkedIn link"
+							errorMessage="Invalid LinkedIn link. Needs to start with http:// or https://"
 							hasError={profile.hasLinkedInPublicProfileUrlError}
 							onChange={onChangeLinkedInPublicProfileUrl}
 						/>
@@ -152,7 +152,7 @@ class ProfileEdit extends Component {
 							value={profile.newGithubPublicProfileUrl}
 							width={280}
 							label="Github:"
-							errorMessage="Invalid github link"
+							errorMessage="Invalid github link. Needs to start with http:// or https://"
 							hasError={profile.hasGithubPublicProfileUrlError}
 							onChange={onChangeGithubPublicProfileUrl}
 						/>
@@ -171,7 +171,7 @@ class ProfileEdit extends Component {
 							value={profile.newWebsiteUrl}
 							width={280}
 							label="Website:"
-							errorMessage="Invalid website link"
+							errorMessage="Invalid website link. Needs to start with http:// or https://"
 							hasError={profile.hasWebsiteUrlError}
 							onChange={onChangeWebsiteUrl}
 						/>

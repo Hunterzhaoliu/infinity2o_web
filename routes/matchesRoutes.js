@@ -149,9 +149,7 @@ module.exports = app => {
 		async (request, response) => {
 			// send message to minerva server to run minerva
 			// for a specific user
-			console.log('CLIENT -> ATHENA SERVER');
 			const { mongoDBUserId } = request.body;
-			console.log('request.body = ', request.body);
 			const URL = 'amqp://infinity2o:2134711@52.4.101.52:5672';
 			await amqp.connect(URL, function(error, connection) {
 				connection.createChannel(function(error, channel) {

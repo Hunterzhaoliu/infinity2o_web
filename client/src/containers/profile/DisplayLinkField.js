@@ -5,7 +5,6 @@ import { Row, Col, Button } from 'antd';
 class DisplayLinkField extends Component {
 	renderValue(label, value) {
 		const { colorTheme } = this.props;
-		console.log('value = ', value);
 		if (value !== undefined && value !== null) {
 			return (
 				<Button
@@ -15,7 +14,9 @@ class DisplayLinkField extends Component {
 						color: colorTheme.text3Color
 					}}
 				>
-					<a href={value}>value</a>
+					<a target="_blank" href={value}>
+						{value}
+					</a>
 				</Button>
 			);
 		} else {

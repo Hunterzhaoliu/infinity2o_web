@@ -38,64 +38,43 @@ class Landing extends Component {
 	}
 
 	renderMarketingInfo() {
-		const { colorTheme, auth } = this.props;
+		const { colorTheme } = this.props;
 		const why_part_0 =
 			'Meet new & interesting people to take online courses with.';
 		const why_part_1 =
 			'Each month, 1000+ students come to Infinity2o to vote, match, & learn from Coursera, edX, Udemy, & Udacity together.';
 
-		switch (auth.loggedInState) {
-			case 'not_logged_in':
-				return (
-					<div>
-						<Row type="flex" justify="center">
-							<Col>
-								<h1
-									key="0"
-									style={{
-										textAlign: 'center',
-										color: colorTheme.text2Color
-									}}
-								>
-									{why_part_0}
-								</h1>
-							</Col>
-						</Row>
-						<Row type="flex" justify="center">
-							<Col>
-								<h2
-									key="0"
-									style={{
-										textAlign: 'center',
-										color: colorTheme.text3Color
-									}}
-								>
-									{why_part_1}
-								</h2>
-							</Col>
-						</Row>
-						{this.renderTestimonials()}
-					</div>
-				);
-			default:
-				// logged in
-				return (
-					<div>
-						<Row type="flex" justify="center">
-							<Col>
-								<h1
-									key="0"
-									style={{
-										color: colorTheme.text2Color
-									}}
-								>
-									{why_part_0}
-								</h1>
-							</Col>
-						</Row>
-					</div>
-				);
-		}
+		return (
+			<div>
+				<Row type="flex" justify="center">
+					<Col>
+						<h1
+							key="0"
+							style={{
+								textAlign: 'center',
+								color: colorTheme.text2Color
+							}}
+						>
+							{why_part_0}
+						</h1>
+					</Col>
+				</Row>
+				<Row type="flex" justify="center">
+					<Col>
+						<h2
+							key="0"
+							style={{
+								textAlign: 'center',
+								color: colorTheme.text3Color
+							}}
+						>
+							{why_part_1}
+						</h2>
+					</Col>
+				</Row>
+				{this.renderTestimonials()}
+			</div>
+		);
 	}
 
 	renderLogin() {
