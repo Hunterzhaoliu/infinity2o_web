@@ -24,7 +24,7 @@ class InputFieldNumber extends Component {
 					>
 						<h3
 							style={{
-								color: colorTheme.text6Color
+								color: colorTheme.text4Color
 							}}
 						>
 							{label}
@@ -41,7 +41,7 @@ class InputFieldNumber extends Component {
 							onChange={this.onChangeAge}
 							style={{
 								width: width,
-								color: colorTheme.text4Color,
+								color: colorTheme.text2Color,
 								borderColor: colorTheme.text8Color,
 								backgroundColor: colorTheme.text8Color
 							}}

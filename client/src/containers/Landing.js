@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Typist from 'react-typist';
 import * as colorThemeActions from '../actions/colorTheme';
 import { bindActionCreators } from 'redux';
+import Testimonials from './Testimonials';
 import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
 
@@ -13,117 +13,120 @@ class Landing extends Component {
 		this.props.onSignedInLanding();
 	}
 
-	renderMarketingInfo() {
-		const { colorTheme, auth } = this.props;
-		const why_part_0 = `Online classes from `;
-		const why_part_1 = `udacity.com, edx.org, udemy.com, & coursera.org`;
-		const why_part_2 = `are amazing but miss the opportunity to work with new people.`;
+	renderTestimonials() {
+		return (
+			<div>
+				<Row
+					style={{
+						padding: '3% 0% 0%' // top left&right bottom
+					}}
+					type="flex"
+					justify="center"
+				>
+					<Col
+						xs={{ span: 24 }}
+						sm={{ span: 24 }}
+						md={{ span: 18 }}
+						lg={{ span: 12 }}
+						xl={{ span: 6 }}
+					>
+						<Testimonials />
+					</Col>
+				</Row>
+			</div>
+		);
+	}
 
-		const how = `Join our growing community of online learners to take online classes together.`;
-		const why = `Online classes from the best teachers are amazing but miss the opportunity to work with new people.`;
-		switch (auth.loggedInState) {
-			case 'not_logged_in':
-				return (
-					<div>
-						<Row type="flex" justify="center">
-							<Col>
-								<h1
-									key="0"
-									style={{
-										color: colorTheme.text2Color
-									}}
-								>
-									{why_part_0}
-								</h1>
-							</Col>
-						</Row>
-						<Row type="flex" justify="center">
-							<Col>
-								<h1
-									key="0"
-									style={{
-										color: colorTheme.text2Color
-									}}
-								>
-									<Typist
-										avgTypingDelay={35}
-										cursor={{
-											show: false
-										}}
-									>
-										{why_part_1}
-										<Typist.Backspace
-											count={0}
-											delay={200}
-										/>
-									</Typist>
-								</h1>
-							</Col>
-						</Row>
-						<Row type="flex" justify="center">
-							<h1
-								key="0"
-								style={{
-									color: colorTheme.text2Color
-								}}
-							>
-								{why_part_2}
-							</h1>
-						</Row>
-						<Row type="flex" justify="center">
-							<h2
-								key="1"
-								style={{
-									color: colorTheme.text4Color,
-									padding: '0% 0% 1%'
-								}}
-							>
-								{how}
-							</h2>
-						</Row>
-					</div>
-				);
-			default:
-				// logged in
-				return (
-					<div>
-						<h1 key="0" style={{ color: colorTheme.text2Color }}>
-							{why}
-						</h1>
-						<h2
-							key="1"
+	renderMarketingInfo() {
+		const { colorTheme } = this.props;
+		const why_part_0 =
+			'Meet new & interesting people to take online courses with.';
+		const why_part_1 =
+			'Each month, 1000+ students come to Infinity2o to vote, match, & learn from Coursera, edX, Udemy, & Udacity together.';
+
+		return (
+			<div>
+				<Row type="flex" justify="center">
+					<Col>
+						<h1
+							key="0"
 							style={{
-								color: colorTheme.text5Color
+								textAlign: 'center',
+								color: colorTheme.text2Color
 							}}
 						>
-							{how}
+							{why_part_0}
+						</h1>
+					</Col>
+				</Row>
+				<Row type="flex" justify="center">
+					<Col>
+						<h2
+							key="0"
+							style={{
+								textAlign: 'center',
+								color: colorTheme.text3Color
+							}}
+						>
+							{why_part_1}
 						</h2>
-					</div>
-				);
-		}
+					</Col>
+				</Row>
+				{this.renderTestimonials()}
+			</div>
+		);
 	}
 
 	renderLogin() {
 		const { colorTheme, auth } = this.props;
 
+		const why_part_2 = "Join Earth's largest online student community.";
 		switch (auth.loggedInState) {
 			case 'not_logged_in':
 				return (
 					<div>
-						<Row type="flex" justify="space-around">
+						<Row
+							style={{
+								padding: '3% 0% 0%' // top left&right bottom
+							}}
+							type="flex"
+							justify="center"
+						>
+							<Col>
+								<h2
+									key="0"
+									style={{
+										textAlign: 'center',
+										color: colorTheme.text3Color
+									}}
+								>
+									{why_part_2}
+								</h2>
+							</Col>
+						</Row>
+						<Row
+							style={{
+								padding: '1% 0% 0%' // top left&right bottom
+							}}
+							type="flex"
+							justify="space-around"
+						>
 							<Col
+								xs={{ span: 0 }}
 								sm={{ span: 3, offset: 0 }}
 								md={{ span: 5, offset: 0 }}
 								lg={{ span: 7, offset: 0 }}
 								xl={{ span: 8, offset: 0 }}
 							/>
 							<Col
+								xs={{ span: 12 }}
 								sm={{ span: 9, offset: 0 }}
 								md={{ span: 7, offset: 0 }}
 								lg={{ span: 5, offset: 0 }}
 								xl={{ span: 4, offset: 0 }}
 							>
 								<Button
+									size="large"
 									key="-1"
 									style={{
 										borderColor: colorTheme.key,
@@ -132,17 +135,23 @@ class Landing extends Component {
 									}}
 								>
 									<a href="/auth/google">
-										Google Login <Icon type="google" />
+										Google Login{' '}
+										<Icon
+											style={{ fontSize: 18 }}
+											type="google"
+										/>
 									</a>
 								</Button>
 							</Col>
 							<Col
+								xs={{ span: 13 }}
 								sm={{ span: 9, offset: 0 }}
 								md={{ span: 7, offset: 0 }}
-								lg={{ span: 5, offset: 0 }}
-								xl={{ span: 4, offset: 0 }}
+								lg={{ span: 4, offset: 0 }}
+								xl={{ span: 3, offset: 0 }}
 							>
 								<Button
+									size="large"
 									key="0"
 									style={{
 										borderColor: colorTheme.keyCompliment1,
@@ -151,11 +160,16 @@ class Landing extends Component {
 									}}
 								>
 									<a href="/auth/linkedIn">
-										LinkedIn Login <Icon type="linkedin" />
+										LinkedIn Login{' '}
+										<Icon
+											style={{ fontSize: 18 }}
+											type="linkedin"
+										/>
 									</a>
 								</Button>
 							</Col>
 							<Col
+								xs={{ span: 0 }}
 								sm={{ span: 3, offset: 0 }}
 								md={{ span: 5, offset: 0 }}
 								lg={{ span: 7, offset: 0 }}
@@ -175,9 +189,7 @@ class Landing extends Component {
 		return (
 			<Content
 				style={{
-					textAlign: 'center',
-					padding: '100px 50px 50px', // top left&right bottom
-					minHeight: 82,
+					padding: '120px 50px 50px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>

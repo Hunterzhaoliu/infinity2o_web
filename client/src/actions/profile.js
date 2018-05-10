@@ -9,20 +9,83 @@ import {
 	SAVE_PROFILE_DONE,
 	SAVE_PROFILE_ERROR,
 	DECREMENT_NEURONS,
-	DECREMENT_NEURONS_ERROR
+	DECREMENT_NEURONS_ERROR,
+	ON_CHANGE_EMAIL,
+	ON_CHANGE_LINKEDIN_PROFILE_URL,
+	ON_CHANGE_GITHUB_PROFILE_URL,
+	ON_CHANGE_WEBSITE_URL
 } from './types';
 import {
 	isValidName,
 	isValidAge,
-	isValidInterests
-	//isValidTimeSlots
+	isValidInterests,
+	isValidEmail
 } from '../utils/validateProfileEdit';
+import validUrl from 'valid-url';
 
 export const onChangeName = newName => dispatch => {
 	if (isValidName(newName)) {
 		dispatch({ type: ON_CHANGE_NAME, newName: newName, hasError: false });
 	} else {
 		dispatch({ type: ON_CHANGE_NAME, newName: newName, hasError: true });
+	}
+};
+
+export const onChangeEmail = newEmail => dispatch => {
+	if (isValidEmail(newEmail)) {
+		dispatch({
+			type: ON_CHANGE_EMAIL,
+			newEmail: newEmail,
+			hasError: false
+		});
+	} else {
+		dispatch({ type: ON_CHANGE_EMAIL, newEmail: newEmail, hasError: true });
+	}
+};
+
+export const onChangeLinkedInPublicProfileUrl = newLinkedInPublicProfileUrl => dispatch => {
+	if (validUrl.isUri(newLinkedInPublicProfileUrl)) {
+		dispatch({
+			type: ON_CHANGE_LINKEDIN_PROFILE_URL,
+			newLinkedInPublicProfileUrl: newLinkedInPublicProfileUrl,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_LINKEDIN_PROFILE_URL,
+			newLinkedInPublicProfileUrl: newLinkedInPublicProfileUrl,
+			hasError: true
+		});
+	}
+};
+export const onChangeGithubPublicProfileUrl = newGithubPublicProfileUrl => dispatch => {
+	if (validUrl.isUri(newGithubPublicProfileUrl)) {
+		dispatch({
+			type: ON_CHANGE_GITHUB_PROFILE_URL,
+			newGithubPublicProfileUrl: newGithubPublicProfileUrl,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_GITHUB_PROFILE_URL,
+			newGithubPublicProfileUrl: newGithubPublicProfileUrl,
+			hasError: true
+		});
+	}
+};
+export const onChangeWebsiteUrl = newWebsiteUrl => dispatch => {
+	if (validUrl.isUri(newWebsiteUrl)) {
+		dispatch({
+			type: ON_CHANGE_WEBSITE_URL,
+			newWebsiteUrl: newWebsiteUrl,
+			hasError: false
+		});
+	} else {
+		dispatch({
+			type: ON_CHANGE_WEBSITE_URL,
+			newWebsiteUrl: newWebsiteUrl,
+			hasError: true
+		});
 	}
 };
 
@@ -96,6 +159,18 @@ export const saveProfile = (values, history) => async dispatch => {
 	}
 	if (Object.keys(values.newAvailability).length === 0) {
 		values.newAvailability = values.availability;
+	}
+	if (values.newEmail === null) {
+		values.newEmail = values.email;
+	}
+	if (values.newLinkedInPublicProfileUrl === null) {
+		values.newLinkedInPublicProfileUrl = values.linkedInPublicProfileUrl;
+	}
+	if (values.newGithubPublicProfileUrl === null) {
+		values.newGithubPublicProfileUrl = values.githubPublicProfileUrl;
+	}
+	if (values.newWebsiteUrl === null) {
+		values.newWebsiteUrl = values.websiteUrl;
 	}
 	const response = await axios.post('/api/profile', values);
 	if (response.status === 200) {

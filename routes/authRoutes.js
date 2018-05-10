@@ -23,7 +23,7 @@ module.exports = app => {
 		passport.authenticate('linkedin'),
 		(request, response) => {
 			// after a user is logged in show them...
-			response.redirect('/profile');
+			response.redirect('/tour');
 		}
 	);
 	app.get('/api/logout', (request, response) => {

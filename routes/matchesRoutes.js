@@ -12,9 +12,15 @@ const getMatchesInfo = async mongoDBUserIds => {
 		});
 		matches_info.push({
 			name: user.profile.name,
+			age: user.profile.age,
+			linkedInPublicProfileUrl: user.profile.linkedInPublicProfileUrl,
+			githubPublicProfileUrl: user.profile.githubPublicProfileUrl,
+			websiteUrl: user.profile.websiteUrl,
 			interests: user.profile.interests,
 			timeZone: user.profile.timeZone,
 			totalUserVotes: user.profile.asks.totalUserVotes,
+			availability: user.profile.availability,
+			asks: user.profile.asks,
 			id: user._id
 		});
 	}
@@ -149,9 +155,7 @@ module.exports = app => {
 		async (request, response) => {
 			// send message to minerva server to run minerva
 			// for a specific user
-			console.log('CLIENT -> ATHENA SERVER');
 			const { mongoDBUserId } = request.body;
-			console.log('request.body = ', request.body);
 			const URL = 'amqp://infinity2o:2134711@52.4.101.52:5672';
 			await amqp.connect(URL, function(error, connection) {
 				connection.createChannel(function(error, channel) {

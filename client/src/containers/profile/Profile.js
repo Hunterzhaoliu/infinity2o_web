@@ -6,6 +6,7 @@ import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import Options from '../payment/Options';
 import DisplayField from './DisplayField';
+import DisplayLinkField from './DisplayLinkField';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
@@ -29,7 +30,7 @@ class Profile extends Component {
 					<Col>
 						<h2
 							style={{
-								color: colorTheme.keyText7Color
+								color: colorTheme.keyText6Color
 							}}
 						>
 							Profile:
@@ -68,6 +69,18 @@ class Profile extends Component {
 					justify="start"
 					align="middle"
 					style={{
+						padding: '0% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<DisplayField label="E-mail: " value={profile.email} />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
 						padding: '5px 0% 0%' // top left&right bottom
 					}}
 				>
@@ -87,6 +100,51 @@ class Profile extends Component {
 						<DisplayField
 							label="Interest(s): "
 							value={profile.interests}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '5px 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<DisplayLinkField
+							label="LinkedIn: "
+							value={profile.linkedInPublicProfileUrl}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '5px 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<DisplayLinkField
+							label="Github: "
+							value={profile.githubPublicProfileUrl}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '5px 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<DisplayLinkField
+							label="Website: "
+							value={profile.websiteUrl}
 						/>
 					</Col>
 				</Row>
@@ -229,7 +287,7 @@ class Profile extends Component {
 					>
 						<h2
 							style={{
-								color: colorTheme.keyText7Color
+								color: colorTheme.keyText6Color
 							}}
 						>
 							Purchase Neurons:
@@ -279,7 +337,7 @@ class Profile extends Component {
 							<h2
 								style={{
 									padding: '25px 0% 0%', // top left&right bottom
-									color: colorTheme.keyText7Color
+									color: colorTheme.keyText6Color
 								}}
 							>
 								Last 5 Questions
@@ -290,7 +348,7 @@ class Profile extends Component {
 							<h2
 								style={{
 									padding: '25px 0% 0%', // top left&right bottom
-									color: colorTheme.keyText7Color
+									color: colorTheme.keyText6Color
 								}}
 							>
 								Last 5 Votes
