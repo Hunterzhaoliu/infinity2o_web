@@ -12,9 +12,15 @@ const getMatchesInfo = async mongoDBUserIds => {
 		});
 		matches_info.push({
 			name: user.profile.name,
+			age: user.profile.age,
+			linkedInPublicProfileUrl: user.profile.linkedInPublicProfileUrl,
+			githubPublicProfileUrl: user.profile.githubPublicProfileUrl,
+			websiteUrl: user.profile.websiteUrl,
 			interests: user.profile.interests,
 			timeZone: user.profile.timeZone,
 			totalUserVotes: user.profile.asks.totalUserVotes,
+			availability: user.profile.availability,
+			asks: user.profile.asks,
 			id: user._id
 		});
 	}
