@@ -40,9 +40,9 @@ class Landing extends Component {
 	renderMarketingInfo() {
 		const { colorTheme } = this.props;
 		const why_part_0 =
-			'Meet new & interesting people based on beliefs instead of pictures to take online courses with.';
+			'Meet new & interesting people based on beliefs to take online courses with.';
 		const why_part_1 =
-			'Each month, 1000+ students come to Infinity2o to vote, match, & learn from Coursera, edX, Udemy, & Udacity together.';
+			'Students come to Infinity2o to vote, match, & learn from Coursera, edX, Udemy, & Udacity together.';
 
 		return (
 			<div>
