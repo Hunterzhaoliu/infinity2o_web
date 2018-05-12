@@ -12,7 +12,6 @@ class InputTimeZone extends Component {
     this.props.onChangeTimeZone(e);
   };
 
-<<<<<<< HEAD
   render() {
     const { colorTheme, label, width, profile } = this.props;
     document.documentElement.style.setProperty(
@@ -39,7 +38,7 @@ class InputTimeZone extends Component {
           >
             <h3
               style={{
-                color: colorTheme.text6Color
+                color: colorTheme.text4Color
               }}
             >
               {label}
@@ -72,55 +71,7 @@ class InputTimeZone extends Component {
       </div>
     );
   }
-=======
-	render() {
-		//console.log('InputTimeZone this.props = ', this.props);
-		// <input onBlur={input.onBlur} onChange={input.onChange} />
-		const { colorTheme, label, width, profile } = this.props;
-		return (
-			<div>
-				<Row type="flex" justify="start" align="middle">
-					<Col
-						sm={{ span: 6 }}
-						md={{ span: 6 }}
-						lg={{ span: 6 }}
-						xl={{ span: 4 }}
-					>
-						<h3
-							style={{
-								color: colorTheme.text4Color
-							}}
-						>
-							{label}
-						</h3>
-					</Col>
-					<Col
-						sm={{ span: 16, offset: 1 }}
-						md={{ span: 17, offset: 1 }}
-						lg={{ span: 17, offset: 1 }}
-						xl={{ span: 19, offset: 1 }}
-					>
-						<TreeSelect
-							style={{
-								width: width
-							}}
-							dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-							value={profile.newTimeZone}
-							onChange={this.onChangeTimeZone}
-							treeData={timeZones}
-						/>
-					</Col>
-				</Row>
-				<ErrorMessage
-					message="Need a time zone instead of a country silly"
-					hasError={profile.hasTimeZoneError}
-				/>
-			</div>
-		);
-	}
->>>>>>> staging
 }
-
 /*
 So we have a state and a UI(with props).
 This function gives the UI the parts of the state it will need to display.

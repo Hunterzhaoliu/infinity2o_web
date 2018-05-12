@@ -19,11 +19,13 @@
   background: var(--time-zone-highlight-color);
 }
 
-/* test rgb(127, 127, 127)*/
+/* color for selected Time Zone */
 .ant-cascader-picker {
   color: var(--time-zone-text-color);
   background-color: var(--time-zone-text-color);
 }
+
+/* test rgb(127, 127, 127)*/
 
 .ant-cascader-input.ant-input {
   background-color: var(--time-zone-text-color);
@@ -34,8 +36,8 @@
 }
 
 .ant-cascader-picker-disabled {
-  background: var(--time-zone-text-color);
-  color: var(--time-zone-text-color);
+  background: var(--time-zone-color);
+  color: var(--time-zone-color);
 }
 
 .ant-cascader-picker:focus .ant-cascader-input {
