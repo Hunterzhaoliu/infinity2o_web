@@ -15,7 +15,6 @@ module.exports = app => {
 			newTimeZone,
 			newAvailability
 		} = request.body;
-		console.log('request.body = ', request.body);
 
 		request.user.profile.name = newName;
 		request.user.profile.email = newEmail;
