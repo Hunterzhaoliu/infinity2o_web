@@ -15,7 +15,11 @@ import {
 	PAYMENT_ERROR,
 	SAVE_COLOR_THEME_START,
 	SAVE_COLOR_THEME_DONE,
-	SAVE_COLOR_THEME_ERROR
+	SAVE_COLOR_THEME_ERROR,
+	ON_CHANGE_EMAIL,
+	ON_CHANGE_LINKEDIN_PROFILE_URL,
+	ON_CHANGE_GITHUB_PROFILE_URL,
+	ON_CHANGE_WEBSITE_URL
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -24,18 +28,30 @@ let cloneObject = obj => {
 
 let initialState = {
 	name: null,
+	email: null,
 	age: null,
 	interests: [],
+	linkedInPublicProfileUrl: null,
+	githubPublicProfileUrl: null,
+	websiteUrl: null,
 	timeZone: null,
 	availability: {},
 	newName: null,
+	newEmail: null,
 	newAge: null,
 	newInterests: [],
+	newLinkedInPublicProfileUrl: null,
+	newGithubPublicProfileUrl: null,
+	newWebsiteUrl: null,
 	newTimeZone: null,
 	newAvailability: {},
 	hasAgeError: false,
 	hasNameError: false,
+	hasEmailError: false,
 	hasInterestsError: false,
+	hasLinkedInPublicProfileUrlError: false,
+	hasGithubPublicProfileUrlError: false,
+	hasWebsiteUrlError: false,
 	hasTimeZoneError: false,
 	hasAvailabilityError: false,
 	save: null,
@@ -55,13 +71,25 @@ export default function(state = initialState, action) {
 		case SAVE_FETCHED_USER_PROFILE:
 			if (action.profile !== undefined) {
 				newState.name = action.profile.name;
+				newState.email = action.profile.email;
 				newState.age = action.profile.age;
 				newState.interests = action.profile.interests;
+				newState.linkedInPublicProfileUrl =
+					action.profile.linkedInPublicProfileUrl;
+				newState.githubPublicProfileUrl =
+					action.profile.githubPublicProfileUrl;
+				newState.websiteUrl = action.profile.websiteUrl;
 				newState.timeZone = action.profile.timeZone;
 				newState.availability = action.profile.availability;
 				newState.newName = action.profile.name;
+				newState.newEmail = action.profile.email;
 				newState.newAge = action.profile.age;
 				newState.newInterests = action.profile.interests;
+				newState.newLinkedInPublicProfileUrl =
+					action.profile.linkedInPublicProfileUrl;
+				newState.newGithubPublicProfileUrl =
+					action.profile.githubPublicProfileUrl;
+				newState.newWebsiteUrl = action.profile.websiteUrl;
 				newState.newTimeZone = action.profile.timeZone;
 				newState.newAvailability = action.profile.availability;
 				newState.asks = action.profile.asks;
@@ -83,6 +111,10 @@ export default function(state = initialState, action) {
 			newState.newName = action.newName;
 			newState.hasNameError = action.hasError;
 			return newState;
+		case ON_CHANGE_EMAIL:
+			newState.newEmail = action.newEmail;
+			newState.hasEmailError = action.hasError;
+			return newState;
 		case ON_CHANGE_AGE:
 			newState.newAge = action.newAge;
 			newState.hasAgeError = action.hasError;
@@ -90,6 +122,20 @@ export default function(state = initialState, action) {
 		case ON_CHANGE_INTERESTS:
 			newState.newInterests = action.newInterests;
 			newState.hasInterestsError = action.hasError;
+			return newState;
+		case ON_CHANGE_LINKEDIN_PROFILE_URL:
+			newState.newLinkedInPublicProfileUrl =
+				action.newLinkedInPublicProfileUrl;
+			newState.hasLinkedInPublicProfileUrlError = action.hasError;
+			return newState;
+		case ON_CHANGE_GITHUB_PROFILE_URL:
+			newState.newGithubPublicProfileUrl =
+				action.newGithubPublicProfileUrl;
+			newState.hasGithubPublicProfileUrlError = action.hasError;
+			return newState;
+		case ON_CHANGE_WEBSITE_URL:
+			newState.newWebsiteUrl = action.newWebsiteUrl;
+			newState.hasWebsiteUrlError = action.hasError;
 			return newState;
 		case ON_CHANGE_TIME_ZONE:
 			newState.newTimeZone = action.newTimeZone;

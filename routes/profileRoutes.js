@@ -5,21 +5,24 @@ const UserCollection = mongoose.model('users');
 module.exports = app => {
 	app.post('/api/profile', requireLogin, async (request, response) => {
 		const {
-			name,
-			age,
-			interests,
-			timeZone,
-			availability,
 			newName,
+			newEmail,
 			newAge,
 			newInterests,
+			newLinkedInPublicProfileUrl,
+			newGithubPublicProfileUrl,
+			newWebsiteUrl,
 			newTimeZone,
 			newAvailability
 		} = request.body;
 
 		request.user.profile.name = newName;
+		request.user.profile.email = newEmail;
 		request.user.profile.age = newAge;
 		request.user.profile.interests = newInterests;
+		request.user.profile.linkedInPublicProfileUrl = newLinkedInPublicProfileUrl;
+		request.user.profile.githubPublicProfileUrl = newGithubPublicProfileUrl;
+		request.user.profile.websiteUrl = newWebsiteUrl;
 		request.user.profile.timeZone = newTimeZone;
 		request.user.profile.availability = newAvailability;
 

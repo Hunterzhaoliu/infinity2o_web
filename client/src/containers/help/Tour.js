@@ -26,14 +26,14 @@ class Tour extends Component {
 			>
 				<Row type="flex" justify="center">
 					<Col span={24}>
-						<h1
+						<h2
 							key="0"
 							style={{
 								color: colorTheme.text2Color
 							}}
 						>
 							{welcome}
-						</h1>
+						</h2>
 					</Col>
 				</Row>
 				<Row type="flex" justify="center">
@@ -47,6 +47,53 @@ class Tour extends Component {
 							frameBorder="0"
 							allowFullScreen
 						/>
+					</Col>
+				</Row>
+				<Row type="flex" justify="center">
+					<Col >
+					<h2
+						key="0"
+						style={{
+							padding: '20px 0px 0px',
+							color: colorTheme.text2Color
+						}}
+					>
+						Master Plan v1
+					</h2>
+					</Col>
+				</Row>
+				<Row type="flex" justify="center">
+					<Col >
+					<p
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						1) Get 100 users that love us.
+					</p>
+					<p
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						2) Recommend online courses for our students to take together to generate affiliate marketing revenue.
+					</p>
+					<p
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						3) Open our first location in Philadelphia, PA where any Infinity2o students
+						   can come to work on their online course with their partner for $X/month.
+					</p>
+					<p
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						4) If the Philadelphia location is profitable we will continue to open
+						   Infinity2o centers in our communities most popular cities.
+					</p>
 					</Col>
 				</Row>
 			</Content>

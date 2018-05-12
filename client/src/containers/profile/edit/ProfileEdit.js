@@ -42,95 +42,188 @@ class ProfileEdit extends Component {
     }
   }
 
-  renderContent() {
-    const { colorTheme, saveProfile, profile, history } = this.props;
+	renderContent() {
+		const {
+			colorTheme,
+			saveProfile,
+			profile,
+			history,
+			onChangeName,
+			onChangeEmail,
+			onChangeLinkedInPublicProfileUrl,
+			onChangeGithubPublicProfileUrl,
+			onChangeWebsiteUrl
+		} = this.props;
 
-    return (
-      <div>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
-            padding: "0% 0% 0%" // top left&right bottom
-          }}
-        >
-          <Col span={24}>
-            <InputField width={280} label="Name:" />
-          </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
-            padding: "3% 0% 0%" // top left&right bottom
-          }}
-        >
-          <Col span={24}>
-            <InputFieldNumber width={48} label="Age:" />
-          </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
-            padding: "3% 0% 0%" // top left&right bottom
-          }}
-        >
-          <Col span={24}>
-            <InputFieldSelect width={280} label="Interest(s):" />
-          </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
-            padding: "3% 0% 0%" // top left&right bottom
-          }}
-        >
-          <Col span={24}>
-            <InputTimeZone width={280} label="Time Zone:" />
-          </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
-            padding: "3% 0% 0%" // top left&right bottom
-          }}
-        >
-          <Col span={24}>
-            <InputSchedule />
-          </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          style={{
-            padding: "3% 0% 0%" // top left&right bottom
-          }}
-        >
-          <Col span={24}>
-            <Button
-              style={{
-                borderColor: colorTheme.key,
-                background: colorTheme.key,
-                color: colorTheme.text1Color
-              }}
-              disabled={this.isSaveDisabled(profile)}
-              onClick={() => saveProfile(profile, history)}
-            >
-              Save {this.renderSaveIcon(profile.save)}
-            </Button>
-          </Col>
-        </Row>
-      </div>
-    );
-  }
+		return (
+			<div>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '0% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField
+							value={profile.newName}
+							width={280}
+							label="Name:"
+							errorMessage="Cool name! But we need 1 to 30 valid letters"
+							hasError={profile.hasNameError}
+							onChange={onChangeName}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField
+							value={profile.newEmail}
+							width={280}
+							label="E-mail:"
+							errorMessage="Invalid e-mail format"
+							hasError={profile.hasEmailError}
+							onChange={onChangeEmail}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputFieldNumber width={48} label="Age:" />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputFieldSelect width={280} label="Interest(s):" />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField
+							value={profile.newLinkedInPublicProfileUrl}
+							width={280}
+							label="LinkedIn:"
+							errorMessage="Invalid LinkedIn link. Needs to start with http:// or https://"
+							hasError={profile.hasLinkedInPublicProfileUrlError}
+							onChange={onChangeLinkedInPublicProfileUrl}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField
+							value={profile.newGithubPublicProfileUrl}
+							width={280}
+							label="Github:"
+							errorMessage="Invalid github link. Needs to start with http:// or https://"
+							hasError={profile.hasGithubPublicProfileUrlError}
+							onChange={onChangeGithubPublicProfileUrl}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputField
+							value={profile.newWebsiteUrl}
+							width={280}
+							label="Website:"
+							errorMessage="Invalid website link. Needs to start with http:// or https://"
+							hasError={profile.hasWebsiteUrlError}
+							onChange={onChangeWebsiteUrl}
+						/>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '1% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputTimeZone width={280} label="Time Zone:" />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					align="middle"
+					style={{
+						padding: '2% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<InputSchedule />
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="start"
+					style={{
+						padding: '5% 0% 0%' // top left&right bottom
+					}}
+				>
+					<Col span={24}>
+						<Button
+							style={{
+								borderColor: colorTheme.key,
+								background: colorTheme.key,
+								color: colorTheme.text1Color
+							}}
+							disabled={this.isSaveDisabled(profile)}
+							onClick={() => saveProfile(profile, history)}
+						>
+							Save {this.renderSaveIcon(profile.save)}
+						</Button>
+					</Col>
+				</Row>
+			</div>
+		);
+	}
 
   render() {
     //console.log('this.props in ProfileEdit.js', this.props);
@@ -179,17 +272,36 @@ function mapDispatchToProps(dispatch) {
     dispatch
   );
 
-  return {
-    fetchUserProfile: () => {
-      indexDispatchers.fetchUserProfile();
-    },
-    onProfile: () => {
-      colorThemeDispatchers.onProfile();
-    },
-    saveProfile: (values, history) => {
-      profileDispatchers.saveProfile(values, history);
-    }
-  };
+	return {
+		fetchUserProfile: () => {
+			indexDispatchers.fetchUserProfile();
+		},
+		onProfile: () => {
+			colorThemeDispatchers.onProfile();
+		},
+		saveProfile: (values, history) => {
+			profileDispatchers.saveProfile(values, history);
+		},
+		onChangeName: newName => {
+			profileDispatchers.onChangeName(newName);
+		},
+		onChangeEmail: newEmail => {
+			profileDispatchers.onChangeEmail(newEmail);
+		},
+		onChangeLinkedInPublicProfileUrl: newLinkedInPublicProfileUrl => {
+			profileDispatchers.onChangeLinkedInPublicProfileUrl(
+				newLinkedInPublicProfileUrl
+			);
+		},
+		onChangeGithubPublicProfileUrl: newGithubPublicProfileUrl => {
+			profileDispatchers.onChangeGithubPublicProfileUrl(
+				newGithubPublicProfileUrl
+			);
+		},
+		onChangeWebsiteUrl: newWebsiteUrl => {
+			profileDispatchers.onChangeWebsiteUrl(newWebsiteUrl);
+		}
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);

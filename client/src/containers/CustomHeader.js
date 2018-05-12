@@ -53,7 +53,7 @@ class CustomHeader extends Component {
 					style={{
 						borderColor: colorTheme.text7Color,
 						background: colorTheme.text7Color,
-						color: colorTheme.text2Color
+						color: colorTheme.text4Color
 					}}
 					onClick={nonLoggedInGenerateRandomColorTheme}
 				>
@@ -66,7 +66,7 @@ class CustomHeader extends Component {
 					style={{
 						borderColor: colorTheme.text7Color,
 						background: colorTheme.text7Color,
-						color: colorTheme.text2Color
+						color: colorTheme.text4Color
 					}}
 					onClick={onRandomColorTheme}
 				>
@@ -83,6 +83,7 @@ class CustomHeader extends Component {
 		return (
 			<Button
 				style={{
+					fontSize: 17,
 					borderColor: colorTheme.tourButtonColor,
 					background: colorTheme.tourButtonColor,
 					color: colorTheme.tourButtonTextColor
@@ -187,6 +188,7 @@ class CustomHeader extends Component {
 		return (
 			<Button
 				style={{
+					fontSize: 17,
 					borderColor: colorTheme.conversationsButtonColor,
 					background: colorTheme.conversationsButtonColor,
 					color: colorTheme.conversationsButtonTextColor
@@ -338,13 +340,23 @@ class CustomHeader extends Component {
 	}
 
 	render() {
-		const { colorTheme } = this.props;
+		const { colorTheme, auth } = this.props;
+		let headerBackground;
+		switch (auth.loggedInState) {
+			case 'not_logged_in':
+				headerBackground = colorTheme.backgroundColor;
+				break;
+			case 'logged_in':
+				headerBackground = colorTheme.text8Color;
+				break;
+			default:
+		}
 		return (
 			<Header
 				style={{
-					background: colorTheme.text8Color,
+					background: headerBackground,
 					position: 'fixed',
-					zIndex: 1, // make every display under the header
+					zIndex: 1, // make every component display under the header
 					width: '100%'
 				}}
 			>
