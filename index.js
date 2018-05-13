@@ -35,6 +35,7 @@ require('./routes/authRoutes')(app);
 require('./routes/colorThemeRoutes')(app);
 require('./routes/paymentRoutes')(app);
 require('./routes/profileRoutes')(app);
+require('./routes/voteEditRoutes')(app);
 require('./routes/trainAIRoutes')(app);
 require('./routes/askRoutes')(app);
 require('./routes/matchesRoutes')(app);

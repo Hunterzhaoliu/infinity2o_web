@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 import { Row, Col, Button, Icon } from 'antd';
 
 class VoteEdit extends Component {
-	componentWillMount() {
-		// run once before first render()
-	}
-
 	onPressPage(displayPage) {
 		this.props.onPressPage(displayPage);
 	}
@@ -82,57 +78,51 @@ class VoteEdit extends Component {
 			const newest5Votes = profile.asks.votes.slice(i, f).reverse();
 			return _.map(newest5Votes, (vote, index) => {
 				return (
-					<div key={index}>
-						<Row type="flex" justify="start" align="middle">
-							<Col
+					<Row key={index} type="flex" justify="start" align="middle">
+						<Col
+							style={{
+								padding: '0px 0px 8px'
+							}}
+							span={12}
+						>
+							<Button
 								style={{
-									padding: '0px 0px 8px'
+									borderColor: colorTheme.text8Color,
+									background: colorTheme.text8Color,
+									color: colorTheme.text3Color
 								}}
-								sm={{ span: 5 }}
-								md={{ span: 5 }}
-								lg={{ span: 5 }}
-								xl={{ span: 5 }}
+								onClick={e =>
+									this.onPressAsk(vote._askId, index)
+								}
 							>
-								<Button
+								<p
 									style={{
-										borderColor: colorTheme.text8Color,
-										background: colorTheme.text8Color,
-										color: colorTheme.text3Color
-									}}
-									onClick={e =>
-										this.onPressAsk(vote._askId, index)
-									}
-								>
-									<p
-										style={{
-											padding: '4px 0px 0px',
-											color: colorTheme.text3Color
-										}}
-									>
-										{vote.question}{' '}
-										{this.renderFetchIcon(index)}
-									</p>
-								</Button>
-							</Col>
-							<Col
-								sm={{ span: 18, offset: 1 }}
-								md={{ span: 18, offset: 1 }}
-								lg={{ span: 18, offset: 1 }}
-								xl={{ span: 18, offset: 1 }}
-							>
-								<h3
-									style={{
+										padding: '4px 0px 0px',
 										color: colorTheme.text3Color
 									}}
 								>
-									{vote.selectedAnswer}
-								</h3>
-							</Col>
-						</Row>
-					</div>
+									{vote.question}{' '}
+									{this.renderFetchIcon(index)}
+								</p>
+							</Button>
+						</Col>
+						<Col span={12}>
+							<h4
+								style={{
+									color: colorTheme.text3Color
+								}}
+							>
+								{vote.selectedAnswer}
+							</h4>
+						</Col>
+					</Row>
 				);
 			});
 		}
+	}
+
+	renderAskToRevote() {
+		const { colorTheme, profile, voteEdit } = this.props;
 	}
 
 	render() {
@@ -140,17 +130,15 @@ class VoteEdit extends Component {
 
 		return (
 			<div>
-				{this.renderVotes()}
+				<Row type="flex" justify="start" align="middle">
+					<Col span={12}>{this.renderVotes()}</Col>
+					<Col span={12}>{this.renderAskToRevote()}</Col>
+				</Row>
 				<Row type="flex" justify="start" align="middle">
 					{this.renderPagination()}
 				</Row>
 			</div>
 		);
-	}
-
-	componentDidMount() {
-		// run once after first render()
-		//console.log('componentDidMount this.props = ', this.props);
 	}
 }
 

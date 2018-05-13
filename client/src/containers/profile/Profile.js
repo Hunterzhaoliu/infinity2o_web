@@ -304,7 +304,11 @@ class Profile extends Component {
 								</h2>
 							</Col>
 						</Row>
-						<VoteEdit />
+						<Row type="flex" justify="start" align="middle">
+							<Col span={24}>
+								<VoteEdit />
+							</Col>
+						</Row>
 						<Row>
 							<Col>
 								<h2
