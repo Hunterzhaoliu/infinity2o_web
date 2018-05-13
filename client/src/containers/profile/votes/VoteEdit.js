@@ -4,7 +4,7 @@ import * as voteEditActionCreators from '../../../actions/profile/voteEdit';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Icon } from 'antd';
 
 class VoteEdit extends Component {
 	componentWillMount() {
@@ -13,6 +13,21 @@ class VoteEdit extends Component {
 
 	onPressPage(displayPage) {
 		this.props.onPressPage(displayPage);
+	}
+
+	renderFetchIcon(index) {
+		const { voteEdit } = this.props;
+		if (voteEdit.fetchState[index] === 'start') {
+			return <Icon type="loading" />;
+		} else if (voteEdit.fetchState[index] === 'done') {
+			return <Icon type="check" />;
+		} else if (voteEdit.fetchState[index] === 'error') {
+			return <Icon type="warning" />;
+		}
+	}
+
+	onPressAsk(mongoDBAskId, index) {
+		this.props.onPressAsk(mongoDBAskId, index);
 	}
 
 	renderPagination() {
@@ -63,27 +78,41 @@ class VoteEdit extends Component {
 				i = (voteEdit.page - 1) * PER_PAGE;
 				f = voteEdit.page * PER_PAGE;
 			}
-			console.log('i = ', i);
-			console.log('f = ', f);
 
 			const newest5Votes = profile.asks.votes.slice(i, f).reverse();
-			return _.map(newest5Votes, (vote, key) => {
+			return _.map(newest5Votes, (vote, index) => {
 				return (
-					<div key={key}>
+					<div key={index}>
 						<Row type="flex" justify="start" align="middle">
 							<Col
+								style={{
+									padding: '0px 0px 8px'
+								}}
 								sm={{ span: 5 }}
 								md={{ span: 5 }}
 								lg={{ span: 5 }}
 								xl={{ span: 5 }}
 							>
-								<h3
+								<Button
 									style={{
+										borderColor: colorTheme.text8Color,
+										background: colorTheme.text8Color,
 										color: colorTheme.text3Color
 									}}
+									onClick={e =>
+										this.onPressAsk(vote._askId, index)
+									}
 								>
-									{vote.question}
-								</h3>
+									<p
+										style={{
+											padding: '4px 0px 0px',
+											color: colorTheme.text3Color
+										}}
+									>
+										{vote.question}{' '}
+										{this.renderFetchIcon(index)}
+									</p>
+								</Button>
 							</Col>
 							<Col
 								sm={{ span: 18, offset: 1 }}
@@ -150,6 +179,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		onPressPage: newPage => {
 			voteEditDispatchers.onPressPage(newPage);
+		},
+		onPressAsk: (mongoDBAskId, index) => {
+			voteEditDispatchers.onPressAsk(mongoDBAskId, index);
 		}
 	};
 }
