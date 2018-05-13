@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as trainAIActionCreators from '../../actions/trainAI';
+import * as trainAIActionCreators from '../../actions/train_ai/trainAI';
 import { bindActionCreators } from 'redux';
 import { Button, Card, Col, Layout, Row, Icon } from 'antd';
 const { Content } = Layout;

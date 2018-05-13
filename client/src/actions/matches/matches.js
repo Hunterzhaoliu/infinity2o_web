@@ -8,7 +8,7 @@ import {
 	UPDATE_CONTACTS_ERROR,
 	DELETE_MATCH_IN_DB,
 	DELETE_MATCH_IN_DB_ERROR
-} from './types';
+} from '../types';
 
 export const fetchUserMatches = async (dispatch, mongoDBUserIds) => {
 	const response = await axios.get(

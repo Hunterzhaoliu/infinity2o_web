@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authActionCreators from '../../../actions/auth';
 import * as colorThemeActionCreators from '../../../actions/colorTheme';
-import * as profileActionCreators from '../../../actions/profile';
+import * as profileActionCreators from '../../../actions/profile/profile';
 import { bindActionCreators } from 'redux';
 import InputField from './InputField';
 import InputFieldNumber from './InputFieldNumber';

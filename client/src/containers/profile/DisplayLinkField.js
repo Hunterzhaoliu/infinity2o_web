@@ -9,9 +9,9 @@ class DisplayLinkField extends Component {
 			return (
 				<Button
 					style={{
-						borderColor: colorTheme.text7Color,
-						background: colorTheme.text7Color,
-						color: colorTheme.text3Color
+						borderColor: colorTheme.text8Color,
+						background: colorTheme.text8Color,
+						color: colorTheme.keyText4Color
 					}}
 				>
 					<a target="_blank" href={value}>

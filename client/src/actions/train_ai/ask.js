@@ -9,9 +9,9 @@ import {
 	ADD_NEW_ASK_TO_STATE,
 	ON_CLICK_REMOVE_ANSWER,
 	DUPLICATE_ANSWER_ERROR
-} from './types';
+} from '../types';
 
-import { isValidQuestion, isValidAnswer } from '../utils/validateAsk';
+import { isValidQuestion, isValidAnswer } from '../../utils/validateAsk';
 
 export const onChangeQuestion = newQuestion => dispatch => {
 	if (isValidQuestion(newQuestion)) {

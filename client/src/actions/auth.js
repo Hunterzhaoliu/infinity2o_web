@@ -8,8 +8,8 @@ import {
 	generateRandomColorThemeWith,
 	updateWithSavedColorTheme
 } from './colorTheme';
-import { fetchUserTrainAIAsks } from './trainAI';
-import { fetchUserMatches } from './matches';
+import { fetchUserTrainAIAsks } from './train_ai/trainAI';
+import { fetchUserMatches } from './matches/matches';
 import { store } from '../index';
 
 export const initializeApp = () => async dispatch => {

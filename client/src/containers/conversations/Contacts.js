@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as contactsActionCreators from '../../actions/contacts';
+import * as contactsActionCreators from '../../actions/conversations/contacts';
 import { bindActionCreators } from 'redux';
 import { Layout, List, Button } from 'antd';
 import './Contacts.css';
