@@ -25,6 +25,7 @@ export default function(state = initialState, action) {
 			newState.fetchState[action.index] = 'start';
 			return newState;
 		case FETCH_ASK_TO_REVOTE_DONE:
+			newState.fetchState = {};
 			newState.fetchState[action.index] = 'done';
 			newState.askToRevote = action.askToRevote;
 			return newState;

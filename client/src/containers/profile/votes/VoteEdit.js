@@ -4,7 +4,7 @@ import * as voteEditActionCreators from '../../../actions/profile/voteEdit';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Row, Col, Button, Icon } from 'antd';
+import { Row, Col, Button, Icon, Card } from 'antd';
 
 class VoteEdit extends Component {
 	onPressPage(displayPage) {
@@ -121,8 +121,118 @@ class VoteEdit extends Component {
 		}
 	}
 
+	renderSpanChange(isDisplayingAskStats) {
+		if (isDisplayingAskStats) {
+			return 12;
+		}
+	}
+
+	renderAnswers(answers, selectedAnswerId, isDisplayingAskStats) {
+		const { colorTheme } = this.props;
+		return _.map(answers, (answerObject, answerIndex) => {
+			// displaying actual answers
+			let displayAnswer;
+			if (answerObject !== null) {
+				displayAnswer = answerObject.answer;
+			}
+
+			// displaying the change in voted answer button color
+			const currentAnswerId = answers[answerIndex]._id;
+
+			let displayAnswerButtonColor = colorTheme.text7Color;
+			let isDisplayingSaveIcon = false;
+			let answerVotes = answerObject.votes;
+
+			if (selectedAnswerId === currentAnswerId) {
+				displayAnswerButtonColor = colorTheme.keyText7Color;
+				isDisplayingSaveIcon = true;
+			}
+
+			return (
+				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
+					<Col
+						style={{
+							color: colorTheme.text2Color
+						}}
+						span={this.renderSpanChange(isDisplayingAskStats)}
+					>
+						<Button
+							style={{
+								borderColor: displayAnswerButtonColor,
+								background: displayAnswerButtonColor,
+								color: colorTheme.text2Color
+							}}
+							// onClick={e =>
+							// 	this.onVote(answerIndex, askIndex, askId)
+							// }
+						>
+							{displayAnswer}
+							{/* {this.renderSaveIcon(
+								trainAI.save,
+								askIndex,
+								isDisplayingSaveIcon
+							)} */}
+						</Button>
+					</Col>
+					<Col
+						style={{
+							color: colorTheme.text2Color
+						}}
+						span={this.renderSpanChange(isDisplayingAskStats)}
+					>
+						{/* {this.renderAskStats(
+							answerVotes,
+							askTotalVotes,
+							isDisplayingAskStats
+						)} */}
+					</Col>
+				</Row>
+			);
+		});
+	}
+
 	renderAskToRevote() {
 		const { colorTheme, profile, voteEdit } = this.props;
+
+		if (voteEdit.askToRevote !== null) {
+			return (
+				<Card
+					sm={{ span: 24 }}
+					md={{ span: 24 }}
+					lg={{ span: 24 }}
+					xl={{ span: 12 }}
+					style={{
+						borderColor: colorTheme.text8Color,
+						background: colorTheme.text8Color,
+						color: colorTheme.text2Color
+					}}
+				>
+					<h3
+						style={{
+							textAlign: 'center',
+							color: colorTheme.text2Color
+						}}
+					>
+						{voteEdit.askToRevote.question}
+					</h3>
+					<div
+						style={{
+							textAlign: 'center',
+							color: colorTheme.text3Color
+						}}
+					>
+						{'Total Votes: ' + voteEdit.askToRevote.totalVotes}
+					</div>
+					{this.renderAnswers(
+						voteEdit.askToRevote.answers,
+						null,
+						true
+					)}
+				</Card>
+			);
+		} else {
+			return;
+		}
 	}
 
 	render() {
@@ -130,7 +240,7 @@ class VoteEdit extends Component {
 
 		return (
 			<div>
-				<Row type="flex" justify="start" align="middle">
+				<Row type="flex" justify="start" align="top">
 					<Col span={12}>{this.renderVotes()}</Col>
 					<Col span={12}>{this.renderAskToRevote()}</Col>
 				</Row>
