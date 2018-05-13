@@ -1,27 +1,72 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import * as voteEditActionCreators from '../../../actions/profile/voteEdit';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Row, Col, Pagination } from 'antd';
+import { Row, Col, Button } from 'antd';
 
 class VoteEdit extends Component {
 	componentWillMount() {
 		// run once before first render()
 	}
 
-	state = {
-		current: 3
-	};
-	onChange = page => {
-		console.log(page);
-		this.setState({
-			current: page
-		});
-	};
+	onPressPage(displayPage) {
+		this.props.onPressPage(displayPage);
+	}
 
-	renderVotes(asks, colorTheme) {
-		if (asks != null) {
-			const newest5Votes = asks.votes.slice(-8).reverse();
+	renderPagination() {
+		const { colorTheme, profile, voteEdit } = this.props;
+
+		let numberOfItems = 0;
+		if (profile.asks != null) {
+			numberOfItems = profile.asks.votes.length;
+		}
+
+		const numberOfButtons = Math.round(numberOfItems / 8);
+		return _.map(new Array(numberOfButtons), (pageButton, index) => {
+			let textColor = colorTheme.text5Color;
+			const displayPage = index + 1;
+			if (voteEdit.page === displayPage) {
+				textColor = colorTheme.text1Color;
+			}
+			return (
+				<Col
+					key={index}
+					style={{
+						padding: '0px 3px'
+					}}
+				>
+					<Button
+						style={{
+							borderColor: colorTheme.text8Color,
+							background: colorTheme.text8Color,
+							color: textColor
+						}}
+						onClick={e => this.onPressPage(displayPage)}
+					>
+						{displayPage}
+					</Button>
+				</Col>
+			);
+		});
+	}
+
+	renderVotes() {
+		const { colorTheme, profile, voteEdit } = this.props;
+
+		const PER_PAGE = 8;
+		if (profile.asks != null) {
+			let i = 0;
+			let f = PER_PAGE;
+			if (voteEdit.page !== 1) {
+				i = (voteEdit.page - 1) * PER_PAGE;
+				f = voteEdit.page * PER_PAGE;
+			}
+			console.log('i = ', i);
+			console.log('f = ', f);
+
+			const newest5Votes = profile.asks.votes.slice(i, f).reverse();
 			return _.map(newest5Votes, (vote, key) => {
 				return (
 					<div key={key}>
@@ -34,7 +79,7 @@ class VoteEdit extends Component {
 							>
 								<h3
 									style={{
-										color: colorTheme.text6Color
+										color: colorTheme.text3Color
 									}}
 								>
 									{vote.question}
@@ -48,7 +93,7 @@ class VoteEdit extends Component {
 							>
 								<h3
 									style={{
-										color: colorTheme.text6Color
+										color: colorTheme.text3Color
 									}}
 								>
 									{vote.selectedAnswer}
@@ -63,24 +108,12 @@ class VoteEdit extends Component {
 
 	render() {
 		//console.log('this.props inside VoteEdit', this.props);
-		const { colorTheme, profile } = this.props;
-		let total = 0;
-		if (profile.asks != null) {
-			total = profile.asks.votes.length;
-		}
-		console.log('total = ', total);
+
 		return (
 			<div>
-				{this.renderVotes(profile.asks, colorTheme)}
+				{this.renderVotes()}
 				<Row type="flex" justify="start" align="middle">
-					<Col>
-						<Pagination
-							current={this.state.current}
-							onChange={this.onChange}
-							pageSize={8}
-							total={total}
-						/>
-					</Col>
+					{this.renderPagination()}
 				</Row>
 			</div>
 		);
@@ -99,7 +132,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		profile: state.profile
+		profile: state.profile,
+		voteEdit: state.voteEdit
 	};
 }
 
@@ -108,7 +142,16 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	return {};
+	const voteEditDispatchers = bindActionCreators(
+		voteEditActionCreators,
+		dispatch
+	);
+
+	return {
+		onPressPage: newPage => {
+			voteEditDispatchers.onPressPage(newPage);
+		}
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VoteEdit);
