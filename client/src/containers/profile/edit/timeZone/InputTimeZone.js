@@ -60,8 +60,7 @@ class InputTimeZone extends Component {
             <Cascader
               style={{
                 width: width,
-                background: colorTheme.text8Color,
-                color: colorTheme.text8Color
+                background: colorTheme.text8Color
               }}
               value={profile.newTimeZone}
               onChange={this.onChangeTimeZone}

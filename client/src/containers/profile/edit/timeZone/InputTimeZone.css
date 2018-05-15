@@ -14,11 +14,9 @@
 }
 
 /* initial highlight color for country */
-/* .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled), */
 .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
   background: var(--text6Color);
 }
-
 .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled) {
   background: var(--text6Color);
 }
@@ -35,6 +33,8 @@
 
 /* color of divider between country and timeZone */
 .ant-cascader-menu {
+  min-width: 140px;
+  height: 200px;
   border-right: 1px solid var(--text6Color);
 }
 
@@ -52,8 +52,6 @@
 .ant-cascader-menu-item {
   color: var(--text2Color);
 }
-
-
 
 /* puts a color around the selected box */
 /* .ant-cascader-picker:focus .ant-cascader-input {
