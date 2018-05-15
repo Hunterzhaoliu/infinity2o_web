@@ -1,0 +1,20 @@
+.ant-popover-inner-content {
+  color: var(--text8Color);
+}
+
+.ant-popover {
+  color: var(--text8Color);
+}
+
+.ant-popover:after {
+  background: var(--text8Color);
+}
+
+.ant-popover-message {
+  color: var(--text8Color);
+}
+
+.ant-popover-content > .ant-popover-arrow {
+  -webkit-box-shadow: 0px 0px 0px var(--text8Color);
+  box-shadow: 0px 0px 0px var(--text8Color);
+}
