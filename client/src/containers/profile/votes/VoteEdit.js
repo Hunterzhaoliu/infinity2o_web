@@ -125,6 +125,76 @@ class VoteEdit extends Component {
 		}
 	}
 
+	renderRevoteStats(answerObject) {
+		const { colorTheme, voteEdit } = this.props;
+		if (voteEdit.askToRevote.totalRevotes === 0) {
+			return (
+				<div>
+					<div
+						style={{
+							color: colorTheme.keyText2Color
+						}}
+					>
+						{'0.0%'}
+					</div>
+					<div
+						style={{
+							color: colorTheme.keyText4Color
+						}}
+					>
+						{'0.0%'}
+					</div>
+				</div>
+			);
+		}
+		return (
+			<div>
+				<div
+					style={{
+						color: colorTheme.keyText2Color
+					}}
+				>
+					{String(
+						(
+							answerObject.votesIn /
+							voteEdit.askToRevote.totalRevotes *
+							100
+						).toFixed(1)
+					) + '%'}
+				</div>
+				<div
+					style={{
+						color: colorTheme.keyText4Color
+					}}
+				>
+					{String(
+						(
+							answerObject.votesOut /
+							voteEdit.askToRevote.totalRevotes *
+							100
+						).toFixed(1)
+					) + '%'}
+				</div>
+			</div>
+		);
+	}
+
+	onRevote(
+		mongoDBAskId,
+		mongoDBAnswerId,
+		previousMongoDBAnswerId,
+		answerIndex,
+		newAnswer
+	) {
+		this.props.onRevote(
+			mongoDBAskId,
+			mongoDBAnswerId,
+			previousMongoDBAnswerId,
+			answerIndex,
+			newAnswer
+		);
+	}
+
 	renderAnswers(answers, isDisplayingAskStats) {
 		const { colorTheme, voteEdit } = this.props;
 		return _.map(answers, (answerObject, answerIndex) => {
@@ -139,7 +209,6 @@ class VoteEdit extends Component {
 
 			let displayAnswerButtonColor = colorTheme.text7Color;
 			let isDisplayingSaveIcon = false;
-			let answerVotes = answerObject.votes;
 
 			if (voteEdit.previousMongoDBAnswerId === currentAnswerId) {
 				displayAnswerButtonColor = colorTheme.keyText7Color;
@@ -165,9 +234,15 @@ class VoteEdit extends Component {
 								background: displayAnswerButtonColor,
 								color: colorTheme.text2Color
 							}}
-							// onClick={e =>
-							// 	this.onVote(answerIndex, askIndex, askId)
-							// }
+							onClick={e =>
+								this.onRevote(
+									voteEdit.askToRevote._id,
+									currentAnswerId,
+									voteEdit.previousMongoDBAnswerId,
+									answerIndex,
+									displayAnswer
+								)
+							}
 						>
 							{displayAnswer}
 							{/* {this.renderSaveIcon(
@@ -190,41 +265,14 @@ class VoteEdit extends Component {
 							).toFixed(1)
 						) + '%'}
 					</Col>
-					<Col>
-						<div
-							style={{
-								color: colorTheme.keyText2Color
-							}}
-						>
-							{String(
-								(
-									-1 /
-									voteEdit.askToRevote.totalVotes *
-									100
-								).toFixed(1)
-							) + '%'}
-						</div>
-						<div
-							style={{
-								color: colorTheme.keyText4Color
-							}}
-						>
-							{String(
-								(
-									-1 /
-									voteEdit.askToRevote.totalVotes *
-									100
-								).toFixed(1)
-							) + '%'}
-						</div>
-					</Col>
+					<Col>{this.renderRevoteStats(answerObject)}</Col>
 				</Row>
 			);
 		});
 	}
 
 	renderAskToRevote() {
-		const { colorTheme, profile, voteEdit } = this.props;
+		const { colorTheme, voteEdit } = this.props;
 
 		if (voteEdit.askToRevote !== null) {
 			return (
@@ -356,6 +404,21 @@ function mapDispatchToProps(dispatch) {
 				mongoDBAskId,
 				index,
 				mongoDBAnswerId
+			);
+		},
+		onRevote: (
+			mongoDBAskId,
+			mongoDBAnswerId,
+			previousMongoDBAnswerId,
+			answerIndex,
+			newAnswer
+		) => {
+			voteEditDispatchers.onRevote(
+				mongoDBAskId,
+				mongoDBAnswerId,
+				previousMongoDBAnswerId,
+				answerIndex,
+				newAnswer
 			);
 		}
 	};
