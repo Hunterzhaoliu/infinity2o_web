@@ -1,84 +1,63 @@
 /* border color for InputTimeZone */
 .ant-cascader-input {
-  border-color: var(--time-zone-color);
+  border-color: var(--text8Color);
 }
 
 /* color for entire cascade */
 .ant-cascader-menus {
-  background: var(--time-zone-color);
+  background: var(--text8Color);
 }
 
 /* highlight color for specific country timeZone */
 .ant-cascader-menu-item:hover {
-  background: var(--time-zone-highlight-color);
+  background: var(--text6Color);
 }
 
 /* initial highlight color for country */
-.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled),
+/* .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled), */
 .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
-  background: var(--time-zone-highlight-color);
+  background: var(--text6Color);
+}
+
+.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled) {
+  background: var(--text6Color);
 }
 
 /* color for selected Time Zone */
 .ant-cascader-picker {
-  color: var(--time-zone-text-color);
-  background-color: var(--time-zone-text-color);
+  color: var(--text2Color);
 }
 
-/* test rgb(127, 127, 127)*/
-
-.ant-cascader-input.ant-input {
-  background-color: var(--time-zone-text-color);
-}
-
-.ant-cascader-picker-with-value .ant-cascader-picker-label {
-  color: var(--time-zone-text-color);
-}
-
-.ant-cascader-picker-disabled {
-  background: var(--time-zone-color);
-  color: var(--time-zone-color);
-}
-
-.ant-cascader-picker:focus .ant-cascader-input {
-  border-color: var(--time-zone-text-color);
-  -webkit-box-shadow: 0 0 0 2px var(--time-zone-text-color);
-  box-shadow: 0 0 0 2px var(--time-zone-text-color);
-}
-
-.ant-cascader-picker-clear {
-  background: var(--time-zone-text-color);
-  color: var(--time-zone-text-color);
-}
-
-.ant-cascader-picker-clear:hover {
-  color: var(--time-zone-text-color);
-}
-
+/* color of dropdown arrow */
 .ant-cascader-picker-arrow {
-  color: var(--time-zone-text-color);
+  color: var(--text8Color);
 }
 
+/* color of divider between country and timeZone */
 .ant-cascader-menu {
-  border-right: 1px solid var(--time-zone-text-color);
+  border-right: 1px solid var(--text6Color);
 }
 
+/* color of the right side of box */
 .ant-cascader-menu:last-child {
-  border-right-color: var(--time-zone-text-color);
+  border-right-color: var(--text8Color);
 }
 
-.ant-cascader-menu-item-disabled {
-  color: var(--time-zone-text-color);
-}
-
-.ant-cascader-menu-item-disabled:hover {
-  background: var(--time-zone-text-color);
-}
-
+/* style of country right arrow */
 .ant-cascader-menu-item-expand:after {
-  color: var(--time-zone-text-color);
+  color: var(--text4Color);
 }
 
-.ant-cascader-menu-item .ant-cascader-menu-item-keyword {
-  color: var(--time-zone-text-color);
+/* font color */
+.ant-cascader-menu-item {
+  color: var(--text2Color);
 }
+
+
+
+/* puts a color around the selected box */
+/* .ant-cascader-picker:focus .ant-cascader-input {
+  border-color: var(--text8Color);
+  -webkit-box-shadow: 0 0 0 0px var(--text8Color);
+  box-shadow: 0 0 0 0px var(--text8Color);
+} */

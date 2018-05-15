@@ -15,18 +15,25 @@ class InputTimeZone extends Component {
   render() {
     const { colorTheme, label, width, profile } = this.props;
     document.documentElement.style.setProperty(
-      `--time-zone-color`,
-      colorTheme.text8Color
+      `--text1Color`,
+      colorTheme.text1Color
     );
     document.documentElement.style.setProperty(
-      `--time-zone-highlight-color`,
+      `--text2Color`,
+      colorTheme.text2Color
+    );
+    document.documentElement.style.setProperty(
+      `--text4Color`,
+      colorTheme.text4Color
+    );
+    document.documentElement.style.setProperty(
+      `--text6Color`,
       colorTheme.text6Color
     );
     document.documentElement.style.setProperty(
-      `--time-zone-text-color`,
-      colorTheme.text1Color
+      `--text8Color`,
+      colorTheme.text8Color
     );
-
     return (
       <div>
         <Row type="flex" justify="start" align="middle">
@@ -53,7 +60,8 @@ class InputTimeZone extends Component {
             <Cascader
               style={{
                 width: width,
-                background: colorTheme.text8Color
+                background: colorTheme.text8Color,
+                color: colorTheme.text8Color
               }}
               value={profile.newTimeZone}
               onChange={this.onChangeTimeZone}
