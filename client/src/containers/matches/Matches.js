@@ -160,6 +160,7 @@ class Matches extends Component {
 									borderded="false"
 									loading={false}
 									style={{
+										width: '300px',
 										color: colorTheme.text1Color,
 										borderColor: colorTheme.text8Color,
 										background: colorTheme.text8Color

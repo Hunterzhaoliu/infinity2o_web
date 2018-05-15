@@ -12,7 +12,8 @@ let cloneObject = obj => {
 let initialState = {
 	page: 1,
 	fetchState: {},
-	askToRevote: null
+	askToRevote: null,
+	previousMongoDBAnswerId: null
 };
 
 export default function(state = initialState, action) {
@@ -28,6 +29,7 @@ export default function(state = initialState, action) {
 			newState.fetchState = {};
 			newState.fetchState[action.index] = 'done';
 			newState.askToRevote = action.askToRevote;
+			newState.previousMongoDBAnswerId = action.previousMongoDBAnswerId;
 			return newState;
 		case FETCH_ASK_TO_REVOTE_ERROR:
 			newState.fetchState[action.index] = 'error';

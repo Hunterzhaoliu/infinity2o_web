@@ -22,8 +22,8 @@ class VoteEdit extends Component {
 		}
 	}
 
-	onPressAsk(mongoDBAskId, index) {
-		this.props.onPressAsk(mongoDBAskId, index);
+	onPressAsk(mongoDBAskId, index, mongoDBAnswerId) {
+		this.props.onPressAsk(mongoDBAskId, index, mongoDBAnswerId);
 	}
 
 	renderPagination() {
@@ -92,7 +92,11 @@ class VoteEdit extends Component {
 									color: colorTheme.text3Color
 								}}
 								onClick={e =>
-									this.onPressAsk(vote._askId, index)
+									this.onPressAsk(
+										vote._askId,
+										index,
+										vote._answerId
+									)
 								}
 							>
 								<p
@@ -121,14 +125,8 @@ class VoteEdit extends Component {
 		}
 	}
 
-	renderSpanChange(isDisplayingAskStats) {
-		if (isDisplayingAskStats) {
-			return 12;
-		}
-	}
-
-	renderAnswers(answers, selectedAnswerId, isDisplayingAskStats) {
-		const { colorTheme } = this.props;
+	renderAnswers(answers, isDisplayingAskStats) {
+		const { colorTheme, voteEdit } = this.props;
 		return _.map(answers, (answerObject, answerIndex) => {
 			// displaying actual answers
 			let displayAnswer;
@@ -143,18 +141,23 @@ class VoteEdit extends Component {
 			let isDisplayingSaveIcon = false;
 			let answerVotes = answerObject.votes;
 
-			if (selectedAnswerId === currentAnswerId) {
+			if (voteEdit.previousMongoDBAnswerId === currentAnswerId) {
 				displayAnswerButtonColor = colorTheme.keyText7Color;
 				isDisplayingSaveIcon = true;
 			}
 
 			return (
-				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
+				<Row
+					type="flex"
+					justify="space-around"
+					align="middle"
+					style={{ padding: '8px 0px 0px' }}
+					key={answerIndex}
+				>
 					<Col
 						style={{
 							color: colorTheme.text2Color
 						}}
-						span={this.renderSpanChange(isDisplayingAskStats)}
 					>
 						<Button
 							style={{
@@ -178,13 +181,42 @@ class VoteEdit extends Component {
 						style={{
 							color: colorTheme.text2Color
 						}}
-						span={this.renderSpanChange(isDisplayingAskStats)}
 					>
-						{/* {this.renderAskStats(
-							answerVotes,
-							askTotalVotes,
-							isDisplayingAskStats
-						)} */}
+						{String(
+							(
+								answerObject.votes /
+								voteEdit.askToRevote.totalVotes *
+								100
+							).toFixed(1)
+						) + '%'}
+					</Col>
+					<Col>
+						<div
+							style={{
+								color: colorTheme.keyText2Color
+							}}
+						>
+							{String(
+								(
+									-1 /
+									voteEdit.askToRevote.totalVotes *
+									100
+								).toFixed(1)
+							) + '%'}
+						</div>
+						<div
+							style={{
+								color: colorTheme.keyText4Color
+							}}
+						>
+							{String(
+								(
+									-1 /
+									voteEdit.askToRevote.totalVotes *
+									100
+								).toFixed(1)
+							) + '%'}
+						</div>
 					</Col>
 				</Row>
 			);
@@ -215,19 +247,60 @@ class VoteEdit extends Component {
 					>
 						{voteEdit.askToRevote.question}
 					</h3>
-					<div
+					<p
 						style={{
 							textAlign: 'center',
 							color: colorTheme.text3Color
 						}}
 					>
 						{'Total Votes: ' + voteEdit.askToRevote.totalVotes}
-					</div>
-					{this.renderAnswers(
-						voteEdit.askToRevote.answers,
-						null,
-						true
-					)}
+					</p>
+					<Row
+						type="flex"
+						justify="space-around"
+						align="middle"
+						style={{ padding: '8px 0px 0px' }}
+					>
+						<Col>
+							<p
+								style={{
+									textAlign: 'center',
+									color: colorTheme.text4Color
+								}}
+							>
+								Answer
+							</p>
+						</Col>
+						<Col>
+							<p
+								style={{
+									textAlign: 'center',
+									color: colorTheme.text4Color
+								}}
+							>
+								Vote %
+							</p>
+						</Col>
+						<Col>
+							<div
+								style={{
+									textAlign: 'center',
+									color: colorTheme.text4Color
+								}}
+							>
+								Revote In %
+							</div>
+							<div
+								style={{
+									textAlign: 'center',
+									color: colorTheme.text4Color
+								}}
+							>
+								Revote Out %
+							</div>
+						</Col>
+					</Row>
+					{this.renderAnswers(voteEdit.askToRevote.answers, true)}
 				</Card>
 			);
 		} else {
@@ -278,8 +351,12 @@ function mapDispatchToProps(dispatch) {
 		onPressPage: newPage => {
 			voteEditDispatchers.onPressPage(newPage);
 		},
-		onPressAsk: (mongoDBAskId, index) => {
-			voteEditDispatchers.onPressAsk(mongoDBAskId, index);
+		onPressAsk: (mongoDBAskId, index, mongoDBAnswerId) => {
+			voteEditDispatchers.onPressAsk(
+				mongoDBAskId,
+				index,
+				mongoDBAnswerId
+			);
 		}
 	};
 }

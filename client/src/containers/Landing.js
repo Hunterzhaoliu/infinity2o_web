@@ -80,7 +80,7 @@ class Landing extends Component {
 	renderLogin() {
 		const { colorTheme, auth } = this.props;
 
-		const why_part_2 = "Join Earth's largest online student community.";
+		const why_part_2 = "Join Earth's largest community of online learners.";
 		switch (auth.loggedInState) {
 			case 'not_logged_in':
 				return (
