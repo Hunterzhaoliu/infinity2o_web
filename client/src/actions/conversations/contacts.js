@@ -11,8 +11,8 @@ import {
 	SAVE_USER_CONVERSATIONS_ERROR,
 	UPDATE_OUR_SOCKET_ID,
 	UPDATE_CONTACT_SOCKET_ID
-} from './types';
-import { store } from '../index';
+} from '../types';
+import { store } from '../../index';
 import io from 'socket.io-client';
 
 export let socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {

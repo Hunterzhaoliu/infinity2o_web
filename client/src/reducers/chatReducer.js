@@ -51,7 +51,7 @@ export default function(state = initialState, action) {
 				'failed-delivery';
 			return newState;
 		case DISPLAY_RECEIVED_MESSAGE:
-			console.log('action.messageInfo = ', action.messageInfo);
+			//console.log('action.messageInfo = ', action.messageInfo);
 			const senderName = action.messageInfo.senderName;
 			const message = action.messageInfo.message;
 			newState.last50Messages.push({

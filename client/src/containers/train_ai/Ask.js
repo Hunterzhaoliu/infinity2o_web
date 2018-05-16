@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authActionCreators from '../../actions/auth';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as askActionCreators from '../../actions/ask';
+import * as askActionCreators from '../../actions/train_ai/ask';
 import { bindActionCreators } from 'redux';
 import { Layout, Row, Col, Button, Input, Icon } from 'antd';
 import ErrorMessage from './ErrorMessage';

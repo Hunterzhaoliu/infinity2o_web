@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as chatActionCreators from '../../actions/chat';
+import * as chatActionCreators from '../../actions/conversations/chat';
 import * as authActionCreators from '../../actions/auth';
 import { bindActionCreators } from 'redux';
 import './Chat.css';
@@ -21,7 +21,7 @@ class Chat extends Component {
 	};
 
 	onPressEnter = () => {
-		console.log('pressed enter');
+		//console.log('pressed enter');
 		const {
 			name,
 			conversationId,

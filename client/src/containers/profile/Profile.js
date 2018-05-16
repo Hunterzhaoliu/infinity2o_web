@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import Options from '../payment/Options';
 import DisplayField from './DisplayField';
 import DisplayLinkField from './DisplayLinkField';
+import VoteEdit from './votes/VoteEdit';
 import { Layout, Row, Col, Button } from 'antd';
 const { Content } = Layout;
 
@@ -203,7 +204,7 @@ class Profile extends Component {
 
 	renderQuestions(asks, colorTheme) {
 		if (asks != null) {
-			const newest5Questions = asks.questions.slice(-5).reverse();
+			const newest5Questions = asks.questions.slice(-8).reverse();
 			return _.map(newest5Questions, (question, key) => {
 				return (
 					<Row key={key}>
@@ -217,48 +218,6 @@ class Profile extends Component {
 							</h3>
 						</Col>
 					</Row>
-				);
-			});
-		}
-	}
-
-	renderVotes(asks, colorTheme) {
-		if (asks != null) {
-			const newest5Votes = asks.votes.slice(-5).reverse();
-			return _.map(newest5Votes, (vote, key) => {
-				return (
-					<div key={key}>
-						<Row type="flex" justify="start" align="middle">
-							<Col
-								sm={{ span: 5 }}
-								md={{ span: 5 }}
-								lg={{ span: 5 }}
-								xl={{ span: 5 }}
-							>
-								<h3
-									style={{
-										color: colorTheme.text6Color
-									}}
-								>
-									{vote.question}
-								</h3>
-							</Col>
-							<Col
-								sm={{ span: 18, offset: 1 }}
-								md={{ span: 18, offset: 1 }}
-								lg={{ span: 18, offset: 1 }}
-								xl={{ span: 18, offset: 1 }}
-							>
-								<h3
-									style={{
-										color: colorTheme.text6Color
-									}}
-								>
-									{vote.selectedAnswer}
-								</h3>
-							</Col>
-						</Row>
-					</div>
 				);
 			});
 		}
@@ -334,27 +293,35 @@ class Profile extends Component {
 						{this.renderProfile()}
 						{this.renderPurchaseNeurons()}
 						<Row>
-							<h2
-								style={{
-									padding: '25px 0% 0%', // top left&right bottom
-									color: colorTheme.keyText6Color
-								}}
-							>
-								Last 5 Questions
-							</h2>
+							<Col>
+								<h2
+									style={{
+										padding: '25px 0% 0%', // top left&right bottom
+										color: colorTheme.keyText6Color
+									}}
+								>
+									Last 8 Votes
+								</h2>
+							</Col>
+						</Row>
+						<Row type="flex" justify="start" align="middle">
+							<Col span={24}>
+								<VoteEdit />
+							</Col>
+						</Row>
+						<Row>
+							<Col>
+								<h2
+									style={{
+										padding: '25px 0% 0%', // top left&right bottom
+										color: colorTheme.keyText6Color
+									}}
+								>
+									Last 8 Questions
+								</h2>
+							</Col>
 						</Row>
 						{this.renderQuestions(profile.asks, colorTheme)}
-						<Row>
-							<h2
-								style={{
-									padding: '25px 0% 0%', // top left&right bottom
-									color: colorTheme.keyText6Color
-								}}
-							>
-								Last 5 Votes
-							</h2>
-						</Row>
-						{this.renderVotes(profile.asks, colorTheme)}
 					</Col>
 					<Col
 						sm={{ span: 0 }}

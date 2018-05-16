@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import * as profileActionCreators from '../../../../actions/profile';
+import * as profileActionCreators from '../../../../actions/profile/profile';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col, Dropdown, Icon, Menu, Checkbox } from 'antd';

@@ -16,10 +16,10 @@ import {
 	RUNNING_ATHENA_FOR_USER_START,
 	RUNNING_ATHENA_FOR_USER_DONE,
 	RUNNING_ATHENA_FOR_USER_ERROR
-} from './types';
-import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../utils/constants';
-import { store } from '../index';
-import { fetchUserMatches } from './matches';
+} from '../types';
+import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
+import { store } from '../../index';
+import { fetchUserMatches } from '../matches/matches';
 
 export const onNewestAsks = colorTheme => dispatch => {
 	dispatch({

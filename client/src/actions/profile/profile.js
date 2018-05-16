@@ -14,13 +14,13 @@ import {
 	ON_CHANGE_LINKEDIN_PROFILE_URL,
 	ON_CHANGE_GITHUB_PROFILE_URL,
 	ON_CHANGE_WEBSITE_URL
-} from './types';
+} from '../types';
 import {
 	isValidName,
 	isValidAge,
 	isValidInterests,
 	isValidEmail
-} from '../utils/validateProfileEdit';
+} from '../../utils/validateProfileEdit';
 import validUrl from 'valid-url';
 
 export const onChangeName = newName => dispatch => {

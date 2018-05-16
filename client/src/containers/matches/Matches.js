@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as matchesActionCreators from '../../actions/matches';
-import * as profileActionCreators from '../../actions/profile';
+import * as matchesActionCreators from '../../actions/matches/matches';
+import * as profileActionCreators from '../../actions/profile/profile';
 import * as authActionCreators from '../../actions/auth';
 import { bindActionCreators } from 'redux';
 import Options from '../payment/Options';
@@ -160,6 +160,7 @@ class Matches extends Component {
 									borderded="false"
 									loading={false}
 									style={{
+										width: '300px',
 										color: colorTheme.text1Color,
 										borderColor: colorTheme.text8Color,
 										background: colorTheme.text8Color

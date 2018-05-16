@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as profileActionCreators from '../../../actions/profile';
+import * as profileActionCreators from '../../../actions/profile/profile';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Input, Row, Col } from 'antd';
