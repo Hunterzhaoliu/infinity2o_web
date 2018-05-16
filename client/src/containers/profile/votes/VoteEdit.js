@@ -83,7 +83,7 @@ class VoteEdit extends Component {
 							style={{
 								padding: '0px 0px 8px'
 							}}
-							span={12}
+							span={24}
 						>
 							<Button
 								style={{
@@ -110,15 +110,6 @@ class VoteEdit extends Component {
 								</p>
 							</Button>
 						</Col>
-						<Col span={12}>
-							<h4
-								style={{
-									color: colorTheme.text3Color
-								}}
-							>
-								{vote.selectedAnswer}
-							</h4>
-						</Col>
 					</Row>
 				);
 			});
@@ -139,7 +130,7 @@ class VoteEdit extends Component {
 					</div>
 					<div
 						style={{
-							color: colorTheme.keyText4Color
+							color: colorTheme.keyText7Color
 						}}
 					>
 						{'0.0%'}
@@ -164,7 +155,7 @@ class VoteEdit extends Component {
 				</div>
 				<div
 					style={{
-						color: colorTheme.keyText4Color
+						color: colorTheme.keyText7Color
 					}}
 				>
 					{String(
@@ -242,6 +233,11 @@ class VoteEdit extends Component {
 					key={answerIndex}
 				>
 					<Col
+						xs={{ span: 24 }}
+						sm={{ span: 14 }}
+						md={{ span: 14 }}
+						lg={{ span: 14 }}
+						xl={{ span: 14 }}
 						style={{
 							textAlign: 'center',
 							color: colorTheme.text2Color
@@ -272,6 +268,11 @@ class VoteEdit extends Component {
 						</Button>
 					</Col>
 					<Col
+						xs={{ span: 6 }}
+						sm={{ span: 4 }}
+						md={{ span: 4 }}
+						lg={{ span: 4 }}
+						xl={{ span: 4 }}
 						style={{
 							textAlign: 'center',
 							color: colorTheme.text2Color
@@ -285,7 +286,18 @@ class VoteEdit extends Component {
 							).toFixed(1)
 						) + '%'}
 					</Col>
-					<Col>{this.renderRevoteStats(answerObject)}</Col>
+					<Col
+						xs={{ span: 6 }}
+						sm={{ span: 6 }}
+						md={{ span: 6 }}
+						lg={{ span: 6 }}
+						xl={{ span: 6 }}
+						style={{
+							textAlign: 'center'
+						}}
+					>
+						{this.renderRevoteStats(answerObject)}
+					</Col>
 				</Row>
 			);
 		});
@@ -329,7 +341,7 @@ class VoteEdit extends Component {
 						align="middle"
 						style={{ padding: '8px 0px 0px' }}
 					>
-						<Col>
+						<Col span={14}>
 							<p
 								style={{
 									textAlign: 'center',
@@ -339,7 +351,7 @@ class VoteEdit extends Component {
 								Answer
 							</p>
 						</Col>
-						<Col>
+						<Col span={4}>
 							<p
 								style={{
 									textAlign: 'center',
@@ -349,11 +361,11 @@ class VoteEdit extends Component {
 								Vote %
 							</p>
 						</Col>
-						<Col>
+						<Col span={6}>
 							<div
 								style={{
 									textAlign: 'center',
-									color: colorTheme.text4Color
+									color: colorTheme.keyText2Color
 								}}
 							>
 								Revote In %
@@ -361,7 +373,7 @@ class VoteEdit extends Component {
 							<div
 								style={{
 									textAlign: 'center',
-									color: colorTheme.text4Color
+									color: colorTheme.keyText7Color
 								}}
 							>
 								Revote Out %
@@ -382,10 +394,32 @@ class VoteEdit extends Component {
 		return (
 			<div>
 				<Row type="flex" justify="start" align="top">
-					<Col span={12}>{this.renderVotes()}</Col>
-					<Col span={12}>{this.renderAskToRevote()}</Col>
+					<Col
+						sm={{ span: 12 }}
+						md={{ span: 12 }}
+						lg={{ span: 12 }}
+						xl={{ span: 12 }}
+					>
+						{this.renderVotes()}
+					</Col>
+					<Col
+						xs={{ span: 24 }}
+						sm={{ span: 24 }}
+						md={{ span: 21 }}
+						lg={{ span: 15 }}
+						xl={{ span: 12 }}
+					>
+						{this.renderAskToRevote()}
+					</Col>
 				</Row>
-				<Row type="flex" justify="start" align="middle">
+				<Row
+					style={{
+						padding: '10px 0px 0px'
+					}}
+					type="flex"
+					justify="start"
+					align="middle"
+				>
 					{this.renderPagination()}
 				</Row>
 			</div>
