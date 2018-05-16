@@ -1,4 +1,3 @@
-import "./Profile.css";
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -9,6 +8,7 @@ import Options from "../payment/Options";
 import DisplayField from "./DisplayField";
 import DisplayLinkField from "./DisplayLinkField";
 import { Layout, Row, Col, Button, Popover, Icon } from "antd";
+import "./Profile.css";
 const { Content } = Layout;
 
 class Profile extends Component {
@@ -25,6 +25,7 @@ class Profile extends Component {
     if (neuronsInBillions !== undefined) {
       neuronsInBillions = neuronsInBillions.toFixed(1);
     }
+
     return (
       <div>
         <Row type="flex" justify="start" align="middle">
@@ -252,23 +253,6 @@ class Profile extends Component {
 
   renderPurchaseNeurons() {
     const { colorTheme } = this.props;
-
-    document.documentElement.style.setProperty(
-      `--text8Color`,
-      colorTheme.text8Color
-    );
-
-    const neuronExplanation = (
-      <div>
-        <p
-          style={{
-            color: colorTheme.text1Color
-          }}
-        >
-          Get Neurons so YOU can Say Hi to more people in Matches :)
-        </p>
-      </div>
-    );
     return (
       <div
         style={{
@@ -286,7 +270,7 @@ class Profile extends Component {
             sm={{ span: 24 }}
             md={{ span: 19 }}
             lg={{ span: 19 }}
-            xl={{ span: 23 }}
+            xl={{ span: 19 }}
           >
             <h2
               style={{
@@ -300,20 +284,8 @@ class Profile extends Component {
             sm={{ span: 0 }}
             md={{ span: 5 }}
             lg={{ span: 5 }}
-            xl={{ span: 1 }}
-          >
-            <Popover content={neuronExplanation}>
-              <Button
-                style={{
-                  borderColor: colorTheme.text7Color,
-                  background: colorTheme.text7Color,
-                  color: colorTheme.text3Color
-                }}
-              >
-                <Icon type="question-circle-o" />
-              </Button>
-            </Popover>
-          </Col>
+            xl={{ span: 5 }}
+          />
         </Row>
         <Row type="flex" justify="start" align="middle">
           <Col>
