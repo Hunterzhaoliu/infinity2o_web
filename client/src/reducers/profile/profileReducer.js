@@ -20,7 +20,7 @@ import {
 	ON_CHANGE_LINKEDIN_PROFILE_URL,
 	ON_CHANGE_GITHUB_PROFILE_URL,
 	ON_CHANGE_WEBSITE_URL
-} from '../actions/types';
+} from '../../actions/types';
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));

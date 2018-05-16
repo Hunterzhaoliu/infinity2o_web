@@ -1,94 +1,395 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import * as voteEditActionCreators from '../../../actions/profile/voteEdit';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Row, Col, Pagination } from 'antd';
+import { Row, Col, Button, Icon, Card } from 'antd';
 
 class VoteEdit extends Component {
-	componentWillMount() {
-		// run once before first render()
+	onPressPage(displayPage) {
+		this.props.onPressPage(displayPage);
 	}
 
-	state = {
-		current: 3
-	};
-	onChange = page => {
-		console.log(page);
-		this.setState({
-			current: page
-		});
-	};
+	renderFetchIcon(index) {
+		const { voteEdit } = this.props;
+		if (voteEdit.fetchState[index] === 'start') {
+			return <Icon type="loading" />;
+		} else if (voteEdit.fetchState[index] === 'done') {
+			return <Icon type="check" />;
+		} else if (voteEdit.fetchState[index] === 'error') {
+			return <Icon type="warning" />;
+		}
+	}
 
-	renderVotes(asks, colorTheme) {
-		if (asks != null) {
-			const newest5Votes = asks.votes.slice(-8).reverse();
-			return _.map(newest5Votes, (vote, key) => {
+	onPressAsk(mongoDBAskId, index, mongoDBAnswerId) {
+		this.props.onPressAsk(mongoDBAskId, index, mongoDBAnswerId);
+	}
+
+	renderPagination() {
+		const { colorTheme, profile, voteEdit } = this.props;
+
+		let numberOfItems = 0;
+		if (profile.asks != null) {
+			numberOfItems = profile.asks.votes.length;
+		}
+
+		const numberOfButtons = Math.round(numberOfItems / 8);
+		return _.map(new Array(numberOfButtons), (pageButton, index) => {
+			let textColor = colorTheme.text5Color;
+			const displayPage = index + 1;
+			if (voteEdit.page === displayPage) {
+				textColor = colorTheme.text1Color;
+			}
+			return (
+				<Col
+					key={index}
+					style={{
+						padding: '0px 3px'
+					}}
+				>
+					<Button
+						style={{
+							borderColor: colorTheme.text8Color,
+							background: colorTheme.text8Color,
+							color: textColor
+						}}
+						onClick={e => this.onPressPage(displayPage)}
+					>
+						{displayPage}
+					</Button>
+				</Col>
+			);
+		});
+	}
+
+	renderVotes() {
+		const { colorTheme, profile, voteEdit } = this.props;
+
+		const PER_PAGE = 8;
+		if (profile.asks != null) {
+			let i = 0;
+			let f = PER_PAGE;
+			if (voteEdit.page !== 1) {
+				i = (voteEdit.page - 1) * PER_PAGE;
+				f = voteEdit.page * PER_PAGE;
+			}
+
+			const newest5Votes = profile.asks.votes.slice(i, f).reverse();
+			return _.map(newest5Votes, (vote, index) => {
 				return (
-					<div key={key}>
-						<Row type="flex" justify="start" align="middle">
-							<Col
-								sm={{ span: 5 }}
-								md={{ span: 5 }}
-								lg={{ span: 5 }}
-								xl={{ span: 5 }}
+					<Row key={index} type="flex" justify="start" align="middle">
+						<Col
+							style={{
+								padding: '0px 0px 8px'
+							}}
+							span={12}
+						>
+							<Button
+								style={{
+									borderColor: colorTheme.text8Color,
+									background: colorTheme.text8Color,
+									color: colorTheme.text3Color
+								}}
+								onClick={e =>
+									this.onPressAsk(
+										vote._askId,
+										index,
+										vote._answerId
+									)
+								}
 							>
-								<h3
+								<p
 									style={{
-										color: colorTheme.text6Color
+										padding: '4px 0px 0px',
+										color: colorTheme.text3Color
 									}}
 								>
-									{vote.question}
-								</h3>
-							</Col>
-							<Col
-								sm={{ span: 18, offset: 1 }}
-								md={{ span: 18, offset: 1 }}
-								lg={{ span: 18, offset: 1 }}
-								xl={{ span: 18, offset: 1 }}
+									{vote.question}{' '}
+									{this.renderFetchIcon(index)}
+								</p>
+							</Button>
+						</Col>
+						<Col span={12}>
+							<h4
+								style={{
+									color: colorTheme.text3Color
+								}}
 							>
-								<h3
-									style={{
-										color: colorTheme.text6Color
-									}}
-								>
-									{vote.selectedAnswer}
-								</h3>
-							</Col>
-						</Row>
-					</div>
+								{vote.selectedAnswer}
+							</h4>
+						</Col>
+					</Row>
 				);
 			});
 		}
 	}
 
-	render() {
-		//console.log('this.props inside VoteEdit', this.props);
-		const { colorTheme, profile } = this.props;
-		let total = 0;
-		if (profile.asks != null) {
-			total = profile.asks.votes.length;
+	renderRevoteStats(answerObject) {
+		const { colorTheme, voteEdit } = this.props;
+		if (voteEdit.askToRevote.totalRevotes === 0) {
+			return (
+				<div>
+					<div
+						style={{
+							color: colorTheme.keyText2Color
+						}}
+					>
+						{'0.0%'}
+					</div>
+					<div
+						style={{
+							color: colorTheme.keyText4Color
+						}}
+					>
+						{'0.0%'}
+					</div>
+				</div>
+			);
 		}
-		console.log('total = ', total);
 		return (
 			<div>
-				{this.renderVotes(profile.asks, colorTheme)}
-				<Row type="flex" justify="start" align="middle">
-					<Col>
-						<Pagination
-							current={this.state.current}
-							onChange={this.onChange}
-							pageSize={8}
-							total={total}
-						/>
-					</Col>
-				</Row>
+				<div
+					style={{
+						color: colorTheme.keyText2Color
+					}}
+				>
+					{String(
+						(
+							answerObject.votesIn /
+							voteEdit.askToRevote.totalRevotes *
+							100
+						).toFixed(1)
+					) + '%'}
+				</div>
+				<div
+					style={{
+						color: colorTheme.keyText4Color
+					}}
+				>
+					{String(
+						(
+							answerObject.votesOut /
+							voteEdit.askToRevote.totalRevotes *
+							100
+						).toFixed(1)
+					) + '%'}
+				</div>
 			</div>
 		);
 	}
 
-	componentDidMount() {
-		// run once after first render()
-		//console.log('componentDidMount this.props = ', this.props);
+	onRevote(
+		mongoDBAskId,
+		mongoDBAnswerId,
+		previousMongoDBAnswerId,
+		answerIndex,
+		newAnswer,
+		currentMongoDBAnswerId
+	) {
+		this.props.onRevote(
+			mongoDBAskId,
+			mongoDBAnswerId,
+			previousMongoDBAnswerId,
+			answerIndex,
+			newAnswer,
+			currentMongoDBAnswerId
+		);
+	}
+
+	renderSaveIcon(saveState, saveIndex) {
+		if (saveState[saveIndex] === 'start') {
+			return <Icon type="loading" />;
+		} else if (saveState[saveIndex] === 'done') {
+			return <Icon type="check" />;
+		} else if (saveState[saveIndex] === 'error') {
+			return <Icon type="warning" />;
+		}
+	}
+
+	renderAnswers(answers, isDisplayingAskStats) {
+		const { colorTheme, voteEdit } = this.props;
+		return _.map(answers, (answerObject, answerIndex) => {
+			// displaying actual answers
+			let displayAnswer;
+			if (answerObject !== null) {
+				displayAnswer = answerObject.answer;
+			}
+
+			// displaying the change in voted answer button color
+			const currentAnswerId = answers[answerIndex]._id;
+
+			let displayAnswerButtonColor = colorTheme.text7Color;
+
+			if (
+				voteEdit.currentMongoDBAnswerId !== null &&
+				voteEdit.currentMongoDBAnswerId === currentAnswerId
+			) {
+				displayAnswerButtonColor = colorTheme.keyText7Color;
+			} else if (
+				voteEdit.currentMongoDBAnswerId === null &&
+				voteEdit.previousMongoDBAnswerId === currentAnswerId
+			) {
+				displayAnswerButtonColor = colorTheme.keyText7Color;
+			}
+
+			return (
+				<Row
+					type="flex"
+					justify="space-around"
+					align="middle"
+					style={{ padding: '8px 0px 0px' }}
+					key={answerIndex}
+				>
+					<Col
+						style={{
+							textAlign: 'center',
+							color: colorTheme.text2Color
+						}}
+					>
+						<Button
+							style={{
+								borderColor: displayAnswerButtonColor,
+								background: displayAnswerButtonColor,
+								color: colorTheme.text2Color
+							}}
+							onClick={e =>
+								this.onRevote(
+									voteEdit.askToRevote._id,
+									currentAnswerId,
+									voteEdit.previousMongoDBAnswerId,
+									answerIndex,
+									displayAnswer,
+									voteEdit.currentMongoDBAnswerId
+								)
+							}
+						>
+							{displayAnswer}
+							{this.renderSaveIcon(
+								voteEdit.revoteSaveState,
+								answerIndex
+							)}
+						</Button>
+					</Col>
+					<Col
+						style={{
+							textAlign: 'center',
+							color: colorTheme.text2Color
+						}}
+					>
+						{String(
+							(
+								answerObject.votes /
+								voteEdit.askToRevote.totalVotes *
+								100
+							).toFixed(1)
+						) + '%'}
+					</Col>
+					<Col>{this.renderRevoteStats(answerObject)}</Col>
+				</Row>
+			);
+		});
+	}
+
+	renderAskToRevote() {
+		const { colorTheme, voteEdit } = this.props;
+
+		if (voteEdit.askToRevote !== null) {
+			return (
+				<Card
+					sm={{ span: 24 }}
+					md={{ span: 24 }}
+					lg={{ span: 24 }}
+					xl={{ span: 12 }}
+					style={{
+						borderColor: colorTheme.text8Color,
+						background: colorTheme.text8Color,
+						color: colorTheme.text2Color
+					}}
+				>
+					<h3
+						style={{
+							textAlign: 'center',
+							color: colorTheme.text2Color
+						}}
+					>
+						{voteEdit.askToRevote.question}
+					</h3>
+					<p
+						style={{
+							textAlign: 'center',
+							color: colorTheme.text3Color
+						}}
+					>
+						{'Total Votes: ' + voteEdit.askToRevote.totalVotes}
+					</p>
+					<Row
+						type="flex"
+						justify="space-around"
+						align="middle"
+						style={{ padding: '8px 0px 0px' }}
+					>
+						<Col>
+							<p
+								style={{
+									textAlign: 'center',
+									color: colorTheme.text4Color
+								}}
+							>
+								Answer
+							</p>
+						</Col>
+						<Col>
+							<p
+								style={{
+									textAlign: 'center',
+									color: colorTheme.text4Color
+								}}
+							>
+								Vote %
+							</p>
+						</Col>
+						<Col>
+							<div
+								style={{
+									textAlign: 'center',
+									color: colorTheme.text4Color
+								}}
+							>
+								Revote In %
+							</div>
+							<div
+								style={{
+									textAlign: 'center',
+									color: colorTheme.text4Color
+								}}
+							>
+								Revote Out %
+							</div>
+						</Col>
+					</Row>
+					{this.renderAnswers(voteEdit.askToRevote.answers, true)}
+				</Card>
+			);
+		} else {
+			return;
+		}
+	}
+
+	render() {
+		//console.log('this.props inside VoteEdit', this.props);
+
+		return (
+			<div>
+				<Row type="flex" justify="start" align="top">
+					<Col span={12}>{this.renderVotes()}</Col>
+					<Col span={12}>{this.renderAskToRevote()}</Col>
+				</Row>
+				<Row type="flex" justify="start" align="middle">
+					{this.renderPagination()}
+				</Row>
+			</div>
+		);
 	}
 }
 
@@ -99,7 +400,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		profile: state.profile
+		profile: state.profile,
+		voteEdit: state.voteEdit
 	};
 }
 
@@ -108,7 +410,40 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	return {};
+	const voteEditDispatchers = bindActionCreators(
+		voteEditActionCreators,
+		dispatch
+	);
+
+	return {
+		onPressPage: newPage => {
+			voteEditDispatchers.onPressPage(newPage);
+		},
+		onPressAsk: (mongoDBAskId, index, mongoDBAnswerId) => {
+			voteEditDispatchers.onPressAsk(
+				mongoDBAskId,
+				index,
+				mongoDBAnswerId
+			);
+		},
+		onRevote: (
+			mongoDBAskId,
+			mongoDBAnswerId,
+			previousMongoDBAnswerId,
+			answerIndex,
+			newAnswer,
+			currentMongoDBAnswerId
+		) => {
+			voteEditDispatchers.onRevote(
+				mongoDBAskId,
+				mongoDBAnswerId,
+				previousMongoDBAnswerId,
+				answerIndex,
+				newAnswer,
+				currentMongoDBAnswerId
+			);
+		}
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VoteEdit);

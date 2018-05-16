@@ -8,7 +8,8 @@ const askSchema = new Schema({
 	answers: [AnswerSchema],
 	_userId: { type: Schema.Types.ObjectId, ref: 'User' },
 	dateAsked: Date,
-	lastVotedOn: Date
+	lastVotedOn: Date,
+	totalRevotes: { type: Number, default: 0 }
 });
 
 mongoose.model('asks', askSchema);

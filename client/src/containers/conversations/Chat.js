@@ -21,7 +21,7 @@ class Chat extends Component {
 	};
 
 	onPressEnter = () => {
-		console.log('pressed enter');
+		//console.log('pressed enter');
 		const {
 			name,
 			conversationId,

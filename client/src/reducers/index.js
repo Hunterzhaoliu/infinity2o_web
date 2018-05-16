@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import colorThemeReducer from './colorThemeReducer';
-import profileReducer from './profileReducer';
+import profileReducer from './profile/profileReducer';
+import voteEditReducer from './profile/voteEditReducer';
 import askReducer from './askReducer';
 import trainAIReducer from './trainAIReducer';
 import matchesReducer from './matchesReducer';
@@ -14,6 +15,7 @@ export default combineReducers({
 	customHeader: customHeaderReducer,
 	auth: authReducer,
 	profile: profileReducer,
+	voteEdit: voteEditReducer,
 	ask: askReducer,
 	trainAI: trainAIReducer,
 	matches: matchesReducer,

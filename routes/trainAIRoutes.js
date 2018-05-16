@@ -193,6 +193,64 @@ module.exports = app => {
 		}
 	);
 
+	app.put('/api/train_ai/revote', requireLogin, async (request, response) => {
+		const {
+			mongoDBAskId,
+			mongoDBAnswerId,
+			previousMongoDBAnswerId,
+			newAnswer
+		} = request.body;
+
+		// update revote in Ask Collection
+		let askInDB = await AskCollection.findOne({ _id: mongoDBAskId });
+		askInDB.lastVotedOn = Date.now();
+		askInDB.totalRevotes += 1;
+
+		for (let i = 0; i < askInDB.answers.length; i++) {
+			if (String(askInDB.answers[i]._id) === previousMongoDBAnswerId) {
+				askInDB.answers[i].votesOut += 1;
+				askInDB.answers[i].votes -= 1;
+			}
+
+			if (String(askInDB.answers[i]._id) === mongoDBAnswerId) {
+				askInDB.answers[i].votesIn += 1;
+				askInDB.answers[i].votes += 1;
+			}
+		}
+
+		try {
+			await AskCollection.updateOne(
+				{ _id: mongoDBAskId },
+				{
+					$set: {
+						lastVotedOn: askInDB.lastVotedOn,
+						answers: askInDB.answers,
+						totalVotes: askInDB.totalVotes,
+						totalRevotes: askInDB.totalRevotes
+					}
+				}
+			);
+
+			// update revote on user
+			await UserCollection.updateOne(
+				{
+					_id: request.user._id,
+					'profile.asks.votes._askId': mongoDBAskId
+				},
+				{
+					$set: {
+						'profile.asks.votes.$.selectedAnswer': newAnswer,
+						'profile.asks.votes.$._answerId': mongoDBAnswerId
+					}
+				}
+			);
+
+			response.send(askInDB);
+		} catch (error) {
+			response.status(422).send(error);
+		}
+	});
+
 	app.put('/api/train_ai/vote', requireLogin, async (request, response) => {
 		const { answerId, askId } = request.body;
 
