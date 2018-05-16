@@ -9,7 +9,6 @@ module.exports = app => {
 		const askToRevote = await AskCollection.findOne({
 			_id: request.query.mongoDBAskId
 		});
-		console.log('askToRevote = ', askToRevote);
 
 		response.send(askToRevote);
 	});
