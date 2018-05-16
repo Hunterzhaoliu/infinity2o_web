@@ -2,7 +2,10 @@ import {
 	ON_PRESS_PAGE,
 	FETCH_ASK_TO_REVOTE_START,
 	FETCH_ASK_TO_REVOTE_DONE,
-	FETCH_ASK_TO_REVOTE_ERROR
+	FETCH_ASK_TO_REVOTE_ERROR,
+	SAVE_REVOTE_START,
+	SAVE_REVOTE_DONE,
+	SAVE_REVOTE_ERROR
 } from '../../actions/types';
 
 let cloneObject = obj => {
@@ -13,7 +16,9 @@ let initialState = {
 	page: 1,
 	fetchState: {},
 	askToRevote: null,
-	previousMongoDBAnswerId: null
+	revoteSaveState: {},
+	previousMongoDBAnswerId: null,
+	currentMongoDBAnswerId: null
 };
 
 export default function(state = initialState, action) {
@@ -24,15 +29,28 @@ export default function(state = initialState, action) {
 			return newState;
 		case FETCH_ASK_TO_REVOTE_START:
 			newState.fetchState[action.index] = 'start';
+			newState.previousMongoDBAnswerId = action.previousMongoDBAnswerId;
 			return newState;
 		case FETCH_ASK_TO_REVOTE_DONE:
 			newState.fetchState = {};
 			newState.fetchState[action.index] = 'done';
 			newState.askToRevote = action.askToRevote;
-			newState.previousMongoDBAnswerId = action.previousMongoDBAnswerId;
 			return newState;
 		case FETCH_ASK_TO_REVOTE_ERROR:
 			newState.fetchState[action.index] = 'error';
+			return newState;
+		case SAVE_REVOTE_START:
+			newState.currentMongoDBAnswerId = action.mongoDBAnswerId;
+			newState.previousMongoDBAnswerId = action.mongoDBAnswerId;
+			newState.revoteSaveState[action.answerIndex] = 'start';
+			return newState;
+		case SAVE_REVOTE_DONE:
+			newState.revoteSaveState = {};
+			newState.revoteSaveState[action.answerIndex] = 'done';
+			newState.askToRevote = action.revotedAsk;
+			return newState;
+		case SAVE_REVOTE_ERROR:
+			newState.revoteSaveState[action.answerIndex] = 'error';
 			return newState;
 		default:
 			return state;

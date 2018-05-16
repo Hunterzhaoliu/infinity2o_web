@@ -184,15 +184,27 @@ class VoteEdit extends Component {
 		mongoDBAnswerId,
 		previousMongoDBAnswerId,
 		answerIndex,
-		newAnswer
+		newAnswer,
+		currentMongoDBAnswerId
 	) {
 		this.props.onRevote(
 			mongoDBAskId,
 			mongoDBAnswerId,
 			previousMongoDBAnswerId,
 			answerIndex,
-			newAnswer
+			newAnswer,
+			currentMongoDBAnswerId
 		);
+	}
+
+	renderSaveIcon(saveState, saveIndex) {
+		if (saveState[saveIndex] === 'start') {
+			return <Icon type="loading" />;
+		} else if (saveState[saveIndex] === 'done') {
+			return <Icon type="check" />;
+		} else if (saveState[saveIndex] === 'error') {
+			return <Icon type="warning" />;
+		}
 	}
 
 	renderAnswers(answers, isDisplayingAskStats) {
@@ -208,11 +220,17 @@ class VoteEdit extends Component {
 			const currentAnswerId = answers[answerIndex]._id;
 
 			let displayAnswerButtonColor = colorTheme.text7Color;
-			let isDisplayingSaveIcon = false;
 
-			if (voteEdit.previousMongoDBAnswerId === currentAnswerId) {
+			if (
+				voteEdit.currentMongoDBAnswerId !== null &&
+				voteEdit.currentMongoDBAnswerId === currentAnswerId
+			) {
 				displayAnswerButtonColor = colorTheme.keyText7Color;
-				isDisplayingSaveIcon = true;
+			} else if (
+				voteEdit.currentMongoDBAnswerId === null &&
+				voteEdit.previousMongoDBAnswerId === currentAnswerId
+			) {
+				displayAnswerButtonColor = colorTheme.keyText7Color;
 			}
 
 			return (
@@ -225,6 +243,7 @@ class VoteEdit extends Component {
 				>
 					<Col
 						style={{
+							textAlign: 'center',
 							color: colorTheme.text2Color
 						}}
 					>
@@ -240,20 +259,21 @@ class VoteEdit extends Component {
 									currentAnswerId,
 									voteEdit.previousMongoDBAnswerId,
 									answerIndex,
-									displayAnswer
+									displayAnswer,
+									voteEdit.currentMongoDBAnswerId
 								)
 							}
 						>
 							{displayAnswer}
-							{/* {this.renderSaveIcon(
-								trainAI.save,
-								askIndex,
-								isDisplayingSaveIcon
-							)} */}
+							{this.renderSaveIcon(
+								voteEdit.revoteSaveState,
+								answerIndex
+							)}
 						</Button>
 					</Col>
 					<Col
 						style={{
+							textAlign: 'center',
 							color: colorTheme.text2Color
 						}}
 					>
@@ -411,14 +431,16 @@ function mapDispatchToProps(dispatch) {
 			mongoDBAnswerId,
 			previousMongoDBAnswerId,
 			answerIndex,
-			newAnswer
+			newAnswer,
+			currentMongoDBAnswerId
 		) => {
 			voteEditDispatchers.onRevote(
 				mongoDBAskId,
 				mongoDBAnswerId,
 				previousMongoDBAnswerId,
 				answerIndex,
-				newAnswer
+				newAnswer,
+				currentMongoDBAnswerId
 			);
 		}
 	};

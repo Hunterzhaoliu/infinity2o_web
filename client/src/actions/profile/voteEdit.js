@@ -18,7 +18,11 @@ export const onPressAsk = (
 	index,
 	previousMongoDBAnswerId
 ) => async dispatch => {
-	dispatch({ type: FETCH_ASK_TO_REVOTE_START, index: index });
+	dispatch({
+		type: FETCH_ASK_TO_REVOTE_START,
+		index: index,
+		previousMongoDBAnswerId: previousMongoDBAnswerId
+	});
 
 	const askToRevoteResponse = await axios.get(
 		'/api/voteEdit?mongoDBAskId=' + mongoDBAskId
@@ -41,10 +45,21 @@ export const onRevote = (
 	mongoDBAnswerId,
 	previousMongoDBAnswerId,
 	answerIndex,
-	newAnswer
+	newAnswer,
+	currentMongoDBAnswerId
 ) => async dispatch => {
-	if (mongoDBAnswerId !== previousMongoDBAnswerId) {
-		dispatch({ type: SAVE_REVOTE_START, answerIndex: answerIndex });
+	const isNotSameAsPreviousOnFirstRevote =
+		currentMongoDBAnswerId === null &&
+		mongoDBAnswerId !== previousMongoDBAnswerId;
+	const isNotSameAsPreviousLater =
+		currentMongoDBAnswerId !== null &&
+		currentMongoDBAnswerId !== mongoDBAnswerId;
+	if (isNotSameAsPreviousOnFirstRevote || isNotSameAsPreviousLater) {
+		dispatch({
+			type: SAVE_REVOTE_START,
+			answerIndex: answerIndex,
+			mongoDBAnswerId: mongoDBAnswerId
+		});
 		const revoteInfo = {
 			mongoDBAskId: mongoDBAskId,
 			mongoDBAnswerId: mongoDBAnswerId,
@@ -54,9 +69,13 @@ export const onRevote = (
 
 		const response = await axios.put('/api/train_ai/revote', revoteInfo);
 		if (response.status === 200) {
-			dispatch({ type: SAVE_REVOTE_DONE });
+			dispatch({
+				type: SAVE_REVOTE_DONE,
+				answerIndex: answerIndex,
+				revotedAsk: response.data
+			});
 		} else {
-			dispatch({ type: SAVE_REVOTE_ERROR });
+			dispatch({ type: SAVE_REVOTE_ERROR, answerIndex: answerIndex });
 		}
 	} else {
 		return;

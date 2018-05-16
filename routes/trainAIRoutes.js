@@ -202,13 +202,13 @@ module.exports = app => {
 		} = request.body;
 
 		// update revote in Ask Collection
-		const askInDB = await AskCollection.findOne({ _id: mongoDBAskId });
+		let askInDB = await AskCollection.findOne({ _id: mongoDBAskId });
 		askInDB.lastVotedOn = Date.now();
 		askInDB.totalRevotes += 1;
 
 		for (let i = 0; i < askInDB.answers.length; i++) {
 			if (String(askInDB.answers[i]._id) === previousMongoDBAnswerId) {
-				askInDB.answers[i].votesOut -= 1;
+				askInDB.answers[i].votesOut += 1;
 				askInDB.answers[i].votes -= 1;
 			}
 
@@ -225,7 +225,8 @@ module.exports = app => {
 					$set: {
 						lastVotedOn: askInDB.lastVotedOn,
 						answers: askInDB.answers,
-						totalVotes: askInDB.totalVotes
+						totalVotes: askInDB.totalVotes,
+						totalRevotes: askInDB.totalRevotes
 					}
 				}
 			);
