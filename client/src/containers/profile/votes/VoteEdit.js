@@ -351,15 +351,11 @@ class VoteEdit extends Component {
 					>
 						{voteEdit.askToRevote.totalRevotes + ' revote(s)'}
 					</p>
-					<Row
-						type="flex"
-						justify="space-around"
-						align="middle"
-						style={{ padding: '8px 0px 0px' }}
-					>
+					<Row type="flex" justify="space-around" align="middle">
 						<Col span={14}>
 							<p
 								style={{
+									padding: '13px 0px 0px',
 									textAlign: 'center',
 									color: colorTheme.text4Color
 								}}
@@ -370,6 +366,7 @@ class VoteEdit extends Component {
 						<Col span={4}>
 							<p
 								style={{
+									padding: '13px 0px 0px',
 									textAlign: 'center',
 									color: colorTheme.text4Color
 								}}
