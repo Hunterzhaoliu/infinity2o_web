@@ -108,9 +108,9 @@ class CustomHeader extends Component {
 		if (neuronsInBillions !== undefined) {
 			shortNeuronsInBillions = neuronsInBillions.toFixed(1);
 		}
-		let displayText = 'Profile ' + shortNeuronsInBillions + ' B';
+		let displayText = ' ' + shortNeuronsInBillions + ' B';
 		if (infinityStatus) {
-			displayText = 'Profile ∞';
+			displayText = ' ∞';
 		}
 		return (
 			<Button
@@ -122,7 +122,10 @@ class CustomHeader extends Component {
 				onClick={onProfile}
 			>
 				<Link to="/profile">
-					<div>{displayText}</div>
+					<div>
+						<Icon style={{ fontSize: 17 }} type="user" />
+						{displayText}
+					</div>
 				</Link>
 			</Button>
 		);
@@ -141,7 +144,7 @@ class CustomHeader extends Component {
 				onClick={onTrainAI}
 			>
 				<Link to="/train_ai">
-					<div>Train AI</div>
+					<div>Sorting Hat</div>
 				</Link>
 			</Button>
 		);
@@ -273,57 +276,65 @@ class CustomHeader extends Component {
 					<div>
 						<Row type="flex" justify="space-between">
 							<Col
-								md={{ span: 5 }}
-								lg={{ span: 4 }}
-								xl={{ span: 4 }}
-								key="0"
+								md={{ span: 21, offset: 0 }}
+								lg={{ span: 18, offset: 0 }}
+								xl={{ span: 14, offset: 0 }}
 							>
-								{this.renderChangeThemeButton()}
+								<Row type="flex" justify="space-between">
+									<Col
+										md={{ span: 5 }}
+										lg={{ span: 4 }}
+										xl={{ span: 4 }}
+										key="0"
+									>
+										{this.renderChangeThemeButton()}
+									</Col>
+									<Col
+										md={{ span: 2, offset: 0 }}
+										lg={{ span: 1, offset: 0 }}
+										xl={{ span: 1, offset: 0 }}
+										key="-1"
+									>
+										{this.renderTourButton()}
+									</Col>
+									<Col
+										md={{ span: 3, offset: 0 }}
+										lg={{ span: 2, offset: 0 }}
+										xl={{ span: 2, offset: 0 }}
+										key="1"
+									>
+										{this.renderProfileButton()}
+									</Col>
+									<Col
+										md={{ span: 4, offset: 0 }}
+										lg={{ span: 3, offset: 0 }}
+										xl={{ span: 3, offset: 0 }}
+										key="2"
+									>
+										{this.renderTrainAIButton()}
+									</Col>
+									<Col
+										md={{ span: 3, offset: 0 }}
+										lg={{ span: 2, offset: 0 }}
+										xl={{ span: 2, offset: 0 }}
+										key="3"
+									>
+										{this.renderMatchesButton()}
+									</Col>
+									<Col
+										md={{ span: 3, offset: 0 }}
+										lg={{ span: 1, offset: 0 }}
+										xl={{ span: 1, offset: 0 }}
+										key="4"
+									>
+										{this.renderConversationsButton()}
+									</Col>
+								</Row>
 							</Col>
 							<Col
-								md={{ span: 2, offset: 0 }}
-								lg={{ span: 1, offset: 1 }}
-								xl={{ span: 1, offset: 0 }}
-								key="-1"
-							>
-								{this.renderTourButton()}
-							</Col>
-							<Col
-								md={{ span: 4, offset: 0 }}
-								lg={{ span: 3, offset: 1 }}
-								xl={{ span: 3, offset: 0 }}
-								key="1"
-							>
-								{this.renderProfileButton()}
-							</Col>
-							<Col
-								md={{ span: 3, offset: 1 }}
-								lg={{ span: 2, offset: 1 }}
-								xl={{ span: 2, offset: 0 }}
-								key="2"
-							>
-								{this.renderTrainAIButton()}
-							</Col>
-							<Col
-								md={{ span: 3, offset: 0 }}
-								lg={{ span: 2, offset: 1 }}
-								xl={{ span: 2, offset: 0 }}
-								key="3"
-							>
-								{this.renderMatchesButton()}
-							</Col>
-							<Col
-								md={{ span: 2, offset: 1 }}
-								lg={{ span: 1, offset: 1 }}
-								xl={{ span: 1, offset: 0 }}
-								key="4"
-							>
-								{this.renderConversationsButton()}
-							</Col>
-							<Col
-								md={{ span: 3, offset: 0 }}
-								lg={{ span: 2, offset: 4 }}
-								xl={{ span: 2, offset: 8 }}
+								md={{ span: 3 }}
+								lg={{ span: 2 }}
+								xl={{ span: 2 }}
 								key="5"
 							>
 								{this.renderLogoutButton()}

@@ -10,7 +10,7 @@
 
 heroku.com:
 
-1. 1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1.  1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
 mlab.com databases:
 
@@ -47,14 +47,18 @@ Cloudflare.com
 
 1. Login with `qn1over12@gmail.com` & password = `21xxxxx@ix`
 2. Already added 2 CNAMEs.
-   * Name: `infinity2o.com` Value: `www.infinity2o.com.herokudns.com`
-     TTL: `Automatic` Status: `Arrow through cloud`
-   * Name: `www` Value: `www.infinity2o.com.herokudns.com`
-     TTL: `Automatic` Status: `Arrow through cloud`
+    * Name: `infinity2o.com` Value: `www.infinity2o.com.herokudns.com`
+      TTL: `Automatic` Status: `Arrow through cloud`
+    * Name: `www` Value: `www.infinity2o.com.herokudns.com`
+      TTL: `Automatic` Status: `Arrow through cloud`
 
 E-mail support:
 
 1. `askinfinity2o@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`. Recovery = Hunter's phone & `q42liu@gmail.com`
+
+Coursera.org Affiliate marketing account:
+
+1. e-mail = `q42liu@gmail.com`, username = `q42liu`, & password = `21xxxxx@ix`. Recovery = `wxxxxx` at http://cli.linksynergy.com/cli/publisher/home.php?lang=en
 
 Local development setup:
 

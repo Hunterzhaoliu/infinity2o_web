@@ -300,7 +300,7 @@ class Profile extends Component {
 										color: colorTheme.keyText6Color
 									}}
 								>
-									Last 8 Votes
+									Oldest Votes
 								</h2>
 							</Col>
 						</Row>
@@ -317,7 +317,7 @@ class Profile extends Component {
 										color: colorTheme.keyText6Color
 									}}
 								>
-									Last 8 Questions
+									Oldest Questions
 								</h2>
 							</Col>
 						</Row>

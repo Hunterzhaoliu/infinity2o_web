@@ -178,15 +178,15 @@ class Matches extends Component {
 											color: colorTheme.text3Color
 										}}
 									>
-										Interests:{' '}
-										{this.formatInterests(match.interests)}
+										{match.totalUserVotes} vote(s)
 									</p>
 									<p
 										style={{
 											color: colorTheme.text3Color
 										}}
 									>
-										Total User Votes: {match.totalUserVotes}
+										Interests:{' '}
+										{this.formatInterests(match.interests)}
 									</p>
 									{this.renderLinks(match)}
 									<Row

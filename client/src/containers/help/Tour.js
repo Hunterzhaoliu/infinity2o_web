@@ -90,6 +90,15 @@ class Tour extends Component {
 							3) People enjoy learning with others that believe in
 							the same core beliefs.
 						</p>
+						<p
+							style={{
+								color: colorTheme.text3Color
+							}}
+						>
+							4) Learn how to create your own job instead of
+							taking tests to get into a college (AKA nightclub &
+							job insurance).
+						</p>
 					</Col>
 				</Row>
 				<Row type="flex" justify="center">
@@ -139,9 +148,8 @@ class Tour extends Component {
 								color: colorTheme.text3Color
 							}}
 						>
-							4) Our Infinity2o centers will have teaching
-							assistants for a diverse list of online courses that
-							can help.
+							4) Our Infinity2o centers will have paid teaching
+							assistants for the difficult online courses.
 						</p>
 						<p
 							style={{
