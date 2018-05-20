@@ -1,0 +1,61 @@
+/* border color for InputTimeZone */
+.ant-cascader-input {
+  border-color: var(--text8Color);
+}
+
+/* color for entire cascade */
+.ant-cascader-menus {
+  background: var(--text8Color);
+}
+
+/* highlight color for specific country timeZone */
+.ant-cascader-menu-item:hover {
+  background: var(--text6Color);
+}
+
+/* initial highlight color for country */
+.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
+  background: var(--text6Color);
+}
+.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled) {
+  background: var(--text6Color);
+}
+
+/* color for selected Time Zone */
+.ant-cascader-picker {
+  color: var(--text2Color);
+}
+
+/* color of dropdown arrow */
+.ant-cascader-picker-arrow {
+  color: var(--text8Color);
+}
+
+/* color of divider between country and timeZone */
+.ant-cascader-menu {
+  min-width: 140px;
+  height: 200px;
+  border-right: 1px solid var(--text6Color);
+}
+
+/* color of the right side of box */
+.ant-cascader-menu:last-child {
+  border-right-color: var(--text8Color);
+}
+
+/* style of country right arrow */
+.ant-cascader-menu-item-expand:after {
+  color: var(--text4Color);
+}
+
+/* font color */
+.ant-cascader-menu-item {
+  color: var(--text2Color);
+}
+
+/* puts a color around the selected box */
+/* .ant-cascader-picker:focus .ant-cascader-input {
+  border-color: var(--text8Color);
+  -webkit-box-shadow: 0 0 0 0px var(--text8Color);
+  box-shadow: 0 0 0 0px var(--text8Color);
+} */
