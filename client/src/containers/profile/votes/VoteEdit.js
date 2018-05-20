@@ -42,7 +42,6 @@ class VoteEdit extends Component {
 		if (profile.asks != null) {
 			numberOfItems = profile.asks.votes.length;
 		}
-		console.log('numberOfItems = ', numberOfItems);
 		const numberOfButtons = this.roundUp(numberOfItems / 8, 0);
 		return _.map(new Array(numberOfButtons), (pageButton, index) => {
 			let textColor = colorTheme.text5Color;
@@ -84,7 +83,7 @@ class VoteEdit extends Component {
 				f = voteEdit.page * PER_PAGE;
 			}
 
-			const newestVotes = profile.asks.votes.slice(i, f).reverse();
+			const newestVotes = profile.asks.votes.slice(i, f);
 			return _.map(newestVotes, (vote, index) => {
 				return (
 					<Row key={index} type="flex" justify="start" align="middle">
