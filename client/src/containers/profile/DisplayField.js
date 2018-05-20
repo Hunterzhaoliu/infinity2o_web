@@ -8,7 +8,7 @@ class DisplayField extends Component {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  renderNeuronExplanation(label) {
+  renderNeuronExplanation() {
     const { colorTheme } = this.props;
 
     document.documentElement.style.setProperty(
@@ -20,7 +20,7 @@ class DisplayField extends Component {
       <div>
         <p
           style={{
-            color: colorTheme.text1Color
+            color: colorTheme.text4Color
           }}
         >
           Get Neurons so YOU can Say Hi to more people in Matches :)
@@ -28,31 +28,26 @@ class DisplayField extends Component {
       </div>
     );
 
-    if (label === "Neurons: ") {
-      return (
-        <Popover content={neuronExplanation}>
-          <Button
-            style={{
-              borderColor: colorTheme.text7Color,
-              background: colorTheme.text7Color,
-              color: colorTheme.text3Color
-            }}
-          >
-            <Icon type="question-circle-o" />
-          </Button>
-        </Popover>
-      );
-    }
+    return (
+      <Popover content={neuronExplanation}>
+        <Button
+          style={{
+            borderColor: colorTheme.text8Color,
+            backgroundColor: colorTheme.text8Color,
+            color: colorTheme.text3Color
+          }}
+          size="small"
+        >
+          <Icon style={{ fontSize: 12 }} type="question-circle-o" />
+        </Button>
+      </Popover>
+    );
   }
 
   renderValue(label, value) {
     const { colorTheme, infinityStatus } = this.props;
     document.documentElement.style.setProperty(
-      `--table-border-color`,
-      colorTheme.text8Color
-    );
-    document.documentElement.style.setProperty(
-      `--table-text-color`,
+      `--text3Color`,
       colorTheme.text3Color
     );
 
@@ -64,7 +59,14 @@ class DisplayField extends Component {
       label === "Time Zone: "
     ) {
       if (label === "Neurons: " && infinityStatus) {
-        return "infinity";
+        return (
+          <div>
+            <Col>
+              <p>"infinity"</p>
+            </Col>
+            <Col>{this.renderNeuronExplanation()}</Col>
+          </div>
+        );
       } else if (label === "Neurons: " && !infinityStatus) {
         let displayNeuronsInBillions = value;
         if (displayNeuronsInBillions !== undefined) {
@@ -75,7 +77,16 @@ class DisplayField extends Component {
             value +
             " Billion)";
 
-          return finalDisplayString;
+          return (
+            <Row type="flex" justify="start" align="middle">
+              <Col>
+                <p style={{ padding: "18px 0px 0px" }}>{finalDisplayString}</p>
+              </Col>
+              <Col style={{ padding: "5px 0px 0px" }} offset={1}>
+                {this.renderNeuronExplanation()}
+              </Col>
+            </Row>
+          );
         }
       } else if (
         value === null ||
@@ -254,7 +265,6 @@ class DisplayField extends Component {
           >
             {this.renderValue(label, value)}
           </h3>
-          {this.renderNeuronExplanation(label)}
         </Col>
       </Row>
     );

@@ -7,8 +7,7 @@ import { bindActionCreators } from "redux";
 import Options from "../payment/Options";
 import DisplayField from "./DisplayField";
 import DisplayLinkField from "./DisplayLinkField";
-import { Layout, Row, Col, Button, Popover, Icon } from "antd";
-import "./Profile.css";
+import { Layout, Row, Col, Button } from "antd";
 const { Content } = Layout;
 
 class Profile extends Component {
