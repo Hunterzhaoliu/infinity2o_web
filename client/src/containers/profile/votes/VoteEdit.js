@@ -26,6 +26,15 @@ class VoteEdit extends Component {
 		this.props.onPressAsk(mongoDBAskId, index, mongoDBAnswerId);
 	}
 
+	/**
+	 * @param num The number to round
+	 * @param precision The number of decimal places to preserve
+	 */
+	roundUp(num, precision) {
+		precision = Math.pow(10, precision);
+		return Math.ceil(num * precision) / precision;
+	}
+
 	renderPagination() {
 		const { colorTheme, profile, voteEdit } = this.props;
 
@@ -33,8 +42,8 @@ class VoteEdit extends Component {
 		if (profile.asks != null) {
 			numberOfItems = profile.asks.votes.length;
 		}
-
-		const numberOfButtons = Math.round(numberOfItems / 8);
+		console.log('numberOfItems = ', numberOfItems);
+		const numberOfButtons = this.roundUp(numberOfItems / 8, 0);
 		return _.map(new Array(numberOfButtons), (pageButton, index) => {
 			let textColor = colorTheme.text5Color;
 			const displayPage = index + 1;
@@ -75,8 +84,8 @@ class VoteEdit extends Component {
 				f = voteEdit.page * PER_PAGE;
 			}
 
-			const newest5Votes = profile.asks.votes.slice(i, f).reverse();
-			return _.map(newest5Votes, (vote, index) => {
+			const newestVotes = profile.asks.votes.slice(i, f).reverse();
+			return _.map(newestVotes, (vote, index) => {
 				return (
 					<Row key={index} type="flex" justify="start" align="middle">
 						<Col
@@ -333,7 +342,15 @@ class VoteEdit extends Component {
 							color: colorTheme.text3Color
 						}}
 					>
-						{'Total Votes: ' + voteEdit.askToRevote.totalVotes}
+						{voteEdit.askToRevote.totalVotes + ' vote(s)'}
+					</p>
+					<p
+						style={{
+							textAlign: 'center',
+							color: colorTheme.keyText2Color
+						}}
+					>
+						{voteEdit.askToRevote.totalRevotes + ' revote(s)'}
 					</p>
 					<Row
 						type="flex"

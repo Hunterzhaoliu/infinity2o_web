@@ -49,9 +49,7 @@ class TrainAI extends Component {
 								color: colorTheme.text2Color
 							}}
 						>
-							We believe people are great partners because their
-							beliefs align. Here you train an artificial
-							intelligence (AI) by...
+							Help the Sorting Hat find you great partners by...
 						</h2>
 					</Col>
 					<Col
@@ -83,6 +81,7 @@ class TrainAI extends Component {
 					>
 						<h2
 							style={{
+								padding: '6px 0px 0px',
 								textAlign: 'center',
 								color: colorTheme.text4Color
 							}}
