@@ -4,11 +4,6 @@
   color: var(--text3Color);
 }
 
-.ant-table-thead {
-  color: red;
-  background-color: red;
-}
-
 .ant-popover-inner-content {
   background-color: var(--text8Color);
 }
