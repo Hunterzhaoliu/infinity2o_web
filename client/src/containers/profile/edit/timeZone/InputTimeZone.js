@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as profileActionCreators from "../../../../actions/profile/profile";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { TreeSelect, Row, Col, Cascader } from "antd";
+import { Row, Col, Cascader } from "antd";
 import timeZones from "./timeZones";
 import ErrorMessage from "../ErrorMessage";
 import "./InputTimeZone.css";
