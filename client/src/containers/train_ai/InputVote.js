@@ -12,12 +12,18 @@ class InputVote extends Component {
 	}
 
 	onVote(answerIndex, askIndex, askId) {
-		const { trainAI, history } = this.props;
+		const { trainAI, history, mongoDBUserId } = this.props;
 		//console.log('onVote this.props = ', this.props);
 		// now we know which answer user pressed so let's pass the answesId too
 		const ask = trainAI.current4DisplayedAsks[askIndex];
 		const answerId = ask.answers[answerIndex]._id;
-
+		if (trainAI.recentVotedAskIndex !== null) {
+			this.props.onNextAsk(
+				trainAI.nextAsks,
+				trainAI.recentVotedAskIndex,
+				mongoDBUserId
+			);
+		}
 		this.props.onVote(answerIndex, answerId, askIndex, askId, history);
 	}
 
@@ -87,6 +93,7 @@ class InputVote extends Component {
 					</Col>
 					<Col
 						style={{
+							padding: '5px 0px 0px',
 							color: colorTheme.text2Color
 						}}
 						span={this.renderSpanChange(isDisplayingAskStats)}
@@ -295,7 +302,7 @@ class InputVote extends Component {
 
 	renderTotalVotes(askTotalVotes, isDisplayingAskStats) {
 		if (isDisplayingAskStats) {
-			return 'Total Votes:  ' + String(askTotalVotes);
+			return String(askTotalVotes) + ' vote(s)';
 		}
 	}
 

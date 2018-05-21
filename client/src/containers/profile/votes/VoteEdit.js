@@ -311,6 +311,41 @@ class VoteEdit extends Component {
 		});
 	}
 
+	renderVoteCount() {
+		const { colorTheme, voteEdit } = this.props;
+
+		let voteWord = ' vote ';
+		if (
+			voteEdit.askToRevote.totalVotes === 0 ||
+			voteEdit.askToRevote.totalVotes > 1
+		) {
+			voteWord = ' votes ';
+		}
+
+		let revoteWord = ' revote ';
+		if (
+			voteEdit.askToRevote.totalRevotes === 0 ||
+			voteEdit.askToRevote.totalRevotes > 1
+		) {
+			revoteWord = ' revotes ';
+		}
+
+		return (
+			<p
+				style={{
+					textAlign: 'center',
+					color: colorTheme.text3Color
+				}}
+			>
+				{voteEdit.askToRevote.totalVotes +
+					voteWord +
+					' & ' +
+					voteEdit.askToRevote.totalRevotes +
+					revoteWord}
+			</p>
+		);
+	}
+
 	renderAskToRevote() {
 		const { colorTheme, voteEdit } = this.props;
 
@@ -335,22 +370,7 @@ class VoteEdit extends Component {
 					>
 						{voteEdit.askToRevote.question}
 					</h3>
-					<p
-						style={{
-							textAlign: 'center',
-							color: colorTheme.text3Color
-						}}
-					>
-						{voteEdit.askToRevote.totalVotes + ' vote(s)'}
-					</p>
-					<p
-						style={{
-							textAlign: 'center',
-							color: colorTheme.keyText2Color
-						}}
-					>
-						{voteEdit.askToRevote.totalRevotes + ' revote(s)'}
-					</p>
+					{this.renderVoteCount()}
 					<Row type="flex" justify="space-around" align="middle">
 						<Col span={14}>
 							<p

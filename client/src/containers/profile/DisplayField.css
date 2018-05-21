@@ -1,11 +1,13 @@
 .ant-table-content {
-	border-color: var(--table-border-color);
-	background-color: var(--table-border-color);
-	color: var(--table-text-color);
+	border-color: var(--text8Color);
+	background-color: var(--text8Color);
+	color: var(--text3Color);
 }
 
-/* .ant-table-thead {
-	border-color: var(--table-border-color);
-	background-color: var(--table-border-color);
-	color: var(--table-text-color);
-}*/
+.ant-popover-inner-content {
+	background-color: var(--text7Color);
+}
+
+.ant-popover-arrow {
+	background-color: var(--text7Color);
+}

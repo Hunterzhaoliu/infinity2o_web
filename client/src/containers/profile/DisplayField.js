@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Table } from 'antd';
+import { Row, Col, Table, Popover, Button, Icon } from 'antd';
 import './DisplayField.css';
 
 class DisplayField extends Component {
@@ -8,16 +8,61 @@ class DisplayField extends Component {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	};
 
+	renderNeuronExplanation() {
+		const { colorTheme } = this.props;
+
+		document.documentElement.style.setProperty(
+			`--text8Color`,
+			colorTheme.text8Color
+		);
+
+		document.documentElement.style.setProperty(
+			`--text7Color`,
+			colorTheme.text7Color
+		);
+
+		const neuronExplanation = (
+			<div>
+				<p
+					style={{
+						padding: '7px 0px 0px',
+						color: colorTheme.text2Color
+					}}
+				>
+					You use Neurons to 'Say Hi' to matches
+				</p>
+			</div>
+		);
+
+		return (
+			<Popover content={neuronExplanation}>
+				<Button
+					style={{
+						borderColor: colorTheme.text8Color,
+						backgroundColor: colorTheme.text8Color,
+						color: colorTheme.text3Color
+					}}
+					size="small"
+				>
+					<Icon
+						style={{
+							fontSize: 12,
+							padding: '0px 0px 6px'
+						}}
+						type="question-circle-o"
+					/>
+				</Button>
+			</Popover>
+		);
+	}
+
 	renderValue(label, value) {
 		const { colorTheme, infinityStatus } = this.props;
 		document.documentElement.style.setProperty(
-			`--table-border-color`,
-			colorTheme.text8Color
-		);
-		document.documentElement.style.setProperty(
-			`--table-text-color`,
+			`--text3Color`,
 			colorTheme.text3Color
 		);
+
 		if (
 			label === 'Neurons: ' ||
 			label === 'Name: ' ||
@@ -26,7 +71,14 @@ class DisplayField extends Component {
 			label === 'Time Zone: '
 		) {
 			if (label === 'Neurons: ' && infinityStatus) {
-				return 'infinity';
+				return (
+					<div>
+						<Col>
+							<p>"infinity"</p>
+						</Col>
+						<Col>{this.renderNeuronExplanation()}</Col>
+					</div>
+				);
 			} else if (label === 'Neurons: ' && !infinityStatus) {
 				let displayNeuronsInBillions = value;
 				if (displayNeuronsInBillions !== undefined) {
@@ -37,7 +89,18 @@ class DisplayField extends Component {
 						value +
 						' Billion)';
 
-					return finalDisplayString;
+					return (
+						<Row type="flex" justify="start" align="middle">
+							<Col>
+								<p style={{ padding: '18px 0px 0px' }}>
+									{finalDisplayString}
+								</p>
+							</Col>
+							<Col style={{ padding: '5px 0px 0px' }} offset={1}>
+								{this.renderNeuronExplanation()}
+							</Col>
+						</Row>
+					);
 				}
 			} else if (
 				value === null ||
