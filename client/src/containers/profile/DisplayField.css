@@ -1,13 +1,13 @@
 .ant-table-content {
-  border-color: var(--text8Color);
-  background-color: var(--text8Color);
-  color: var(--text3Color);
+	border-color: var(--text8Color);
+	background-color: var(--text8Color);
+	color: var(--text3Color);
 }
 
 .ant-popover-inner-content {
-  background-color: var(--text8Color);
+	background-color: var(--text7Color);
 }
 
 .ant-popover-arrow {
-  background-color: var(--text8Color);
+	background-color: var(--text7Color);
 }
