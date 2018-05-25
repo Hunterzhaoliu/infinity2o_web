@@ -73,8 +73,11 @@ class Testimonials extends Component {
 			slidesToShow: 1,
 			slidesToScroll: 1,
 			nextArrow: <SampleNextArrow />,
-			prevArrow: <SamplePrevArrow />
+			prevArrow: <SamplePrevArrow />,
+			pauseOnDotsHover: true,
+			pauseOnFocus: true
 		};
+
 		return (
 			<Content>
 				<Slider {...settings}>{this.renderTestimonials()}</Slider>
