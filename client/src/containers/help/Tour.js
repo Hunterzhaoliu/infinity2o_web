@@ -13,7 +13,11 @@ class Tour extends Component {
 	}
 
 	render() {
-		const { colorTheme } = this.props;
+		const { colorTheme, windowWidth } = this.props;
+		const WIDTH_RATIO = 0.7;
+		const HEIGHT_RATIO = 0.38;
+		const videoWidth = windowWidth * WIDTH_RATIO;
+		const videoHeight = windowWidth * HEIGHT_RATIO;
 		const welcome = `Welcome to Infinity2o`;
 		return (
 			<Content
@@ -40,8 +44,8 @@ class Tour extends Component {
 					<Col span={24}>
 						<iframe
 							title="tour-video"
-							width="840"
-							height="472.5"
+							width={videoWidth}
+							height={videoHeight}
 							src="https://www.youtube.com/embed/_bCDOyo4ZOo?&autoplay=1"
 							allow="autoplay; encrypted-media"
 							frameBorder="0"
@@ -173,7 +177,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 
