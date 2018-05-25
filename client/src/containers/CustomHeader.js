@@ -249,6 +249,7 @@ class CustomHeader extends Component {
 									Options{' '}
 									<Icon
 										style={{
+											paddingLeft: '7px',
 											fontSize: 16,
 											color: colorTheme.keyText6Color
 										}}

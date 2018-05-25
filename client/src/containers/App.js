@@ -14,7 +14,7 @@ import Ask from './train_ai/Ask';
 import Matches from './matches/Matches';
 import Conversations from './conversations/Conversations';
 
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col } from 'antd';
 
 const { Footer } = Layout;
 
@@ -39,29 +39,6 @@ class App extends Component {
 					}}
 				>
 					<Row type="flex" justify="center">
-						<Col
-							sm={{ span: 4 }}
-							md={{ span: 3 }}
-							lg={{ span: 2 }}
-							xl={{ span: 2 }}
-						>
-							<Button
-								size={'small'}
-								style={{
-									borderColor: colorTheme.text8Color,
-									background: colorTheme.text8Color
-								}}
-							>
-								<a
-									style={{
-										color: this.props.colorTheme.text6Color
-									}}
-									href="https://medium.com/infinity2o"
-								>
-									tech blog
-								</a>
-							</Button>
-						</Col>
 						<Col
 							sm={{ span: 12 }}
 							md={{ span: 10 }}
