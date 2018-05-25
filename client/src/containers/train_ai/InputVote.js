@@ -17,7 +17,8 @@ class InputVote extends Component {
 		// now we know which answer user pressed so let's pass the answesId too
 		const ask = trainAI.current4DisplayedAsks[askIndex];
 		const answerId = ask.answers[answerIndex]._id;
-		if (trainAI.recentVotedAskIndex !== null) {
+		const isRevote = askIndex === trainAI.recentVotedAskIndex;
+		if (!isRevote && trainAI.recentVotedAskIndex !== null) {
 			this.props.onNextAsk(
 				trainAI.nextAsks,
 				trainAI.recentVotedAskIndex,
