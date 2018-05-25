@@ -149,7 +149,7 @@ class Profile extends Component {
           }}
         >
           <Col span={24}>
-            <DisplayField label="Time Zone: " value={profile.timeZone} />
+            <DisplayField label="Time Zone: " value={profile.timeZone[1]} />
           </Col>
         </Row>
         <Row
