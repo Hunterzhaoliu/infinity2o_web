@@ -18,7 +18,7 @@ class Landing extends Component {
 			<div>
 				<Row
 					style={{
-						padding: '0% 0% 0%' // top left&right bottom
+						padding: '2% 0% 0%' // top left&right bottom
 					}}
 					type="flex"
 					justify="center"
@@ -41,8 +41,8 @@ class Landing extends Component {
 		const { colorTheme } = this.props;
 		const why_part_0 =
 			'Meet interesting people with similar core beliefs to take online courses with.';
-		// const why_part_1 =
-		// 	'Students come to Infinity2o to vote, match, & learn from Coursera, edX, Udemy, & Udacity together.';
+		const why_part_1 =
+			'Students come to Infinity2o to vote, match, & learn from Coursera, edX, Udemy, & Udacity together.';
 
 		return (
 			<div>
@@ -59,7 +59,7 @@ class Landing extends Component {
 						</h1>
 					</Col>
 				</Row>
-				{/* <Row type="flex" justify="center">
+				<Row type="flex" justify="center">
 					<Col>
 						<h2
 							key="0"
@@ -71,7 +71,7 @@ class Landing extends Component {
 							{why_part_1}
 						</h2>
 					</Col>
-				</Row> */}
+				</Row>
 				{this.renderTestimonials()}
 			</div>
 		);
@@ -87,7 +87,7 @@ class Landing extends Component {
 					<div>
 						<Row
 							style={{
-								padding: '2% 0% 0%' // top left&right bottom
+								padding: '3% 0% 0%' // top left&right bottom
 							}}
 							type="flex"
 							justify="center"
@@ -106,7 +106,7 @@ class Landing extends Component {
 						</Row>
 						<Row
 							style={{
-								padding: '0% 0% 0%' // top left&right bottom
+								padding: '1% 0% 0%' // top left&right bottom
 							}}
 							type="flex"
 							justify="space-around"
