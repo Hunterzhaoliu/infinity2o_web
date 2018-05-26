@@ -18,7 +18,7 @@ class Landing extends Component {
 			<div>
 				<Row
 					style={{
-						padding: '3% 0% 0%' // top left&right bottom
+						padding: '2% 0% 0%' // top left&right bottom
 					}}
 					type="flex"
 					justify="center"
@@ -189,7 +189,7 @@ class Landing extends Component {
 		return (
 			<Content
 				style={{
-					padding: '120px 50px 50px', // top left&right bottom
+					padding: '60px 50px 50px', // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
