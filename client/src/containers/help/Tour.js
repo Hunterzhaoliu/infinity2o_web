@@ -46,7 +46,7 @@ class Tour extends Component {
 							title="tour-video"
 							width={videoWidth}
 							height={videoHeight}
-							src="https://www.youtube.com/embed/_bCDOyo4ZOo?&autoplay=1"
+							src="https://www.youtube.com/embed/oQ2fWIce2JU?&autoplay=1"
 							allow="autoplay; encrypted-media"
 							frameBorder="0"
 							allowFullScreen
