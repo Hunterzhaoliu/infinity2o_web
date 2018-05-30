@@ -32,11 +32,11 @@ class CustomHeader extends Component {
 
 	renderSaveIcon(saveState) {
 		if (saveState === 'save_start') {
-			return <Icon type="loading" />;
+			return <Icon style={{ padding: '0px 8px 0px' }} type="loading" />;
 		} else if (saveState === 'save_done') {
 			return;
 		} else if (saveState === 'save_error') {
-			return <Icon type="warning" />;
+			return <Icon style={{ padding: '0px 8px 0px' }} type="warning" />;
 		}
 	}
 
@@ -72,7 +72,7 @@ class CustomHeader extends Component {
 						}}
 						onClick={onRandomColorTheme}
 					>
-						<img style={{ width: '30px' }} src={Logo} />
+						<img alt="" style={{ width: '30px' }} src={Logo} />
 					</Button>
 				);
 			} else {
