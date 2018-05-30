@@ -103,7 +103,7 @@ class TrainAI extends Component {
 								color: colorTheme.text2Color
 							}}
 						>
-							<a href="/train_ai/ask">Ask Question</a>
+							<a href="/train_ai/ask">Ask</a>
 						</Button>
 					</Col>
 					<Col

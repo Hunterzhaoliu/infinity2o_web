@@ -126,8 +126,8 @@ class Tour extends Component {
 							}}
 						>
 							1) Get 100 users that love us. A user that loves us
-							will have their profile filled out and be willing to
-							pay to meet someone else in our community.
+							will have their profile filled out and telling their
+							friends about us!
 						</p>
 						<p
 							style={{

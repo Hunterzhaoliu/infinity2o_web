@@ -30,7 +30,7 @@ class Matches extends Component {
 		message.warn(
 			'You need ' +
 				NUMBER_NEURONS_TO_SAY_HI +
-				" Million neurons to 'Say Hi'. You can purchase neurons below or in Profile.",
+				" Million neurons to 'Say Hi'. You can get neurons by voting or asking questions with the Sorting Hat.",
 			5
 		);
 	};
@@ -373,7 +373,6 @@ class Matches extends Component {
 						xl={{ span: 5 }}
 					/>
 				</Row>
-				{this.renderPaymentOptions()}
 			</Content>
 		);
 	}
