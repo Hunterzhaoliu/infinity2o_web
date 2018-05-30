@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../actions/colorTheme';
 import * as authActionCreators from '../actions/auth';
 import * as customHeaderActionCreators from '../actions/customHeader';
+import Logo from './favicon.png';
 
 import { Layout, Row, Col, Button, Icon, Dropdown, Menu } from 'antd';
 const { Header } = Layout;
@@ -61,19 +62,33 @@ class CustomHeader extends Component {
 				</Button>
 			);
 		} else if (loggedInState === 'logged_in') {
-			return (
-				<Button
-					style={{
-						borderColor: colorTheme.text7Color,
-						background: colorTheme.text7Color,
-						color: colorTheme.text4Color
-					}}
-					onClick={onRandomColorTheme}
-				>
-					Change Theme
-					{this.renderSaveIcon(colorThemeSave)}
-				</Button>
-			);
+			if (colorThemeSave === 'save_done' || colorThemeSave === null) {
+				return (
+					<Button
+						style={{
+							borderColor: colorTheme.text7Color,
+							background: colorTheme.text7Color,
+							color: colorTheme.text4Color
+						}}
+						onClick={onRandomColorTheme}
+					>
+						<img style={{ width: '30px' }} src={Logo} />
+					</Button>
+				);
+			} else {
+				return (
+					<Button
+						style={{
+							borderColor: colorTheme.text7Color,
+							background: colorTheme.text7Color,
+							color: colorTheme.text4Color
+						}}
+						onClick={onRandomColorTheme}
+					>
+						{this.renderSaveIcon(colorThemeSave)}
+					</Button>
+				);
+			}
 		}
 	}
 
