@@ -20,6 +20,8 @@ import {
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
 import { store } from '../../index';
 import { fetchUserMatches } from '../matches/matches';
+import { saveAndAddNeurons } from './ask';
+import { NUMBER_NEURONS_GIVEN_FOR_VOTE_IN_BILLIONS } from '../../containers/payment/prices';
 
 export const onNewestAsks = colorTheme => dispatch => {
 	dispatch({
@@ -44,7 +46,8 @@ export const onVote = (
 	answerId,
 	askIndex,
 	askId,
-	history
+	history,
+	mongoDBUserId
 ) => async dispatch => {
 	dispatch({ type: SAVE_VOTE_START, saveIndex: askIndex });
 	dispatch({
@@ -57,7 +60,7 @@ export const onVote = (
 		answerId: answerId,
 		askId: askId
 	};
-	const response = await axios.put('/api/train_ai/vote', voteInfo);
+	const response = await axios.put('/api/sorting_hat/vote', voteInfo);
 	//response.data === askInDB
 	dispatch({
 		type: UPDATE_VOTED_ASK,
@@ -67,6 +70,11 @@ export const onVote = (
 
 	if (response.status === 200) {
 		dispatch({ type: SAVE_VOTE_DONE, saveIndex: askIndex });
+		saveAndAddNeurons(
+			mongoDBUserId,
+			dispatch,
+			NUMBER_NEURONS_GIVEN_FOR_VOTE_IN_BILLIONS
+		);
 	} else {
 		dispatch({ type: SAVE_VOTE_ERROR, saveIndex: askIndex });
 	}
@@ -110,9 +118,9 @@ export const onVote = (
 	}
 };
 
-export const fetchUserTrainAIAsks = async (dispatch, mongoDBUserId) => {
+export const fetchUserSortingHatAsks = async (dispatch, mongoDBUserId) => {
 	const nextAsks = await axios.get(
-		'/api/train_ai/initial_asks?mongoDBUserId=' + mongoDBUserId
+		'/api/sorting_hat/initial_asks?mongoDBUserId=' + mongoDBUserId
 	);
 	dispatch({
 		type: SAVE_FETCHED_INITIAL_ASKS,
@@ -130,7 +138,7 @@ export const onNextAsk = (
 ) => async dispatch => {
 	if (nextAsks.length < 1) {
 		const newNextAsks = await axios.get(
-			'/api/train_ai/next_asks?mongoDBUserId=' + mongoDBUserId
+			'/api/sorting_hat/next_asks?mongoDBUserId=' + mongoDBUserId
 		);
 		dispatch({
 			type: SAVE_FETCHED_NEXT_ASKS,

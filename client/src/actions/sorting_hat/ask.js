@@ -8,10 +8,13 @@ import {
 	SAVE_QUESTION_ERROR,
 	ADD_NEW_ASK_TO_STATE,
 	ON_CLICK_REMOVE_ANSWER,
-	DUPLICATE_ANSWER_ERROR
+	DUPLICATE_ANSWER_ERROR,
+	ADD_NEURONS,
+	ADD_NEURONS_ERROR
 } from '../types';
 
 import { isValidQuestion, isValidAnswer } from '../../utils/validateAsk';
+import { NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS } from '../../containers/payment/prices';
 
 export const onChangeQuestion = newQuestion => dispatch => {
 	if (isValidQuestion(newQuestion)) {
@@ -78,7 +81,27 @@ export const onChangeAnswer = (
 	}
 };
 
-export const saveAsk = (ask, history) => async dispatch => {
+export const saveAndAddNeurons = async (
+	mongoDBUserId,
+	dispatch,
+	neuronsInBillions
+) => {
+	const info = {
+		mongoDBUserId: mongoDBUserId,
+		neuronsInBillions: neuronsInBillions
+	};
+	const response2 = await axios.put('/api/profile/add_neurons', info);
+	if (response2.status === 200) {
+		dispatch({
+			type: ADD_NEURONS,
+			neuronsInBillions: neuronsInBillions
+		});
+	} else {
+		dispatch({ type: ADD_NEURONS_ERROR });
+	}
+};
+
+export const saveAsk = (ask, history, mongoDBUserId) => async dispatch => {
 	dispatch({ type: SAVE_QUESTION_START });
 	let validatedAnswers = [];
 	//remove empty answers
@@ -92,10 +115,16 @@ export const saveAsk = (ask, history) => async dispatch => {
 	// returns ask in DB
 	const response = await axios.post('/api/ask', ask);
 	if (response.status === 200) {
-		// sends new Ask to trainAI reducer
+		// sends new Ask to SortingHat reducer
 		dispatch({ type: ADD_NEW_ASK_TO_STATE, ask: response.data });
 		dispatch({ type: SAVE_QUESTION_DONE });
-		history.push('/train_ai');
+		saveAndAddNeurons(
+			mongoDBUserId,
+			dispatch,
+			NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS
+		);
+		// TODO: animate added neurons
+		history.push('/sorting_hat');
 	} else {
 		dispatch({ type: SAVE_QUESTION_ERROR });
 	}

@@ -9,8 +9,8 @@ import Landing from './Landing';
 import Tour from './help/Tour';
 import Profile from './profile/Profile';
 import ProfileEdit from './profile/edit/ProfileEdit';
-import TrainAI from './train_ai/TrainAI';
-import Ask from './train_ai/Ask';
+import SortingHat from './sorting_hat/SortingHat';
+import Ask from './sorting_hat/Ask';
 import Matches from './matches/Matches';
 import Conversations from './conversations/Conversations';
 
@@ -78,8 +78,16 @@ class App extends Component {
 						path="/profile/edit"
 						component={ProfileEdit}
 					/>
-					<Route exact={true} path="/train_ai" component={TrainAI} />
-					<Route exact={true} path="/train_ai/ask" component={Ask} />
+					<Route
+						exact={true}
+						path="/sorting_hat"
+						component={SortingHat}
+					/>
+					<Route
+						exact={true}
+						path="/sorting_hat/ask"
+						component={Ask}
+					/>
 					<Route exact={true} path="/matches" component={Matches} />
 					<Route
 						exact={true}

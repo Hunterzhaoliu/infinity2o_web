@@ -8,6 +8,8 @@ import {
 	SAVE_REVOTE_DONE,
 	SAVE_REVOTE_ERROR
 } from '../types';
+import { saveAndAddNeurons } from '../sorting_hat/ask';
+import { NUMBER_NEURONS_GIVEN_FOR_VOTE_IN_BILLIONS } from '../../containers/payment/prices';
 
 export const onPressPage = newPage => dispatch => {
 	dispatch({ type: ON_PRESS_PAGE, newPage: newPage });
@@ -46,7 +48,8 @@ export const onRevote = (
 	previousMongoDBAnswerId,
 	answerIndex,
 	newAnswer,
-	currentMongoDBAnswerId
+	currentMongoDBAnswerId,
+	mongoDBUserId
 ) => async dispatch => {
 	const isNotSameAsPreviousOnFirstRevote =
 		currentMongoDBAnswerId === null &&
@@ -67,13 +70,18 @@ export const onRevote = (
 			newAnswer: newAnswer
 		};
 
-		const response = await axios.put('/api/train_ai/revote', revoteInfo);
+		const response = await axios.put('/api/sorting_hat/revote', revoteInfo);
 		if (response.status === 200) {
 			dispatch({
 				type: SAVE_REVOTE_DONE,
 				answerIndex: answerIndex,
 				revotedAsk: response.data
 			});
+			saveAndAddNeurons(
+				mongoDBUserId,
+				dispatch,
+				NUMBER_NEURONS_GIVEN_FOR_VOTE_IN_BILLIONS
+			);
 		} else {
 			dispatch({ type: SAVE_REVOTE_ERROR, answerIndex: answerIndex });
 		}

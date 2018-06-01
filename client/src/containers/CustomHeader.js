@@ -146,19 +146,19 @@ class CustomHeader extends Component {
 		);
 	}
 
-	renderTrainAIButton() {
-		const { colorTheme, onTrainAI } = this.props;
+	renderSortingHatButton() {
+		const { colorTheme, onSortingHat } = this.props;
 
 		return (
 			<Button
 				style={{
-					borderColor: colorTheme.trainAIButtonColor,
-					background: colorTheme.trainAIButtonColor,
-					color: colorTheme.trainAIButtonTextColor
+					borderColor: colorTheme.sortingHatButtonColor,
+					background: colorTheme.sortingHatButtonColor,
+					color: colorTheme.sortingHatButtonTextColor
 				}}
-				onClick={onTrainAI}
+				onClick={onSortingHat}
 			>
-				<Link to="/train_ai">
+				<Link to="/sorting_hat">
 					<div>Sorting Hat</div>
 				</Link>
 			</Button>
@@ -240,7 +240,9 @@ class CustomHeader extends Component {
 					</Menu.Item>
 					<Menu.Item key="2">{this.renderTourButton()}</Menu.Item>
 					<Menu.Item key="3">{this.renderProfileButton()}</Menu.Item>
-					<Menu.Item key="4">{this.renderTrainAIButton()}</Menu.Item>
+					<Menu.Item key="4">
+						{this.renderSortingHatButton()}
+					</Menu.Item>
 					<Menu.Item key="5">{this.renderMatchesButton()}</Menu.Item>
 					<Menu.Item key="6">
 						{this.renderConversationsButton()}
@@ -327,7 +329,7 @@ class CustomHeader extends Component {
 										xl={{ span: 3, offset: 0 }}
 										key="2"
 									>
-										{this.renderTrainAIButton()}
+										{this.renderSortingHatButton()}
 									</Col>
 									<Col
 										md={{ span: 3, offset: 0 }}
@@ -433,8 +435,8 @@ function mapDispatchToProps(dispatch) {
 		onProfile: () => {
 			colorThemeDispatchers.onProfile();
 		},
-		onTrainAI: () => {
-			colorThemeDispatchers.onTrainAI();
+		onSortingHat: () => {
+			colorThemeDispatchers.onSortingHat();
 		},
 		onMatches: () => {
 			colorThemeDispatchers.onMatches();
