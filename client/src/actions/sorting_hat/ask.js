@@ -8,10 +8,13 @@ import {
 	SAVE_QUESTION_ERROR,
 	ADD_NEW_ASK_TO_STATE,
 	ON_CLICK_REMOVE_ANSWER,
-	DUPLICATE_ANSWER_ERROR
+	DUPLICATE_ANSWER_ERROR,
+	ADD_NEURONS,
+	ADD_NEURONS_ERROR
 } from '../types';
 
 import { isValidQuestion, isValidAnswer } from '../../utils/validateAsk';
+import { NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS } from '../../containers/payment/prices';
 
 export const onChangeQuestion = newQuestion => dispatch => {
 	if (isValidQuestion(newQuestion)) {
@@ -78,7 +81,7 @@ export const onChangeAnswer = (
 	}
 };
 
-export const saveAsk = (ask, history) => async dispatch => {
+export const saveAsk = (ask, history, mongoDBUserId) => async dispatch => {
 	dispatch({ type: SAVE_QUESTION_START });
 	let validatedAnswers = [];
 	//remove empty answers
@@ -95,6 +98,20 @@ export const saveAsk = (ask, history) => async dispatch => {
 		// sends new Ask to SortingHat reducer
 		dispatch({ type: ADD_NEW_ASK_TO_STATE, ask: response.data });
 		dispatch({ type: SAVE_QUESTION_DONE });
+		const info = {
+			mongoDBUserId: mongoDBUserId,
+			neuronsInBillions: NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS
+		};
+		const response2 = await axios.put('/api/profile/add_neurons', info);
+		if (response2.status === 200) {
+			dispatch({
+				type: ADD_NEURONS,
+				neuronsInBillions: NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS
+			});
+		} else {
+			dispatch({ type: ADD_NEURONS_ERROR });
+		}
+		// TODO: animate added neurons
 		history.push('/sorting_hat');
 	} else {
 		dispatch({ type: SAVE_QUESTION_ERROR });

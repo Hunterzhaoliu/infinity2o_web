@@ -202,7 +202,14 @@ class Ask extends Component {
 	}
 
 	renderAskForm() {
-		const { colorTheme, saveAsk, ask, history, windowWidth } = this.props;
+		const {
+			colorTheme,
+			saveAsk,
+			ask,
+			history,
+			windowWidth,
+			mongoDBUserId
+		} = this.props;
 		let answerInputWidth = windowWidth * 0.183; // = 220/1200
 		let questionInputWidth = answerInputWidth * 2;
 
@@ -289,7 +296,7 @@ class Ask extends Component {
 								color: colorTheme.text1Color
 							}}
 							disabled={this.isAskDisabled(ask)}
-							onClick={() => saveAsk(ask, history)}
+							onClick={() => saveAsk(ask, history, mongoDBUserId)}
 						>
 							Ask
 							{this.renderAskIcon(ask.save)}
@@ -351,7 +358,8 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		ask: state.ask,
-		windowWidth: state.customHeader.windowWidth
+		windowWidth: state.customHeader.windowWidth,
+		mongoDBUserId: state.auth.mongoDBUserId
 	};
 }
 
@@ -392,8 +400,8 @@ function mapDispatchToProps(dispatch) {
 				previousAnswers
 			);
 		},
-		saveAsk: (ask, history) => {
-			askDispatchers.saveAsk(ask, history);
+		saveAsk: (ask, history, mongoDBUserId) => {
+			askDispatchers.saveAsk(ask, history, mongoDBUserId);
 		}
 	};
 }
