@@ -34,6 +34,7 @@ let initialState = {
   linkedInPublicProfileUrl: null,
   githubPublicProfileUrl: null,
   websiteUrl: null,
+  imageUrl: null,
   timeZone: [],
   availability: {},
   newName: null,
@@ -78,6 +79,7 @@ export default function(state = initialState, action) {
           action.profile.linkedInPublicProfileUrl;
         newState.githubPublicProfileUrl = action.profile.githubPublicProfileUrl;
         newState.websiteUrl = action.profile.websiteUrl;
+        newState.imageUrl = action.profile.imageUrl;
         newState.timeZone = action.profile.timeZone;
         newState.availability = action.profile.availability;
         newState.newName = action.profile.name;
