@@ -4,7 +4,7 @@ import {
 	MOVE_TO_SIGNED_IN_LANDING,
 	UPDATE_COLOR_THEME,
 	MOVE_TO_PROFILE,
-	MOVE_TO_TRAIN_AI,
+	MOVE_TO_SORTING_HAT,
 	MOVE_TO_MATCHES,
 	MOVE_TO_CONVERSATIONS,
 	SAVE_COLOR_THEME_START,
@@ -50,9 +50,9 @@ export const onProfile = () => {
 	};
 };
 
-export const onTrainAI = () => {
+export const onSortingHat = () => {
 	return function(dispatch) {
-		dispatch({ type: MOVE_TO_TRAIN_AI });
+		dispatch({ type: MOVE_TO_SORTING_HAT });
 	};
 };
 

@@ -62,4 +62,26 @@ module.exports = app => {
 			}
 		}
 	);
+
+	app.put(
+		'/api/profile/add_neurons',
+		requireLogin,
+		async (request, response) => {
+			const { neuronsInBillions, mongoDBUserId } = request.body;
+
+			try {
+				await UserCollection.findOneAndUpdate(
+					{ _id: mongoDBUserId },
+					{
+						$inc: {
+							'profile.payment.neuronsInBillions': neuronsInBillions
+						}
+					}
+				);
+				response.send('done');
+			} catch (error) {
+				response.status(422).send(error);
+			}
+		}
+	);
 };

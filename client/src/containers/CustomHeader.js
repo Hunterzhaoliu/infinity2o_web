@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../actions/colorTheme';
 import * as authActionCreators from '../actions/auth';
 import * as customHeaderActionCreators from '../actions/customHeader';
+import Logo from './favicon.png';
 
 import { Layout, Row, Col, Button, Icon, Dropdown, Menu } from 'antd';
 const { Header } = Layout;
@@ -31,11 +32,11 @@ class CustomHeader extends Component {
 
 	renderSaveIcon(saveState) {
 		if (saveState === 'save_start') {
-			return <Icon type="loading" />;
+			return <Icon style={{ padding: '0px 8px 0px' }} type="loading" />;
 		} else if (saveState === 'save_done') {
 			return;
 		} else if (saveState === 'save_error') {
-			return <Icon type="warning" />;
+			return <Icon style={{ padding: '0px 8px 0px' }} type="warning" />;
 		}
 	}
 
@@ -61,19 +62,33 @@ class CustomHeader extends Component {
 				</Button>
 			);
 		} else if (loggedInState === 'logged_in') {
-			return (
-				<Button
-					style={{
-						borderColor: colorTheme.text7Color,
-						background: colorTheme.text7Color,
-						color: colorTheme.text4Color
-					}}
-					onClick={onRandomColorTheme}
-				>
-					Change Theme
-					{this.renderSaveIcon(colorThemeSave)}
-				</Button>
-			);
+			if (colorThemeSave === 'save_done' || colorThemeSave === null) {
+				return (
+					<Button
+						style={{
+							borderColor: colorTheme.text7Color,
+							background: colorTheme.text7Color,
+							color: colorTheme.text4Color
+						}}
+						onClick={onRandomColorTheme}
+					>
+						<img alt="" style={{ width: '30px' }} src={Logo} />
+					</Button>
+				);
+			} else {
+				return (
+					<Button
+						style={{
+							borderColor: colorTheme.text7Color,
+							background: colorTheme.text7Color,
+							color: colorTheme.text4Color
+						}}
+						onClick={onRandomColorTheme}
+					>
+						{this.renderSaveIcon(colorThemeSave)}
+					</Button>
+				);
+			}
 		}
 	}
 
@@ -131,19 +146,19 @@ class CustomHeader extends Component {
 		);
 	}
 
-	renderTrainAIButton() {
-		const { colorTheme, onTrainAI } = this.props;
+	renderSortingHatButton() {
+		const { colorTheme, onSortingHat } = this.props;
 
 		return (
 			<Button
 				style={{
-					borderColor: colorTheme.trainAIButtonColor,
-					background: colorTheme.trainAIButtonColor,
-					color: colorTheme.trainAIButtonTextColor
+					borderColor: colorTheme.sortingHatButtonColor,
+					background: colorTheme.sortingHatButtonColor,
+					color: colorTheme.sortingHatButtonTextColor
 				}}
-				onClick={onTrainAI}
+				onClick={onSortingHat}
 			>
-				<Link to="/train_ai">
+				<Link to="/sorting_hat">
 					<div>Sorting Hat</div>
 				</Link>
 			</Button>
@@ -225,7 +240,9 @@ class CustomHeader extends Component {
 					</Menu.Item>
 					<Menu.Item key="2">{this.renderTourButton()}</Menu.Item>
 					<Menu.Item key="3">{this.renderProfileButton()}</Menu.Item>
-					<Menu.Item key="4">{this.renderTrainAIButton()}</Menu.Item>
+					<Menu.Item key="4">
+						{this.renderSortingHatButton()}
+					</Menu.Item>
 					<Menu.Item key="5">{this.renderMatchesButton()}</Menu.Item>
 					<Menu.Item key="6">
 						{this.renderConversationsButton()}
@@ -312,7 +329,7 @@ class CustomHeader extends Component {
 										xl={{ span: 3, offset: 0 }}
 										key="2"
 									>
-										{this.renderTrainAIButton()}
+										{this.renderSortingHatButton()}
 									</Col>
 									<Col
 										md={{ span: 3, offset: 0 }}
@@ -418,8 +435,8 @@ function mapDispatchToProps(dispatch) {
 		onProfile: () => {
 			colorThemeDispatchers.onProfile();
 		},
-		onTrainAI: () => {
-			colorThemeDispatchers.onTrainAI();
+		onSortingHat: () => {
+			colorThemeDispatchers.onSortingHat();
 		},
 		onMatches: () => {
 			colorThemeDispatchers.onMatches();
