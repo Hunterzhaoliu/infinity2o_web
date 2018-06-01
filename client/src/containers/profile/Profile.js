@@ -8,7 +8,8 @@ import Options from "../payment/Options";
 import DisplayField from "./DisplayField";
 import DisplayLinkField from "./DisplayLinkField";
 import VoteEdit from "./votes/VoteEdit";
-import { Layout, Row, Col, Button } from "antd";
+import { Layout, Row, Col, Button, Avatar } from "antd";
+import "./Profile.css";
 const { Content } = Layout;
 
 class Profile extends Component {
@@ -36,7 +37,32 @@ class Profile extends Component {
               Profile:
             </h2>
           </Col>
-          <img src={profile.imageUrl} />
+        </Row>
+        <Row type="flex" justify="start" align="middle">
+          <Col
+            span={24}
+            style={{
+              padding: "10px 100px 0px" // top left&right bottom
+            }}
+          >
+            <Avatar shape="circle" src={profile.imageUrl} />
+          </Col>
+        </Row>
+        <Row type="flex" justify="start" align="middle">
+          <Col
+            span={24}
+            style={{
+              padding: "10px 150px 0px" // top left&right bottom
+            }}
+          >
+            <h3
+              style={{
+                color: colorTheme.text4Color
+              }}
+            >
+              {profile.name}
+            </h3>
+          </Col>
         </Row>
         <Row
           type="flex"

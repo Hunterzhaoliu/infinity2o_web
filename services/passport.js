@@ -87,7 +87,7 @@ passport.use(
       const existingUser = await UserCollection.findOne({
         "auth.linkedInId": profile.id
       }); // asynchronus
-
+      console.log("profile = ", profile);
       if (existingUser) {
         // we already have this user in db
 
@@ -95,7 +95,8 @@ passport.use(
         if (
           existingUser.profile.name === undefined ||
           existingUser.profile.email === undefined ||
-          existingUser.profile.linkedInPublicProfileUrl === undefined
+          existingUser.profile.linkedInPublicProfileUrl === undefined ||
+          existingUser.profile.imageUrl === undefined
         ) {
           await UserCollection.updateOne(
             {
@@ -106,7 +107,8 @@ passport.use(
                 "profile.name": profile.displayName,
                 "profile.email": profile.emails[0].value,
                 "profile.linkedInPublicProfileUrl":
-                  profile._json.publicProfileUrl
+                  profile._json.publicProfileUrl,
+                "profile.imageUrl": profile.photos[0].value
               }
             }
           );
@@ -123,7 +125,8 @@ passport.use(
           profile: {
             name: profile.displayName,
             email: profile.emails[0].value,
-            linkedInPublicProfileUrl: profile._json.publicProfileUrl
+            linkedInPublicProfileUrl: profile._json.publicProfileUrl,
+            imageUrl: profile.photos[0].value
           }
         }).save();
         done(null, newUserFromDB);
