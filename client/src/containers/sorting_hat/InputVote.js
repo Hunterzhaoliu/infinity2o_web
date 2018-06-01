@@ -25,7 +25,14 @@ class InputVote extends Component {
 				mongoDBUserId
 			);
 		}
-		this.props.onVote(answerIndex, answerId, askIndex, askId, history);
+		this.props.onVote(
+			answerIndex,
+			answerId,
+			askIndex,
+			askId,
+			history,
+			mongoDBUserId
+		);
 	}
 
 	onNextAsk(removeAskIndex) {

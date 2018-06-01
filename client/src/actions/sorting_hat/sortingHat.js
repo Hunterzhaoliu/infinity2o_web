@@ -20,6 +20,8 @@ import {
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
 import { store } from '../../index';
 import { fetchUserMatches } from '../matches/matches';
+import { saveAndAddNeurons } from './ask';
+import { NUMBER_NEURONS_GIVEN_FOR_VOTE_IN_BILLIONS } from '../../containers/payment/prices';
 
 export const onNewestAsks = colorTheme => dispatch => {
 	dispatch({
@@ -44,7 +46,8 @@ export const onVote = (
 	answerId,
 	askIndex,
 	askId,
-	history
+	history,
+	mongoDBUserId
 ) => async dispatch => {
 	dispatch({ type: SAVE_VOTE_START, saveIndex: askIndex });
 	dispatch({
@@ -67,6 +70,11 @@ export const onVote = (
 
 	if (response.status === 200) {
 		dispatch({ type: SAVE_VOTE_DONE, saveIndex: askIndex });
+		saveAndAddNeurons(
+			mongoDBUserId,
+			dispatch,
+			NUMBER_NEURONS_GIVEN_FOR_VOTE_IN_BILLIONS
+		);
 	} else {
 		dispatch({ type: SAVE_VOTE_ERROR, saveIndex: askIndex });
 	}

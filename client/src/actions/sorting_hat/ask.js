@@ -81,6 +81,26 @@ export const onChangeAnswer = (
 	}
 };
 
+export const saveAndAddNeurons = async (
+	mongoDBUserId,
+	dispatch,
+	neuronsInBillions
+) => {
+	const info = {
+		mongoDBUserId: mongoDBUserId,
+		neuronsInBillions: neuronsInBillions
+	};
+	const response2 = await axios.put('/api/profile/add_neurons', info);
+	if (response2.status === 200) {
+		dispatch({
+			type: ADD_NEURONS,
+			neuronsInBillions: neuronsInBillions
+		});
+	} else {
+		dispatch({ type: ADD_NEURONS_ERROR });
+	}
+};
+
 export const saveAsk = (ask, history, mongoDBUserId) => async dispatch => {
 	dispatch({ type: SAVE_QUESTION_START });
 	let validatedAnswers = [];
@@ -98,19 +118,11 @@ export const saveAsk = (ask, history, mongoDBUserId) => async dispatch => {
 		// sends new Ask to SortingHat reducer
 		dispatch({ type: ADD_NEW_ASK_TO_STATE, ask: response.data });
 		dispatch({ type: SAVE_QUESTION_DONE });
-		const info = {
-			mongoDBUserId: mongoDBUserId,
-			neuronsInBillions: NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS
-		};
-		const response2 = await axios.put('/api/profile/add_neurons', info);
-		if (response2.status === 200) {
-			dispatch({
-				type: ADD_NEURONS,
-				neuronsInBillions: NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS
-			});
-		} else {
-			dispatch({ type: ADD_NEURONS_ERROR });
-		}
+		saveAndAddNeurons(
+			mongoDBUserId,
+			dispatch,
+			NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS
+		);
 		// TODO: animate added neurons
 		history.push('/sorting_hat');
 	} else {

@@ -178,24 +178,6 @@ class VoteEdit extends Component {
 		);
 	}
 
-	onRevote(
-		mongoDBAskId,
-		mongoDBAnswerId,
-		previousMongoDBAnswerId,
-		answerIndex,
-		newAnswer,
-		currentMongoDBAnswerId
-	) {
-		this.props.onRevote(
-			mongoDBAskId,
-			mongoDBAnswerId,
-			previousMongoDBAnswerId,
-			answerIndex,
-			newAnswer,
-			currentMongoDBAnswerId
-		);
-	}
-
 	renderSaveIcon(saveState, saveIndex) {
 		if (saveState[saveIndex] === 'start') {
 			return <Icon type="loading" />;
@@ -207,7 +189,7 @@ class VoteEdit extends Component {
 	}
 
 	renderAnswers(answers, isDisplayingAskStats) {
-		const { colorTheme, voteEdit } = this.props;
+		const { colorTheme, voteEdit, mongoDBUserId } = this.props;
 		return _.map(answers, (answerObject, answerIndex) => {
 			// displaying actual answers
 			let displayAnswer;
@@ -258,13 +240,14 @@ class VoteEdit extends Component {
 								color: colorTheme.text2Color
 							}}
 							onClick={e =>
-								this.onRevote(
+								this.props.onRevote(
 									voteEdit.askToRevote._id,
 									currentAnswerId,
 									voteEdit.previousMongoDBAnswerId,
 									answerIndex,
 									displayAnswer,
-									voteEdit.currentMongoDBAnswerId
+									voteEdit.currentMongoDBAnswerId,
+									mongoDBUserId
 								)
 							}
 						>
@@ -468,7 +451,8 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		profile: state.profile,
-		voteEdit: state.voteEdit
+		voteEdit: state.voteEdit,
+		mongoDBUserId: state.auth.mongoDBUserId
 	};
 }
 
@@ -499,7 +483,8 @@ function mapDispatchToProps(dispatch) {
 			previousMongoDBAnswerId,
 			answerIndex,
 			newAnswer,
-			currentMongoDBAnswerId
+			currentMongoDBAnswerId,
+			mongoDBUserId
 		) => {
 			voteEditDispatchers.onRevote(
 				mongoDBAskId,
@@ -507,7 +492,8 @@ function mapDispatchToProps(dispatch) {
 				previousMongoDBAnswerId,
 				answerIndex,
 				newAnswer,
-				currentMongoDBAnswerId
+				currentMongoDBAnswerId,
+				mongoDBUserId
 			);
 		}
 	};
