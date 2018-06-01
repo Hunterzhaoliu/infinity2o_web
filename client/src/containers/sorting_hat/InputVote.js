@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as trainAIActionCreators from '../../actions/train_ai/trainAI';
+import * as sortingHatActionCreators from '../../actions/sorting_hat/sortingHat';
 import { bindActionCreators } from 'redux';
 import { Button, Card, Col, Layout, Row, Icon } from 'antd';
 const { Content } = Layout;
@@ -12,16 +12,16 @@ class InputVote extends Component {
 	}
 
 	onVote(answerIndex, askIndex, askId) {
-		const { trainAI, history, mongoDBUserId } = this.props;
+		const { sortingHat, history, mongoDBUserId } = this.props;
 		//console.log('onVote this.props = ', this.props);
 		// now we know which answer user pressed so let's pass the answesId too
-		const ask = trainAI.current4DisplayedAsks[askIndex];
+		const ask = sortingHat.current4DisplayedAsks[askIndex];
 		const answerId = ask.answers[answerIndex]._id;
-		const isRevote = askIndex === trainAI.recentVotedAskIndex;
-		if (!isRevote && trainAI.recentVotedAskIndex !== null) {
+		const isRevote = askIndex === sortingHat.recentVotedAskIndex;
+		if (!isRevote && sortingHat.recentVotedAskIndex !== null) {
 			this.props.onNextAsk(
-				trainAI.nextAsks,
-				trainAI.recentVotedAskIndex,
+				sortingHat.nextAsks,
+				sortingHat.recentVotedAskIndex,
 				mongoDBUserId
 			);
 		}
@@ -29,8 +29,12 @@ class InputVote extends Component {
 	}
 
 	onNextAsk(removeAskIndex) {
-		const { trainAI, mongoDBUserId } = this.props;
-		this.props.onNextAsk(trainAI.nextAsks, removeAskIndex, mongoDBUserId);
+		const { sortingHat, mongoDBUserId } = this.props;
+		this.props.onNextAsk(
+			sortingHat.nextAsks,
+			removeAskIndex,
+			mongoDBUserId
+		);
 	}
 
 	renderAnswers(
@@ -41,7 +45,7 @@ class InputVote extends Component {
 		isDisplayingAskStats,
 		askTotalVotes
 	) {
-		const { colorTheme, trainAI } = this.props;
+		const { colorTheme, sortingHat } = this.props;
 		return _.map(answers, (answerObject, answerIndex) => {
 			// displaying actual answers
 			let displayAnswer;
@@ -57,8 +61,8 @@ class InputVote extends Component {
 			let answerVotes = answerObject.votes;
 
 			// if user has voted on an ask
-			if (trainAI.votes[askId] !== undefined) {
-				const votedAnswerId = trainAI.votes[askId].answerId;
+			if (sortingHat.votes[askId] !== undefined) {
+				const votedAnswerId = sortingHat.votes[askId].answerId;
 				isDisplayingAskStats = true;
 				if (votedAnswerId === currentAnswerId) {
 					displayAnswerButtonColor = colorTheme.keyText7Color;
@@ -86,7 +90,7 @@ class InputVote extends Component {
 						>
 							{displayAnswer}
 							{this.renderSaveIcon(
-								trainAI.save,
+								sortingHat.save,
 								askIndex,
 								isDisplayingSaveIcon
 							)}
@@ -166,12 +170,12 @@ class InputVote extends Component {
 	}
 
 	renderQandAs() {
-		const { colorTheme, trainAI } = this.props;
+		const { colorTheme, sortingHat } = this.props;
 
-		if (trainAI.current4DisplayedAsks.length > 0) {
-			return _.map(trainAI.current4DisplayedAsks, (Ask, askIndex) => {
+		if (sortingHat.current4DisplayedAsks.length > 0) {
+			return _.map(sortingHat.current4DisplayedAsks, (Ask, askIndex) => {
 				const heightBetweenCards = this.getHeightBetweenCards(
-					trainAI.current4DisplayedAsks,
+					sortingHat.current4DisplayedAsks,
 					askIndex
 				);
 
@@ -187,7 +191,7 @@ class InputVote extends Component {
 					displayAnswers = Ask.answers;
 					askId = Ask._id;
 					askTotalVotes = Ask.totalVotes;
-					if (trainAI.votes[askId] !== undefined) {
+					if (sortingHat.votes[askId] !== undefined) {
 						isDisplayingAskStats = true;
 					}
 
@@ -413,10 +417,10 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		trainAI: state.trainAI,
+		sortingHat: state.sortingHat,
 		mongoDBUserId: state.auth.mongoDBUserId,
 		windowWidth: state.customHeader.windowWidth,
-		theme: state.trainAI.theme
+		theme: state.sortingHat.theme
 	};
 }
 
@@ -425,30 +429,30 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const trainAIDispatchers = bindActionCreators(
-		trainAIActionCreators,
+	const sortingHatDispatchers = bindActionCreators(
+		sortingHatActionCreators,
 		dispatch
 	);
 
 	return {
 		onNewestAsks: () => {
-			trainAIDispatchers.onNewestAsks();
+			sortingHatDispatchers.onNewestAsks();
 		},
 		onPopularAsks: () => {
-			trainAIDispatchers.onPopularAsks();
+			sortingHatDispatchers.onPopularAsks();
 		},
 		onControversialAsks: () => {
-			trainAIDispatchers.onControversialAsks();
+			sortingHatDispatchers.onControversialAsks();
 		},
 		onNextAsk: (nextAsks, removeAskIndex, mongoDBUserId) => {
-			trainAIDispatchers.onNextAsk(
+			sortingHatDispatchers.onNextAsk(
 				nextAsks,
 				removeAskIndex,
 				mongoDBUserId
 			);
 		},
 		onVote: (answerIndex, answerId, askIndex, askId, history) => {
-			trainAIDispatchers.onVote(
+			sortingHatDispatchers.onVote(
 				answerIndex,
 				answerId,
 				askIndex,

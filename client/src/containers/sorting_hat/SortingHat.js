@@ -7,14 +7,14 @@ import { Layout, Row, Col, Button } from 'antd';
 import InputVote from './InputVote';
 const { Content } = Layout;
 
-class TrainAI extends Component {
+class SortingHat extends Component {
 	componentWillMount() {
 		// run once before first render()
-		this.props.onTrainAI();
+		this.props.onSortingHat();
 	}
 
 	render() {
-		//console.log('this.props in TrainAI.js', this.props);
+		//console.log('this.props in SortingHat.js', this.props);
 		const { colorTheme, history } = this.props;
 		return (
 			<Content
@@ -103,7 +103,7 @@ class TrainAI extends Component {
 								color: colorTheme.text2Color
 							}}
 						>
-							<a href="/train_ai/ask">Ask</a>
+							<a href="/sorting_hat/ask">Ask</a>
 						</Button>
 					</Col>
 					<Col
@@ -193,10 +193,10 @@ function mapDispatchToProps(dispatch) {
 		fetchUserProfile: () => {
 			indexDispatchers.fetchUserProfile();
 		},
-		onTrainAI: () => {
-			colorThemeDispatchers.onTrainAI();
+		onSortingHat: () => {
+			colorThemeDispatchers.onSortingHat();
 		}
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrainAI);
+export default connect(mapStateToProps, mapDispatchToProps)(SortingHat);

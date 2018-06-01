@@ -57,7 +57,7 @@ export const onVote = (
 		answerId: answerId,
 		askId: askId
 	};
-	const response = await axios.put('/api/train_ai/vote', voteInfo);
+	const response = await axios.put('/api/sorting_hat/vote', voteInfo);
 	//response.data === askInDB
 	dispatch({
 		type: UPDATE_VOTED_ASK,
@@ -110,9 +110,9 @@ export const onVote = (
 	}
 };
 
-export const fetchUserTrainAIAsks = async (dispatch, mongoDBUserId) => {
+export const fetchUserSortingHatAsks = async (dispatch, mongoDBUserId) => {
 	const nextAsks = await axios.get(
-		'/api/train_ai/initial_asks?mongoDBUserId=' + mongoDBUserId
+		'/api/sorting_hat/initial_asks?mongoDBUserId=' + mongoDBUserId
 	);
 	dispatch({
 		type: SAVE_FETCHED_INITIAL_ASKS,
@@ -130,7 +130,7 @@ export const onNextAsk = (
 ) => async dispatch => {
 	if (nextAsks.length < 1) {
 		const newNextAsks = await axios.get(
-			'/api/train_ai/next_asks?mongoDBUserId=' + mongoDBUserId
+			'/api/sorting_hat/next_asks?mongoDBUserId=' + mongoDBUserId
 		);
 		dispatch({
 			type: SAVE_FETCHED_NEXT_ASKS,

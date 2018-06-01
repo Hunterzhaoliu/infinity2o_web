@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authActionCreators from '../../actions/auth';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as askActionCreators from '../../actions/train_ai/ask';
+import * as askActionCreators from '../../actions/sorting_hat/ask';
 import { bindActionCreators } from 'redux';
 import { Layout, Row, Col, Button, Input, Icon } from 'antd';
 import ErrorMessage from './ErrorMessage';
@@ -13,7 +13,7 @@ class Ask extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.fetchUserProfile();
-		this.props.onTrainAI();
+		this.props.onSortingHat();
 	}
 
 	onChangeQuestion = e => {
@@ -373,8 +373,8 @@ function mapDispatchToProps(dispatch) {
 		fetchUserProfile: () => {
 			indexDispatchers.fetchUserProfile();
 		},
-		onTrainAI: () => {
-			colorThemeDispatchers.onTrainAI();
+		onSortingHat: () => {
+			colorThemeDispatchers.onSortingHat();
 		},
 		onChangeQuestion: newQuestion => {
 			askDispatchers.onChangeQuestion(newQuestion);

@@ -67,7 +67,7 @@ export const onRevote = (
 			newAnswer: newAnswer
 		};
 
-		const response = await axios.put('/api/train_ai/revote', revoteInfo);
+		const response = await axios.put('/api/sorting_hat/revote', revoteInfo);
 		if (response.status === 200) {
 			dispatch({
 				type: SAVE_REVOTE_DONE,

@@ -11,7 +11,7 @@ export const SAVE_COLOR_THEME_ERROR = 'SAVE_COLOR_THEME_ERROR';
 // CustomHeader.js
 export const MOVE_TO_TOUR = 'MOVE_TO_TOUR';
 export const MOVE_TO_PROFILE = 'MOVE_TO_PROFILE';
-export const MOVE_TO_TRAIN_AI = 'MOVE_TO_TRAIN_AI';
+export const MOVE_TO_SORTING_HAT = 'MOVE_TO_SORTING_HAT';
 export const MOVE_TO_MATCHES = 'MOVE_TO_MATCHES';
 export const MOVE_TO_SIGNED_IN_LANDING = 'MOVE_TO_SIGNED_IN_LANDING';
 export const UPDATE_WINDOW_WIDTH = 'UPDATE_WINDOW_WIDTH';
@@ -46,12 +46,12 @@ export const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS';
 export const UPDATE_NEURONS = 'UPDATE_NEURONS';
 export const PAYMENT_ERROR = 'PAYMENT_ERROR';
 
-// train_ai/InputVote.js
+// sorting_hat/InputVote.js
 export const ON_NEWEST_ASKS = 'ON_NEWEST_ASKS';
 export const ON_POPULAR_ASKS = 'ON_POPULAR_ASKS';
 export const ON_CONTROVERSIAL_ASKS = 'ON_CONTROVERSIAL_ASKS';
 
-// train_ai/Ask.js
+// sorting_hat/Ask.js
 export const ON_CHANGE_QUESTION = 'ON_CHANGE_QUESTION';
 export const ON_CLICK_ADD_ANSWER = 'ON_CLICK_ADD_ANSWER';
 export const ON_CHANGE_ANSWER = 'ON_CHANGE_ANSWER';
@@ -62,7 +62,7 @@ export const ADD_NEW_ASK_TO_STATE = 'ADD_NEW_ASK_TO_STATE';
 export const ON_CLICK_REMOVE_ANSWER = 'ON_CLICK_REMOVE_ANSWER';
 export const DUPLICATE_ANSWER_ERROR = 'DUPLICATE_ANSWER_ERROR';
 
-// train_ai/InputVote.js
+// sorting_hat/InputVote.js
 export const SAVE_FETCHED_INITIAL_ASKS = 'SAVE_FETCHED_INITIAL_ASKS';
 export const SAVE_FETCHED_NEXT_ASKS = 'SAVE_FETCHED_NEXT_ASKS';
 export const UPDATE_INITIAL_4_ASKS = 'UPDATE_INITIAL_4_ASKS';

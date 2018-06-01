@@ -1,7 +1,7 @@
 import {
 	UPDATE_COLOR_THEME,
 	MOVE_TO_PROFILE,
-	MOVE_TO_TRAIN_AI,
+	MOVE_TO_SORTING_HAT,
 	MOVE_TO_MATCHES,
 	MOVE_TO_SIGNED_IN_LANDING,
 	MOVE_TO_CONVERSATIONS,
@@ -37,8 +37,8 @@ let initialState = {
 	activeSection: null,
 	profileButtonColor: null,
 	profileButtonTextColor: null,
-	trainAIButtonColor: null,
-	trainAIButtonTextColor: null,
+	sortingHatButtonColor: null,
+	sortingHatButtonTextColor: null,
 	matchesButtonColor: null,
 	matchesButtonTextColor: null,
 	conversationsButtonColor: null,
@@ -48,11 +48,11 @@ let initialState = {
 };
 
 function _getStateForSection(newState) {
-	if (newState.activeSection === 'train_ai') {
+	if (newState.activeSection === 'sorting_hat') {
 		newState.profileButtonColor = newState.text7Color;
 		newState.profileButtonTextColor = newState.text4Color;
-		newState.trainAIButtonColor = newState.key;
-		newState.trainAIButtonTextColor = newState.text1Color;
+		newState.sortingHatButtonColor = newState.key;
+		newState.sortingHatButtonTextColor = newState.text1Color;
 		newState.matchesButtonColor = newState.text7Color;
 		newState.matchesButtonTextColor = newState.text4Color;
 		newState.conversationsButtonColor = newState.text7Color;
@@ -62,8 +62,8 @@ function _getStateForSection(newState) {
 	} else if (newState.activeSection === 'matches') {
 		newState.profileButtonColor = newState.text7Color;
 		newState.profileButtonTextColor = newState.text4Color;
-		newState.trainAIButtonColor = newState.text7Color;
-		newState.trainAIButtonTextColor = newState.text4Color;
+		newState.sortingHatButtonColor = newState.text7Color;
+		newState.sortingHatButtonTextColor = newState.text4Color;
 		newState.matchesButtonColor = newState.key;
 		newState.matchesButtonTextColor = newState.text1Color;
 		newState.conversationsButtonColor = newState.text7Color;
@@ -73,8 +73,8 @@ function _getStateForSection(newState) {
 	} else if (newState.activeSection === 'profile') {
 		newState.profileButtonColor = newState.key;
 		newState.profileButtonTextColor = newState.text1Color;
-		newState.trainAIButtonColor = newState.text7Color;
-		newState.trainAIButtonTextColor = newState.text4Color;
+		newState.sortingHatButtonColor = newState.text7Color;
+		newState.sortingHatButtonTextColor = newState.text4Color;
 		newState.matchesButtonColor = newState.text7Color;
 		newState.matchesButtonTextColor = newState.text4Color;
 		newState.conversationsButtonColor = newState.text7Color;
@@ -84,8 +84,8 @@ function _getStateForSection(newState) {
 	} else if (newState.activeSection === 'signed_in_landing') {
 		newState.profileButtonColor = newState.text7Color;
 		newState.profileButtonTextColor = newState.text4Color;
-		newState.trainAIButtonColor = newState.text7Color;
-		newState.trainAIButtonTextColor = newState.text4Color;
+		newState.sortingHatButtonColor = newState.text7Color;
+		newState.sortingHatButtonTextColor = newState.text4Color;
 		newState.matchesButtonColor = newState.text7Color;
 		newState.matchesButtonTextColor = newState.text4Color;
 		newState.conversationsButtonColor = newState.text7Color;
@@ -95,8 +95,8 @@ function _getStateForSection(newState) {
 	} else if (newState.activeSection === 'conversations') {
 		newState.profileButtonColor = newState.text7Color;
 		newState.profileButtonTextColor = newState.text4Color;
-		newState.trainAIButtonColor = newState.text7Color;
-		newState.trainAIButtonTextColor = newState.text4Color;
+		newState.sortingHatButtonColor = newState.text7Color;
+		newState.sortingHatButtonTextColor = newState.text4Color;
 		newState.matchesButtonColor = newState.text7Color;
 		newState.matchesButtonTextColor = newState.text4Color;
 		newState.conversationsButtonColor = newState.key;
@@ -106,8 +106,8 @@ function _getStateForSection(newState) {
 	} else if (newState.activeSection === 'tour') {
 		newState.profileButtonColor = newState.text7Color;
 		newState.profileButtonTextColor = newState.text4Color;
-		newState.trainAIButtonColor = newState.text7Color;
-		newState.trainAIButtonTextColor = newState.text4Color;
+		newState.sortingHatButtonColor = newState.text7Color;
+		newState.sortingHatButtonTextColor = newState.text4Color;
 		newState.matchesButtonColor = newState.text7Color;
 		newState.matchesButtonTextColor = newState.text4Color;
 		newState.conversationsButtonColor = newState.text7Color;
@@ -163,8 +163,8 @@ export default function(state = initialState, action) {
 			newState.activeSection = 'profile';
 			newState = _getStateForSection(newState);
 			return newState;
-		case MOVE_TO_TRAIN_AI:
-			newState.activeSection = 'train_ai';
+		case MOVE_TO_SORTING_HAT:
+			newState.activeSection = 'sorting_hat';
 			newState = _getStateForSection(newState);
 			return newState;
 		case MOVE_TO_MATCHES:
