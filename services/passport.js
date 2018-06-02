@@ -26,9 +26,8 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log("profile = ", profile);
-      console.log("profile.photos[0].value = ", profile.photos[0].value);
-
+      const biggerImageUrl = profile.photos[0].value.slice(0, -2) + "150";
+      console.log("biggerImageUrl = ", biggerImageUrl);
       const existingUser = await UserCollection.findOne({
         auth: { googleId: profile.id }
       }); // asynchronus
@@ -49,7 +48,7 @@ passport.use(
               $set: {
                 "profile.name": profile.displayName,
                 "profile.email": profile.emails[0].value,
-                "profile.imageUrl": profile.photos[0].value
+                "profile.imageUrl": biggerImageUrl
               }
             }
           );
@@ -64,7 +63,7 @@ passport.use(
           profile: {
             name: profile.displayName,
             email: profile.emails[0].value,
-            imageUrl: profile.photos[0].value
+            imageUrl: biggerImageUrl
           }
         }).save();
         done(null, newUserFromDB);
@@ -87,7 +86,6 @@ passport.use(
       const existingUser = await UserCollection.findOne({
         "auth.linkedInId": profile.id
       }); // asynchronus
-      console.log("profile = ", profile);
       if (existingUser) {
         // we already have this user in db
 

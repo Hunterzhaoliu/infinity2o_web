@@ -8,7 +8,7 @@ import Options from "../payment/Options";
 import DisplayField from "./DisplayField";
 import DisplayLinkField from "./DisplayLinkField";
 import VoteEdit from "./votes/VoteEdit";
-import { Layout, Row, Col, Button, Avatar } from "antd";
+import { Layout, Row, Col, Button, Avatar, Icon } from "antd";
 import "./Profile.css";
 const { Content } = Layout;
 
@@ -18,7 +18,15 @@ class Profile extends Component {
     this.props.fetchUserProfile();
     this.props.onProfile();
   }
-
+  renderNameAndAge() {
+    const { profile } = this.props;
+    console.log("profile.age = ", profile.age);
+    if (profile.age !== undefined) {
+      return profile.name + ", " + profile.age;
+    } else {
+      return profile.name;
+    }
+  }
   renderProfile() {
     const { colorTheme, profile } = this.props;
     let neuronsInBillions = profile.payment.neuronsInBillions;
@@ -34,7 +42,7 @@ class Profile extends Component {
                 color: colorTheme.keyText6Color
               }}
             >
-              Profile:
+              {this.renderNameAndAge()}
             </h2>
           </Col>
         </Row>
@@ -48,22 +56,6 @@ class Profile extends Component {
             <Avatar shape="circle" src={profile.imageUrl} />
           </Col>
         </Row>
-        <Row type="flex" justify="start" align="middle">
-          <Col
-            span={24}
-            style={{
-              padding: "10px 150px 0px" // top left&right bottom
-            }}
-          >
-            <h3
-              style={{
-                color: colorTheme.text4Color
-              }}
-            >
-              {profile.name}
-            </h3>
-          </Col>
-        </Row>
         <Row
           type="flex"
           justify="start"
@@ -72,7 +64,14 @@ class Profile extends Component {
             padding: "0% 0% 0%" // top left&right bottom
           }}
         >
-          <Col span={24}>
+          <Col span={1}>
+            <img
+              alt="Neurons: "
+              style={{ width: "35px" }}
+              src="https://user-images.githubusercontent.com/24757872/40867763-8f2df248-65cc-11e8-892f-3e22b4032b4a.png"
+            />
+          </Col>
+          <Col span={23}>
             <DisplayField label="Neurons: " value={neuronsInBillions} />
           </Col>
         </Row>
@@ -81,46 +80,17 @@ class Profile extends Component {
           justify="start"
           align="middle"
           style={{
-            padding: "0% 0% 0%" // top left&right bottom
-          }}
-        >
-          <Col span={24}>
-            <DisplayField label="Name: " value={profile.name} />
-          </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
-            padding: "0% 0% 0%" // top left&right bottom
-          }}
-        >
-          <Col span={24}>
-            <DisplayField label="E-mail: " value={profile.email} />
-          </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
             padding: "5px 0% 0%" // top left&right bottom
           }}
         >
-          <Col span={24}>
-            <DisplayField label="Age: " value={profile.age} />
+          <Col span={1}>
+            <img
+              alt="Interests: "
+              style={{ width: "35px" }}
+              src="https://user-images.githubusercontent.com/24757872/40868785-206477b0-65d6-11e8-9d7a-5482bcd504c3.png"
+            />
           </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
-            padding: "5px 0% 0%" // top left&right bottom
-          }}
-        >
-          <Col span={24}>
+          <Col span={23}>
             <DisplayField label="Interest(s): " value={profile.interests} />
           </Col>
         </Row>
@@ -132,7 +102,14 @@ class Profile extends Component {
             padding: "5px 0% 0%" // top left&right bottom
           }}
         >
-          <Col span={24}>
+          <Col span={1}>
+            <Icon
+              alt="LinkedIn: "
+              style={{ fontSize: "35px" }}
+              type="linkedin"
+            />
+          </Col>
+          <Col span={23}>
             <DisplayLinkField
               label="LinkedIn: "
               value={profile.linkedInPublicProfileUrl}
@@ -159,11 +136,18 @@ class Profile extends Component {
           justify="start"
           align="middle"
           style={{
-            padding: "5px 0% 0%" // top left&right bottom
+            padding: "0% 0% 0%" // top left&right bottom
           }}
         >
-          <Col span={24}>
-            <DisplayLinkField label="Website: " value={profile.websiteUrl} />
+          <Col span={1}>
+            <img
+              alt="Email: "
+              style={{ width: "35px" }}
+              src="https://user-images.githubusercontent.com/24757872/40867452-d7a6feaa-65c9-11e8-849f-9d144103b0c3.png"
+            />
+          </Col>
+          <Col span={23}>
+            <DisplayField label="E-mail: " value={profile.email} />
           </Col>
         </Row>
         <Row

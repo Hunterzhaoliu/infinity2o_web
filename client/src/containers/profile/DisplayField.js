@@ -251,20 +251,6 @@ class DisplayField extends Component {
     return (
       <Row type="flex" justify="start" align="middle">
         <Col
-          sm={{ span: 5 }}
-          md={{ span: 4 }}
-          lg={{ span: 3 }}
-          xl={{ span: 2 }}
-        >
-          <h3
-            style={{
-              color: colorTheme.text4Color
-            }}
-          >
-            {label}
-          </h3>
-        </Col>
-        <Col
           sm={{ span: 18, offset: 1 }}
           md={{ span: 19, offset: 1 }}
           lg={{ span: 20, offset: 1 }}

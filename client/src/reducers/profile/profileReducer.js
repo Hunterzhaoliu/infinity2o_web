@@ -18,8 +18,7 @@ import {
   SAVE_COLOR_THEME_ERROR,
   ON_CHANGE_EMAIL,
   ON_CHANGE_LINKEDIN_PROFILE_URL,
-  ON_CHANGE_GITHUB_PROFILE_URL,
-  ON_CHANGE_WEBSITE_URL
+  ON_CHANGE_GITHUB_PROFILE_URL
 } from "../../actions/types";
 
 let cloneObject = obj => {
@@ -33,7 +32,6 @@ let initialState = {
   interests: [],
   linkedInPublicProfileUrl: null,
   githubPublicProfileUrl: null,
-  websiteUrl: null,
   imageUrl: null,
   timeZone: [],
   availability: {},
@@ -43,7 +41,6 @@ let initialState = {
   newInterests: [],
   newLinkedInPublicProfileUrl: null,
   newGithubPublicProfileUrl: null,
-  newWebsiteUrl: null,
   newTimeZone: null,
   newAvailability: {},
   hasAgeError: false,
@@ -52,7 +49,6 @@ let initialState = {
   hasInterestsError: false,
   hasLinkedInPublicProfileUrlError: false,
   hasGithubPublicProfileUrlError: false,
-  hasWebsiteUrlError: false,
   hasTimeZoneError: false,
   hasAvailabilityError: false,
   save: null,
@@ -78,7 +74,6 @@ export default function(state = initialState, action) {
         newState.linkedInPublicProfileUrl =
           action.profile.linkedInPublicProfileUrl;
         newState.githubPublicProfileUrl = action.profile.githubPublicProfileUrl;
-        newState.websiteUrl = action.profile.websiteUrl;
         newState.imageUrl = action.profile.imageUrl;
         newState.timeZone = action.profile.timeZone;
         newState.availability = action.profile.availability;
@@ -90,7 +85,6 @@ export default function(state = initialState, action) {
           action.profile.linkedInPublicProfileUrl;
         newState.newGithubPublicProfileUrl =
           action.profile.githubPublicProfileUrl;
-        newState.newWebsiteUrl = action.profile.websiteUrl;
         newState.newTimeZone = action.profile.timeZone;
         newState.newAvailability = action.profile.availability;
         newState.asks = action.profile.asks;
@@ -130,10 +124,6 @@ export default function(state = initialState, action) {
     case ON_CHANGE_GITHUB_PROFILE_URL:
       newState.newGithubPublicProfileUrl = action.newGithubPublicProfileUrl;
       newState.hasGithubPublicProfileUrlError = action.hasError;
-      return newState;
-    case ON_CHANGE_WEBSITE_URL:
-      newState.newWebsiteUrl = action.newWebsiteUrl;
-      newState.hasWebsiteUrlError = action.hasError;
       return newState;
     case ON_CHANGE_TIME_ZONE:
       newState.newTimeZone = action.newTimeZone;

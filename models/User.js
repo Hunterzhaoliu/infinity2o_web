@@ -23,7 +23,6 @@ const userSchema = new Schema({
     imageUrl: String,
     linkedInPublicProfileUrl: String,
     githubPublicProfileUrl: String,
-    websiteUrl: String,
     age: { type: Number },
     interests: [String],
     timeZone: [String],
