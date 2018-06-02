@@ -91,10 +91,10 @@ class DisplayField extends Component {
 
           return (
             <Row type="flex" justify="start" align="middle">
-              <Col>
-                <p style={{ padding: "18px 0px 0px" }}>{finalDisplayString}</p>
+              <Col style={{ padding: "25px 0px 0px" }}>
+                <p>{finalDisplayString}</p>
               </Col>
-              <Col style={{ padding: "5px 0px 0px" }} offset={1}>
+              <Col offset={1} style={{ padding: "15px 0px 0px" }}>
                 {this.renderNeuronExplanation()}
               </Col>
             </Row>

@@ -36,17 +36,6 @@ class Profile extends Component {
     return (
       <div>
         <Row type="flex" justify="start" align="middle">
-          <Col>
-            <h2
-              style={{
-                color: colorTheme.keyText6Color
-              }}
-            >
-              {this.renderNameAndAge()}
-            </h2>
-          </Col>
-        </Row>
-        <Row type="flex" justify="start" align="middle">
           <Col
             span={24}
             style={{
@@ -60,8 +49,25 @@ class Profile extends Component {
           type="flex"
           justify="start"
           align="middle"
+          style={{ padding: "2px 0px 0px" }}
+        >
+          <Col span={2} />
+          <Col>
+            <h2
+              style={{
+                color: colorTheme.keyText6Color
+              }}
+            >
+              {this.renderNameAndAge()}
+            </h2>
+          </Col>
+        </Row>
+        <Row
+          type="flex"
+          justify="start"
+          align="middle"
           style={{
-            padding: "0% 0% 0%" // top left&right bottom
+            padding: "0px 0px 0px" // top left&right bottom
           }}
         >
           <Col span={1}>
@@ -80,7 +86,7 @@ class Profile extends Component {
           justify="start"
           align="middle"
           style={{
-            padding: "5px 0% 0%" // top left&right bottom
+            padding: "0px 0px 0px" // top left&right bottom
           }}
         >
           <Col span={1}>
@@ -99,17 +105,17 @@ class Profile extends Component {
           justify="start"
           align="middle"
           style={{
-            padding: "5px 0% 0%" // top left&right bottom
+            padding: "5px 0px 0px" // top left&right bottom
           }}
         >
           <Col span={1}>
             <Icon
               alt="LinkedIn: "
-              style={{ fontSize: "35px" }}
+              style={{ fontSize: "35px", color: "rgb(161, 102, 255)" }}
               type="linkedin"
             />
           </Col>
-          <Col span={23}>
+          <Col span={23} style={{ padding: "9px 0px 0px" }}>
             <DisplayLinkField
               label="LinkedIn: "
               value={profile.linkedInPublicProfileUrl}
@@ -121,10 +127,13 @@ class Profile extends Component {
           justify="start"
           align="middle"
           style={{
-            padding: "5px 0% 0%" // top left&right bottom
+            padding: "0px 0px 0px" // top left&right bottom
           }}
         >
-          <Col span={24}>
+          <Col span={1}>
+            <Icon alt="Github: " style={{ fontSize: "35px" }} type="github" />
+          </Col>
+          <Col span={23} style={{ padding: "9px 0px 0px" }}>
             <DisplayLinkField
               label="Github: "
               value={profile.githubPublicProfileUrl}
@@ -136,7 +145,7 @@ class Profile extends Component {
           justify="start"
           align="middle"
           style={{
-            padding: "0% 0% 0%" // top left&right bottom
+            padding: "0px 0px 0px" // top left&right bottom
           }}
         >
           <Col span={1}>
@@ -155,10 +164,17 @@ class Profile extends Component {
           justify="start"
           align="middle"
           style={{
-            padding: "5px 0% 0%" // top left&right bottom
+            padding: "5px 0px 0px" // top left&right bottom
           }}
         >
-          <Col span={24}>
+          <Col span={1}>
+            <img
+              alt="Time Zone: "
+              style={{ width: "35px" }}
+              src="https://user-images.githubusercontent.com/24757872/40868790-25f907ea-65d6-11e8-8dd1-2f3a79076082.png"
+            />
+          </Col>
+          <Col span={23}>
             <DisplayField label="Time Zone: " value={profile.timeZone[1]} />
           </Col>
         </Row>
@@ -167,10 +183,11 @@ class Profile extends Component {
           justify="start"
           align="middle"
           style={{
-            padding: "5px 0% 0%" // top left&right bottom
+            padding: "5px 0px 0px" // top left&right bottom
           }}
         >
-          <Col span={24}>
+          <Col span={1} />
+          <Col span={23}>
             <DisplayField label="Availability: " value={profile.availability} />
           </Col>
         </Row>
@@ -178,7 +195,7 @@ class Profile extends Component {
           type="flex"
           justify="start"
           style={{
-            padding: "5px 0% 0%" // top left&right bottom
+            padding: "5px 0px 0px" // top left&right bottom
           }}
         >
           <Col>
@@ -290,7 +307,7 @@ class Profile extends Component {
               <Col>
                 <h2
                   style={{
-                    padding: "25px 0% 0%", // top left&right bottom
+                    padding: "25px 0px 0px", // top left&right bottom
                     color: colorTheme.keyText6Color
                   }}
                 >
@@ -307,7 +324,7 @@ class Profile extends Component {
               <Col>
                 <h2
                   style={{
-                    padding: "25px 0% 0%", // top left&right bottom
+                    padding: "25px 0px 0px", // top left&right bottom
                     color: colorTheme.keyText6Color
                   }}
                 >
