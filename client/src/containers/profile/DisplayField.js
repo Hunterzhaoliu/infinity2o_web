@@ -59,6 +59,10 @@ class DisplayField extends Component {
   renderValue(label, value) {
     const { colorTheme, infinityStatus } = this.props;
     document.documentElement.style.setProperty(
+      `--text1Color`,
+      colorTheme.text1Color
+    );
+    document.documentElement.style.setProperty(
       `--text2Color`,
       colorTheme.text2Color
     );
@@ -126,6 +130,7 @@ class DisplayField extends Component {
         return value;
       }
     } else if (label === "Availability: ") {
+      // value = profile.availability
       if (Object.keys(value).length !== 0) {
         const daysOfWeek = [
           "monday",
@@ -137,12 +142,20 @@ class DisplayField extends Component {
           "sunday"
         ];
 
-        // makes sure user has atleast one open timeSlot
-        let totalTimeSlots = 0;
+        // determines the width of the table & checks if user has timeSlots
+        let numberOfDaysAvailable = 0;
+
         daysOfWeek.forEach(day => {
-          totalTimeSlots += value[day].length;
+          if (value[day].length > 0) {
+            numberOfDaysAvailable += 1;
+          }
         });
-        if (totalTimeSlots === 0) {
+        const widthOfTable = numberOfDaysAvailable * 75 + "px";
+        document.documentElement.style.setProperty(
+          `--widthOfTable`,
+          widthOfTable
+        );
+        if (numberOfDaysAvailable === 0) {
           return;
         }
 
@@ -188,13 +201,13 @@ class DisplayField extends Component {
         const indexInTimeSlot = {
           "6-8 AM": 0,
           "8-10 AM": 1,
-          "10-12 noon": 2,
+          "10-12 AM": 2,
           "12-2 PM": 3,
           "2-4 PM": 4,
           "4-6 PM": 5,
           "6-8 PM": 6,
           "8-10 PM": 7,
-          "10-12 midnight": 8
+          "10-12 PM": 8
         };
 
         let timeSlots = [
@@ -246,6 +259,7 @@ class DisplayField extends Component {
             bordered={true}
             pagination={false}
             showHeader={true}
+            size="small"
           />
         );
       }
@@ -267,10 +281,10 @@ class DisplayField extends Component {
     return (
       <Row type="flex" justify="start" align="middle">
         <Col
-          sm={{ span: 18, offset: 1 }}
-          md={{ span: 19, offset: 1 }}
-          lg={{ span: 20, offset: 1 }}
-          xl={{ span: 21, offset: 1 }}
+          sm={{ span: 18, offset: 0 }}
+          md={{ span: 19, offset: 0 }}
+          lg={{ span: 20, offset: 0 }}
+          xl={{ span: 21, offset: 0 }}
         >
           <h3
             style={{
