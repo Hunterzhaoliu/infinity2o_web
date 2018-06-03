@@ -59,8 +59,24 @@ class DisplayField extends Component {
   renderValue(label, value) {
     const { colorTheme, infinityStatus } = this.props;
     document.documentElement.style.setProperty(
+      `--text2Color`,
+      colorTheme.text2Color
+    );
+    document.documentElement.style.setProperty(
       `--text3Color`,
       colorTheme.text3Color
+    );
+    document.documentElement.style.setProperty(
+      `--text4Color`,
+      colorTheme.text4Color
+    );
+    document.documentElement.style.setProperty(
+      `--text5Color`,
+      colorTheme.text5Color
+    );
+    document.documentElement.style.setProperty(
+      `--text6Color`,
+      colorTheme.text6Color
     );
 
     if (
@@ -229,7 +245,6 @@ class DisplayField extends Component {
             columns={columnHeaders}
             bordered={true}
             pagination={false}
-            size="medium"
             showHeader={true}
           />
         );

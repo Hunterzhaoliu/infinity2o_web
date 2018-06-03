@@ -1,13 +1,44 @@
 .ant-table-content {
-	border-color: var(--text8Color);
-	background-color: var(--text8Color);
-	color: var(--text3Color);
+  background-color: var(--text7Color);
+  color: var(--text2Color);
+  -webkit-transition: red 0.3s ease;
+  transition: red 0.3s ease;
 }
 
 .ant-popover-inner-content {
-	background-color: var(--text7Color);
+  background-color: var(--text7Color);
 }
 
 .ant-popover-arrow {
-	background-color: var(--text7Color);
+  background-color: var(--text7Color);
+}
+
+.ant-table-thead > tr > th {
+  background: var(--text8Color);
+  color: var(--text4Color);
+  font-weight: 700;
+}
+
+.ant-table-bordered .ant-table-header > table,
+.ant-table-bordered .ant-table-body > table,
+.ant-table-bordered .ant-table-fixed-left table,
+.ant-table-bordered .ant-table-fixed-right table {
+  border: 1px solid var(--text6Color);
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.ant-table-bordered .ant-table-thead > tr > th,
+.ant-table-bordered .ant-table-tbody > tr > td {
+  border-right: 1px solid var(--text6Color);
+  border: 1px solid var(--text6Color);
+  border-bottom: 1px solid var(--text6Color);
+  border-top: 1px solid var(--text6Color);
+}
+
+.ant-table-thead > tr.ant-table-row-hover > td,
+.ant-table-tbody > tr.ant-table-row-hover > td,
+.ant-table-thead > tr:hover > td,
+.ant-table-tbody > tr:hover > td {
+  background: var(--text5Color);
 }
