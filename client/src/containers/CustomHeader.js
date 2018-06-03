@@ -252,12 +252,19 @@ class CustomHeader extends Component {
 
       return (
         <Row type="flex" justify="start">
-          <Col key="0">
+          <Col
+            style={{
+              padding: "3px 0px 0px"
+            }}
+            key="0"
+          >
             <Button
               style={{
                 borderColor: colorTheme.text7Color,
                 background: colorTheme.text7Color,
-                color: colorTheme.text2Color
+                color: colorTheme.text2Color,
+                padding: "0px 0px 0px 7px",
+                width: 100
               }}
             >
               <Dropdown overlay={menu} trigger={["click"]}>
@@ -265,7 +272,7 @@ class CustomHeader extends Component {
                   Options{" "}
                   <Icon
                     style={{
-                      paddingLeft: "7px",
+                      padding: "0px 7px 0px",
                       fontSize: 16,
                       color: colorTheme.keyText6Color
                     }}
