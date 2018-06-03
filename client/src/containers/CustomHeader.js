@@ -117,8 +117,12 @@ class CustomHeader extends Component {
         onClick={onProfile}
       >
         <Link to="/profile">
-          <div>
-            <Icon style={{ fontSize: 17 }} type="user" />
+          <div style={{ padding: "2px 0px 0px" }}>
+            <img
+              alt=""
+              style={{ width: 20 }}
+              src="https://user-images.githubusercontent.com/24757872/40881386-00fbc094-668b-11e8-96ca-47c0a9fafd56.png"
+            />
             {displayText}
           </div>
         </Link>
@@ -139,7 +143,13 @@ class CustomHeader extends Component {
         onClick={onTrainAI}
       >
         <Link to="/train_ai">
-          <div>Sorting Hat</div>
+          <div style={{ padding: "1px 0px 0px" }}>
+            <img
+              alt=""
+              style={{ width: 30, padding: "0px 0px 4px" }}
+              src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
+            />Sorting Hat
+          </div>
         </Link>
       </Button>
     );
@@ -158,7 +168,13 @@ class CustomHeader extends Component {
         onClick={onMatches}
       >
         <Link to="/matches">
-          <div>Matches</div>
+          <div style={{ padding: "1px 0px 0px" }}>
+            <img
+              alt=""
+              style={{ width: 32, padding: "0px 0px 1px" }}
+              src="https://user-images.githubusercontent.com/24757872/40881562-23db47c0-668f-11e8-84a6-29020f352353.png"
+            />Matches
+          </div>
         </Link>
       </Button>
     );
@@ -175,7 +191,13 @@ class CustomHeader extends Component {
           color: colorTheme.text4Color
         }}
       >
-        <a href="/api/logout">Logout</a>
+        <Link to="/api/logout">
+          <img
+            alt=""
+            style={{ width: 20 }}
+            src="https://user-images.githubusercontent.com/24757872/40881894-17153326-6698-11e8-960e-0c08d872b139.png"
+          />
+        </Link>
       </Button>
     );
   }
@@ -194,9 +216,11 @@ class CustomHeader extends Component {
         onClick={onPressConversations}
       >
         <Link to="/conversations">
-          <div>
-            <Icon type="message" />
-          </div>
+          <img
+            alt=""
+            style={{ width: 18, padding: "0px 0px 0px" }}
+            src="https://user-images.githubusercontent.com/24757872/40881815-7ea6867c-6696-11e8-9690-4b691d249fa8.png"
+          />
         </Link>
       </Button>
     );

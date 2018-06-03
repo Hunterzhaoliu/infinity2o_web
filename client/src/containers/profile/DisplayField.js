@@ -87,7 +87,8 @@ class DisplayField extends Component {
             this.numberWithCommas(displayNeuronsInBillions) +
             " (" +
             value +
-            " Billion)";
+            " Billion) " +
+            "Neurons";
 
           return (
             <Row type="flex" justify="start" align="middle">

@@ -6,7 +6,6 @@ import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { bindActionCreators } from "redux";
 import Options from "../payment/Options";
 import DisplayField from "./DisplayField";
-import DisplayLinkField from "./DisplayLinkField";
 import VoteEdit from "./votes/VoteEdit";
 import { Layout, Row, Col, Button, Avatar, Icon } from "antd";
 import "./Profile.css";
@@ -20,7 +19,6 @@ class Profile extends Component {
   }
   renderNameAndAge() {
     const { profile } = this.props;
-    console.log("profile.age = ", profile.age);
     if (profile.age !== undefined) {
       return profile.name + ", " + profile.age;
     } else {
@@ -52,7 +50,7 @@ class Profile extends Component {
           style={{ padding: "2px 0px 0px" }}
         >
           <Col span={2} />
-          <Col>
+          <Col style={{ padding: "10px 0px 0px" }}>
             <h2
               style={{
                 color: colorTheme.keyText6Color
@@ -60,6 +58,24 @@ class Profile extends Component {
             >
               {this.renderNameAndAge()}
             </h2>
+          </Col>
+          <Col style={{ padding: "0px 29px 0px" }}>
+            <a href={profile.linkedInPublicProfileUrl}>
+              <Icon
+                alt="LinkedIn: "
+                style={{ fontSize: "35px", color: "rgb(13, 142, 255)" }}
+                type="linkedin"
+              />
+            </a>
+          </Col>
+          <Col>
+            <a href={profile.githubPublicProfileUrl}>
+              <Icon
+                alt="Github: "
+                style={{ fontSize: "35px", color: colorTheme.text3Color }}
+                type="github"
+              />
+            </a>
           </Col>
         </Row>
         <Row
@@ -98,46 +114,6 @@ class Profile extends Component {
           </Col>
           <Col span={23}>
             <DisplayField label="Interest(s): " value={profile.interests} />
-          </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
-            padding: "5px 0px 0px" // top left&right bottom
-          }}
-        >
-          <Col span={1}>
-            <Icon
-              alt="LinkedIn: "
-              style={{ fontSize: "35px", color: "rgb(161, 102, 255)" }}
-              type="linkedin"
-            />
-          </Col>
-          <Col span={23} style={{ padding: "9px 0px 0px" }}>
-            <DisplayLinkField
-              label="LinkedIn: "
-              value={profile.linkedInPublicProfileUrl}
-            />
-          </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
-            padding: "0px 0px 0px" // top left&right bottom
-          }}
-        >
-          <Col span={1}>
-            <Icon alt="Github: " style={{ fontSize: "35px" }} type="github" />
-          </Col>
-          <Col span={23} style={{ padding: "9px 0px 0px" }}>
-            <DisplayLinkField
-              label="Github: "
-              value={profile.githubPublicProfileUrl}
-            />
           </Col>
         </Row>
         <Row
