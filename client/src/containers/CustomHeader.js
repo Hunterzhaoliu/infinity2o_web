@@ -80,7 +80,9 @@ class CustomHeader extends Component {
           fontSize: 17,
           borderColor: colorTheme.tourButtonColor,
           background: colorTheme.tourButtonColor,
-          color: colorTheme.tourButtonTextColor
+          color: colorTheme.tourButtonTextColor,
+          padding: "0px 0px 0px 0px",
+          width: 34
         }}
         onClick={onTour}
       >
@@ -184,7 +186,9 @@ class CustomHeader extends Component {
           fontSize: 17,
           borderColor: colorTheme.conversationsButtonColor,
           background: colorTheme.conversationsButtonColor,
-          color: colorTheme.conversationsButtonTextColor
+          color: colorTheme.conversationsButtonTextColor,
+          padding: "0px 0px 0px",
+          width: 35
         }}
         onClick={onPressConversations}
       >
@@ -207,7 +211,9 @@ class CustomHeader extends Component {
         style={{
           borderColor: colorTheme.text7Color,
           background: colorTheme.text7Color,
-          color: colorTheme.text4Color
+          color: colorTheme.text4Color,
+          padding: "0px 0px 0px",
+          width: 38
         }}
       >
         <Link to="/api/logout">
@@ -281,61 +287,63 @@ class CustomHeader extends Component {
           <div>
             <Row type="flex" justify="space-between">
               <Col
-                md={{ span: 21, offset: 0 }}
-                lg={{ span: 18, offset: 0 }}
-                xl={{ span: 14, offset: 0 }}
+                style={{ padding: "0px 0px 0px" }}
+                md={{ span: 22, offset: 0 }}
+                lg={{ span: 22, offset: 0 }}
+                xl={{ span: 22, offset: 0 }}
+                key="0"
               >
-                <Row type="flex" justify="space-between">
+                <Row type="flex">
                   <Col
                     style={{ padding: "0px 0px 0px" }}
-                    md={{ span: 5, offset: 0 }}
-                    lg={{ span: 4, offset: 0 }}
-                    xl={{ span: 4, offset: 0 }}
+                    md={{ offset: 0 }}
+                    lg={{ offset: 0 }}
+                    xl={{ offset: 0 }}
                     key="0"
                   >
                     {this.renderChangeThemeButton()}
                   </Col>
                   <Col
                     style={{ padding: "2px 0px 0px" }}
-                    md={{ span: 2, offset: 0 }}
-                    lg={{ span: 1, offset: 0 }}
-                    xl={{ span: 1, offset: 0 }}
+                    md={{ offset: 1 }}
+                    lg={{ offset: 3 }}
+                    xl={{ offset: 3 }}
                     key="1"
                   >
                     {this.renderTourButton()}
                   </Col>
                   <Col
                     style={{ padding: ".5px 0px 0px" }}
-                    md={{ span: 3, offset: 0 }}
-                    lg={{ span: 2, offset: 0 }}
-                    xl={{ span: 2, offset: 0 }}
+                    md={{ offset: 1 }}
+                    lg={{ offset: 1 }}
+                    xl={{ offset: 1 }}
                     key="2"
                   >
                     {this.renderProfileButton()}
                   </Col>
                   <Col
                     style={{ padding: "1px 0px 0px" }}
-                    md={{ span: 4, offset: 0 }}
-                    lg={{ span: 3, offset: 0 }}
-                    xl={{ span: 3, offset: 0 }}
+                    md={{ offset: 1 }}
+                    lg={{ offset: 1 }}
+                    xl={{ offset: 1 }}
                     key="3"
                   >
                     {this.renderTrainAIButton()}
                   </Col>
                   <Col
                     style={{ padding: "1px 0px 0px" }}
-                    md={{ span: 3, offset: 0 }}
-                    lg={{ span: 2, offset: 0 }}
-                    xl={{ span: 2, offset: 0 }}
+                    md={{ offset: 1 }}
+                    lg={{ offset: 1 }}
+                    xl={{ offset: 1 }}
                     key="4"
                   >
                     {this.renderMatchesButton()}
                   </Col>
                   <Col
                     style={{ padding: "1.5px 0px 0px" }}
-                    md={{ span: 3, offset: 0 }}
-                    lg={{ span: 1, offset: 0 }}
-                    xl={{ span: 1, offset: 0 }}
+                    md={{ offset: 1 }}
+                    lg={{ offset: 1 }}
+                    xl={{ offset: 1 }}
                     key="5"
                   >
                     {this.renderConversationsButton()}
@@ -344,9 +352,9 @@ class CustomHeader extends Component {
               </Col>
               <Col
                 style={{ padding: "0px 0px 0px" }}
-                md={{ span: 3 }}
-                lg={{ span: 2 }}
-                xl={{ span: 2 }}
+                md={{ offset: 0 }}
+                lg={{ offset: 0 }}
+                xl={{ offset: 0 }}
                 key="6"
               >
                 {this.renderLogoutButton()}
