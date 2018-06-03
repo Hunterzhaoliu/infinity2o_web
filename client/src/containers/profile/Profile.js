@@ -237,7 +237,7 @@ class Profile extends Component {
           type="flex"
           justify="start"
           style={{
-            padding: "5px 0px 0px" // top right bottom left
+            padding: "15px 0px 0px" // top right bottom left
           }}
         >
           <Col>
