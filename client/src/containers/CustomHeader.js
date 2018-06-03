@@ -6,7 +6,6 @@ import * as colorThemeActionCreators from "../actions/colorTheme";
 import * as authActionCreators from "../actions/auth";
 import * as customHeaderActionCreators from "../actions/customHeader";
 import Logo from "./favicon.png";
-
 import { Layout, Row, Col, Button, Icon, Dropdown, Menu } from "antd";
 const { Header } = Layout;
 
@@ -117,10 +116,10 @@ class CustomHeader extends Component {
         onClick={onProfile}
       >
         <Link to="/profile">
-          <div style={{ padding: "2px 0px 0px" }}>
+          <div style={{ padding: "1px 0px 0px" }}>
             <img
               alt=""
-              style={{ width: 20 }}
+              style={{ width: 20, padding: "1px 0px 0px" }}
               src="https://user-images.githubusercontent.com/24757872/40881386-00fbc094-668b-11e8-96ca-47c0a9fafd56.png"
             />
             {displayText}
@@ -143,13 +142,11 @@ class CustomHeader extends Component {
         onClick={onTrainAI}
       >
         <Link to="/train_ai">
-          <div style={{ padding: "1px 0px 0px" }}>
-            <img
-              alt=""
-              style={{ width: 30, padding: "0px 0px 4px" }}
-              src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
-            />Sorting Hat
-          </div>
+          <img
+            alt=""
+            style={{ width: 30, padding: "0px 0px 3px" }}
+            src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
+          />Sorting Hat
         </Link>
       </Button>
     );
@@ -168,35 +165,11 @@ class CustomHeader extends Component {
         onClick={onMatches}
       >
         <Link to="/matches">
-          <div style={{ padding: "1px 0px 0px" }}>
-            <img
-              alt=""
-              style={{ width: 32, padding: "0px 0px 1px" }}
-              src="https://user-images.githubusercontent.com/24757872/40881562-23db47c0-668f-11e8-84a6-29020f352353.png"
-            />Matches
-          </div>
-        </Link>
-      </Button>
-    );
-  }
-
-  renderLogoutButton() {
-    const { colorTheme } = this.props;
-
-    return (
-      <Button
-        style={{
-          borderColor: colorTheme.text7Color,
-          background: colorTheme.text7Color,
-          color: colorTheme.text4Color
-        }}
-      >
-        <Link to="/api/logout">
           <img
             alt=""
-            style={{ width: 20 }}
-            src="https://user-images.githubusercontent.com/24757872/40881894-17153326-6698-11e8-960e-0c08d872b139.png"
-          />
+            style={{ width: 32, padding: "0px 0px 1px" }}
+            src="https://user-images.githubusercontent.com/24757872/40881562-23db47c0-668f-11e8-84a6-29020f352353.png"
+          />Matches
         </Link>
       </Button>
     );
@@ -218,8 +191,30 @@ class CustomHeader extends Component {
         <Link to="/conversations">
           <img
             alt=""
-            style={{ width: 18, padding: "0px 0px 0px" }}
+            style={{ width: 18, padding: "0px 0px 4px" }}
             src="https://user-images.githubusercontent.com/24757872/40881815-7ea6867c-6696-11e8-9690-4b691d249fa8.png"
+          />
+        </Link>
+      </Button>
+    );
+  }
+
+  renderLogoutButton() {
+    const { colorTheme } = this.props;
+
+    return (
+      <Button
+        style={{
+          borderColor: colorTheme.text7Color,
+          background: colorTheme.text7Color,
+          color: colorTheme.text4Color
+        }}
+      >
+        <Link to="/api/logout">
+          <img
+            alt=""
+            style={{ width: 20, padding: "0px 0px 1px" }}
+            src="https://user-images.githubusercontent.com/24757872/40881894-17153326-6698-11e8-960e-0c08d872b139.png"
           />
         </Link>
       </Button>
@@ -292,56 +287,68 @@ class CustomHeader extends Component {
               >
                 <Row type="flex" justify="space-between">
                   <Col
-                    md={{ span: 5 }}
-                    lg={{ span: 4 }}
-                    xl={{ span: 4 }}
+                    style={{ padding: "0px 0px 0px" }}
+                    md={{ span: 5, offset: 0 }}
+                    lg={{ span: 4, offset: 0 }}
+                    xl={{ span: 4, offset: 0 }}
                     key="0"
                   >
                     {this.renderChangeThemeButton()}
                   </Col>
                   <Col
+                    style={{ padding: "2px 0px 0px" }}
                     md={{ span: 2, offset: 0 }}
                     lg={{ span: 1, offset: 0 }}
                     xl={{ span: 1, offset: 0 }}
-                    key="-1"
+                    key="1"
                   >
                     {this.renderTourButton()}
                   </Col>
                   <Col
+                    style={{ padding: ".5px 0px 0px" }}
                     md={{ span: 3, offset: 0 }}
                     lg={{ span: 2, offset: 0 }}
                     xl={{ span: 2, offset: 0 }}
-                    key="1"
+                    key="2"
                   >
                     {this.renderProfileButton()}
                   </Col>
                   <Col
+                    style={{ padding: "1px 0px 0px" }}
                     md={{ span: 4, offset: 0 }}
                     lg={{ span: 3, offset: 0 }}
                     xl={{ span: 3, offset: 0 }}
-                    key="2"
+                    key="3"
                   >
                     {this.renderTrainAIButton()}
                   </Col>
                   <Col
+                    style={{ padding: "1px 0px 0px" }}
                     md={{ span: 3, offset: 0 }}
                     lg={{ span: 2, offset: 0 }}
                     xl={{ span: 2, offset: 0 }}
-                    key="3"
+                    key="4"
                   >
                     {this.renderMatchesButton()}
                   </Col>
                   <Col
+                    style={{ padding: "1.5px 0px 0px" }}
                     md={{ span: 3, offset: 0 }}
                     lg={{ span: 1, offset: 0 }}
                     xl={{ span: 1, offset: 0 }}
-                    key="4"
+                    key="5"
                   >
                     {this.renderConversationsButton()}
                   </Col>
                 </Row>
               </Col>
-              <Col md={{ span: 3 }} lg={{ span: 2 }} xl={{ span: 2 }} key="5">
+              <Col
+                style={{ padding: "0px 0px 0px" }}
+                md={{ span: 3 }}
+                lg={{ span: 2 }}
+                xl={{ span: 2 }}
+                key="6"
+              >
                 {this.renderLogoutButton()}
               </Col>
             </Row>
