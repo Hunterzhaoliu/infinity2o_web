@@ -43,15 +43,15 @@ class CustomSider extends Component {
           collapsed={isSiderCollapsed}
           collapsedWidth={0}
           style={{
-            borderColor: colorTheme.text6Color,
-            background: colorTheme.text6Color
+            borderColor: colorTheme.text8Color,
+            background: colorTheme.text8Color
           }}
           width={180}
         >
           <Menu
             style={{
-              borderColor: colorTheme.text6Color,
-              background: colorTheme.text6Color
+              borderColor: colorTheme.text8Color,
+              background: colorTheme.text8Color
             }}
             mode="inline"
             selectable={false}

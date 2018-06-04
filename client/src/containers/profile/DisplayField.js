@@ -4,10 +4,6 @@ import { Row, Col, Table, Popover, Button, Icon } from "antd";
 import "./DisplayField.css";
 
 class DisplayField extends Component {
-  numberWithCommas = x => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
   renderNeuronExplanation() {
     const { colorTheme } = this.props;
 
@@ -103,12 +99,7 @@ class DisplayField extends Component {
         let displayNeuronsInBillions = value;
         if (displayNeuronsInBillions !== undefined) {
           displayNeuronsInBillions *= 1000000000;
-          let finalDisplayString =
-            this.numberWithCommas(displayNeuronsInBillions) +
-            " (" +
-            value +
-            " Billion) " +
-            "Neurons";
+          let finalDisplayString = value + " Billion Neurons";
 
           return (
             <Row type="flex" justify="start" align="middle">
