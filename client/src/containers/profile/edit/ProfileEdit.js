@@ -52,8 +52,7 @@ class ProfileEdit extends Component {
       onChangeName,
       onChangeEmail,
       onChangeLinkedInPublicProfileUrl,
-      onChangeGithubPublicProfileUrl,
-      onChangeWebsiteUrl
+      onChangeGithubPublicProfileUrl
     } = this.props;
 
     return (
@@ -155,25 +154,6 @@ class ProfileEdit extends Component {
               errorMessage="Invalid github link. Needs to start with http:// or https://"
               hasError={profile.hasGithubPublicProfileUrlError}
               onChange={onChangeGithubPublicProfileUrl}
-            />
-          </Col>
-        </Row>
-        <Row
-          type="flex"
-          justify="start"
-          align="middle"
-          style={{
-            padding: "1% 0% 0%" // top left&right bottom
-          }}
-        >
-          <Col span={24}>
-            <InputField
-              value={profile.newWebsiteUrl}
-              width={280}
-              label="Website:"
-              errorMessage="Invalid website link. Needs to start with http:// or https://"
-              hasError={profile.hasWebsiteUrlError}
-              onChange={onChangeWebsiteUrl}
             />
           </Col>
         </Row>
@@ -298,9 +278,6 @@ function mapDispatchToProps(dispatch) {
       profileDispatchers.onChangeGithubPublicProfileUrl(
         newGithubPublicProfileUrl
       );
-    },
-    onChangeWebsiteUrl: newWebsiteUrl => {
-      profileDispatchers.onChangeWebsiteUrl(newWebsiteUrl);
     }
   };
 }
