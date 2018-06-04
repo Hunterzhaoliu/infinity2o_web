@@ -7,8 +7,9 @@ export const updateWindowWidth = newWindowWidth => dispatch => {
   });
 };
 
-export const toggleSider = () => dispatch => {
+export const toggleMenu = siderDisplay => dispatch => {
   dispatch({
-    type: TOGGLE_SIDER
+    type: TOGGLE_SIDER,
+    siderDisplay: siderDisplay
   });
 };
