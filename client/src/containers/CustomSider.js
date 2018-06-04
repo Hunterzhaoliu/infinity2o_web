@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import * as customHeaderActionCreators from "../actions/customHeader";
 import * as colorThemeActionCreators from "../actions/colorTheme";
 import * as authActionCreators from "../actions/auth";
-import * as customHeaderActionCreators from "../actions/customHeader";
-// import Logo from "./favicon.png";
-import { Layout, Row, Col, Button, Icon } from "antd";
-const { Header } = Layout;
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Layout, Menu, Icon, Button } from "antd";
+const { Sider } = Layout;
 
-class CustomHeader extends Component {
+class CustomSider extends Component {
   constructor(props) {
     super(props);
     this.props.fetchUserProfile(); // to show correct neuron number
@@ -235,157 +234,42 @@ class CustomHeader extends Component {
     );
   }
 
-  renderHeaderButtons() {
-    const {
-      colorTheme,
-      auth,
-      windowWidth,
-      siderDisplay,
-      toggleSider
-    } = this.props;
-    if (windowWidth < 768) {
-      // show a menu with buttons instead of nav bar
-      let siderIcon;
-      if (siderDisplay === false) {
-        siderIcon = "menu-unfold";
-      } else {
-        siderIcon = "menu-fold";
-      }
-
-      return (
-        <Row type="flex" justify="start">
-          <Col
-            style={{
-              padding: "3px 0px 0px"
-            }}
-            key="0"
-          >
-            <Button
-              style={{
-                borderColor: colorTheme.text7Color,
-                background: colorTheme.text7Color,
-                color: colorTheme.text2Color
-              }}
-              onClick={toggleSider}
-            >
-              <Icon type={siderIcon} />
-            </Button>
-          </Col>
-        </Row>
-      );
-    }
-    switch (auth.loggedInState) {
-      case "not_logged_in":
-        return;
-      case "logged_in":
-        return (
-          <div>
-            <Row type="flex" justify="space-between">
-              <Col
-                style={{ padding: "0px 0px 0px" }}
-                md={{ span: 22, offset: 0 }}
-                lg={{ span: 22, offset: 0 }}
-                xl={{ span: 22, offset: 0 }}
-                key="0"
-              >
-                <Row type="flex">
-                  <Col
-                    style={{ padding: "0px 0px 0px" }}
-                    md={{ offset: 0 }}
-                    lg={{ offset: 0 }}
-                    xl={{ offset: 0 }}
-                    key="0"
-                  >
-                    {this.renderChangeThemeButton()}
-                  </Col>
-                  <Col
-                    style={{ padding: "2px 0px 0px" }}
-                    md={{ offset: 1 }}
-                    lg={{ offset: 3 }}
-                    xl={{ offset: 3 }}
-                    key="1"
-                  >
-                    {this.renderTourButton()}
-                  </Col>
-                  <Col
-                    style={{ padding: ".5px 0px 0px" }}
-                    md={{ offset: 1 }}
-                    lg={{ offset: 1 }}
-                    xl={{ offset: 1 }}
-                    key="2"
-                  >
-                    {this.renderProfileButton()}
-                  </Col>
-                  <Col
-                    style={{ padding: "1px 0px 0px" }}
-                    md={{ offset: 1 }}
-                    lg={{ offset: 1 }}
-                    xl={{ offset: 1 }}
-                    key="3"
-                  >
-                    {this.renderSortingHatButton()}
-                  </Col>
-                  <Col
-                    style={{ padding: "1px 0px 0px" }}
-                    md={{ offset: 1 }}
-                    lg={{ offset: 1 }}
-                    xl={{ offset: 1 }}
-                    key="4"
-                  >
-                    {this.renderMatchesButton()}
-                  </Col>
-                  <Col
-                    style={{ padding: "1.5px 0px 0px" }}
-                    md={{ offset: 1 }}
-                    lg={{ offset: 1 }}
-                    xl={{ offset: 1 }}
-                    key="5"
-                  >
-                    {this.renderConversationsButton()}
-                  </Col>
-                </Row>
-              </Col>
-              <Col
-                style={{ padding: "0px 0px 0px" }}
-                md={{ offset: 0 }}
-                lg={{ offset: 0 }}
-                xl={{ offset: 0 }}
-                key="6"
-              >
-                {this.renderLogoutButton()}
-              </Col>
-            </Row>
-          </div>
-        );
-      default:
-        console.log("ERROR: site in invalid state = ", auth.loggedInState);
-    }
-  }
-
   render() {
-    const { colorTheme, auth } = this.props;
-    let headerBackground;
-    switch (auth.loggedInState) {
-      case "not_logged_in":
-        headerBackground = colorTheme.backgroundColor;
-        break;
-      case "logged_in":
-        headerBackground = colorTheme.text8Color;
-        break;
-      default:
+    const { colorTheme, windowWidth, siderDisplay } = this.props;
+    let isSiderCollapsed = !siderDisplay;
+    if (windowWidth < 768) {
+      return (
+        <Sider
+          trigger={null}
+          collapsible={true}
+          collapsed={isSiderCollapsed}
+          collapsedWidth={0}
+          style={{
+            borderColor: colorTheme.text6Color,
+            background: colorTheme.text6Color
+          }}
+          width={180}
+        >
+          <Menu
+            style={{
+              borderColor: colorTheme.text6Color,
+              background: colorTheme.text6Color
+            }}
+            mode="inline"
+          >
+            <Menu.Item key="1">{this.renderChangeThemeButton()}</Menu.Item>
+            <Menu.Item key="2">{this.renderTourButton()}</Menu.Item>
+            <Menu.Item key="3">{this.renderProfileButton()}</Menu.Item>
+            <Menu.Item key="4">{this.renderSortingHatButton()}</Menu.Item>
+            <Menu.Item key="5">{this.renderMatchesButton()}</Menu.Item>
+            <Menu.Item key="6">{this.renderConversationsButton()}</Menu.Item>
+            <Menu.Item key="7">{this.renderLogoutButton()}</Menu.Item>
+          </Menu>
+        </Sider>
+      );
+    } else {
+      return <div />;
     }
-    return (
-      <Header
-        style={{
-          background: headerBackground,
-          position: "fixed",
-          zIndex: 1, // make every component display under the header
-          width: "100%"
-        }}
-      >
-        {this.renderHeaderButtons()}
-      </Header>
-    );
   }
 }
 
@@ -444,11 +328,8 @@ function mapDispatchToProps(dispatch) {
     },
     updateWindowWidth: newWindowWidth => {
       customHeaderDispatchers.updateWindowWidth(newWindowWidth);
-    },
-    toggleSider: () => {
-      customHeaderDispatchers.toggleSider();
     }
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomSider);
