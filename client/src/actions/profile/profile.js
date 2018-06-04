@@ -12,8 +12,7 @@ import {
   DECREMENT_NEURONS_ERROR,
   ON_CHANGE_EMAIL,
   ON_CHANGE_LINKEDIN_PROFILE_URL,
-  ON_CHANGE_GITHUB_PROFILE_URL,
-  ON_CHANGE_WEBSITE_URL
+  ON_CHANGE_GITHUB_PROFILE_URL
 } from "../types";
 import {
   isValidName,
@@ -69,21 +68,6 @@ export const onChangeGithubPublicProfileUrl = newGithubPublicProfileUrl => dispa
     dispatch({
       type: ON_CHANGE_GITHUB_PROFILE_URL,
       newGithubPublicProfileUrl: newGithubPublicProfileUrl,
-      hasError: true
-    });
-  }
-};
-export const onChangeWebsiteUrl = newWebsiteUrl => dispatch => {
-  if (validUrl.isUri(newWebsiteUrl)) {
-    dispatch({
-      type: ON_CHANGE_WEBSITE_URL,
-      newWebsiteUrl: newWebsiteUrl,
-      hasError: false
-    });
-  } else {
-    dispatch({
-      type: ON_CHANGE_WEBSITE_URL,
-      newWebsiteUrl: newWebsiteUrl,
       hasError: true
     });
   }
@@ -168,9 +152,6 @@ export const saveProfile = (values, history) => async dispatch => {
   }
   if (values.newGithubPublicProfileUrl === null) {
     values.newGithubPublicProfileUrl = values.githubPublicProfileUrl;
-  }
-  if (values.newWebsiteUrl === null) {
-    values.newWebsiteUrl = values.websiteUrl;
   }
   const response = await axios.post("/api/profile", values);
   if (response.status === 200) {
