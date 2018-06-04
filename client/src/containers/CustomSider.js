@@ -54,6 +54,7 @@ class CustomSider extends Component {
               background: colorTheme.text6Color
             }}
             mode="inline"
+            selectable={false}
           >
             <Menu.Item key="1">
               <ChangeThemeButton />
