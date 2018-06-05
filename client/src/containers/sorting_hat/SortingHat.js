@@ -61,29 +61,22 @@ class SortingHat extends Component {
               Asking questions:
             </h2>
           </Col>
-          <Col
-            sm={{ offset: 1 }}
-            md={{ offset: 1 }}
-            lg={{ offset: 1 }}
-            xl={{ offset: 1 }}
-            style={{ padding: "0px 0px 7px 0px" }}
-          >
+          <Col style={{ padding: "0px 0px 7px 25px" }}>
             <Button
               key="1"
               style={{
-                borderColor: colorTheme.text7Color,
-                background: colorTheme.text7Color,
-                color: colorTheme.text2Color,
+                borderColor: colorTheme.keyText7Color,
+                background: colorTheme.keyText7Color,
+                color: colorTheme.keyText7Color,
                 width: 32,
                 padding: "0px 0px 0px"
               }}
             >
-              <a href="/sorting_hat/ask">
-                <img
-                  alt=""
-                  style={{ width: 25, padding: "2px 0px 0px 2px" }}
-                  src="https://user-images.githubusercontent.com/24757872/40990146-762c3ffc-68b5-11e8-80df-4c688ab3dd9b.png"
-                />
+              <a
+                style={{ color: colorTheme.text2Color }}
+                href="/sorting_hat/ask"
+              >
+                Ask
               </a>
             </Button>
           </Col>

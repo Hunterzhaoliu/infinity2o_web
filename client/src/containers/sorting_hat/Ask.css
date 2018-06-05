@@ -1,0 +1,4 @@
+/* placeholder color */
+.ant-input::-webkit-input-placeholder {
+  color: var(--text5Color);
+}
