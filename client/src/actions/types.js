@@ -17,6 +17,7 @@ export const MOVE_TO_SORTING_HAT = "MOVE_TO_SORTING_HAT";
 export const MOVE_TO_MATCHES = "MOVE_TO_MATCHES";
 export const MOVE_TO_SIGNED_IN_LANDING = "MOVE_TO_SIGNED_IN_LANDING";
 export const UPDATE_WINDOW_WIDTH = "UPDATE_WINDOW_WIDTH";
+export const TOGGLE_SIDER = "TOGGLE_SIDER";
 
 // profile/ProfileEdit.js
 export const ON_CHANGE_NAME = "ON_CHANGE_NAME";

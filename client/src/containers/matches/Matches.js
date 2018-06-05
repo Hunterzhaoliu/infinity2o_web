@@ -254,7 +254,7 @@ class Matches extends Component {
               color: colorTheme.text3Color
             }}
           >
-            Recieve your first 2 matches by voting on 8 questions in Train AI
+            Recieve your first 2 matches by voting on 8 questions in Sorting Hat
           </h2>
           <h3
             style={{
@@ -279,7 +279,7 @@ class Matches extends Component {
               color: colorTheme.text3Color
             }}
           >
-            You're out of matches for today. Vote on questions in Train AI to
+            You're out of matches for today. Vote on questions in Sorting Hat to
             get better matches.
           </h2>
           <h3

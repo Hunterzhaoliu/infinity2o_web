@@ -4,10 +4,6 @@ import { Row, Col, Table, Popover, Button, Icon } from "antd";
 import "./DisplayField.css";
 
 class DisplayField extends Component {
-  numberWithCommas = x => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
   renderNeuronExplanation() {
     const { colorTheme } = this.props;
 
@@ -103,12 +99,7 @@ class DisplayField extends Component {
         let displayNeuronsInBillions = value;
         if (displayNeuronsInBillions !== undefined) {
           displayNeuronsInBillions *= 1000000000;
-          let finalDisplayString =
-            this.numberWithCommas(displayNeuronsInBillions) +
-            " (" +
-            value +
-            " Billion) " +
-            "Neurons";
+          let finalDisplayString = value + " Billion Neurons";
 
           return (
             <Row type="flex" justify="start" align="middle">
@@ -264,15 +255,25 @@ class DisplayField extends Component {
         );
       }
     } else if (label === "Interest(s): ") {
-      let formattedValue = "";
-      let i;
-      for (i = 0; i < value.length; i++) {
-        formattedValue += value[i];
-        if (i !== value.length - 1) {
-          formattedValue += ", ";
+      // value = profile.interests
+      let formattedInterests = "";
+      let upperCaseInterest = "";
+      for (let i = 0; i < value.length; i++) {
+        upperCaseInterest = value[i][0].toUpperCase() + value[i].substring(1);
+        // replaces underscore in two word interests with space
+        upperCaseInterest = upperCaseInterest.replace(/_/g, " ");
+        formattedInterests += upperCaseInterest;
+        // adds comma between interests
+        if (value.length === 2 && i === 0) {
+          formattedInterests += " & ";
+        } else if (i !== value.length - 1) {
+          formattedInterests += ", ";
+          if (i === value.length - 2) {
+            formattedInterests += "& ";
+          }
         }
       }
-      return formattedValue;
+      return formattedInterests;
     }
   }
 
