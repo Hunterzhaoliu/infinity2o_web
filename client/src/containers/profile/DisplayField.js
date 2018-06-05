@@ -57,28 +57,12 @@ class DisplayField extends Component {
       colorTheme.backgroundColor
     );
     document.documentElement.style.setProperty(
-      `--text1Color`,
-      colorTheme.text1Color
-    );
-    document.documentElement.style.setProperty(
-      `--text2Color`,
-      colorTheme.text2Color
-    );
-    document.documentElement.style.setProperty(
       `--text3Color`,
       colorTheme.text3Color
     );
     document.documentElement.style.setProperty(
       `--text4Color`,
       colorTheme.text4Color
-    );
-    document.documentElement.style.setProperty(
-      `--text5Color`,
-      colorTheme.text5Color
-    );
-    document.documentElement.style.setProperty(
-      `--text6Color`,
-      colorTheme.text6Color
     );
     document.documentElement.style.setProperty(
       `--text7Color`,
