@@ -53,9 +53,14 @@
   color: var(--text2Color);
 }
 
-/* puts a color around the selected box */
-/* .ant-cascader-picker:focus .ant-cascader-input {
-  border-color: var(--text8Color);
-  -webkit-box-shadow: 0 0 0 0px var(--text8Color);
-  box-shadow: 0 0 0 0px var(--text8Color);
-} */
+/* puts a color around the timeZone box after selection */
+.ant-cascader-picker:focus .ant-cascader-input {
+  border-color: var(--text7Color);
+  -webkit-box-shadow: 0 0 0 0px var(--text7Color);
+  box-shadow: 0 0 0 0px var(--text7Color);
+}
+
+/* color of Time Zone box when hover */
+.ant-input:hover {
+  border-color: var(--text7Color);
+}

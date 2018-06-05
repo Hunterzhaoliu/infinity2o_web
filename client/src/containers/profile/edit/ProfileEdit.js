@@ -6,7 +6,7 @@ import * as profileActionCreators from "../../../actions/profile/profile";
 import { bindActionCreators } from "redux";
 import InputField from "./InputField";
 import InputFieldNumber from "./InputFieldNumber";
-import InputFieldSelect from "./interests/InputFieldSelect";
+import InputInterests from "./interests/InputInterests";
 import InputSchedule from "./availability/InputSchedule";
 import InputTimeZone from "./timeZone/InputTimeZone";
 import "./ProfileEdit.css";
@@ -116,7 +116,7 @@ class ProfileEdit extends Component {
           }}
         >
           <Col span={24}>
-            <InputFieldSelect width={280} label="Interest(s):" />
+            <InputInterests width={280} label="Interest(s):" />
           </Col>
         </Row>
         <Row

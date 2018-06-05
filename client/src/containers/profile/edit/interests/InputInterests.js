@@ -1,34 +1,49 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import * as profileActionCreators from "../../../../actions/profile/profile";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Row, Col, Cascader } from "antd";
-import timeZones from "./timeZones";
+import optionFields from "./optionFields";
 import ErrorMessage from "../ErrorMessage";
-import "./InputTimeZone.css";
+// import "../ProfileEdit.css";
+import "./InputInterests.css";
 
-class InputTimeZone extends Component {
-  onChangeTimeZone = e => {
-    this.props.onChangeTimeZone(e);
+import { Row, Col, Select } from "antd";
+const { Option } = Select;
+
+class InputInterests extends Component {
+  renderOptions() {
+    const { colorTheme } = this.props;
+
+    return _.map(optionFields, option => {
+      return (
+        <Option
+          style={{
+            background: colorTheme.text8Color,
+            color: colorTheme.text4Color
+          }}
+          value={option.value}
+          key={option.value}
+        >
+          {option.name}
+        </Option>
+      );
+    });
+  }
+
+  onChangeInterests = e => {
+    this.props.onChangeInterests(e);
   };
 
   render() {
     const { colorTheme, label, width, profile } = this.props;
     document.documentElement.style.setProperty(
-      `--text1Color`,
-      colorTheme.text1Color
-    );
-    document.documentElement.style.setProperty(
       `--text2Color`,
       colorTheme.text2Color
     );
     document.documentElement.style.setProperty(
-      `--text4Color`,
-      colorTheme.text4Color
-    );
-    document.documentElement.style.setProperty(
-      `--text6Color`,
-      colorTheme.text6Color
+      `--text3Color`,
+      colorTheme.text3Color
     );
     document.documentElement.style.setProperty(
       `--text7Color`,
@@ -38,6 +53,7 @@ class InputTimeZone extends Component {
       `--text8Color`,
       colorTheme.text8Color
     );
+
     return (
       <div>
         <Row type="flex" justify="start" align="middle">
@@ -61,28 +77,27 @@ class InputTimeZone extends Component {
             lg={{ span: 17, offset: 1 }}
             xl={{ span: 19, offset: 1 }}
           >
-            <Cascader
+            <Select
+              mode="multiple"
               style={{
-                width: width,
-                background: colorTheme.text8Color
+                width: width
               }}
-              value={profile.newTimeZone}
-              onChange={this.onChangeTimeZone}
-              options={timeZones}
-              expandTrigger="hover"
-              allowClear={false}
-              placeholder=""
-            />
+              value={profile.newInterests}
+              onChange={this.onChangeInterests}
+            >
+              {this.renderOptions()}
+            </Select>
           </Col>
         </Row>
         <ErrorMessage
-          message="Need a time zone instead of a country"
-          hasError={profile.hasTimeZoneError}
+          message="1 to 5 interests pretty please"
+          hasError={profile.hasInterestsError}
         />
       </div>
     );
   }
 }
+
 /*
 So we have a state and a UI(with props).
 This function gives the UI the parts of the state it will need to display.
@@ -101,10 +116,10 @@ function mapDispatchToProps(dispatch) {
   );
 
   return {
-    onChangeTimeZone: newTimeZone => {
-      profileDispatchers.onChangeTimeZone(newTimeZone);
+    onChangeInterests: newInterests => {
+      profileDispatchers.onChangeInterests(newInterests);
     }
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputTimeZone);
+export default connect(mapStateToProps, mapDispatchToProps)(InputInterests);
