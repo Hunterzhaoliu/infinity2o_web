@@ -25,25 +25,14 @@ class SortingHat extends Component {
       >
         <Row
           type="flex"
-          justify="start"
+          justify="center"
           align="middle"
           style={{
             textAlign: "center",
-            padding: "0% 0% 5px" // top left&right bottom
+            padding: "0px 0px 0px" // top left&right bottom
           }}
         >
-          <Col
-            sm={{ span: 0 }}
-            md={{ span: 0 }}
-            lg={{ span: 3 }}
-            xl={{ span: 5 }}
-          />
-          <Col
-            sm={{ span: 24 }}
-            md={{ span: 24 }}
-            lg={{ span: 18 }}
-            xl={{ span: 14 }}
-          >
+          <Col>
             <h2
               style={{
                 color: colorTheme.text2Color
@@ -52,36 +41,19 @@ class SortingHat extends Component {
               Help the Sorting Hat find me great partners by...
             </h2>
           </Col>
-          <Col
-            sm={{ span: 0 }}
-            md={{ span: 0 }}
-            lg={{ span: 3 }}
-            xl={{ span: 5 }}
-          />
         </Row>
         <Row
           type="flex"
           justify="center"
           align="middle"
           style={{
-            padding: "0% 0% 5px" // top left&right bottom
+            padding: "0px 0px 0px" // top left&right bottom
           }}
         >
-          <Col
-            sm={{ span: 0 }}
-            md={{ span: 3 }}
-            lg={{ span: 5 }}
-            xl={{ span: 6 }}
-          />
-          <Col
-            sm={{ span: 17 }}
-            md={{ span: 12 }}
-            lg={{ span: 9 }}
-            xl={{ span: 8 }}
-          >
+          <Col>
             <h2
               style={{
-                padding: "6px 0px 0px",
+                padding: "0px 0px 0px",
                 textAlign: "center",
                 color: colorTheme.text4Color
               }}
@@ -90,35 +62,38 @@ class SortingHat extends Component {
             </h2>
           </Col>
           <Col
-            sm={{ span: 5 }}
-            md={{ span: 2 }}
-            lg={{ span: 2 }}
-            xl={{ span: 2 }}
+            sm={{ offset: 1 }}
+            md={{ offset: 1 }}
+            lg={{ offset: 1 }}
+            xl={{ offset: 1 }}
+            style={{ padding: "0px 0px 7px 0px" }}
           >
             <Button
               key="1"
               style={{
                 borderColor: colorTheme.text7Color,
                 background: colorTheme.text7Color,
-                color: colorTheme.text2Color
+                color: colorTheme.text2Color,
+                width: 32,
+                padding: "0px 0px 0px"
               }}
             >
-              <a href="/sorting_hat/ask">Ask</a>
+              <a href="/sorting_hat/ask">
+                <img
+                  alt=""
+                  style={{ width: 25, padding: "2px 0px 0px 2px" }}
+                  src="https://user-images.githubusercontent.com/24757872/40990146-762c3ffc-68b5-11e8-80df-4c688ab3dd9b.png"
+                />
+              </a>
             </Button>
           </Col>
-          <Col
-            sm={{ span: 1 }}
-            md={{ span: 3 }}
-            lg={{ span: 5 }}
-            xl={{ span: 6 }}
-          />
         </Row>
         <Row
           type="flex"
           justify="center"
           align="middle"
           style={{
-            padding: "25px 0px 0px" // top left&right bottom
+            padding: "0px 0px 0px" // top left&right bottom
           }}
         >
           <Col md={{ span: 24 }}>
@@ -138,7 +113,7 @@ class SortingHat extends Component {
           align="middle"
           style={{
             textAlign: "center",
-            padding: "0px 0% 0%" // top left&right bottom
+            padding: "0px 0px 0px" // top left&right bottom
           }}
         >
           <Col
