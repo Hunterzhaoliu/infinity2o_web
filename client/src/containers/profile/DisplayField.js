@@ -6,15 +6,13 @@ import "./DisplayField.css";
 class DisplayField extends Component {
   renderNeuronExplanation() {
     const { colorTheme } = this.props;
-
-    document.documentElement.style.setProperty(
-      `--text8Color`,
-      colorTheme.text8Color
-    );
-
     document.documentElement.style.setProperty(
       `--text7Color`,
       colorTheme.text7Color
+    );
+    document.documentElement.style.setProperty(
+      `--text8Color`,
+      colorTheme.text8Color
     );
 
     const neuronExplanation = (
@@ -55,6 +53,10 @@ class DisplayField extends Component {
   renderValue(label, value) {
     const { colorTheme, infinityStatus } = this.props;
     document.documentElement.style.setProperty(
+      `--backgroundColor`,
+      colorTheme.backgroundColor
+    );
+    document.documentElement.style.setProperty(
       `--text1Color`,
       colorTheme.text1Color
     );
@@ -77,6 +79,14 @@ class DisplayField extends Component {
     document.documentElement.style.setProperty(
       `--text6Color`,
       colorTheme.text6Color
+    );
+    document.documentElement.style.setProperty(
+      `--text7Color`,
+      colorTheme.text7Color
+    );
+    document.documentElement.style.setProperty(
+      `--text8Color`,
+      colorTheme.text8Color
     );
 
     if (
