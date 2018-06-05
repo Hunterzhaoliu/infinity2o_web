@@ -30,7 +30,7 @@ class Matches extends Component {
     message.warn(
       "You need " +
         NUMBER_NEURONS_TO_SAY_HI +
-        " neurons (1 Billion) to 'Say Hi'. You can get neurons by voting or asking questions with the Sorting Hat.",
+        " more neurons to 'Say Hi'. Get neurons by voting or asking questions with the Sorting Hat.",
       5
     );
   };

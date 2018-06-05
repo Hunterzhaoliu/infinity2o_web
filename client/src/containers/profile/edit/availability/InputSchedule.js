@@ -30,7 +30,7 @@ class InputSchedule extends Component {
                     color: colorTheme.text4Color
                   }}
                 >
-                  When are you free to video chat for your class?
+                  When am I free to video chat for my class?
                 </h3>
               </Col>
             </Row>
