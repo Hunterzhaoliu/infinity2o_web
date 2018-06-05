@@ -6,9 +6,9 @@ import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import Options from '../payment/Options';
 import DisplayField from './DisplayField';
-import DisplayLinkField from './DisplayLinkField';
 import VoteEdit from './votes/VoteEdit';
-import { Layout, Row, Col, Button } from 'antd';
+import { Layout, Row, Col, Button, Avatar, Icon } from 'antd';
+import './Profile.css';
 const { Content } = Layout;
 
 class Profile extends Component {
@@ -18,158 +18,229 @@ class Profile extends Component {
 		this.props.onProfile();
 	}
 
-	renderProfile() {
-		const { colorTheme, profile } = this.props;
+	renderNameAndAge() {
+		const { profile } = this.props;
+		if (profile.age !== undefined) {
+			return profile.name + ', ' + profile.age;
+		} else {
+			return profile.name;
+		}
+	}
 
+	renderLinkedIn() {
+		const { profile } = this.props;
+		if (profile.linkedInPublicProfileUrl !== undefined) {
+			return (
+				<Col style={{ padding: '0px 0px 0px 29px' }}>
+					<a href={profile.linkedInPublicProfileUrl}>
+						<Icon
+							alt="LinkedIn: "
+							style={{
+								fontSize: '35px',
+								color: 'rgb(13, 142, 255)'
+							}}
+							type="linkedin"
+						/>
+					</a>
+				</Col>
+			);
+		}
+	}
+
+	renderGithub() {
+		const { profile, colorTheme } = this.props;
+		if (profile.githubPublicProfileUrl !== undefined) {
+			return (
+				<Col style={{ padding: '0px 0px 0px 29px' }}>
+					<a href={profile.githubPublicProfileUrl}>
+						<Icon
+							alt="Github: "
+							style={{
+								fontSize: '35px',
+								color: colorTheme.text3Color
+							}}
+							type="github"
+						/>
+					</a>
+				</Col>
+			);
+		}
+	}
+
+	renderNeurons() {
+		const { profile } = this.props;
 		let neuronsInBillions = profile.payment.neuronsInBillions;
 		if (neuronsInBillions !== undefined) {
 			neuronsInBillions = neuronsInBillions.toFixed(1);
 		}
 		return (
-			<div>
-				<Row type="flex" justify="start" align="middle">
-					<Col>
-						<h2
-							style={{
-								color: colorTheme.keyText6Color
-							}}
-						>
-							Profile:
-						</h2>
-					</Col>
-				</Row>
+			<Row
+				type="flex"
+				justify="start"
+				align="middle"
+				style={{
+					padding: '0px 0px 0px' // top right bottom left
+				}}
+			>
+				<Col span={1}>
+					<img
+						alt="Neurons: "
+						style={{
+							width: '35px',
+							padding: '10px 0px 0px 0px' // top right bottom left
+						}}
+						src="https://user-images.githubusercontent.com/24757872/40867763-8f2df248-65cc-11e8-892f-3e22b4032b4a.png"
+					/>
+				</Col>
+				<Col
+					span={23}
+					style={{
+						padding: '0px 0px 0px 20px' // top right bottom left
+					}}
+				>
+					<DisplayField label="Neurons: " value={neuronsInBillions} />
+				</Col>
+			</Row>
+		);
+	}
+
+	renderInterests() {
+		const { profile } = this.props;
+		if (profile.interests.length > 0) {
+			return (
 				<Row
 					type="flex"
 					justify="start"
 					align="middle"
 					style={{
-						padding: '0% 0% 0%' // top left&right bottom
+						padding: '0px 0px 0px' // top right bottom left
 					}}
 				>
-					<Col span={24}>
-						<DisplayField
-							label="Neurons: "
-							value={neuronsInBillions}
+					<Col span={1}>
+						<img
+							alt="Interests: "
+							style={{ width: '35px' }}
+							src="https://user-images.githubusercontent.com/24757872/40868785-206477b0-65d6-11e8-9d7a-5482bcd504c3.png"
 						/>
 					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="start"
-					align="middle"
-					style={{
-						padding: '0% 0% 0%' // top left&right bottom
-					}}
-				>
-					<Col span={24}>
-						<DisplayField label="Name: " value={profile.name} />
-					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="start"
-					align="middle"
-					style={{
-						padding: '0% 0% 0%' // top left&right bottom
-					}}
-				>
-					<Col span={24}>
-						<DisplayField label="E-mail: " value={profile.email} />
-					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="start"
-					align="middle"
-					style={{
-						padding: '5px 0% 0%' // top left&right bottom
-					}}
-				>
-					<Col span={24}>
-						<DisplayField label="Age: " value={profile.age} />
-					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="start"
-					align="middle"
-					style={{
-						padding: '5px 0% 0%' // top left&right bottom
-					}}
-				>
-					<Col span={24}>
+					<Col
+						span={23}
+						style={{
+							padding: '0px 0px 0px 20px' // top right bottom left
+						}}
+					>
 						<DisplayField
 							label="Interest(s): "
 							value={profile.interests}
 						/>
 					</Col>
 				</Row>
+			);
+		}
+	}
+
+	renderEmail() {
+		const { profile } = this.props;
+		return (
+			<Row
+				type="flex"
+				justify="start"
+				align="middle"
+				style={{
+					padding: '0px 0px 0px' // top right bottom left
+				}}
+			>
+				<Col span={1}>
+					<img
+						alt="Email: "
+						style={{ width: '35px' }}
+						src="https://user-images.githubusercontent.com/24757872/40867452-d7a6feaa-65c9-11e8-849f-9d144103b0c3.png"
+					/>
+				</Col>
+				<Col
+					span={23}
+					style={{
+						padding: '4px 0px 0px 20px' // top right bottom left
+					}}
+				>
+					<DisplayField label="E-mail: " value={profile.email} />
+				</Col>
+			</Row>
+		);
+	}
+
+	renderTimeZone() {
+		const { profile } = this.props;
+		if (profile.timeZone.length > 0) {
+			return (
 				<Row
 					type="flex"
 					justify="start"
 					align="middle"
 					style={{
-						padding: '5px 0% 0%' // top left&right bottom
+						padding: '5px 0px 0px' // top right bottom left
 					}}
 				>
-					<Col span={24}>
-						<DisplayLinkField
-							label="LinkedIn: "
-							value={profile.linkedInPublicProfileUrl}
+					<Col span={1}>
+						<img
+							alt="Time Zone: "
+							style={{ width: '35px' }}
+							src="https://user-images.githubusercontent.com/24757872/40868790-25f907ea-65d6-11e8-8dd1-2f3a79076082.png"
 						/>
 					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="start"
-					align="middle"
-					style={{
-						padding: '5px 0% 0%' // top left&right bottom
-					}}
-				>
-					<Col span={24}>
-						<DisplayLinkField
-							label="Github: "
-							value={profile.githubPublicProfileUrl}
-						/>
-					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="start"
-					align="middle"
-					style={{
-						padding: '5px 0% 0%' // top left&right bottom
-					}}
-				>
-					<Col span={24}>
-						<DisplayLinkField
-							label="Website: "
-							value={profile.websiteUrl}
-						/>
-					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="start"
-					align="middle"
-					style={{
-						padding: '5px 0% 0%' // top left&right bottom
-					}}
-				>
-					<Col span={24}>
+					<Col
+						span={23}
+						style={{
+							padding: '0px 0px 0px 20px' // top right bottom left
+						}}
+					>
 						<DisplayField
 							label="Time Zone: "
 							value={profile.timeZone[1]}
 						/>
 					</Col>
 				</Row>
+			);
+		}
+	}
+
+	renderProfile() {
+		const { colorTheme, profile } = this.props;
+		return (
+			<div>
+				<Row type="flex" justify="start" align="middle">
+					<Col span={2} />
+					<Col span={22}>
+						<Avatar shape="circle" src={profile.imageUrl} />
+					</Col>
+				</Row>
 				<Row
 					type="flex"
 					justify="start"
 					align="middle"
+					style={{ padding: '2px 0px 0px' }}
+				>
+					<Col span={1} />
+					<Col style={{ padding: '10px 0px 0px 18px' }}>
+						<h2
+							style={{
+								color: colorTheme.keyText6Color
+							}}
+						>
+							{this.renderNameAndAge()}
+						</h2>
+					</Col>
+					{this.renderLinkedIn()}
+					{this.renderGithub()}
+				</Row>
+				{this.renderNeurons()}
+				{this.renderInterests()}
+				{this.renderEmail()}
+				{this.renderTimeZone()}
+				<Row
+					type="flex"
 					style={{
-						padding: '5px 0% 0%' // top left&right bottom
+						padding: '15px 0px 0px 0px' // top right bottom left
 					}}
 				>
 					<Col span={24}>
@@ -183,7 +254,7 @@ class Profile extends Component {
 					type="flex"
 					justify="start"
 					style={{
-						padding: '5px 0% 0%' // top left&right bottom
+						padding: '15px 0px 0px' // top right bottom left
 					}}
 				>
 					<Col>
@@ -228,16 +299,10 @@ class Profile extends Component {
 		return (
 			<div
 				style={{
-					padding: '25px 0px 0px' // top left&right bottom
+					padding: '25px 0px 0px' // top right bottom left
 				}}
 			>
 				<Row type="flex" justify="start" align="middle">
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 0 }}
-						lg={{ span: 0 }}
-						xl={{ span: 0 }}
-					/>
 					<Col
 						sm={{ span: 24 }}
 						md={{ span: 19 }}
@@ -273,17 +338,11 @@ class Profile extends Component {
 		return (
 			<Content
 				style={{
-					padding: '75px 50px 0px', // top left&right bottom
+					padding: '75px 50px 0px', // top right bottom left
 					background: colorTheme.backgroundColor
 				}}
 			>
 				<Row type="flex" justify="start" align="middle">
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 0 }}
-						lg={{ span: 0 }}
-						xl={{ span: 0 }}
-					/>
 					<Col
 						sm={{ span: 24 }}
 						md={{ span: 19 }}
@@ -295,11 +354,11 @@ class Profile extends Component {
 							<Col>
 								<h2
 									style={{
-										padding: '25px 0% 0%', // top left&right bottom
+										padding: '25px 0px 0px', // top right bottom left
 										color: colorTheme.keyText6Color
 									}}
 								>
-									Oldest Votes
+									Votes
 								</h2>
 							</Col>
 						</Row>
@@ -312,11 +371,11 @@ class Profile extends Component {
 							<Col>
 								<h2
 									style={{
-										padding: '25px 0% 0%', // top left&right bottom
+										padding: '25px 0px 0px', // top right bottom left
 										color: colorTheme.keyText6Color
 									}}
 								>
-									Oldest Questions
+									Questions
 								</h2>
 							</Col>
 						</Row>

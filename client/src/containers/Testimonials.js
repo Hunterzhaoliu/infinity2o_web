@@ -45,6 +45,10 @@ class Testimonials extends Component {
 								<Avatar
 									size="large"
 									src={testimonial['avatarProfilePicUrl']}
+									style={{
+										width: 125,
+										height: 125
+									}}
 								/>
 								<p
 									style={{

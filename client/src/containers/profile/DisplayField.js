@@ -4,10 +4,6 @@ import { Row, Col, Table, Popover, Button, Icon } from 'antd';
 import './DisplayField.css';
 
 class DisplayField extends Component {
-	numberWithCommas = x => {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	};
-
 	renderNeuronExplanation() {
 		const { colorTheme } = this.props;
 
@@ -29,7 +25,8 @@ class DisplayField extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					You use Neurons to 'Say Hi' to matches
+					Collect more Neurons by asking questions and voting in
+					Sorting Hat or revoting in Profile to 'Say Hi' to matches.
 				</p>
 			</div>
 		);
@@ -59,8 +56,28 @@ class DisplayField extends Component {
 	renderValue(label, value) {
 		const { colorTheme, infinityStatus } = this.props;
 		document.documentElement.style.setProperty(
+			`--text1Color`,
+			colorTheme.text1Color
+		);
+		document.documentElement.style.setProperty(
+			`--text2Color`,
+			colorTheme.text2Color
+		);
+		document.documentElement.style.setProperty(
 			`--text3Color`,
 			colorTheme.text3Color
+		);
+		document.documentElement.style.setProperty(
+			`--text4Color`,
+			colorTheme.text4Color
+		);
+		document.documentElement.style.setProperty(
+			`--text5Color`,
+			colorTheme.text5Color
+		);
+		document.documentElement.style.setProperty(
+			`--text6Color`,
+			colorTheme.text6Color
 		);
 
 		if (
@@ -83,20 +100,14 @@ class DisplayField extends Component {
 				let displayNeuronsInBillions = value;
 				if (displayNeuronsInBillions !== undefined) {
 					displayNeuronsInBillions *= 1000000000;
-					let finalDisplayString =
-						this.numberWithCommas(displayNeuronsInBillions) +
-						' (' +
-						value +
-						' Billion)';
+					let finalDisplayString = value + ' Billion Neurons';
 
 					return (
 						<Row type="flex" justify="start" align="middle">
-							<Col>
-								<p style={{ padding: '18px 0px 0px' }}>
-									{finalDisplayString}
-								</p>
+							<Col style={{ padding: '25px 0px 0px' }}>
+								<p>{finalDisplayString}</p>
 							</Col>
-							<Col style={{ padding: '5px 0px 0px' }} offset={1}>
+							<Col offset={1} style={{ padding: '15px 0px 0px' }}>
 								{this.renderNeuronExplanation()}
 							</Col>
 						</Row>
@@ -111,6 +122,7 @@ class DisplayField extends Component {
 				return value;
 			}
 		} else if (label === 'Availability: ') {
+			// value = profile.availability
 			if (Object.keys(value).length !== 0) {
 				const daysOfWeek = [
 					'monday',
@@ -122,12 +134,20 @@ class DisplayField extends Component {
 					'sunday'
 				];
 
-				// makes sure user has atleast one open timeSlot
-				let totalTimeSlots = 0;
+				// determines the width of the table & checks if user has timeSlots
+				let numberOfDaysAvailable = 0;
+
 				daysOfWeek.forEach(day => {
-					totalTimeSlots += value[day].length;
+					if (value[day].length > 0) {
+						numberOfDaysAvailable += 1;
+					}
 				});
-				if (totalTimeSlots === 0) {
+				const widthOfTable = numberOfDaysAvailable * 75 + 'px';
+				document.documentElement.style.setProperty(
+					`--widthOfTable`,
+					widthOfTable
+				);
+				if (numberOfDaysAvailable === 0) {
 					return;
 				}
 
@@ -173,13 +193,13 @@ class DisplayField extends Component {
 				const indexInTimeSlot = {
 					'6-8 AM': 0,
 					'8-10 AM': 1,
-					'10-12 noon': 2,
+					'10-12 AM': 2,
 					'12-2 PM': 3,
 					'2-4 PM': 4,
 					'4-6 PM': 5,
 					'6-8 PM': 6,
 					'8-10 PM': 7,
-					'10-12 midnight': 8
+					'10-12 PM': 8
 				};
 
 				let timeSlots = [
@@ -231,21 +251,32 @@ class DisplayField extends Component {
 						columns={columnHeaders}
 						bordered={true}
 						pagination={false}
-						size="medium"
 						showHeader={true}
+						size="small"
 					/>
 				);
 			}
 		} else if (label === 'Interest(s): ') {
-			let formattedValue = '';
-			let i;
-			for (i = 0; i < value.length; i++) {
-				formattedValue += value[i];
-				if (i !== value.length - 1) {
-					formattedValue += ', ';
+			// value = profile.interests
+			let formattedInterests = '';
+			let upperCaseInterest = '';
+			for (let i = 0; i < value.length; i++) {
+				upperCaseInterest =
+					value[i][0].toUpperCase() + value[i].substring(1);
+				// replaces underscore in two word interests with space
+				upperCaseInterest = upperCaseInterest.replace(/_/g, ' ');
+				formattedInterests += upperCaseInterest;
+				// adds comma between interests
+				if (value.length === 2 && i === 0) {
+					formattedInterests += ' & ';
+				} else if (i !== value.length - 1) {
+					formattedInterests += ', ';
+					if (i === value.length - 2) {
+						formattedInterests += '& ';
+					}
 				}
 			}
-			return formattedValue;
+			return formattedInterests;
 		}
 	}
 
@@ -254,24 +285,10 @@ class DisplayField extends Component {
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col
-					sm={{ span: 5 }}
-					md={{ span: 4 }}
-					lg={{ span: 3 }}
-					xl={{ span: 2 }}
-				>
-					<h3
-						style={{
-							color: colorTheme.text4Color
-						}}
-					>
-						{label}
-					</h3>
-				</Col>
-				<Col
-					sm={{ span: 18, offset: 1 }}
-					md={{ span: 19, offset: 1 }}
-					lg={{ span: 20, offset: 1 }}
-					xl={{ span: 21, offset: 1 }}
+					sm={{ span: 18, offset: 0 }}
+					md={{ span: 19, offset: 0 }}
+					lg={{ span: 20, offset: 0 }}
+					xl={{ span: 21, offset: 0 }}
 				>
 					<h3
 						style={{
