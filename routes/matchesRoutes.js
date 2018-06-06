@@ -20,7 +20,8 @@ const getMatchesInfo = async mongoDBUserIds => {
       totalUserVotes: user.profile.asks.totalUserVotes,
       availability: user.profile.availability,
       asks: user.profile.asks,
-      id: user._id
+      id: user._id,
+      imageUrl: user.profile.imageUrl
     });
   }
   return matches_info;
@@ -36,6 +37,7 @@ const generateUniqueUID = () => {
 
 module.exports = app => {
   app.get("/api/matches", requireLogin, async (request, response) => {
+    // formats the request string into an array
     const mongoDBUserIds = request.query.mongoDBUserIds.split(",");
     let matches_info = await getMatchesInfo(mongoDBUserIds);
     response.send(matches_info);
