@@ -4,6 +4,7 @@ import * as profileActionCreators from "../../../../actions/profile/profile";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Row, Col, Dropdown, Icon, Menu, Checkbox } from "antd";
+import "./DayDropdown.css";
 
 const timeSlotOptions = [
   "6-8 AM",
@@ -22,8 +23,30 @@ class DayDropdown extends Component {
     visible: false
   };
 
-  renderMenuItems(day, newTimeSlots) {
-    const { colorTheme } = this.props;
+  renderMenuItems(day) {
+    const { colorTheme, profile } = this.props;
+    const newTimeSlots = profile.newAvailability[day.value];
+
+    document.documentElement.style.setProperty(
+      `--text2Color`,
+      colorTheme.text2Color
+    );
+    document.documentElement.style.setProperty(
+      `--text3Color`,
+      colorTheme.text3Color
+    );
+    document.documentElement.style.setProperty(
+      `--text5Color`,
+      colorTheme.text5Color
+    );
+    document.documentElement.style.setProperty(
+      `--text6Color`,
+      colorTheme.text6Color
+    );
+    document.documentElement.style.setProperty(
+      `--text7Color`,
+      colorTheme.text7Color
+    );
 
     return _.map(timeSlotOptions, timeSlot => {
       return (
@@ -66,12 +89,11 @@ class DayDropdown extends Component {
   };
 
   render() {
-    //console.log('this.props in DayDropdown', this.props);
-    const { colorTheme, day, profile } = this.props;
+    // day comes from InputSchedule and is just a specific day in a week
+    const { colorTheme, day } = this.props;
 
     // copy over initial old checked time slots
-    const newTimeSlots = profile.newAvailability[day.value];
-    const menu = <Menu>{this.renderMenuItems(day, newTimeSlots)}</Menu>;
+    const menu = <Menu>{this.renderMenuItems(day)}</Menu>;
     return (
       <div>
         <Row type="flex" justify="space-between" align="middle">

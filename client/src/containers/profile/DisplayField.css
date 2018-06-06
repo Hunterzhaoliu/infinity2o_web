@@ -7,10 +7,14 @@
 }
 
 .ant-table-content {
-  background-color: var(--text7Color);
-  color: var(--text2Color);
+  /* color of inner table */
+  background-color: var(--backgroundColor);
+
+  /* textColor of inner table */
+  color: var(--text4Color);
 }
 
+/* table width and font */
 .ant-table {
   font-size: 14px;
   width: var(--widthOfTable);
@@ -19,37 +23,35 @@
 }
 
 .ant-table-thead > tr > th {
-  background: var(--text8Color);
-  color: var(--text4Color);
+  /* background: red; */
+  /* color and font of header text */
+  color: var(--text3Color);
   font-weight: 500;
   font-size: 16px;
   font-family: Verdana, sans-serif;
 }
 
-.ant-table-bordered .ant-table-header > table,
-.ant-table-bordered .ant-table-body > table,
-.ant-table-bordered .ant-table-fixed-left table,
-.ant-table-bordered .ant-table-fixed-right table {
-  border: 1px solid var(--text6Color);
-}
-
 .ant-table-bordered .ant-table-thead > tr > th,
 .ant-table-bordered .ant-table-tbody > tr > td {
-  border-right: 1px solid var(--text6Color);
-  border: 1px solid var(--text6Color);
-  border-bottom: 1px solid var(--text6Color);
-  border-top: 1px solid var(--text6Color);
+  /* border-right: 1px solid red; */
+  /* color of vertical table lines */
+  border: 1px solid var(--text8Color);
+  /* color of horizontal table lines */
+  border-bottom: 1px solid var(--text8Color);
+  border-top: 1px solid var(--text8Color);
 }
 
+/* color of hover over table */
 .ant-table-thead > tr.ant-table-row-hover > td,
 .ant-table-tbody > tr.ant-table-row-hover > td,
 .ant-table-thead > tr:hover > td,
 .ant-table-tbody > tr:hover > td {
-  background: var(--text5Color);
+  background: var(--text8Color);
 }
 
+/* color of border around table */
 .ant-table-small {
-  border: 1px solid var(--text6Color);
+  border: 1px solid var(--text8Color);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
@@ -284,8 +286,10 @@
   > .ant-table-thead
   > tr
   > th {
-  background: var(--text8Color);
-  border-bottom: 1px solid var(--text6Color);
+  /* color of header */
+  background: var(--backgroundColor);
+  /* color of bottom of header */
+  border-bottom: 1px solid var(--text8Color);
 }
 .ant-table-small.ant-table-bordered {
   border-bottom-right-radius: 5px;
