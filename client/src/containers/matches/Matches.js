@@ -121,6 +121,32 @@ class Matches extends Component {
     );
   }
 
+  renderMatchPicture(imageUrl) {
+    if (imageUrl !== undefined) {
+      return (
+        <Row
+          style={{ padding: "5px 0px 0px 0px" }}
+          type="flex"
+          justify="center"
+          align="middle"
+        >
+          <Col>
+            <Avatar
+              style={{
+                width: 75,
+                height: 75
+              }}
+              shape="circle"
+              src={imageUrl}
+            />
+          </Col>
+        </Row>
+      );
+    } else {
+      return <div />;
+    }
+  }
+
   renderMatches() {
     //console.log('in Matches.js this.props = ', this.props);
     const {
@@ -190,23 +216,7 @@ class Matches extends Component {
                 <Row style={{ padding: "0px 0px 0px 36px" }}>
                   <TimeZone value={match.timeZone} />
                 </Row>
-                <Row
-                  style={{ padding: "5px 0px 0px 0px" }}
-                  type="flex"
-                  justify="center"
-                  align="middle"
-                >
-                  <Col>
-                    <Avatar
-                      style={{
-                        width: 75,
-                        height: 75
-                      }}
-                      shape="circle"
-                      src={match.imageUrl}
-                    />
-                  </Col>
-                </Row>
+                {this.renderMatchPicture(match.imageUrl)}
                 <Row
                   style={{ padding: "8px 0px 0px 0px" }}
                   type="flex"
