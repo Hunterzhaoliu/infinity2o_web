@@ -106,7 +106,7 @@ class Matches extends Component {
         type="flex"
         justify="center"
         align="middle"
-        style={{ padding: "0px 0px 0px" }}
+        style={{ padding: "3px 0px 0px" }}
       >
         <Col>
           <p
@@ -183,12 +183,19 @@ class Matches extends Component {
                     <Github value={match.githubPublicProfileUrl} />
                   </Col>
                 </Row>
-                <Row style={{ padding: "0px 0px 0px 30px" }}>
+                <Row style={{ padding: "0px 0px 0px 36px" }}>
                   <Interests value={match.interests} />
                 </Row>
                 {this.renderMatchTotalVotes(match.totalUserVotes)}
-                <TimeZone value={match.timeZone} />
-                <Row type="flex" justify="center" align="middle">
+                <Row style={{ padding: "0px 0px 0px 36px" }}>
+                  <TimeZone value={match.timeZone} />
+                </Row>
+                <Row
+                  style={{ padding: "5px 0px 0px 0px" }}
+                  type="flex"
+                  justify="center"
+                  align="middle"
+                >
                   <Col>
                     <Avatar
                       style={{
@@ -200,7 +207,12 @@ class Matches extends Component {
                     />
                   </Col>
                 </Row>
-                <Row type="flex" justify="space-between" align="top">
+                <Row
+                  style={{ padding: "8px 0px 0px 0px" }}
+                  type="flex"
+                  justify="space-between"
+                  align="top"
+                >
                   <Col span={11}>
                     <Button
                       style={{
