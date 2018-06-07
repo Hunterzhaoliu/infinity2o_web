@@ -1,7 +1,26 @@
 .ant-progress-bg {
-	background-color: var(--progress-color);
+	background-color: var(--keyText7Color);
 }
 
 .ant-progress-inner {
-	background-color: var(--progress-remaining-color);
+	background-color: var(--text8Color);
+}
+
+/* color of warning symbol in message */
+.ant-message-warning .anticon {
+  color: var(--text1Color);
+}
+
+/* background color and shadow of message */
+.ant-message-notice-content {
+  padding: 6px 16px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0px 0px var(--text7Color);
+          box-shadow: 0 3px 3px var(--text7Color);
+  background: var(--text8Color);
+}
+
+/* text color */
+.ant-message {
+  color: var(--text2Color);
 }

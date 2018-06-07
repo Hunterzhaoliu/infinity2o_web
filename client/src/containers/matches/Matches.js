@@ -43,7 +43,7 @@ class Matches extends Component {
     message.warn(
       "You need " +
         NUMBER_NEURONS_TO_SAY_HI +
-        " more neurons to 'Say Hi'. Get neurons by voting or asking questions with the Sorting Hat.",
+        " neurons to 'Say Hi'. Get neurons by voting or asking questions with the Sorting Hat.",
       5
     );
   };
@@ -158,12 +158,23 @@ class Matches extends Component {
     } = this.props;
 
     document.documentElement.style.setProperty(
-      `--progress-color`,
+      `--keyText7Color`,
       colorTheme.keyText7Color
     );
-
     document.documentElement.style.setProperty(
-      `--progress-remaining-color`,
+      `--text1Color`,
+      colorTheme.text1Color
+    );
+    document.documentElement.style.setProperty(
+      `--text2Color`,
+      colorTheme.text2Color
+    );
+    document.documentElement.style.setProperty(
+      `--text7Color`,
+      colorTheme.text7Color
+    );
+    document.documentElement.style.setProperty(
+      `--text8Color`,
       colorTheme.text8Color
     );
 
