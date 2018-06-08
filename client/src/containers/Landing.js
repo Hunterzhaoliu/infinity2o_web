@@ -81,7 +81,7 @@ class Landing extends Component {
 							<Col>
 								<img
 									alt=""
-									style={{ height: '300px' }}
+									style={{ height: '240px' }}
 									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
 								/>
 							</Col>
