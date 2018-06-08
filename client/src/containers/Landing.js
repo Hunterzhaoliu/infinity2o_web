@@ -44,7 +44,7 @@ class Landing extends Component {
 		}
 	}
 
-	renderTestimonialsAndCartoons() {
+	renderCartoons() {
 		document.documentElement.style.setProperty(`--progress-color`, GREY_6);
 
 		document.documentElement.style.setProperty(
@@ -56,78 +56,61 @@ class Landing extends Component {
 			<div>
 				<Row
 					style={{
-						padding: '10px 0px 0px' // top left&right bottom
+						padding: '0px 0px 0px' // top left&right bottom
 					}}
 					type="flex"
 					justify="space-around"
-					align="middle"
+					align="top"
 				>
 					<Col
 						xs={{ span: 24 }}
 						sm={{ span: 12 }}
-						md={{ span: 8 }}
-						lg={{ span: 6 }}
-						xl={{ span: 6 }}
+						md={{ span: 10 }}
+						lg={{ span: 9 }}
+						xl={{ span: 8 }}
 					>
+						<h2
+							style={{
+								textAlign: 'center',
+								color: GREY_2
+							}}
+						>
+							Online class alone
+						</h2>
 						<Row type="flex" justify="center">
 							<Col>
 								<img
 									alt=""
-									style={{ width: '220px' }}
+									style={{ height: '300px' }}
 									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
 								/>
 							</Col>
 						</Row>
-						<h4
-							style={{
-								textAlign: 'center',
-								color: GREY_3
-							}}
-						>
-							Taking an online class alone on an invisible chair
-						</h4>
 					</Col>
 					<Col
-						style={{
-							padding: '10px 0px 0px' // top left&right bottom
-						}}
-						xs={{ span: 24 }}
-						sm={{ span: 14 }}
-						md={{ span: 10 }}
-						lg={{ span: 8 }}
-						xl={{ span: 6 }}
-					>
-						<Testimonials />
-					</Col>
-					<Col
-						style={{
-							padding: '20px 0px 0px' // top left&right bottom
-						}}
 						xs={{ span: 24 }}
 						sm={{ span: 12 }}
-						md={{ span: 8 }}
-						lg={{ span: 6 }}
-						xl={{ span: 6 }}
+						md={{ span: 12 }}
+						lg={{ span: 11 }}
+						xl={{ span: 10 }}
 					>
+						<h2
+							style={{
+								textAlign: 'center',
+								color: GREY_2
+							}}
+						>
+							Online class through infinity2o
+						</h2>
 						<Row type="flex" justify="center">
 							<Col>
 								<img
 									alt=""
-									style={{ width: '400px' }}
+									style={{ height: '300px' }}
 									src="https://user-images.githubusercontent.com/2585159/40999319-20ee0d16-68d0-11e8-900a-0c239b422906.png"
 								/>
 							</Col>
 						</Row>
-						<h4
-							style={{
-								textAlign: 'center',
-								color: GREY_2,
-								padding: '10px 0px 0px'
-							}}
-						>
-							Taking an online class through infinity2o on 2
-							invisible chairs
-						</h4>
 					</Col>
 				</Row>
 			</div>
@@ -136,14 +119,15 @@ class Landing extends Component {
 
 	renderMarketingInfo() {
 		const why_part_0 =
-			'Meet interesting people with similar core beliefs to take online courses with.';
+			'Meet people with similar beliefs to take online courses with.';
 
 		return (
 			<div>
+				{this.renderCartoons()}
 				<Row
 					type="flex"
 					justify="center"
-					style={{ padding: '20px 0px 0px 0px' }}
+					style={{ padding: '70px 0px 0px' }}
 				>
 					<Col>
 						<h1
@@ -158,8 +142,30 @@ class Landing extends Component {
 						</h1>
 					</Col>
 				</Row>
-				{this.renderTestimonialsAndCartoons()}
 			</div>
+		);
+	}
+
+	renderTestimonials() {
+		return (
+			<Row
+				style={{
+					padding: '200px 0px 0px' // top left&right bottom
+				}}
+				type="flex"
+				justify="center"
+				align="top"
+			>
+				<Col
+					xs={{ span: 24 }}
+					sm={{ span: 14 }}
+					md={{ span: 10 }}
+					lg={{ span: 8 }}
+					xl={{ span: 6 }}
+				>
+					<Testimonials />
+				</Col>
+			</Row>
 		);
 	}
 
@@ -181,14 +187,6 @@ class Landing extends Component {
 						lg={{ span: 6 }}
 						xl={{ span: 6 }}
 					>
-						<h4
-							style={{
-								textAlign: 'center',
-								color: GREY_3
-							}}
-						>
-							Taking an online class alone on an invisible chair
-						</h4>
 						<Progress
 							percent={0}
 							size="small"
@@ -240,7 +238,7 @@ class Landing extends Component {
 					</Col>
 					<Col
 						style={{
-							padding: '20px 0px 0px' // top left&right bottom
+							padding: '10px 0px 0px' // top left&right bottom
 						}}
 						xs={{ span: 24 }}
 						sm={{ span: 12 }}
@@ -248,15 +246,6 @@ class Landing extends Component {
 						lg={{ span: 6 }}
 						xl={{ span: 6 }}
 					>
-						<h4
-							style={{
-								textAlign: 'center',
-								color: GREY_3
-							}}
-						>
-							Taking an online class through infinity2o on 2
-							invisible chairs
-						</h4>
 						<Progress
 							percent={99}
 							size="small"
@@ -316,7 +305,7 @@ class Landing extends Component {
 					<div>
 						<Row
 							style={{
-								padding: '0px 0px 0px' // top left&right bottom
+								padding: '10px 0px 0px' // top left&right bottom
 							}}
 							type="flex"
 							justify="center"
@@ -427,13 +416,13 @@ class Landing extends Component {
 		return (
 			<Content
 				style={{
-					padding: '55px 50px 50px', // top left&right bottom
+					padding: '150px 50px 50px', // top left&right bottom
 					background: GREY_9
 				}}
 			>
 				{this.renderMarketingInfo()}
+				{this.renderTestimonials()}
 				{this.renderLogin()}
-				{this.renderMarketingInfo2()}
 			</Content>
 		);
 	}
