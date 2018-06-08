@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
+import { GREY_9, GREY_7 } from './styles/ColorConstants';
 import { Layout, Row, Col } from 'antd';
 const { Footer } = Layout;
 
@@ -8,18 +8,22 @@ class CustomFooter extends Component {
 	render() {
 		const { colorTheme, loggedInState } = this.props;
 
-		if (
-			colorTheme.activeSection === 'conversations' ||
-			loggedInState === 'not_logged_in'
-		) {
+		let backgroundColor = this.props.colorTheme.backgroundColor;
+		let textColor = this.props.colorTheme.text7Color;
+		if (loggedInState === 'not_logged_in') {
+			backgroundColor = GREY_9;
+			textColor = GREY_7;
+		}
+
+		if (colorTheme.activeSection === 'conversations') {
 			return <div />;
 		} else {
 			return (
 				<Footer
 					style={{
 						textAlign: 'center',
-						background: this.props.colorTheme.backgroundColor,
-						color: this.props.colorTheme.text7Color
+						background: backgroundColor,
+						color: textColor
 					}}
 				>
 					<Row type="flex" justify="center">

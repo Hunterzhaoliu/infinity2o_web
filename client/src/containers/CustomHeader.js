@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as customHeaderActionCreators from '../actions/customHeader';
-import { Layout, Row, Col, Button, Icon } from 'antd';
 import ChangeThemeButton from './navigationButtons/ChangeThemeButton';
 import TourButton from './navigationButtons/TourButton';
 import ProfileButton from './navigationButtons/ProfileButton';
@@ -10,7 +9,8 @@ import SortingHatButton from './navigationButtons/SortingHatButton';
 import MatchesButton from './navigationButtons/MatchesButton';
 import ConversationButton from './navigationButtons/ConversationButton';
 import LogoutButton from './navigationButtons/LogoutButton';
-
+import { GREY_9, GREY_2 } from './styles/ColorConstants';
+import { Layout, Row, Col, Button, Icon } from 'antd';
 const { Header } = Layout;
 
 class CustomHeader extends Component {
@@ -73,7 +73,28 @@ class CustomHeader extends Component {
 		}
 		switch (loggedInState) {
 			case 'not_logged_in':
-				return;
+				return (
+					<Row type="flex" justify="start">
+						<Col style={{ padding: '0px 0px 0px' }}>
+							<img
+								alt=""
+								style={{ width: '30px' }}
+								src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
+							/>
+						</Col>
+						<Col>
+							{' '}
+							<h2
+								style={{
+									color: GREY_2,
+									padding: '0px 10px 0px'
+								}}
+							>
+								infinity2o
+							</h2>
+						</Col>
+					</Row>
+				);
 			case 'logged_in':
 				return (
 					<div>
@@ -108,7 +129,7 @@ class CustomHeader extends Component {
 		let headerBackground;
 		switch (loggedInState) {
 			case 'not_logged_in':
-				headerBackground = colorTheme.backgroundColor;
+				headerBackground = GREY_9;
 				break;
 			case 'logged_in':
 				headerBackground = colorTheme.text8Color;

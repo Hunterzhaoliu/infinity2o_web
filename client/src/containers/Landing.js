@@ -4,6 +4,17 @@ import * as colorThemeActions from '../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import Testimonials from './Testimonials';
 import './Landing.css';
+import {
+	GREY_9,
+	GREY_8,
+	GREY_7,
+	GREY_6,
+	GREY_3,
+	GREY_2,
+	GREY_1,
+	RED_ORANGE_7,
+	BLUE_7
+} from './styles/ColorConstants';
 import { Layout, Button, Row, Col, Icon, Progress } from 'antd';
 const { Content } = Layout;
 
@@ -33,17 +44,12 @@ class Landing extends Component {
 		}
 	}
 
-	renderTestimonials() {
-		const { colorTheme } = this.props;
-
-		document.documentElement.style.setProperty(
-			`--progress-color`,
-			colorTheme.text6Color
-		);
+	renderTestimonialsAndCartoons() {
+		document.documentElement.style.setProperty(`--progress-color`, GREY_6);
 
 		document.documentElement.style.setProperty(
 			`--progress-remaining-color`,
-			colorTheme.text8Color
+			GREY_8
 		);
 
 		return (
@@ -67,7 +73,7 @@ class Landing extends Component {
 							<Col>
 								<img
 									alt=""
-									style={{ width: '110px' }}
+									style={{ width: '220px' }}
 									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
 								/>
 							</Col>
@@ -75,59 +81,11 @@ class Landing extends Component {
 						<h4
 							style={{
 								textAlign: 'center',
-								color: colorTheme.text3Color
+								color: GREY_3
 							}}
 						>
 							Taking an online class alone on an invisible chair
 						</h4>
-						<Progress
-							percent={0}
-							size="small"
-							showInfo={false}
-							status="active"
-						/>
-						<p
-							style={{
-								textAlign: 'center',
-								color: colorTheme.text3Color
-							}}
-						>
-							0% likely to make a new friend
-						</p>
-						<Progress
-							percent={2.5}
-							size="small"
-							showInfo={false}
-							status="active"
-						/>
-						<p
-							style={{
-								textAlign: 'center',
-								color: colorTheme.text3Color
-							}}
-						>
-							2.5% likely to finish your class
-						</p>
-						<Row type="flex" justify="center">
-							<Col>
-								<Button
-									size="small"
-									style={{
-										borderColor: colorTheme.text8Color,
-										background: colorTheme.text8Color,
-										color: colorTheme.text7Color
-									}}
-								>
-									<a
-										href="https://shrm.org/hr-today/news/hr-magazine/Pages/0214-execbrief.aspx"
-										target="_blank"
-										rel="noopener noreferrer"
-									>
-										Source
-									</a>
-								</Button>
-							</Col>
-						</Row>
 					</Col>
 					<Col
 						style={{
@@ -155,7 +113,7 @@ class Landing extends Component {
 							<Col>
 								<img
 									alt=""
-									style={{ width: '300px' }}
+									style={{ width: '400px' }}
 									src="https://user-images.githubusercontent.com/2585159/40999319-20ee0d16-68d0-11e8-900a-0c239b422906.png"
 								/>
 							</Col>
@@ -163,55 +121,13 @@ class Landing extends Component {
 						<h4
 							style={{
 								textAlign: 'center',
-								color: colorTheme.text3Color
+								color: GREY_2,
+								padding: '10px 0px 0px'
 							}}
 						>
 							Taking an online class through infinity2o on 2
 							invisible chairs
 						</h4>
-						<Progress
-							percent={99}
-							size="small"
-							showInfo={false}
-							status="active"
-						/>
-						<p
-							style={{
-								textAlign: 'center',
-								color: colorTheme.text3Color
-							}}
-						>
-							99% more likely to make a new friend
-						</p>
-						<Progress
-							percent={95}
-							size="small"
-							showInfo={false}
-							status="active"
-						/>
-						<p
-							style={{
-								textAlign: 'center',
-								color: colorTheme.text3Color
-							}}
-						>
-							95% more likely to finish your class
-						</p>
-						<Row type="flex" justify="center">
-							<Col>
-								<Button
-									size="small"
-									style={{
-										borderColor: colorTheme.text8Color,
-										background: colorTheme.text8Color,
-										color: colorTheme.text7Color
-									}}
-									onClick={e => this.onClickSource()}
-								>
-									{this.state.displayText}
-								</Button>
-							</Col>
-						</Row>
 					</Col>
 				</Row>
 			</div>
@@ -219,7 +135,6 @@ class Landing extends Component {
 	}
 
 	renderMarketingInfo() {
-		const { colorTheme } = this.props;
 		const why_part_0 =
 			'Meet interesting people with similar core beliefs to take online courses with.';
 
@@ -235,20 +150,164 @@ class Landing extends Component {
 							key="0"
 							style={{
 								textAlign: 'center',
-								color: colorTheme.text2Color
+								color: GREY_1,
+								fontSize: 35
 							}}
 						>
 							{why_part_0}
 						</h1>
 					</Col>
 				</Row>
-				{this.renderTestimonials()}
+				{this.renderTestimonialsAndCartoons()}
+			</div>
+		);
+	}
+
+	renderMarketingInfo2() {
+		return (
+			<div>
+				<Row
+					style={{
+						padding: '10px 0px 0px' // top left&right bottom
+					}}
+					type="flex"
+					justify="space-around"
+					align="middle"
+				>
+					<Col
+						xs={{ span: 24 }}
+						sm={{ span: 12 }}
+						md={{ span: 8 }}
+						lg={{ span: 6 }}
+						xl={{ span: 6 }}
+					>
+						<h4
+							style={{
+								textAlign: 'center',
+								color: GREY_3
+							}}
+						>
+							Taking an online class alone on an invisible chair
+						</h4>
+						<Progress
+							percent={0}
+							size="small"
+							showInfo={false}
+							status="active"
+						/>
+						<p
+							style={{
+								textAlign: 'center',
+								color: GREY_3
+							}}
+						>
+							0% likely to make a new friend
+						</p>
+						<Progress
+							percent={2.5}
+							size="small"
+							showInfo={false}
+							status="active"
+						/>
+						<p
+							style={{
+								textAlign: 'center',
+								color: GREY_3
+							}}
+						>
+							2.5% likely to finish your class
+						</p>
+						<Row type="flex" justify="center">
+							<Col>
+								<Button
+									size="small"
+									style={{
+										borderColor: GREY_8,
+										background: GREY_8,
+										color: GREY_7
+									}}
+								>
+									<a
+										href="https://shrm.org/hr-today/news/hr-magazine/Pages/0214-execbrief.aspx"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Source
+									</a>
+								</Button>
+							</Col>
+						</Row>
+					</Col>
+					<Col
+						style={{
+							padding: '20px 0px 0px' // top left&right bottom
+						}}
+						xs={{ span: 24 }}
+						sm={{ span: 12 }}
+						md={{ span: 8 }}
+						lg={{ span: 6 }}
+						xl={{ span: 6 }}
+					>
+						<h4
+							style={{
+								textAlign: 'center',
+								color: GREY_3
+							}}
+						>
+							Taking an online class through infinity2o on 2
+							invisible chairs
+						</h4>
+						<Progress
+							percent={99}
+							size="small"
+							showInfo={false}
+							status="active"
+						/>
+						<p
+							style={{
+								textAlign: 'center',
+								color: GREY_3
+							}}
+						>
+							99% more likely to make a new friend
+						</p>
+						<Progress
+							percent={95}
+							size="small"
+							showInfo={false}
+							status="active"
+						/>
+						<p
+							style={{
+								textAlign: 'center',
+								color: GREY_3
+							}}
+						>
+							95% more likely to finish your class
+						</p>
+						<Row type="flex" justify="center">
+							<Col>
+								<Button
+									size="small"
+									style={{
+										borderColor: GREY_8,
+										background: GREY_8,
+										color: GREY_7
+									}}
+									onClick={e => this.onClickSource()}
+								>
+									{this.state.displayText}
+								</Button>
+							</Col>
+						</Row>
+					</Col>
+				</Row>
 			</div>
 		);
 	}
 
 	renderLogin() {
-		const { colorTheme, auth } = this.props;
+		const { auth } = this.props;
 
 		const why_part_2 = "Join Earth's largest community of online learners.";
 		switch (auth.loggedInState) {
@@ -271,7 +330,7 @@ class Landing extends Component {
 									key="0"
 									style={{
 										textAlign: 'center',
-										color: colorTheme.text3Color
+										color: GREY_3
 									}}
 								>
 									{why_part_2}
@@ -306,9 +365,9 @@ class Landing extends Component {
 									size="large"
 									key="-1"
 									style={{
-										borderColor: colorTheme.key,
-										background: colorTheme.key,
-										color: colorTheme.text1Color
+										borderColor: RED_ORANGE_7,
+										background: RED_ORANGE_7,
+										color: GREY_1
 									}}
 								>
 									<a href="/auth/google">
@@ -334,9 +393,9 @@ class Landing extends Component {
 									size="large"
 									key="0"
 									style={{
-										borderColor: colorTheme.keyCompliment1,
-										background: colorTheme.keyCompliment1,
-										color: colorTheme.text1Color
+										borderColor: BLUE_7,
+										background: BLUE_7,
+										color: GREY_1
 									}}
 								>
 									<a href="/auth/linkedIn">
@@ -365,16 +424,16 @@ class Landing extends Component {
 
 	render() {
 		//console.log('this.props inside Landing', this.props);
-		const { colorTheme } = this.props;
 		return (
 			<Content
 				style={{
 					padding: '55px 50px 50px', // top left&right bottom
-					background: colorTheme.backgroundColor
+					background: GREY_9
 				}}
 			>
 				{this.renderMarketingInfo()}
 				{this.renderLogin()}
+				{this.renderMarketingInfo2()}
 			</Content>
 		);
 	}
@@ -386,7 +445,6 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme,
 		auth: state.auth
 	};
 }
@@ -402,9 +460,6 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		onPressRandomColorTheme: () => {
-			customHeaderDispatchers.generateRandomColorTheme();
-		},
 		onSignedInLanding: () => {
 			customHeaderDispatchers.onSignedInLanding();
 		}
