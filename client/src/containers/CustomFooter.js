@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GREY_9, GREY_7 } from './styles/ColorConstants';
+import { GREY_1, GREY_3 } from './styles/ColorConstants';
 import { Layout, Row, Col } from 'antd';
 const { Footer } = Layout;
 
@@ -11,8 +11,8 @@ class CustomFooter extends Component {
 		let backgroundColor = this.props.colorTheme.backgroundColor;
 		let textColor = this.props.colorTheme.text7Color;
 		if (loggedInState === 'not_logged_in') {
-			backgroundColor = GREY_9;
-			textColor = GREY_7;
+			backgroundColor = GREY_1;
+			textColor = GREY_3;
 		}
 
 		if (colorTheme.activeSection === 'conversations') {

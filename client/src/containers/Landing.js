@@ -12,8 +12,8 @@ import {
 	GREY_3,
 	GREY_2,
 	GREY_1,
-	RED_ORANGE_7,
-	BLUE_7
+	RED_ORANGE_3,
+	BLUE_3
 } from './styles/ColorConstants';
 import { Layout, Button, Row, Col, Icon, Progress } from 'antd';
 const { Content } = Layout;
@@ -298,28 +298,25 @@ class Landing extends Component {
 	renderLogin() {
 		const { auth } = this.props;
 
-		const why_part_2 = "Join Earth's largest community of online learners.";
+		const why_part_2 =
+			"Join Earth's largest community of learning partners.";
 		switch (auth.loggedInState) {
 			case 'not_logged_in':
 				return (
 					<div>
 						<Row
 							style={{
-								padding: '10px 0px 0px' // top left&right bottom
+								padding: '40px 0px 0px' // top left&right bottom
 							}}
 							type="flex"
 							justify="center"
 						>
-							<Col
-								style={{
-									padding: '10px 0px 0px' // top left&right bottom
-								}}
-							>
+							<Col>
 								<h2
 									key="0"
 									style={{
 										textAlign: 'center',
-										color: GREY_3
+										color: GREY_7
 									}}
 								>
 									{why_part_2}
@@ -354,9 +351,9 @@ class Landing extends Component {
 									size="large"
 									key="-1"
 									style={{
-										borderColor: RED_ORANGE_7,
-										background: RED_ORANGE_7,
-										color: GREY_1
+										borderColor: RED_ORANGE_3,
+										background: RED_ORANGE_3,
+										color: GREY_9
 									}}
 								>
 									<a href="/auth/google">
@@ -382,9 +379,9 @@ class Landing extends Component {
 									size="large"
 									key="0"
 									style={{
-										borderColor: BLUE_7,
-										background: BLUE_7,
-										color: GREY_1
+										borderColor: BLUE_3,
+										background: BLUE_3,
+										color: GREY_9
 									}}
 								>
 									<a href="/auth/linkedIn">
@@ -414,16 +411,25 @@ class Landing extends Component {
 	render() {
 		//console.log('this.props inside Landing', this.props);
 		return (
-			<Content
-				style={{
-					padding: '150px 50px 50px', // top left&right bottom
-					background: GREY_9
-				}}
-			>
-				{this.renderMarketingInfo()}
-				{this.renderTestimonials()}
-				{this.renderLogin()}
-			</Content>
+			<div>
+				<Content
+					style={{
+						padding: '150px 50px 50px', // top left&right bottom
+						background: GREY_9
+					}}
+				>
+					{this.renderMarketingInfo()}
+				</Content>
+				<Content
+					style={{
+						padding: '0px 50px 50px', // top left&right bottom
+						background: GREY_1
+					}}
+				>
+					{this.renderTestimonials()}
+					{this.renderLogin()}
+				</Content>
+			</div>
 		);
 	}
 }

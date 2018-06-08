@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import '../../node_modules/slick-carousel/slick/slick.css';
 import '../../node_modules/slick-carousel/slick/slick-theme.css';
 import { testimonialData } from './testimonialData';
-import { GREY_8, GREY_1 } from './styles/ColorConstants';
+import { GREY_2, GREY_9 } from './styles/ColorConstants';
 
 import { Layout, Row, Col, Card, Avatar } from 'antd';
 const { Content } = Layout;
@@ -38,8 +38,8 @@ class Testimonials extends Component {
 								loading={false}
 								style={{
 									textAlign: 'center',
-									borderColor: GREY_8,
-									background: GREY_8
+									borderColor: GREY_2,
+									background: GREY_2
 								}}
 							>
 								<Avatar
@@ -52,7 +52,7 @@ class Testimonials extends Component {
 								/>
 								<p
 									style={{
-										color: GREY_1
+										color: GREY_9
 									}}
 								>
 									{testimonial['quote']}
