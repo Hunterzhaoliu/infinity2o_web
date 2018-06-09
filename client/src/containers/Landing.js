@@ -14,8 +14,18 @@ import {
 	RED_ORANGE_3,
 	BLUE_3
 } from './styles/ColorConstants';
+import anime from 'animejs';
 import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
+
+// anime({
+// 	targets: 'div',
+// 	translateX: [{ value: 100, duration: 3300 }, { value: 0, duration: 800 }],
+// 	rotate: '1turn',
+// 	backgroundColor: '#FFF',
+// 	duration: 2000,
+// 	loop: false
+// });
 
 class Landing extends Component {
 	state = {
@@ -58,7 +68,7 @@ class Landing extends Component {
 						padding: '150px 0px 0px' // top left&right bottom
 					}}
 					type="flex"
-					justify="space-around"
+					justify="center"
 					align="top"
 				>
 					<Col
@@ -66,22 +76,36 @@ class Landing extends Component {
 						sm={{ span: 12 }}
 						md={{ span: 8 }}
 						lg={{ span: 6 }}
-						xl={{ span: 4 }}
+						xl={{ span: 5 }}
 					>
-						<h2
-							style={{
-								textAlign: 'center',
-								color: GREY_2
-							}}
-						>
-							Online class alone
-						</h2>
 						<Row type="flex" justify="center">
 							<Col>
+								<h2
+									style={{
+										textAlign: 'center',
+										color: GREY_2
+									}}
+								>
+									Online class alone
+								</h2>
+								<Row type="flex" justify="center">
+									<Col>
+										<img
+											alt=""
+											style={{ height: '240px' }}
+											src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
+										/>
+									</Col>
+								</Row>
+							</Col>
+							<Col xl={{ span: 2 }}>
 								<img
 									alt=""
-									style={{ height: '240px' }}
-									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
+									style={{
+										padding: '180px 0px 0px',
+										height: '195px'
+									}}
+									src="https://user-images.githubusercontent.com/24757872/41196729-b7ea3038-6c0d-11e8-8b2f-cb4c4fe4afb7.png"
 								/>
 							</Col>
 						</Row>
@@ -91,7 +115,7 @@ class Landing extends Component {
 						sm={{ span: 14 }}
 						md={{ span: 16 }}
 						lg={{ span: 11 }}
-						xl={{ span: 9 }}
+						xl={{ span: 9, offset: 3 }}
 					>
 						<h2
 							style={{
