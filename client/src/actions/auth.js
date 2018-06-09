@@ -4,10 +4,7 @@ import {
 	SAVE_FETCHED_USER_PROFILE,
 	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS
 } from './types';
-import {
-	generateRandomColorThemeWith,
-	updateWithSavedColorTheme
-} from './colorTheme';
+import { updateWithSavedColorTheme } from './colorTheme';
 import { fetchUserSortingHatAsks } from './sorting_hat/sortingHat';
 import { fetchUserMatches } from './matches/matches';
 import { store } from '../index';
@@ -30,8 +27,8 @@ export const initializeApp = () => async dispatch => {
 	}
 
 	if (store.getState().auth.loggedInState === 'not_logged_in') {
-		generateRandomColorThemeWith(dispatch);
-	} else {
+		// use constant color theme
+	} else if (store.getState().auth.loggedInState === 'logged_in') {
 		updateWithSavedColorTheme(dispatch, response.data.profile.colorTheme);
 	}
 };

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import '../../node_modules/slick-carousel/slick/slick.css';
 import '../../node_modules/slick-carousel/slick/slick-theme.css';
 import { testimonialData } from './testimonialData';
+import { GREY_2, GREY_9 } from './styles/ColorConstants';
+
 import { Layout, Row, Col, Card, Avatar } from 'antd';
 const { Content } = Layout;
 
@@ -18,8 +20,6 @@ function SamplePrevArrow(props) {
 
 class Testimonials extends Component {
 	renderTestimonials() {
-		const { colorTheme } = this.props;
-
 		return _.map(testimonialData, (testimonial, index) => {
 			return (
 				<div key={index}>
@@ -38,8 +38,8 @@ class Testimonials extends Component {
 								loading={false}
 								style={{
 									textAlign: 'center',
-									borderColor: colorTheme.text8Color,
-									background: colorTheme.text8Color
+									borderColor: GREY_2,
+									background: GREY_2
 								}}
 							>
 								<Avatar
@@ -52,7 +52,7 @@ class Testimonials extends Component {
 								/>
 								<p
 									style={{
-										color: colorTheme.text1Color
+										color: GREY_9
 									}}
 								>
 									{testimonial['quote']}
@@ -90,14 +90,4 @@ class Testimonials extends Component {
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
-function mapStateToProps(state) {
-	return {
-		colorTheme: state.colorTheme
-	};
-}
-
-export default connect(mapStateToProps, null)(Testimonials);
+export default connect(null, null)(Testimonials);
