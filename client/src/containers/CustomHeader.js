@@ -99,7 +99,7 @@ class CustomHeader extends Component {
 						</Col>
 						<Col>
 							<Row type="flex" justify="end">
-								<Col>
+								<Col xs={{ span: 12 }}>
 									<Button
 										style={{
 											borderColor: RED_ORANGE_7,
@@ -117,6 +117,7 @@ class CustomHeader extends Component {
 									</Button>
 								</Col>
 								<Col
+									xs={{ span: 12 }}
 									style={{
 										padding: '0px 16px 0px'
 									}}
