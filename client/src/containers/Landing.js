@@ -9,13 +9,12 @@ import {
 	GREY_8,
 	GREY_7,
 	GREY_6,
-	GREY_3,
 	GREY_2,
 	GREY_1,
 	RED_ORANGE_3,
 	BLUE_3
 } from './styles/ColorConstants';
-import { Layout, Button, Row, Col, Icon, Progress } from 'antd';
+import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
@@ -56,7 +55,7 @@ class Landing extends Component {
 			<div>
 				<Row
 					style={{
-						padding: '0px 0px 0px' // top left&right bottom
+						padding: '150px 0px 0px' // top left&right bottom
 					}}
 					type="flex"
 					justify="space-around"
@@ -65,9 +64,9 @@ class Landing extends Component {
 					<Col
 						xs={{ span: 24 }}
 						sm={{ span: 12 }}
-						md={{ span: 10 }}
-						lg={{ span: 9 }}
-						xl={{ span: 8 }}
+						md={{ span: 8 }}
+						lg={{ span: 6 }}
+						xl={{ span: 4 }}
 					>
 						<h2
 							style={{
@@ -89,10 +88,10 @@ class Landing extends Component {
 					</Col>
 					<Col
 						xs={{ span: 24 }}
-						sm={{ span: 12 }}
-						md={{ span: 12 }}
+						sm={{ span: 14 }}
+						md={{ span: 16 }}
 						lg={{ span: 11 }}
-						xl={{ span: 10 }}
+						xl={{ span: 9 }}
 					>
 						<h2
 							style={{
@@ -150,7 +149,7 @@ class Landing extends Component {
 		return (
 			<Row
 				style={{
-					padding: '200px 0px 0px' // top left&right bottom
+					padding: '160px 0px 0px' // top left&right bottom
 				}}
 				type="flex"
 				justify="center"
@@ -169,132 +168,6 @@ class Landing extends Component {
 		);
 	}
 
-	renderMarketingInfo2() {
-		return (
-			<div>
-				<Row
-					style={{
-						padding: '10px 0px 0px' // top left&right bottom
-					}}
-					type="flex"
-					justify="space-around"
-					align="middle"
-				>
-					<Col
-						xs={{ span: 24 }}
-						sm={{ span: 12 }}
-						md={{ span: 8 }}
-						lg={{ span: 6 }}
-						xl={{ span: 6 }}
-					>
-						<Progress
-							percent={0}
-							size="small"
-							showInfo={false}
-							status="active"
-						/>
-						<p
-							style={{
-								textAlign: 'center',
-								color: GREY_3
-							}}
-						>
-							0% likely to make a new friend
-						</p>
-						<Progress
-							percent={2.5}
-							size="small"
-							showInfo={false}
-							status="active"
-						/>
-						<p
-							style={{
-								textAlign: 'center',
-								color: GREY_3
-							}}
-						>
-							2.5% likely to finish your class
-						</p>
-						<Row type="flex" justify="center">
-							<Col>
-								<Button
-									size="small"
-									style={{
-										borderColor: GREY_8,
-										background: GREY_8,
-										color: GREY_7
-									}}
-								>
-									<a
-										href="https://shrm.org/hr-today/news/hr-magazine/Pages/0214-execbrief.aspx"
-										target="_blank"
-										rel="noopener noreferrer"
-									>
-										Source
-									</a>
-								</Button>
-							</Col>
-						</Row>
-					</Col>
-					<Col
-						style={{
-							padding: '10px 0px 0px' // top left&right bottom
-						}}
-						xs={{ span: 24 }}
-						sm={{ span: 12 }}
-						md={{ span: 8 }}
-						lg={{ span: 6 }}
-						xl={{ span: 6 }}
-					>
-						<Progress
-							percent={99}
-							size="small"
-							showInfo={false}
-							status="active"
-						/>
-						<p
-							style={{
-								textAlign: 'center',
-								color: GREY_3
-							}}
-						>
-							99% more likely to make a new friend
-						</p>
-						<Progress
-							percent={95}
-							size="small"
-							showInfo={false}
-							status="active"
-						/>
-						<p
-							style={{
-								textAlign: 'center',
-								color: GREY_3
-							}}
-						>
-							95% more likely to finish your class
-						</p>
-						<Row type="flex" justify="center">
-							<Col>
-								<Button
-									size="small"
-									style={{
-										borderColor: GREY_8,
-										background: GREY_8,
-										color: GREY_7
-									}}
-									onClick={e => this.onClickSource()}
-								>
-									{this.state.displayText}
-								</Button>
-							</Col>
-						</Row>
-					</Col>
-				</Row>
-			</div>
-		);
-	}
-
 	renderLogin() {
 		const { auth } = this.props;
 
@@ -306,7 +179,7 @@ class Landing extends Component {
 					<div>
 						<Row
 							style={{
-								padding: '40px 0px 0px' // top left&right bottom
+								padding: '80px 0px 0px' // top left&right bottom
 							}}
 							type="flex"
 							justify="center"
@@ -414,7 +287,7 @@ class Landing extends Component {
 			<div>
 				<Content
 					style={{
-						padding: '150px 50px 50px', // top left&right bottom
+						height: '100vh',
 						background: GREY_9
 					}}
 				>
