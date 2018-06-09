@@ -19,12 +19,31 @@ import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
 
 // anime({
+// 	targets: '.arrow',
+// 	translateX: 250
+// });
+
+anime({
+	targets: '.ball',
+	translateY: '50vh',
+	duration: 300,
+	loop: true,
+	direction: 'alternate',
+	easing: 'easeInCubic',
+	scaleX: {
+		value: 1.05,
+		duration: 150,
+		delay: 268
+	}
+});
+
+// anime({
 // 	targets: 'div',
-// 	translateX: [{ value: 100, duration: 3300 }, { value: 0, duration: 800 }],
+// 	translateX: [{ value: 100, duration: 1200 }, { value: 0, duration: 800 }],
 // 	rotate: '1turn',
 // 	backgroundColor: '#FFF',
 // 	duration: 2000,
-// 	loop: false
+// 	loop: true
 // });
 
 class Landing extends Component {
@@ -99,14 +118,17 @@ class Landing extends Component {
 								</Row>
 							</Col>
 							<Col xl={{ span: 2 }}>
-								<img
-									alt=""
-									style={{
-										padding: '180px 0px 0px',
-										height: '195px'
-									}}
-									src="https://user-images.githubusercontent.com/24757872/41196729-b7ea3038-6c0d-11e8-8b2f-cb4c4fe4afb7.png"
-								/>
+								<div className="arrow">
+									<img
+										alt=""
+										style={{
+											padding: '180px 0px 0px',
+											height: '195px'
+										}}
+										src="https://user-images.githubusercontent.com/24757872/41196729-b7ea3038-6c0d-11e8-8b2f-cb4c4fe4afb7.png"
+									/>
+								</div>
+								<div className="ball" />
 							</Col>
 						</Row>
 					</Col>
