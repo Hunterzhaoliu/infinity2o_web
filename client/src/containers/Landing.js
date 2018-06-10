@@ -18,29 +18,10 @@ import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
-	state = {
-		displayText: 'Source'
-	};
-
 	componentWillMount() {
 		// run once before first render()
 
 		this.props.onSignedInLanding();
-	}
-
-	onClickSource() {
-		if (
-			this.state.displayText === 'Source' ||
-			this.state.displayText === 'Highly vetted source'
-		) {
-			this.setState({
-				displayText: 'Above statistics are made up but highly accurate'
-			});
-		} else {
-			this.setState({
-				displayText: 'Highly vetted source'
-			});
-		}
 	}
 
 	renderCartoons() {
@@ -58,7 +39,7 @@ class Landing extends Component {
 						padding: '150px 0px 0px' // top left&right bottom
 					}}
 					type="flex"
-					justify="space-around"
+					justify="center"
 					align="top"
 				>
 					<Col
@@ -66,23 +47,60 @@ class Landing extends Component {
 						sm={{ span: 12 }}
 						md={{ span: 8 }}
 						lg={{ span: 6 }}
-						xl={{ span: 4 }}
+						xl={{ span: 5 }}
 					>
-						<h2
-							style={{
-								textAlign: 'center',
-								color: GREY_2
-							}}
-						>
-							Online class alone
-						</h2>
 						<Row type="flex" justify="center">
-							<Col>
-								<img
-									alt=""
-									style={{ height: '240px' }}
-									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
-								/>
+							<Col
+								xs={{ span: 7, offset: 4 }}
+								sm={{ span: 14, offset: 4 }}
+								md={{ span: 15, offset: 4 }}
+								lg={{ span: 15, offset: 4 }}
+								xl={{ span: 15, offset: 4 }}
+							>
+								<h2
+									style={{
+										textAlign: 'center',
+										color: GREY_2
+									}}
+								>
+									Online class alone
+								</h2>
+								<Row type="flex" justify="center">
+									<Col>
+										<img
+											alt=""
+											style={{ height: '240px' }}
+											src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
+										/>
+									</Col>
+								</Row>
+							</Col>
+							<Col
+								xs={{ span: 3 }}
+								sm={{ span: 5 }}
+								md={{ span: 5 }}
+								lg={{ span: 5 }}
+								xl={{ span: 5 }}
+							>
+								<div className="arrow">
+									<img
+										alt=""
+										style={{
+											padding: '180px 0px 0px',
+											height: '195px'
+										}}
+										src="https://user-images.githubusercontent.com/24757872/41196729-b7ea3038-6c0d-11e8-8b2f-cb4c4fe4afb7.png"
+									/>
+								</div>
+								<p
+									style={{
+										color: GREY_1,
+										padding: '2px 0px 0px 28px',
+										textAlign: 'center'
+									}}
+								>
+									invisible chair
+								</p>
 							</Col>
 						</Row>
 					</Col>
@@ -91,7 +109,7 @@ class Landing extends Component {
 						sm={{ span: 14 }}
 						md={{ span: 16 }}
 						lg={{ span: 11 }}
-						xl={{ span: 9 }}
+						xl={{ span: 9, offset: 3 }}
 					>
 						<h2
 							style={{
@@ -196,29 +214,11 @@ class Landing extends Component {
 								</h2>
 							</Col>
 						</Row>
-						<Row
-							style={{
-								padding: '1px 0px 0px' // top left&right bottom
-							}}
-							type="flex"
-							justify="space-around"
-						>
-							<Col
-								xs={{ span: 0 }}
-								sm={{ span: 3, offset: 0 }}
-								md={{ span: 5, offset: 0 }}
-								lg={{ span: 7, offset: 0 }}
-								xl={{ span: 8, offset: 0 }}
-							/>
+						<Row type="flex" justify="center">
 							<Col
 								style={{
 									padding: '10px 0px 0px' // top left&right bottom
 								}}
-								xs={{ span: 12 }}
-								sm={{ span: 9, offset: 0 }}
-								md={{ span: 7, offset: 0 }}
-								lg={{ span: 5, offset: 0 }}
-								xl={{ span: 4, offset: 0 }}
 							>
 								<Button
 									size="large"
@@ -240,13 +240,8 @@ class Landing extends Component {
 							</Col>
 							<Col
 								style={{
-									padding: '10px 0px 0px' // top left&right bottom
+									padding: '10px 0px 0px 10px' // top left&right bottom
 								}}
-								xs={{ span: 13 }}
-								sm={{ span: 9, offset: 0 }}
-								md={{ span: 7, offset: 0 }}
-								lg={{ span: 4, offset: 0 }}
-								xl={{ span: 3, offset: 0 }}
 							>
 								<Button
 									size="large"
@@ -266,13 +261,6 @@ class Landing extends Component {
 									</a>
 								</Button>
 							</Col>
-							<Col
-								xs={{ span: 0 }}
-								sm={{ span: 3, offset: 0 }}
-								md={{ span: 5, offset: 0 }}
-								lg={{ span: 7, offset: 0 }}
-								xl={{ span: 8, offset: 0 }}
-							/>
 						</Row>
 					</div>
 				);
