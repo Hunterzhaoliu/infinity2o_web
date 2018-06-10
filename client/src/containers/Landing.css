@@ -5,18 +5,3 @@
 .ant-progress-inner {
 	background-color: var(--progress-remaining-color);
 }
-
-.arrow {
-	background-color: red;
-}
-
-.ball {
-	height: 200px;
-	width: 200px;
-	position: absolute;
-	top: 20px;
-	bottom: 0;
-	left: calc(50% - 100px);
-	background-color: darkblue;
-	border-radius: 50%;
-}

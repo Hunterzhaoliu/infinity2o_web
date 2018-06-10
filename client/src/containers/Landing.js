@@ -14,62 +14,14 @@ import {
 	RED_ORANGE_3,
 	BLUE_3
 } from './styles/ColorConstants';
-import anime from 'animejs';
 import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
 
-// anime({
-// 	targets: '.arrow',
-// 	translateX: 250
-// });
-
-anime({
-	targets: '.ball',
-	translateY: '50vh',
-	duration: 300,
-	loop: true,
-	direction: 'alternate',
-	easing: 'easeInCubic',
-	scaleX: {
-		value: 1.05,
-		duration: 150,
-		delay: 268
-	}
-});
-
-// anime({
-// 	targets: 'div',
-// 	translateX: [{ value: 100, duration: 1200 }, { value: 0, duration: 800 }],
-// 	rotate: '1turn',
-// 	backgroundColor: '#FFF',
-// 	duration: 2000,
-// 	loop: true
-// });
-
 class Landing extends Component {
-	state = {
-		displayText: 'Source'
-	};
-
 	componentWillMount() {
 		// run once before first render()
 
 		this.props.onSignedInLanding();
-	}
-
-	onClickSource() {
-		if (
-			this.state.displayText === 'Source' ||
-			this.state.displayText === 'Highly vetted source'
-		) {
-			this.setState({
-				displayText: 'Above statistics are made up but highly accurate'
-			});
-		} else {
-			this.setState({
-				displayText: 'Highly vetted source'
-			});
-		}
 	}
 
 	renderCartoons() {
@@ -98,7 +50,13 @@ class Landing extends Component {
 						xl={{ span: 5 }}
 					>
 						<Row type="flex" justify="center">
-							<Col>
+							<Col
+								xs={{ span: 7, offset: 4 }}
+								sm={{ span: 14, offset: 4 }}
+								md={{ span: 15, offset: 4 }}
+								lg={{ span: 15, offset: 4 }}
+								xl={{ span: 15, offset: 4 }}
+							>
 								<h2
 									style={{
 										textAlign: 'center',
@@ -117,7 +75,13 @@ class Landing extends Component {
 									</Col>
 								</Row>
 							</Col>
-							<Col xl={{ span: 2 }}>
+							<Col
+								xs={{ span: 3 }}
+								sm={{ span: 5 }}
+								md={{ span: 5 }}
+								lg={{ span: 5 }}
+								xl={{ span: 5 }}
+							>
 								<div className="arrow">
 									<img
 										alt=""
@@ -128,7 +92,15 @@ class Landing extends Component {
 										src="https://user-images.githubusercontent.com/24757872/41196729-b7ea3038-6c0d-11e8-8b2f-cb4c4fe4afb7.png"
 									/>
 								</div>
-								<div className="ball" />
+								<p
+									style={{
+										color: GREY_1,
+										padding: '2px 0px 0px 28px',
+										textAlign: 'center'
+									}}
+								>
+									invisible chair
+								</p>
 							</Col>
 						</Row>
 					</Col>
@@ -242,29 +214,11 @@ class Landing extends Component {
 								</h2>
 							</Col>
 						</Row>
-						<Row
-							style={{
-								padding: '1px 0px 0px' // top left&right bottom
-							}}
-							type="flex"
-							justify="space-around"
-						>
-							<Col
-								xs={{ span: 0 }}
-								sm={{ span: 3, offset: 0 }}
-								md={{ span: 5, offset: 0 }}
-								lg={{ span: 7, offset: 0 }}
-								xl={{ span: 8, offset: 0 }}
-							/>
+						<Row type="flex" justify="center">
 							<Col
 								style={{
 									padding: '10px 0px 0px' // top left&right bottom
 								}}
-								xs={{ span: 12 }}
-								sm={{ span: 9, offset: 0 }}
-								md={{ span: 7, offset: 0 }}
-								lg={{ span: 5, offset: 0 }}
-								xl={{ span: 4, offset: 0 }}
 							>
 								<Button
 									size="large"
@@ -286,13 +240,8 @@ class Landing extends Component {
 							</Col>
 							<Col
 								style={{
-									padding: '10px 0px 0px' // top left&right bottom
+									padding: '10px 0px 0px 10px' // top left&right bottom
 								}}
-								xs={{ span: 13 }}
-								sm={{ span: 9, offset: 0 }}
-								md={{ span: 7, offset: 0 }}
-								lg={{ span: 4, offset: 0 }}
-								xl={{ span: 3, offset: 0 }}
 							>
 								<Button
 									size="large"
@@ -312,13 +261,6 @@ class Landing extends Component {
 									</a>
 								</Button>
 							</Col>
-							<Col
-								xs={{ span: 0 }}
-								sm={{ span: 3, offset: 0 }}
-								md={{ span: 5, offset: 0 }}
-								lg={{ span: 7, offset: 0 }}
-								xl={{ span: 8, offset: 0 }}
-							/>
 						</Row>
 					</div>
 				);
