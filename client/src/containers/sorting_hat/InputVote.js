@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as sortingHatActionCreators from '../../actions/sorting_hat/sortingHat';
 import { bindActionCreators } from 'redux';
+import { GREY_8, GREY_2 } from '../styles/ColorConstants';
 import { Button, Card, Col, Layout, Row, Icon } from 'antd';
 const { Content } = Layout;
 
@@ -122,14 +123,14 @@ class InputVote extends Component {
 		});
 	}
 
-	getHeightBetweenCards(current4DisplayedAsks, askIndex) {
+	getHeightBetweenCards(fourAsks, askIndex) {
 		const { windowWidth } = this.props;
 		if (windowWidth >= 1200 && (askIndex === 0 || askIndex === 1)) {
 			// to display to second Ask with the same height as the first Ask
-			const numberOfAsOn1stAsk = current4DisplayedAsks[0].answers.length;
+			const numberOfAsOn1stAsk = fourAsks[0].answers.length;
 			let numberOfAsOn2ndAsk = 0;
-			if (current4DisplayedAsks.length > 1) {
-				numberOfAsOn2ndAsk = current4DisplayedAsks[1].answers.length;
+			if (fourAsks.length > 1) {
+				numberOfAsOn2ndAsk = fourAsks[1].answers.length;
 			}
 
 			// add height below card on 1st or 2nd Ask to match each other
@@ -178,12 +179,23 @@ class InputVote extends Component {
 	}
 
 	renderQandAs() {
-		const { colorTheme, sortingHat } = this.props;
+		const { colorTheme, sortingHat, landing, loggedInState } = this.props;
 
-		if (sortingHat.current4DisplayedAsks.length > 0) {
-			return _.map(sortingHat.current4DisplayedAsks, (Ask, askIndex) => {
+		let fourAsks;
+		let cardColor = colorTheme.text8Color;
+		let cardTextColor = colorTheme.text2Color;
+		if (loggedInState === 'not_logged_in') {
+			fourAsks = landing.landingAsks;
+			cardColor = GREY_2;
+			cardTextColor = GREY_8;
+		} else {
+			fourAsks = sortingHat.current4DisplayedAsks;
+		}
+
+		if (fourAsks.length > 0) {
+			return _.map(fourAsks, (Ask, askIndex) => {
 				const heightBetweenCards = this.getHeightBetweenCards(
-					sortingHat.current4DisplayedAsks,
+					fourAsks,
 					askIndex
 				);
 
@@ -213,9 +225,9 @@ class InputVote extends Component {
 						>
 							<Card
 								style={{
-									borderColor: colorTheme.text8Color,
-									background: colorTheme.text8Color,
-									color: colorTheme.text2Color
+									borderColor: cardColor,
+									background: cardColor,
+									color: cardTextColor
 								}}
 							>
 								<h3
@@ -428,7 +440,9 @@ function mapStateToProps(state) {
 		sortingHat: state.sortingHat,
 		mongoDBUserId: state.auth.mongoDBUserId,
 		windowWidth: state.customHeader.windowWidth,
-		theme: state.sortingHat.theme
+		theme: state.sortingHat.theme,
+		landing: state.landing,
+		loggedInState: state.auth.loggedInState
 	};
 }
 

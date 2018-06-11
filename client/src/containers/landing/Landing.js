@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActions from '../../actions/colorTheme';
+import * as landingActions from '../../actions/landing';
 import { bindActionCreators } from 'redux';
 import Testimonials from './Testimonials';
 import './Landing.css';
@@ -23,6 +24,7 @@ class Landing extends Component {
 		// run once before first render()
 
 		this.props.onSignedInLanding();
+		this.props.fetchLandingPageSortingHatAsks();
 	}
 
 	renderCartoons() {
@@ -272,7 +274,7 @@ class Landing extends Component {
 
 	renderMarketingInfo2() {
 		const how_part_0 =
-			'Find the best matches by expressing your beliefs to the Sorting Hat';
+			'Find the best matches by expressing your beliefs to our Sorting Hat';
 		const how_part_1 = 'by voting or asking questions';
 
 		return (
@@ -290,15 +292,16 @@ class Landing extends Component {
 								fontSize: 35
 							}}
 						>
-							{how_part_0}
+							{how_part_0}{' '}
+							<img
+								alt=""
+								style={{ width: 45, padding: '0px 0px 7px' }}
+								src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
+							/>
 						</h1>
 					</Col>
 				</Row>
-				<Row
-					type="flex"
-					justify="center"
-					style={{ padding: '0px 0px 0px' }}
-				>
+				<Row type="flex" justify="center">
 					<Col>
 						<h1
 							style={{
@@ -311,12 +314,10 @@ class Landing extends Component {
 						</h1>
 					</Col>
 				</Row>
-				<Row
-					type="flex"
-					justify="center"
-					style={{ padding: '70px 0px 0px' }}
-				>
-					<Col />
+				<Row type="flex" justify="center">
+					<Col>
+						<InputVote />
+					</Col>
 				</Row>
 			</div>
 		);
@@ -384,9 +385,14 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
+	const landingDispatchers = bindActionCreators(landingActions, dispatch);
+
 	return {
 		onSignedInLanding: () => {
 			customHeaderDispatchers.onSignedInLanding();
+		},
+		fetchLandingPageSortingHatAsks: () => {
+			landingDispatchers.fetchLandingPageSortingHatAsks();
 		}
 	};
 }

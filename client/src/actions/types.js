@@ -10,6 +10,9 @@ export const SAVE_COLOR_THEME_ERROR = 'SAVE_COLOR_THEME_ERROR';
 export const ADD_NEURONS = 'ADD_NEURONS';
 export const ADD_NEURONS_ERROR = 'ADD_NEURONS_ERROR';
 
+// Landing.js
+export const SAVE_FETCHED_LANDING_ASKS = 'SAVE_FETCHED_LANDING_ASKS';
+
 // CustomHeader.js
 export const MOVE_TO_TOUR = 'MOVE_TO_TOUR';
 export const MOVE_TO_PROFILE = 'MOVE_TO_PROFILE';
