@@ -11,12 +11,11 @@ import {
 	GREY_7,
 	GREY_6,
 	GREY_2,
-	GREY_1,
-	RED_ORANGE_3,
-	BLUE_3
+	GREY_1
 } from '../styles/ColorConstants';
+import LoginButtons from './LoginButtons';
 import InputVote from '../sorting_hat/InputVote';
-import { Layout, Button, Row, Col, Icon } from 'antd';
+import { Layout, Row, Col } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
@@ -217,54 +216,7 @@ class Landing extends Component {
 								</h2>
 							</Col>
 						</Row>
-						<Row type="flex" justify="center">
-							<Col
-								style={{
-									padding: '10px 0px 0px' // top left&right bottom
-								}}
-							>
-								<Button
-									size="large"
-									key="-1"
-									style={{
-										borderColor: RED_ORANGE_3,
-										background: RED_ORANGE_3,
-										color: GREY_9
-									}}
-								>
-									<a href="/auth/google">
-										Gmail Login{' '}
-										<Icon
-											style={{ fontSize: 18 }}
-											type="google"
-										/>
-									</a>
-								</Button>
-							</Col>
-							<Col
-								style={{
-									padding: '10px 0px 0px 10px' // top left&right bottom
-								}}
-							>
-								<Button
-									size="large"
-									key="0"
-									style={{
-										borderColor: BLUE_3,
-										background: BLUE_3,
-										color: GREY_9
-									}}
-								>
-									<a href="/auth/linkedIn">
-										LinkedIn Login{' '}
-										<Icon
-											style={{ fontSize: 18 }}
-											type="linkedin"
-										/>
-									</a>
-								</Button>
-							</Col>
-						</Row>
+						<LoginButtons />
 					</div>
 				);
 			default:
@@ -340,7 +292,7 @@ class Landing extends Component {
 			<div>
 				<Content
 					style={{
-						height: '100vh',
+						height: '96vh',
 						background: GREY_9
 					}}
 				>

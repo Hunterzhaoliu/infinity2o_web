@@ -5,12 +5,16 @@ import * as sortingHatActionCreators from '../../actions/sorting_hat/sortingHat'
 import * as landingActionCreators from '../../actions/landing';
 import { bindActionCreators } from 'redux';
 import {
+	GREY_9,
 	GREY_8,
 	GREY_7,
 	GREY_3,
 	GREY_2,
+	GREY_1,
 	RED_ORANGE_3
 } from '../styles/ColorConstants';
+import LoginButtons from '../landing/LoginButtons';
+import './InputVote.css';
 import { Button, Card, Col, Layout, Row, Icon, Modal } from 'antd';
 const { Content } = Layout;
 
@@ -80,19 +84,24 @@ class InputVote extends Component {
 		}
 	}
 
+	handleCancel = () => {
+		this.setState({ visible: false });
+	};
+
 	renderModal() {
+		const { visible } = this.state;
+
+		document.documentElement.style.setProperty(`--GREY_1`, GREY_1);
+
 		return (
-			<Modal
-				visible={visible}
-				title="Congrats on your 1st vote!"
-				footer={[
-					<Button key="back">Return</Button>,
-					<Button key="submit" type="primary">
-						Submit
-					</Button>
-				]}
-			>
-				<p>To save your vote login with</p>
+			<Modal visible={visible} onCancel={this.handleCancel} footer={null}>
+				<h2 style={{ textAlign: 'center', color: GREY_9 }}>
+					Congrats on your first vote!
+				</h2>
+				<p style={{ textAlign: 'center', color: GREY_7 }}>
+					To make your vote count login with
+				</p>
+				<LoginButtons />
 			</Modal>
 		);
 	}
@@ -518,6 +527,7 @@ class InputVote extends Component {
 				}}
 			>
 				{/* {this.renderAskCategories()} */}
+				{this.renderModal()}
 				<Row
 					type="flex"
 					justify="center"
