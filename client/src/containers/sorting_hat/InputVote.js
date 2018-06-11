@@ -3,7 +3,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as sortingHatActionCreators from '../../actions/sorting_hat/sortingHat';
 import { bindActionCreators } from 'redux';
-import { GREY_8, GREY_2 } from '../styles/ColorConstants';
+import {
+	GREY_8,
+	GREY_7,
+	GREY_3,
+	GREY_2,
+	RED_ORANGE_3
+} from '../styles/ColorConstants';
 import { Button, Card, Col, Layout, Row, Icon } from 'antd';
 const { Content } = Layout;
 
@@ -46,6 +52,29 @@ class InputVote extends Component {
 		);
 	}
 
+	renderNextAskButton(askIndex, isDisplayingAskStats) {
+		const { colorTheme, loggedInState } = this.props;
+
+		if (loggedInState === 'not_logged_in') {
+			return;
+		} else {
+			return (
+				<Row style={{ padding: '8px 0px 0px' }}>
+					<Button
+						style={{
+							borderColor: colorTheme.text7Color,
+							background: colorTheme.text7Color,
+							color: colorTheme.text2Color
+						}}
+						onClick={e => this.onNextAsk(askIndex)}
+					>
+						{this.renderAskDoneWord(isDisplayingAskStats)}
+					</Button>
+				</Row>
+			);
+		}
+	}
+
 	renderAnswers(
 		answers,
 		askIndex,
@@ -54,7 +83,14 @@ class InputVote extends Component {
 		isDisplayingAskStats,
 		askTotalVotes
 	) {
-		const { colorTheme, sortingHat } = this.props;
+		const { colorTheme, sortingHat, landing, loggedInState } = this.props;
+		let answerButtonColor = colorTheme.text7Color;
+		let votedAnswerButtonColor = colorTheme.keyText7Color;
+		if (loggedInState === 'not_logged_in') {
+			answerButtonColor = GREY_3;
+			votedAnswerButtonColor = RED_ORANGE_3;
+		}
+
 		return _.map(answers, (answerObject, answerIndex) => {
 			// displaying actual answers
 			let displayAnswer;
@@ -65,7 +101,7 @@ class InputVote extends Component {
 			// displaying the change in voted answer button color
 			const currentAnswerId = ask.answers[answerIndex]._id;
 
-			let displayAnswerButtonColor = colorTheme.text7Color;
+			let displayAnswerButtonColor = answerButtonColor;
 			let isDisplayingSaveIcon = false;
 			let answerVotes = answerObject.votes;
 
@@ -74,7 +110,7 @@ class InputVote extends Component {
 				const votedAnswerId = sortingHat.votes[askId].answerId;
 				isDisplayingAskStats = true;
 				if (votedAnswerId === currentAnswerId) {
-					displayAnswerButtonColor = colorTheme.keyText7Color;
+					displayAnswerButtonColor = votedAnswerButtonColor;
 					isDisplayingSaveIcon = true;
 				}
 			}
@@ -184,10 +220,12 @@ class InputVote extends Component {
 		let fourAsks;
 		let cardColor = colorTheme.text8Color;
 		let cardTextColor = colorTheme.text2Color;
+		let voteColor = colorTheme.text3Color;
 		if (loggedInState === 'not_logged_in') {
 			fourAsks = landing.landingAsks;
 			cardColor = GREY_2;
 			cardTextColor = GREY_8;
+			voteColor = GREY_7;
 		} else {
 			fourAsks = sortingHat.current4DisplayedAsks;
 		}
@@ -232,14 +270,14 @@ class InputVote extends Component {
 							>
 								<h3
 									style={{
-										color: colorTheme.text2Color
+										color: cardTextColor
 									}}
 								>
 									{displayQuestion}
 								</h3>
 								<div
 									style={{
-										color: colorTheme.text3Color
+										color: voteColor
 									}}
 								>
 									{this.renderTotalVotes(
@@ -255,20 +293,10 @@ class InputVote extends Component {
 									isDisplayingAskStats,
 									askTotalVotes
 								)}
-								<Row style={{ padding: '8px 0px 0px' }}>
-									<Button
-										style={{
-											borderColor: colorTheme.text7Color,
-											background: colorTheme.text7Color,
-											color: colorTheme.text2Color
-										}}
-										onClick={e => this.onNextAsk(askIndex)}
-									>
-										{this.renderAskDoneWord(
-											isDisplayingAskStats
-										)}
-									</Button>
-								</Row>
+								{this.renderNextAskButton(
+									askIndex,
+									isDisplayingAskStats
+								)}
 							</Card>
 							<Row
 								style={{
