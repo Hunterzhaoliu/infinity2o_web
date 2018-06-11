@@ -274,7 +274,8 @@ class InputVote extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					Looks like I've done a lot of voting; let me ask a question!
+					Looks like you've done a lot of voting; you should ask a
+					question!
 				</h3>
 			);
 		}

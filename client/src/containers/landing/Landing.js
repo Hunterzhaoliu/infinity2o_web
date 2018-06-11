@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as colorThemeActions from '../actions/colorTheme';
+import * as colorThemeActions from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import Testimonials from './Testimonials';
 import './Landing.css';
@@ -13,7 +13,8 @@ import {
 	GREY_1,
 	RED_ORANGE_3,
 	BLUE_3
-} from './styles/ColorConstants';
+} from '../styles/ColorConstants';
+import InputVote from '../sorting_hat/InputVote';
 import { Layout, Button, Row, Col, Icon } from 'antd';
 const { Content } = Layout;
 
@@ -269,6 +270,58 @@ class Landing extends Component {
 		}
 	}
 
+	renderMarketingInfo2() {
+		const how_part_0 =
+			'Find the best matches by expressing your beliefs to the Sorting Hat';
+		const how_part_1 = 'by voting or asking questions';
+
+		return (
+			<div>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: '70px 0px 0px' }}
+				>
+					<Col>
+						<h1
+							style={{
+								textAlign: 'center',
+								color: GREY_9,
+								fontSize: 35
+							}}
+						>
+							{how_part_0}
+						</h1>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: '0px 0px 0px' }}
+				>
+					<Col>
+						<h1
+							style={{
+								textAlign: 'center',
+								color: GREY_7,
+								fontSize: 25
+							}}
+						>
+							{how_part_1}
+						</h1>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: '70px 0px 0px' }}
+				>
+					<Col />
+				</Row>
+			</div>
+		);
+	}
+
 	render() {
 		//console.log('this.props inside Landing', this.props);
 		return (
@@ -280,6 +333,22 @@ class Landing extends Component {
 					}}
 				>
 					{this.renderMarketingInfo()}
+				</Content>
+				<Content
+					style={{
+						padding: '0px 50px 50px', // top left&right bottom
+						background: GREY_1
+					}}
+				>
+					{this.renderMarketingInfo2()}
+				</Content>
+				<Content
+					style={{
+						padding: '0px 50px 50px', // top left&right bottom
+						background: GREY_9
+					}}
+				>
+					TODO
 				</Content>
 				<Content
 					style={{

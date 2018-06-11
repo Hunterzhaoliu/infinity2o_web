@@ -31,26 +31,20 @@ class SortingHat extends Component {
 						textAlign: 'center'
 					}}
 				>
-					<Col
-						sm={{ span: 17 }}
-						md={{ span: 16 }}
-						lg={{ span: 12 }}
-						xl={{ span: 10 }}
-					>
+					<Col>
 						<h2
 							style={{
 								color: colorTheme.text2Color,
-								padding: '6px 0px 0px' // top left&right bottom
+								padding: '12px 0px 0px' // top left&right bottom
 							}}
 						>
 							Help the Sorting Hat find you great partners by
 						</h2>
 					</Col>
 					<Col
-						sm={{ span: 7 }}
-						md={{ span: 6 }}
-						lg={{ span: 5 }}
-						xl={{ span: 4 }}
+						style={{
+							padding: '0px 0px 0px 8px' // top left&right bottom
+						}}
 					>
 						<Button
 							style={{
@@ -58,11 +52,15 @@ class SortingHat extends Component {
 								background: colorTheme.keyText7Color
 							}}
 						>
-							<a
-								style={{ color: colorTheme.text2Color }}
-								href="/sorting_hat/ask"
-							>
-								Asking a Question
+							<a href="/sorting_hat/ask">
+								<p
+									style={{
+										color: colorTheme.text2Color,
+										fontSize: 20
+									}}
+								>
+									asking a question
+								</p>
 							</a>
 						</Button>
 					</Col>

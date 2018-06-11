@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GREY_1, GREY_3 } from './styles/ColorConstants';
+import { GREY_1, GREY_3 } from '../styles/ColorConstants';
 import { Layout, Row, Col } from 'antd';
 const { Footer } = Layout;
 
