@@ -15,6 +15,7 @@ import {
 } from '../styles/ColorConstants';
 import LoginButtons from './LoginButtons';
 import InputVote from '../sorting_hat/InputVote';
+import Matches from '../matches/Matches';
 import { Layout, Row, Col } from 'antd';
 const { Content } = Layout;
 
@@ -226,7 +227,7 @@ class Landing extends Component {
 
 	renderLandingAsks() {
 		const how_part_0 =
-			'Find the best matches by expressing your beliefs to our Sorting Hat';
+			'Find the best matches by expressing your beliefs to the Sorting Hat';
 		const how_part_1 = 'by voting or asking questions';
 
 		return (
@@ -287,7 +288,7 @@ class Landing extends Component {
 	}
 
 	renderMatches() {
-		const how_part_2 = 'Say Hi to the matches you want to learn with';
+		const how_part_2 = "'Say Hi' to the matches you want to learn with";
 
 		return (
 			<div>
@@ -306,6 +307,19 @@ class Landing extends Component {
 						>
 							{how_part_2}
 						</h1>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					align="middle"
+					style={{
+						textAlign: 'center',
+						padding: '20px 0px 0px 0px'
+					}}
+				>
+					<Col>
+						<Matches />
 					</Col>
 				</Row>
 			</div>

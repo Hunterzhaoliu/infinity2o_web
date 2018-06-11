@@ -38,7 +38,7 @@ class Matches extends Component {
 		this.props.onNextMatch();
 	}
 
-	displayNeedToPurchaseMoreNeurons = () => {
+	displayNeedToGetMoreNeurons = () => {
 		message.warn(
 			'You need ' +
 				NUMBER_NEURONS_TO_SAY_HI +
@@ -56,7 +56,7 @@ class Matches extends Component {
 			);
 			this.props.onStartConversation(history, matchName, matchId);
 		} else {
-			this.displayNeedToPurchaseMoreNeurons();
+			this.displayNeedToGetMoreNeurons();
 		}
 	}
 
