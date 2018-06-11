@@ -11,21 +11,8 @@ import {
 	NUMBER_NEURONS_TO_SAY_HI
 } from '../payment/prices';
 import './Matches.css';
-import {
-	Layout,
-	Row,
-	Col,
-	Card,
-	Button,
-	message,
-	Progress,
-	Icon,
-	Avatar
-} from 'antd';
-import LinkedIn from '../profileInformation/LinkedIn';
-import Github from '../profileInformation/Github';
-import Interests from '../profileInformation/Interests';
-import TimeZone from '../profileInformation/TimeZone';
+import { Layout, Row, Col, message, Progress, Icon } from 'antd';
+import MatchCards from './MatchCards';
 const { Content } = Layout;
 
 class Matches extends Component {
@@ -68,56 +55,6 @@ class Matches extends Component {
 		}
 	}
 
-	renderMatchTotalVotes(totalUserVotes) {
-		const { colorTheme } = this.props;
-		let voteDescription;
-		if (totalUserVotes <= 1) {
-			voteDescription = 'total vote';
-		} else {
-			voteDescription = 'total votes';
-		}
-		return (
-			<Row type="flex" justify="center" align="middle">
-				<Col>
-					<h3
-						style={{
-							//fontSize: 12,
-							color: colorTheme.text3Color
-						}}
-					>
-						{totalUserVotes} {voteDescription}
-					</h3>
-				</Col>
-			</Row>
-		);
-	}
-
-	renderMatchPicture(imageUrl) {
-		if (imageUrl !== undefined) {
-			return (
-				<Row
-					style={{ padding: '5px 0px 0px 0px' }}
-					type="flex"
-					justify="center"
-					align="middle"
-				>
-					<Col>
-						<Avatar
-							style={{
-								width: 75,
-								height: 75
-							}}
-							shape="circle"
-							src={imageUrl}
-						/>
-					</Col>
-				</Row>
-			);
-		} else {
-			return <div />;
-		}
-	}
-
 	renderMatches() {
 		//console.log('in Matches.js this.props = ', this.props);
 		const {
@@ -144,116 +81,7 @@ class Matches extends Component {
 			const match = matches.current1DisplayedMatches[0];
 			return (
 				<Col key={match.name}>
-					<Row type="flex" justify="center" align="top">
-						<Col>
-							<Card
-								hoverable={true}
-								borderded="false"
-								loading={false}
-								style={{
-									width: '400px',
-									color: colorTheme.text1Color,
-									borderColor: colorTheme.text8Color,
-									background: colorTheme.text8Color
-								}}
-							>
-								<Row
-									type="flex"
-									justify="center"
-									align="middle"
-								>
-									<Col>
-										<h2
-											style={{
-												color: colorTheme.keyText6Color
-											}}
-										>
-											{match.name}
-										</h2>
-									</Col>
-									<Col>
-										<h2
-											style={{
-												color: colorTheme.text6Color
-											}}
-										>
-											{', '}
-											{match.age}
-										</h2>
-									</Col>
-								</Row>
-								{this.renderMatchTotalVotes(
-									match.totalUserVotes
-								)}
-								<Row
-									type="flex"
-									justify="center"
-									align="middle"
-								>
-									<Col>
-										<LinkedIn
-											value={
-												match.linkedInPublicProfileUrl
-											}
-										/>
-									</Col>
-									<Col>
-										<Github
-											value={match.githubPublicProfileUrl}
-										/>
-									</Col>
-								</Row>
-								<Row style={{ padding: '10px 0px 0px 0px' }}>
-									<Interests value={match.interests} />
-								</Row>
-								<Row>
-									<TimeZone value={match.timeZone} />
-								</Row>
-								{this.renderMatchPicture(match.imageUrl)}
-								<Row
-									style={{ padding: '8px 0px 0px 0px' }}
-									type="flex"
-									justify="space-between"
-									align="top"
-								>
-									<Col span={11}>
-										<Button
-											style={{
-												borderColor:
-													colorTheme.text7Color,
-												background:
-													colorTheme.text7Color,
-												color: colorTheme.text2Color
-											}}
-											onClick={e => this.onNextMatch()}
-										>
-											Next
-										</Button>
-									</Col>
-									<Col span={11}>
-										<Button
-											style={{
-												borderColor:
-													colorTheme.keyText7Color,
-												background:
-													colorTheme.keyText7Color,
-												color: colorTheme.text1Color
-											}}
-											onClick={e =>
-												this.onStartConversation(
-													history,
-													match.name,
-													match.id
-												)
-											}
-										>
-											Say Hi
-										</Button>
-									</Col>
-								</Row>
-							</Card>
-						</Col>
-					</Row>
+					<MatchCards match={match} history={history} />
 				</Col>
 			);
 		} else if (runningAthenaForUser) {

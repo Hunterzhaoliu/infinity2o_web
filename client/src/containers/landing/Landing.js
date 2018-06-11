@@ -15,7 +15,7 @@ import {
 } from '../styles/ColorConstants';
 import LoginButtons from './LoginButtons';
 import InputVote from '../sorting_hat/InputVote';
-import Matches from '../matches/Matches';
+import MatchCards from '../matches/MatchCards';
 import { Layout, Row, Col } from 'antd';
 const { Content } = Layout;
 
@@ -288,7 +288,7 @@ class Landing extends Component {
 	}
 
 	renderMatches() {
-		const how_part_2 = "'Say Hi' to the matches you want to learn with";
+		const how_part_2 = 'Chat with the matches you want to learn with';
 
 		return (
 			<div>
@@ -319,7 +319,7 @@ class Landing extends Component {
 					}}
 				>
 					<Col>
-						<Matches />
+						<MatchCards />
 					</Col>
 				</Row>
 			</div>
