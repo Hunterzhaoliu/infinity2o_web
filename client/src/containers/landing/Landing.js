@@ -224,7 +224,7 @@ class Landing extends Component {
 		}
 	}
 
-	renderMarketingInfo2() {
+	renderLandingAsks() {
 		const how_part_0 =
 			'Find the best matches by expressing your beliefs to our Sorting Hat';
 		const how_part_1 = 'by voting or asking questions';
@@ -286,6 +286,32 @@ class Landing extends Component {
 		);
 	}
 
+	renderMatches() {
+		const how_part_2 = 'Say Hi to the matches you want to learn with';
+
+		return (
+			<div>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: '70px 0px 0px' }}
+				>
+					<Col>
+						<h1
+							style={{
+								textAlign: 'center',
+								color: GREY_1,
+								fontSize: 35
+							}}
+						>
+							{how_part_2}
+						</h1>
+					</Col>
+				</Row>
+			</div>
+		);
+	}
+
 	render() {
 		//console.log('this.props inside Landing', this.props);
 		return (
@@ -304,7 +330,7 @@ class Landing extends Component {
 						background: GREY_1
 					}}
 				>
-					{this.renderMarketingInfo2()}
+					{this.renderLandingAsks()}
 				</Content>
 				<Content
 					style={{
@@ -312,7 +338,7 @@ class Landing extends Component {
 						background: GREY_9
 					}}
 				>
-					TODO
+					{this.renderMatches()}
 				</Content>
 				<Content
 					style={{

@@ -27,20 +27,26 @@ class DisplayField extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					Collect more Neurons by asking questions and voting in
-					Sorting Hat or revoting in Profile to 'Say Hi' to more
-					matches.
+					Use neurons to 'Say Hi' to more matches.
 				</p>
 			</div>
 		);
 
 		return (
-			<Popover content={neuronExplanation}>
+			<Popover
+				style={{
+					borderColor: colorTheme.text8Color,
+					backgroundColor: colorTheme.text8Color,
+					color: colorTheme.text3Color
+				}}
+				content={neuronExplanation}
+			>
 				<Button
 					style={{
 						borderColor: colorTheme.text8Color,
 						backgroundColor: colorTheme.text8Color,
-						color: colorTheme.text3Color
+						color: colorTheme.text3Color,
+						padding: '0px 5px 0px'
 					}}
 					size="small"
 				>
@@ -110,7 +116,7 @@ class DisplayField extends Component {
 							<Col style={{ padding: '25px 0px 0px' }}>
 								<p>{finalDisplayString}</p>
 							</Col>
-							<Col offset={1} style={{ padding: '15px 0px 0px' }}>
+							<Col offset={1} style={{ padding: '7px 0px 0px' }}>
 								{this.renderNeuronExplanation()}
 							</Col>
 						</Row>
