@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as sortingHatActionCreators from '../../actions/sorting_hat/sortingHat';
+import * as landingActionCreators from '../../actions/landing';
 import { bindActionCreators } from 'redux';
 import {
 	GREY_8,
@@ -10,7 +11,7 @@ import {
 	GREY_2,
 	RED_ORANGE_3
 } from '../styles/ColorConstants';
-import { Button, Card, Col, Layout, Row, Icon } from 'antd';
+import { Button, Card, Col, Layout, Row, Icon, Modal } from 'antd';
 const { Content } = Layout;
 
 class InputVote extends Component {
@@ -75,6 +76,31 @@ class InputVote extends Component {
 		}
 	}
 
+	renderModal() {
+		Modal.info({
+			maskClosable: true,
+			footer: true,
+			title: 'This is a notification message',
+			content: (
+				<div>
+					<p>some messages...some messages...</p>
+					<p>some messages...some messages...</p>
+				</div>
+			)
+		});
+	}
+
+	onVoteLanding(answerIndex, askIndex) {
+		const { landing } = this.props;
+		const ask = landing.landingAsks[askIndex];
+		const answerId = ask.answers[answerIndex]._id;
+		if (landing.numberOfLandingVotes === 0) {
+			this.renderModal();
+		}
+
+		this.props.onVoteLanding(answerIndex, answerId, askIndex);
+	}
+
 	renderAnswerButton(
 		displayAnswerButtonColor,
 		answerButtonTextColor,
@@ -95,7 +121,7 @@ class InputVote extends Component {
 						background: displayAnswerButtonColor,
 						color: answerButtonTextColor
 					}}
-					// TODO: onClick={e => this.onVoteLanding(answerIndex)}
+					onClick={e => this.onVoteLanding(answerIndex, askIndex)}
 				>
 					{displayAnswer}
 				</Button>
@@ -133,9 +159,12 @@ class InputVote extends Component {
 		let answerButtonColor = colorTheme.text7Color;
 		let answerButtonTextColor = colorTheme.text2Color;
 		let votedAnswerButtonColor = colorTheme.keyText7Color;
+		let votingPlace = sortingHat;
 		if (loggedInState === 'not_logged_in') {
 			answerButtonColor = GREY_3;
+			answerButtonTextColor = GREY_8;
 			votedAnswerButtonColor = RED_ORANGE_3;
+			votingPlace = landing;
 		}
 
 		return _.map(answers, (answerObject, answerIndex) => {
@@ -153,8 +182,8 @@ class InputVote extends Component {
 			let answerVotes = answerObject.votes;
 
 			// if user has voted on an ask
-			if (sortingHat.votes[askId] !== undefined) {
-				const votedAnswerId = sortingHat.votes[askId].answerId;
+			if (votingPlace.votes[askId] !== undefined) {
+				const votedAnswerId = votingPlace.votes[askId].answerId;
 				isDisplayingAskStats = true;
 				if (votedAnswerId === currentAnswerId) {
 					displayAnswerButtonColor = votedAnswerButtonColor;
@@ -172,7 +201,7 @@ class InputVote extends Component {
 							askIndex,
 							askId,
 							displayAnswer,
-							sortingHat,
+							votingPlace,
 							isDisplayingSaveIcon
 						)}
 					</Col>
@@ -283,7 +312,10 @@ class InputVote extends Component {
 					displayAnswers = Ask.answers;
 					askId = Ask._id;
 					askTotalVotes = Ask.totalVotes;
-					if (sortingHat.votes[askId] !== undefined) {
+					if (
+						sortingHat.votes[askId] !== undefined ||
+						landing.votes[askId] !== undefined
+					) {
 						isDisplayingAskStats = true;
 					}
 
@@ -301,6 +333,7 @@ class InputVote extends Component {
 									background: cardColor,
 									color: cardTextColor
 								}}
+								hoverable
 							>
 								<h3
 									style={{
@@ -467,7 +500,7 @@ class InputVote extends Component {
 
 	render() {
 		const { colorTheme } = this.props;
-		//console.log('this.props in InputVote.js', this.props);
+
 		return (
 			<Content
 				style={{
@@ -518,6 +551,11 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
+	const landingDispatchers = bindActionCreators(
+		landingActionCreators,
+		dispatch
+	);
+
 	return {
 		onNewestAsks: () => {
 			sortingHatDispatchers.onNewestAsks();
@@ -551,6 +589,9 @@ function mapDispatchToProps(dispatch) {
 				history,
 				mongoDBUserId
 			);
+		},
+		onVoteLanding: (answerIndex, answerId, askIndex) => {
+			landingDispatchers.onVoteLanding(answerIndex, answerId, askIndex);
 		}
 	};
 }

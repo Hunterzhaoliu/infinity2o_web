@@ -14,7 +14,7 @@ class SortingHat extends Component {
 	}
 
 	render() {
-		//console.log('this.props in SortingHat.js', this.props);
+		// console.log('this.props in SortingHat.js', this.props);
 		const { colorTheme, history } = this.props;
 		return (
 			<Content

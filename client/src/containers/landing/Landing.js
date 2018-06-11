@@ -295,7 +295,10 @@ class Landing extends Component {
 							{how_part_0}{' '}
 							<img
 								alt=""
-								style={{ width: 45, padding: '0px 0px 7px' }}
+								style={{
+									width: 50,
+									padding: '0px 0px 5px 5px'
+								}}
 								src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
 							/>
 						</h1>
@@ -314,7 +317,15 @@ class Landing extends Component {
 						</h1>
 					</Col>
 				</Row>
-				<Row type="flex" justify="center">
+				<Row
+					type="flex"
+					justify="center"
+					align="middle"
+					style={{
+						textAlign: 'center',
+						padding: '20px 0px 0px 0px'
+					}}
+				>
 					<Col>
 						<InputVote />
 					</Col>
