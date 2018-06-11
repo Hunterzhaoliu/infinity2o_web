@@ -152,10 +152,8 @@ const findNewerAndOlderAsks = async (
 module.exports = app => {
 	app.get('/api/sorting_hat/landing_asks', async (request, response) => {
 		const nextAsks = await AskCollection.find()
-			.sort({ totalVotes: -1 }) // -1 = newest to oldest
+			.sort({ totalVotes: -1 }) // -1 = most to least
 			.limit(4);
-
-		// TODO: most popular 4 asks
 
 		response.send(nextAsks);
 	});

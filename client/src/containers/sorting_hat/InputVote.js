@@ -15,6 +15,10 @@ import { Button, Card, Col, Layout, Row, Icon, Modal } from 'antd';
 const { Content } = Layout;
 
 class InputVote extends Component {
+	state = {
+		visible: false
+	};
+
 	componentWillMount() {
 		// run once before first render()
 	}
@@ -77,17 +81,20 @@ class InputVote extends Component {
 	}
 
 	renderModal() {
-		Modal.info({
-			maskClosable: true,
-			footer: true,
-			title: 'This is a notification message',
-			content: (
-				<div>
-					<p>some messages...some messages...</p>
-					<p>some messages...some messages...</p>
-				</div>
-			)
-		});
+		return (
+			<Modal
+				visible={visible}
+				title="Congrats on your 1st vote!"
+				footer={[
+					<Button key="back">Return</Button>,
+					<Button key="submit" type="primary">
+						Submit
+					</Button>
+				]}
+			>
+				<p>To save your vote login with</p>
+			</Modal>
+		);
 	}
 
 	onVoteLanding(answerIndex, askIndex) {
@@ -95,7 +102,9 @@ class InputVote extends Component {
 		const ask = landing.landingAsks[askIndex];
 		const answerId = ask.answers[answerIndex]._id;
 		if (landing.numberOfLandingVotes === 0) {
-			this.renderModal();
+			this.setState({
+				visible: true
+			});
 		}
 
 		this.props.onVoteLanding(answerIndex, answerId, askIndex);
