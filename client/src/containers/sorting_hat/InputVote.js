@@ -75,6 +75,52 @@ class InputVote extends Component {
 		}
 	}
 
+	renderAnswerButton(
+		displayAnswerButtonColor,
+		answerButtonTextColor,
+		answerIndex,
+		askIndex,
+		askId,
+		displayAnswer,
+		sortingHat,
+		isDisplayingSaveIcon
+	) {
+		const { loggedInState } = this.props;
+
+		if (loggedInState === 'not_logged_in') {
+			return (
+				<Button
+					style={{
+						borderColor: displayAnswerButtonColor,
+						background: displayAnswerButtonColor,
+						color: answerButtonTextColor
+					}}
+					// TODO: onClick={e => this.onVoteLanding(answerIndex)}
+				>
+					{displayAnswer}
+				</Button>
+			);
+		} else {
+			return (
+				<Button
+					style={{
+						borderColor: displayAnswerButtonColor,
+						background: displayAnswerButtonColor,
+						color: answerButtonTextColor
+					}}
+					onClick={e => this.onVote(answerIndex, askIndex, askId)}
+				>
+					{displayAnswer}
+					{this.renderSaveIcon(
+						sortingHat.save,
+						askIndex,
+						isDisplayingSaveIcon
+					)}
+				</Button>
+			);
+		}
+	}
+
 	renderAnswers(
 		answers,
 		askIndex,
@@ -85,6 +131,7 @@ class InputVote extends Component {
 	) {
 		const { colorTheme, sortingHat, landing, loggedInState } = this.props;
 		let answerButtonColor = colorTheme.text7Color;
+		let answerButtonTextColor = colorTheme.text2Color;
 		let votedAnswerButtonColor = colorTheme.keyText7Color;
 		if (loggedInState === 'not_logged_in') {
 			answerButtonColor = GREY_3;
@@ -117,34 +164,21 @@ class InputVote extends Component {
 
 			return (
 				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
-					<Col
-						style={{
-							color: colorTheme.text2Color
-						}}
-						span={this.renderSpanChange(isDisplayingAskStats)}
-					>
-						<Button
-							style={{
-								borderColor: displayAnswerButtonColor,
-								background: displayAnswerButtonColor,
-								color: colorTheme.text2Color
-							}}
-							onClick={e =>
-								this.onVote(answerIndex, askIndex, askId)
-							}
-						>
-							{displayAnswer}
-							{this.renderSaveIcon(
-								sortingHat.save,
-								askIndex,
-								isDisplayingSaveIcon
-							)}
-						</Button>
+					<Col span={this.renderSpanChange(isDisplayingAskStats)}>
+						{this.renderAnswerButton(
+							displayAnswerButtonColor,
+							answerButtonTextColor,
+							answerIndex,
+							askIndex,
+							askId,
+							displayAnswer,
+							sortingHat,
+							isDisplayingSaveIcon
+						)}
 					</Col>
 					<Col
 						style={{
-							padding: '5px 0px 0px',
-							color: colorTheme.text2Color
+							padding: '5px 0px 0px'
 						}}
 						span={this.renderSpanChange(isDisplayingAskStats)}
 					>
