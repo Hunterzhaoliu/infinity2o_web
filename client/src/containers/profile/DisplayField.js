@@ -310,10 +310,10 @@ class DisplayField extends Component {
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col
-					sm={{ span: 18, offset: 0 }}
-					md={{ span: 19, offset: 0 }}
-					lg={{ span: 20, offset: 0 }}
-					xl={{ span: 21, offset: 0 }}
+					sm={{ span: 18 }}
+					md={{ span: 19 }}
+					lg={{ span: 20 }}
+					xl={{ span: 21 }}
 				>
 					<h3
 						style={{

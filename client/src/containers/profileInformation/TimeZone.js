@@ -5,8 +5,12 @@ import DisplayField from '../profile/DisplayField';
 
 class TimeZone extends Component {
 	render() {
-		const { value } = this.props;
+		const { value, activeSection } = this.props;
 		if (value.length > 0) {
+			let padding = '5px 0px 0px 20px';
+			if (activeSection === 'matches') {
+				padding = '5px 0px 0px 40px';
+			}
 			return (
 				<Row type="flex" justify="start" align="middle">
 					<Col span={1}>
@@ -22,7 +26,7 @@ class TimeZone extends Component {
 					<Col
 						span={23}
 						style={{
-							padding: '0px 0px 0px 20px' // top right bottom left
+							padding: padding // top right bottom left
 						}}
 					>
 						<DisplayField label="Time Zone: " value={value[1]} />
@@ -39,7 +43,9 @@ So we have a state and a UI(with props).
 This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
-	return {};
+	return {
+		activeSection: state.colorTheme.activeSection
+	};
 }
 
 /*

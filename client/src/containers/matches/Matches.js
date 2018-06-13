@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as matchesActionCreators from '../../actions/matches/matches';
-import * as profileActionCreators from '../../actions/profile/profile';
-import * as authActionCreators from '../../actions/auth';
 import { bindActionCreators } from 'redux';
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
-import {
-	NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
-	NUMBER_NEURONS_TO_SAY_HI
-} from '../payment/prices';
 import './Matches.css';
-import { Layout, Row, Col, message, Progress, Icon } from 'antd';
+import { Layout, Row, Col, Progress, Icon } from 'antd';
 import MatchCards from './MatchCards';
 const { Content } = Layout;
 
@@ -19,40 +12,6 @@ class Matches extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onMatches();
-	}
-
-	onNextMatch() {
-		this.props.onNextMatch();
-	}
-
-	displayNeedToGetMoreNeurons = () => {
-		message.warn(
-			'You need ' +
-				NUMBER_NEURONS_TO_SAY_HI +
-				" more neurons to 'Say Hi'. Get neurons by voting or asking questions with the Sorting Hat.",
-			5
-		);
-	};
-
-	onStartConversation(history, matchName, matchId) {
-		const { neuronsInBillions, mongoDBUserId } = this.props;
-		if (neuronsInBillions >= NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS) {
-			this.props.decrementNeurons(
-				NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
-				mongoDBUserId
-			);
-			this.props.onStartConversation(history, matchName, matchId);
-		} else {
-			this.displayNeedToGetMoreNeurons();
-		}
-	}
-
-	renderNameAndAge(match) {
-		if (match.age !== undefined) {
-			return match.name + ', ' + match.age;
-		} else {
-			return match.name;
-		}
 	}
 
 	renderMatches() {
@@ -250,36 +209,9 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
-	const matchesDispatchers = bindActionCreators(
-		matchesActionCreators,
-		dispatch
-	);
-
-	const profileDispatchers = bindActionCreators(
-		profileActionCreators,
-		dispatch
-	);
-
-	const authDispatchers = bindActionCreators(authActionCreators, dispatch);
-
 	return {
 		onMatches: () => {
 			colorThemeDispatchers.onMatches();
-		},
-		onNextMatch: () => {
-			matchesDispatchers.onNextMatch();
-		},
-		onStartConversation: (history, matchName, matchId) => {
-			matchesDispatchers.onStartConversation(history, matchName, matchId);
-		},
-		decrementNeurons: (neuronsInBillions, mongoDBUserId) => {
-			profileDispatchers.decrementNeurons(
-				neuronsInBillions,
-				mongoDBUserId
-			);
-		},
-		fetchUserProfile: () => {
-			authDispatchers.fetchUserProfile();
 		}
 	};
 }
