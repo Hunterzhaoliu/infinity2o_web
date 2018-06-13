@@ -184,7 +184,7 @@ class MatchCards extends Component {
 							<Row type="flex" justify="center" align="middle">
 								<Col>
 									{this.renderMatchPicture(
-										'https://bit.ly/2JLyOE1'
+										'https://bit.ly/2HME05s'
 									)}
 								</Col>
 							</Row>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { GREY_2 } from '../styles/ColorConstants';
 import { Row, Col, Table, Popover, Button, Icon } from 'antd';
 import './DisplayField.css';
 
@@ -306,7 +307,12 @@ class DisplayField extends Component {
 	}
 
 	render() {
-		const { colorTheme, label, value } = this.props;
+		const { colorTheme, label, value, loggedInState } = this.props;
+
+		let textColor = colorTheme.text2Color;
+		if (loggedInState === 'not_logged_in') {
+			textColor = GREY_2;
+		}
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col
@@ -317,7 +323,7 @@ class DisplayField extends Component {
 				>
 					<h3
 						style={{
-							color: colorTheme.text2Color
+							color: textColor
 						}}
 					>
 						{this.renderValue(label, value)}
@@ -335,7 +341,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		infinityStatus: state.profile.payment.infinityStatus
+		infinityStatus: state.profile.payment.infinityStatus,
+		loggedInState: state.auth.loggedInState
 	};
 }
 

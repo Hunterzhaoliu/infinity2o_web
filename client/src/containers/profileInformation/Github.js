@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-// import { bindActionCreators } from "redux";
+import { GREY_3 } from '../styles/ColorConstants';
 import { connect } from 'react-redux';
 import { Col, Icon } from 'antd';
 
 class Github extends Component {
 	render() {
-		const { value, colorTheme } = this.props;
+		const { value, colorTheme, loggedInState } = this.props;
+		let textColor = colorTheme.text2Color;
+		if (loggedInState === 'not_logged_in') {
+			textColor = GREY_3;
+		}
 		if (value !== undefined) {
 			return (
 				<Col>
@@ -14,7 +18,7 @@ class Github extends Component {
 							alt="Github: "
 							style={{
 								fontSize: '25px',
-								color: colorTheme.text3Color
+								color: textColor
 							}}
 							type="github"
 						/>
@@ -33,7 +37,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme
+		colorTheme: state.colorTheme,
+		loggedInState: state.auth.loggedInState
 	};
 }
 
