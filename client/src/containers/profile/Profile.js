@@ -60,11 +60,15 @@ class Profile extends Component {
 							{this.renderNameAndAge()}
 						</h2>
 					</Col>
-					<LinkedIn value={profile.linkedInPublicProfileUrl} />
-					<Github value={profile.githubPublicProfileUrl} />
+					<Col style={{ padding: '0px 0px 0px 10px' }}>
+						<LinkedIn value={profile.linkedInPublicProfileUrl} />
+					</Col>
+					<Col style={{ padding: '0px 0px 0px 10px' }}>
+						<Github value={profile.githubPublicProfileUrl} />
+					</Col>
 				</Row>
 				<Neurons value={profile.payment.neuronsInBillions} />
-				<Interests value={profile.interests} />
+				<Interests interests={profile.interests} />
 				<Email value={profile.email} />
 				<TimeZone value={profile.timeZone} />
 				<Row

@@ -2,11 +2,27 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as sortingHatActionCreators from '../../actions/sorting_hat/sortingHat';
+import * as landingActionCreators from '../../actions/landing';
 import { bindActionCreators } from 'redux';
-import { Button, Card, Col, Layout, Row, Icon } from 'antd';
+import {
+	GREY_9,
+	GREY_8,
+	GREY_7,
+	GREY_3,
+	GREY_2,
+	GREY_1,
+	RED_ORANGE_3
+} from '../styles/ColorConstants';
+import LoginButtons from '../landing/LoginButtons';
+import './InputVote.css';
+import { Button, Card, Col, Layout, Row, Icon, Modal } from 'antd';
 const { Content } = Layout;
 
 class InputVote extends Component {
+	state = {
+		visible: false
+	};
+
 	componentWillMount() {
 		// run once before first render()
 	}
@@ -45,6 +61,110 @@ class InputVote extends Component {
 		);
 	}
 
+	renderNextAskButton(askIndex, isDisplayingAskStats) {
+		const { colorTheme, loggedInState } = this.props;
+
+		if (loggedInState === 'not_logged_in') {
+			return;
+		} else {
+			return (
+				<Row style={{ padding: '8px 0px 0px' }}>
+					<Button
+						style={{
+							borderColor: colorTheme.text7Color,
+							background: colorTheme.text7Color,
+							color: colorTheme.text2Color
+						}}
+						onClick={e => this.onNextAsk(askIndex)}
+					>
+						{this.renderAskDoneWord(isDisplayingAskStats)}
+					</Button>
+				</Row>
+			);
+		}
+	}
+
+	handleCancel = () => {
+		this.setState({ visible: false });
+	};
+
+	renderModal() {
+		const { visible } = this.state;
+
+		document.documentElement.style.setProperty(`--GREY_1`, GREY_1);
+
+		return (
+			<Modal visible={visible} onCancel={this.handleCancel} footer={null}>
+				<h2 style={{ textAlign: 'center', color: GREY_9 }}>
+					Congrats on your first vote!
+				</h2>
+				<p style={{ textAlign: 'center', color: GREY_7 }}>
+					To make your vote count login with
+				</p>
+				<LoginButtons />
+			</Modal>
+		);
+	}
+
+	onVoteLanding(answerIndex, askIndex) {
+		const { landing } = this.props;
+		const ask = landing.landingAsks[askIndex];
+		const answerId = ask.answers[answerIndex]._id;
+		if (landing.numberOfLandingVotes === 0) {
+			this.setState({
+				visible: true
+			});
+		}
+
+		this.props.onVoteLanding(answerIndex, answerId, askIndex);
+	}
+
+	renderAnswerButton(
+		displayAnswerButtonColor,
+		answerButtonTextColor,
+		answerIndex,
+		askIndex,
+		askId,
+		displayAnswer,
+		sortingHat,
+		isDisplayingSaveIcon
+	) {
+		const { loggedInState } = this.props;
+
+		if (loggedInState === 'not_logged_in') {
+			return (
+				<Button
+					style={{
+						borderColor: displayAnswerButtonColor,
+						background: displayAnswerButtonColor,
+						color: answerButtonTextColor
+					}}
+					onClick={e => this.onVoteLanding(answerIndex, askIndex)}
+				>
+					{displayAnswer}
+				</Button>
+			);
+		} else {
+			return (
+				<Button
+					style={{
+						borderColor: displayAnswerButtonColor,
+						background: displayAnswerButtonColor,
+						color: answerButtonTextColor
+					}}
+					onClick={e => this.onVote(answerIndex, askIndex, askId)}
+				>
+					{displayAnswer}
+					{this.renderSaveIcon(
+						sortingHat.save,
+						askIndex,
+						isDisplayingSaveIcon
+					)}
+				</Button>
+			);
+		}
+	}
+
 	renderAnswers(
 		answers,
 		askIndex,
@@ -53,7 +173,18 @@ class InputVote extends Component {
 		isDisplayingAskStats,
 		askTotalVotes
 	) {
-		const { colorTheme, sortingHat } = this.props;
+		const { colorTheme, sortingHat, landing, loggedInState } = this.props;
+		let answerButtonColor = colorTheme.text7Color;
+		let answerButtonTextColor = colorTheme.text2Color;
+		let votedAnswerButtonColor = colorTheme.keyText7Color;
+		let votingPlace = sortingHat;
+		if (loggedInState === 'not_logged_in') {
+			answerButtonColor = GREY_3;
+			answerButtonTextColor = GREY_8;
+			votedAnswerButtonColor = RED_ORANGE_3;
+			votingPlace = landing;
+		}
+
 		return _.map(answers, (answerObject, answerIndex) => {
 			// displaying actual answers
 			let displayAnswer;
@@ -64,50 +195,37 @@ class InputVote extends Component {
 			// displaying the change in voted answer button color
 			const currentAnswerId = ask.answers[answerIndex]._id;
 
-			let displayAnswerButtonColor = colorTheme.text7Color;
+			let displayAnswerButtonColor = answerButtonColor;
 			let isDisplayingSaveIcon = false;
 			let answerVotes = answerObject.votes;
 
 			// if user has voted on an ask
-			if (sortingHat.votes[askId] !== undefined) {
-				const votedAnswerId = sortingHat.votes[askId].answerId;
+			if (votingPlace.votes[askId] !== undefined) {
+				const votedAnswerId = votingPlace.votes[askId].answerId;
 				isDisplayingAskStats = true;
 				if (votedAnswerId === currentAnswerId) {
-					displayAnswerButtonColor = colorTheme.keyText7Color;
+					displayAnswerButtonColor = votedAnswerButtonColor;
 					isDisplayingSaveIcon = true;
 				}
 			}
 
 			return (
 				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
-					<Col
-						style={{
-							color: colorTheme.text2Color
-						}}
-						span={this.renderSpanChange(isDisplayingAskStats)}
-					>
-						<Button
-							style={{
-								borderColor: displayAnswerButtonColor,
-								background: displayAnswerButtonColor,
-								color: colorTheme.text2Color
-							}}
-							onClick={e =>
-								this.onVote(answerIndex, askIndex, askId)
-							}
-						>
-							{displayAnswer}
-							{this.renderSaveIcon(
-								sortingHat.save,
-								askIndex,
-								isDisplayingSaveIcon
-							)}
-						</Button>
+					<Col span={this.renderSpanChange(isDisplayingAskStats)}>
+						{this.renderAnswerButton(
+							displayAnswerButtonColor,
+							answerButtonTextColor,
+							answerIndex,
+							askIndex,
+							askId,
+							displayAnswer,
+							votingPlace,
+							isDisplayingSaveIcon
+						)}
 					</Col>
 					<Col
 						style={{
-							padding: '5px 0px 0px',
-							color: colorTheme.text2Color
+							padding: '5px 0px 0px'
 						}}
 						span={this.renderSpanChange(isDisplayingAskStats)}
 					>
@@ -122,14 +240,14 @@ class InputVote extends Component {
 		});
 	}
 
-	getHeightBetweenCards(current4DisplayedAsks, askIndex) {
+	getHeightBetweenCards(fourAsks, askIndex) {
 		const { windowWidth } = this.props;
 		if (windowWidth >= 1200 && (askIndex === 0 || askIndex === 1)) {
 			// to display to second Ask with the same height as the first Ask
-			const numberOfAsOn1stAsk = current4DisplayedAsks[0].answers.length;
+			const numberOfAsOn1stAsk = fourAsks[0].answers.length;
 			let numberOfAsOn2ndAsk = 0;
-			if (current4DisplayedAsks.length > 1) {
-				numberOfAsOn2ndAsk = current4DisplayedAsks[1].answers.length;
+			if (fourAsks.length > 1) {
+				numberOfAsOn2ndAsk = fourAsks[1].answers.length;
 			}
 
 			// add height below card on 1st or 2nd Ask to match each other
@@ -178,12 +296,25 @@ class InputVote extends Component {
 	}
 
 	renderQandAs() {
-		const { colorTheme, sortingHat } = this.props;
+		const { colorTheme, sortingHat, landing, loggedInState } = this.props;
 
-		if (sortingHat.current4DisplayedAsks.length > 0) {
-			return _.map(sortingHat.current4DisplayedAsks, (Ask, askIndex) => {
+		let fourAsks;
+		let cardColor = colorTheme.text8Color;
+		let cardTextColor = colorTheme.text2Color;
+		let voteColor = colorTheme.text3Color;
+		if (loggedInState === 'not_logged_in') {
+			fourAsks = landing.landingAsks;
+			cardColor = GREY_2;
+			cardTextColor = GREY_8;
+			voteColor = GREY_7;
+		} else {
+			fourAsks = sortingHat.current4DisplayedAsks;
+		}
+
+		if (fourAsks.length > 0) {
+			return _.map(fourAsks, (Ask, askIndex) => {
 				const heightBetweenCards = this.getHeightBetweenCards(
-					sortingHat.current4DisplayedAsks,
+					fourAsks,
 					askIndex
 				);
 
@@ -199,7 +330,10 @@ class InputVote extends Component {
 					displayAnswers = Ask.answers;
 					askId = Ask._id;
 					askTotalVotes = Ask.totalVotes;
-					if (sortingHat.votes[askId] !== undefined) {
+					if (
+						sortingHat.votes[askId] !== undefined ||
+						landing.votes[askId] !== undefined
+					) {
 						isDisplayingAskStats = true;
 					}
 
@@ -213,21 +347,22 @@ class InputVote extends Component {
 						>
 							<Card
 								style={{
-									borderColor: colorTheme.text8Color,
-									background: colorTheme.text8Color,
-									color: colorTheme.text2Color
+									borderColor: cardColor,
+									background: cardColor,
+									color: cardTextColor
 								}}
+								hoverable
 							>
 								<h3
 									style={{
-										color: colorTheme.text2Color
+										color: cardTextColor
 									}}
 								>
 									{displayQuestion}
 								</h3>
 								<div
 									style={{
-										color: colorTheme.text3Color
+										color: voteColor
 									}}
 								>
 									{this.renderTotalVotes(
@@ -243,20 +378,10 @@ class InputVote extends Component {
 									isDisplayingAskStats,
 									askTotalVotes
 								)}
-								<Row style={{ padding: '8px 0px 0px' }}>
-									<Button
-										style={{
-											borderColor: colorTheme.text7Color,
-											background: colorTheme.text7Color,
-											color: colorTheme.text2Color
-										}}
-										onClick={e => this.onNextAsk(askIndex)}
-									>
-										{this.renderAskDoneWord(
-											isDisplayingAskStats
-										)}
-									</Button>
-								</Row>
+								{this.renderNextAskButton(
+									askIndex,
+									isDisplayingAskStats
+								)}
 							</Card>
 							<Row
 								style={{
@@ -274,7 +399,8 @@ class InputVote extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					Looks like I've done a lot of voting; let me ask a question!
+					Looks like you've done a lot of voting; you should ask a
+					question!
 				</h3>
 			);
 		}
@@ -392,7 +518,7 @@ class InputVote extends Component {
 
 	render() {
 		const { colorTheme } = this.props;
-		//console.log('this.props in InputVote.js', this.props);
+
 		return (
 			<Content
 				style={{
@@ -401,6 +527,7 @@ class InputVote extends Component {
 				}}
 			>
 				{/* {this.renderAskCategories()} */}
+				{this.renderModal()}
 				<Row
 					type="flex"
 					justify="center"
@@ -427,7 +554,9 @@ function mapStateToProps(state) {
 		sortingHat: state.sortingHat,
 		mongoDBUserId: state.auth.mongoDBUserId,
 		windowWidth: state.customHeader.windowWidth,
-		theme: state.sortingHat.theme
+		theme: state.sortingHat.theme,
+		landing: state.landing,
+		loggedInState: state.auth.loggedInState
 	};
 }
 
@@ -438,6 +567,11 @@ This function gives the UI the functions it will need to be called.
 function mapDispatchToProps(dispatch) {
 	const sortingHatDispatchers = bindActionCreators(
 		sortingHatActionCreators,
+		dispatch
+	);
+
+	const landingDispatchers = bindActionCreators(
+		landingActionCreators,
 		dispatch
 	);
 
@@ -474,6 +608,9 @@ function mapDispatchToProps(dispatch) {
 				history,
 				mongoDBUserId
 			);
+		},
+		onVoteLanding: (answerIndex, answerId, askIndex) => {
+			landingDispatchers.onVoteLanding(answerIndex, answerId, askIndex);
 		}
 	};
 }

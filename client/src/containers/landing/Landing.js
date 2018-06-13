@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as colorThemeActions from '../actions/colorTheme';
+import * as colorThemeActions from '../../actions/colorTheme';
+import * as landingActions from '../../actions/landing';
 import { bindActionCreators } from 'redux';
 import Testimonials from './Testimonials';
 import './Landing.css';
@@ -10,11 +11,12 @@ import {
 	GREY_7,
 	GREY_6,
 	GREY_2,
-	GREY_1,
-	RED_ORANGE_3,
-	BLUE_3
-} from './styles/ColorConstants';
-import { Layout, Button, Row, Col, Icon } from 'antd';
+	GREY_1
+} from '../styles/ColorConstants';
+import LoginButtons from './LoginButtons';
+import InputVote from '../sorting_hat/InputVote';
+import MatchCards from '../matches/MatchCards';
+import { Layout, Row, Col } from 'antd';
 const { Content } = Layout;
 
 class Landing extends Component {
@@ -22,6 +24,7 @@ class Landing extends Component {
 		// run once before first render()
 
 		this.props.onSignedInLanding();
+		this.props.fetchLandingPageSortingHatAsks();
 	}
 
 	renderCartoons() {
@@ -214,59 +217,113 @@ class Landing extends Component {
 								</h2>
 							</Col>
 						</Row>
-						<Row type="flex" justify="center">
-							<Col
-								style={{
-									padding: '10px 0px 0px' // top left&right bottom
-								}}
-							>
-								<Button
-									size="large"
-									key="-1"
-									style={{
-										borderColor: RED_ORANGE_3,
-										background: RED_ORANGE_3,
-										color: GREY_9
-									}}
-								>
-									<a href="/auth/google">
-										Gmail Login{' '}
-										<Icon
-											style={{ fontSize: 18 }}
-											type="google"
-										/>
-									</a>
-								</Button>
-							</Col>
-							<Col
-								style={{
-									padding: '10px 0px 0px 10px' // top left&right bottom
-								}}
-							>
-								<Button
-									size="large"
-									key="0"
-									style={{
-										borderColor: BLUE_3,
-										background: BLUE_3,
-										color: GREY_9
-									}}
-								>
-									<a href="/auth/linkedIn">
-										LinkedIn Login{' '}
-										<Icon
-											style={{ fontSize: 18 }}
-											type="linkedin"
-										/>
-									</a>
-								</Button>
-							</Col>
-						</Row>
+						<LoginButtons />
 					</div>
 				);
 			default:
 				return;
 		}
+	}
+
+	renderLandingAsks() {
+		const how_part_0 =
+			'Find the best matches by expressing your beliefs to the Sorting Hat';
+		const how_part_1 = 'by voting or asking questions';
+
+		return (
+			<div>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: '70px 0px 0px' }}
+				>
+					<Col>
+						<h1
+							style={{
+								textAlign: 'center',
+								color: GREY_9,
+								fontSize: 35
+							}}
+						>
+							{how_part_0}{' '}
+							<img
+								alt=""
+								style={{
+									width: 50,
+									padding: '0px 0px 5px 5px'
+								}}
+								src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
+							/>
+						</h1>
+					</Col>
+				</Row>
+				<Row type="flex" justify="center">
+					<Col>
+						<h1
+							style={{
+								textAlign: 'center',
+								color: GREY_7,
+								fontSize: 25
+							}}
+						>
+							{how_part_1}
+						</h1>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					align="middle"
+					style={{
+						textAlign: 'center',
+						padding: '20px 0px 0px 0px'
+					}}
+				>
+					<Col>
+						<InputVote />
+					</Col>
+				</Row>
+			</div>
+		);
+	}
+
+	renderMatches() {
+		const how_part_2 = 'Chat with the matches you want to learn with';
+
+		return (
+			<div>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: '70px 0px 0px' }}
+				>
+					<Col>
+						<h1
+							style={{
+								textAlign: 'center',
+								color: GREY_1,
+								fontSize: 35
+							}}
+						>
+							{how_part_2}
+						</h1>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					align="middle"
+					style={{
+						textAlign: 'center',
+						padding: '20px 0px 0px 0px'
+					}}
+				>
+					<Col>
+						<MatchCards />
+					</Col>
+				</Row>
+			</div>
+		);
 	}
 
 	render() {
@@ -275,11 +332,27 @@ class Landing extends Component {
 			<div>
 				<Content
 					style={{
-						height: '100vh',
+						height: '96vh',
 						background: GREY_9
 					}}
 				>
 					{this.renderMarketingInfo()}
+				</Content>
+				<Content
+					style={{
+						padding: '0px 50px 50px', // top left&right bottom
+						background: GREY_1
+					}}
+				>
+					{this.renderLandingAsks()}
+				</Content>
+				<Content
+					style={{
+						padding: '0px 50px 50px', // top left&right bottom
+						background: GREY_9
+					}}
+				>
+					{this.renderMatches()}
 				</Content>
 				<Content
 					style={{
@@ -315,9 +388,14 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
+	const landingDispatchers = bindActionCreators(landingActions, dispatch);
+
 	return {
 		onSignedInLanding: () => {
 			customHeaderDispatchers.onSignedInLanding();
+		},
+		fetchLandingPageSortingHatAsks: () => {
+			landingDispatchers.fetchLandingPageSortingHatAsks();
 		}
 	};
 }
