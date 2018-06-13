@@ -22,11 +22,14 @@ const { Content } = Layout;
 class Landing extends Component {
 	componentWillMount() {
 		// run once before first render()
-
-		this.props.onSignedInLanding();
 		this.props.fetchLandingPageSortingHatAsks();
 	}
 
+	componentDidUpdate() {
+		// determines if logged_in_landing or logged_out_landing page
+		const {auth} = this.props;
+		this.props.onLanding(auth.loggedInState);
+	}
 	renderCartoons() {
 		document.documentElement.style.setProperty(`--progress-color`, GREY_6);
 
@@ -386,19 +389,14 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	const customHeaderDispatchers = bindActionCreators(
-		colorThemeActions,
-		dispatch
-	);
-
 	const landingDispatchers = bindActionCreators(landingActions, dispatch);
-
+	const colorThemeDispatchers = bindActionCreators(colorThemeActions, dispatch);
 	return {
-		onSignedInLanding: () => {
-			customHeaderDispatchers.onSignedInLanding();
-		},
 		fetchLandingPageSortingHatAsks: () => {
 			landingDispatchers.fetchLandingPageSortingHatAsks();
+		},
+		onLanding: (loggedInState) => {
+			colorThemeDispatchers.onLanding(loggedInState);
 		}
 	};
 }
