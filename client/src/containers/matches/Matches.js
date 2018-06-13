@@ -1,389 +1,211 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import * as colorThemeActionCreators from "../../actions/colorTheme";
-import * as matchesActionCreators from "../../actions/matches/matches";
-import * as profileActionCreators from "../../actions/profile/profile";
-import * as authActionCreators from "../../actions/auth";
-import { bindActionCreators } from "redux";
-import Options from "../payment/Options";
-import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from "../../utils/constants";
-import {
-  NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
-  NUMBER_NEURONS_TO_SAY_HI
-} from "../payment/prices";
-import "./Matches.css";
-import {
-  Layout,
-  Row,
-  Col,
-  Card,
-  Button,
-  message,
-  Progress,
-  Icon,
-  Avatar
-} from "antd";
-import LinkedIn from "../profileInformation/LinkedIn";
-import Github from "../profileInformation/Github";
-import Interests from "../profileInformation/Interests";
-import TimeZone from "../profileInformation/TimeZone";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as colorThemeActionCreators from '../../actions/colorTheme';
+import { bindActionCreators } from 'redux';
+import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
+import './Matches.css';
+import { Layout, Row, Col, Progress, Icon } from 'antd';
+import MatchCards from './MatchCards';
 const { Content } = Layout;
 
 class Matches extends Component {
-  componentWillMount() {
-    // run once before first render()
-    this.props.onMatches();
-  }
+	componentWillMount() {
+		// run once before first render()
+		this.props.onMatches();
+	}
 
-  onNextMatch() {
-    this.props.onNextMatch();
-  }
+	renderMatches() {
+		//console.log('in Matches.js this.props = ', this.props);
+		const {
+			colorTheme,
+			matches,
+			history,
+			totalUserVotesAcrossAllSessions,
+			runningAthenaForUser
+		} = this.props;
 
-  displayNeedToPurchaseMoreNeurons = () => {
-    message.warn(
-      "You need " +
-        NUMBER_NEURONS_TO_SAY_HI +
-        " more neurons to 'Say Hi'. Get neurons by voting or asking questions with the Sorting Hat.",
-      5
-    );
-  };
+		document.documentElement.style.setProperty(
+			`--keyText7Color`,
+			colorTheme.keyText7Color
+		);
+		document.documentElement.style.setProperty(
+			`--text6Color`,
+			colorTheme.text6Color
+		);
+		document.documentElement.style.setProperty(
+			`--text1Color`,
+			colorTheme.text1Color
+		);
+		document.documentElement.style.setProperty(
+			`--text2Color`,
+			colorTheme.text2Color
+		);
+		document.documentElement.style.setProperty(
+			`--text7Color`,
+			colorTheme.text7Color
+		);
+		document.documentElement.style.setProperty(
+			`--text8Color`,
+			colorTheme.text8Color
+		);
 
-  renderPaymentOptions() {
-    const { colorTheme, neuronsInBillions } = this.props;
-    if (neuronsInBillions < NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS) {
-      return (
-        <div>
-          <Row type="flex" justify="center" align="middle">
-            <Col>
-              <h2
-                style={{
-                  textAlign: "center",
-                  padding: "10px 0px 0px",
-                  color: colorTheme.text3Color
-                }}
-              >
-                Purchase Neurons:
-              </h2>
-            </Col>
-          </Row>
-          <Options />
-        </div>
-      );
-    }
-  }
+		const hasMatches = matches.current1DisplayedMatches.length > 0;
 
-  onStartConversation(history, matchName, matchId) {
-    const { neuronsInBillions, mongoDBUserId } = this.props;
-    if (neuronsInBillions >= NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS) {
-      this.props.decrementNeurons(
-        NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
-        mongoDBUserId
-      );
-      this.props.onStartConversation(history, matchName, matchId);
-    } else {
-      this.displayNeedToPurchaseMoreNeurons();
-    }
-  }
+		if (hasMatches) {
+			const match = matches.current1DisplayedMatches[0];
+			return (
+				<Col key={match.name}>
+					<MatchCards match={match} history={history} />
+				</Col>
+			);
+		} else if (runningAthenaForUser) {
+			return (
+				<Col>
+					<h2
+						style={{
+							color: colorTheme.text2Color
+						}}
+					>
+						We will have matches for you in a moment{' '}
+						<Icon type="loading" />
+					</h2>
+				</Col>
+			);
+		} else if (
+			totalUserVotesAcrossAllSessions <
+			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
+		) {
+			// display progress bar showing user needs to vote X more times
+			// before we run minerva for them
+			const votesToGo =
+				MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH -
+				totalUserVotesAcrossAllSessions;
+			const percentVotes = 100 / 8 * totalUserVotesAcrossAllSessions;
+			return (
+				<Col
+					sm={{ span: 24 }}
+					md={{ span: 22 }}
+					lg={{ span: 18 }}
+					xl={{ span: 14 }}
+				>
+					<h2
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						Recieve your first 2 matches by voting on 8 questions in
+						Sorting Hat
+					</h2>
+					<h3
+						style={{
+							color: colorTheme.text4Color
+						}}
+					>
+						You have {votesToGo} to go!
+					</h3>
+					<Progress
+						percent={percentVotes}
+						showInfo={false}
+						status="active"
+					/>
+				</Col>
+			);
+		} else {
+			return (
+				<Col
+					sm={{ span: 24 }}
+					md={{ span: 22 }}
+					lg={{ span: 18 }}
+					xl={{ span: 14 }}
+				>
+					<h2
+						style={{
+							color: colorTheme.text3Color
+						}}
+					>
+						You're out of matches for today. Vote on questions in
+						Sorting Hat to get better matches.
+					</h2>
+					<h3
+						style={{
+							color: colorTheme.text4Color
+						}}
+					>
+						Every day at 9 AM CST, the Sorting Hat generates the 2
+						best study partners for you.
+					</h3>
+				</Col>
+			);
+		}
+	}
 
-  renderNameAndAge(match) {
-    if (match.age !== undefined) {
-      return match.name + ", " + match.age;
-    } else {
-      return match.name;
-    }
-  }
-
-  renderMatchTotalVotes(totalUserVotes) {
-    const { colorTheme } = this.props;
-    let voteDescription;
-    if (totalUserVotes === 1) {
-      voteDescription = "vote";
-    } else {
-      voteDescription = "votes";
-    }
-    return (
-      <Row
-        type="flex"
-        justify="center"
-        align="middle"
-        style={{ padding: "3px 0px 0px" }}
-      >
-        <Col>
-          <p
-            style={{
-              color: colorTheme.text3Color
-            }}
-          >
-            {totalUserVotes} {voteDescription}
-          </p>
-        </Col>
-      </Row>
-    );
-  }
-
-  renderMatchPicture(imageUrl) {
-    if (imageUrl !== undefined) {
-      return (
-        <Row
-          style={{ padding: "5px 0px 0px 0px" }}
-          type="flex"
-          justify="center"
-          align="middle"
-        >
-          <Col>
-            <Avatar
-              style={{
-                width: 75,
-                height: 75
-              }}
-              shape="circle"
-              src={imageUrl}
-            />
-          </Col>
-        </Row>
-      );
-    } else {
-      return <div />;
-    }
-  }
-
-  renderMatches() {
-    //console.log('in Matches.js this.props = ', this.props);
-    const {
-      colorTheme,
-      matches,
-      history,
-      totalUserVotesAcrossAllSessions,
-      runningAthenaForUser
-    } = this.props;
-
-    document.documentElement.style.setProperty(
-      `--progress-color`,
-      colorTheme.keyText7Color
-    );
-
-    document.documentElement.style.setProperty(
-      `--progress-remaining-color`,
-      colorTheme.text8Color
-    );
-
-    const hasMatches = matches.current1DisplayedMatches.length > 0;
-
-    if (hasMatches) {
-      const match = matches.current1DisplayedMatches[0];
-      return (
-        <Col key={match.name}>
-          <Row type="flex" justify="center" align="top">
-            <Col>
-              <Card
-                hoverable={true}
-                borderded="false"
-                loading={false}
-                style={{
-                  width: "350px",
-                  color: colorTheme.text1Color,
-                  borderColor: colorTheme.text8Color,
-                  background: colorTheme.text8Color
-                }}
-              >
-                <Row
-                  type="flex"
-                  justify="center"
-                  align="middle"
-                  style={{ padding: "0px 0px 0px" }}
-                >
-                  <Col span={1} />
-                  <Col style={{ padding: "0px 0px 0px 0px" }}>
-                    <h2
-                      style={{
-                        color: colorTheme.keyText6Color
-                      }}
-                    >
-                      {this.renderNameAndAge(match)}
-                    </h2>
-                  </Col>
-                  <Col style={{ padding: "0px 0px 9px 0px" }}>
-                    <LinkedIn value={match.linkedInPublicProfileUrl} />
-                  </Col>
-                  <Col style={{ padding: "0px 0px 9px 0px" }}>
-                    <Github value={match.githubPublicProfileUrl} />
-                  </Col>
-                </Row>
-                <Row style={{ padding: "0px 0px 0px 36px" }}>
-                  <Interests value={match.interests} />
-                </Row>
-                {this.renderMatchTotalVotes(match.totalUserVotes)}
-                <Row style={{ padding: "0px 0px 0px 36px" }}>
-                  <TimeZone value={match.timeZone} />
-                </Row>
-                {this.renderMatchPicture(match.imageUrl)}
-                <Row
-                  style={{ padding: "8px 0px 0px 0px" }}
-                  type="flex"
-                  justify="space-between"
-                  align="top"
-                >
-                  <Col span={11}>
-                    <Button
-                      style={{
-                        borderColor: colorTheme.text7Color,
-                        background: colorTheme.text7Color,
-                        color: colorTheme.text2Color
-                      }}
-                      onClick={e => this.onNextMatch()}
-                    >
-                      Next
-                    </Button>
-                  </Col>
-                  <Col span={11}>
-                    <Button
-                      style={{
-                        borderColor: colorTheme.keyText7Color,
-                        background: colorTheme.keyText7Color,
-                        color: colorTheme.text1Color
-                      }}
-                      onClick={e =>
-                        this.onStartConversation(history, match.name, match.id)
-                      }
-                    >
-                      Say Hi
-                    </Button>
-                  </Col>
-                </Row>
-              </Card>
-            </Col>
-          </Row>
-        </Col>
-      );
-    } else if (runningAthenaForUser) {
-      return (
-        <Col>
-          <h2
-            style={{
-              color: colorTheme.text2Color
-            }}
-          >
-            We will have matches for you in a moment <Icon type="loading" />
-          </h2>
-        </Col>
-      );
-    } else if (
-      totalUserVotesAcrossAllSessions < MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
-    ) {
-      // display progress bar showing user needs to vote X more times
-      // before we run minerva for them
-      const votesToGo =
-        MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH - totalUserVotesAcrossAllSessions;
-      const percentVotes = 100 / 8 * totalUserVotesAcrossAllSessions;
-      return (
-        <Col
-          sm={{ span: 24 }}
-          md={{ span: 22 }}
-          lg={{ span: 18 }}
-          xl={{ span: 14 }}
-        >
-          <h2
-            style={{
-              color: colorTheme.text3Color
-            }}
-          >
-            Recieve your first 2 matches by voting on 8 questions in Sorting Hat
-          </h2>
-          <h3
-            style={{
-              color: colorTheme.text4Color
-            }}
-          >
-            You have {votesToGo} to go!
-          </h3>
-          <Progress percent={percentVotes} showInfo={false} status="active" />
-        </Col>
-      );
-    } else {
-      return (
-        <Col
-          sm={{ span: 24 }}
-          md={{ span: 22 }}
-          lg={{ span: 18 }}
-          xl={{ span: 14 }}
-        >
-          <h2
-            style={{
-              color: colorTheme.text3Color
-            }}
-          >
-            You're out of matches for today. Vote on questions in Sorting Hat to
-            get better matches.
-          </h2>
-          <h3
-            style={{
-              color: colorTheme.text4Color
-            }}
-          >
-            Every day at 9 AM Central Time, our artificial intelligence (AI)
-            generates the 2 best study partners for you.
-          </h3>
-        </Col>
-      );
-    }
-  }
-
-  render() {
-    const { colorTheme } = this.props;
-    return (
-      <Content
-        style={{
-          textAlign: "center",
-          padding: "75px 50px 0px", // top left&right bottom
-          background: colorTheme.backgroundColor
-        }}
-      >
-        <Row type="flex" justify="center" align="top">
-          <Col
-            sm={{ span: 0 }}
-            md={{ span: 1 }}
-            lg={{ span: 3 }}
-            xl={{ span: 5 }}
-          />
-          <Col
-            sm={{ span: 24 }}
-            md={{ span: 22 }}
-            lg={{ span: 18 }}
-            xl={{ span: 14 }}
-          >
-            <h2
-              style={{
-                color: colorTheme.text2Color
-              }}
-            >
-              We use your profile to give you the 2 best matches everyday
-            </h2>
-          </Col>
-          <Col
-            sm={{ span: 0 }}
-            md={{ span: 1 }}
-            lg={{ span: 3 }}
-            xl={{ span: 5 }}
-          />
-        </Row>
-        <Row type="flex" justify="center" align="top">
-          <Col
-            sm={{ span: 0 }}
-            md={{ span: 1 }}
-            lg={{ span: 3 }}
-            xl={{ span: 5 }}
-          />
-          {this.renderMatches()}
-          <Col
-            sm={{ span: 0 }}
-            md={{ span: 1 }}
-            lg={{ span: 3 }}
-            xl={{ span: 5 }}
-          />
-        </Row>
-      </Content>
-    );
-  }
+	render() {
+		const { colorTheme } = this.props;
+		return (
+			<Content
+				style={{
+					textAlign: 'center',
+					padding: '75px 50px 0px', // top left&right bottom
+					background: colorTheme.backgroundColor
+				}}
+			>
+				<Row
+					type="flex"
+					justify="center"
+					align="top"
+					style={{ padding: '20px 0px 0px 0px' }}
+				>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 1 }}
+						lg={{ span: 3 }}
+						xl={{ span: 5 }}
+					/>
+					<Col
+						sm={{ span: 24 }}
+						md={{ span: 22 }}
+						lg={{ span: 18 }}
+						xl={{ span: 14 }}
+					>
+						<h2
+							style={{
+								color: colorTheme.text2Color
+							}}
+						>
+							Sorting Hat finds your 2 best matches everyday at 9
+							AM CST
+						</h2>
+					</Col>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 1 }}
+						lg={{ span: 3 }}
+						xl={{ span: 5 }}
+					/>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					align="top"
+					style={{ padding: '20px 0px 0px 0px' }}
+				>
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 1 }}
+						lg={{ span: 3 }}
+						xl={{ span: 5 }}
+					/>
+					{this.renderMatches()}
+					<Col
+						sm={{ span: 0 }}
+						md={{ span: 1 }}
+						lg={{ span: 3 }}
+						xl={{ span: 5 }}
+					/>
+				</Row>
+			</Content>
+		);
+	}
 }
 
 /*
@@ -391,15 +213,13 @@ So we have a state and a UI(with props).
 This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
-  return {
-    colorTheme: state.colorTheme,
-    matches: state.matches,
-    neuronsInBillions: state.profile.payment.neuronsInBillions,
-    mongoDBUserId: state.auth.mongoDBUserId,
-    totalUserVotesAcrossAllSessions:
-      state.matches.totalUserVotesAcrossAllSessions,
-    runningAthenaForUser: state.matches.runningAthenaForUser
-  };
+	return {
+		colorTheme: state.colorTheme,
+		matches: state.matches,
+		totalUserVotesAcrossAllSessions:
+			state.matches.totalUserVotesAcrossAllSessions,
+		runningAthenaForUser: state.matches.runningAthenaForUser
+	};
 }
 
 /*
@@ -407,40 +227,16 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-  const colorThemeDispatchers = bindActionCreators(
-    colorThemeActionCreators,
-    dispatch
-  );
+	const colorThemeDispatchers = bindActionCreators(
+		colorThemeActionCreators,
+		dispatch
+	);
 
-  const matchesDispatchers = bindActionCreators(
-    matchesActionCreators,
-    dispatch
-  );
-
-  const profileDispatchers = bindActionCreators(
-    profileActionCreators,
-    dispatch
-  );
-
-  const authDispatchers = bindActionCreators(authActionCreators, dispatch);
-
-  return {
-    onMatches: () => {
-      colorThemeDispatchers.onMatches();
-    },
-    onNextMatch: () => {
-      matchesDispatchers.onNextMatch();
-    },
-    onStartConversation: (history, matchName, matchId) => {
-      matchesDispatchers.onStartConversation(history, matchName, matchId);
-    },
-    decrementNeurons: (neuronsInBillions, mongoDBUserId) => {
-      profileDispatchers.decrementNeurons(neuronsInBillions, mongoDBUserId);
-    },
-    fetchUserProfile: () => {
-      authDispatchers.fetchUserProfile();
-    }
-  };
+	return {
+		onMatches: () => {
+			colorThemeDispatchers.onMatches();
+		}
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Matches);

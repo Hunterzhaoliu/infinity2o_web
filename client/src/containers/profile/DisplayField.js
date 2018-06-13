@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { GREY_2 } from '../styles/ColorConstants';
 import { Row, Col, Table, Popover, Button, Icon } from 'antd';
 import './DisplayField.css';
 
@@ -27,20 +28,26 @@ class DisplayField extends Component {
 						color: colorTheme.text2Color
 					}}
 				>
-					Collect more Neurons by asking questions and voting in
-					Sorting Hat or revoting in Profile to 'Say Hi' to more
-					matches.
+					Use neurons to 'Say Hi' to more matches.
 				</p>
 			</div>
 		);
 
 		return (
-			<Popover content={neuronExplanation}>
+			<Popover
+				style={{
+					borderColor: colorTheme.text8Color,
+					backgroundColor: colorTheme.text8Color,
+					color: colorTheme.text3Color
+				}}
+				content={neuronExplanation}
+			>
 				<Button
 					style={{
 						borderColor: colorTheme.text8Color,
 						backgroundColor: colorTheme.text8Color,
-						color: colorTheme.text3Color
+						color: colorTheme.text3Color,
+						padding: '0px 5px 0px'
 					}}
 					size="small"
 				>
@@ -110,7 +117,7 @@ class DisplayField extends Component {
 							<Col style={{ padding: '25px 0px 0px' }}>
 								<p>{finalDisplayString}</p>
 							</Col>
-							<Col offset={1} style={{ padding: '15px 0px 0px' }}>
+							<Col offset={1} style={{ padding: '7px 0px 0px' }}>
 								{this.renderNeuronExplanation()}
 							</Col>
 						</Row>
@@ -268,6 +275,22 @@ class DisplayField extends Component {
 					value[i][0].toUpperCase() + value[i].substring(1);
 				// replaces underscore in two word interests with space
 				upperCaseInterest = upperCaseInterest.replace(/_/g, ' ');
+				const spaceIndex = upperCaseInterest.indexOf(' ');
+				if (spaceIndex !== -1) {
+					const secondWordFirstLetterIndex = spaceIndex + 1;
+					upperCaseInterest =
+						upperCaseInterest.substr(
+							0,
+							secondWordFirstLetterIndex
+						) +
+						upperCaseInterest[
+							secondWordFirstLetterIndex
+						].toUpperCase() +
+						upperCaseInterest.substr(
+							secondWordFirstLetterIndex + 1
+						);
+				}
+
 				formattedInterests += upperCaseInterest;
 				// adds comma between interests
 				if (value.length === 2 && i === 0) {
@@ -284,18 +307,23 @@ class DisplayField extends Component {
 	}
 
 	render() {
-		const { colorTheme, label, value } = this.props;
+		const { colorTheme, label, value, loggedInState } = this.props;
+
+		let textColor = colorTheme.text2Color;
+		if (loggedInState === 'not_logged_in') {
+			textColor = GREY_2;
+		}
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col
-					sm={{ span: 18, offset: 0 }}
-					md={{ span: 19, offset: 0 }}
-					lg={{ span: 20, offset: 0 }}
-					xl={{ span: 21, offset: 0 }}
+					sm={{ span: 18 }}
+					md={{ span: 19 }}
+					lg={{ span: 20 }}
+					xl={{ span: 21 }}
 				>
 					<h3
 						style={{
-							color: colorTheme.text2Color
+							color: textColor
 						}}
 					>
 						{this.renderValue(label, value)}
@@ -313,7 +341,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		infinityStatus: state.profile.payment.infinityStatus
+		infinityStatus: state.profile.payment.infinityStatus,
+		loggedInState: state.auth.loggedInState
 	};
 }
 

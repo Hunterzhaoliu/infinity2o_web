@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as customHeaderActionCreators from '../actions/customHeader';
-import ChangeThemeButton from './navigationButtons/ChangeThemeButton';
-import TourButton from './navigationButtons/TourButton';
-import ProfileButton from './navigationButtons/ProfileButton';
-import SortingHatButton from './navigationButtons/SortingHatButton';
-import MatchesButton from './navigationButtons/MatchesButton';
-import ConversationButton from './navigationButtons/ConversationButton';
-import LogoutButton from './navigationButtons/LogoutButton';
-import { GREY_9, GREY_1, RED_ORANGE_7, BLUE_7 } from './styles/ColorConstants';
+import * as customHeaderActionCreators from '../../actions/customHeader';
+import ChangeThemeButton from '../navigationButtons/ChangeThemeButton';
+import TourButton from '../navigationButtons/TourButton';
+import ProfileButton from '../navigationButtons/ProfileButton';
+import SortingHatButton from '../navigationButtons/SortingHatButton';
+import MatchesButton from '../navigationButtons/MatchesButton';
+import ConversationButton from '../navigationButtons/ConversationButton';
+import LogoutButton from '../navigationButtons/LogoutButton';
+import { GREY_9, GREY_1, RED_ORANGE_7, BLUE_7 } from '../styles/ColorConstants';
 import { Layout, Row, Col, Button, Icon } from 'antd';
 const { Header } = Layout;
 
