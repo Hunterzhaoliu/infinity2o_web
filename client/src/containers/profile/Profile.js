@@ -64,7 +64,7 @@ class Profile extends Component {
 					<Github value={profile.githubPublicProfileUrl} />
 				</Row>
 				<Neurons value={profile.payment.neuronsInBillions} />
-				<Interests value={profile.interests} />
+				<Interests interests={profile.interests} />
 				<Email value={profile.email} />
 				<TimeZone value={profile.timeZone} />
 				<Row

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {} from '../styles/ColorConstants';
+import { GREY_8, GREY_4, GREY_3, GREY_2 } from '../styles/ColorConstants';
 import { Button, Row, Col, Card, Avatar } from 'antd';
 import LinkedIn from '../profileInformation/LinkedIn';
 import Github from '../profileInformation/Github';
@@ -9,7 +9,12 @@ import TimeZone from '../profileInformation/TimeZone';
 
 class MatchCards extends Component {
 	renderMatchTotalVotes(totalUserVotes) {
-		const { colorTheme } = this.props;
+		const { colorTheme, loggedInState } = this.props;
+		let textColor = colorTheme.text3Color;
+		if (loggedInState === 'not_logged_in') {
+			textColor = GREY_3;
+		}
+
 		let voteDescription;
 		if (totalUserVotes <= 1) {
 			voteDescription = 'total vote';
@@ -21,8 +26,7 @@ class MatchCards extends Component {
 				<Col>
 					<h3
 						style={{
-							//fontSize: 12,
-							color: colorTheme.text3Color
+							color: textColor
 						}}
 					>
 						{totalUserVotes} {voteDescription}
@@ -71,29 +75,28 @@ class MatchCards extends Component {
 							loading={false}
 							style={{
 								width: '400px',
-								color: colorTheme.text1Color,
-								borderColor: colorTheme.text8Color,
-								background: colorTheme.text8Color
+								borderColor: GREY_8,
+								background: GREY_8
 							}}
 						>
 							<Row type="flex" justify="center" align="middle">
 								<Col>
 									<h2
 										style={{
-											color: colorTheme.keyText6Color
+											color: GREY_2
 										}}
 									>
-										Bruce Wayne
+										Harry Potter
 									</h2>
 								</Col>
 								<Col>
 									<h2
 										style={{
-											color: colorTheme.text6Color
+											color: GREY_4
 										}}
 									>
 										{', '}
-										42
+										38
 									</h2>
 								</Col>
 							</Row>
@@ -101,65 +104,33 @@ class MatchCards extends Component {
 							<Row type="flex" justify="center" align="middle">
 								<Col>
 									<LinkedIn
-										value={'https://bit.ly/2l6cuqS'}
+										value={'https://bit.ly/2y6EcwX'}
 									/>
 								</Col>
 								<Col>
 									<Github
 										value={
-											'https://github.com/brucewayne4real'
+											'https://github.com/harrypotter4real'
 										}
 									/>
 								</Col>
 							</Row>
 							<Row style={{ padding: '10px 0px 0px 0px' }}>
-								<Interests value={'artificial_intelligence'} />
+								<Interests
+									interests={[
+										'artificial_intelligence',
+										'computer_science',
+										'physics',
+										'philosophy'
+									]}
+								/>
 							</Row>
 							<Row>
-								<TimeZone value={'US-Eastern'} />
+								<TimeZone
+									value={['united_states', 'US-Eastern']}
+								/>
 							</Row>
-							{this.renderMatchPicture(
-								'http://images6.fanpop.com/image/photos/32400000/Bruce-Wayne-bruce-wayne-32411252-967-1450.jpg'
-							)}
-							<Row
-								style={{ padding: '8px 0px 0px 0px' }}
-								type="flex"
-								justify="space-between"
-								align="top"
-							>
-								<Col span={11}>
-									<Button
-										style={{
-											borderColor: colorTheme.text7Color,
-											background: colorTheme.text7Color,
-											color: colorTheme.text2Color
-										}}
-										onClick={e => this.onNextMatch()}
-									>
-										Next
-									</Button>
-								</Col>
-								<Col span={11}>
-									<Button
-										style={{
-											borderColor:
-												colorTheme.keyText7Color,
-											background:
-												colorTheme.keyText7Color,
-											color: colorTheme.text1Color
-										}}
-										onClick={e =>
-											this.onStartConversation(
-												history,
-												match.name,
-												match.id
-											)
-										}
-									>
-										Say Hi
-									</Button>
-								</Col>
-							</Row>
+							{this.renderMatchPicture('https://bit.ly/2JLyOE1')}
 						</Card>
 					</Col>
 				</Row>
@@ -213,12 +184,8 @@ class MatchCards extends Component {
 									/>
 								</Col>
 							</Row>
-							<Row style={{ padding: '10px 0px 0px 0px' }}>
-								<Interests value={match.interests} />
-							</Row>
-							<Row>
-								<TimeZone value={match.timeZone} />
-							</Row>
+							<Interests interests={match.interests} />
+							<TimeZone value={match.timeZone} />
 							{this.renderMatchPicture(match.imageUrl)}
 							<Row
 								style={{ padding: '8px 0px 0px 0px' }}

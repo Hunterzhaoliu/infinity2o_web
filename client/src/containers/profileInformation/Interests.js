@@ -6,8 +6,8 @@ import DisplayField from '../profile/DisplayField';
 
 class Interests extends Component {
 	render() {
-		const { value } = this.props;
-		if (value.length > 0) {
+		const { interests } = this.props;
+		if (interests.length > 0) {
 			return (
 				<Row type="flex" justify="start" align="middle">
 					<Col span={1}>
@@ -26,7 +26,7 @@ class Interests extends Component {
 							padding: '0px 0px 0px 20px' // top right bottom left
 						}}
 					>
-						<DisplayField label="Interest(s): " value={value} />
+						<DisplayField label="Interest(s): " value={interests} />
 					</Col>
 				</Row>
 			);

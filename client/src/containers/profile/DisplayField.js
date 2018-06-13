@@ -274,6 +274,22 @@ class DisplayField extends Component {
 					value[i][0].toUpperCase() + value[i].substring(1);
 				// replaces underscore in two word interests with space
 				upperCaseInterest = upperCaseInterest.replace(/_/g, ' ');
+				const spaceIndex = upperCaseInterest.indexOf(' ');
+				if (spaceIndex !== -1) {
+					const secondWordFirstLetterIndex = spaceIndex + 1;
+					upperCaseInterest =
+						upperCaseInterest.substr(
+							0,
+							secondWordFirstLetterIndex
+						) +
+						upperCaseInterest[
+							secondWordFirstLetterIndex
+						].toUpperCase() +
+						upperCaseInterest.substr(
+							secondWordFirstLetterIndex + 1
+						);
+				}
+
 				formattedInterests += upperCaseInterest;
 				// adds comma between interests
 				if (value.length === 2 && i === 0) {
