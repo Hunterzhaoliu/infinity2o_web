@@ -41,7 +41,6 @@ class MatchCards extends Component {
 
 	onStartConversation(history, matchName, matchId) {
 		const { neuronsInBillions, mongoDBUserId } = this.props;
-		console.log('neuronsInBillions = ', neuronsInBillions);
 		if (neuronsInBillions >= NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS) {
 			this.props.decrementNeurons(
 				NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
@@ -108,9 +107,8 @@ class MatchCards extends Component {
 	}
 
 	render() {
-		const { match, history, colorTheme, loggedInState } = this.props;
-
-		if (loggedInState === 'not_logged_in') {
+		const { match, history, colorTheme, activeSection } = this.props;
+		if (activeSection !== 'matches') {
 			return (
 				<Row type="flex" justify="center" align="top">
 					<Col>
@@ -343,7 +341,8 @@ function mapStateToProps(state) {
 		colorTheme: state.colorTheme,
 		loggedInState: state.auth.loggedInState,
 		neuronsInBillions: state.profile.payment.neuronsInBillions,
-		mongoDBUserId: state.auth.mongoDBUserId
+		mongoDBUserId: state.auth.mongoDBUserId,
+		activeSection: state.colorTheme.activeSection
 	};
 }
 

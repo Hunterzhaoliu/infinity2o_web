@@ -50,7 +50,6 @@ class Matches extends Component {
 		);
 
 		const hasMatches = matches.current1DisplayedMatches.length > 0;
-
 		if (hasMatches) {
 			const match = matches.current1DisplayedMatches[0];
 			return (

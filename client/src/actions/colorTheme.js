@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
 	MOVE_TO_TOUR,
-	MOVE_TO_SIGNED_IN_LANDING,
+	MOVE_TO_LOGGED_OUT_LANDING,
+	MOVE_TO_LOGGED_IN_LANDING,
 	UPDATE_COLOR_THEME,
 	MOVE_TO_PROFILE,
 	MOVE_TO_SORTING_HAT,
@@ -38,10 +39,16 @@ export const onTour = () => {
 	};
 };
 
-export const onSignedInLanding = () => {
-	return function(dispatch) {
-		dispatch({ type: MOVE_TO_SIGNED_IN_LANDING });
-	};
+export const onLanding = (loggedInState) => {
+	if (loggedInState === 'logged_in') {
+		return function(dispatch) {
+			dispatch({ type: MOVE_TO_LOGGED_IN_LANDING });
+		}
+	} else {
+		return function(dispatch) {
+			dispatch({ type: MOVE_TO_LOGGED_OUT_LANDING });
+		}
+	}
 };
 
 export const onProfile = () => {
