@@ -3,9 +3,10 @@ import {
 	MOVE_TO_PROFILE,
 	MOVE_TO_SORTING_HAT,
 	MOVE_TO_MATCHES,
-	MOVE_TO_SIGNED_IN_LANDING,
+	MOVE_TO_LOGGED_IN_LANDING,
 	MOVE_TO_CONVERSATIONS,
-	MOVE_TO_TOUR
+	MOVE_TO_TOUR,
+	MOVE_TO_LOGGED_OUT_LANDING
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -81,7 +82,7 @@ function _getStateForSection(newState) {
 		newState.conversationsButtonTextColor = newState.text4Color;
 		newState.tourButtonColor = newState.text7Color;
 		newState.tourButtonTextColor = newState.text4Color;
-	} else if (newState.activeSection === 'signed_in_landing') {
+	} else if (newState.activeSection === 'logged_in_landing') {
 		newState.profileButtonColor = newState.text7Color;
 		newState.profileButtonTextColor = newState.text4Color;
 		newState.sortingHatButtonColor = newState.text7Color;
@@ -171,9 +172,12 @@ export default function(state = initialState, action) {
 			newState.activeSection = 'matches';
 			newState = _getStateForSection(newState);
 			return newState;
-		case MOVE_TO_SIGNED_IN_LANDING:
-			newState.activeSection = 'signed_in_landing';
+		case MOVE_TO_LOGGED_IN_LANDING:
+			newState.activeSection = 'logged_in_landing';
 			newState = _getStateForSection(newState);
+			return newState;
+		case MOVE_TO_LOGGED_OUT_LANDING:
+			newState.activeSection = 'logged_out_landing';
 			return newState;
 		case MOVE_TO_CONVERSATIONS:
 			newState.activeSection = 'conversations';
