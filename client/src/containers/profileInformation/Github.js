@@ -8,7 +8,7 @@ class Github extends Component {
 		const { value, colorTheme } = this.props;
 		if (value !== undefined) {
 			return (
-				<Col style={{ padding: '0px 0px 0px 29px' }}>
+				<Col>
 					<a href={value} target="_blank">
 						<Icon
 							alt="Github: "

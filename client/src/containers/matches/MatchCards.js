@@ -170,20 +170,18 @@ class MatchCards extends Component {
 										{match.age}
 									</h2>
 								</Col>
-							</Row>
-							{this.renderMatchTotalVotes(match.totalUserVotes)}
-							<Row type="flex" justify="center" align="middle">
-								<Col>
+								<Col style={{ padding: '0px 0px 10px 10px' }}>
 									<LinkedIn
 										value={match.linkedInPublicProfileUrl}
 									/>
 								</Col>
-								<Col>
+								<Col style={{ padding: '0px 0px 10px 10px' }}>
 									<Github
 										value={match.githubPublicProfileUrl}
 									/>
 								</Col>
 							</Row>
+							{this.renderMatchTotalVotes(match.totalUserVotes)}
 							<Interests interests={match.interests} />
 							<TimeZone value={match.timeZone} />
 							{this.renderMatchPicture(match.imageUrl)}

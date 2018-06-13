@@ -8,7 +8,7 @@ class LinkedIn extends Component {
 		const { value } = this.props;
 		if (value !== undefined) {
 			return (
-				<Col style={{ padding: '0px 0px 0px 0px' }}>
+				<Col>
 					<a href={value} target="_blank">
 						<Icon
 							alt="LinkedIn: "

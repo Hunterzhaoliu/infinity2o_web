@@ -12,14 +12,7 @@ class Neurons extends Component {
 			neuronsInBillions = neuronsInBillions.toFixed(1);
 		}
 		return (
-			<Row
-				type="flex"
-				justify="start"
-				align="middle"
-				style={{
-					padding: '0px 0px 0px' // top right bottom left
-				}}
-			>
+			<Row type="flex" justify="start" align="middle">
 				<Col span={1}>
 					<img
 						alt="Neurons: "
