@@ -36,14 +36,15 @@ class MatchCards extends Component {
 		);
 	};
 
-	onStartConversation(history, matchName, matchId, onStartConversation) {
+	onStartConversation(history, matchName, matchId) {
 		const { neuronsInBillions, mongoDBUserId } = this.props;
+		console.log('neuronsInBillions = ', neuronsInBillions);
 		if (neuronsInBillions >= NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS) {
 			this.props.decrementNeurons(
 				NUMBER_NEURONS_TO_SAY_HI_IN_BILLIONS,
 				mongoDBUserId
 			);
-			onStartConversation(history, matchName, matchId);
+			this.props.onStartConversation(history, matchName, matchId);
 		} else {
 			this.displayNeedToGetMoreNeurons();
 		}
@@ -104,13 +105,7 @@ class MatchCards extends Component {
 	}
 
 	render() {
-		const {
-			match,
-			history,
-			colorTheme,
-			loggedInState,
-			onStartConversation
-		} = this.props;
+		const { match, history, colorTheme, loggedInState } = this.props;
 
 		if (loggedInState === 'not_logged_in') {
 			return (
@@ -317,7 +312,7 @@ class MatchCards extends Component {
 											color: colorTheme.text1Color
 										}}
 										onClick={e =>
-											onStartConversation(
+											this.onStartConversation(
 												history,
 												match.name,
 												match.id
@@ -343,7 +338,9 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		loggedInState: state.auth.loggedInState
+		loggedInState: state.auth.loggedInState,
+		neuronsInBillions: state.profile.payment.neuronsInBillions,
+		mongoDBUserId: state.auth.mongoDBUserId
 	};
 }
 

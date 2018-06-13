@@ -191,8 +191,6 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		matches: state.matches,
-		neuronsInBillions: state.profile.payment.neuronsInBillions,
-		mongoDBUserId: state.auth.mongoDBUserId,
 		totalUserVotesAcrossAllSessions:
 			state.matches.totalUserVotesAcrossAllSessions,
 		runningAthenaForUser: state.matches.runningAthenaForUser
