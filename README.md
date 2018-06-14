@@ -18,6 +18,7 @@ mlab.com databases:
 2. `infinity2o-dev` database username = `infinity2o-dev` & password = `2134711p`
 3. `infinity2o-staging` database username = `infinity2o-staging` & password = `2134711p`
 4. `infinity2o-prod` database username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
+5. Backups are stored at https://bitbucket.org/quinnliu/mongodb_data
 
 Google OAuth:
 

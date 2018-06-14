@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import CustomSider from './landing/CustomSider';
 import CustomHeader from './landing/CustomHeader';
 import Landing from './landing/Landing';
+import About from './landing/About';
 import Tour from './help/Tour';
 import Profile from './profile/Profile';
 import ProfileEdit from './profile/edit/ProfileEdit';
@@ -32,6 +33,7 @@ class App extends Component {
 					<Layout style={{ height: '100vh' }}>
 						<CustomHeader />
 						<Route exact={true} path="/" component={Landing} />
+						<Route exact={true} path="/about" component={About} />
 						<Route exact={true} path="/tour" component={Tour} />
 						<Route
 							exact={true}

@@ -62,9 +62,9 @@ class InputVote extends Component {
 	}
 
 	renderNextAskButton(askIndex, isDisplayingAskStats) {
-		const { colorTheme, loggedInState } = this.props;
+		const { colorTheme, activeSection } = this.props;
 
-		if (loggedInState === 'not_logged_in') {
+		if (activeSection !== 'sorting_hat') {
 			return;
 		} else {
 			return (
@@ -107,10 +107,13 @@ class InputVote extends Component {
 	}
 
 	onVoteLanding(answerIndex, askIndex) {
-		const { landing } = this.props;
+		const { landing, loggedInState } = this.props;
 		const ask = landing.landingAsks[askIndex];
 		const answerId = ask.answers[answerIndex]._id;
-		if (landing.numberOfLandingVotes === 0) {
+		if (
+			landing.numberOfLandingVotes === 0 &&
+			loggedInState === 'not_logged_in'
+		) {
 			this.setState({
 				visible: true
 			});
@@ -129,9 +132,9 @@ class InputVote extends Component {
 		sortingHat,
 		isDisplayingSaveIcon
 	) {
-		const { loggedInState } = this.props;
+		const { activeSection } = this.props;
 
-		if (loggedInState === 'not_logged_in') {
+		if (activeSection !== 'sorting_hat') {
 			return (
 				<Button
 					style={{
@@ -173,12 +176,12 @@ class InputVote extends Component {
 		isDisplayingAskStats,
 		askTotalVotes
 	) {
-		const { colorTheme, sortingHat, landing, loggedInState } = this.props;
+		const { colorTheme, sortingHat, landing, activeSection } = this.props;
 		let answerButtonColor = colorTheme.text7Color;
 		let answerButtonTextColor = colorTheme.text2Color;
 		let votedAnswerButtonColor = colorTheme.keyText7Color;
 		let votingPlace = sortingHat;
-		if (loggedInState === 'not_logged_in') {
+		if (activeSection !== 'sorting_hat') {
 			answerButtonColor = GREY_3;
 			answerButtonTextColor = GREY_8;
 			votedAnswerButtonColor = RED_ORANGE_3;
@@ -296,13 +299,13 @@ class InputVote extends Component {
 	}
 
 	renderQandAs() {
-		const { colorTheme, sortingHat, landing, loggedInState } = this.props;
+		const { colorTheme, sortingHat, landing, activeSection } = this.props;
 
 		let fourAsks;
 		let cardColor = colorTheme.text8Color;
 		let cardTextColor = colorTheme.text2Color;
 		let voteColor = colorTheme.text3Color;
-		if (loggedInState === 'not_logged_in') {
+		if (activeSection !== 'sorting_hat') {
 			fourAsks = landing.landingAsks;
 			cardColor = GREY_2;
 			cardTextColor = GREY_8;
@@ -517,16 +520,20 @@ class InputVote extends Component {
 	}
 
 	render() {
-		const { colorTheme } = this.props;
+		const { colorTheme, activeSection } = this.props;
+
+		let background = colorTheme.backgroundColor;
+		if (activeSection !== 'sorting_hat') {
+			background = GREY_1;
+		}
 
 		return (
 			<Content
 				style={{
 					overflow: 'initial',
-					background: colorTheme.backgroundColor
+					background: background
 				}}
 			>
-				{/* {this.renderAskCategories()} */}
 				{this.renderModal()}
 				<Row
 					type="flex"
@@ -556,7 +563,8 @@ function mapStateToProps(state) {
 		windowWidth: state.customHeader.windowWidth,
 		theme: state.sortingHat.theme,
 		landing: state.landing,
-		loggedInState: state.auth.loggedInState
+		loggedInState: state.auth.loggedInState,
+		activeSection: state.colorTheme.activeSection
 	};
 }
 
