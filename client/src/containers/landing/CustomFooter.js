@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { GREY_1, GREY_3 } from '../styles/ColorConstants';
-import { Layout, Row, Col } from 'antd';
+import { GREY_1, GREY_2, GREY_3, GREY_4 } from '../styles/ColorConstants';
+import { Layout, Row, Col, Button } from 'antd';
 const { Footer } = Layout;
 
 class CustomFooter extends Component {
@@ -10,9 +10,13 @@ class CustomFooter extends Component {
 
 		let backgroundColor = this.props.colorTheme.backgroundColor;
 		let textColor = this.props.colorTheme.text7Color;
+		let aboutButtonColor = this.props.colorTheme.text8Color;
+		let textColor2 = this.props.colorTheme.text6Color;
 		if (loggedInState === 'not_logged_in') {
 			backgroundColor = GREY_1;
 			textColor = GREY_3;
+			aboutButtonColor = GREY_2;
+			textColor2 = GREY_4;
 		}
 
 		if (colorTheme.activeSection === 'conversations') {
@@ -27,24 +31,43 @@ class CustomFooter extends Component {
 					}}
 				>
 					<Row type="flex" justify="center">
-						<Col
-							sm={{ span: 12 }}
-							md={{ span: 10 }}
-							lg={{ span: 8 }}
-							xl={{ span: 6 }}
-						>
+						<Col>
 							<p
 								style={{
-									color: this.props.colorTheme.text6Color
+									color: textColor
 								}}
 							>
 								Feedback? askinfinity2o@gmail.com
 							</p>
 						</Col>
+						<Col
+							style={{
+								padding: '0px 0px 0px 10px'
+							}}
+						>
+							<Button
+								style={{
+									borderColor: aboutButtonColor,
+									background: aboutButtonColor
+								}}
+								size={'small'}
+							>
+								<a
+									style={{
+										color: textColor2
+									}}
+									href="/about"
+								>
+									About
+								</a>
+							</Button>
+						</Col>
 					</Row>
-					<Row>
+					<Row type="flex" justify="center">
 						<Col span={24}>
-							<p>Infinity2o © 2018 -> ∞</p>
+							<p style={{ color: textColor }}>
+								Infinity2o © 2018 -> ∞
+							</p>
 						</Col>
 					</Row>
 				</Footer>
