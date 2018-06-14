@@ -90,5 +90,28 @@ export default [
 			{ label: 'CET', value: 'CET', key: 'CET', UTC_offset: 1 },
 			{ label: 'EEST', value: 'EEST', key: 'EEST', UTC_offset: 3 }
 		]
+	},
+	{
+		label: 'Asia',
+		value: 'asia',
+		key: 'Asia',
+		children: [
+			{ label: 'India', value: 'India', key: 'India', UTC_offset: 5.5},
+			{ label: 'China', value: 'China', key: 'China', UTC_offset: 8 },
+			{ label: 'Korea', value: 'Korea', key: 'Korea', UTC_offset: 9 }
+		]
+	},
+	{
+		label: 'Africa',
+		value: 'africa',
+		key: 'Africa',
+		children: [
+			{ label: 'CVT', value: 'CVT', key: 'CVT', UTC_offset: -1},
+			{ label: 'GMT', value: 'GMT', key: 'GMT', UTC_offset: 0 },
+			{ label: 'WAT', value: 'WAT', key: 'WAT', UTC_offset: 1 },
+			{ label: 'CAT', value: 'CAT', key: 'CAT', UTC_offset: 2 },
+			{ label: 'EAT', value: 'EAT', key: 'EAT', UTC_offset: 3 },
+			{ label: 'MUT', value: 'MUT', key: 'MUT', UTC_offset: 4 }
+		]
 	}
 ];
