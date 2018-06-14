@@ -238,7 +238,7 @@ class Landing extends Component {
 				<Row
 					type="flex"
 					justify="center"
-					style={{ padding: '70px 0px 0px' }}
+					style={{ padding: '20px 0px 0px' }}
 				>
 					<Col>
 						<h1
@@ -343,6 +343,7 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
+						height: '100vh',
 						padding: '0px 50px 50px', // top left&right bottom
 						background: GREY_1
 					}}
@@ -351,6 +352,7 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
+						height: '80vh',
 						padding: '0px 50px 50px', // top left&right bottom
 						background: GREY_9
 					}}
@@ -359,6 +361,7 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
+						height: '80vh',
 						padding: '0px 50px 50px', // top left&right bottom
 						background: GREY_1
 					}}
