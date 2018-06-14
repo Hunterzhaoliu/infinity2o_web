@@ -39,8 +39,8 @@ const generateUniqueUID = () => {
 module.exports = app => {
 	app.get('/api/matches', requireLogin, async (request, response) => {
 		// formats the request string into an array
-		const mongoDBUserIds = request.query.mongoDBUserIds.split(',');
-		let matches_info = await getMatchesInfo(mongoDBUserIds);
+		const mongoDBMatchIds = request.query.mongoDBMatchIds.split(',');
+		let matches_info = await getMatchesInfo(mongoDBMatchIds);
 		response.send(matches_info);
 	});
 
