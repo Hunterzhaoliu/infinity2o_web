@@ -27,9 +27,10 @@ class Landing extends Component {
 
 	componentDidUpdate() {
 		// determines if logged_in_landing or logged_out_landing page
-		const {auth} = this.props;
+		const { auth } = this.props;
 		this.props.onLanding(auth.loggedInState);
 	}
+
 	renderCartoons() {
 		document.documentElement.style.setProperty(`--progress-color`, GREY_6);
 
@@ -173,7 +174,7 @@ class Landing extends Component {
 		return (
 			<Row
 				style={{
-					padding: '160px 0px 0px' // top left&right bottom
+					padding: '40px 0px 0px' // top left&right bottom
 				}}
 				type="flex"
 				justify="center"
@@ -203,7 +204,7 @@ class Landing extends Component {
 					<div>
 						<Row
 							style={{
-								padding: '80px 0px 0px' // top left&right bottom
+								padding: '40px 0px 0px' // top left&right bottom
 							}}
 							type="flex"
 							justify="center"
@@ -298,7 +299,7 @@ class Landing extends Component {
 				<Row
 					type="flex"
 					justify="center"
-					style={{ padding: '70px 0px 0px' }}
+					style={{ padding: '30px 0px 0px' }}
 				>
 					<Col>
 						<h1
@@ -343,7 +344,6 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						height: '100vh',
 						padding: '0px 50px 50px', // top left&right bottom
 						background: GREY_1
 					}}
@@ -352,7 +352,6 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						height: '80vh',
 						padding: '0px 50px 50px', // top left&right bottom
 						background: GREY_9
 					}}
@@ -361,7 +360,6 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						height: '80vh',
 						padding: '0px 50px 50px', // top left&right bottom
 						background: GREY_1
 					}}
@@ -390,12 +388,15 @@ This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
 	const landingDispatchers = bindActionCreators(landingActions, dispatch);
-	const colorThemeDispatchers = bindActionCreators(colorThemeActions, dispatch);
+	const colorThemeDispatchers = bindActionCreators(
+		colorThemeActions,
+		dispatch
+	);
 	return {
 		fetchLandingPageSortingHatAsks: () => {
 			landingDispatchers.fetchLandingPageSortingHatAsks();
 		},
-		onLanding: (loggedInState) => {
+		onLanding: loggedInState => {
 			colorThemeDispatchers.onLanding(loggedInState);
 		}
 	};
