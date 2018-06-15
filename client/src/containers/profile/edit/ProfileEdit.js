@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as authActionCreators from "../../../actions/auth";
 import * as colorThemeActionCreators from "../../../actions/colorTheme";
 import * as profileActionCreators from "../../../actions/profile/profile";
 import { bindActionCreators } from "redux";
@@ -16,7 +15,6 @@ const { Content } = Layout;
 class ProfileEdit extends Component {
   componentWillMount() {
     // run once before first render()
-    this.props.fetchUserProfile();
     this.props.onProfile();
   }
 
@@ -242,8 +240,6 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-  const indexDispatchers = bindActionCreators(authActionCreators, dispatch);
-
   const profileDispatchers = bindActionCreators(
     profileActionCreators,
     dispatch
@@ -254,9 +250,6 @@ function mapDispatchToProps(dispatch) {
   );
 
   return {
-    fetchUserProfile: () => {
-      indexDispatchers.fetchUserProfile();
-    },
     onProfile: () => {
       colorThemeDispatchers.onProfile();
     },

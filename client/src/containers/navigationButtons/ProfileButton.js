@@ -1,15 +1,8 @@
 import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import * as authActionCreators from "../../actions/auth";
 import { connect } from "react-redux";
 import { Col, Button } from "antd";
 
 class ProfileButton extends Component {
-  constructor(props) {
-    super(props);
-    this.props.fetchUserProfile(); // to show correct neuron number
-  }
-
   renderProfileButton() {
     const { colorTheme, neuronsInBillions, infinityStatus } = this.props;
     let shortNeuronsInBillions;
@@ -69,18 +62,4 @@ function mapStateToProps(state) {
   };
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-function mapDispatchToProps(dispatch) {
-  const authDispatchers = bindActionCreators(authActionCreators, dispatch);
-
-  return {
-    fetchUserProfile: () => {
-      authDispatchers.fetchUserProfile();
-    }
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileButton);
+export default connect(mapStateToProps, null)(ProfileButton);
