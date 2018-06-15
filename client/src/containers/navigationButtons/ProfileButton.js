@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import * as authActionCreators from "../../actions/auth";
-import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { connect } from "react-redux";
 import { Col, Button } from "antd";
 
@@ -12,12 +11,7 @@ class ProfileButton extends Component {
   }
 
   renderProfileButton() {
-    const {
-      colorTheme,
-      onProfile,
-      neuronsInBillions,
-      infinityStatus
-    } = this.props;
+    const { colorTheme, neuronsInBillions, infinityStatus } = this.props;
     let shortNeuronsInBillions;
     if (neuronsInBillions !== undefined) {
       shortNeuronsInBillions = neuronsInBillions.toFixed(1);
@@ -33,7 +27,6 @@ class ProfileButton extends Component {
           background: colorTheme.profileButtonColor,
           color: colorTheme.profileButtonTextColor
         }}
-        onClick={onProfile}
       >
         <a href="/profile">
           <div style={{ padding: "1px 0px 0px" }}>
@@ -81,16 +74,9 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-  const colorThemeDispatchers = bindActionCreators(
-    colorThemeActionCreators,
-    dispatch
-  );
   const authDispatchers = bindActionCreators(authActionCreators, dispatch);
 
   return {
-    onProfile: () => {
-      colorThemeDispatchers.onProfile();
-    },
     fetchUserProfile: () => {
       authDispatchers.fetchUserProfile();
     }

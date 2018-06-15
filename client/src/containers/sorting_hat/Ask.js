@@ -15,6 +15,8 @@ class Ask extends Component {
   componentWillMount() {
     // run once before first render()
     this.props.fetchUserProfile();
+
+    // keeps the custom Header button colors
     this.props.onSortingHat();
   }
 
@@ -68,7 +70,7 @@ class Ask extends Component {
                   background: colorTheme.text7Color,
                   color: colorTheme.text3Color
                 }}
-                placeHolder={"Answer " + (key + 1).toString()}
+                placeholder={"Answer " + (key + 1).toString()}
               />
             </Col>
             <Col
@@ -242,7 +244,7 @@ class Ask extends Component {
                 background: colorTheme.text7Color,
                 color: colorTheme.text3Color
               }}
-              placeHolder="Question"
+              placeholder="Question"
             />
           </Col>
           <Col
