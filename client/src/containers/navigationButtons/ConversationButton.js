@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { connect } from "react-redux";
 import { Col, Button } from "antd";
 
 class ConversationButton extends Component {
   renderConversationsButton() {
-    const { colorTheme, onPressConversations } = this.props;
+    const { colorTheme } = this.props;
 
     return (
       <Button
@@ -18,7 +16,6 @@ class ConversationButton extends Component {
           padding: "0px 0px 0px",
           width: 35
         }}
-        onClick={onPressConversations}
       >
         <a href="/conversations">
           <img
@@ -60,16 +57,5 @@ function mapStateToProps(state) {
 So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
-function mapDispatchToProps(dispatch) {
-  const colorThemeDispatchers = bindActionCreators(
-    colorThemeActionCreators,
-    dispatch
-  );
-  return {
-    onPressConversations: () => {
-      colorThemeDispatchers.onConversations();
-    }
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConversationButton);
+export default connect(mapStateToProps, null)(ConversationButton);

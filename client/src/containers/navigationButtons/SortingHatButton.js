@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { connect } from "react-redux";
 import { Col, Button } from "antd";
 
 class SortingHatButton extends Component {
   renderSortingHatButton() {
-    const { colorTheme, onSortingHat } = this.props;
+    const { colorTheme } = this.props;
 
     return (
       <Button
@@ -15,7 +13,6 @@ class SortingHatButton extends Component {
           background: colorTheme.sortingHatButtonColor,
           color: colorTheme.sortingHatButtonTextColor
         }}
-        onClick={onSortingHat}
       >
         <a href="/sorting_hat">
           <img
@@ -53,20 +50,4 @@ function mapStateToProps(state) {
   };
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-function mapDispatchToProps(dispatch) {
-  const colorThemeDispatchers = bindActionCreators(
-    colorThemeActionCreators,
-    dispatch
-  );
-  return {
-    onSortingHat: () => {
-      colorThemeDispatchers.onSortingHat();
-    }
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SortingHatButton);
+export default connect(mapStateToProps, null)(SortingHatButton);

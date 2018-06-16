@@ -5,12 +5,12 @@ const UserCollection = mongoose.model('users');
 const amqp = require('amqplib/callback_api');
 
 const getMatchesInfo = async mongoDBUserIds => {
-	let matches_info = [];
+	let matchesInfo = [];
 	for (let mongoDBUserId of mongoDBUserIds) {
 		const user = await UserCollection.findById(mongoDBUserId);
 
 		if (user !== null) {
-			matches_info.push({
+			matchesInfo.push({
 				name: user.profile.name,
 				age: user.profile.age,
 				linkedInPublicProfileUrl: user.profile.linkedInPublicProfileUrl,
@@ -25,7 +25,7 @@ const getMatchesInfo = async mongoDBUserIds => {
 			});
 		}
 	}
-	return matches_info;
+	return matchesInfo;
 };
 
 const generateUniqueUID = () => {
@@ -39,9 +39,17 @@ const generateUniqueUID = () => {
 module.exports = app => {
 	app.get('/api/matches', requireLogin, async (request, response) => {
 		// formats the request string into an array
-		const mongoDBUserIds = request.query.mongoDBUserIds.split(',');
-		let matches_info = await getMatchesInfo(mongoDBUserIds);
-		response.send(matches_info);
+		const mongoDBUserId = request.query.mongoDBUserId;
+		// get user's Match Ids
+		const userInDB = await UserCollection.findOne({ _id: mongoDBUserId });
+		const userMatches = userInDB.matches;
+		let mongoDBMatchIds = [];
+		for (let i = 0; i < userMatches.length; i++) {
+			mongoDBMatchIds.push(userMatches[i]['id']);
+		}
+
+		let matchesInfo = await getMatchesInfo(mongoDBMatchIds);
+		response.send(matchesInfo);
 	});
 
 	app.post(
@@ -49,7 +57,6 @@ module.exports = app => {
 		requireLogin,
 		async (request, response) => {
 			const { matchId, matchName } = request.body;
-			//console.log('start_conversation request.body = ', request.body);
 
 			const userId = request.user._id;
 			let userName;
