@@ -97,16 +97,15 @@ export const onVote = (
     const info = {
       mongoDBUserId: store.getState().auth.mongoDBUserId
     };
+
+    // runs athena
     const initialMatchesResponse = await axios.post(
       "/api/matches/initial",
       info
     );
 
     if (initialMatchesResponse.status === 200) {
-      const currentUserResponse = await axios.get("/api/current_user");
-      if (currentUserResponse.data.matches.length >= 1) {
-        fetchUserMatches(dispatch, currentUserResponse.data.matches);
-      }
+      fetchUserMatches(mongoDBUserId);
       dispatch({
         type: RUNNING_ATHENA_FOR_USER_DONE
       });

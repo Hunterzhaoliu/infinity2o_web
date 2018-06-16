@@ -16,10 +16,9 @@ class Matches extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.matches !== nextProps.matches) {
+    if (this.props.mongoDBUserId !== nextProps.mongoDBUserId) {
       // runs after user's auth gets filled
-      console.log("componentWillReceiveProps");
-      this.props.fetchUserMatches(nextProps.matches);
+      this.props.fetchUserMatches(nextProps.mongoDBUserId);
     }
   }
 
@@ -217,7 +216,8 @@ function mapStateToProps(state) {
     matches: state.matches,
     totalUserVotesAcrossAllSessions:
       state.matches.totalUserVotesAcrossAllSessions,
-    runningAthenaForUser: state.matches.runningAthenaForUser
+    runningAthenaForUser: state.matches.runningAthenaForUser,
+    mongoDBUserId: state.auth.mongoDBUserId
   };
 }
 

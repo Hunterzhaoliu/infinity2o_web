@@ -10,18 +10,14 @@ import {
   DELETE_MATCH_IN_DB_ERROR
 } from "../types";
 
-export const fetchUserMatches = matches => async dispatch => {
-  console.log("matches = ", matches);
-  let mongoDBMatchIds = [];
-  for (let i = 0; i < matches.length; i++) {
-    mongoDBMatchIds.push(matches[i]["id"]);
-  }
-  const response = await axios.get(
-    "/api/matches?mongoDBMatchIds=" + mongoDBMatchIds
+export const fetchUserMatches = mongoDBUserId => async dispatch => {
+  const matchesInfo = await axios.get(
+    "/api/matches?mongoDBUserId=" + mongoDBUserId
   );
+
   dispatch({
     type: SAVE_FETCHED_DAILY_MATCHES,
-    dailyMatches: response.data
+    dailyMatches: matchesInfo.data
   });
   dispatch({
     type: UPDATE_INITIAL_MATCH
