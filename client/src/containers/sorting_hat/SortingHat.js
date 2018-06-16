@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as sortingHatActionCreators from "../../actions/sorting_hat/sortingHat";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { bindActionCreators } from "redux";
 import { Layout, Row, Col, Button } from "antd";
@@ -10,6 +11,13 @@ class SortingHat extends Component {
   componentWillMount() {
     // run once before first render()
     this.props.onSortingHat();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.auth.mongoDBUserId !== nextProps.auth.mongoDBUserId) {
+      // runs after user's auth gets filled
+      this.props.fetchUserSortingHatAsks(nextProps.auth.mongoDBUserId);
+    }
   }
 
   render() {
@@ -124,7 +132,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
   return {
-    colorTheme: state.colorTheme
+    colorTheme: state.colorTheme,
+    auth: state.auth
   };
 }
 
@@ -138,9 +147,17 @@ function mapDispatchToProps(dispatch) {
     dispatch
   );
 
+  const sortingHatDispatchers = bindActionCreators(
+    sortingHatActionCreators,
+    dispatch
+  );
+
   return {
     onSortingHat: () => {
       colorThemeDispatchers.onSortingHat();
+    },
+    fetchUserSortingHatAsks: mongoDBUserId => {
+      sortingHatDispatchers.fetchUserSortingHatAsks(mongoDBUserId);
     }
   };
 }

@@ -15,13 +15,11 @@ function saveUserProfile(response, dispatch) {
     profile: response.data.profile
   });
 
-  if (!store.getState().matches.hasUpdateTotalUserVotesFromDB) {
-    // separate dispatch that goes to matches reducer
-    dispatch({
-      type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
-      additionalVotes: response.data.profile.asks.totalUserVotes
-    });
-  }
+  // separate dispatch that goes to matches reducer
+  dispatch({
+    type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
+    additionalVotes: response.data.profile.asks.totalUserVotes
+  });
 }
 
 export const initializeApp = () => async dispatch => {
@@ -33,9 +31,6 @@ export const initializeApp = () => async dispatch => {
     mongoDBUserId: response.data._id
   });
 
-  // if (response.data._id !== undefined) {
-  // 	fetchUserSortingHatAsks(dispatch, response.data._id);
-  //
   // 	if (response.data.matches.length >= 1) {
   // 		fetchUserMatches(dispatch, response.data.matches);
   // 	}
