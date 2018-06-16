@@ -19,7 +19,7 @@ import {
 } from '../types';
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
 import { store } from '../../index';
-import { fetchUserMatches } from '../matches/matches';
+import { fetchUserMatchesDispatch } from '../matches/matches';
 import { saveAndAddNeurons } from './ask';
 import { NUMBER_NEURONS_GIVEN_FOR_VOTE_IN_BILLIONS } from '../../containers/payment/prices';
 
@@ -97,16 +97,16 @@ export const onVote = (
 		const info = {
 			mongoDBUserId: store.getState().auth.mongoDBUserId
 		};
+
+		// runs athena
 		const initialMatchesResponse = await axios.post(
 			'/api/matches/initial',
 			info
 		);
 
 		if (initialMatchesResponse.status === 200) {
-			const currentUserResponse = await axios.get('/api/current_user');
-			if (currentUserResponse.data.matches.length >= 1) {
-				fetchUserMatches(dispatch, currentUserResponse.data.matches);
-			}
+			console.log('initialMatchesResponse.status === 200');
+			fetchUserMatchesDispatch(mongoDBUserId, dispatch);
 			dispatch({
 				type: RUNNING_ATHENA_FOR_USER_DONE
 			});
@@ -118,7 +118,7 @@ export const onVote = (
 	}
 };
 
-export const fetchUserSortingHatAsks = async (dispatch, mongoDBUserId) => {
+export const fetchUserSortingHatAsks = mongoDBUserId => async dispatch => {
 	const nextAsks = await axios.get(
 		'/api/sorting_hat/initial_asks?mongoDBUserId=' + mongoDBUserId
 	);

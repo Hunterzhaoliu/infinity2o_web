@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as matchesActionCreators from '../../actions/matches/matches';
 import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { bindActionCreators } from 'redux';
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
@@ -12,6 +13,13 @@ class Matches extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onMatches();
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.mongoDBUserId !== nextProps.mongoDBUserId) {
+			// runs after user's auth gets filled
+			this.props.fetchUserMatches(nextProps.mongoDBUserId);
+		}
 	}
 
 	renderMatches() {
@@ -217,7 +225,8 @@ function mapStateToProps(state) {
 		matches: state.matches,
 		totalUserVotesAcrossAllSessions:
 			state.matches.totalUserVotesAcrossAllSessions,
-		runningAthenaForUser: state.matches.runningAthenaForUser
+		runningAthenaForUser: state.matches.runningAthenaForUser,
+		mongoDBUserId: state.auth.mongoDBUserId
 	};
 }
 
@@ -226,6 +235,10 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
+	const matchesDispatchers = bindActionCreators(
+		matchesActionCreators,
+		dispatch
+	);
 	const colorThemeDispatchers = bindActionCreators(
 		colorThemeActionCreators,
 		dispatch
@@ -234,6 +247,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		onMatches: () => {
 			colorThemeDispatchers.onMatches();
+		},
+		fetchUserMatches: matches => {
+			matchesDispatchers.fetchUserMatches(matches);
 		}
 	};
 }

@@ -11,7 +11,6 @@ class ErrorMessage extends Component {
 		}
 	}
 	render() {
-		//console.log('ErrorMessage this.props = ', this.props);
 		const { colorTheme, message, hasError } = this.props;
 		return (
 			<Row type="flex" justify="start" align="middle">

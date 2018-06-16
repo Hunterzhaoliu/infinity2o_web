@@ -18,7 +18,8 @@ import {
   isValidName,
   isValidAge,
   isValidInterests,
-  isValidEmail
+  isValidEmail,
+  isValidTimeZone
 } from "../../utils/validateProfileEdit";
 import validUrl from "valid-url";
 
@@ -98,11 +99,7 @@ export const onChangeInterests = newInterests => dispatch => {
 };
 
 export const onChangeTimeZone = newTimeZone => dispatch => {
-  if (
-    newTimeZone[0] === "europe" ||
-    newTimeZone[0] === "canada" ||
-    newTimeZone[0] === "united_states"
-  ) {
+  if (isValidTimeZone) {
     dispatch({
       type: ON_CHANGE_TIME_ZONE,
       newTimeZone: newTimeZone,

@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as authActionCreators from "../../actions/auth";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as askActionCreators from "../../actions/sorting_hat/ask";
 import { bindActionCreators } from "redux";
@@ -14,7 +13,7 @@ const { Content } = Layout;
 class Ask extends Component {
   componentWillMount() {
     // run once before first render()
-    this.props.fetchUserProfile();
+    // keeps the custom Header button colors
     this.props.onSortingHat();
   }
 
@@ -68,7 +67,7 @@ class Ask extends Component {
                   background: colorTheme.text7Color,
                   color: colorTheme.text3Color
                 }}
-                placeHolder={"Answer " + (key + 1).toString()}
+                placeholder={"Answer " + (key + 1).toString()}
               />
             </Col>
             <Col
@@ -242,7 +241,7 @@ class Ask extends Component {
                 background: colorTheme.text7Color,
                 color: colorTheme.text3Color
               }}
-              placeHolder="Question"
+              placeholder="Question"
             />
           </Col>
           <Col
@@ -374,8 +373,6 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-  const indexDispatchers = bindActionCreators(authActionCreators, dispatch);
-
   const colorThemeDispatchers = bindActionCreators(
     colorThemeActionCreators,
     dispatch
@@ -384,9 +381,6 @@ function mapDispatchToProps(dispatch) {
   const askDispatchers = bindActionCreators(askActionCreators, dispatch);
 
   return {
-    fetchUserProfile: () => {
-      indexDispatchers.fetchUserProfile();
-    },
     onSortingHat: () => {
       colorThemeDispatchers.onSortingHat();
     },
