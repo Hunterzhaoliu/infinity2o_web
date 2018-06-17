@@ -7,7 +7,8 @@ import {
   UPDATE_CONTACTS,
   UPDATE_CONTACTS_ERROR,
   DELETE_MATCH_IN_DB,
-  DELETE_MATCH_IN_DB_ERROR
+  DELETE_MATCH_IN_DB_ERROR,
+  DECREMENT_NUMBER_OF_UNSEEN_MATCHES
 } from "../types";
 
 export const fetchUserMatchesDispatch = async (mongoDBUserId, dispatch) => {
@@ -30,10 +31,51 @@ export const fetchUserMatches = mongoDBUserId => async dispatch => {
   fetchUserMatchesDispatch(mongoDBUserId, dispatch);
 };
 
-export const onNextMatch = () => dispatch => {
+export const checkIfMatchSeen = (
+  matchNeededToBeChecked,
+  mongoDBUserId
+) => async dispatch => {
+  if (matchNeededToBeChecked["seen"]) {
+    // already seen this match
+  } else {
+    dispatch({
+      type: DECREMENT_NUMBER_OF_UNSEEN_MATCHES,
+      basicMatchInfoIndex: 0
+    });
+
+    // mongoDB hit that changes if the match seen status
+    const seenInfo = {
+      userId: mongoDBUserId,
+      matchId: matchNeededToBeChecked["id"]
+    };
+    await axios.put("/api/matches/seen", seenInfo);
+  }
+};
+
+export const onNextMatch = (
+  matchNeededToBeChecked,
+  mongoDBUserId
+) => async dispatch => {
   dispatch({
     type: ON_NEXT_MATCH
   });
+  if (matchNeededToBeChecked !== null && mongoDBUserId !== null) {
+    if (matchNeededToBeChecked["seen"]) {
+      // already seen this match
+    } else {
+      dispatch({
+        type: DECREMENT_NUMBER_OF_UNSEEN_MATCHES,
+        basicMatchInfoIndex: 1
+      });
+
+      // mongoDB hit that changes if the match seen status
+      const seenInfo = {
+        userId: mongoDBUserId,
+        matchId: matchNeededToBeChecked["id"]
+      };
+      await axios.put("/api/matches/seen", seenInfo);
+    }
+  }
 };
 
 export const onStartConversation = (
