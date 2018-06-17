@@ -13,6 +13,7 @@ class Conversation extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onConversations();
+		this.props.updateOnlineStatus();
 		this.props.fetchConversations();
 	}
 
@@ -72,7 +73,7 @@ class Conversation extends Component {
 	}
 
 	render() {
-		//console.log('Conversation this.props = ', this.props);
+		console.log('Conversation this.props = ', this.props);
 		const { colorTheme } = this.props;
 
 		return (
@@ -122,6 +123,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		fetchConversations: () => {
 			contactsDispatchers.fetchConversations();
+		},
+		updateOnlineStatus: () => {
+			contactsDispatchers.updateOnlineStatus();
 		}
 	};
 }

@@ -4,7 +4,6 @@ import {
 	GREY_1,
 	GREY_5,
 	GREY_6,
-	GREY_7,
 	GREY_8,
 	GREY_9
 } from '../styles/ColorConstants';
@@ -18,14 +17,12 @@ class Terms extends Component {
 		let background = colorTheme.backgroundColor;
 		let text1Color = colorTheme.text1Color;
 		let text2Color = colorTheme.text2Color;
-		let text3Color = colorTheme.text3Color;
 		let text4Color = colorTheme.text4Color;
 
 		if (loggedInState === 'not_logged_in') {
 			background = GREY_1;
 			text1Color = GREY_9;
 			text2Color = GREY_8;
-			text3Color = GREY_7;
 			text4Color = GREY_6;
 		}
 
