@@ -10,11 +10,20 @@ import MatchCards from "./MatchCards";
 const { Content } = Layout;
 
 class Matches extends Component {
-	componentWillMount() {
-		// run once before first render()
-		this.props.onMatches();
+  componentWillMount() {
+    // run once before first render()
+    this.props.onMatches();
     this.props.fetchUserMatches(this.props.mongoDBUserId);
-	}
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.basicMatchInfo !== this.props.basicMatchInfo) {
+      this.props.checkIfMatchSeen(
+        nextProps.basicMatchInfo[0],
+        nextProps.mongoDBUserId
+      );
+    }
+  }
 
   renderMatches() {
     const {
@@ -210,7 +219,8 @@ function mapStateToProps(state) {
     totalUserVotesAcrossAllSessions:
       state.matches.totalUserVotesAcrossAllSessions,
     runningAthenaForUser: state.matches.runningAthenaForUser,
-    mongoDBUserId: state.auth.mongoDBUserId
+    mongoDBUserId: state.auth.mongoDBUserId,
+    basicMatchInfo: state.customHeader.basicMatchInfo
   };
 }
 
@@ -228,14 +238,20 @@ function mapDispatchToProps(dispatch) {
     dispatch
   );
 
-	return {
-		onMatches: () => {
-			colorThemeDispatchers.onMatches();
-		},
-		fetchUserMatches: mongoDBUserId => {
-			matchesDispatchers.fetchUserMatches(mongoDBUserId);
-		}
-	};
+  return {
+    onMatches: () => {
+      colorThemeDispatchers.onMatches();
+    },
+    fetchUserMatches: mongoDBUserId => {
+      matchesDispatchers.fetchUserMatches(mongoDBUserId);
+    },
+    checkIfMatchSeen: (matchNeededToBeChecked, mongoDBUserId) => {
+      matchesDispatchers.checkIfMatchSeen(
+        matchNeededToBeChecked,
+        mongoDBUserId
+      );
+    }
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Matches);
