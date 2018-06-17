@@ -10,7 +10,8 @@ import {
 	MOVE_TO_CONVERSATIONS,
 	SAVE_COLOR_THEME_START,
 	SAVE_COLOR_THEME_DONE,
-	SAVE_COLOR_THEME_ERROR
+	SAVE_COLOR_THEME_ERROR,
+	MOVE_TO_FOOTER
 } from './types';
 import {
 	colors1,
@@ -39,15 +40,15 @@ export const onTour = () => {
 	};
 };
 
-export const onLanding = (loggedInState) => {
+export const onLanding = loggedInState => {
 	if (loggedInState === 'logged_in') {
 		return function(dispatch) {
 			dispatch({ type: MOVE_TO_LOGGED_IN_LANDING });
-		}
+		};
 	} else {
 		return function(dispatch) {
 			dispatch({ type: MOVE_TO_LOGGED_OUT_LANDING });
-		}
+		};
 	}
 };
 
@@ -72,6 +73,12 @@ export const onMatches = () => {
 export const onConversations = () => {
 	return function(dispatch) {
 		dispatch({ type: MOVE_TO_CONVERSATIONS });
+	};
+};
+
+export const onFooter = () => {
+	return function(dispatch) {
+		dispatch({ type: MOVE_TO_FOOTER });
 	};
 };
 

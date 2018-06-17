@@ -6,7 +6,8 @@ import {
 	MOVE_TO_LOGGED_IN_LANDING,
 	MOVE_TO_CONVERSATIONS,
 	MOVE_TO_TOUR,
-	MOVE_TO_LOGGED_OUT_LANDING
+	MOVE_TO_LOGGED_OUT_LANDING,
+	MOVE_TO_FOOTER
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -115,6 +116,17 @@ function _getStateForSection(newState) {
 		newState.conversationsButtonTextColor = newState.text4Color;
 		newState.tourButtonColor = newState.key;
 		newState.tourButtonTextColor = newState.text1Color;
+	} else if (newState.activeSection === 'footer') {
+		newState.profileButtonColor = newState.text7Color;
+		newState.profileButtonTextColor = newState.text4Color;
+		newState.sortingHatButtonColor = newState.text7Color;
+		newState.sortingHatButtonTextColor = newState.text4Color;
+		newState.matchesButtonColor = newState.text7Color;
+		newState.matchesButtonTextColor = newState.text4Color;
+		newState.conversationsButtonColor = newState.text7Color;
+		newState.conversationsButtonTextColor = newState.text4Color;
+		newState.tourButtonColor = newState.text7Color;
+		newState.tourButtonTextColor = newState.text4Color;
 	}
 	return newState;
 }
@@ -181,6 +193,10 @@ export default function(state = initialState, action) {
 			return newState;
 		case MOVE_TO_CONVERSATIONS:
 			newState.activeSection = 'conversations';
+			newState = _getStateForSection(newState);
+			return newState;
+		case MOVE_TO_FOOTER:
+			newState.activeSection = 'footer';
 			newState = _getStateForSection(newState);
 			return newState;
 		default:
