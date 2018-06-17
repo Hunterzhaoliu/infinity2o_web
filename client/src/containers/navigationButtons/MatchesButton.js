@@ -12,7 +12,7 @@ class MatchesButton extends Component {
         style={{
           backgroundColor: colorTheme.keyText8Color,
           color: colorTheme.text1Color,
-          borderColor: colorTheme.keyText8Color
+          boxShadow: "0 0 0 1px " + colorTheme.keyText8Color
         }}
       >
         <Button
