@@ -1,27 +1,36 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Button } from "antd";
+import { Col, Button, Badge } from "antd";
 
 class MatchesButton extends Component {
   renderMatchesButton() {
-    const { colorTheme } = this.props;
+    const { colorTheme, numberOfUnseenMatches } = this.props;
 
     return (
-      <Button
+      <Badge
+        count={numberOfUnseenMatches}
         style={{
-          borderColor: colorTheme.matchesButtonColor,
-          background: colorTheme.matchesButtonColor,
-          color: colorTheme.matchesButtonTextColor
+          backgroundColor: colorTheme.keyText8Color,
+          color: colorTheme.text1Color,
+          borderColor: colorTheme.keyText8Color
         }}
       >
-        <a href="/matches">
-          <img
-            alt=""
-            style={{ width: 32, padding: "0px 0px 1px" }}
-            src="https://user-images.githubusercontent.com/24757872/40881562-23db47c0-668f-11e8-84a6-29020f352353.png"
-          />Matches
-        </a>
-      </Button>
+        <Button
+          style={{
+            borderColor: colorTheme.matchesButtonColor,
+            background: colorTheme.matchesButtonColor,
+            color: colorTheme.matchesButtonTextColor
+          }}
+        >
+          <a href="/matches">
+            <img
+              alt=""
+              style={{ width: 32, padding: "0px 0px 1px" }}
+              src="https://user-images.githubusercontent.com/24757872/40881562-23db47c0-668f-11e8-84a6-29020f352353.png"
+            />Matches
+          </a>
+        </Button>
+      </Badge>
     );
   }
 
@@ -46,7 +55,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
   return {
-    colorTheme: state.colorTheme
+    colorTheme: state.colorTheme,
+    numberOfUnseenMatches: state.customHeader.numberOfUnseenMatches
   };
 }
 
