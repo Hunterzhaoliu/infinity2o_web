@@ -13,13 +13,7 @@ class Matches extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onMatches();
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.mongoDBUserId !== nextProps.mongoDBUserId) {
-			// runs after user's auth gets filled
-			this.props.fetchUserMatches(nextProps.mongoDBUserId);
-		}
+    this.props.fetchUserMatches(this.props.mongoDBUserId);
 	}
 
 	renderMatches() {
@@ -248,8 +242,8 @@ function mapDispatchToProps(dispatch) {
 		onMatches: () => {
 			colorThemeDispatchers.onMatches();
 		},
-		fetchUserMatches: matches => {
-			matchesDispatchers.fetchUserMatches(matches);
+		fetchUserMatches: mongoDBUserId => {
+			matchesDispatchers.fetchUserMatches(mongoDBUserId);
 		}
 	};
 }

@@ -11,13 +11,7 @@ class SortingHat extends Component {
   componentWillMount() {
     // run once before first render()
     this.props.onSortingHat();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.auth.mongoDBUserId !== nextProps.auth.mongoDBUserId) {
-      // runs after user's auth gets filled
-      this.props.fetchUserSortingHatAsks(nextProps.auth.mongoDBUserId);
-    }
+    this.props.fetchUserSortingHatAsks(this.props.auth.mongoDBUserId);
   }
 
   render() {
