@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import * as colorThemeActionCreators from '../../actions/colorTheme';
 import { connect } from 'react-redux';
 import { GREY_1, GREY_2, GREY_3, GREY_4 } from '../styles/ColorConstants';
 import { Layout, Row, Col, Button } from 'antd';
@@ -6,8 +8,7 @@ const { Footer } = Layout;
 
 class CustomFooter extends Component {
 	render() {
-		const { colorTheme, loggedInState } = this.props;
-
+		const { colorTheme, loggedInState, onFooter } = this.props;
 		let backgroundColor = this.props.colorTheme.backgroundColor;
 		let textColor = this.props.colorTheme.text7Color;
 		let aboutButtonColor = this.props.colorTheme.text8Color;
@@ -32,13 +33,23 @@ class CustomFooter extends Component {
 				>
 					<Row type="flex" justify="center">
 						<Col>
-							<p
+							<Button
 								style={{
-									color: textColor
+									borderColor: aboutButtonColor,
+									background: aboutButtonColor
 								}}
+								size={'small'}
+								onClick={onFooter}
 							>
-								Feedback? askinfinity2o@gmail.com
-							</p>
+								<a
+									style={{
+										color: textColor2
+									}}
+									href="/terms"
+								>
+									Terms
+								</a>
+							</Button>
 						</Col>
 						<Col
 							style={{
@@ -51,6 +62,30 @@ class CustomFooter extends Component {
 									background: aboutButtonColor
 								}}
 								size={'small'}
+								onClick={onFooter}
+							>
+								<a
+									style={{
+										color: textColor2
+									}}
+									href="/privacy"
+								>
+									Privacy
+								</a>
+							</Button>
+						</Col>
+						<Col
+							style={{
+								padding: '0px 0px 0px 10px'
+							}}
+						>
+							<Button
+								style={{
+									borderColor: aboutButtonColor,
+									background: aboutButtonColor
+								}}
+								size={'small'}
+								onClick={onFooter}
 							>
 								<a
 									style={{
@@ -65,7 +100,12 @@ class CustomFooter extends Component {
 					</Row>
 					<Row type="flex" justify="center">
 						<Col span={24}>
-							<p style={{ color: textColor }}>
+							<p
+								style={{
+									color: textColor,
+									padding: '10px 0px 0px 0px'
+								}}
+							>
 								Infinity2o © 2018 -> ∞
 							</p>
 						</Col>
@@ -92,7 +132,15 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	return {};
+	const colorThemeDispatchers = bindActionCreators(
+		colorThemeActionCreators,
+		dispatch
+	);
+	return {
+		onFooter: () => {
+			colorThemeDispatchers.onFooter();
+		}
+	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomFooter);
