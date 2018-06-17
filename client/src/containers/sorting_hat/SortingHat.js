@@ -8,18 +8,11 @@ import InputVote from './InputVote';
 const { Content } = Layout;
 
 class SortingHat extends Component {
-	componentWillMount() {
-		// run once before first render()
-		this.props.onSortingHat();
-		this.props.fetchUserSortingHatAsks(this.props.auth.mongoDBUserId);
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.auth.mongoDBUserId !== nextProps.auth.mongoDBUserId) {
-			// runs after user's auth gets filled
-			this.props.fetchUserSortingHatAsks(nextProps.auth.mongoDBUserId);
-		}
-	}
+  componentWillMount() {
+    // run once before first render()
+    this.props.onSortingHat();
+    this.props.fetchUserSortingHatAsks(this.props.auth.mongoDBUserId);
+  }
 
 	render() {
 		// console.log('this.props in SortingHat.js', this.props);
