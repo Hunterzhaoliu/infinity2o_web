@@ -228,16 +228,6 @@ function mapDispatchToProps(dispatch) {
     dispatch
   );
 
-<<<<<<< HEAD
-  return {
-    onMatches: () => {
-      colorThemeDispatchers.onMatches();
-    },
-    fetchUserMatches: matches => {
-      matchesDispatchers.fetchUserMatches(matches);
-    }
-  };
-=======
 	return {
 		onMatches: () => {
 			colorThemeDispatchers.onMatches();
@@ -246,7 +236,6 @@ function mapDispatchToProps(dispatch) {
 			matchesDispatchers.fetchUserMatches(mongoDBUserId);
 		}
 	};
->>>>>>> staging
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Matches);
