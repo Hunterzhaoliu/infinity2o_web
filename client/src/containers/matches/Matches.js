@@ -10,17 +10,11 @@ import MatchCards from "./MatchCards";
 const { Content } = Layout;
 
 class Matches extends Component {
-  componentWillMount() {
-    // run once before first render()
-    this.props.onMatches();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.mongoDBUserId !== nextProps.mongoDBUserId) {
-      // runs after user's auth gets filled
-      this.props.fetchUserMatches(nextProps.mongoDBUserId);
-    }
-  }
+	componentWillMount() {
+		// run once before first render()
+		this.props.onMatches();
+    this.props.fetchUserMatches(this.props.mongoDBUserId);
+	}
 
   renderMatches() {
     const {
@@ -234,6 +228,7 @@ function mapDispatchToProps(dispatch) {
     dispatch
   );
 
+<<<<<<< HEAD
   return {
     onMatches: () => {
       colorThemeDispatchers.onMatches();
@@ -242,6 +237,16 @@ function mapDispatchToProps(dispatch) {
       matchesDispatchers.fetchUserMatches(matches);
     }
   };
+=======
+	return {
+		onMatches: () => {
+			colorThemeDispatchers.onMatches();
+		},
+		fetchUserMatches: mongoDBUserId => {
+			matchesDispatchers.fetchUserMatches(mongoDBUserId);
+		}
+	};
+>>>>>>> staging
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Matches);
