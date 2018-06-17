@@ -105,8 +105,10 @@ export const onVote = (
 		);
 
 		if (initialMatchesResponse.status === 200) {
-			console.log('initialMatchesResponse.status === 200');
 			fetchUserMatchesDispatch(mongoDBUserId, dispatch);
+			// dispatch({
+			// 	type: INCREMENT_NUMBER_OF_UNSEEN_MATCHES
+			// })
 			dispatch({
 				type: RUNNING_ATHENA_FOR_USER_DONE
 			});
