@@ -20,6 +20,10 @@ export let socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 	transports: ['websocket', 'polling']
 });
 
+export const updateOnlineStatus = () => async dispatch => {
+	console.log('updateOnlineStatus');
+};
+
 export const fetchConversations = () => async dispatch => {
 	// 1) hit /api/current_user to get allContacts
 	const userResponse = await axios.get('/api/current_user');
