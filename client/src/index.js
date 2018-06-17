@@ -12,7 +12,8 @@ import reducers from './reducers';
 
 const persistConfig = {
 	key: 'root',
-	storage
+	storage: storage,
+	whitelist: ['colorTheme', 'auth', 'profile']
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
