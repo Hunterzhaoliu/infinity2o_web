@@ -25,10 +25,12 @@ class Landing extends Component {
 		this.props.fetchLandingPageSortingHatAsks();
 	}
 
-	componentDidUpdate() {
+	componentWillReceiveProps(nextProps) {
 		// determines if logged_in_landing or logged_out_landing page
-		const { auth } = this.props;
-		this.props.onLanding(auth.loggedInState);
+		if (nextProps.loggedInState !== this.props.loggedInState) {
+			this.props.onLanding(nextProps.loggedInState);
+		}
+
 	}
 
 	renderCartoons() {
@@ -194,11 +196,11 @@ class Landing extends Component {
 	}
 
 	renderLogin() {
-		const { auth } = this.props;
+		const { loggedInState } = this.props;
 
 		const why_part_2 =
 			"Join Earth's largest community of learning partners.";
-		switch (auth.loggedInState) {
+		switch (loggedInState) {
 			case 'not_logged_in':
 				return (
 					<div>
@@ -378,7 +380,7 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		auth: state.auth
+		loggedInState: state.auth.loggedInState
 	};
 }
 
