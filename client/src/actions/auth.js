@@ -30,7 +30,7 @@ function saveUserProfile(response, dispatch) {
   dispatch({
     type: UPDATE_MATCHES_SEEN,
     numberOfUnseenMatches: numberOfUnseenMatches,
-    matches: response.data.matches
+    basicMatchInfo: response.data.matches
   });
 }
 

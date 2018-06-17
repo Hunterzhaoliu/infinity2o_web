@@ -15,7 +15,12 @@ import {
 
 class MatchCards extends Component {
   onNextMatch() {
-    this.props.onNextMatch();
+    const { nextMatches, basicMatchInfo, mongoDBUserId } = this.props;
+    if (nextMatches.length > 0) {
+      this.props.onNextMatch(basicMatchInfo[1], mongoDBUserId);
+    } else {
+      this.props.onNextMatch(null, null);
+    }
   }
 
   displayNeedToGetMoreNeurons = () => {
@@ -201,7 +206,9 @@ function mapStateToProps(state) {
   return {
     colorTheme: state.colorTheme,
     neuronsInBillions: state.profile.payment.neuronsInBillions,
-    mongoDBUserId: state.auth.mongoDBUserId
+    mongoDBUserId: state.auth.mongoDBUserId,
+    nextMatches: state.matches.nextMatches,
+    basicMatchInfo: state.customHeader.basicMatchInfo
   };
 }
 
@@ -224,8 +231,8 @@ function mapDispatchToProps(dispatch) {
     onStartConversation: (history, matchName, matchId) => {
       matchesDispatchers.onStartConversation(history, matchName, matchId);
     },
-    onNextMatch: () => {
-      matchesDispatchers.onNextMatch();
+    onNextMatch: (matchNeededToBeChecked, mongoDBUserId) => {
+      matchesDispatchers.onNextMatch(matchNeededToBeChecked, mongoDBUserId);
     },
     decrementNeurons: (neuronsInBillions, mongoDBUserId) => {
       profileDispatchers.decrementNeurons(neuronsInBillions, mongoDBUserId);
