@@ -77,7 +77,7 @@ module.exports = app => {
 					}
 				);
 
-				// console.log('clientInConversation = ', clientInConversation);
+				console.log('clientInConversation = ', clientInConversation);
 
 				if (clientInConversation === null) {
 					// this is the client's initial connection
