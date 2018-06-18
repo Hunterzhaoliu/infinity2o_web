@@ -55,25 +55,15 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-// heroku dynamic port
-const PORT = process.env.PORT || 5000;
-server = app.listen(PORT, function() {
-	console.log(
-		'Express server listening on port %d in %s mode',
-		this.address().port,
-		app.settings.env
-	);
-});
-
-const Server = require('socket.io');
-const io = new Server();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 const ClientInConversationCollection = mongoose.model('clientsInConversation');
 
 console.log('Running socket.io code...');
 io.on('connection', function(socket) {
-	//app.set('socket', socket);
+	// app.set('socket', socket);
 	console.log('a user connected with socket.id = ', socket.id);
-	// console.log('socket = ', socket);
+	console.log('socket = ', socket);
 	// listens for messages to be sent
 	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
 		messageInfo
@@ -99,4 +89,14 @@ io.on('connection', function(socket) {
 			console.log('delete client in conversation DB error = ', error);
 		}
 	});
+});
+
+// heroku dynamic port
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, function() {
+	console.log(
+		'Express server listening on port %d in %s mode',
+		this.address().port,
+		app.settings.env
+	);
 });
