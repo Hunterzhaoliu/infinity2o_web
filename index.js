@@ -65,12 +65,14 @@ server = app.listen(PORT, function() {
 	);
 });
 
-let io = require('socket.io')(server);
+const Server = require('socket.io');
+const io = new Server();
 const ClientInConversationCollection = mongoose.model('clientsInConversation');
 
+console.log('Running socket.io code...');
 io.on('connection', function(socket) {
-	app.set('socket', socket);
-	// console.log('a user connected with socket.id = ', socket.id);
+	//app.set('socket', socket);
+	console.log('a user connected with socket.id = ', socket.id);
 	// console.log('socket = ', socket);
 	// listens for messages to be sent
 	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(

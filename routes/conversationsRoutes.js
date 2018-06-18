@@ -60,65 +60,55 @@ module.exports = app => {
 		response.send(conversation);
 	});
 
+	/**
+     Returns false if client is not online
+     */
+	app.get(
+		'/api/conversations/clients_online',
+		requireLogin,
+		async (request, response) => {
+			const client = await ClientInConversationCollection.findOne({
+				mongoDBUserId: request.query.mongoDBUserId
+			});
+
+			if (client !== null) {
+				response.send(true);
+			} else {
+				response.send(false);
+			}
+		}
+	);
+
 	app.post(
 		'/api/conversations/clients_online',
 		requireLogin,
 		async (request, response) => {
-			const { mongoDBUserId, allContacts, socketId } = request.body;
+			const { mongoDBUserId, socketId } = request.body;
 
-			if (
-				mongoDBUserId !== null &&
-				socketId !== null &&
-				allContacts !== null
-			) {
-				const clientInConversation = await ClientInConversationCollection.findOne(
-					{
-						mongoDBUserId: mongoDBUserId
-					}
-				);
+			console.log(' socketId = ', socketId);
 
-				console.log('clientInConversation = ', clientInConversation);
-
-				if (clientInConversation === null) {
-					// this is the client's initial connection
-					const newClientInConversation = {
-						mongoDBUserId: mongoDBUserId,
-						socketId: socketId
-					};
-					ClientInConversationCollection.create(
-						newClientInConversation
-					);
-				} else {
-					// update clientInConversation if socketId is newer
-					//console.log('new socketId = ', socketId);
-					if (clientInConversation.socketId !== socketId) {
-						try {
-							await ClientInConversationCollection.updateOne(
-								{
-									mongoDBUserId: mongoDBUserId
-								},
-								{
-									$set: {
-										socketId: socketId
-									}
-								}
-							);
-						} catch (error) {
-							response.status(422).send(error);
-						}
-					}
+			const clientInConversation = await ClientInConversationCollection.findOne(
+				{
+					mongoDBUserId: mongoDBUserId
 				}
+			);
 
-				let socket = request.app.get('socket');
-				let clientMongoDBUserId = request.user._id;
-				// respond with which of the client's contacts can chat over websockets
-				const onlineContacts = await getOnlineContacts(
-					allContacts,
-					socketId,
-					socket,
-					clientMongoDBUserId
+			console.log('clientInConversation = ', clientInConversation);
+
+			if (clientInConversation === null) {
+				// this is the client's initial connection
+				const newClientInConversation = {
+					mongoDBUserId: mongoDBUserId,
+					socketId: socketId
+				};
+				ClientInConversationCollection.create(newClientInConversation);
+				response.send(
+					'Saved client into clientInConversation collection'
 				);
-				response.send(onlineContacts);
+			} else {
+				response.send(
+					'Client already in clientInConversation collection'
+				);
 			}
 		}
 	);

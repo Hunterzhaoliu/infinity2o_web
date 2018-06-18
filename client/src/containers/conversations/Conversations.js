@@ -13,7 +13,7 @@ class Conversation extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onConversations();
-		this.props.fetchConversations();
+		//this.props.fetchConversations();
 	}
 
 	renderConversations() {
