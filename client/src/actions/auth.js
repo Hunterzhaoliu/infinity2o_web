@@ -13,9 +13,7 @@ console.log(
 	'process.env.REACT_APP_SOCKET_DOMAIN = ',
 	process.env.REACT_APP_SOCKET_DOMAIN
 );
-export const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
-	transports: ['websocket']
-});
+export let socket;
 
 function saveUserProfile(response, dispatch) {
 	dispatch({
@@ -54,10 +52,14 @@ async function storeInDBUserIsOnline(
 	const alreadyStored = response.data;
 
 	if (!alreadyStored) {
+		socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
+			transports: ['websocket']
+		});
 		const info = {
 			mongoDBUserId: mongoDBUserId,
 			socketId: socket.id,
-			userConversations: userConversations
+			userConversations: userConversations,
+			socket: socket
 		};
 
 		// puts user inside of clientsInConversation and tells online contacts that user is online
