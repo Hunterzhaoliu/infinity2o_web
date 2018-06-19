@@ -1,185 +1,189 @@
-const requireLogin = require('../middlewares/requireLogin');
-const mongoose = require('mongoose');
-const ConversationCollection = mongoose.model('conversations');
-const ClientInConversationCollection = mongoose.model('clientsInConversation');
+const requireLogin = require("../middlewares/requireLogin");
+const mongoose = require("mongoose");
+const ConversationCollection = mongoose.model("conversations");
+const ClientInConversationCollection = mongoose.model("clientsInConversation");
 
 const getOnlineContacts = async (
-	allContacts,
-	socketId,
-	socket,
-	clientMongoDBUserId
+  allContacts,
+  socketId,
+  socket,
+  clientMongoDBUserId
 ) => {
-	let onlineContacts = [];
-	for (let i = 0; i < allContacts.length; i++) {
-		const contactInConversation = await ClientInConversationCollection.findOne(
-			{
-				mongoDBUserId: allContacts[i].matchId
-			}
-		);
+  let onlineContacts = [];
+  for (let i = 0; i < allContacts.length; i++) {
+    const contactInConversation = await ClientInConversationCollection.findOne({
+      mongoDBUserId: allContacts[i].matchId
+    });
 
-		if (contactInConversation !== null) {
-			// the current contact is online
-			allContacts[i]['isOnline'] = true;
-			allContacts[i]['socketId'] = contactInConversation.socketId;
-			onlineContacts.push(allContacts[i]);
+    if (contactInConversation !== null) {
+      // the current contact is online
+      allContacts[i]["isOnline"] = true;
+      allContacts[i]["socketId"] = contactInConversation.socketId;
+      onlineContacts.push(allContacts[i]);
 
-			const newContactInfo = {
-				matchId: clientMongoDBUserId,
-				socketId: socketId
-			};
+      const newContactInfo = {
+        matchId: clientMongoDBUserId,
+        socketId: socketId
+      };
 
-			socket
-				.to(contactInConversation.socketId)
-				.emit(
-					'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
-					newContactInfo
-				);
-			console.log(
-				'contactInConversation.socketId = ',
-				contactInConversation.socketId
-			);
-			console.log(
-				'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ',
-				newContactInfo
-			);
-		} else {
-			allContacts[i]['isOnline'] = false;
-			allContacts[i]['socketId'] = null;
-			onlineContacts.push(allContacts[i]);
-		}
-	}
-	//console.log('onlineContacts = ', onlineContacts);
-	return onlineContacts;
+      socket
+        .to(contactInConversation.socketId)
+        .emit("TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE", newContactInfo);
+      console.log(
+        "contactInConversation.socketId = ",
+        contactInConversation.socketId
+      );
+      console.log(
+        "TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ",
+        newContactInfo
+      );
+    } else {
+      allContacts[i]["isOnline"] = false;
+      allContacts[i]["socketId"] = null;
+      onlineContacts.push(allContacts[i]);
+    }
+  }
+  //console.log('onlineContacts = ', onlineContacts);
+  return onlineContacts;
 };
 
+const tellContactsUserIsOnline = async (
+  mostRecentUserConversations,
+  newClientInConversation,
+  socket
+) => {
+  // tell all the user's contacts that are already online that the user is online
+  for (let i = 0; i < mostRecentUserConversations.length; i++) {
+    const contactInConversation = await ClientInConversationCollection.findOne({
+      mongoDBUserId: mostRecentUserConversations[i]["matchId"]
+    });
+
+    if (contactInConversation !== null) {
+      // the current contact is online
+      socket
+        .to(contactInConversation["socketId"])
+        .emit(
+          "TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE",
+          newClientInConversation
+        );
+      console.log(
+        "told contact " +
+          contactInConversation["mongoDBUserId"] +
+          "that user is online"
+      );
+    }
+  }
+};
 module.exports = app => {
-	app.get('/api/conversations', requireLogin, async (request, response) => {
-		const conversation = await ConversationCollection.findOne({
-			_id: request.query.conversationId
-		});
-		response.send(conversation);
-	});
+  app.get("/api/conversations", requireLogin, async (request, response) => {
+    const conversation = await ConversationCollection.findOne({
+      _id: request.query.conversationId
+    });
+    response.send(conversation);
+  });
 
-	/**
-     Returns false if client is not online
-     */
-	app.get(
-		'/api/conversations/clients_online',
-		requireLogin,
-		async (request, response) => {
-			const client = await ClientInConversationCollection.findOne({
-				mongoDBUserId: request.query.mongoDBUserId
-			});
+  app.get(
+    "/api/conversations/clients_online",
+    requireLogin,
+    async (request, response) => {
+      const client = await ClientInConversationCollection.findOne({
+        mongoDBUserId: request.query.mongoDBUserId
+      });
 
-			if (client !== null) {
-				response.send(true);
-			} else {
-				response.send(false);
-			}
-		}
-	);
+      if (client !== null) {
+        response.send(true);
+      } else {
+        response.send(false);
+      }
+    }
+  );
 
-	app.post(
-		'/api/conversations/clients_online',
-		requireLogin,
-		async (request, response) => {
-			const { mongoDBUserId, socketId } = request.body;
+  app.post(
+    "/api/conversations/clients_online",
+    requireLogin,
+    async (request, response) => {
+      const { mongoDBUserId, socketId, userConversations } = request.body;
+      // this is the client's initial connection
+      const newClientInConversation = {
+        mongoDBUserId: mongoDBUserId,
+        socketId: socketId
+      };
+      ClientInConversationCollection.create(newClientInConversation);
 
-			console.log(' socketId = ', socketId);
+      const socket = request.app.get("socket");
+      console.log("socket = ", socket);
+      tellContactsUserIsOnline(
+        userConversations,
+        newClientInConversation,
+        socket
+      );
+      response.send(
+        "added user to clients in conversation & told online contacts"
+      );
+    }
+  );
 
-			const clientInConversation = await ClientInConversationCollection.findOne(
-				{
-					mongoDBUserId: mongoDBUserId
-				}
-			);
+  app.delete(
+    "/api/conversations/clients_online",
+    requireLogin,
+    async (request, response) => {
+      const { mongoDBUserId } = request.body;
+      console.log("DELETE mongoDBUserId = ", mongoDBUserId);
 
-			console.log('clientInConversation = ', clientInConversation);
+      await ClientInConversationCollection.deleteOne(
+        {
+          mongoDBUserId: mongoDBUserId
+        },
+        function(error) {
+          response.send("Error");
+        }
+      );
+      response.send("Deleted");
+    }
+  );
 
-			if (clientInConversation === null) {
-				// this is the client's initial connection
-				const newClientInConversation = {
-					mongoDBUserId: mongoDBUserId,
-					test: true,
-					socketId: socketId
-				};
-				ClientInConversationCollection.create(newClientInConversation);
-				response.send(
-					'Saved client into clientInConversation collection'
-				);
-			} else {
-				response.send(
-					'Client already in clientInConversation collection'
-				);
-			}
-		}
-	);
+  app.post(
+    "/api/conversations/chat",
+    requireLogin,
+    async (request, response) => {
+      const { conversationId, senderName, message, timeCreated } = request.body;
 
-	app.delete(
-		'/api/conversations/clients_online',
-		requireLogin,
-		async (request, response) => {
-			const { mongoDBUserId } = request.body;
-			console.log('DELETE mongoDBUserId = ', mongoDBUserId);
+      // GOAL = save newMessage into correct conversation document
+      const newMessage = {
+        senderName: senderName,
+        content: message,
+        timeCreated: timeCreated,
+        status: "delivered"
+      };
 
-			await ClientInConversationCollection.deleteOne(
-				{
-					mongoDBUserId: mongoDBUserId
-				},
-				function(error) {
-					response.send('Error');
-				}
-			);
-			response.send('Deleted');
-		}
-	);
+      const conversation = await ConversationCollection.findOne(
+        {
+          _id: conversationId
+        },
+        { last50Messages: true }
+      );
+      let last50Messages = conversation.last50Messages;
+      last50Messages.push(newMessage);
+      if (last50Messages.length > 50) {
+        last50Messages.shift();
+      }
 
-	app.post(
-		'/api/conversations/chat',
-		requireLogin,
-		async (request, response) => {
-			const {
-				conversationId,
-				senderName,
-				message,
-				timeCreated
-			} = request.body;
+      try {
+        await ConversationCollection.updateOne(
+          {
+            _id: conversationId
+          },
+          {
+            $set: {
+              last50Messages: last50Messages
+            }
+          }
+        );
 
-			// GOAL = save newMessage into correct conversation document
-			const newMessage = {
-				senderName: senderName,
-				content: message,
-				timeCreated: timeCreated,
-				status: 'delivered'
-			};
-
-			const conversation = await ConversationCollection.findOne(
-				{
-					_id: conversationId
-				},
-				{ last50Messages: true }
-			);
-			let last50Messages = conversation.last50Messages;
-			last50Messages.push(newMessage);
-			if (last50Messages.length > 50) {
-				last50Messages.shift();
-			}
-
-			try {
-				await ConversationCollection.updateOne(
-					{
-						_id: conversationId
-					},
-					{
-						$set: {
-							last50Messages: last50Messages
-						}
-					}
-				);
-
-				response.send(last50Messages);
-			} catch (error) {
-				response.status(422).send(error);
-			}
-		}
-	);
+        response.send(last50Messages);
+      } catch (error) {
+        response.status(422).send(error);
+      }
+    }
+  );
 };
