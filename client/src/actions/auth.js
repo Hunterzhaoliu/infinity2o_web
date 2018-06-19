@@ -9,19 +9,11 @@ import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
 import io from 'socket.io-client';
 
-let URL = process.env.REACT_APP_SOCKET_DOMAIN;
 console.log(
 	'process.env.REACT_APP_SOCKET_DOMAIN = ',
 	process.env.REACT_APP_SOCKET_DOMAIN
 );
-console.log(
-	'process.env.REACT_APP_ON_HEROKU_STAGING = ',
-	process.env.REACT_APP_ON_HEROKU_STAGING
-);
-if (process.env.REACT_APP_ON_HEROKU_STAGING === 'TRUE') {
-	URL = 'https://infinity2o-staging.herokuapp.com/';
-}
-export const socket = io(URL, {
+export const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 	transports: ['websocket']
 });
 
@@ -60,11 +52,6 @@ async function storeInDBUserIsOnline(
 		'/api/conversations/clients_online?mongoDBUserId=' + mongoDBUserId
 	);
 	const alreadyStored = response.data;
-	console.log('using URL = ', URL);
-	console.log(
-		'process.env.REACT_APP_ON_HEROKU_STAGING = ',
-		process.env.REACT_APP_ON_HEROKU_STAGING
-	);
 
 	if (!alreadyStored) {
 		const info = {
