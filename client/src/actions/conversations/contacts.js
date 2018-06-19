@@ -6,14 +6,14 @@ import {
 	UPDATE_CHAT_ERROR,
 	ON_SELECT_CONTACT,
 	TOLD_DB_CLIENT_IN_CONVERSATION,
-	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR,
+	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR
 	//SAVE_USER_CONVERSATIONS_SUCCESS,
 	//SAVE_USER_CONVERSATIONS_ERROR,
 	//UPDATE_OUR_SOCKET_ID,
-	UPDATE_CONTACT_SOCKET_ID
+	//UPDATE_CONTACT_SOCKET_ID
 } from '../types';
-import { store } from '../../index';
-import { SOCKET } from '../auth';
+//import { store } from '../../index';
+//import { SOCKET } from '../auth';
 
 export const fetchConversations = () => async dispatch => {
 	// 1) hit /api/current_user to get allContacts

@@ -3,10 +3,10 @@ import {
 	ON_CHANGE_CURRENT_MESSAGE,
 	DISPLAY_SENT_MESSAGE,
 	MESSAGE_SENT_SUCCESS,
-	MESSAGE_SENT_ERROR,
-	DISPLAY_RECEIVED_MESSAGE
+	MESSAGE_SENT_ERROR
+	//DISPLAY_RECEIVED_MESSAGE
 } from '../types';
-import { store } from '../../index';
+//import { store } from '../../index';
 import { SOCKET } from '../auth';
 
 export const onChangeCurrentMessage = newMessage => dispatch => {

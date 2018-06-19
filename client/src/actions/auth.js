@@ -8,7 +8,9 @@ import {
 import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
 import io from 'socket.io-client';
-export let SOCKET = null;
+export let SOCKET = io(process.env.REACT_APP_SOCKET_DOMAIN, {
+	transports: ['websocket']
+});
 
 function saveUserProfile(response, dispatch) {
 	dispatch({
@@ -50,20 +52,15 @@ async function storeInDBUserIsOnline(dispatch, mongoDBUserId) {
 		SOCKET = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 			transports: ['websocket']
 		});
-		// SOCKET.on('connection', () => {
-		// 	console.log('SOCKET.id = ', SOCKET.id);
-		// });
 		console.log('SOCKET = ', SOCKET);
 
 		const info = {
 			mongoDBUserId: mongoDBUserId,
 			socketId: SOCKET.id
 		};
-		const storeResponse = await axios.post(
-			'/api/conversations/clients_online',
-			info
-		);
+		await axios.post('/api/conversations/clients_online', info);
 	}
+	console.log('SOCKET = ', SOCKET);
 }
 
 export const initializeApp = () => async dispatch => {
