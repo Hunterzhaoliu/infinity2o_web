@@ -10,7 +10,15 @@ import { store } from '../index';
 import io from 'socket.io-client';
 
 let URL = process.env.REACT_APP_SOCKET_DOMAIN;
-if (process.env.ON_HEROKU_STAGING === 'TRUE') {
+console.log(
+	'process.env.REACT_APP_SOCKET_DOMAIN = ',
+	process.env.REACT_APP_SOCKET_DOMAIN
+);
+console.log(
+	'process.env.REACT_APP_ON_HEROKU_STAGING = ',
+	process.env.REACT_APP_ON_HEROKU_STAGING
+);
+if (process.env.REACT_APP_ON_HEROKU_STAGING === 'TRUE') {
 	URL = 'https://infinity2o-staging.herokuapp.com/';
 }
 export const socket = io(URL, {
@@ -53,6 +61,10 @@ async function storeInDBUserIsOnline(
 	);
 	const alreadyStored = response.data;
 	console.log('using URL = ', URL);
+	console.log(
+		'process.env.REACT_APP_ON_HEROKU_STAGING = ',
+		process.env.REACT_APP_ON_HEROKU_STAGING
+	);
 
 	if (!alreadyStored) {
 		const info = {
