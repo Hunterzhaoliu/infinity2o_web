@@ -45,14 +45,9 @@ async function storeInDBUserIsOnline(dispatch, mongoDBUserId) {
 	const alreadyStored = response.data;
 	console.log('alreadyStored = ', alreadyStored);
 	if (!alreadyStored) {
-		console.log(
-			'process.env.REACT_APP_SOCKET_DOMAIN = ',
-			process.env.REACT_APP_SOCKET_DOMAIN
-		);
-		SOCKET = io(process.env.REACT_APP_SOCKET_DOMAIN, {
-			transports: ['websocket']
+		SOCKET.emit('TELL_SERVER:NEW_CLIENT_A', {
+			message: 'HEY FROM INSIDE'
 		});
-		console.log('SOCKET = ', SOCKET);
 
 		const info = {
 			mongoDBUserId: mongoDBUserId,
@@ -60,7 +55,10 @@ async function storeInDBUserIsOnline(dispatch, mongoDBUserId) {
 		};
 		await axios.post('/api/conversations/clients_online', info);
 	}
-	console.log('SOCKET = ', SOCKET);
+	//console.log('SOCKET = ', SOCKET);
+	SOCKET.emit('TELL_SERVER:NEW_CLIENT_A', {
+		message: 'HEY FROM OUTSIDE'
+	});
 }
 
 export const initializeApp = () => async dispatch => {

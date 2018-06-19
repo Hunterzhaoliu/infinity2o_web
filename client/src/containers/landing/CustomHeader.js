@@ -22,10 +22,6 @@ class CustomHeader extends Component {
 	componentDidMount() {
 		this.updateWindowDimensions();
 		window.addEventListener('resize', this.updateWindowDimensions);
-		window.addEventListener('beforeunload', event => {
-			this.props.userLeftTab();
-			return 'undefined';
-		});
 	}
 
 	componentWillUnmount() {
@@ -229,9 +225,6 @@ function mapDispatchToProps(dispatch) {
 		},
 		toggleSider: () => {
 			customHeaderDispatchers.toggleSider();
-		},
-		userLeftTab: () => {
-			customHeaderDispatchers.userLeftTab();
 		}
 	};
 }

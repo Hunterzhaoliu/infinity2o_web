@@ -71,7 +71,9 @@ const ClientInConversationCollection = mongoose.model('clientsInConversation');
 
 console.log('Running socket.io code...');
 io.on('connection', function(socket) {
-	console.log('a user connected');
+	socket.on('TELL_SERVER:NEW_CLIENT_A', function(message) {
+		console.log('a user connected message = ', message);
+	});
 
 	// listens for messages to be sent
 	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(

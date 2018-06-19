@@ -99,6 +99,7 @@ module.exports = app => {
 				// this is the client's initial connection
 				const newClientInConversation = {
 					mongoDBUserId: mongoDBUserId,
+					test: true,
 					socketId: socketId
 				};
 				ClientInConversationCollection.create(newClientInConversation);
