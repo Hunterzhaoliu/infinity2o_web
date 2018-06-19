@@ -75,6 +75,7 @@ class Chat extends Component {
 					<List
 						dataSource={chat.last50Messages}
 						renderItem={item => {
+							console.log('item = ', item);
 							const nameAndMessage =
 								item.senderName + ': ' + item.content;
 							let justifyValue = 'start';

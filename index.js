@@ -17,6 +17,18 @@ mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
 
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+// heroku dynamic port
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, function() {
+	console.log(
+		'Express server listening on port %d in %s mode',
+		this.address().port,
+		app.settings.env
+	);
+});
 
 // wiring middlewares
 // middlewares = small functions that modify incoming requests to our
@@ -55,23 +67,14 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-// heroku dynamic port
-const PORT = process.env.PORT || 5000;
-server = app.listen(PORT, function() {
-	console.log(
-		'Express server listening on port %d in %s mode',
-		this.address().port,
-		app.settings.env
-	);
-});
-
-let io = require('socket.io')(server);
 const ClientInConversationCollection = mongoose.model('clientsInConversation');
 
+console.log('Running socket.io code...');
 io.on('connection', function(socket) {
-	app.set('socket', socket);
-	// console.log('a user connected with socket.id = ', socket.id);
-	// console.log('socket = ', socket);
+	socket.on('TELL_SERVER:NEW_CLIENT_A', function(message) {
+		console.log('a user connected message = ', message);
+	});
+
 	// listens for messages to be sent
 	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
 		messageInfo

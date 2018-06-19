@@ -3,11 +3,11 @@ import {
 	ON_CHANGE_CURRENT_MESSAGE,
 	DISPLAY_SENT_MESSAGE,
 	MESSAGE_SENT_SUCCESS,
-	MESSAGE_SENT_ERROR,
-	DISPLAY_RECEIVED_MESSAGE
+	MESSAGE_SENT_ERROR
+	//DISPLAY_RECEIVED_MESSAGE
 } from '../types';
-import { store } from '../../index';
-import { socket } from './contacts';
+//import { store } from '../../index';
+import { SOCKET } from '../auth';
 
 export const onChangeCurrentMessage = newMessage => dispatch => {
 	dispatch({
@@ -31,7 +31,7 @@ export const sendMessageToServer = (
 	const timeCreated = Date.now();
 	if (selectedContactOnline) {
 		// use websockets for live chat
-		socket.emit('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', {
+		SOCKET.emit('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', {
 			selectedContactSocketId: selectedContactSocketId,
 			senderName: name,
 			message: currentMessage,
@@ -59,15 +59,17 @@ export const sendMessageToServer = (
 	}
 };
 
-socket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(messageInfo) {
-	// No need to save message into DB since the message was already
-	// saved by client A. We just need to display the message to us(Client B)
-	// console.log(
-	// 	'TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A messageInfo = ',
-	// 	messageInfo
-	// );
-	store.dispatch({
-		type: DISPLAY_RECEIVED_MESSAGE,
-		messageInfo: messageInfo
-	});
-});
+// if (SOCKET !== null) {
+// 	SOCKET.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(messageInfo) {
+// 		// No need to save message into DB since the message was already
+// 		// saved by client A. We just need to display the message to us(Client B)
+// 		// console.log(
+// 		// 	'TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A messageInfo = ',
+// 		// 	messageInfo
+// 		// );
+// 		store.dispatch({
+// 			type: DISPLAY_RECEIVED_MESSAGE,
+// 			messageInfo: messageInfo
+// 		});
+// 	});
+// }
