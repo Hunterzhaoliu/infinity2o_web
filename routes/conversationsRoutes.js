@@ -113,6 +113,25 @@ module.exports = app => {
 		}
 	);
 
+	app.delete(
+		'/api/conversations/clients_online',
+		requireLogin,
+		async (request, response) => {
+			const { mongoDBUserId } = request.body;
+			console.log('DELETE mongoDBUserId = ', mongoDBUserId);
+
+			await ClientInConversationCollection.deleteOne(
+				{
+					mongoDBUserId: mongoDBUserId
+				},
+				function(error) {
+					response.send('Error');
+				}
+			);
+			response.send('Deleted');
+		}
+	);
+
 	app.post(
 		'/api/conversations/chat',
 		requireLogin,

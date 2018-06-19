@@ -22,19 +22,15 @@ class CustomHeader extends Component {
 	componentDidMount() {
 		this.updateWindowDimensions();
 		window.addEventListener('resize', this.updateWindowDimensions);
-		// window.addEventListener('beforeunload', event => {
-		// 	return undefined;
-		// });
-		window.onbeforeunload = function() {
-			return undefined;
-		};
+		window.addEventListener('beforeunload', event => {
+			this.props.userLeftTab();
+			return 'undefined';
+		});
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener('resize', this.updateWindowDimensions);
 	}
-
-	userLeaving;
 
 	updateWindowDimensions() {
 		this.props.updateWindowWidth(window.innerWidth);
@@ -233,6 +229,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		toggleSider: () => {
 			customHeaderDispatchers.toggleSider();
+		},
+		userLeftTab: () => {
+			customHeaderDispatchers.userLeftTab();
 		}
 	};
 }
