@@ -95,10 +95,10 @@ module.exports = app => {
 		async (request, response) => {
 			const redis = request.app.get('redis');
 			redis.get(request.query.mongoDBUserId, function(err, reply) {
+				console.log('GET /clients_onlie reply = ', reply);
 				if (reply === null) {
-					response.send(null);
+					response.send('not online');
 				} else {
-					console.log('reply = ', reply);
 					response.send(reply);
 				}
 			});
