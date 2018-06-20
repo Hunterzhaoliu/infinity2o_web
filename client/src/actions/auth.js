@@ -9,6 +9,7 @@ import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
 import io from 'socket.io-client';
 import stringify from 'json-stringify-safe';
+export let socket;
 
 function saveUserProfile(response, dispatch) {
 	dispatch({
@@ -50,11 +51,11 @@ async function storeInRedisUserIsOnline(
 
 	// console.log('alreadyStoredSocket = ', alreadyStoredSocket);
 	if (alreadyStoredSocket === 'not online') {
-		const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
+		socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 			transports: ['websocket']
 		});
 		console.log('original socket = ', socket);
-		console.log('socket.id = ', socket.id);
+		console.log('original socket.id = ', socket.id);
 		const info = {
 			mongoDBUserId: mongoDBUserId,
 			socketId: socket.id,
@@ -65,9 +66,9 @@ async function storeInRedisUserIsOnline(
 		// puts user inside of clientsInConversation and tells online contacts that user is online
 		await axios.post('/api/conversations/clients_online', info);
 	} else {
-		const socket = alreadyStoredSocket;
+		socket = alreadyStoredSocket;
 		console.log('socket from already connected user = ', socket);
-		console.log('socket.id = ', socket.id);
+		console.log('socket.id from already connected user = ', socket.id);
 	}
 }
 
