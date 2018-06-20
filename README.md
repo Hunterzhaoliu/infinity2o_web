@@ -14,6 +14,9 @@
 2. Heroku Redis addons:
 
 * Staging: `heroku addons:info redis-transparent-42654`
+    * Connect to AWS redis = `heroku redis:cli -a infinity2o-staging -c infinity2o-staging`
+    * View all keys = `KEYS *`
+    * Delete a key = `DEL keyValue`
 * Production:
 
 ### mlab.com databases:

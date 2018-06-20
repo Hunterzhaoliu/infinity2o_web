@@ -96,10 +96,10 @@ module.exports = app => {
 			const redis = request.app.get('redis');
 			redis.get(request.query.mongoDBUserId, function(err, reply) {
 				if (reply === null) {
-					response.send(false);
+					response.send(null);
 				} else {
-					console.log('reply.toString() = ', reply.toString());
-					response.send(true);
+					console.log('reply = ', reply);
+					response.send(reply);
 				}
 			});
 		}

@@ -43,10 +43,10 @@ async function storeInRedisUserIsOnline(
 	const response = await axios.get(
 		'/api/conversations/clients_online?mongoDBUserId=' + mongoDBUserId
 	);
-	const alreadyStored = response.data;
+	const alreadyStoredSocket = response.data;
 
-	console.log('alreadyStored = ', alreadyStored);
-	if (!alreadyStored) {
+	console.log('alreadyStoredSocket = ', alreadyStoredSocket);
+	if (alreadyStoredSocket === null) {
 		const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 			transports: ['websocket']
 		});
@@ -60,6 +60,12 @@ async function storeInRedisUserIsOnline(
 
 		// puts user inside of clientsInConversation and tells online contacts that user is online
 		await axios.post('/api/conversations/clients_online', info);
+	} else {
+		//const socket = JSON.parse(alreadyStoredSocket);
+		console.log(
+			'after JSON.parse alreadyStoredSocket.id = ',
+			alreadyStoredSocket.id
+		);
 	}
 }
 
