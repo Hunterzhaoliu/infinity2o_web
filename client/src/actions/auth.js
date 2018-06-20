@@ -56,6 +56,8 @@ async function storeInRedisUserIsOnline(
 		});
 		console.log('original socket = ', socket);
 		console.log('original socket.id = ', socket.id);
+		console.log('original socket[id] = ', socket['id']);
+
 		const info = {
 			mongoDBUserId: mongoDBUserId,
 			socketId: socket.id,
