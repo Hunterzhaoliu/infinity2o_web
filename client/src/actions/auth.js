@@ -45,6 +45,7 @@ async function storeInRedisUserIsOnline(
 	);
 	const alreadyStored = response.data;
 
+	console.log('alreadyStored = ', alreadyStored);
 	if (!alreadyStored) {
 		const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 			transports: ['websocket']
