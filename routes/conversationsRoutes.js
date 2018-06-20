@@ -123,7 +123,12 @@ module.exports = app => {
 			};
 			const redis = request.app.get('redis');
 			redis.set(mongoDBUserId, socket);
-			//ClientInConversationCollection.create(newClientInConversation);
+			console.log(
+				'saved socket into redis for mongoDBUserId = ',
+				mongoDBUserId
+			);
+			console.log('socket = ', socket);
+			console.log('redis = ', redis);
 
 			// TODO:
 			// const currentSocket = request.app.get('socket');

@@ -70,8 +70,6 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-const ClientInConversationCollection = mongoose.model('clientsInConversation');
-
 console.log('Running socket.io code...');
 io.on('connection', function(socket) {
 	app.set('socket', socket);
@@ -96,9 +94,9 @@ io.on('connection', function(socket) {
 		// remove document from ClientInConversation collection
 		console.log('user disconnected with socket.id = ', socket.id);
 		try {
-			await ClientInConversationCollection.deleteOne({
-				socketId: socket.id
-			});
+			// await ClientInConversationCollection.deleteOne({
+			// 	socketId: socket.id
+			// });
 		} catch (error) {
 			console.log('delete client in conversation DB error = ', error);
 		}
