@@ -66,6 +66,7 @@ async function storeInRedisUserIsOnline(
 	} else {
 		const socket = alreadyStoredSocket;
 		console.log('socket from already connected user = ', socket);
+		console.log('socket.id = ', socket.id);
 	}
 }
 
