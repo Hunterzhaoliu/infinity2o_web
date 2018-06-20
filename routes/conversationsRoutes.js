@@ -117,6 +117,7 @@ module.exports = app => {
 			} = request.body;
 			// this is the client's initial connection
 			const redis = request.app.get('redis');
+			console.log('socketId = ', socketId);
 			console.log(
 				'saved socket into redis for mongoDBUserId = ',
 				mongoDBUserId

@@ -53,7 +53,8 @@ async function storeInRedisUserIsOnline(
 		const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 			transports: ['websocket']
 		});
-
+		console.log('original socket = ', socket);
+		console.log('socket.id = ', socket.id);
 		const info = {
 			mongoDBUserId: mongoDBUserId,
 			socketId: socket.id,
