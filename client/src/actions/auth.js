@@ -8,7 +8,7 @@ import {
 import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
 import io from 'socket.io-client';
-import util from 'util';
+import stringify from 'json-stringify-safe';
 
 function saveUserProfile(response, dispatch) {
 	dispatch({
@@ -44,60 +44,28 @@ async function storeInRedisUserIsOnline(
 	const response = await axios.get(
 		'/api/conversations/clients_online?mongoDBUserId=' + mongoDBUserId
 	);
-	console.log('response.data = ', response.data);
+	// console.log('response.data = ', response.data);
+	// somehow the socket gets parsed when the user is already inside of redis
 	const alreadyStoredSocket = response.data;
 
-	console.log('alreadyStoredSocket = ', alreadyStoredSocket);
+	// console.log('alreadyStoredSocket = ', alreadyStoredSocket);
 	if (alreadyStoredSocket === 'not online') {
 		const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 			transports: ['websocket']
 		});
-		console.log('socket = ', socket);
-
-		// cannot parse String(socket)
-		// let stringSocket = String(socket);
-		// console.log('stringSocket = ', stringSocket);
-		// console.log('JSON.parse(stringSocket) = ', JSON.parse(stringSocket));
-
-		// cannot parse socket.toString()
-		// let socketToString = socket.toString();
-		// console.log('socketToString = ', socketToString);
-		// console.log(
-		// 	'JSON.parse(socketToString) = ',
-		// 	JSON.parse(socketToString)
-		// );
-
-		// cannot parse JSON.stringify()
-		// let JSONStringifySocket = JSON.stringify(socket);
-		// console.log('JSONStringifySocket = ', JSONStringifySocket);
-		// console.log(
-		// 	'JSON.parse(JSONStringifySocket) = ',
-		// 	JSON.parse(JSONStringifySocket)
-		// );
-
-		// cannot parse util.inspect()
-		let utilInspectSocket = util.inspect(socket);
-		console.log('utilInspectSocket = ', utilInspectSocket);
-		console.log(
-			'JSON.parse(utilInspectSocket) = ',
-			JSON.parse(utilInspectSocket)
-		);
 
 		const info = {
 			mongoDBUserId: mongoDBUserId,
 			socketId: socket.id,
 			userConversations: userConversations,
-			socket: util.inspect(socket)
+			socket: stringify(socket)
 		};
 
 		// puts user inside of clientsInConversation and tells online contacts that user is online
 		await axios.post('/api/conversations/clients_online', info);
 	} else {
-		//const socket = JSON.parse(alreadyStoredSocket);
-		// console.log(
-		// 	'after JSON.parse alreadyStoredSocket = ',
-		// 	JSON.parse(alreadyStoredSocket)
-		// );
+		const socket = alreadyStoredSocket;
+		console.log('socket from already connected user = ', socket);
 	}
 }
 

@@ -121,8 +121,6 @@ module.exports = app => {
 				'saved socket into redis for mongoDBUserId = ',
 				mongoDBUserId
 			);
-			console.log('socket = ', socket);
-			console.log('redis = ', redis);
 			redis.set(mongoDBUserId, socket);
 			console.log('after redis.set(mongoDBUserId, socket);');
 
