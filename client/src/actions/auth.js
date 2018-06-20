@@ -9,12 +9,6 @@ import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
 import io from 'socket.io-client';
 
-console.log(
-	'process.env.REACT_APP_SOCKET_DOMAIN = ',
-	process.env.REACT_APP_SOCKET_DOMAIN
-);
-export let socket;
-
 function saveUserProfile(response, dispatch) {
 	dispatch({
 		type: SAVE_FETCHED_USER_PROFILE,
@@ -41,7 +35,7 @@ function saveUserProfile(response, dispatch) {
 	});
 }
 
-async function storeInDBUserIsOnline(
+async function storeInRedisUserIsOnline(
 	dispatch,
 	mongoDBUserId,
 	userConversations
@@ -52,7 +46,7 @@ async function storeInDBUserIsOnline(
 	const alreadyStored = response.data;
 
 	if (!alreadyStored) {
-		socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
+		const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 			transports: ['websocket']
 		});
 		const info = {
@@ -77,7 +71,7 @@ export const initializeApp = () => async dispatch => {
 	});
 
 	if (store.getState().auth.loggedInState === 'logged_in') {
-		storeInDBUserIsOnline(
+		storeInRedisUserIsOnline(
 			dispatch,
 			response.data.auth.mongoDBUserId,
 			response.data.conversations

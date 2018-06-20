@@ -93,11 +93,12 @@ module.exports = app => {
 		'/api/conversations/clients_online',
 		requireLogin,
 		async (request, response) => {
-			const client = await ClientInConversationCollection.findOne({
-				mongoDBUserId: request.query.mongoDBUserId
-			});
+			const redis = request.app.get('redis');
+			const possibleUserSocket = redis.get(request.query.mongoDBUserId);
 
-			if (client !== null) {
+			console.log('possibleUserSocket = ', possibleUserSocket);
+
+			if (possibleUserSocket !== null) {
 				response.send(true);
 			} else {
 				response.send(false);
@@ -121,17 +122,18 @@ module.exports = app => {
 				socketId: socketId,
 				socket: socket
 			};
-			ClientInConversationCollection.create(newClientInConversation);
+			const redis = request.app.get('redis');
+			redis.set(mongoDBUserId, socket);
+			//ClientInConversationCollection.create(newClientInConversation);
 
-			const currentSocket = request.app.get('socket');
-			tellContactsUserIsOnline(
-				userConversations,
-				newClientInConversation,
-				currentSocket
-			);
-			response.send(
-				'added user to clients in conversation & told online contacts'
-			);
+			// TODO:
+			// const currentSocket = request.app.get('socket');
+			// tellContactsUserIsOnline(
+			// 	userConversations,
+			// 	newClientInConversation,
+			// 	currentSocket
+			// );
+			response.send("added user's socket to redis");
 		}
 	);
 
