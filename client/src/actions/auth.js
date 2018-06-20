@@ -50,11 +50,12 @@ async function storeInRedisUserIsOnline(
 		const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 			transports: ['websocket']
 		});
+		console.log('socket = ', socket.toString());
 		const info = {
 			mongoDBUserId: mongoDBUserId,
 			socketId: socket.id,
 			userConversations: userConversations,
-			socket: socket
+			socket: socket.toString()
 		};
 
 		// puts user inside of clientsInConversation and tells online contacts that user is online

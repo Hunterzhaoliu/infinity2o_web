@@ -116,11 +116,6 @@ module.exports = app => {
 				socket
 			} = request.body;
 			// this is the client's initial connection
-			const newClientInConversation = {
-				mongoDBUserId: mongoDBUserId,
-				socketId: socketId,
-				socket: socket
-			};
 			const redis = request.app.get('redis');
 			console.log(
 				'saved socket into redis for mongoDBUserId = ',
@@ -142,24 +137,24 @@ module.exports = app => {
 		}
 	);
 
-	app.delete(
-		'/api/conversations/clients_online',
-		requireLogin,
-		async (request, response) => {
-			const { mongoDBUserId } = request.body;
-			console.log('DELETE mongoDBUserId = ', mongoDBUserId);
-
-			await ClientInConversationCollection.deleteOne(
-				{
-					mongoDBUserId: mongoDBUserId
-				},
-				function(error) {
-					response.send('Error');
-				}
-			);
-			response.send('Deleted');
-		}
-	);
+	// app.delete(
+	// 	'/api/conversations/clients_online',
+	// 	requireLogin,
+	// 	async (request, response) => {
+	// 		const { mongoDBUserId } = request.body;
+	// 		console.log('DELETE mongoDBUserId = ', mongoDBUserId);
+	//
+	// 		await ClientInConversationCollection.deleteOne(
+	// 			{
+	// 				mongoDBUserId: mongoDBUserId
+	// 			},
+	// 			function(error) {
+	// 				response.send('Error');
+	// 			}
+	// 		);
+	// 		response.send('Deleted');
+	// 	}
+	// );
 
 	app.post(
 		'/api/conversations/chat',
