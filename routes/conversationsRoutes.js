@@ -94,15 +94,16 @@ module.exports = app => {
 		requireLogin,
 		async (request, response) => {
 			const redis = request.app.get('redis');
-			const possibleUserSocket = redis.get(request.query.mongoDBUserId);
+			redis.get(request.query.mongoDBUserId, function(err, reply) {
+				console.log('reply.toString() = ', reply.toString());
 
-			console.log('possibleUserSocket = ', possibleUserSocket);
-
-			if (possibleUserSocket !== null) {
+				// if (possibleUserSocket !== null) {
+				// 	response.send(true);
+				// } else {
+				// 	response.send(false);
+				// }
 				response.send(true);
-			} else {
-				response.send(false);
-			}
+			});
 		}
 	);
 
