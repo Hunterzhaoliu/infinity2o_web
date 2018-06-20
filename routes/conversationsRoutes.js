@@ -116,6 +116,13 @@ module.exports = app => {
 				socket
 			} = request.body;
 			// this is the client's initial connection
+			console.log('socket of new user = ', socket);
+			console.log('JSON.parse socket of new user = ', JSON.parse(socket));
+			console.log(
+				'JSON.parse socketId of new user = ',
+				JSON.parse(socket).id
+			);
+
 			const redis = request.app.get('redis');
 			console.log('socketId = ', socketId);
 			console.log(
