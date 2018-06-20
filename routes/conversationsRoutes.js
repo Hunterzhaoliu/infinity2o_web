@@ -95,14 +95,12 @@ module.exports = app => {
 		async (request, response) => {
 			const redis = request.app.get('redis');
 			redis.get(request.query.mongoDBUserId, function(err, reply) {
-				console.log('reply.toString() = ', reply.toString());
-
-				// if (possibleUserSocket !== null) {
-				// 	response.send(true);
-				// } else {
-				// 	response.send(false);
-				// }
-				response.send(true);
+				if (reply === null) {
+					response.send(false);
+				} else {
+					console.log('reply.toString() = ', reply.toString());
+					response.send(true);
+				}
 			});
 		}
 	);
