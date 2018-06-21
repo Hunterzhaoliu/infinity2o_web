@@ -2,6 +2,8 @@ const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
 const ConversationCollection = mongoose.model('conversations');
 const ClientInConversationCollection = mongoose.model('clientsInConversation');
+const stringify = require('json-stringify-safe');
+
 
 const getOnlineContacts = async (
 	allContacts,
@@ -117,19 +119,17 @@ module.exports = app => {
 			} = request.body;
 			// this is the client's initial connection
 			console.log('socket of new user = ', socket);
-			console.log('JSON.parse socket of new user = ', JSON.parse(socket));
-			console.log(
-				'JSON.parse socketId of new user = ',
-				JSON.parse(socket).id
-			);
+			console.log('socket id of new user = ', socket.id);
+			let stringifySocket = stringify(socket);
+			console.log('stringifySocket of new user = ', stringifySocket);
+			console.log('JSON.parse socket of new user = ', JSON.parse(stringifySocket));
 
 			const redis = request.app.get('redis');
-			console.log('socketId = ', socketId);
 			console.log(
 				'saved socket into redis for mongoDBUserId = ',
 				mongoDBUserId
 			);
-			redis.set(mongoDBUserId, socket);
+			redis.set(mongoDBUserId, stringify(socket));
 			console.log('after redis.set(mongoDBUserId, socket);');
 
 			// TODO:

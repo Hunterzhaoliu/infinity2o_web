@@ -8,7 +8,6 @@ import {
 import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
 import io from 'socket.io-client';
-import stringify from 'json-stringify-safe';
 export let socket;
 
 function saveUserProfile(response, dispatch) {
@@ -62,7 +61,7 @@ async function storeInRedisUserIsOnline(
 			mongoDBUserId: mongoDBUserId,
 			socketId: socket.id,
 			userConversations: userConversations,
-			socket: stringify(socket)
+			socket: socket
 		};
 
 		// puts user inside of clientsInConversation and tells online contacts that user is online
