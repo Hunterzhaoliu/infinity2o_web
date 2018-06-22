@@ -53,9 +53,10 @@ const getOnlineContacts = async (
 };
 
 const tellContactsUserIsOnline = async (
-	mostRecentUserConversations,
-	newClientInConversation,
-	socket
+	userConversations,
+	mongoDBUserId,
+	socket,
+	socketId
 ) => {
 	// tell all the user's contacts that are already online that the user is online
 	for (let i = 0; i < mostRecentUserConversations.length; i++) {
@@ -107,13 +108,14 @@ module.exports = app => {
 				mongoDBUserId
 			);
 
-			// TODO:
-			// const currentSocket = request.app.get('socket');
-			// tellContactsUserIsOnline(
-			// 	userConversations,
-			// 	newClientInConversation,
-			// 	currentSocket
-			// );
+
+			const socket = request.app.get('socket');
+			tellContactsUserIsOnline(
+				userConversations,
+				mongoDBUserId,
+				socket,
+				socketId
+			);
 			response.send("added user's socket to redis");
 		}
 	);
