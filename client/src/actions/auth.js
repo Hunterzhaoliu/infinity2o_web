@@ -8,7 +8,9 @@ import {
 import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
 import io from 'socket.io-client';
-export let socket;
+export const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
+	transports: ['websocket']
+});
 
 function saveUserProfile(response, dispatch) {
 	dispatch({
@@ -36,41 +38,21 @@ function saveUserProfile(response, dispatch) {
 	});
 }
 
-async function storeInRedisUserIsOnline(
+async function storeUserSocketIdInRedis(
 	dispatch,
 	mongoDBUserId,
 	userConversations
 ) {
-	const response = await axios.get(
-		'/api/conversations/clients_online?mongoDBUserId=' + mongoDBUserId
-	);
-	// console.log('response.data = ', response.data);
-	// somehow the socket gets parsed when the user is already inside of redis
-	const alreadyStoredSocket = response.data;
-
-	// console.log('alreadyStoredSocket = ', alreadyStoredSocket);
-	if (alreadyStoredSocket === 'not online') {
-		socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
-			transports: ['websocket']
-		});
-		console.log('original socket = ', socket);
-		console.log('original socket.id = ', socket.id);
-		console.log('original socket[id] = ', socket['id']);
+		console.log('socket.id = ', socket.id);
 
 		const info = {
 			mongoDBUserId: mongoDBUserId,
 			socketId: socket.id,
-			userConversations: userConversations,
-			socket: socket
+			userConversations: userConversations
 		};
 
 		// puts user inside of clientsInConversation and tells online contacts that user is online
 		await axios.post('/api/conversations/clients_online', info);
-	} else {
-		socket = alreadyStoredSocket;
-		console.log('socket from already connected user = ', socket);
-		console.log('socket.id from already connected user = ', socket.id);
-	}
 }
 
 export const initializeApp = () => async dispatch => {
@@ -83,7 +65,7 @@ export const initializeApp = () => async dispatch => {
 	});
 
 	if (store.getState().auth.loggedInState === 'logged_in') {
-		storeInRedisUserIsOnline(
+		storeUserSocketIdInRedis(
 			dispatch,
 			response.data.auth.mongoDBUserId,
 			response.data.conversations
