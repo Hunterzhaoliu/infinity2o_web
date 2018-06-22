@@ -77,8 +77,6 @@ async function storeUserSocketIdInRedis(
 export const initializeApp = () => async dispatch => {
 	const response = await axios.get('/api/current_user');
 
-	console.log('initializeApp response = ', response);
-
 	dispatch({
 		type: SAVE_FETCHED_USER_AUTH,
 		auth: response.data.auth,
