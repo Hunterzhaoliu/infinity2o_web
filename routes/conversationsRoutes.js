@@ -3,12 +3,7 @@ const mongoose = require('mongoose');
 const ConversationCollection = mongoose.model('conversations');
 const ClientInConversationCollection = mongoose.model('clientsInConversation');
 
-const getOnlineContacts = async (
-	allContacts,
-	socketId,
-	socket,
-	clientMongoDBUserId
-) => {
+const getOnlineContacts = async (allContacts, socket) => {
 	let onlineContacts = [];
 	for (let i = 0; i < allContacts.length; i++) {
 		const contactInConversation = await ClientInConversationCollection.findOne(
@@ -22,33 +17,13 @@ const getOnlineContacts = async (
 			allContacts[i]['isOnline'] = true;
 			allContacts[i]['socketId'] = contactInConversation.socketId;
 			onlineContacts.push(allContacts[i]);
-
-			const newContactInfo = {
-				matchId: clientMongoDBUserId,
-				socketId: socketId
-			};
-
-			socket
-				.to(contactInConversation.socketId)
-				.emit(
-					'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
-					newContactInfo
-				);
-			console.log(
-				'contactInConversation.socketId = ',
-				contactInConversation.socketId
-			);
-			console.log(
-				'TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ',
-				newContactInfo
-			);
 		} else {
 			allContacts[i]['isOnline'] = false;
 			allContacts[i]['socketId'] = null;
 			onlineContacts.push(allContacts[i]);
 		}
 	}
-	//console.log('onlineContacts = ', onlineContacts);
+	console.log('onlineContacts = ', onlineContacts);
 	return onlineContacts;
 };
 
@@ -66,22 +41,27 @@ const tellContactsUserIsOnline = async (
 			}
 		);
 
+		const newContactInfo = {
+			userId: mongoDBUserId,
+			socketId: socketId
+		};
+
 		if (contactInConversation !== null) {
 			// the current contact is online
 			socket
 				.to(contactInConversation['socketId'])
 				.emit(
 					'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
-					newClientInConversation
+					newContactInfo
 				);
 			console.log(
-				'told contact ' +
-					contactInConversation['mongoDBUserId'] +
-					'that user is online'
+				'updated the socketId of this contact: ' +
+					contactInConversation['mongoDBUserId']
 			);
 		}
 	}
 };
+
 module.exports = app => {
 	app.get('/api/conversations', requireLogin, async (request, response) => {
 		const conversation = await ConversationCollection.findOne({
@@ -90,24 +70,27 @@ module.exports = app => {
 		response.send(conversation);
 	});
 
-	app.post(
-		'/api/conversations/clients_online',
+	app.get(
+		'/api/conversations/user_contacts_online_status',
 		requireLogin,
 		async (request, response) => {
-			const {
-				mongoDBUserId,
-				socketId,
-				userConversations
-			} = request.body;
+			console.log('request.query = ', request.query);
+			response.send('onlineContacts are not ready yet');
+		}
+	);
+	app.post(
+		'/api/conversations/user_online',
+		requireLogin,
+		async (request, response) => {
+			const { mongoDBUserId, socketId, userConversations } = request.body;
 
 			const redis = request.app.get('redis');
-			redis.set(mongoDBUserId, socketId)
+			redis.set(mongoDBUserId, socketId);
 
 			console.log(
 				'saved socketId into redis for mongoDBUserId = ',
 				mongoDBUserId
 			);
-
 
 			const socket = request.app.get('socket');
 			tellContactsUserIsOnline(
@@ -120,24 +103,19 @@ module.exports = app => {
 		}
 	);
 
-	// app.delete(
-	// 	'/api/conversations/clients_online',
-	// 	requireLogin,
-	// 	async (request, response) => {
-	// 		const { mongoDBUserId } = request.body;
-	// 		console.log('DELETE mongoDBUserId = ', mongoDBUserId);
-	//
-	// 		await ClientInConversationCollection.deleteOne(
-	// 			{
-	// 				mongoDBUserId: mongoDBUserId
-	// 			},
-	// 			function(error) {
-	// 				response.send('Error');
-	// 			}
-	// 		);
-	// 		response.send('Deleted');
-	// 	}
-	// );
+	app.delete(
+		'/api/conversations/user_online',
+		requireLogin,
+		async (request, response) => {
+			const { mongoDBUserId } = request.body;
+			console.log('DELETE mongoDBUserId = ', mongoDBUserId);
+
+			const redis = request.app.get('redis');
+			redis.del(mongoDBUserId);
+
+			response.send('Deleted');
+		}
+	);
 
 	app.post(
 		'/api/conversations/chat',

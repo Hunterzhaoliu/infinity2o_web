@@ -2,11 +2,11 @@ import {
 	UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
 	ON_SELECT_CONTACT,
-	TOLD_DB_CLIENT_IN_CONVERSATION,
-	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR,
+	TOLD_DB_CLIENT_IS_ONLINE,
+	TOLD_DB_CLIENT_IS_ONLINE_ERROR,
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
-	UPDATE_CONTACT_SOCKET_ID
+	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -45,10 +45,10 @@ export default function(state = initialState, action) {
 			newState.selectedContactOnline = action.isOnline;
 			newState.selectedContactSocketId = action.socketId;
 			return newState;
-		case TOLD_DB_CLIENT_IN_CONVERSATION:
+		case TOLD_DB_CLIENT_IS_ONLINE:
 			newState.hasToldDBClientInConversationError = false;
 			return newState;
-		case TOLD_DB_CLIENT_IN_CONVERSATION_ERROR:
+		case TOLD_DB_CLIENT_IS_ONLINE_ERROR:
 			newState.hasToldDBClientInConversationError = true;
 			return newState;
 		case SAVE_USER_CONVERSATIONS_SUCCESS:
@@ -57,10 +57,10 @@ export default function(state = initialState, action) {
 		case SAVE_USER_CONVERSATIONS_ERROR:
 			newState.hasSaveUserConversationsError = true;
 			return newState;
-		case UPDATE_CONTACT_SOCKET_ID:
+		case UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID:
 			newState.allContacts.forEach(function(contact) {
-				if (contact.matchId === action.newContactInfo.matchId) {
-					// we found the contact we need to update socketId
+				if (contact.matchId === action.newContactInfo.userId) {
+					// we found the contact that is online and are updating their socketId
 					contact.socketId = action.newContactInfo.socketId;
 					newState.selectedContactSocketId =
 						action.newContactInfo.socketId;

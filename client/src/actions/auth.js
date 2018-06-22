@@ -3,7 +3,10 @@ import {
 	SAVE_FETCHED_USER_AUTH,
 	SAVE_FETCHED_USER_PROFILE,
 	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
-	UPDATE_MATCHES_SEEN
+	UPDATE_MATCHES_SEEN,
+	UPDATE_OUR_SOCKET_ID,
+	TOLD_DB_CLIENT_IS_ONLINE,
+	TOLD_DB_CLIENT_IS_ONLINE_ERROR
 } from './types';
 import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
@@ -43,16 +46,32 @@ async function storeUserSocketIdInRedis(
 	mongoDBUserId,
 	userConversations
 ) {
-		console.log('socket.id = ', socket.id);
+	console.log('socket.id = ', socket.id);
 
-		const info = {
-			mongoDBUserId: mongoDBUserId,
-			socketId: socket.id,
-			userConversations: userConversations
-		};
+	const info = {
+		mongoDBUserId: mongoDBUserId,
+		socketId: socket.id,
+		userConversations: userConversations
+	};
 
-		// puts user inside of clientsInConversation and tells online contacts that user is online
-		await axios.post('/api/conversations/clients_online', info);
+	// puts user inside of redis and tells online contacts that user is online
+	const clientIsOnlineResponse = await axios.post(
+		'/api/conversations/user_online',
+		info
+	);
+
+	if (clientIsOnlineResponse.status === 200) {
+		// update user socket id
+		dispatch({
+			type: UPDATE_OUR_SOCKET_ID,
+			ourSocketId: socket.id
+		});
+		dispatch({
+			type: TOLD_DB_CLIENT_IS_ONLINE
+		});
+	} else {
+		store.dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
+	}
 }
 
 export const initializeApp = () => async dispatch => {
