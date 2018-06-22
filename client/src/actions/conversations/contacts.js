@@ -53,27 +53,27 @@ export const fetchConversations = () => async dispatch => {
 
 		console.log('userConversations = ', userConversations);
 
-		const onlineContactsResponse = await axios.get(
-			'/api/conversations/user_contacts_online_status?allContacts=' +
-				userConversations
-		);
-		// 3) update user with up to date contact socket ids
-		const onlineContacts = onlineContactsResponse.data;
-		dispatch({
-			type: UPDATE_CONTACTS,
-			allContacts: onlineContacts
-		});
-
-		// 4) save updated user contacts into DB
-		const updateUserDBResponse = await axios.put(
-			'/api/profile/conversations',
-			onlineContacts
-		);
-		if (updateUserDBResponse.status === 200) {
-			dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
-		} else {
-			dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
-		}
+		// const onlineContactsResponse = await axios.get(
+		// 	'/api/conversations/user_contacts_online_status?allContacts=' +
+		// 		userConversations
+		// );
+		// // 3) update user with up to date contact socket ids
+		// const onlineContacts = onlineContactsResponse.data;
+		// dispatch({
+		// 	type: UPDATE_CONTACTS,
+		// 	allContacts: onlineContacts
+		// });
+		//
+		// // 4) save updated user contacts into DB
+		// const updateUserDBResponse = await axios.put(
+		// 	'/api/profile/conversations',
+		// 	onlineContacts
+		// );
+		// if (updateUserDBResponse.status === 200) {
+		// 	dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
+		// } else {
+		// 	dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
+		// }
 	} else {
 		dispatch({ type: UPDATE_CONTACTS_ERROR });
 	}

@@ -92,13 +92,13 @@ module.exports = app => {
 				mongoDBUserId
 			);
 
-			const socket = request.app.get('socket');
-			tellContactsUserIsOnline(
-				userConversations,
-				mongoDBUserId,
-				socket,
-				socketId
-			);
+			// const socket = request.app.get('socket');
+			// tellContactsUserIsOnline(
+			// 	userConversations,
+			// 	mongoDBUserId,
+			// 	socket,
+			// 	socketId
+			// );
 			response.send("added user's socket to redis");
 		}
 	);

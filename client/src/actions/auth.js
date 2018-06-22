@@ -60,22 +60,24 @@ async function storeUserSocketIdInRedis(
 		info
 	);
 
-	if (clientIsOnlineResponse.status === 200) {
-		// update user socket id
-		dispatch({
-			type: UPDATE_OUR_SOCKET_ID,
-			ourSocketId: socket.id
-		});
-		dispatch({
-			type: TOLD_DB_CLIENT_IS_ONLINE
-		});
-	} else {
-		store.dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
-	}
+	// if (clientIsOnlineResponse.status === 200) {
+	// 	// update user socket id
+	// 	dispatch({
+	// 		type: UPDATE_OUR_SOCKET_ID,
+	// 		ourSocketId: socket.id
+	// 	});
+	// 	dispatch({
+	// 		type: TOLD_DB_CLIENT_IS_ONLINE
+	// 	});
+	// } else {
+	// 	store.dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
+	// }
 }
 
 export const initializeApp = () => async dispatch => {
 	const response = await axios.get('/api/current_user');
+
+	console.log('initializeApp response = ', response);
 
 	dispatch({
 		type: SAVE_FETCHED_USER_AUTH,
