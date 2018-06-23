@@ -84,8 +84,10 @@ module.exports = app => {
 		async (request, response) => {
 			const { mongoDBUserId, socketId, userConversations } = request.body;
 
-			// const redis = request.app.get('redis');
-			// redis.set(mongoDBUserId, socketId);
+			const redis = request.app.get('redis');
+
+			console.log('redis = ', redis);
+			redis.set(mongoDBUserId, socketId);
 
 			console.log(
 				'saved socketId into redis for mongoDBUserId = ',
