@@ -109,16 +109,18 @@ export const onSelectContact = (
 	}
 };
 
-socket.on('TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
-	newContactInfo
-) {
-	console.log(
-		'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ',
+if (socket !== undefined) {
+	socket.on('TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
 		newContactInfo
-	);
-	// telling the user contacts the user's new socket id
-	store.dispatch({
-		type: UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
-		newContactInfo: newContactInfo
+	) {
+		console.log(
+			'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ',
+			newContactInfo
+		);
+		// telling the user contacts the user's new socket id
+		store.dispatch({
+			type: UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
+			newContactInfo: newContactInfo
+		});
 	});
-});
+}
