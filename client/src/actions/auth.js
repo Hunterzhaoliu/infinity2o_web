@@ -46,8 +46,8 @@ async function storeUserSocketIdInRedis(
 	mongoDBUserId,
 	userConversations
 ) {
-	console.log('socket.id = ', socket.id);
-
+	console.log('socket.id inside auth = ', socket.id);
+	console.log('socket inside auth = ', socket);
 	const info = {
 		mongoDBUserId: mongoDBUserId,
 		socketId: socket.id,
@@ -59,6 +59,8 @@ async function storeUserSocketIdInRedis(
 		'/api/conversations/user_online',
 		info
 	);
+
+	console.log('finished clientIsOnlineResponse');
 
 	// if (clientIsOnlineResponse.status === 200) {
 	// 	// update user socket id
@@ -84,7 +86,6 @@ export const initializeApp = () => async dispatch => {
 	});
 
 	if (store.getState().auth.loggedInState === 'logged_in') {
-		console.log('process.env = ', process.env);
 		if (process.env.NODE_ENV === 'production') {
 			storeUserSocketIdInRedis(
 				dispatch,

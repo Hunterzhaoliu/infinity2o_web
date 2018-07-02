@@ -83,7 +83,7 @@ module.exports = app => {
 		requireLogin,
 		async (request, response) => {
 			const { mongoDBUserId, socketId, userConversations } = request.body;
-
+			console.log('socketId inside routes = ', socketId);
 			const redis = request.app.get('redis');
 			redis.set(mongoDBUserId, socketId);
 

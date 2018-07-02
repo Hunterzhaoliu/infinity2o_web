@@ -75,6 +75,7 @@ if (process.env.NODE_ENV === 'production') {
 
 console.log('Running socket.io code...');
 io.on('connection', function(socket) {
+	// allows for the use of socket inside routes
 	app.set('socket', socket);
 	console.log('a user connected with socket.id = ', socket.id);
 
