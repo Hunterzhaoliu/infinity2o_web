@@ -72,6 +72,11 @@
 
 1. `cd infinity2o_server` then `npm run dev`
 
+### AWS development setup:
+
+1. cd into `minerva/config` and SHH into server with `chmod 400 infinity2o-minerva.pem` and `ssh -i infinity2o-minerva.pem ubuntu@52.4.101.52`.
+2. edit `config/dev.js` to have socketDomain = `'52.4.101.52:5000'` and redirectDomain = `'52.4.101.52:3000'`
+
 ### Development workflow checklists
 
 When you want to add something...
@@ -83,10 +88,7 @@ When you want to add something...
 5. Add `reducers/actionReducer.js` to `reducers/index.js`
 6. If state changes add `mapStateToProps` in `containers/Containers.js`
 7. If added functions to change state add `mapDispatchToProps` in `containers/Containers.js`
-8. Test your new code with cypress by writing tests in `cypress/integration/`
-   & running the tests in a new terminal with `npm test`
-   in `infinity2o_server/`
-9. Create a `pull request` for your `new-branch` to merge into `master`
+8. Create a `pull request` for your `new-branch` to merge into `master`
 
 ### Deployment checklist
 
