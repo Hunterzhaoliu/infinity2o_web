@@ -85,8 +85,6 @@ module.exports = app => {
 			const { mongoDBUserId, socketId, userConversations } = request.body;
 
 			const redis = request.app.get('redis');
-
-			console.log('redis = ', redis);
 			redis.set(mongoDBUserId, socketId);
 
 			console.log('saved socketId into redis for = ', mongoDBUserId);

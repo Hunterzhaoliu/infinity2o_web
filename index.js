@@ -20,9 +20,6 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-const redis = require('redis').createClient(keys.redisURL);
-app.set('redis', redis);
-
 // heroku dynamic port
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, function() {
@@ -68,6 +65,12 @@ if (process.env.NODE_ENV === 'production') {
 			path.resolve(__dirname, 'client', 'build', 'index.html')
 		);
 	});
+
+	// connection to redis
+	const redis = require('redis').createClient(keys.redisURL);
+
+	// allows for the use of redis inside routes
+	app.set('redis', redis);
 }
 
 console.log('Running socket.io code...');
