@@ -11,11 +11,7 @@ import {
 import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
 import io from 'socket.io-client';
-export const socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
-	transports: ['websocket']
-});
-
-console.log('immediate socket = ', socket);
+export let socket;
 
 function saveUserProfile(response, dispatch) {
 	dispatch({
@@ -86,12 +82,12 @@ export const initializeApp = () => async dispatch => {
 		auth: response.data.auth,
 		mongoDBUserId: response.data._id
 	});
-	console.log('socket after SAVE_FETCHED_USER_AUTH dispatch = ', socket);
 	if (store.getState().auth.loggedInState === 'logged_in') {
-		console.log(
-			'socket outside of storeUserSocketIdInRedis function = ',
-			socket
-		);
+		socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
+			transports: ['websocket']
+		});
+
+		console.log('socket just gets set = ', socket);
 		storeUserSocketIdInRedis(
 			dispatch,
 			response.data.auth.mongoDBUserId,
