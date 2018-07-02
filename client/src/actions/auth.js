@@ -86,13 +86,11 @@ export const initializeApp = () => async dispatch => {
 	});
 
 	if (store.getState().auth.loggedInState === 'logged_in') {
-		if (process.env.NODE_ENV === 'production') {
-			storeUserSocketIdInRedis(
-				dispatch,
-				response.data.auth.mongoDBUserId,
-				response.data.conversations
-			);
-		}
+		storeUserSocketIdInRedis(
+			dispatch,
+			response.data.auth.mongoDBUserId,
+			response.data.conversations
+		);
 
 		saveUserProfile(response, dispatch);
 		updateWithSavedColorTheme(dispatch, response.data.profile.colorTheme);
