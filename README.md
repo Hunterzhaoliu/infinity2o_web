@@ -74,8 +74,9 @@
 
 ### AWS development setup:
 
-1. cd into `minerva/config` and SHH into server with `chmod 400 infinity2o-minerva.pem` and `ssh -i infinity2o-minerva.pem ubuntu@52.4.101.52`.
-2. edit `config/dev.js` to have socketDomain = `'52.4.101.52:5000'` and redirectDomain = `'52.4.101.52:3000'`
+1. `cd` into `minerva/config` and SHH into server with `chmod 400 infinity2o-minerva.pem` and `ssh -i infinity2o-minerva.pem ubuntu@52.4.101.52`.
+2. Edit `config/dev.js` to have socketDomain = `'52.4.101.52:5000'` and redirectDomain = `'52.4.101.52:3000'`
+3. You can view the running development server code at `http://52.4.101.52:3000/`.
 
 ### Development workflow checklists
 
