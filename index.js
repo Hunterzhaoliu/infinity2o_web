@@ -18,7 +18,6 @@ mongoose.connect(keys.mongoURI, { useMongoClient: true });
 
 const app = express();
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
 
 // heroku dynamic port
 const PORT = process.env.PORT || 5000;
@@ -29,6 +28,8 @@ server.listen(PORT, function() {
 		app.settings.env
 	);
 });
+
+const io = require('socket.io')(server);
 
 // wiring middlewares
 // middlewares = small functions that modify incoming requests to our

@@ -88,7 +88,7 @@ export const initializeApp = () => async dispatch => {
 			transports: ['websocket', 'polling']
 		});
 
-		console.log('socket just gets set = ', socket);
+		console.log('socket just got set = ', socket);
 		storeUserSocketIdInRedis(
 			dispatch,
 			response.data.auth.mongoDBUserId,
