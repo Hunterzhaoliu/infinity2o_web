@@ -88,13 +88,13 @@ module.exports = app => {
 				clientSocketId
 			} = request.body;
 
-			if (process.env.NODE_ENV === 'production') {
-				// only store socketId in redis during staging or production
-				const redis = request.app.get('redis');
-				redis.set(mongoDBUserId, clientSocketId);
-				console.log('saved socketId = ', clientSocketId);
-				console.log('into redis for mongoDBUserId = ', mongoDBUserId);
-			}
+			//if (process.env.NODE_ENV === 'production') {
+			// only store socketId in redis during staging or production
+			const redis = request.app.get('redis');
+			redis.set(mongoDBUserId, clientSocketId);
+			console.log('saved socketId = ', clientSocketId);
+			console.log('into redis for mongoDBUserId = ', mongoDBUserId);
+			//}
 
 			// tellContactsUserIsOnline(
 			// 	userConversations,

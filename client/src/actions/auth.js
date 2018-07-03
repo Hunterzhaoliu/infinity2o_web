@@ -91,13 +91,16 @@ export const initializeApp = () => async dispatch => {
 			transports: ['websocket', 'polling']
 		});
 
-		console.log('initializeApp clientSocket = ', clientSocket);
-		storeUserSocketIdInRedis(
-			dispatch,
-			response.data.auth.mongoDBUserId,
-			response.data.conversations,
-			clientSocket.id
-		);
+		clientSocket.on('connect', () => {
+			// https://stackoverflow.com/questions/44270239/how-to-get-socket-id-of-a-connection-on-client-side
+			console.log('clientSocket.id = ', clientSocket.id);
+			storeUserSocketIdInRedis(
+				dispatch,
+				response.data.auth.mongoDBUserId,
+				response.data.conversations,
+				clientSocket.id
+			);
+		});
 
 		saveUserProfile(response, dispatch);
 		updateWithSavedColorTheme(dispatch, response.data.profile.colorTheme);
