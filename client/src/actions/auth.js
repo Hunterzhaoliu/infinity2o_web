@@ -11,7 +11,7 @@ import {
 import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
 import io from 'socket.io-client';
-export let socket;
+export let clientSocket;
 
 function saveUserProfile(response, dispatch) {
 	dispatch({
@@ -42,15 +42,16 @@ function saveUserProfile(response, dispatch) {
 async function storeUserSocketIdInRedis(
 	dispatch,
 	mongoDBUserId,
-	userConversations
+	userConversations,
+	clientSocketId
 ) {
-	console.log('socket.id inside storeUserSocketIdInRedis = ', socket.id);
-	console.log('socket inside storeUserSocketIdInRedis = ', socket);
 	const info = {
 		mongoDBUserId: mongoDBUserId,
-		socketId: socket.id,
-		userConversations: userConversations
+		userConversations: userConversations,
+		clientSocketId: clientSocketId
 	};
+
+	console.log('storeUserSocketIdInRedis clientSocketId = ', clientSocketId);
 
 	// puts user inside of redis and tells online contacts that user is online
 	const clientIsOnlineResponse = await axios.post(
@@ -58,20 +59,18 @@ async function storeUserSocketIdInRedis(
 		info
 	);
 
-	console.log('finished clientIsOnlineResponse');
-
-	// if (clientIsOnlineResponse.status === 200) {
-	// 	// update user socket id
-	// 	dispatch({
-	// 		type: UPDATE_OUR_SOCKET_ID,
-	// 		ourSocketId: socket.id
-	// 	});
-	// 	dispatch({
-	// 		type: TOLD_DB_CLIENT_IS_ONLINE
-	// 	});
-	// } else {
-	// 	store.dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
-	// }
+	if (clientIsOnlineResponse.status === 200) {
+		// update user clientSocket id
+		dispatch({
+			type: UPDATE_OUR_SOCKET_ID,
+			ourSocketId: clientSocket.id
+		});
+		dispatch({
+			type: TOLD_DB_CLIENT_IS_ONLINE
+		});
+	} else {
+		store.dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
+	}
 }
 
 export const initializeApp = () => async dispatch => {
@@ -83,16 +82,17 @@ export const initializeApp = () => async dispatch => {
 		mongoDBUserId: response.data._id
 	});
 	if (store.getState().auth.loggedInState === 'logged_in') {
-		socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
+		clientSocket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 			reconnect: true,
 			transports: ['websocket', 'polling']
 		});
 
-		console.log('socket just got set = ', socket);
+		console.log('initializeApp clientSocket.id = ', clientSocket.id);
 		storeUserSocketIdInRedis(
 			dispatch,
 			response.data.auth.mongoDBUserId,
-			response.data.conversations
+			response.data.conversations,
+			clientSocket.id
 		);
 
 		saveUserProfile(response, dispatch);

@@ -1,18 +1,18 @@
 import axios from 'axios';
 import {
-	UPDATE_CONTACTS,
+	//UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
 	UPDATE_CHAT,
 	UPDATE_CHAT_ERROR,
 	ON_SELECT_CONTACT,
-	SAVE_USER_CONVERSATIONS_SUCCESS,
-	SAVE_USER_CONVERSATIONS_ERROR,
+	//SAVE_USER_CONVERSATIONS_SUCCESS,
+	//SAVE_USER_CONVERSATIONS_ERROR,
 	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
 	TOLD_DB_CLIENT_IS_ONLINE,
 	TOLD_DB_CLIENT_IS_ONLINE_ERROR
 } from '../types';
 import { store } from '../../index';
-import { socket } from '../auth';
+import { clientSocket } from '../auth';
 
 export const fetchConversations = () => async dispatch => {
 	// 1) hit /api/current_user to get allContacts
@@ -57,7 +57,7 @@ export const fetchConversations = () => async dispatch => {
 		// 	'/api/conversations/user_contacts_online_status?allContacts=' +
 		// 		userConversations
 		// );
-		// // 3) update user with up to date contact socket ids
+		// // 3) update user with up to date contact clientSocket ids
 		// const onlineContacts = onlineContactsResponse.data;
 		// dispatch({
 		// 	type: UPDATE_CONTACTS,
@@ -109,15 +109,15 @@ export const onSelectContact = (
 	}
 };
 
-if (socket !== undefined) {
-	socket.on('TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
+if (clientSocket !== undefined) {
+	clientSocket.on('TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
 		newContactInfo
 	) {
 		console.log(
 			'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ',
 			newContactInfo
 		);
-		// telling the user contacts the user's new socket id
+		// telling the user contacts the user's new clientSocket id
 		store.dispatch({
 			type: UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
 			newContactInfo: newContactInfo

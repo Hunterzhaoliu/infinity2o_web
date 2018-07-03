@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ConversationCollection = mongoose.model('conversations');
 const ClientInConversationCollection = mongoose.model('clientsInConversation');
 
-const getOnlineContacts = async (allContacts, socket) => {
+const getOnlineContacts = async (allContacts, serverSocket) => {
 	let onlineContacts = [];
 	for (let i = 0; i < allContacts.length; i++) {
 		const contactInConversation = await ClientInConversationCollection.findOne(
@@ -30,7 +30,7 @@ const getOnlineContacts = async (allContacts, socket) => {
 const tellContactsUserIsOnline = async (
 	userConversations,
 	mongoDBUserId,
-	socket,
+	serverSocket,
 	socketId
 ) => {
 	// tell all the user's contacts that are already online that the user is online
@@ -48,7 +48,7 @@ const tellContactsUserIsOnline = async (
 
 		if (contactInConversation !== null) {
 			// the current contact is online
-			socket
+			serverSocket
 				.to(contactInConversation['socketId'])
 				.emit(
 					'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
@@ -82,25 +82,27 @@ module.exports = app => {
 		'/api/conversations/user_online',
 		requireLogin,
 		async (request, response) => {
-			const { mongoDBUserId, socketId, userConversations } = request.body;
-			console.log('socketId inside routes = ', socketId);
+			const {
+				mongoDBUserId,
+				userConversations,
+				clientSocketId
+			} = request.body;
 
-			// if (process.env.NODE_ENV === 'production') {
-			// 	// only store socketId in redis during production
-			// 	const redis = request.app.get('redis');
-			// 	redis.set(mongoDBUserId, socketId);
-			// }
+			if (process.env.NODE_ENV === 'production') {
+				// only store socketId in redis during staging or production
+				const redis = request.app.get('redis');
+				redis.set(mongoDBUserId, clientSocketId);
+				console.log('saved socketId = ', clientSocketId);
+				console.log('into redis for mongoDBUserId = ', mongoDBUserId);
+			}
 
-			console.log('saved socketId into redis for ', mongoDBUserId);
-
-			// const socket = request.app.get('socket');
 			// tellContactsUserIsOnline(
 			// 	userConversations,
 			// 	mongoDBUserId,
-			// 	socket,
+			// 	serverSocket,
 			// 	socketId
 			// );
-			response.send("added user's socket to redis");
+			response.send("added user's serverSocketId to redis");
 		}
 	);
 

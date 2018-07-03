@@ -74,14 +74,14 @@ if (process.env.NODE_ENV === 'production') {
 	app.set('redis', redis);
 }
 
-console.log('Running socket.io code...');
-io.on('connection', function(socket) {
-	// allows for the use of socket inside routes
-	app.set('socket', socket);
-	console.log('a user connected with socket.id = ', socket.id);
+console.log('Running serverSocket.io code...');
+io.on('connection', function(serverSocket) {
+	// allows for the use of serverSocket inside routes
+	app.set('serverSocket', serverSocket);
+	console.log('a user connected with serverSocket.id = ', serverSocket.id);
 
 	// listens for messages to be sent
-	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
+	serverSocket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
 		messageInfo
 	) {
 		console.log(
@@ -90,17 +90,20 @@ io.on('connection', function(socket) {
 		);
 
 		// sends private message to other client
-		socket
+		serverSocket
 			.to(messageInfo.selectedContactSocketId)
 			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
 	});
 
-	socket.on('disconnect', async function() {
+	serverSocket.on('disconnect', async function() {
 		// remove document from ClientInConversation collection
-		console.log('user disconnected with socket.id = ', socket.id);
+		console.log(
+			'user disconnected with serverSocket.id = ',
+			serverSocket.id
+		);
 		try {
 			// await ClientInConversationCollection.deleteOne({
-			// 	socketId: socket.id
+			// 	socketId: serverSocket.id
 			// });
 		} catch (error) {
 			console.log('delete client in conversation DB error = ', error);
