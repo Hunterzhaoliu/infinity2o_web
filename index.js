@@ -54,12 +54,6 @@ require('./routes/matchesRoutes')(app);
 require('./routes/conversationsRoutes')(app);
 require('./routes/legalRoutes')(app);
 
-// connection to redis
-const redis = require('redis').createClient(keys.redisURL);
-
-// allows for the use of redis inside routes
-app.set('redis', redis);
-
 if (process.env.NODE_ENV === 'production') {
 	// Express will serve up production assets like our main.js or main.css file
 	app.use(express.static('client/build'));
@@ -71,6 +65,12 @@ if (process.env.NODE_ENV === 'production') {
 			path.resolve(__dirname, 'client', 'build', 'index.html')
 		);
 	});
+
+	// connection to redis
+	const redis = require('redis').createClient(keys.redisURL);
+
+	// allows for the use of redis inside routes
+	app.set('redis', redis);
 }
 
 console.log('Running socket.io code...');

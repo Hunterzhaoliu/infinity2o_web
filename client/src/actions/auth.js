@@ -84,6 +84,7 @@ export const initializeApp = () => async dispatch => {
 	});
 	if (store.getState().auth.loggedInState === 'logged_in') {
 		socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
+			reconnect: true,
 			transports: ['websocket']
 		});
 
