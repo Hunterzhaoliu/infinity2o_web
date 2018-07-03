@@ -82,12 +82,16 @@ export const initializeApp = () => async dispatch => {
 		mongoDBUserId: response.data._id
 	});
 	if (store.getState().auth.loggedInState === 'logged_in') {
+		console.log(
+			'REACT_APP_SOCKET_DOMAIN = ',
+			process.env.REACT_APP_SOCKET_DOMAIN
+		);
 		clientSocket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 			reconnect: true,
 			transports: ['websocket', 'polling']
 		});
 
-		console.log('initializeApp clientSocket.id = ', clientSocket.id);
+		console.log('initializeApp clientSocket = ', clientSocket);
 		storeUserSocketIdInRedis(
 			dispatch,
 			response.data.auth.mongoDBUserId,
