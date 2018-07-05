@@ -101,6 +101,8 @@ io.on('connection', function(serverSocket) {
 			'user disconnected with serverSocket.id = ',
 			serverSocket.id
 		);
+		const redis = request.app.get('redis');
+
 		try {
 			// await ClientInConversationCollection.deleteOne({
 			// 	socketId: serverSocket.id

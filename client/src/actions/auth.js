@@ -59,18 +59,18 @@ async function storeUserSocketIdInRedis(
 		info
 	);
 
-	if (clientIsOnlineResponse.status === 200) {
-		// update user clientSocket id
-		dispatch({
-			type: UPDATE_OUR_SOCKET_ID,
-			ourSocketId: clientSocket.id
-		});
-		dispatch({
-			type: TOLD_DB_CLIENT_IS_ONLINE
-		});
-	} else {
-		store.dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
-	}
+	// if (clientIsOnlineResponse.status === 200) {
+	// 	// update user clientSocket id
+	// 	dispatch({
+	// 		type: UPDATE_OUR_SOCKET_ID,
+	// 		ourSocketId: clientSocketId
+	// 	});
+	// 	dispatch({
+	// 		type: TOLD_DB_CLIENT_IS_ONLINE
+	// 	});
+	// } else {
+	// 	store.dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
+	// }
 }
 
 export const initializeApp = () => async dispatch => {
