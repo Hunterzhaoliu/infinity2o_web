@@ -13,8 +13,6 @@ import { store } from '../index';
 import io from 'socket.io-client';
 export let clientSocket;
 
-let mongoDBUserId;
-
 function saveUserProfile(response, dispatch) {
 	dispatch({
 		type: SAVE_FETCHED_USER_PROFILE,
@@ -43,6 +41,7 @@ function saveUserProfile(response, dispatch) {
 
 async function storeUserSocketIdInRedis(
 	dispatch,
+	mongoDBUserId,
 	userConversations,
 	clientSocketId
 ) {
@@ -58,27 +57,26 @@ async function storeUserSocketIdInRedis(
 		info
 	);
 
-	// if (clientIsOnlineResponse.status === 200) {
-	// 	// update user clientSocket id
-	// 	dispatch({
-	// 		type: UPDATE_OUR_SOCKET_ID,
-	// 		ourSocketId: clientSocketId
-	// 	});
-	// 	dispatch({
-	// 		type: TOLD_DB_CLIENT_IS_ONLINE
-	// 	});
-	// } else {
-	// 	store.dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
-	// }
+	if (clientIsOnlineResponse.status === 200) {
+		// update user clientSocket id
+		dispatch({
+			type: UPDATE_OUR_SOCKET_ID,
+			ourSocketId: clientSocketId
+		});
+		dispatch({
+			type: TOLD_DB_CLIENT_IS_ONLINE
+		});
+	} else {
+		store.dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
+	}
 }
 
 export const initializeApp = () => async dispatch => {
 	const response = await axios.get('/api/current_user');
-	mongoDBUserId = response.data._id;
 	dispatch({
 		type: SAVE_FETCHED_USER_AUTH,
 		auth: response.data.auth,
-		mongoDBUserId: mongoDBUserId
+		mongoDBUserId: response.data._id
 	});
 	if (store.getState().auth.loggedInState === 'logged_in') {
 		// console.log(
@@ -93,6 +91,7 @@ export const initializeApp = () => async dispatch => {
 			// https://stackoverflow.com/questions/44270239/how-to-get-socket-id-of-a-connection-on-client-side
 			storeUserSocketIdInRedis(
 				dispatch,
+				response.data.auth.mongoDBUserId,
 				response.data.conversations,
 				clientSocket.id
 			);
@@ -102,13 +101,3 @@ export const initializeApp = () => async dispatch => {
 		updateWithSavedColorTheme(dispatch, response.data.profile.colorTheme);
 	}
 };
-
-if (clientSocket !== undefined) {
-	clientSocket.on('DELETE_USER_FROM_REDIS', async () => {
-		console.log('deleting user from redis');
-		const delUserRes = await axios.delete(
-			'api/conversations/user_online',
-			mongoDBUserId
-		);
-	});
-}

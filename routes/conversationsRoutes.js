@@ -90,6 +90,7 @@ module.exports = app => {
 
 			const redis = request.app.get('redis');
 			redis.set(mongoDBUserId, clientSocketId);
+			redis.set(clientSocketId, mongoDBUserId);
 
 			// tellContactsUserIsOnline(
 			// 	userConversations,
@@ -98,20 +99,6 @@ module.exports = app => {
 			// 	socketId
 			// );
 			response.send("added user's serverSocketId to redis");
-		}
-	);
-
-	app.delete(
-		'/api/conversations/user_online',
-		requireLogin,
-		async (request, response) => {
-			const { mongoDBUserId } = request.body;
-			console.log('DELETE mongoDBUserId = ', mongoDBUserId);
-
-			const redis = request.app.get('redis');
-			redis.del(mongoDBUserId);
-
-			response.send('Deleted');
 		}
 	);
 

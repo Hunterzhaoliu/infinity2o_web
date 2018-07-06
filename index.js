@@ -74,7 +74,14 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-console.log('Running serverSocket.io code...');
+async function getRedisMongoDBUserId(serverSocketId) {
+	await redis.get(serverSocketId, function(err, reply) {
+		console.log('reply.toString() = ', reply.toString());
+		return reply.toString();
+	});
+}
+
+// console.log('Running serverSocket.io code...');
 io.on('connection', function(serverSocket) {
 	// allows for the use of serverSocket inside routes
 	app.set('serverSocket', serverSocket);
@@ -95,12 +102,13 @@ io.on('connection', function(serverSocket) {
 			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
 	});
 
-	serverSocket.on('disconnect', () => {
+	serverSocket.on('disconnect', async () => {
 		console.log(
 			'user disconnected with serverSocket.id = ',
 			serverSocket.id
 		);
 
-		serverSocket.emit('DELETE_USER_FROM_REDIS');
+		//const mongoDBUserId = await getRedisMongoDBUserId(serverSocket.id);
+		//console.log('mongoDBUserId = ', mongoDBUserId);
 	});
 });
