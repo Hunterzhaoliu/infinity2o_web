@@ -90,8 +90,6 @@ module.exports = app => {
 
 			const redis = request.app.get('redis');
 			redis.set(mongoDBUserId, clientSocketId);
-			console.log('saved socketId = ', clientSocketId);
-			console.log('into redis for mongoDBUserId = ', mongoDBUserId);
 
 			// tellContactsUserIsOnline(
 			// 	userConversations,

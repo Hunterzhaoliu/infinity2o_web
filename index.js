@@ -95,20 +95,12 @@ io.on('connection', function(serverSocket) {
 			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
 	});
 
-	serverSocket.on('disconnect', async function() {
-		// remove document from ClientInConversation collection
+	serverSocket.on('disconnect', () => {
 		console.log(
 			'user disconnected with serverSocket.id = ',
 			serverSocket.id
 		);
-		const redis = request.app.get('redis');
 
-		try {
-			// await ClientInConversationCollection.deleteOne({
-			// 	socketId: serverSocket.id
-			// });
-		} catch (error) {
-			console.log('delete client in conversation DB error = ', error);
-		}
+		serverSocket.emit('DELETE_USER_FROM_REDIS');
 	});
 });
