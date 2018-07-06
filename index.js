@@ -74,13 +74,6 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-async function getRedisMongoDBUserId(serverSocketId) {
-	await redis.get(serverSocketId, function(err, reply) {
-		console.log('reply.toString() = ', reply.toString());
-		return reply.toString();
-	});
-}
-
 // console.log('Running serverSocket.io code...');
 io.on('connection', function(serverSocket) {
 	// allows for the use of serverSocket inside routes
@@ -102,13 +95,21 @@ io.on('connection', function(serverSocket) {
 			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
 	});
 
-	serverSocket.on('disconnect', async () => {
+	serverSocket.on('disconnect', () => {
 		console.log(
 			'user disconnected with serverSocket.id = ',
 			serverSocket.id
 		);
 
-		//const mongoDBUserId = await getRedisMongoDBUserId(serverSocket.id);
-		//console.log('mongoDBUserId = ', mongoDBUserId);
+		redis.get(serverSocket.id, function(err, reply) {
+			if (reply !== null) {
+				const mongoDBUserId = reply.toString();
+				// we need to delete 2 entries in redis
+				// 1) mongoDBUserId: socketId
+				// 2) socketId: mongoDBUserId
+				redis.del(mongoDBUserId);
+				redis.del(serverSocket.id);
+			}
+		});
 	});
 });
