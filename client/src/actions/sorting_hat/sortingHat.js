@@ -15,12 +15,10 @@ import {
 	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
 	RUNNING_ATHENA_FOR_USER_START,
 	RUNNING_ATHENA_FOR_USER_DONE,
-	RUNNING_ATHENA_FOR_USER_ERROR,
-	INCREMENT_NUMBER_OF_UNSEEN_MATCHES
+	RUNNING_ATHENA_FOR_USER_ERROR
 } from '../types';
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
 import { store } from '../../index';
-import { fetchUserMatchesDispatch } from '../matches/matches';
 import { saveAndAddNeurons } from './ask';
 import { NUMBER_NEURONS_GIVEN_FOR_VOTE_IN_BILLIONS } from '../../containers/payment/prices';
 
@@ -106,11 +104,9 @@ export const onVote = (
 		);
 
 		if (initialMatchesResponse.status === 200) {
-			// retrieves user's matches from DB
-			fetchUserMatchesDispatch(mongoDBUserId, dispatch);
-			dispatch({
-				type: INCREMENT_NUMBER_OF_UNSEEN_MATCHES
-			});
+			// don't need to retrieve user matches here because redirected to
+			// matches page where fetchUserMatches is always called
+			// the numberOfUnseenMatches is also updated in auth
 			dispatch({
 				type: RUNNING_ATHENA_FOR_USER_DONE
 			});
