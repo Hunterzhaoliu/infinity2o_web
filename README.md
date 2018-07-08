@@ -8,11 +8,18 @@
 
 ## Backend & frontend development setup
 
-heroku.com:
+### heroku.com:
 
 1.  1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+2. Heroku Redis addons:
 
-mlab.com databases:
+* Staging: `heroku addons:info redis-transparent-42654`
+    * Connect to AWS redis = `heroku redis:cli -a infinity2o-staging -c infinity2o-staging`
+    * View all keys = `KEYS *`
+    * Delete a key = `DEL keyValue`
+* Production:
+
+### mlab.com databases:
 
 1. Login with `qliu` & password = `mxxxxFxxxxxIxxxxxx`
 2. `infinity2o-dev` database username = `infinity2o-dev` & password = `2134711p`
@@ -20,31 +27,31 @@ mlab.com databases:
 4. `infinity2o-prod` database username = `infinity2o-prod` & password = `mxFxxxxxIxxxx`
 5. Backups are stored at https://bitbucket.org/quinnliu/mongodb_data
 
-Google OAuth:
+### Google OAuth:
 
 1. Login `console.developers.google.com` with `q42liu@gmail.com` under projects
    `infinity2o-dev`, `infinity2o-staging`, & `infinity2o-prod`
 
-LinkedIn OAuth:
+### LinkedIn OAuth:
 
 1. Login TODO:
 
-Stripe.com login:
+### Stripe.com login:
 
 1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
-Sendgrid.com login:
+### Sendgrid.com login:
 
 1. Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
-Godaddy.com login:
+### Godaddy.com login:
 
 1. Login with `q42liu@gmail.com` & password = `49xxxxxx@wxxxxx`
 2. Already added name servers(NS) `karl.ns.cloudflare.com` & `wally.ns.cloudflare.com`
 3. Add forwarding to domain: `https://www.infinity2o.com` by adding
    subdomains `infinity2o.com` & `www`
 
-Cloudflare.com
+### Cloudflare.com
 
 1. Login with `qn1over12@gmail.com` & password = `21xxxxx@ix`
 2. Already added 2 CNAMEs.
@@ -53,19 +60,25 @@ Cloudflare.com
     * Name: `www` Value: `www.infinity2o.com.herokudns.com`
       TTL: `Automatic` Status: `Arrow through cloud`
 
-E-mail support:
+### E-mail support:
 
 1. `askinfinity2o@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`. Recovery = Hunter's phone & `q42liu@gmail.com`
 
-Coursera.org Affiliate marketing account:
+### Coursera.org Affiliate marketing account:
 
 1. e-mail = `q42liu@gmail.com`, username = `q42liu`, & password = `21xxxxx@ix`. Recovery = `wxxxxx` at http://cli.linksynergy.com/cli/publisher/home.php?lang=en
 
-Local development setup:
+### Local development setup:
 
 1. `cd infinity2o_server` then `npm run dev`
 
-## Development workflow checklists
+### AWS development setup:
+
+1. `cd` into `minerva/config` and SHH into server with `chmod 400 infinity2o-minerva.pem` and `ssh -i infinity2o-minerva.pem ubuntu@52.4.101.52`.
+2. Edit `config/dev.js` to have socketDomain = `'52.4.101.52:5000'` and redirectDomain = `'52.4.101.52:3000'`
+3. You can view the running development server code at `http://52.4.101.52:3000/`.
+
+### Development workflow checklists
 
 When you want to add something...
 
@@ -76,12 +89,9 @@ When you want to add something...
 5. Add `reducers/actionReducer.js` to `reducers/index.js`
 6. If state changes add `mapStateToProps` in `containers/Containers.js`
 7. If added functions to change state add `mapDispatchToProps` in `containers/Containers.js`
-8. Test your new code with cypress by writing tests in `cypress/integration/`
-   & running the tests in a new terminal with `npm test`
-   in `infinity2o_server/`
-9. Create a `pull request` for your `new-branch` to merge into `master`
+8. Create a `pull request` for your `new-branch` to merge into `master`
 
-## Deployment checklist
+### Deployment checklist
 
 1. `cd infinity2o_server`
 2. `heroku login` username = `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
@@ -98,13 +108,13 @@ When you want to add something...
 12. Check code is deployed on https://infinity2o.herokuapp.com/
 13. Check code is deployed on https://www.infinity2o.com/
 
-## Design principles
+### Design principles
 
 1. [Fletcher Color Control](http://www.barnstonestudios.com/content/COLOUR-CONTROL-by-Frank-Morley-Fletcher.pdf)
 2. `color` beside `opposite color` is the most contrasting.
 3. `color` surrounded by grey changes grey into shade of `color`.
 
-## Domain name
+### Domain name
 
 The key idea is we want to direct all different ways one can type our
 domain name and redirect it to `https://www.infinity2o.com`
@@ -113,6 +123,6 @@ Right now if one types `www.infinity2o.com`
 
 They will get redirected to `https://www.infinity2o.com`
 
-## Useful links
+### Useful links
 
 [HTTP status codes](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)

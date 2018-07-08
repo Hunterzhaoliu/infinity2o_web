@@ -1,28 +1,18 @@
 import axios from 'axios';
 import {
-	UPDATE_CONTACTS,
+	//UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
 	UPDATE_CHAT,
 	UPDATE_CHAT_ERROR,
 	ON_SELECT_CONTACT,
-	TOLD_DB_CLIENT_IN_CONVERSATION,
-	TOLD_DB_CLIENT_IN_CONVERSATION_ERROR,
-	SAVE_USER_CONVERSATIONS_SUCCESS,
-	SAVE_USER_CONVERSATIONS_ERROR,
-	UPDATE_OUR_SOCKET_ID,
-	UPDATE_CONTACT_SOCKET_ID
+	//SAVE_USER_CONVERSATIONS_SUCCESS,
+	//SAVE_USER_CONVERSATIONS_ERROR,
+	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
+	TOLD_DB_CLIENT_IS_ONLINE,
+	TOLD_DB_CLIENT_IS_ONLINE_ERROR
 } from '../types';
 import { store } from '../../index';
-import io from 'socket.io-client';
-
-export let socket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
-	reconnect: true,
-	transports: ['websocket', 'polling']
-});
-
-export const updateOnlineStatus = () => async dispatch => {
-	console.log('updateOnlineStatus');
-};
+import { clientSocket } from '../auth';
 
 export const fetchConversations = () => async dispatch => {
 	// 1) hit /api/current_user to get allContacts
@@ -32,13 +22,10 @@ export const fetchConversations = () => async dispatch => {
 		// 2) display chat log of first conversation
 		const contactChatDisplayIndex = 0;
 		let conversationId;
-		if (
-			userResponse.data.conversations !== undefined &&
-			userResponse.data.conversations.length >= 1
-		) {
+		const userConversations = userResponse.data.conversation;
+		if (userConversations !== undefined && userConversations.length >= 1) {
 			conversationId =
-				userResponse.data.conversations[contactChatDisplayIndex]
-					.conversationId;
+				userConversations[contactChatDisplayIndex].conversationId;
 
 			// get chat logs by hitting GET api/conversations
 			const conversationsResponse = await axios.get(
@@ -51,11 +38,9 @@ export const fetchConversations = () => async dispatch => {
 					type: ON_SELECT_CONTACT,
 					conversationId: conversationId,
 					isOnline:
-						userResponse.data.conversations[contactChatDisplayIndex]
-							.isOnline,
+						userConversations[contactChatDisplayIndex].isOnline,
 					socketId:
-						userResponse.data.conversations[contactChatDisplayIndex]
-							.socketId
+						userConversations[contactChatDisplayIndex].socketId
 				});
 				dispatch({
 					type: UPDATE_CHAT,
@@ -66,49 +51,29 @@ export const fetchConversations = () => async dispatch => {
 			}
 		}
 
-		// 3) tell client in conversation DB we have a new client
-		// by hitting /api/conversations/clients_online to get allContacts with latest socketIds
-		const allContacts = userResponse.data.conversations;
-		const mongoDBUserId = store.getState().auth.mongoDBUserId;
-		const clientInConversationInfo = {
-			mongoDBUserId: mongoDBUserId,
-			allContacts: allContacts,
-			socketId: socket.id
-		};
-		const onlineContactsResponse = await axios.post(
-			'/api/conversations/clients_online',
-			clientInConversationInfo
-		);
-		if (onlineContactsResponse.status === 200) {
-			// 4) update our socket id
-			dispatch({
-				type: UPDATE_OUR_SOCKET_ID,
-				ourSocketId: socket.id
-			});
-			dispatch({
-				type: TOLD_DB_CLIENT_IN_CONVERSATION
-			});
+		console.log('userConversations = ', userConversations);
 
-			// 5) dispatch allContacts (with lastest socketIds) to our state
-			const onlineContacts = onlineContactsResponse.data;
-			dispatch({
-				type: UPDATE_CONTACTS,
-				allContacts: onlineContacts
-			});
-
-			// 6) save allContacts (with lastest socketIds) to User DB
-			const updateUserDBResponse = await axios.put(
-				'/api/profile/conversations',
-				onlineContacts
-			);
-			if (updateUserDBResponse.status === 200) {
-				dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
-			} else {
-				dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
-			}
-		} else {
-			store.dispatch({ type: TOLD_DB_CLIENT_IN_CONVERSATION_ERROR });
-		}
+		// const onlineContactsResponse = await axios.get(
+		// 	'/api/conversations/user_contacts_online_status?allContacts=' +
+		// 		userConversations
+		// );
+		// // 3) update user with up to date contact clientSocket ids
+		// const onlineContacts = onlineContactsResponse.data;
+		// dispatch({
+		// 	type: UPDATE_CONTACTS,
+		// 	allContacts: onlineContacts
+		// });
+		//
+		// // 4) save updated user contacts into DB
+		// const updateUserDBResponse = await axios.put(
+		// 	'/api/profile/conversations',
+		// 	onlineContacts
+		// );
+		// if (updateUserDBResponse.status === 200) {
+		// 	dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
+		// } else {
+		// 	dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
+		// }
 	} else {
 		dispatch({ type: UPDATE_CONTACTS_ERROR });
 	}
@@ -133,26 +98,29 @@ export const onSelectContact = (
 
 	if (response.status === 200) {
 		dispatch({
-			type: TOLD_DB_CLIENT_IN_CONVERSATION
+			type: TOLD_DB_CLIENT_IS_ONLINE
 		});
 		dispatch({
 			type: UPDATE_CHAT,
 			last50Messages: response.data.last50Messages
 		});
 	} else {
-		dispatch({ type: TOLD_DB_CLIENT_IN_CONVERSATION_ERROR });
+		dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
 	}
 };
 
-socket.on('TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
-	newContactInfo
-) {
-	// console.log(
-	//   "TELL_CLIENT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ",
-	//   newContactInfo
-	// );
-	store.dispatch({
-		type: UPDATE_CONTACT_SOCKET_ID,
-		newContactInfo: newContactInfo
+if (clientSocket !== undefined) {
+	clientSocket.on('TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
+		newContactInfo
+	) {
+		console.log(
+			'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ',
+			newContactInfo
+		);
+		// telling the user contacts the user's new clientSocket id
+		store.dispatch({
+			type: UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
+			newContactInfo: newContactInfo
+		});
 	});
-});
+}

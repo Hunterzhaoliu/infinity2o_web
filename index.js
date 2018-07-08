@@ -17,6 +17,19 @@ mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
 
 const app = express();
+const server = require('http').createServer(app);
+
+// heroku dynamic port
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, function() {
+	console.log(
+		'Express server listening on port %d in %s mode',
+		this.address().port,
+		app.settings.env
+	);
+});
+
+const io = require('socket.io')(server);
 
 // wiring middlewares
 // middlewares = small functions that modify incoming requests to our
@@ -42,6 +55,12 @@ require('./routes/matchesRoutes')(app);
 require('./routes/conversationsRoutes')(app);
 require('./routes/legalRoutes')(app);
 
+// connection to redis
+const redis = require('redis').createClient(keys.redisURL);
+
+// allows for the use of redis inside routes
+app.set('redis', redis);
+
 if (process.env.NODE_ENV === 'production') {
 	// Express will serve up production assets like our main.js or main.css file
 	app.use(express.static('client/build'));
@@ -55,25 +74,14 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-// heroku dynamic port
-const PORT = process.env.PORT || 5000;
-server = app.listen(PORT, function() {
-	console.log(
-		'Express server listening on port %d in %s mode',
-		this.address().port,
-		app.settings.env
-	);
-});
+// console.log('Running serverSocket.io code...');
+io.on('connection', function(serverSocket) {
+	// allows for the use of serverSocket inside routes
+	app.set('serverSocket', serverSocket);
+	console.log('a user connected with serverSocket.id = ', serverSocket.id);
 
-let io = require('socket.io')(server);
-const ClientInConversationCollection = mongoose.model('clientsInConversation');
-
-io.on('connection', function(socket) {
-	app.set('socket', socket);
-	// console.log('a user connected with socket.id = ', socket.id);
-	// console.log('socket = ', socket);
 	// listens for messages to be sent
-	socket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
+	serverSocket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
 		messageInfo
 	) {
 		console.log(
@@ -82,19 +90,26 @@ io.on('connection', function(socket) {
 		);
 
 		// sends private message to other client
-		socket
+		serverSocket
 			.to(messageInfo.selectedContactSocketId)
 			.emit('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', messageInfo);
 	});
 
-	socket.on('disconnect', async function() {
-		// remove document from ClientInConversation collection
-		try {
-			await ClientInConversationCollection.deleteOne({
-				socketId: socket.id
-			});
-		} catch (error) {
-			console.log('delete client in conversation DB error = ', error);
-		}
+	serverSocket.on('disconnect', () => {
+		console.log(
+			'user disconnected with serverSocket.id = ',
+			serverSocket.id
+		);
+
+		redis.get(serverSocket.id, function(err, reply) {
+			if (reply !== null) {
+				const mongoDBUserId = reply.toString();
+				// we need to delete 2 entries in redis
+				// 1) mongoDBUserId: socketId
+				// 2) socketId: mongoDBUserId
+				redis.del(mongoDBUserId);
+				redis.del(serverSocket.id);
+			}
+		});
 	});
 });
