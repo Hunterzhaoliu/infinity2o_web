@@ -2,7 +2,8 @@ import {
 	UPDATE_WINDOW_WIDTH,
 	TOGGLE_SIDER,
 	UPDATE_MATCHES_SEEN,
-	DECREMENT_NUMBER_OF_UNSEEN_MATCHES
+	DECREMENT_NUMBER_OF_UNSEEN_MATCHES,
+	NEW_UNSEEN_MATCHES
 } from '../actions/types';
 
 let cloneObject = obj => {
@@ -32,6 +33,9 @@ export default function(state = initialState, action) {
 		case DECREMENT_NUMBER_OF_UNSEEN_MATCHES:
 			newState.numberOfUnseenMatches -= 1;
 			newState.basicMatchInfo[action.basicMatchInfoIndex]['seen'] = true;
+			return newState;
+		case NEW_UNSEEN_MATCHES:
+			newState.numberOfUnseenMatches += action.numberOfUnseenMatchesToAdd;
 			return newState;
 		default:
 			return state;

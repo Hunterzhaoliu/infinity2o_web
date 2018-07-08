@@ -15,7 +15,8 @@ import {
 	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
 	RUNNING_ATHENA_FOR_USER_START,
 	RUNNING_ATHENA_FOR_USER_DONE,
-	RUNNING_ATHENA_FOR_USER_ERROR
+	RUNNING_ATHENA_FOR_USER_ERROR,
+	NEW_UNSEEN_MATCHES
 } from '../types';
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
 import { store } from '../../index';
@@ -78,7 +79,7 @@ export const onVote = (
 		dispatch({ type: SAVE_VOTE_ERROR, saveIndex: askIndex });
 	}
 
-	// for running minerva the first time user logins and votes
+	// for running athena
 	dispatch({
 		type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
 		additionalVotes: 1
@@ -92,7 +93,6 @@ export const onVote = (
 		dispatch({
 			type: RUNNING_ATHENA_FOR_USER_START
 		});
-		history.push('/matches');
 		const info = {
 			mongoDBUserId: store.getState().auth.mongoDBUserId
 		};
@@ -109,6 +109,12 @@ export const onVote = (
 			// the numberOfUnseenMatches is also updated in auth
 			dispatch({
 				type: RUNNING_ATHENA_FOR_USER_DONE
+			});
+
+			// update match badge icon
+			dispatch({
+				type: NEW_UNSEEN_MATCHES,
+				numberOfUnseenMatchesToAdd: 2
 			});
 		} else {
 			dispatch({

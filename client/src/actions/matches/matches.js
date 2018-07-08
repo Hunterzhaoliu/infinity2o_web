@@ -29,20 +29,22 @@ export const checkIfMatchSeen = (
 	matchNeededToBeChecked,
 	mongoDBUserId
 ) => async dispatch => {
-	if (matchNeededToBeChecked['seen']) {
-		// already seen this match
-	} else {
-		dispatch({
-			type: DECREMENT_NUMBER_OF_UNSEEN_MATCHES,
-			basicMatchInfoIndex: 0
-		});
+	if (matchNeededToBeChecked !== undefined) {
+		if (matchNeededToBeChecked['seen']) {
+			// already seen this match
+		} else {
+			dispatch({
+				type: DECREMENT_NUMBER_OF_UNSEEN_MATCHES,
+				basicMatchInfoIndex: 0
+			});
 
-		// mongoDB hit that changes if the match seen status
-		const seenInfo = {
-			userId: mongoDBUserId,
-			matchId: matchNeededToBeChecked['id']
-		};
-		await axios.put('/api/matches/seen', seenInfo);
+			// mongoDB hit that changes if the match seen status
+			const seenInfo = {
+				userId: mongoDBUserId,
+				matchId: matchNeededToBeChecked['id']
+			};
+			await axios.put('/api/matches/seen', seenInfo);
+		}
 	}
 };
 
