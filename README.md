@@ -95,7 +95,6 @@ When you want to add something...
 
 1. `cd infinity2o_server`
 2. `heroku login` username = `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
-
 3. If first time, `git remote add heroku-staging https://git.heroku.com/infinity2o-staging.git` and `git remote add heroku https://git.heroku.com/infinity2o.git`
 4. `git checkout staging`
 5. `git push origin staging`
@@ -103,10 +102,11 @@ When you want to add something...
 7. Check code is deployed on https://infinity2o-staging.herokuapp.com/
 8. `git checkout master`
 9. `git merge staging`
-10. `git push origin master`
-11. `git push heroku master`
-12. Check code is deployed on https://infinity2o.herokuapp.com/
-13. Check code is deployed on https://www.infinity2o.com/
+10. Update `infinity2o_server/client/.env.production` `REACT_APP_SOCKET_DOMAIN=https://infinity2o.com/`
+11. `git push origin master`
+12. `git push heroku master`
+13. Check code is deployed on https://infinity2o.herokuapp.com/
+14. Check code is deployed on https://www.infinity2o.com/
 
 ### Design principles
 
