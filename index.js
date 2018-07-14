@@ -107,8 +107,7 @@ io.on('connection', function(serverSocket) {
 				// we need to delete 2 entries in redis
 				// 1) mongoDBUserId: socketId
 				// 2) socketId: mongoDBUserId
-				redis.del(mongoDBUserId);
-				redis.del(serverSocket.id);
+				redis.del([serverSocket.id, mongoDBUserId]);
 			}
 		});
 	});

@@ -89,15 +89,23 @@ module.exports = app => {
 			} = request.body;
 
 			const redis = request.app.get('redis');
+
+			redis.get(mongoDBUserId, function(err, reply) {
+				if (reply !== null) {
+					const oldClientSocketId = reply.toString();
+					redis.del(oldClientSocketId);
+				}
+			});
+
 			redis.set(mongoDBUserId, clientSocketId);
 			redis.set(clientSocketId, mongoDBUserId);
 
-			// tellContactsUserIsOnline(
-			// 	userConversations,
-			// 	mongoDBUserId,
-			// 	serverSocket,
-			// 	socketId
-			// );
+			tellContactsUserIsOnline(
+				userConversations,
+				mongoDBUserId,
+				serverSocket,
+				socketId
+			);
 			response.send("added user's serverSocketId to redis");
 		}
 	);
