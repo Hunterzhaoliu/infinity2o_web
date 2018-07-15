@@ -2,6 +2,27 @@ const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const UserCollection = mongoose.model('users');
 
+const updateUserConversationsWithOnlineContacts = async (
+	userConversations,
+	redis
+) => {
+	for (let i = 0; i < userConversations.length; i++) {
+		await redis.get(userConversations[i].matchId, function(err, reply) {
+			if (reply !== null) {
+				const contactSocketId = reply.toString();
+				console.log('contactSocketId = ', contactSocketId);
+				// the current contact is online
+				userConversations[i]['isOnline'] = true;
+				userConversations[i]['socketId'] = contactSocketId;
+			} else {
+				userConversations[i]['isOnline'] = false;
+				userConversations[i]['socketId'] = null;
+			}
+		});
+	}
+	return userConversations;
+};
+
 module.exports = app => {
 	app.post('/api/profile', requireLogin, async (request, response) => {
 		const {
@@ -32,10 +53,15 @@ module.exports = app => {
 		'/api/profile/conversations',
 		requireLogin,
 		async (request, response) => {
-			// request.body = onlineContacts
-			request.user.conversations = request.body;
+			const redis = request.app.get('redis');
+			const updatedUserConversations = await updateUserConversationsWithOnlineContacts(
+				request.body,
+				redis
+			);
+
+			request.user.conversations = updatedUserConversations;
 			const user = await request.user.save();
-			response.send(user);
+			response.send(updatedUserConversations);
 		}
 	);
 

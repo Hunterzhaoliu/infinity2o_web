@@ -1,31 +1,6 @@
 const requireLogin = require('../middlewares/requireLogin');
 const mongoose = require('mongoose');
 const ConversationCollection = mongoose.model('conversations');
-const ClientInConversationCollection = mongoose.model('clientsInConversation');
-
-const getOnlineContacts = async allContacts => {
-	let onlineContacts = [];
-	for (let i = 0; i < allContacts.length; i++) {
-		const contactInConversation = await ClientInConversationCollection.findOne(
-			{
-				mongoDBUserId: allContacts[i].matchId
-			}
-		);
-
-		if (contactInConversation !== null) {
-			// the current contact is online
-			allContacts[i]['isOnline'] = true;
-			allContacts[i]['socketId'] = contactInConversation.socketId;
-			onlineContacts.push(allContacts[i]);
-		} else {
-			allContacts[i]['isOnline'] = false;
-			allContacts[i]['socketId'] = null;
-			onlineContacts.push(allContacts[i]);
-		}
-	}
-	console.log('onlineContacts = ', onlineContacts);
-	return onlineContacts;
-};
 
 const tellContactsUserIsOnline = async (
 	userConversations,
@@ -68,15 +43,6 @@ module.exports = app => {
 		});
 		response.send(conversation);
 	});
-
-	app.get(
-		'/api/conversations/user_contacts_online_status',
-		requireLogin,
-		async (request, response) => {
-			console.log('request.query = ', request.query);
-			response.send('onlineContacts are not ready yet');
-		}
-	);
 
 	app.post(
 		'/api/conversations/user_online',

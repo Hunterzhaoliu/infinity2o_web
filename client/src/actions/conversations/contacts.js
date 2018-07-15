@@ -5,8 +5,8 @@ import {
 	UPDATE_CHAT,
 	UPDATE_CHAT_ERROR,
 	ON_SELECT_CONTACT,
-	// SAVE_USER_CONVERSATIONS_SUCCESS,
-	// SAVE_USER_CONVERSATIONS_ERROR,
+	SAVE_USER_CONVERSATIONS_SUCCESS,
+	SAVE_USER_CONVERSATIONS_ERROR,
 	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
 	TOLD_DB_CLIENT_IS_ONLINE,
 	TOLD_DB_CLIENT_IS_ONLINE_ERROR
@@ -17,16 +17,15 @@ import { clientSocket } from '../auth';
 export const fetchConversations = () => async dispatch => {
 	// 1) hit /api/current_user to get allContacts
 	const userResponse = await axios.get('/api/current_user');
-
 	if (userResponse.status === 200) {
-		// 2) display chat log of first conversation
 		const contactChatDisplayIndex = 0;
+
+		// 2) display chat log of first conversation
 		let conversationId;
-		const userConversations = userResponse.data.conversation;
+		const userConversations = userResponse.data.conversations;
 		if (userConversations !== undefined && userConversations.length >= 1) {
 			conversationId =
 				userConversations[contactChatDisplayIndex].conversationId;
-
 			// get chat logs by hitting GET api/conversations
 			const conversationsResponse = await axios.get(
 				'/api/conversations?conversationId=' + conversationId
@@ -50,34 +49,24 @@ export const fetchConversations = () => async dispatch => {
 				dispatch({ type: UPDATE_CHAT_ERROR });
 			}
 
-			// 3) update user with up to date contact clientSocket ids
-			console.log('userConversations = ', userConversations);
-
-			const onlineContactsResponse = await axios.get(
-				'/api/conversations/user_contacts_online_status?allContacts=' +
-					userConversations
+			// 3) update DB and user with newest contact clientSocket ids
+			const updateUserDBConversationsResponse = await axios.put(
+				'/api/profile/conversations',
+				userConversations
 			);
-
-			if (onlineContactsResponse.status === 200) {
-				const onlineContacts = onlineContactsResponse.data;
+			if (updateUserDBConversationsResponse.status === 200) {
+				const updatedUserConversations =
+					updateUserDBConversationsResponse.data;
 				dispatch({
 					type: UPDATE_CONTACTS,
-					allContacts: onlineContacts
+					allContacts: updatedUserConversations
 				});
+				dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
 			} else {
 				dispatch({ type: UPDATE_CONTACTS_ERROR });
-			}
 
-			// // 4) save updated user contacts into DB
-			// const updateUserDBResponse = await axios.put(
-			// 	'/api/profile/conversations',
-			// 	onlineContacts
-			// );
-			// if (updateUserDBResponse.status === 200) {
-			// 	dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
-			// } else {
-			// 	dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
-			// }
+				dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
+			}
 		}
 	}
 };
