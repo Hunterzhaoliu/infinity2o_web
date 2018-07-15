@@ -20,7 +20,7 @@ const tellContactsUserIsOnline = async (
 					socketId: clientSocketId
 				};
 
-				// the current contact is online
+				// send message to contact telling them we are also online
 				serverSocket
 					.to(contactInConversation['socketId'])
 					.emit(
@@ -28,7 +28,7 @@ const tellContactsUserIsOnline = async (
 						newContactInfo
 					);
 				console.log(
-					'updated the socketId of this contact: ' +
+					'updated the socketId of contact: ' +
 						contactInConversation['mongoDBUserId']
 				);
 			}
@@ -68,13 +68,13 @@ module.exports = app => {
 
 			const serverSocket = request.app.get('serverSocket');
 
-			// tellContactsUserIsOnline(
-			// 	userConversations,
-			// 	mongoDBUserId,
-			// 	serverSocket,
-			// 	clientSocketId,
-			// 	redis
-			// );
+			tellContactsUserIsOnline(
+				userConversations,
+				mongoDBUserId,
+				serverSocket,
+				clientSocketId,
+				redis
+			);
 			response.send("added user's serverSocketId to redis");
 		}
 	);
