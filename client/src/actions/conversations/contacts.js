@@ -1,12 +1,12 @@
 import axios from 'axios';
 import {
-	//UPDATE_CONTACTS,
+	UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
 	UPDATE_CHAT,
 	UPDATE_CHAT_ERROR,
 	ON_SELECT_CONTACT,
-	//SAVE_USER_CONVERSATIONS_SUCCESS,
-	//SAVE_USER_CONVERSATIONS_ERROR,
+	// SAVE_USER_CONVERSATIONS_SUCCESS,
+	// SAVE_USER_CONVERSATIONS_ERROR,
 	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
 	TOLD_DB_CLIENT_IS_ONLINE,
 	TOLD_DB_CLIENT_IS_ONLINE_ERROR
@@ -49,33 +49,36 @@ export const fetchConversations = () => async dispatch => {
 			} else {
 				dispatch({ type: UPDATE_CHAT_ERROR });
 			}
+
+			// 3) update user with up to date contact clientSocket ids
+			console.log('userConversations = ', userConversations);
+
+			const onlineContactsResponse = await axios.get(
+				'/api/conversations/user_contacts_online_status?allContacts=' +
+					userConversations
+			);
+
+			if (onlineContactsResponse.status === 200) {
+				const onlineContacts = onlineContactsResponse.data;
+				dispatch({
+					type: UPDATE_CONTACTS,
+					allContacts: onlineContacts
+				});
+			} else {
+				dispatch({ type: UPDATE_CONTACTS_ERROR });
+			}
+
+			// // 4) save updated user contacts into DB
+			// const updateUserDBResponse = await axios.put(
+			// 	'/api/profile/conversations',
+			// 	onlineContacts
+			// );
+			// if (updateUserDBResponse.status === 200) {
+			// 	dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
+			// } else {
+			// 	dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
+			// }
 		}
-
-		console.log('userConversations = ', userConversations);
-
-		// const onlineContactsResponse = await axios.get(
-		// 	'/api/conversations/user_contacts_online_status?allContacts=' +
-		// 		userConversations
-		// );
-		// // 3) update user with up to date contact clientSocket ids
-		// const onlineContacts = onlineContactsResponse.data;
-		// dispatch({
-		// 	type: UPDATE_CONTACTS,
-		// 	allContacts: onlineContacts
-		// });
-		//
-		// // 4) save updated user contacts into DB
-		// const updateUserDBResponse = await axios.put(
-		// 	'/api/profile/conversations',
-		// 	onlineContacts
-		// );
-		// if (updateUserDBResponse.status === 200) {
-		// 	dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
-		// } else {
-		// 	dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
-		// }
-	} else {
-		dispatch({ type: UPDATE_CONTACTS_ERROR });
 	}
 };
 
