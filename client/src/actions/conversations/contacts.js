@@ -103,16 +103,16 @@ export const onSelectContact = (
 
 if (clientSocket !== undefined) {
 	clientSocket.on('TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
-		newContactInfo
+		newUserSocketInfo
 	) {
 		console.log(
-			'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ',
-			newContactInfo
+			'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newUserSocketInfo = ',
+			newUserSocketInfo
 		);
-		// telling the user contacts the user's new clientSocket id
+		// telling an online contact the user's new clientSocket id
 		store.dispatch({
 			type: UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
-			newContactInfo: newContactInfo
+			newUserSocketInfo: newUserSocketInfo
 		});
 	});
 }

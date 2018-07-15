@@ -19,7 +19,7 @@ let initialState = {
 	conversationId: null,
 	selectedContactOnline: false,
 	selectedContactSocketId: null,
-	hasToldDBClientInConversationError: false,
+	hasToldRedisClientOnlineError: false,
 	hasSaveUserConversationsError: false
 };
 
@@ -46,10 +46,10 @@ export default function(state = initialState, action) {
 			newState.selectedContactSocketId = action.socketId;
 			return newState;
 		case TOLD_DB_CLIENT_IS_ONLINE:
-			newState.hasToldDBClientInConversationError = false;
+			newState.hasToldRedisClientOnlineError = false;
 			return newState;
 		case TOLD_DB_CLIENT_IS_ONLINE_ERROR:
-			newState.hasToldDBClientInConversationError = true;
+			newState.hasToldRedisClientOnlineError = true;
 			return newState;
 		case SAVE_USER_CONVERSATIONS_SUCCESS:
 			newState.hasSaveUserConversationsError = false;
@@ -59,13 +59,13 @@ export default function(state = initialState, action) {
 			return newState;
 		case UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID:
 			newState.allContacts.forEach(function(contact) {
-				if (contact.matchId === action.newContactInfo.userId) {
+				if (contact.matchId === action.newUserSocketInfo.userId) {
 					// we found the contact that is online and are updating their socketId
-					contact.socketId = action.newContactInfo.socketId;
+					contact.socketId = action.newUserSocketInfo.socketId;
 
 					// not sure why need this
 					newState.selectedContactSocketId =
-						action.newContactInfo.socketId;
+						action.newUserSocketInfo.socketId;
 				}
 			});
 			return newState;

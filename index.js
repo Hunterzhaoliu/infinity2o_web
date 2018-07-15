@@ -10,7 +10,6 @@ require('./models/Answer');
 require('./models/ProfileQuestionDisplay');
 require('./models/ProfileVoteDisplay');
 require('./models/Conversation');
-require('./models/ClientInConversation');
 require('./services/passport');
 
 mongoose.Promise = global.Promise;

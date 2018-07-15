@@ -48,7 +48,6 @@ module.exports = app => {
 		for (let i = 0; i < userMatches.length; i++) {
 			mongoDBMatchIds.push(userMatches[i]['id']);
 		}
-
 		let matchesInfo = await getMatchesInfo(mongoDBMatchIds);
 		response.send(matchesInfo);
 	});
