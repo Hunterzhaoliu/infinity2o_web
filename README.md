@@ -17,7 +17,8 @@
     * Connect to AWS redis = `heroku redis:cli -a infinity2o-staging -c infinity2o-staging`
     * View all keys = `KEYS *`
     * Delete a key = `DEL keyValue`
-* Production:
+* Production: `heroku addons:info redis-reticulated-26782`
+    * Connect to AWS redis = `heroku redis:cli -a infinity2o -c infinity2o`
 
 ### mlab.com databases:
 

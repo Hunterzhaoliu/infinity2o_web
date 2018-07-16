@@ -22,12 +22,6 @@ const tellContactsUserIsOnline = async (
 				};
 
 				// send message to contact telling them we are also online
-				console.log('contact is online, need to send contact newInfo');
-				console.log('userConversations = ', userConversations);
-				console.log(
-					'contact socket id = ',
-					userConversations[i]['socketId']
-				);
 				serverSocket
 					.to(contactSocketId)
 					.emit(
@@ -35,7 +29,9 @@ const tellContactsUserIsOnline = async (
 						newUserSocketInfo
 					);
 				console.log(
-					'updated the socketId of contact: ' + contactMongoDBUserId
+					'updated contactMongoDBUserId = ' +
+						contactMongoDBUserId +
+						' with our socketId'
 				);
 			}
 		});

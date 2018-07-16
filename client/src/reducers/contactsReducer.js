@@ -62,10 +62,7 @@ export default function(state = initialState, action) {
 				if (contact.matchId === action.newUserSocketInfo.userId) {
 					// we found the contact that is online and are updating their socketId
 					contact.socketId = action.newUserSocketInfo.socketId;
-
-					// not sure why need this
-					newState.selectedContactSocketId =
-						action.newUserSocketInfo.socketId;
+					contact.isOnline = true;
 				}
 			});
 			return newState;
