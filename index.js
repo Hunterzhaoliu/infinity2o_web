@@ -79,6 +79,21 @@ io.on('connection', function(serverSocket) {
 	app.set('serverSocket', serverSocket);
 	console.log('a user connected with serverSocket.id = ', serverSocket.id);
 
+	serverSocket.on('TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
+		newUserSocketInfo
+	) {
+		console.log(
+			'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE = ',
+			newUserSocketInfo
+		);
+
+		serverSocket
+			.to(contactSocketId)
+			.emit(
+				'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
+				newUserSocketInfo
+			);
+	});
 	// listens for messages to be sent
 	serverSocket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
 		messageInfo
