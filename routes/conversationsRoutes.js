@@ -11,6 +11,7 @@ const tellContactsUserIsOnline = async (
 ) => {
 	// tell all the user's contacts that are already online that the user is online
 	for (let i = 0; i < userConversations.length; i++) {
+		console.log('inside of conversationsRoutes for loop');
 		const contactMongoDBUserId = userConversations[i]['matchId'];
 		redis.get(contactMongoDBUserId, function(err, reply) {
 			if (reply !== null) {
@@ -21,6 +22,9 @@ const tellContactsUserIsOnline = async (
 					socketId: clientSocketId
 				};
 
+				console.log(
+					'sending message to contact telling them we are also online'
+				);
 				// send message to contact telling them we are also online
 				serverSocket
 					.to(contactSocketId)
@@ -70,6 +74,7 @@ module.exports = app => {
 
 			const serverSocket = request.app.get('serverSocket');
 
+			console.log('tellContactsUserIsOnline');
 			tellContactsUserIsOnline(
 				userConversations,
 				mongoDBUserId,
