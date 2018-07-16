@@ -7,12 +7,9 @@ import {
 	ON_SELECT_CONTACT,
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
-	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
-	TOLD_DB_CLIENT_IS_ONLINE,
-	TOLD_DB_CLIENT_IS_ONLINE_ERROR
+	TOLD_REDIS_CLIENT_IS_ONLINE,
+	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR
 } from '../types';
-import { store } from '../../index';
-import { clientSocket } from '../auth';
 
 export const fetchConversations = () => async dispatch => {
 	// 1) hit /api/current_user to get allContacts
@@ -90,29 +87,13 @@ export const onSelectContact = (
 
 	if (response.status === 200) {
 		dispatch({
-			type: TOLD_DB_CLIENT_IS_ONLINE
+			type: TOLD_REDIS_CLIENT_IS_ONLINE
 		});
 		dispatch({
 			type: UPDATE_CHAT,
 			last50Messages: response.data.last50Messages
 		});
 	} else {
-		dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
+		dispatch({ type: TOLD_REDIS_CLIENT_IS_ONLINE_ERROR });
 	}
 };
-
-if (clientSocket !== undefined) {
-	clientSocket.on('TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
-		newUserSocketInfo
-	) {
-		console.log(
-			'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newUserSocketInfo = ',
-			newUserSocketInfo
-		);
-		// telling an online contact the user's new clientSocket id
-		store.dispatch({
-			type: UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
-			newUserSocketInfo: newUserSocketInfo
-		});
-	});
-}

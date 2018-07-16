@@ -2,8 +2,8 @@ import {
 	UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
 	ON_SELECT_CONTACT,
-	TOLD_DB_CLIENT_IS_ONLINE,
-	TOLD_DB_CLIENT_IS_ONLINE_ERROR,
+	TOLD_REDIS_CLIENT_IS_ONLINE,
+	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR,
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
 	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID
@@ -45,10 +45,10 @@ export default function(state = initialState, action) {
 			newState.selectedContactOnline = action.isOnline;
 			newState.selectedContactSocketId = action.socketId;
 			return newState;
-		case TOLD_DB_CLIENT_IS_ONLINE:
+		case TOLD_REDIS_CLIENT_IS_ONLINE:
 			newState.hasToldRedisClientOnlineError = false;
 			return newState;
-		case TOLD_DB_CLIENT_IS_ONLINE_ERROR:
+		case TOLD_REDIS_CLIENT_IS_ONLINE_ERROR:
 			newState.hasToldRedisClientOnlineError = true;
 			return newState;
 		case SAVE_USER_CONVERSATIONS_SUCCESS:
