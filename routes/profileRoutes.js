@@ -25,6 +25,7 @@ const updateUserConversationsWithOnlineContacts = async (
 			}
 		});
 	}
+	console.log('userConversations = ', userConversations);
 	return userConversations;
 };
 
@@ -63,7 +64,10 @@ module.exports = app => {
 				request.body,
 				redis
 			);
-			console.log('updatedUserConversations');
+			console.log(
+				'updatedUserConversations = ',
+				updatedUserConversations
+			);
 			request.user.conversations = updatedUserConversations;
 			const user = await request.user.save();
 			response.send(updatedUserConversations);
