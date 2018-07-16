@@ -17,6 +17,8 @@ export const fetchConversations = () => async dispatch => {
 	if (userResponse.status === 200) {
 		const userConversations = userResponse.data.conversations;
 
+		console.log('/api/profile/conversations');
+
 		// 2) update DB and user with newest contact clientSocket ids
 		const updateUserDBConversationsResponse = await axios.put(
 			'/api/profile/conversations',
@@ -42,6 +44,7 @@ export const fetchConversations = () => async dispatch => {
 				conversationId =
 					updatedUserConversations[contactChatDisplayIndex]
 						.conversationId;
+
 				// get chat logs by hitting GET api/conversations
 				const conversationsResponse = await axios.get(
 					'/api/conversations?conversationId=' + conversationId

@@ -6,6 +6,7 @@ const updateUserConversationsWithOnlineContacts = async (
 	userConversations,
 	redis
 ) => {
+	console.log('updateUserConversationsWithOnlineContacts');
 	for (let i = 0; i < userConversations.length; i++) {
 		await redis.get(userConversations[i].matchId, function(err, reply) {
 			if (reply !== null) {
@@ -58,7 +59,7 @@ module.exports = app => {
 				request.body,
 				redis
 			);
-
+			console.log('updatedUserConversations');
 			request.user.conversations = updatedUserConversations;
 			const user = await request.user.save();
 			response.send(updatedUserConversations);
