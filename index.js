@@ -109,5 +109,9 @@ io.on('connection', function(serverSocket) {
 				redis.del([serverSocket.id, mongoDBUserId]);
 			}
 		});
+
+		// TODO: figure out a way to tell online contacts that contact has left
+		// may not be able to do here because may send signal that user has left
+		// when the user is just changing pages
 	});
 });

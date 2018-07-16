@@ -102,10 +102,10 @@ export const initializeApp = () => async dispatch => {
 		clientSocket.on(
 			'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
 			function(newUserSocketInfo) {
-				console.log(
-					'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newUserSocketInfo = ',
-					newUserSocketInfo
-				);
+				// console.log(
+				// 	'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newUserSocketInfo = ',
+				// 	newUserSocketInfo
+				// );
 
 				// telling an online contact the user's new clientSocket id
 				dispatch({

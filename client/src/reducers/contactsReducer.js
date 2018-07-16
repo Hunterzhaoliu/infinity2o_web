@@ -60,6 +60,12 @@ export default function(state = initialState, action) {
 		case UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID:
 			newState.allContacts.forEach(function(contact) {
 				if (contact.matchId === action.newUserSocketInfo.userId) {
+					if (state.selectedContactSocketId === contact.socketId) {
+						// contact is also the currently selected contact
+						newState.selectedContactOnline = true;
+						newState.selectedContactSocketId =
+							action.newUserSocketInfo.socketId;
+					}
 					// we found the contact that is online and are updating their socketId
 					contact.socketId = action.newUserSocketInfo.socketId;
 					contact.isOnline = true;

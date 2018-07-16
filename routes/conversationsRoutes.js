@@ -14,7 +14,6 @@ const tellContactsUserIsOnline = async (
 		const contactMongoDBUserId = userConversations[i]['matchId'];
 		redis.get(contactMongoDBUserId, function(err, reply) {
 			if (reply !== null) {
-				console.log('contact is online');
 				const contactSocketId = reply.toString();
 				// contact is online
 				const newUserSocketInfo = {
@@ -22,7 +21,6 @@ const tellContactsUserIsOnline = async (
 					socketId: clientSocketId
 				};
 
-				console.log('contactSocketId = ', contactSocketId);
 				// send message to contact telling them we are also online
 				serverSocket
 					.to(contactSocketId)
@@ -30,11 +28,11 @@ const tellContactsUserIsOnline = async (
 						'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
 						newUserSocketInfo
 					);
-				console.log(
-					'updated contactMongoDBUserId = ' +
-						contactMongoDBUserId +
-						' with our socketId'
-				);
+				// console.log(
+				// 	'updated contactMongoDBUserId = ' +
+				// 		contactMongoDBUserId +
+				// 		' with our socketId'
+				// );
 			}
 		});
 	}
