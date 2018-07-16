@@ -20,13 +20,19 @@ export const fetchConversations = () => async dispatch => {
 		console.log('/api/profile/conversations');
 
 		// 2) update DB and user with newest contact clientSocket ids
-		const updateUserDBConversationsResponse = await axios.put(
+		const updatedUserDBConversationsResponse = await axios.put(
 			'/api/profile/conversations',
 			userConversations
 		);
-		if (updateUserDBConversationsResponse.status === 200) {
+
+		if (updatedUserDBConversationsResponse.status === 200) {
 			const updatedUserConversations =
-				updateUserDBConversationsResponse.data;
+				updatedUserDBConversationsResponse.data;
+			console.log(
+				'updatedUserConversations = ',
+				updatedUserConversations
+			);
+
 			dispatch({
 				type: UPDATE_CONTACTS,
 				allContacts: updatedUserConversations

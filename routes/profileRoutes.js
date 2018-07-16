@@ -6,8 +6,12 @@ const updateUserConversationsWithOnlineContacts = async (
 	userConversations,
 	redis
 ) => {
-	console.log('updateUserConversationsWithOnlineContacts');
+	console.log('userConversations = ', userConversations);
 	for (let i = 0; i < userConversations.length; i++) {
+		console.log(
+			'userConversations[i].matchId = ',
+			userConversations[i].matchId
+		);
 		await redis.get(userConversations[i].matchId, function(err, reply) {
 			if (reply !== null) {
 				const contactSocketId = reply.toString();
