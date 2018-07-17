@@ -25,11 +25,6 @@ export const fetchConversations = () => async dispatch => {
 		if (updatedUserDBConversationsResponse.status === 200) {
 			const updatedUserConversations =
 				updatedUserDBConversationsResponse.data;
-			console.log(
-				'updatedUserConversations inside contacts = ',
-				updatedUserConversations
-			);
-
 			dispatch({
 				type: UPDATE_CONTACTS,
 				allContacts: updatedUserConversations

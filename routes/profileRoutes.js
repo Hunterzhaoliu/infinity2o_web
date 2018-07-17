@@ -33,7 +33,6 @@ const updateUserConversationsWithOnlineContacts = async (
 			console.log(err);
 		});
 
-	console.log('userConversations after promise = ', userConversations);
 	return userConversations;
 };
 
