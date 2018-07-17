@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const UserCollection = mongoose.model('users');
@@ -7,25 +8,33 @@ const updateUserConversationsWithOnlineContacts = async (
 	redis
 ) => {
 	console.log('userConversations = ', userConversations);
-	for (let i = 0; i < userConversations.length; i++) {
-		console.log(
-			'userConversations[i].matchId = ',
-			userConversations[i].matchId
-		);
-		await redis.get(userConversations[i].matchId, function(err, reply) {
-			if (reply !== null) {
-				const contactSocketId = reply.toString();
-				console.log('contactSocketId = ', contactSocketId);
-				// the current contact is online
-				userConversations[i]['isOnline'] = true;
-				userConversations[i]['socketId'] = contactSocketId;
-			} else {
-				userConversations[i]['isOnline'] = false;
-				userConversations[i]['socketId'] = null;
-			}
-		});
-	}
-	console.log('userConversations = ', userConversations);
+	Promise.all(
+		_.map(userConversations, userConversation => {
+			return new Promise(function(resolve, reject) {
+				console.log(
+					'userConversation.matchId = ',
+					userConversation.matchId
+				);
+				// need to redo this redis.get because await is not working
+				redis.get(userConversation.matchId, function(err, reply) {
+					if (err) {
+						return reject(err);
+					} else if (reply !== null) {
+						const contactSocketId = reply.toString();
+						console.log('contactSocketId = ', contactSocketId);
+						// the current contact is online
+						userConversation['isOnline'] = true;
+						userConversation['socketId'] = contactSocketId;
+					}
+					resolve();
+				});
+			});
+		})
+	).catch(function(err) {
+		console.log(err);
+	});
+
+	console.log('userConversations after promise = ', userConversations);
 	return userConversations;
 };
 
@@ -69,7 +78,7 @@ module.exports = app => {
 				updatedUserConversations
 			);
 			request.user.conversations = updatedUserConversations;
-			const user = await request.user.save();
+			await request.user.save();
 			response.send(updatedUserConversations);
 		}
 	);
