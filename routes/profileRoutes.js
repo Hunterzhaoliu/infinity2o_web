@@ -7,21 +7,16 @@ const updateUserConversationsWithOnlineContacts = async (
 	userConversations,
 	redis
 ) => {
-	console.log('userConversations = ', userConversations);
-	Promise.all(
+	// https://stackoverflow.com/questions/29693469/node-js-wait-for-all-redis-queries-to-complete-before-continuing-with-execution
+	await Promise.all(
 		_.map(userConversations, userConversation => {
 			return new Promise(function(resolve, reject) {
-				console.log(
-					'userConversation.matchId = ',
-					userConversation.matchId
-				);
 				// need to redo this redis.get because await is not working
 				redis.get(userConversation.matchId, function(err, reply) {
 					if (err) {
 						return reject(err);
 					} else if (reply !== null) {
 						const contactSocketId = reply.toString();
-						console.log('contactSocketId = ', contactSocketId);
 						// the current contact is online
 						userConversation['isOnline'] = true;
 						userConversation['socketId'] = contactSocketId;
@@ -30,9 +25,13 @@ const updateUserConversationsWithOnlineContacts = async (
 				});
 			});
 		})
-	).catch(function(err) {
-		console.log(err);
-	});
+	)
+		.then(function() {
+			// console.log('All operations are done');
+		})
+		.catch(function(err) {
+			console.log(err);
+		});
 
 	console.log('userConversations after promise = ', userConversations);
 	return userConversations;
@@ -72,10 +71,6 @@ module.exports = app => {
 			const updatedUserConversations = await updateUserConversationsWithOnlineContacts(
 				request.body,
 				redis
-			);
-			console.log(
-				'updatedUserConversations = ',
-				updatedUserConversations
 			);
 			request.user.conversations = updatedUserConversations;
 			await request.user.save();
