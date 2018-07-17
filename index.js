@@ -84,7 +84,7 @@ io.on('connection', function(serverSocket) {
 		messageInfo
 	) {
 		console.log(
-			'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo = ',
+			'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo index = ',
 			messageInfo
 		);
 

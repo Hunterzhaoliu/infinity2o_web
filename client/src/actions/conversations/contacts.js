@@ -8,8 +8,10 @@ import {
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
 	TOLD_REDIS_CLIENT_IS_ONLINE,
-	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR
+	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR,
+	DISPLAY_RECEIVED_MESSAGE
 } from '../types';
+import { clientSocket } from '../auth';
 
 export const fetchConversations = () => async dispatch => {
 	// 1) hit /api/current_user to get allContacts
@@ -75,6 +77,21 @@ export const fetchConversations = () => async dispatch => {
 			dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
 		}
 	}
+
+	clientSocket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(
+		messageInfo
+	) {
+		// No need to save message into DB since the message was already
+		// saved by client A. We just need to display the message to us(Client B)
+		console.log(
+			'TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A messageInfo contacts = ',
+			messageInfo
+		);
+		dispatch({
+			type: DISPLAY_RECEIVED_MESSAGE,
+			messageInfo: messageInfo
+		});
+	});
 };
 
 export const onSelectContact = (

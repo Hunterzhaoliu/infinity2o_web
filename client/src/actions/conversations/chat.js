@@ -3,10 +3,8 @@ import {
 	ON_CHANGE_CURRENT_MESSAGE,
 	DISPLAY_SENT_MESSAGE,
 	MESSAGE_SENT_SUCCESS,
-	MESSAGE_SENT_ERROR,
-	DISPLAY_RECEIVED_MESSAGE
+	MESSAGE_SENT_ERROR
 } from '../types';
-import { store } from '../../index';
 import { clientSocket } from '../auth';
 
 export const onChangeCurrentMessage = newMessage => dispatch => {
@@ -38,7 +36,7 @@ export const sendMessageToServer = (
 			timeCreated: timeCreated
 		});
 		console.log(
-			'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A currentMessage = ',
+			'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A currentMessage chat = ',
 			currentMessage
 		);
 	}
@@ -58,20 +56,3 @@ export const sendMessageToServer = (
 		dispatch({ type: MESSAGE_SENT_ERROR });
 	}
 };
-
-if (clientSocket !== undefined) {
-	clientSocket.on('TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A', function(
-		messageInfo
-	) {
-		// No need to save message into DB since the message was already
-		// saved by client A. We just need to display the message to us(Client B)
-		console.log(
-			'TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A messageInfo = ',
-			messageInfo
-		);
-		store.dispatch({
-			type: DISPLAY_RECEIVED_MESSAGE,
-			messageInfo: messageInfo
-		});
-	});
-}
