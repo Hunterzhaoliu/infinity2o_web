@@ -77,16 +77,16 @@ if (process.env.NODE_ENV === 'production') {
 io.on('connection', function(serverSocket) {
 	// allows for the use of serverSocket inside routes
 	app.set('serverSocket', serverSocket);
-	console.log('a user connected with serverSocket.id = ', serverSocket.id);
+	// console.log('a user connected with serverSocket.id = ', serverSocket.id);
 
 	// listens for messages to be sent
 	serverSocket.on('TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A', function(
 		messageInfo
 	) {
-		console.log(
-			'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo index = ',
-			messageInfo
-		);
+		// console.log(
+		// 	'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo index = ',
+		// 	messageInfo
+		// );
 
 		// sends private message to other client
 		serverSocket
@@ -95,10 +95,10 @@ io.on('connection', function(serverSocket) {
 	});
 
 	serverSocket.on('disconnect', () => {
-		console.log(
-			'user disconnected with serverSocket.id = ',
-			serverSocket.id
-		);
+		// console.log(
+		// 	'user disconnected with serverSocket.id = ',
+		// 	serverSocket.id
+		// );
 
 		redis.get(serverSocket.id, function(err, reply) {
 			if (reply !== null) {

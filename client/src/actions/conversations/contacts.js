@@ -83,10 +83,10 @@ export const fetchConversations = () => async dispatch => {
 	) {
 		// No need to save message into DB since the message was already
 		// saved by client A. We just need to display the message to us(Client B)
-		console.log(
-			'TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A messageInfo contacts = ',
-			messageInfo
-		);
+		// console.log(
+		// 	'TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A messageInfo contacts = ',
+		// 	messageInfo
+		// );
 		dispatch({
 			type: DISPLAY_RECEIVED_MESSAGE,
 			messageInfo: messageInfo
