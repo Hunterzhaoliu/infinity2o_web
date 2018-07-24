@@ -80,7 +80,6 @@ export const initializeApp = () => async dispatch => {
     mongoDBUserId: response.data._id
   });
   if (store.getState().auth.loggedInState === "logged_in") {
-    console.log("process.env = ", process.env);
     console.log(
       "REACT_APP_SOCKET_DOMAIN = ",
       process.env.REACT_APP_SOCKET_DOMAIN
