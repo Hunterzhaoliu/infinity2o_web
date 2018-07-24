@@ -33,7 +33,6 @@ export default function(state = initialState, action) {
       }
       return newState;
     case FINISHED_BADGE_CALCULATIONS:
-      console.log("initialize user");
       newState.calculatedBadgeDisplays = true;
       return newState;
     default:
