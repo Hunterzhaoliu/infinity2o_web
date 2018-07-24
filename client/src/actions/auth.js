@@ -85,13 +85,13 @@ export const initializeApp = () => async dispatch => {
 			clientSocket = io(process.env.REACT_APP_SOCKET_DOMAIN_STAGING, {
 				transports: ['websocket']
 			});
-			console.log('in STAGING');
+			//console.log('in STAGING');
 		} else {
 			// in DEVELOPMENT or PRODUCTION
 			clientSocket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
 				transports: ['websocket']
 			});
-			console.log('in DEVELOPMENT or PRODUCTION');
+			//console.log('in DEVELOPMENT or PRODUCTION');
 		}
 
 		clientSocket.on('connect', () => {
