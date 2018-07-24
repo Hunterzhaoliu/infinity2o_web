@@ -1,126 +1,117 @@
-import axios from 'axios';
+import axios from "axios";
 import {
-	//UPDATE_CONTACTS,
-	UPDATE_CONTACTS_ERROR,
-	UPDATE_CHAT,
-	UPDATE_CHAT_ERROR,
-	ON_SELECT_CONTACT,
-	//SAVE_USER_CONVERSATIONS_SUCCESS,
-	//SAVE_USER_CONVERSATIONS_ERROR,
-	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
-	TOLD_DB_CLIENT_IS_ONLINE,
-	TOLD_DB_CLIENT_IS_ONLINE_ERROR
-} from '../types';
-import { store } from '../../index';
-import { clientSocket } from '../auth';
+  UPDATE_CONTACTS,
+  UPDATE_CONTACTS_ERROR,
+  UPDATE_CHAT,
+  UPDATE_CHAT_ERROR,
+  ON_SELECT_CONTACT,
+  SAVE_USER_CONVERSATIONS_SUCCESS,
+  SAVE_USER_CONVERSATIONS_ERROR,
+  TOLD_REDIS_CLIENT_IS_ONLINE,
+  TOLD_REDIS_CLIENT_IS_ONLINE_ERROR,
+  DISPLAY_RECEIVED_MESSAGE
+} from "../types";
+import { clientSocket } from "../auth";
 
 export const fetchConversations = () => async dispatch => {
-	// 1) hit /api/current_user to get allContacts
-	const userResponse = await axios.get('/api/current_user');
+  // 1) hit /api/current_user to get allContacts
+  const userResponse = await axios.get("/api/current_user");
+  if (userResponse.status === 200) {
+    const userConversations = userResponse.data.conversations;
+    // 2) update user conversations with newest contact clientSocket ids
+    const updatedUserConversationsResponse = await axios.put(
+      "/api/conversations/online_contacts",
+      userConversations
+    );
 
-	if (userResponse.status === 200) {
-		// 2) display chat log of first conversation
-		const contactChatDisplayIndex = 0;
-		let conversationId;
-		const userConversations = userResponse.data.conversation;
-		if (userConversations !== undefined && userConversations.length >= 1) {
-			conversationId =
-				userConversations[contactChatDisplayIndex].conversationId;
+    if (updatedUserConversationsResponse.status === 200) {
+      const updatedUserConversations = updatedUserConversationsResponse.data;
+      dispatch({
+        type: UPDATE_CONTACTS,
+        allContacts: updatedUserConversations
+      });
+      dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
 
-			// get chat logs by hitting GET api/conversations
-			const conversationsResponse = await axios.get(
-				'/api/conversations?conversationId=' + conversationId
-			);
+      const contactChatDisplayIndex = 0;
 
-			if (conversationsResponse.status === 200) {
-				// dispatch chat logs for the latest messages
-				dispatch({
-					type: ON_SELECT_CONTACT,
-					conversationId: conversationId,
-					isOnline:
-						userConversations[contactChatDisplayIndex].isOnline,
-					socketId:
-						userConversations[contactChatDisplayIndex].socketId
-				});
-				dispatch({
-					type: UPDATE_CHAT,
-					last50Messages: conversationsResponse.data.last50Messages
-				});
-			} else {
-				dispatch({ type: UPDATE_CHAT_ERROR });
-			}
-		}
+      // 3) display chat log of first conversation
+      let conversationId;
+      if (
+        updatedUserConversations !== undefined &&
+        updatedUserConversations.length >= 1
+      ) {
+        conversationId =
+          updatedUserConversations[contactChatDisplayIndex].conversationId;
 
-		console.log('userConversations = ', userConversations);
+        // get chat logs by hitting GET api/conversations
+        const conversationsResponse = await axios.get(
+          "/api/conversations?conversationId=" + conversationId
+        );
 
-		// const onlineContactsResponse = await axios.get(
-		// 	'/api/conversations/user_contacts_online_status?allContacts=' +
-		// 		userConversations
-		// );
-		// // 3) update user with up to date contact clientSocket ids
-		// const onlineContacts = onlineContactsResponse.data;
-		// dispatch({
-		// 	type: UPDATE_CONTACTS,
-		// 	allContacts: onlineContacts
-		// });
-		//
-		// // 4) save updated user contacts into DB
-		// const updateUserDBResponse = await axios.put(
-		// 	'/api/profile/conversations',
-		// 	onlineContacts
-		// );
-		// if (updateUserDBResponse.status === 200) {
-		// 	dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
-		// } else {
-		// 	dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
-		// }
-	} else {
-		dispatch({ type: UPDATE_CONTACTS_ERROR });
-	}
+        if (conversationsResponse.status === 200) {
+          // dispatch chat logs for the latest messages
+          dispatch({
+            type: ON_SELECT_CONTACT,
+            conversationId: conversationId,
+            isOnline:
+              updatedUserConversations[contactChatDisplayIndex].isOnline,
+            socketId: updatedUserConversations[contactChatDisplayIndex].socketId
+          });
+          dispatch({
+            type: UPDATE_CHAT,
+            last50Messages: conversationsResponse.data.last50Messages
+          });
+        } else {
+          dispatch({ type: UPDATE_CHAT_ERROR });
+        }
+      }
+    } else {
+      dispatch({ type: UPDATE_CONTACTS_ERROR });
+
+      dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
+    }
+  }
+
+  clientSocket.on("TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A", function(messageInfo) {
+    // No need to save message into DB since the message was already
+    // saved by client A. We just need to display the message to us(Client B)
+    // console.log(
+    // 	'TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A messageInfo contacts = ',
+    // 	messageInfo
+    // );
+    dispatch({
+      type: DISPLAY_RECEIVED_MESSAGE,
+      messageInfo: messageInfo
+    });
+  });
 };
 
 export const onSelectContact = (
-	conversationId,
-	isOnline,
-	socketId
+  conversationId,
+  isOnline,
+  socketId
 ) => async dispatch => {
-	dispatch({
-		type: ON_SELECT_CONTACT,
-		conversationId: conversationId,
-		isOnline: isOnline,
-		socketId: socketId
-	});
+  dispatch({
+    type: ON_SELECT_CONTACT,
+    conversationId: conversationId,
+    isOnline: isOnline,
+    socketId: socketId
+  });
 
-	// get previous messages in DB
-	const response = await axios.get(
-		'/api/conversations?conversationId=' + conversationId
-	);
+  // get previous messages in DB
+  const response = await axios.get(
+    "/api/conversations?conversationId=" + conversationId
+  );
 
-	if (response.status === 200) {
-		dispatch({
-			type: TOLD_DB_CLIENT_IS_ONLINE
-		});
-		dispatch({
-			type: UPDATE_CHAT,
-			last50Messages: response.data.last50Messages
-		});
-	} else {
-		dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
-	}
+  if (response.status === 200) {
+    dispatch({
+      type: TOLD_REDIS_CLIENT_IS_ONLINE
+    });
+    dispatch({
+      type: UPDATE_CHAT,
+      last50Messages: response.data.last50Messages
+    });
+  } else {
+    dispatch({ type: TOLD_REDIS_CLIENT_IS_ONLINE_ERROR });
+  }
 };
-
-if (clientSocket !== undefined) {
-	clientSocket.on('TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE', function(
-		newContactInfo
-	) {
-		console.log(
-			'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newContactInfo = ',
-			newContactInfo
-		);
-		// telling the user contacts the user's new clientSocket id
-		store.dispatch({
-			type: UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
-			newContactInfo: newContactInfo
-		});
-	});
-}

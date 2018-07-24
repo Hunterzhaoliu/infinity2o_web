@@ -5,8 +5,9 @@ import {
 	UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
 	UPDATE_MATCHES_SEEN,
 	UPDATE_OUR_SOCKET_ID,
-	TOLD_DB_CLIENT_IS_ONLINE,
-	TOLD_DB_CLIENT_IS_ONLINE_ERROR
+	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
+	TOLD_REDIS_CLIENT_IS_ONLINE,
+	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR
 } from './types';
 import { updateWithSavedColorTheme } from './colorTheme';
 import { store } from '../index';
@@ -64,10 +65,10 @@ async function storeUserSocketIdInRedis(
 			ourSocketId: clientSocketId
 		});
 		dispatch({
-			type: TOLD_DB_CLIENT_IS_ONLINE
+			type: TOLD_REDIS_CLIENT_IS_ONLINE
 		});
 	} else {
-		store.dispatch({ type: TOLD_DB_CLIENT_IS_ONLINE_ERROR });
+		store.dispatch({ type: TOLD_REDIS_CLIENT_IS_ONLINE_ERROR });
 	}
 }
 
@@ -96,6 +97,23 @@ export const initializeApp = () => async dispatch => {
 				clientSocket.id
 			);
 		});
+
+		// listen for when any contacts come online
+		clientSocket.on(
+			'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE',
+			function(newUserSocketInfo) {
+				// console.log(
+				// 	'TELL_CONTACT_X:ONE_OF_YOUR_CONTACTS_IS_ONLINE newUserSocketInfo = ',
+				// 	newUserSocketInfo
+				// );
+
+				// telling an online contact the user's new clientSocket id
+				dispatch({
+					type: UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
+					newUserSocketInfo: newUserSocketInfo
+				});
+			}
+		);
 
 		saveUserProfile(response, dispatch);
 		updateWithSavedColorTheme(dispatch, response.data.profile.colorTheme);

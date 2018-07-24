@@ -19,10 +19,6 @@ class Matches extends Component {
 	componentWillReceiveProps(nextProps) {
 		// basicMatchInfo contains the match Ids and whether they have been seen
 		if (nextProps.basicMatchInfo !== this.props.basicMatchInfo) {
-			console.log(
-				'nextProps.basicMatchInfo = ',
-				nextProps.basicMatchInfo
-			);
 			this.props.checkIfMatchSeen(
 				nextProps.basicMatchInfo[0],
 				nextProps.mongoDBUserId

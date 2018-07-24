@@ -2,8 +2,8 @@ import {
 	UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
 	ON_SELECT_CONTACT,
-	TOLD_DB_CLIENT_IS_ONLINE,
-	TOLD_DB_CLIENT_IS_ONLINE_ERROR,
+	TOLD_REDIS_CLIENT_IS_ONLINE,
+	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR,
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
 	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID
@@ -19,7 +19,7 @@ let initialState = {
 	conversationId: null,
 	selectedContactOnline: false,
 	selectedContactSocketId: null,
-	hasToldDBClientInConversationError: false,
+	hasToldRedisClientOnlineError: false,
 	hasSaveUserConversationsError: false
 };
 
@@ -45,11 +45,11 @@ export default function(state = initialState, action) {
 			newState.selectedContactOnline = action.isOnline;
 			newState.selectedContactSocketId = action.socketId;
 			return newState;
-		case TOLD_DB_CLIENT_IS_ONLINE:
-			newState.hasToldDBClientInConversationError = false;
+		case TOLD_REDIS_CLIENT_IS_ONLINE:
+			newState.hasToldRedisClientOnlineError = false;
 			return newState;
-		case TOLD_DB_CLIENT_IS_ONLINE_ERROR:
-			newState.hasToldDBClientInConversationError = true;
+		case TOLD_REDIS_CLIENT_IS_ONLINE_ERROR:
+			newState.hasToldRedisClientOnlineError = true;
 			return newState;
 		case SAVE_USER_CONVERSATIONS_SUCCESS:
 			newState.hasSaveUserConversationsError = false;
@@ -59,11 +59,16 @@ export default function(state = initialState, action) {
 			return newState;
 		case UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID:
 			newState.allContacts.forEach(function(contact) {
-				if (contact.matchId === action.newContactInfo.userId) {
+				if (contact.matchId === action.newUserSocketInfo.userId) {
+					if (state.selectedContactSocketId === contact.socketId) {
+						// contact is also the currently selected contact
+						newState.selectedContactOnline = true;
+						newState.selectedContactSocketId =
+							action.newUserSocketInfo.socketId;
+					}
 					// we found the contact that is online and are updating their socketId
-					contact.socketId = action.newContactInfo.socketId;
-					newState.selectedContactSocketId =
-						action.newContactInfo.socketId;
+					contact.socketId = action.newUserSocketInfo.socketId;
+					contact.isOnline = true;
 				}
 			});
 			return newState;
