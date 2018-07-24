@@ -7,7 +7,8 @@ import {
   UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
   TOLD_REDIS_CLIENT_IS_ONLINE,
   TOLD_REDIS_CLIENT_IS_ONLINE_ERROR,
-  FINISHED_BADGE_CALCULATIONS
+  FINISHED_BADGE_CALCULATIONS,
+  DISPLAY_RECEIVED_MESSAGE
 } from "./types";
 import { updateWithSavedColorTheme } from "./colorTheme";
 import { store } from "../index";
@@ -26,10 +27,6 @@ function saveUserProfile(response, dispatch) {
     additionalVotes: response.data.profile.asks.totalUserVotes
   });
 
-  console.log(
-    "store.getState().auth.calculatedBadgeDisplays = ",
-    store.getState().auth.calculatedBadgeDisplays
-  );
   if (store.getState().auth.calculatedBadgeDisplays) {
     console.log("user already calculatedBadgeDisplays");
   } else {
@@ -87,18 +84,17 @@ export const initializeApp = () => async dispatch => {
     mongoDBUserId: response.data._id
   });
   if (response.data.auth !== undefined) {
+    // user is logged in
     //console.log('window.location.href = ', window.location.href);
     if (window.location.href.includes("infinity2o-staging")) {
       clientSocket = io(process.env.REACT_APP_SOCKET_DOMAIN_STAGING, {
         transports: ["websocket"]
       });
-      console.log("in STAGING");
     } else {
       // in DEVELOPMENT or PRODUCTION
       clientSocket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
         transports: ["websocket"]
       });
-      console.log("in DEVELOPMENT or PRODUCTION");
     }
 
     clientSocket.on("connect", () => {
@@ -125,6 +121,31 @@ export const initializeApp = () => async dispatch => {
         type: UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
         newUserSocketInfo: newUserSocketInfo
       });
+    });
+
+    clientSocket.on("TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A", function(
+      messageInfo
+    ) {
+      // No need to save message into DB since the message was already
+      // saved by client A. We just need to display the message to us(Client B)
+      console.log(
+        "TELL_CLIENT_B:MESSAGE_FROM_CLIENT_A messageInfo contacts = ",
+        messageInfo
+      );
+
+      const activeSection = store.getState().colorTheme.activeSection;
+      const selectedContactSocketId = store.getState().contacts
+        .selectedContactSocketId;
+
+      console.log("activeSection = ", activeSection);
+      console.log("selectedContactSocketId = ", selectedContactSocketId);
+      // add condition to where this action only gets dispatched when user is the selectedContact
+      if (messageInfo.senderMongoDBUserId === selectedContactSocketId) {
+        dispatch({
+          type: DISPLAY_RECEIVED_MESSAGE,
+          messageInfo: messageInfo
+        });
+      }
     });
 
     saveUserProfile(response, dispatch);

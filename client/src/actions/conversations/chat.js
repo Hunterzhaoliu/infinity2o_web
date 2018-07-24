@@ -19,6 +19,7 @@ export const sendMessageToServer = (
   selectedContactOnline,
   selectedContactSocketId,
   name,
+  mongoDBUserId,
   currentMessage
 ) => async dispatch => {
   dispatch({
@@ -32,6 +33,7 @@ export const sendMessageToServer = (
     clientSocket.emit("TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A", {
       selectedContactSocketId: selectedContactSocketId,
       senderName: name,
+      senderMongoDBUserId: mongoDBUserId,
       message: currentMessage,
       timeCreated: timeCreated
     });
