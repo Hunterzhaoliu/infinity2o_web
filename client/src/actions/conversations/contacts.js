@@ -26,7 +26,6 @@ export const fetchConversations = () => async dispatch => {
 
     if (updatedUserConversationsResponse.status === 200) {
       const updatedUserConversations = updatedUserConversationsResponse.data;
-      console.log("updatedUserConversations = ", updatedUserConversations);
       dispatch({
         type: UPDATE_CONTACTS,
         allContacts: updatedUserConversations

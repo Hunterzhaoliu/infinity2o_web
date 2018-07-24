@@ -43,22 +43,35 @@ const updateUserConversationsWithOnlineContacts = async (
   userConversations,
   redis
 ) => {
-  _.map(userConversations, userConversation => {
-    // need to redo this redis.get because await is not working
-    redis.get(userConversation.matchId, function(err, reply) {
-      if (reply !== null) {
-        const contactSocketId = reply.toString();
-        // the current contact is online
-        userConversation["isOnline"] = true;
-        userConversation["socketId"] = contactSocketId;
-      } else {
-        // TODO: remove when we actually figure out how to detect user is offline
-        userConversation["isOnline"] = false;
-        userConversation["socketId"] = null;
-      }
+  // https://stackoverflow.com/questions/29693469/node-js-wait-for-all-redis-queries-to-complete-before-continuing-with-execution
+  await Promise.all(
+    _.map(userConversations, userConversation => {
+      return new Promise(function(resolve, reject) {
+        // need to redo this redis.get because await is not working
+        redis.get(userConversation.matchId, function(err, reply) {
+          if (err) {
+            return reject(err);
+          } else if (reply !== null) {
+            const contactSocketId = reply.toString();
+            // the current contact is online
+            userConversation["isOnline"] = true;
+            userConversation["socketId"] = contactSocketId;
+          } else if (reply === null) {
+            // TODO: remove when we actually figure out how to detect user is offline
+            userConversation["isOnline"] = false;
+            userConversation["socketId"] = null;
+          }
+          resolve();
+        });
+      });
+    })
+  )
+    .then(function() {
+      // console.log('All operations are done');
+    })
+    .catch(function(err) {
+      console.log(err);
     });
-  });
-
   return userConversations;
 };
 
