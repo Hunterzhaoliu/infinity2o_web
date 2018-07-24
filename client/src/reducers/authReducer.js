@@ -1,36 +1,41 @@
-import { SAVE_FETCHED_USER_AUTH, UPDATE_OUR_SOCKET_ID } from '../actions/types';
+import {
+  SAVE_FETCHED_USER_AUTH,
+  FINISHED_BADGE_CALCULATIONS
+} from "../actions/types";
 
 let cloneObject = obj => {
-	return JSON.parse(JSON.stringify(obj));
+  return JSON.parse(JSON.stringify(obj));
 };
 
 let initialState = {
-	loggedInState: 'not_logged_in',
-	googleId: null,
-	linkedInId: null,
-	location: null,
-	mongoDBUserId: null,
-	ourSocketId: null
+  loggedInState: "not_logged_in",
+  googleId: null,
+  linkedInId: null,
+  mongoDBUserId: null,
+  calculatedBadgeDisplays: false
 };
 
 export default function(state = initialState, action) {
-	let newState = cloneObject(state);
-	switch (action.type) {
-		case SAVE_FETCHED_USER_AUTH:
-			// when action.auth is undefined newState = initialState
-			newState = action.auth || initialState;
-			if (
-				action.auth !== undefined &&
-				(action.auth.googleId || action.auth.linkedInId)
-			) {
-				newState.loggedInState = 'logged_in';
-				newState.mongoDBUserId = action.mongoDBUserId;
-			}
-			return newState;
-		case UPDATE_OUR_SOCKET_ID:
-			newState.ourSocketId = action.ourSocketId;
-			return newState;
-		default:
-			return state;
-	}
+  let newState = cloneObject(state);
+  switch (action.type) {
+    case SAVE_FETCHED_USER_AUTH:
+      if (action.auth !== undefined) {
+        newState.loggedInState = "logged_in";
+        newState.mongoDBUserId = action.mongoDBUserId;
+        if (action.auth.googleId !== undefined) {
+          newState.googleId = action.auth.googleId;
+        } else {
+          newState.linkedInId = action.auth.linkedInId;
+        }
+      } else {
+        // user is logged out
+        newState = initialState;
+      }
+      return newState;
+    case FINISHED_BADGE_CALCULATIONS:
+      newState.calculatedBadgeDisplays = true;
+      return newState;
+    default:
+      return state;
+  }
 }
