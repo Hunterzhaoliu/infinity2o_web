@@ -51,7 +51,7 @@ const updateUserConversationsWithOnlineContacts = async (
         // the current contact is online
         userConversation["isOnline"] = true;
         userConversation["socketId"] = contactSocketId;
-      } else if (reply === null) {
+      } else {
         // TODO: remove when we actually figure out how to detect user is offline
         userConversation["isOnline"] = false;
         userConversation["socketId"] = null;
