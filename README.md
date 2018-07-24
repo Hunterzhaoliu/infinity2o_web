@@ -102,12 +102,11 @@ When you want to add something...
 6. `git push heroku-staging staging:master`
 7. Check code is deployed on https://infinity2o-staging.herokuapp.com/
 8. `git checkout master`
-9. `git merge staging`
-10. Update `infinity2o_server/client/.env.production` `REACT_APP_SOCKET_DOMAIN=https://infinity2o.com/`
-11. `git push origin master`
-12. `git push heroku master`
-13. Check code is deployed on https://infinity2o.herokuapp.com/
-14. Check code is deployed on https://www.infinity2o.com/
+9. `git merge --no-ff staging`
+10. `git push origin master`
+11. `git push heroku master`
+12. Check code is deployed on https://infinity2o.herokuapp.com/
+13. Check code is deployed on https://www.infinity2o.com/
 
 ### Design principles
 

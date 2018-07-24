@@ -80,13 +80,19 @@ export const initializeApp = () => async dispatch => {
 		mongoDBUserId: response.data._id
 	});
 	if (store.getState().auth.loggedInState === 'logged_in') {
-		// console.log(
-		// 	'REACT_APP_SOCKET_DOMAIN = ',
-		// 	process.env.REACT_APP_SOCKET_DOMAIN
-		// );
-		clientSocket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
-			transports: ['websocket']
-		});
+		//console.log('window.location.href = ', window.location.href);
+		if (window.location.href.includes('infinity2o-staging')) {
+			clientSocket = io(process.env.REACT_APP_SOCKET_DOMAIN_STAGING, {
+				transports: ['websocket']
+			});
+			console.log('in STAGING');
+		} else {
+			// in DEVELOPMENT or PRODUCTION
+			clientSocket = io(process.env.REACT_APP_SOCKET_DOMAIN, {
+				transports: ['websocket']
+			});
+			console.log('in DEVELOPMENT or PRODUCTION');
+		}
 
 		clientSocket.on('connect', () => {
 			// https://stackoverflow.com/questions/44270239/how-to-get-socket-id-of-a-connection-on-client-side
