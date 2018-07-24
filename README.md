@@ -102,10 +102,11 @@ When you want to add something...
 6. `git push heroku-staging staging:master`
 7. Check code is deployed on https://infinity2o-staging.herokuapp.com/
 8. `git checkout master`
-9. `git merge staging`
+9. `git merge --no-ff staging`
 10. `git push origin master`
 11. `git push heroku master`
-12. Check code is deployed on https://www.infinity2o.com/
+12. Check code is deployed on https://infinity2o.herokuapp.com/
+13. Check code is deployed on https://www.infinity2o.com/
 
 ### Design principles
 
