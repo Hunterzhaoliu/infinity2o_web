@@ -85,11 +85,9 @@ export const onStartConversation = (
 	};
 	// 1) need to remove match from current user
 	// 2) need to remove current user from match's matches
-	console.log("before response 1");
 	const response1 = await axios.delete("/api/matches/delete_match", {
 		data: { matchId: matchId }
 	});
-	console.log("response1.status = ", response1.status);
 	if (response1.status === 200) {
 		dispatch({
 			type: DELETED_MATCH_IN_DB
@@ -101,7 +99,6 @@ export const onStartConversation = (
 			"/api/matches/start_conversation",
 			matchInfo
 		);
-		console.log("response2.status = ", response2.status);
 		if (response2.status === 200) {
 			dispatch({
 				type: MOVE_TO_CONVERSATIONS
