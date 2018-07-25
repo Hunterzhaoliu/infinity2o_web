@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
 	SAVE_FETCHED_DAILY_MATCHES,
 	UPDATE_INITIAL_MATCH,
@@ -6,15 +6,15 @@ import {
 	MOVE_TO_CONVERSATIONS,
 	UPDATE_CONTACTS,
 	UPDATE_CONTACTS_ERROR,
-	DELETE_MATCH_IN_DB,
-	DELETE_MATCH_IN_DB_ERROR,
+	DELETED_MATCH_IN_DB,
+	DELETED_MATCH_IN_DB_ERROR,
 	DECREMENT_NUMBER_OF_UNSEEN_MATCHES
-} from '../types';
+} from "../types";
 
 export const fetchUserMatches = mongoDBUserId => async dispatch => {
 	// runs on Matches page
 	const matchesInfo = await axios.get(
-		'/api/matches?mongoDBUserId=' + mongoDBUserId
+		"/api/matches?mongoDBUserId=" + mongoDBUserId
 	);
 	dispatch({
 		type: SAVE_FETCHED_DAILY_MATCHES,
@@ -30,7 +30,7 @@ export const checkIfMatchSeen = (
 	mongoDBUserId
 ) => async dispatch => {
 	if (matchNeededToBeChecked !== undefined) {
-		if (matchNeededToBeChecked['seen']) {
+		if (matchNeededToBeChecked["seen"]) {
 			// already seen this match
 		} else {
 			dispatch({
@@ -41,9 +41,9 @@ export const checkIfMatchSeen = (
 			// mongoDB hit that changes if the match seen status
 			const seenInfo = {
 				userId: mongoDBUserId,
-				matchId: matchNeededToBeChecked['id']
+				matchId: matchNeededToBeChecked["id"]
 			};
-			await axios.put('/api/matches/seen', seenInfo);
+			await axios.put("/api/matches/seen", seenInfo);
 		}
 	}
 };
@@ -56,7 +56,7 @@ export const onNextMatch = (
 		type: ON_NEXT_MATCH
 	});
 	if (matchNeededToBeChecked !== null && mongoDBUserId !== null) {
-		if (matchNeededToBeChecked['seen']) {
+		if (matchNeededToBeChecked["seen"]) {
 			// already seen this match
 		} else {
 			dispatch({
@@ -67,9 +67,9 @@ export const onNextMatch = (
 			// mongoDB hit that changes if the match seen status
 			const seenInfo = {
 				userId: mongoDBUserId,
-				matchId: matchNeededToBeChecked['id']
+				matchId: matchNeededToBeChecked["id"]
 			};
-			await axios.put('/api/matches/seen', seenInfo);
+			await axios.put("/api/matches/seen", seenInfo);
 		}
 	}
 };
@@ -85,20 +85,23 @@ export const onStartConversation = (
 	};
 	// 1) need to remove match from current user
 	// 2) need to remove current user from match's matches
-	const response1 = await axios.delete('/api/matches/delete_match', {
+	console.log("before response 1");
+	const response1 = await axios.delete("/api/matches/delete_match", {
 		data: { matchId: matchId }
 	});
+	console.log("response1.status = ", response1.status);
 	if (response1.status === 200) {
 		dispatch({
-			type: DELETE_MATCH_IN_DB
+			type: DELETED_MATCH_IN_DB
 		});
 
 		// 3) update current user's conversations with new conversation
 		// 4) update match's conversations with new conversation
 		const response2 = await axios.post(
-			'/api/matches/start_conversation',
+			"/api/matches/start_conversation",
 			matchInfo
 		);
+		console.log("response2.status = ", response2.status);
 		if (response2.status === 200) {
 			dispatch({
 				type: MOVE_TO_CONVERSATIONS
@@ -113,11 +116,11 @@ export const onStartConversation = (
 				type: ON_NEXT_MATCH,
 				matchId: matchId
 			});
-			history.push('/conversations');
+			history.push("/conversations");
 		} else {
 			dispatch({ type: UPDATE_CONTACTS_ERROR });
 		}
 	} else {
-		dispatch({ type: DELETE_MATCH_IN_DB_ERROR });
+		dispatch({ type: DELETED_MATCH_IN_DB_ERROR });
 	}
 };

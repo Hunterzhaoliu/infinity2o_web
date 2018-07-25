@@ -2,8 +2,8 @@ import {
   SAVE_FETCHED_DAILY_MATCHES,
   UPDATE_INITIAL_MATCH,
   ON_NEXT_MATCH,
-  DELETE_MATCH_IN_DB,
-  DELETE_MATCH_IN_DB_ERROR,
+  DELETED_MATCH_IN_DB,
+  DELETED_MATCH_IN_DB_ERROR,
   UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
   RUNNING_ATHENA_FOR_USER_START,
   RUNNING_ATHENA_FOR_USER_DONE,
@@ -53,10 +53,10 @@ export default function(state = initialState, action) {
         newState.current1DisplayedMatches.push(currentMatch);
       }
       return newState;
-    case DELETE_MATCH_IN_DB:
+    case DELETED_MATCH_IN_DB:
       newState.hasDeleteMatchInDBError = false;
       return newState;
-    case DELETE_MATCH_IN_DB_ERROR:
+    case DELETED_MATCH_IN_DB_ERROR:
       newState.hasDeleteMatchInDBError = true;
       return newState;
     case UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS:

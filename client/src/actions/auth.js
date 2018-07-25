@@ -88,11 +88,6 @@ export const initializeApp = () => async dispatch => {
 		mongoDBUserId: response.data._id
 	});
 
-	// dispatch({
-	//   type: SAVE_FETCHED_TOTAL_NUMBER_OF_UNSEEN_MESSAGES,
-	//   totalNumberOfUnseenMessages: response.data.conversations.totalNumberOfUnseenMessages;
-	// })
-	//
 	if (response.data.auth !== undefined) {
 		// user is logged in
 		//console.log('window.location.href = ', window.location.href);
@@ -112,7 +107,7 @@ export const initializeApp = () => async dispatch => {
 			storeUserSocketIdInRedis(
 				dispatch,
 				response.data._id,
-				response.data.conversations,
+				response.data.conversations.userConversations,
 				clientSocket.id
 			);
 		});
