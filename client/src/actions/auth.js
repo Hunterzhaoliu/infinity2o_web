@@ -7,7 +7,9 @@ import {
 	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
 	TOLD_REDIS_CLIENT_IS_ONLINE,
 	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR,
-	DISPLAY_RECEIVED_MESSAGE
+	DISPLAY_RECEIVED_MESSAGE,
+	NEW_MESSAGE,
+	UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES
 } from "./types";
 import { updateWithSavedColorTheme } from "./colorTheme";
 import { store } from "../index";
@@ -20,6 +22,7 @@ function saveUserProfile(response, dispatch) {
 		profile: response.data.profile
 	});
 
+	// TODO: make sure that this is necessary
 	// separate dispatch that goes to matches reducer
 	dispatch({
 		type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
@@ -37,6 +40,16 @@ function saveUserProfile(response, dispatch) {
 		type: UPDATE_MATCHES_SEEN,
 		numberOfUnseenMatches: numberOfUnseenMatches,
 		basicMatchInfo: response.data.matches
+	});
+
+	console.log(
+		"response.data.conversations.totalNumberOfUnseenMessages = ",
+		response.data.conversations.totalNumberOfUnseenMessages
+	);
+	dispatch({
+		type: UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES,
+		totalNumberOfUnseenMessages:
+			response.data.conversations.totalNumberOfUnseenMessages
 	});
 }
 
@@ -130,18 +143,23 @@ export const initializeApp = () => async dispatch => {
 			//   messageInfo
 			// );
 
-			const activeSection = store.getState().colorTheme.activeSection;
-			const selectedContactSocketId = store.getState().contacts
-				.selectedContactSocketId;
 			const selectedContactMongoDBUserId = store.getState().contacts
 				.selectedContactMongoDBUserId;
-			console.log("activeSection = ", activeSection);
-			console.log("selectedContactSocketId = ", selectedContactSocketId);
+			console.log(
+				"selectedContactMongoDBUserId = ",
+				selectedContactMongoDBUserId
+			);
 			// the message should be displayed only if contact is selecting conversation with user
 			if (messageInfo.senderMongoDBUserId === selectedContactMongoDBUserId) {
 				dispatch({
 					type: DISPLAY_RECEIVED_MESSAGE,
 					messageInfo: messageInfo
+				});
+			} else {
+				// increments the totalNumberOfUnseenMessages and the numberOfUnseenMessages
+				dispatch({
+					type: NEW_MESSAGE,
+					userMongoDBUserId: messageInfo.userMongoDBUserId
 				});
 			}
 		});
