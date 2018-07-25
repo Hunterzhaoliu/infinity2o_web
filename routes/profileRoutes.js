@@ -77,21 +77,19 @@ module.exports = app => {
 		requireLogin,
 		async (request, response) => {
 			const { contactMongoDBUserId, conversationId } = request.body;
-			console.log("contactMongoDBUserId = ", contactMongoDBUserId);
-			console.log("conversationId = ", conversationId);
-
 			try {
+				// https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
 				await UserCollection.findOneAndUpdate(
-					{ _id: contactMongoDBUserId },
+					{
+						_id: contactMongoDBUserId,
+						"conversations.userConversations.conversationId": conversationId
+					},
 					{
 						$inc: {
-							"conversations.userConversations.$[elem].numberOfUnseenMessages": 1
-						},
-						$inc: {
-							"conversations.userConversations.totalNumberOfUnseenMessages": 1
+							"conversations.userConversations.$.numberOfUnseenMessages": 1,
+							"conversations.totalNumberOfUnseenMessages": 1
 						}
-					},
-					{ arrayFilters: [{ "elem.conversationId": conversationId }] }
+					}
 				);
 				response.send("done");
 			} catch (error) {

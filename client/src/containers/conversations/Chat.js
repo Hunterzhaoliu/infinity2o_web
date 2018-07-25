@@ -79,7 +79,7 @@ class Chat extends Component {
 					<List
 						dataSource={chat.last50Messages}
 						renderItem={item => {
-							const nameAndMessage = item.senderName + ": " + item.content;
+							const message = item.content;
 							let justifyValue = "start";
 							if (item.senderName === name) {
 								// TODO: what if both people's names are the senderName
@@ -111,7 +111,7 @@ class Chat extends Component {
 													padding: "4px 15px 4px"
 												}}
 											>
-												{nameAndMessage}
+												{message}
 											</p>
 										</List.Item>
 									</Col>

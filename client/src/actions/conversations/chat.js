@@ -46,11 +46,6 @@ export const sendMessageToServer = (
 	// save sent message into database and update the numberOfUnseenMessages for
 	// the contact
 
-	console.log(
-		"selectedContactMongoDBUserId inside chat = ",
-		selectedContactMongoDBUserId
-	);
-
 	const messageInfo = {
 		conversationId: conversationId,
 		senderName: name,
