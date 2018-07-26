@@ -59,7 +59,7 @@ const userSchema = new Schema(
 		matches: [Match],
 		conversations: {
 			userConversations: [UserConversation],
-			totalNumberOfUnseenMessagesOnLastLogin: {
+			totalNumberOfUnseenMessages: {
 				type: Number,
 				default: 0
 			}

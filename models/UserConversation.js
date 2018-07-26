@@ -7,7 +7,7 @@ const userConversationSchema = new Schema({
 	matchId: { type: Schema.Types.ObjectId, ref: "User" },
 	isOnline: Boolean,
 	socketId: String,
-	numberOfUnseenMatches: { type: Number, default: 0 }
+	numberOfUnseenMessages: { type: Number, default: 0 }
 });
 
 module.exports = userConversationSchema;

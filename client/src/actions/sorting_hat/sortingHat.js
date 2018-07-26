@@ -16,7 +16,7 @@ import {
 	RUNNING_ATHENA_FOR_USER_START,
 	RUNNING_ATHENA_FOR_USER_DONE,
 	RUNNING_ATHENA_FOR_USER_ERROR,
-	NEW_UNSEEN_MATCHES
+	NEW_UNSEEN_MATCH
 } from '../types';
 import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
 import { store } from '../../index';
@@ -113,7 +113,7 @@ export const onVote = (
 
 			// update match badge icon
 			dispatch({
-				type: NEW_UNSEEN_MATCHES,
+				type: NEW_UNSEEN_MATCH,
 				numberOfUnseenMatchesToAdd: 2
 			});
 		} else {

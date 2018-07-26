@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as matchesActionCreators from '../../actions/matches/matches';
-import * as colorThemeActionCreators from '../../actions/colorTheme';
-import { bindActionCreators } from 'redux';
-import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from '../../utils/constants';
-import './Matches.css';
-import { Layout, Row, Col, Progress, Icon } from 'antd';
-import MatchCards from './MatchCards';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as matchesActionCreators from "../../actions/matches/matches";
+import * as colorThemeActionCreators from "../../actions/colorTheme";
+import { bindActionCreators } from "redux";
+import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from "../../utils/constants";
+import "./Matches.css";
+import { Layout, Row, Col, Progress, Icon } from "antd";
+import MatchCards from "./MatchCards";
 const { Content } = Layout;
 
 class Matches extends Component {
@@ -76,20 +76,17 @@ class Matches extends Component {
 							color: colorTheme.text2Color
 						}}
 					>
-						We will have matches for you in a moment{' '}
-						<Icon type="loading" />
+						We will have matches for you in a moment <Icon type="loading" />
 					</h2>
 				</Col>
 			);
 		} else if (
-			totalUserVotesAcrossAllSessions <
-			MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
+			totalUserVotesAcrossAllSessions < MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
 		) {
 			// display progress bar showing user needs to vote X more times
 			// before we run minerva for them
 			const votesToGo =
-				MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH -
-				totalUserVotesAcrossAllSessions;
+				MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH - totalUserVotesAcrossAllSessions;
 			const percentVotes = 100 / 8 * totalUserVotesAcrossAllSessions;
 			return (
 				<Col
@@ -103,8 +100,7 @@ class Matches extends Component {
 							color: colorTheme.text3Color
 						}}
 					>
-						Recieve your first 2 matches by voting on 8 questions in
-						Sorting Hat
+						Recieve your first 2 matches by voting on 8 questions in Sorting Hat
 					</h2>
 					<h3
 						style={{
@@ -113,11 +109,7 @@ class Matches extends Component {
 					>
 						You have {votesToGo} to go!
 					</h3>
-					<Progress
-						percent={percentVotes}
-						showInfo={false}
-						status="active"
-					/>
+					<Progress percent={percentVotes} showInfo={false} status="active" />
 				</Col>
 			);
 		} else {
@@ -133,16 +125,16 @@ class Matches extends Component {
 							color: colorTheme.text3Color
 						}}
 					>
-						You're out of matches for today. Vote on questions in
-						Sorting Hat to get better matches.
+						You're out of matches for today. Vote on questions in Sorting Hat to
+						get better matches.
 					</h2>
 					<h3
 						style={{
 							color: colorTheme.text4Color
 						}}
 					>
-						Every day at 9 AM CST, the Sorting Hat generates the 2
-						best study partners for you.
+						Every day at 9 AM CST, the Sorting Hat generates the 2 best study
+						partners for you.
 					</h3>
 				</Col>
 			);
@@ -154,8 +146,8 @@ class Matches extends Component {
 		return (
 			<Content
 				style={{
-					textAlign: 'center',
-					padding: '75px 50px 0px', // top left&right bottom
+					textAlign: "center",
+					padding: "75px 50px 0px", // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -163,7 +155,7 @@ class Matches extends Component {
 					type="flex"
 					justify="center"
 					align="top"
-					style={{ padding: '20px 0px 0px 0px' }}
+					style={{ padding: "20px 0px 0px 0px" }}
 				>
 					<Col
 						sm={{ span: 0 }}
@@ -182,8 +174,7 @@ class Matches extends Component {
 								color: colorTheme.text2Color
 							}}
 						>
-							Sorting Hat finds your 2 best matches everyday at 9
-							AM CST
+							Sorting Hat finds your 2 best matches everyday at 9 AM CST
 						</h2>
 					</Col>
 					<Col
@@ -197,7 +188,7 @@ class Matches extends Component {
 					type="flex"
 					justify="center"
 					align="top"
-					style={{ padding: '20px 0px 0px 0px' }}
+					style={{ padding: "20px 0px 0px 0px" }}
 				>
 					<Col
 						sm={{ span: 0 }}
@@ -230,7 +221,7 @@ function mapStateToProps(state) {
 			state.matches.totalUserVotesAcrossAllSessions,
 		runningAthenaForUser: state.matches.runningAthenaForUser,
 		mongoDBUserId: state.auth.mongoDBUserId,
-		basicMatchInfo: state.customHeader.basicMatchInfo
+		basicMatchInfo: state.matches.basicMatchInfo
 	};
 }
 

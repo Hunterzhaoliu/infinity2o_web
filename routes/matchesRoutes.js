@@ -1,9 +1,9 @@
-const requireLogin = require('../middlewares/requireLogin');
-const mongoose = require('mongoose');
-const ConversationCollection = mongoose.model('conversations');
-const UserCollection = mongoose.model('users');
-const amqp = require('amqplib/callback_api');
-const keys = require('../config/keys');
+const requireLogin = require("../middlewares/requireLogin");
+const mongoose = require("mongoose");
+const ConversationCollection = mongoose.model("conversations");
+const UserCollection = mongoose.model("users");
+const amqp = require("amqplib/callback_api");
+const keys = require("../config/keys");
 
 const getMatchesInfo = async mongoDBUserIds => {
 	let matchesInfo = [];
@@ -38,7 +38,7 @@ const generateUniqueUID = () => {
 };
 
 module.exports = app => {
-	app.get('/api/matches', requireLogin, async (request, response) => {
+	app.get("/api/matches", requireLogin, async (request, response) => {
 		// formats the request string into an array
 		const mongoDBUserId = request.query.mongoDBUserId;
 		// get user's Match Ids
@@ -46,14 +46,14 @@ module.exports = app => {
 		const userMatches = userInDB.matches;
 		let mongoDBMatchIds = [];
 		for (let i = 0; i < userMatches.length; i++) {
-			mongoDBMatchIds.push(userMatches[i]['id']);
+			mongoDBMatchIds.push(userMatches[i]["id"]);
 		}
 		let matchesInfo = await getMatchesInfo(mongoDBMatchIds);
 		response.send(matchesInfo);
 	});
 
 	app.post(
-		'/api/matches/start_conversation',
+		"/api/matches/start_conversation",
 		requireLogin,
 		async (request, response) => {
 			const { matchId, matchName } = request.body;
@@ -61,7 +61,7 @@ module.exports = app => {
 			const userId = request.user._id;
 			let userName;
 			if (request.user.profile.name === undefined) {
-				userName = 'Anonymous';
+				userName = "Anonymous";
 			} else {
 				userName = request.user.profile.name;
 			}
@@ -75,10 +75,10 @@ module.exports = app => {
 
 			// finds userConversationList && matchConversationList
 			const userInDB = await UserCollection.findOne({ _id: userId });
-			let userConversationList = userInDB.conversations;
+			let userConversationList = userInDB.conversations.userConversations;
 			// console.log('userConversationList = ', userConversationList);
 			const matchInDB = await UserCollection.findOne({ _id: matchId });
-			let matchConversationList = matchInDB.conversations;
+			let matchConversationList = matchInDB.conversations.userConversations;
 			// console.log('matchConversationList = ', matchConversationList);
 
 			try {
@@ -93,7 +93,7 @@ module.exports = app => {
 				});
 				await UserCollection.updateOne(
 					{ _id: userId },
-					{ $set: { conversations: userConversationList } },
+					{ $set: { "conversations.userConversations": userConversationList } },
 					{ upsert: true }
 				);
 				matchConversationList.push({
@@ -106,7 +106,9 @@ module.exports = app => {
 
 				await UserCollection.updateOne(
 					{ _id: matchId },
-					{ $set: { conversations: matchConversationList } },
+					{
+						$set: { "conversations.userConversations": matchConversationList }
+					},
 					{ upsert: true }
 				);
 				response.send(userConversationList);
@@ -116,13 +118,13 @@ module.exports = app => {
 		}
 	);
 
-	app.put('/api/matches/seen', requireLogin, async (request, response) => {
+	app.put("/api/matches/seen", requireLogin, async (request, response) => {
 		const { userId, matchId } = request.body;
 		const userInDB = await UserCollection.findOne({ _id: userId });
 		let userInDBMatches = userInDB.matches;
 		for (let i = 0; i < userInDBMatches.length; i++) {
-			if (String(userInDBMatches[i]['id']) === matchId) {
-				userInDBMatches[i]['seen'] = true;
+			if (String(userInDBMatches[i]["id"]) === matchId) {
+				userInDBMatches[i]["seen"] = true;
 			}
 		}
 
@@ -131,11 +133,11 @@ module.exports = app => {
 			{ $set: { matches: userInDBMatches } }
 		);
 
-		response.send('done');
+		response.send("done");
 	});
 
 	app.delete(
-		'/api/matches/delete_match',
+		"/api/matches/delete_match",
 		requireLogin,
 		async (request, response) => {
 			const { matchId } = request.body;
@@ -169,82 +171,67 @@ module.exports = app => {
 					{ _id: matchId },
 					{ $set: { matches: matchMatches } }
 				);
-				response.send('successful');
+				response.send("successful");
 			} catch (error) {
 				response.status(422).send(error);
 			}
 		}
 	);
 
-	app.post(
-		'/api/matches/initial',
-		requireLogin,
-		async (request, response) => {
-			// send message to Athena server to run Athena
-			// for a specific user
-			const { mongoDBUserId } = request.body;
-			const URL = 'amqp://infinity2o:2134711@52.4.101.52:5672';
-			await amqp.connect(URL, function(error, connection) {
-				connection.createChannel(function(error, channel) {
-					let sendToQueueName = 'run_athena_for_new_user_queue';
-					channel.assertQueue('', { exclusive: true }, function(
-						error,
-						replyToQueueObject
-					) {
-						const correlationId = generateUniqueUID();
+	app.post("/api/matches/initial", requireLogin, async (request, response) => {
+		// send message to Athena server to run Athena
+		// for a specific user
+		const { mongoDBUserId } = request.body;
+		const URL = "amqp://infinity2o:2134711@52.4.101.52:5672";
+		await amqp.connect(URL, function(error, connection) {
+			connection.createChannel(function(error, channel) {
+				let sendToQueueName = "run_athena_for_new_user_queue";
+				channel.assertQueue("", { exclusive: true }, function(
+					error,
+					replyToQueueObject
+				) {
+					const correlationId = generateUniqueUID();
 
-						console.log(
-							' [x] Requesting Athena matches for mongoDBUserId=%s',
-							mongoDBUserId
-						);
+					console.log(
+						" [x] Requesting Athena matches for mongoDBUserId=%s",
+						mongoDBUserId
+					);
 
-						channel.consume(
-							replyToQueueObject.queue,
-							function(messageFromServer) {
-								if (
-									messageFromServer.properties
-										.correlationId == correlationId
-								) {
-									const mongoDBUserIdFromAthenaServer = messageFromServer.content.toString();
-									console.log(
-										' [.] Got messageFromServer=%s',
-										mongoDBUserIdFromAthenaServer
-									);
+					channel.consume(
+						replyToQueueObject.queue,
+						function(messageFromServer) {
+							if (messageFromServer.properties.correlationId == correlationId) {
+								const mongoDBUserIdFromAthenaServer = messageFromServer.content.toString();
+								console.log(
+									" [.] Got messageFromServer=%s",
+									mongoDBUserIdFromAthenaServer
+								);
 
-									if (
-										mongoDBUserIdFromAthenaServer !== null
-									) {
-										response.send(
-											mongoDBUserIdFromAthenaServer
-										);
-									} else {
-										response
-											.status(422)
-											.send(
-												'ERROR: Athena ran unsuccessfully'
-											);
-									}
-									setTimeout(function() {
-										connection.close();
-									}, 500);
+								if (mongoDBUserIdFromAthenaServer !== null) {
+									response.send(mongoDBUserIdFromAthenaServer);
+								} else {
+									response.status(422).send("ERROR: Athena ran unsuccessfully");
 								}
-							},
-							{ noAck: true }
-						);
-
-						const mongoDBUserId_serverEnvironment =
-							mongoDBUserId + ' ' + keys.serverEnvironment;
-						channel.sendToQueue(
-							sendToQueueName,
-							new Buffer(mongoDBUserId_serverEnvironment),
-							{
-								correlationId: correlationId,
-								replyTo: replyToQueueObject.queue
+								setTimeout(function() {
+									connection.close();
+								}, 500);
 							}
-						);
-					});
+						},
+						{ noAck: true }
+					);
+
+					const mongoDBUserId_serverEnvironment =
+						mongoDBUserId + " " + keys.serverEnvironment;
+					channel.sendToQueue(
+						sendToQueueName,
+						new Buffer(mongoDBUserId_serverEnvironment),
+						{
+							correlationId: correlationId,
+							replyTo: replyToQueueObject.queue
+						}
+					);
 				});
 			});
-		}
-	);
+		});
+	});
 };
