@@ -145,11 +145,14 @@ export const initializeApp = () => async dispatch => {
 					messageInfo: messageInfo
 				});
 
-				const contactMongoDBUserId = messageInfo.senderMongoDBUserId;
-				console.log("contactMongoDBUserId = ", contactMongoDBUserId);
+				const conversationInfo = {
+					contactMongoDBUserId: messageInfo.senderMongoDBUserId
+				};
+
+				console.log("conversationInfo = ", conversationInfo);
 				// seen the message so need to decrement totalNumberOfUnseenMessages
 				// and numberOfUnseenMatches inside DB
-				axios.put("/api/profile/seen_new_message", contactMongoDBUserId);
+				axios.put("/api/profile/seen_new_message", conversationInfo);
 			} else {
 				// increments the totalNumberOfUnseenMessages and the numberOfUnseenMessages
 				dispatch({
