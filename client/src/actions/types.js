@@ -74,7 +74,7 @@ export const SAVE_VOTE_DONE = "SAVE_VOTE_DONE";
 export const SAVE_VOTE_ERROR = "SAVE_VOTE_ERROR";
 export const ON_NEXT_QUESTION = "ON_NEXT_QUESTION";
 export const ON_NEXT_ASK = "ON_NEXT_ASK";
-export const NEW_UNSEEN_MATCHES = "NEW_UNSEEN_MATCHES";
+export const NEW_UNSEEN_MATCH = "NEW_UNSEEN_MATCH";
 
 // sorting_hat/Ask.js
 export const ON_CHANGE_QUESTION = "ON_CHANGE_QUESTION";
