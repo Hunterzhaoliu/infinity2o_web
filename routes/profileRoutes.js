@@ -103,9 +103,6 @@ module.exports = app => {
 		requireLogin,
 		async (request, response) => {
 			const { contactMongoDBUserId } = request.body;
-			console.log("contactMongoDBUserId = ", contactMongoDBUserId);
-			console.log("request.user = ", request.user);
-			console.log("request.user._id = ", request.user._id);
 			try {
 				// https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
 				await UserCollection.findOneAndUpdate(

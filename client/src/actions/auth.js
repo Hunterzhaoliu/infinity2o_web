@@ -149,7 +149,6 @@ export const initializeApp = () => async dispatch => {
 					contactMongoDBUserId: messageInfo.senderMongoDBUserId
 				};
 
-				console.log("conversationInfo = ", conversationInfo);
 				// seen the message so need to decrement totalNumberOfUnseenMessages
 				// and numberOfUnseenMatches inside DB
 				axios.put("/api/profile/seen_new_message", conversationInfo);
