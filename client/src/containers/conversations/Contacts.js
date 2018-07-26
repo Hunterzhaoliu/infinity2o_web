@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as contactsActionCreators from "../../actions/conversations/contacts";
 import { bindActionCreators } from "redux";
-import { Layout, List, Button } from "antd";
+import { Layout, List, Button, Badge } from "antd";
 import "./Contacts.css";
 const { Content } = Layout;
 
@@ -27,6 +27,7 @@ class Contacts extends Component {
 		let background = colorTheme.text8Color;
 		let color = colorTheme.text4Color;
 		if (contacts.conversationId === contact.conversationId) {
+			// selected contact
 			borderColor = colorTheme.keyText8Color;
 			background = colorTheme.keyText8Color;
 			color = colorTheme.text2Color;
@@ -43,26 +44,35 @@ class Contacts extends Component {
 			buttonWidth = windowWidth * 0.2244;
 		}
 		return (
-			<Button
+			<Badge
+				count={contact.numberOfUnseenMessages}
 				style={{
-					borderColor: borderColor,
-					background: background,
-					color: color,
-					height: "44px",
-					width: buttonWidth
+					backgroundColor: colorTheme.keyText8Color,
+					color: colorTheme.text1Color,
+					boxShadow: "0 0 0 1px " + colorTheme.keyText8Color
 				}}
-				onClick={e =>
-					onSelectContact(
-						contact.conversationId,
-						contact.isOnline,
-						contact.socketId,
-						contact.matchId,
-						contact.numberOfUnseenMessages
-					)
-				}
 			>
-				{this.renderOnline(contact)}
-			</Button>
+				<Button
+					style={{
+						borderColor: borderColor,
+						background: background,
+						color: color,
+						height: "44px",
+						width: buttonWidth
+					}}
+					onClick={e =>
+						onSelectContact(
+							contact.conversationId,
+							contact.isOnline,
+							contact.socketId,
+							contact.matchId,
+							contact.numberOfUnseenMessages
+						)
+					}
+				>
+					{this.renderOnline(contact)}
+				</Button>
+			</Badge>
 		);
 	}
 
