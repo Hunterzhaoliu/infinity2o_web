@@ -7,7 +7,8 @@ import {
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
 	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
-	NEW_MESSAGE
+	NEW_MESSAGE,
+	UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES
 } from "../actions/types";
 
 let cloneObject = obj => {
@@ -22,7 +23,8 @@ let initialState = {
 	selectedContactSocketId: null,
 	selectedContactMongoDBUserId: null,
 	hasToldRedisClientOnlineError: false,
-	hasSaveUserConversationsError: false
+	hasSaveUserConversationsError: false,
+	totalNumberOfUnseenMessages: 0
 };
 
 export default function(state = initialState, action) {
@@ -83,6 +85,10 @@ export default function(state = initialState, action) {
 					contact.numberOfUnseenMessages += 1;
 				}
 			});
+			newState.totalNumberOfUnseenMessages += 1;
+			return newState;
+		case UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES:
+			newState.totalNumberOfUnseenMessages = action.totalNumberOfUnseenMessages;
 			return newState;
 		default:
 			return state;

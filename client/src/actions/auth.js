@@ -41,7 +41,6 @@ function saveUserProfile(response, dispatch) {
 		numberOfUnseenMatches: numberOfUnseenMatches,
 		basicMatchInfo: response.data.matches
 	});
-
 	dispatch({
 		type: UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES,
 		totalNumberOfUnseenMessages:
@@ -83,7 +82,6 @@ export const initializeApp = () => async dispatch => {
 		auth: response.data.auth,
 		mongoDBUserId: response.data._id
 	});
-
 	if (response.data.auth !== undefined) {
 		// user is logged in
 		//console.log('window.location.href = ', window.location.href);
