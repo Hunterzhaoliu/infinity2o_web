@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as contactsActionCreators from '../../actions/conversations/contacts';
-import { bindActionCreators } from 'redux';
-import { Layout, List, Button } from 'antd';
-import './Contacts.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as colorThemeActionCreators from "../../actions/colorTheme";
+import * as contactsActionCreators from "../../actions/conversations/contacts";
+import { bindActionCreators } from "redux";
+import { Layout, List, Button } from "antd";
+import "./Contacts.css";
 const { Content } = Layout;
 
 class Contacts extends Component {
@@ -14,19 +14,14 @@ class Contacts extends Component {
 
 	renderOnline(contact) {
 		if (contact.isOnline) {
-			return contact.matchName + ' online';
+			return contact.matchName + " online";
 		} else {
 			return contact.matchName;
 		}
 	}
 
 	renderContactButton(contact) {
-		const {
-			colorTheme,
-			contacts,
-			onSelectContact,
-			windowWidth
-		} = this.props;
+		const { colorTheme, contacts, onSelectContact, windowWidth } = this.props;
 
 		let borderColor = colorTheme.text8Color;
 		let background = colorTheme.text8Color;
@@ -53,14 +48,16 @@ class Contacts extends Component {
 					borderColor: borderColor,
 					background: background,
 					color: color,
-					height: '44px',
+					height: "44px",
 					width: buttonWidth
 				}}
 				onClick={e =>
 					onSelectContact(
 						contact.conversationId,
 						contact.isOnline,
-						contact.socketId
+						contact.socketId,
+						contact.matchId
+						contact.numberOfUnseenMessages
 					)
 				}
 			>
@@ -76,8 +73,8 @@ class Contacts extends Component {
 		return (
 			<Content
 				style={{
-					textAlign: 'center',
-					padding: '0px 0px 0px', // top left&right bottom
+					textAlign: "center",
+					padding: "0px 0px 0px", // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -91,7 +88,7 @@ class Contacts extends Component {
 									style={{
 										borderColor: colorTheme.backgroundColor,
 										background: colorTheme.backgroundColor,
-										padding: '5px 0px 0px'
+										padding: "5px 0px 0px"
 									}}
 								>
 									{this.renderContactButton(contact)}
@@ -136,11 +133,14 @@ function mapDispatchToProps(dispatch) {
 		onPressConversations: () => {
 			colorThemeDispatchers.onPressConversations();
 		},
-		onSelectContact: (conversationId, isOnline, socketId) => {
+		onSelectContact: (conversationId, isOnline, socketId, matchId,
+		numberOfUnseenMessages) => {
 			contactsDispatchers.onSelectContact(
 				conversationId,
 				isOnline,
-				socketId
+				socketId,
+				matchId,
+				numberOfUnseenMessages
 			);
 		}
 	};

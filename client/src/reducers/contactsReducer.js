@@ -8,7 +8,8 @@ import {
 	SAVE_USER_CONVERSATIONS_ERROR,
 	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
 	NEW_MESSAGE,
-	UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES
+	UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES,
+	SEEN_MESSAGES
 } from "../actions/types";
 
 let cloneObject = obj => {
@@ -89,6 +90,12 @@ export default function(state = initialState, action) {
 			return newState;
 		case UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES:
 			newState.totalNumberOfUnseenMessages = action.totalNumberOfUnseenMessages;
+			return newState;
+		case SEEN_MESSAGES:
+			newState.totalNumberOfUnseenMessages -= action.numberOfSeenMessages;
+			newState.allContacts[
+				action.contactChatDisplayIndex
+			].numberOfUnseenMessages = 0;
 			return newState;
 		default:
 			return state;

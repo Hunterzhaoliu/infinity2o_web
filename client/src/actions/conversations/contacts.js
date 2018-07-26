@@ -8,7 +8,8 @@ import {
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
 	TOLD_REDIS_CLIENT_IS_ONLINE,
-	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR
+	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR,
+	SEEN_MESSAGES
 } from "../types";
 
 export const fetchConversations = () => async dispatch => {
@@ -62,6 +63,23 @@ export const fetchConversations = () => async dispatch => {
 						type: UPDATE_CHAT,
 						last50Messages: conversationsResponse.data.last50Messages
 					});
+
+					const numberOfUnseenMessages =
+						updatedUserConversations[contactChatDisplayIndex]
+							.numberOfUnseenMessages;
+					console.log("numberOfUnseenMessages = ", numberOfUnseenMessages);
+					if (numberOfUnseenMessages >= 1) {
+						dispatch({
+							type: SEEN_MESSAGES,
+							contactChatDisplayIndex: contactChatDisplayIndex,
+							numberOfSeenMessages: numberOfUnseenMessages
+						});
+						const seenMessagesInfo = {
+							conversationId: conversationId,
+							numberOfSeenMessages: numberOfUnseenMessages
+						};
+						await axios.put("/api/profile/seen_messages", seenMessagesInfo);
+					}
 				} else {
 					dispatch({ type: UPDATE_CHAT_ERROR });
 				}
@@ -76,14 +94,17 @@ export const fetchConversations = () => async dispatch => {
 
 export const onSelectContact = (
 	conversationId,
-	isOnline,
-	socketId
+	contactIsOnline,
+	contactSocketId,
+	contactMongoDBUserId,
+	numberOfUnseenMessages
 ) => async dispatch => {
 	dispatch({
 		type: ON_SELECT_CONTACT,
 		conversationId: conversationId,
-		isOnline: isOnline,
-		socketId: socketId
+		contactIsOnline: contactIsOnline,
+		contactSocketId: contactSocketId,
+		contactMongoDBUserId: contactMongoDBUserId
 	});
 
 	// get previous messages in DB
@@ -93,13 +114,10 @@ export const onSelectContact = (
 
 	if (response.status === 200) {
 		dispatch({
-			type: TOLD_REDIS_CLIENT_IS_ONLINE
-		});
-		dispatch({
 			type: UPDATE_CHAT,
 			last50Messages: response.data.last50Messages
 		});
 	} else {
-		dispatch({ type: TOLD_REDIS_CLIENT_IS_ONLINE_ERROR });
+		dispatch({ type: UPDATE_CHAT_ERROR });
 	}
 };
