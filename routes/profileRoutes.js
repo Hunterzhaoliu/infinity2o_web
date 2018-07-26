@@ -99,7 +99,7 @@ module.exports = app => {
 	);
 
 	app.put(
-		"/api/profile/seen_new_messages",
+		"/api/profile/seen_new_message",
 		requireLogin,
 		async (request, response) => {
 			console.log("request.body = ", request.body);
