@@ -12,11 +12,9 @@ class Contacts extends Component {
 		// run once before first render()
 	}
 
-	renderOnline(contact) {
-		if (contact.isOnline) {
-			return contact.matchName + " online";
-		} else {
-			return contact.matchName;
+	renderOnline(contactIsOnline) {
+		if (contactIsOnline) {
+			return <Badge status="success" offset={[0, 5]} />;
 		}
 	}
 
@@ -51,6 +49,7 @@ class Contacts extends Component {
 					color: colorTheme.text1Color,
 					boxShadow: "0 0 0 1px " + colorTheme.keyText8Color
 				}}
+				offset={[22, -15]} // [lower, right]
 			>
 				<Button
 					style={{
@@ -70,7 +69,8 @@ class Contacts extends Component {
 						)
 					}
 				>
-					{this.renderOnline(contact)}
+					{contact.matchName}
+					{this.renderOnline(contact.isOnline)}
 				</Button>
 			</Badge>
 		);
