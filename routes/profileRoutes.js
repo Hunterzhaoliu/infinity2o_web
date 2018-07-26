@@ -97,4 +97,34 @@ module.exports = app => {
 			}
 		}
 	);
+
+	app.put(
+		"/api/profile/seen_new_messages",
+		requireLogin,
+		async (request, response) => {
+			console.log("request.body = ", request.body);
+			console.log(
+				"request.user.auth.mongoDBUserId = ",
+				request.user.auth.mongoDBUserId
+			);
+			try {
+				// https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
+				await UserCollection.findOneAndUpdate(
+					{
+						_id: request.user.auth.mongoDBUserId,
+						"conversations.userConversations.matchId": request.body
+					},
+					{
+						$inc: {
+							"conversations.userConversations.$.numberOfUnseenMessages": -1,
+							"conversations.totalNumberOfUnseenMessages": -1
+						}
+					}
+				);
+				response.send("done");
+			} catch (error) {
+				response.status(422).send(error);
+			}
+		}
+	);
 };
