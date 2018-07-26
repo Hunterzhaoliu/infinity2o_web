@@ -92,10 +92,12 @@ export default function(state = initialState, action) {
 			newState.totalNumberOfUnseenMessages = action.totalNumberOfUnseenMessages;
 			return newState;
 		case SEEN_MESSAGES:
-			newState.totalNumberOfUnseenMessages -= action.numberOfSeenMessages;
-			newState.allContacts[
-				action.contactChatDisplayIndex
-			].numberOfUnseenMessages = 0;
+			newState.totalNumberOfUnseenMessages -= action.numberOfUnseenMessages;
+			newState.allContacts.forEach(function(contact) {
+				if (contact.conversationId === action.conversationId) {
+					contact.numberOfUnseenMessages = 0;
+				}
+			});
 			return newState;
 		default:
 			return state;

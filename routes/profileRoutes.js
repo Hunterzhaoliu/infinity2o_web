@@ -128,9 +128,7 @@ module.exports = app => {
 		"/api/profile/seen_messages",
 		requireLogin,
 		async (request, response) => {
-			const { conversationId, numberOfSeenMessages } = request.body;
-			console.log("conversationId = ", conversationId);
-			console.log("numberOfSeenMessages = ", numberOfSeenMessages);
+			const { conversationId, numberOfUnseenMessages } = request.body;
 			try {
 				// https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
 				await UserCollection.findOneAndUpdate(
@@ -140,8 +138,8 @@ module.exports = app => {
 					},
 					{
 						$inc: {
-							"conversations.userConversations.$.numberOfUnseenMessages": numberOfSeenMessages,
-							"conversations.totalNumberOfUnseenMessages": numberOfSeenMessages
+							"conversations.userConversations.$.numberOfUnseenMessages": -numberOfUnseenMessages,
+							"conversations.totalNumberOfUnseenMessages": -numberOfUnseenMessages
 						}
 					}
 				);

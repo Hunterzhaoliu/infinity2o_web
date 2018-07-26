@@ -56,7 +56,7 @@ class Contacts extends Component {
 						contact.conversationId,
 						contact.isOnline,
 						contact.socketId,
-						contact.matchId
+						contact.matchId,
 						contact.numberOfUnseenMessages
 					)
 				}
@@ -133,8 +133,13 @@ function mapDispatchToProps(dispatch) {
 		onPressConversations: () => {
 			colorThemeDispatchers.onPressConversations();
 		},
-		onSelectContact: (conversationId, isOnline, socketId, matchId,
-		numberOfUnseenMessages) => {
+		onSelectContact: (
+			conversationId,
+			isOnline,
+			socketId,
+			matchId,
+			numberOfUnseenMessages
+		) => {
 			contactsDispatchers.onSelectContact(
 				conversationId,
 				isOnline,
