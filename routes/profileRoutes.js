@@ -71,7 +71,7 @@ module.exports = app => {
 			}
 		}
 	);
-
+	// TODO: combine the next three routes to be one
 	app.put(
 		"/api/profile/increment_unseen_messages",
 		requireLogin,
@@ -114,6 +114,32 @@ module.exports = app => {
 						$inc: {
 							"conversations.userConversations.$.numberOfUnseenMessages": -1,
 							"conversations.totalNumberOfUnseenMessages": -1
+						}
+					}
+				);
+				response.send("done");
+			} catch (error) {
+				response.status(422).send(error);
+			}
+		}
+	);
+
+	app.put(
+		"/api/profile/seen_messages",
+		requireLogin,
+		async (request, response) => {
+			const { conversationId, numberOfUnseenMessages } = request.body;
+			try {
+				// https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
+				await UserCollection.findOneAndUpdate(
+					{
+						_id: request.user._id,
+						"conversations.userConversations.conversationId": conversationId
+					},
+					{
+						$inc: {
+							"conversations.userConversations.$.numberOfUnseenMessages": -numberOfUnseenMessages,
+							"conversations.totalNumberOfUnseenMessages": -numberOfUnseenMessages
 						}
 					}
 				);

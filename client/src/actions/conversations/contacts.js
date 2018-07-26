@@ -7,8 +7,7 @@ import {
 	ON_SELECT_CONTACT,
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
-	TOLD_REDIS_CLIENT_IS_ONLINE,
-	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR
+	SEEN_MESSAGES
 } from "../types";
 
 export const fetchConversations = () => async dispatch => {
@@ -31,40 +30,31 @@ export const fetchConversations = () => async dispatch => {
 			dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
 
 			const contactChatDisplayIndex = 0;
-
 			// 3) display chat log of first conversation
-			let conversationId;
 			if (
 				updatedUserConversations !== undefined &&
 				updatedUserConversations.length >= 1
 			) {
-				conversationId =
+				const conversationId =
 					updatedUserConversations[contactChatDisplayIndex].conversationId;
+				const contactIsOnline =
+					updatedUserConversations[contactChatDisplayIndex].isOnline;
+				const contactSocketId =
+					updatedUserConversations[contactChatDisplayIndex].socketId;
+				const contactMongoDBUserId =
+					updatedUserConversations[contactChatDisplayIndex].matchId;
+				const numberOfUnseenMessages =
+					updatedUserConversations[contactChatDisplayIndex]
+						.numberOfUnseenMessages;
 
-				// get chat logs by hitting GET api/conversations
-				const conversationsResponse = await axios.get(
-					"/api/conversations?conversationId=" + conversationId
+				selectContact(
+					conversationId,
+					contactIsOnline,
+					contactSocketId,
+					contactMongoDBUserId,
+					numberOfUnseenMessages,
+					dispatch
 				);
-
-				if (conversationsResponse.status === 200) {
-					// dispatch chat logs for the latest messages
-					dispatch({
-						type: ON_SELECT_CONTACT,
-						conversationId: conversationId,
-						contactIsOnline:
-							updatedUserConversations[contactChatDisplayIndex].isOnline,
-						contactSocketId:
-							updatedUserConversations[contactChatDisplayIndex].socketId,
-						contactMongoDBUserId:
-							updatedUserConversations[contactChatDisplayIndex].matchId
-					});
-					dispatch({
-						type: UPDATE_CHAT,
-						last50Messages: conversationsResponse.data.last50Messages
-					});
-				} else {
-					dispatch({ type: UPDATE_CHAT_ERROR });
-				}
 			}
 		} else {
 			dispatch({ type: UPDATE_CONTACTS_ERROR });
@@ -74,16 +64,20 @@ export const fetchConversations = () => async dispatch => {
 	}
 };
 
-export const onSelectContact = (
+const selectContact = async (
 	conversationId,
-	isOnline,
-	socketId
-) => async dispatch => {
+	contactIsOnline,
+	contactSocketId,
+	contactMongoDBUserId,
+	numberOfUnseenMessages,
+	dispatch
+) => {
 	dispatch({
 		type: ON_SELECT_CONTACT,
 		conversationId: conversationId,
-		isOnline: isOnline,
-		socketId: socketId
+		contactIsOnline: contactIsOnline,
+		contactSocketId: contactSocketId,
+		contactMongoDBUserId: contactMongoDBUserId
 	});
 
 	// get previous messages in DB
@@ -93,13 +87,40 @@ export const onSelectContact = (
 
 	if (response.status === 200) {
 		dispatch({
-			type: TOLD_REDIS_CLIENT_IS_ONLINE
-		});
-		dispatch({
 			type: UPDATE_CHAT,
 			last50Messages: response.data.last50Messages
 		});
+
+		if (numberOfUnseenMessages >= 1) {
+			dispatch({
+				type: SEEN_MESSAGES,
+				conversationId: conversationId,
+				numberOfUnseenMessages: numberOfUnseenMessages
+			});
+			const seenMessagesInfo = {
+				conversationId: conversationId,
+				numberOfUnseenMessages: numberOfUnseenMessages
+			};
+			await axios.put("/api/profile/seen_messages", seenMessagesInfo);
+		}
 	} else {
-		dispatch({ type: TOLD_REDIS_CLIENT_IS_ONLINE_ERROR });
+		dispatch({ type: UPDATE_CHAT_ERROR });
 	}
+};
+
+export const onSelectContact = (
+	conversationId,
+	contactIsOnline,
+	contactSocketId,
+	contactMongoDBUserId,
+	numberOfUnseenMessages
+) => async dispatch => {
+	selectContact(
+		conversationId,
+		contactIsOnline,
+		contactSocketId,
+		contactMongoDBUserId,
+		numberOfUnseenMessages,
+		dispatch
+	);
 };
