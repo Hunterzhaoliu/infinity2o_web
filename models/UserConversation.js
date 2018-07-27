@@ -5,8 +5,6 @@ const userConversationSchema = new Schema({
 	conversationId: { type: Schema.Types.ObjectId, ref: "Conversation" },
 	matchName: String,
 	matchId: { type: Schema.Types.ObjectId, ref: "User" },
-	isOnline: Boolean,
-	socketId: String,
 	numberOfUnseenMessages: { type: Number, default: 0 }
 });
 
