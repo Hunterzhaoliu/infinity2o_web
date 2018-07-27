@@ -82,7 +82,7 @@ export default function(state = initialState, action) {
 		case NEW_MESSAGE:
 			// TODO: optimize
 			newState.allContacts.forEach(function(contact) {
-				if (contact.matchId === action.userMongoDBUserId) {
+				if (contact.matchId === action.senderMongoDBUserId) {
 					contact.numberOfUnseenMessages += 1;
 				}
 			});

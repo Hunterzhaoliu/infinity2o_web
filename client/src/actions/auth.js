@@ -156,7 +156,7 @@ export const initializeApp = () => async dispatch => {
 				// increments the totalNumberOfUnseenMessages and the numberOfUnseenMessages
 				dispatch({
 					type: NEW_MESSAGE,
-					userMongoDBUserId: messageInfo.userMongoDBUserId
+					senderMongoDBUserId: messageInfo.senderMongoDBUserId
 				});
 			}
 		});
