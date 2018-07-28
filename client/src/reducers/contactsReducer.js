@@ -6,8 +6,11 @@ import {
 	TOLD_REDIS_CLIENT_IS_ONLINE_ERROR,
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
-	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID
-} from '../actions/types';
+	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
+	NEW_MESSAGE,
+	UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES,
+	SEEN_MESSAGES
+} from "../actions/types";
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
@@ -19,8 +22,10 @@ let initialState = {
 	conversationId: null,
 	selectedContactOnline: false,
 	selectedContactSocketId: null,
+	selectedContactMongoDBUserId: null,
 	hasToldRedisClientOnlineError: false,
-	hasSaveUserConversationsError: false
+	hasSaveUserConversationsError: false,
+	totalNumberOfUnseenMessages: 0
 };
 
 export default function(state = initialState, action) {
@@ -42,8 +47,9 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_SELECT_CONTACT:
 			newState.conversationId = action.conversationId;
-			newState.selectedContactOnline = action.isOnline;
-			newState.selectedContactSocketId = action.socketId;
+			newState.selectedContactOnline = action.contactIsOnline;
+			newState.selectedContactSocketId = action.contactSocketId;
+			newState.selectedContactMongoDBUserId = action.contactMongoDBUserId;
 			return newState;
 		case TOLD_REDIS_CLIENT_IS_ONLINE:
 			newState.hasToldRedisClientOnlineError = false;
@@ -58,6 +64,7 @@ export default function(state = initialState, action) {
 			newState.hasSaveUserConversationsError = true;
 			return newState;
 		case UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID:
+			// TODO: optimize
 			newState.allContacts.forEach(function(contact) {
 				if (contact.matchId === action.newUserSocketInfo.userId) {
 					if (state.selectedContactSocketId === contact.socketId) {
@@ -69,6 +76,26 @@ export default function(state = initialState, action) {
 					// we found the contact that is online and are updating their socketId
 					contact.socketId = action.newUserSocketInfo.socketId;
 					contact.isOnline = true;
+				}
+			});
+			return newState;
+		case NEW_MESSAGE:
+			// TODO: optimize
+			newState.allContacts.forEach(function(contact) {
+				if (contact.matchId === action.senderMongoDBUserId) {
+					contact.numberOfUnseenMessages += 1;
+				}
+			});
+			newState.totalNumberOfUnseenMessages += 1;
+			return newState;
+		case UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES:
+			newState.totalNumberOfUnseenMessages = action.totalNumberOfUnseenMessages;
+			return newState;
+		case SEEN_MESSAGES:
+			newState.totalNumberOfUnseenMessages -= action.numberOfUnseenMessages;
+			newState.allContacts.forEach(function(contact) {
+				if (contact.conversationId === action.conversationId) {
+					contact.numberOfUnseenMessages = 0;
 				}
 			});
 			return newState;

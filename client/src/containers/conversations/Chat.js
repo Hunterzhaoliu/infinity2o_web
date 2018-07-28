@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as chatActionCreators from '../../actions/conversations/chat';
-import { bindActionCreators } from 'redux';
-import './Chat.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as colorThemeActionCreators from "../../actions/colorTheme";
+import * as chatActionCreators from "../../actions/conversations/chat";
+import { bindActionCreators } from "redux";
+import "./Chat.css";
 
-import { Layout, Input, Row, Col, Affix, Icon, List } from 'antd';
+import { Layout, Input, Row, Col, Affix, Icon, List } from "antd";
 const { Content } = Layout;
 
 class Chat extends Component {
@@ -18,29 +18,33 @@ class Chat extends Component {
 		//console.log('pressed enter');
 		const {
 			name,
+			mongoDBUserId,
 			conversationId,
 			chat,
 			selectedContactOnline,
-			selectedContactSocketId
+			selectedContactSocketId,
+			selectedContactMongoDBUserId
 		} = this.props;
 		this.props.sendMessageToServer(
 			conversationId,
 			selectedContactOnline,
 			selectedContactSocketId,
+			selectedContactMongoDBUserId,
 			name,
+			mongoDBUserId,
 			chat.currentMessage
 		);
 	};
 
 	renderMessageStatusIcon(status, item, name) {
 		if (item.senderName === name) {
-			if (status === 'sending') {
+			if (status === "sending") {
 				return <Icon type="loading" />;
-			} else if (status === 'sent') {
+			} else if (status === "sent") {
 				return <Icon type="check-circle-o" />;
-			} else if (status === 'delivered') {
+			} else if (status === "delivered") {
 				return <Icon type="check-circle" />;
-			} else if (status === 'failed-delivery') {
+			} else if (status === "failed-delivery") {
 				return <Icon type="warning" />;
 			}
 		} else {
@@ -67,7 +71,7 @@ class Chat extends Component {
 		return (
 			<Content
 				style={{
-					textAlign: 'center',
+					textAlign: "center",
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -75,13 +79,12 @@ class Chat extends Component {
 					<List
 						dataSource={chat.last50Messages}
 						renderItem={item => {
-							const nameAndMessage =
-								item.senderName + ': ' + item.content;
-							let justifyValue = 'start';
+							const message = item.content;
+							let justifyValue = "start";
 							if (item.senderName === name) {
 								// TODO: what if both people's names are the senderName
 								// need to switch to unique identifier
-								justifyValue = 'end';
+								justifyValue = "end";
 							}
 							return (
 								<Row
@@ -89,29 +92,26 @@ class Chat extends Component {
 									justify={justifyValue}
 									align="middle"
 									style={{
-										padding: '0px 0px 0px'
+										padding: "0px 0px 0px"
 									}}
 								>
 									<Col>
 										<List.Item
 											style={{
-												padding: '0px 0px 0px'
+												padding: "0px 0px 0px"
 											}}
 										>
 											<p
 												style={{
-													borderColor:
-														colorTheme.text8Color,
-													borderWidth: '2px',
-													background:
-														colorTheme.text8Color,
-													color:
-														colorTheme.text3Color,
-													borderRadius: '25px',
-													padding: '4px 15px 4px'
+													borderColor: colorTheme.text8Color,
+													borderWidth: "2px",
+													background: colorTheme.text8Color,
+													color: colorTheme.text3Color,
+													borderRadius: "25px",
+													padding: "4px 15px 4px"
 												}}
 											>
-												{nameAndMessage}
+												{message}
 											</p>
 										</List.Item>
 									</Col>
@@ -119,14 +119,10 @@ class Chat extends Component {
 										<p
 											style={{
 												color: colorTheme.text8Color,
-												padding: '12px 4px 0px'
+												padding: "12px 4px 0px"
 											}}
 										>
-											{this.renderMessageStatusIcon(
-												'delivered',
-												item,
-												name
-											)}
+											{this.renderMessageStatusIcon("delivered", item, name)}
 										</p>
 									</Col>
 								</Row>
@@ -166,9 +162,11 @@ function mapStateToProps(state) {
 		colorTheme: state.colorTheme,
 		chat: state.chat,
 		name: state.profile.name,
+		mongoDBUserId: state.auth.mongoDBUserId,
 		conversationId: state.contacts.conversationId,
 		selectedContactOnline: state.contacts.selectedContactOnline,
 		selectedContactSocketId: state.contacts.selectedContactSocketId,
+		selectedContactMongoDBUserId: state.contacts.selectedContactMongoDBUserId,
 		windowWidth: state.customHeader.windowWidth
 	};
 }
@@ -195,14 +193,18 @@ function mapDispatchToProps(dispatch) {
 			conversationId,
 			selectedContactOnline,
 			selectedContactSocketId,
+			selectedContactMongoDBUserId,
 			name,
+			mongoDBUserId,
 			currentMessage
 		) => {
 			chatDispatchers.sendMessageToServer(
 				conversationId,
 				selectedContactOnline,
 				selectedContactSocketId,
+				selectedContactMongoDBUserId,
 				name,
+				mongoDBUserId,
 				currentMessage
 			);
 		}
