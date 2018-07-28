@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as contactsActionCreators from '../../actions/conversations/contacts';
-import { bindActionCreators } from 'redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as colorThemeActionCreators from "../../actions/colorTheme";
+import * as contactsActionCreators from "../../actions/conversations/contacts";
+import { bindActionCreators } from "redux";
 
-import Chat from './Chat';
-import Contacts from './Contacts';
-import { Layout, Row, Col } from 'antd';
+import Chat from "./Chat";
+import Contacts from "./Contacts";
+import { Layout, Row, Col } from "antd";
 const { Content } = Layout;
 
 class Conversation extends Component {
@@ -47,6 +47,9 @@ class Conversation extends Component {
 						md={{ span: 18 }}
 						lg={{ span: 10 }}
 						xl={{ span: 10 }}
+						style={{
+							padding: "5px 0px 0px"
+						}}
 					>
 						<Chat chat={chat} />
 					</Col>
@@ -78,8 +81,8 @@ class Conversation extends Component {
 		return (
 			<Content
 				style={{
-					textAlign: 'center',
-					padding: '75px 50px 0px', // top left&right bottom
+					textAlign: "center",
+					padding: "75px 50px 0px", // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>

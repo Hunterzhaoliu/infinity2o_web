@@ -19,8 +19,20 @@ class Contacts extends Component {
 	}
 
 	renderContactButton(contact) {
-		const { colorTheme, contacts, onSelectContact, windowWidth } = this.props;
+		const {
+			colorTheme,
+			contacts,
+			onSelectContact,
+			windowWidth,
+			windowHeight
+		} = this.props;
 
+		const contactWindowHeight = windowHeight * 88.5 / 662;
+		const contactWindowVerticalHeight = contactWindowHeight.toString() + "vh";
+		document.documentElement.style.setProperty(
+			`--contact-window-vertical-height`,
+			contactWindowVerticalHeight
+		);
 		let borderColor = colorTheme.text8Color;
 		let background = colorTheme.text8Color;
 		let color = colorTheme.text4Color;
@@ -120,7 +132,8 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		contacts: state.contacts,
-		windowWidth: state.customHeader.windowWidth
+		windowWidth: state.customHeader.windowWidth,
+		windowHeight: state.customHeader.windowHeight
 	};
 }
 

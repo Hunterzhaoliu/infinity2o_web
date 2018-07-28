@@ -2,5 +2,5 @@
 	border-radius: 0px;
 	overflow: auto;
 	padding: 0px 0px;
-	height: 90vh;
+	height: var(--contact-window-vertical-height);
 }

@@ -6,12 +6,17 @@ import { bindActionCreators } from "redux";
 import "./Chat.css";
 
 import { Layout, Input, Row, Col, Affix, Icon, List } from "antd";
+import { animateScroll as scroll } from "react-scroll";
 const { Content } = Layout;
 
 class Chat extends Component {
 	onChangeCurrentMessage = e => {
 		// console.log('e.target.value = ', e.target.value);
 		this.props.onChangeCurrentMessage(e.target.value);
+	};
+
+	scrollToBottom = () => {
+		scroll.scrollToBottom();
 	};
 
 	onPressEnter = () => {
@@ -54,7 +59,13 @@ class Chat extends Component {
 
 	render() {
 		//console.log('Chat this.props = ', this.props);
-		const { colorTheme, chat, name, windowWidth } = this.props;
+		const { colorTheme, chat, name, windowWidth, windowHeight } = this.props;
+		const chatWindowHeight = windowHeight * 83 / 662;
+		const chatWindowVerticalHeight = chatWindowHeight.toString() + "vh";
+		document.documentElement.style.setProperty(
+			`--chat-window-vertical-height`,
+			chatWindowVerticalHeight
+		);
 		// 0.3819 = 483.5/1200
 		// 0.3745 = 371.6/992
 		let inputWidth = windowWidth * 0.38; // = 483.5/1200
@@ -130,9 +141,9 @@ class Chat extends Component {
 						}}
 					/>
 				</div>
-				<Row type="flex" justify="start" align="middle">
-					<Col>
-						<Affix offsetBottom={0}>
+				<Affix offsetBottom={0}>
+					<Row type="flex" justify="start" align="middle">
+						<Col>
 							<Input
 								value={chat.currentMessage}
 								placeholder="type here..."
@@ -145,9 +156,9 @@ class Chat extends Component {
 									color: colorTheme.text1Color
 								}}
 							/>
-						</Affix>
-					</Col>
-				</Row>
+						</Col>
+					</Row>
+				</Affix>
 			</Content>
 		);
 	}
@@ -167,7 +178,8 @@ function mapStateToProps(state) {
 		selectedContactOnline: state.contacts.selectedContactOnline,
 		selectedContactSocketId: state.contacts.selectedContactSocketId,
 		selectedContactMongoDBUserId: state.contacts.selectedContactMongoDBUserId,
-		windowWidth: state.customHeader.windowWidth
+		windowWidth: state.customHeader.windowWidth,
+		windowHeight: state.customHeader.windowHeight
 	};
 }
 

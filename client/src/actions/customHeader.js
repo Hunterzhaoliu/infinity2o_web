@@ -1,9 +1,13 @@
-import { UPDATE_WINDOW_WIDTH, TOGGLE_SIDER } from './types';
+import { UPDATE_WINDOW_DIMENSIONS, TOGGLE_SIDER } from "./types";
 
-export const updateWindowWidth = newWindowWidth => dispatch => {
+export const updateWindowDimensions = (
+	newWindowWidth,
+	newWindowHeight
+) => dispatch => {
 	dispatch({
-		type: UPDATE_WINDOW_WIDTH,
-		newWindowWidth: newWindowWidth
+		type: UPDATE_WINDOW_DIMENSIONS,
+		newWindowWidth: newWindowWidth,
+		newWindowHeight: newWindowHeight
 	});
 };
 
