@@ -1,6 +1,11 @@
-.demo-infinite-container {
+.contact-infinite-container {
 	border-radius: 0px;
 	overflow: auto;
 	padding: 0px 0px;
 	height: var(--contact-window-vertical-height);
+	margin-right: -20px;
+}
+
+#contact-infinite-container {
+	overflow: hidden;
 }

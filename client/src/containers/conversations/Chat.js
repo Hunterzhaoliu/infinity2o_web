@@ -69,9 +69,9 @@ class Chat extends Component {
 
 		// finding the right number of pixels for the chat input
 		const numberOfPixelsPerSpan = (windowWidth - 100) / 24;
-		let inputWidth = numberOfPixelsPerSpan * 10 - 17;
+		let inputWidth = numberOfPixelsPerSpan * 10;
 		if (windowWidth < 768) {
-			inputWidth = numberOfPixelsPerSpan * 18 - 17;
+			inputWidth = numberOfPixelsPerSpan * 18;
 		}
 
 		return (
@@ -81,8 +81,9 @@ class Chat extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<div className="chat-window-infinite-container">
+				<div id="chat-window-infinite-container">
 					<List
+						className="chat-window-infinite-container"
 						dataSource={chat.last50Messages}
 						renderItem={item => {
 							const message = item.content;

@@ -35,9 +35,9 @@ class Contacts extends Component {
 		);
 
 		const numberOfPixelsPerSpan = (windowWidth - 100) / 24;
-		let buttonWidth = numberOfPixelsPerSpan * 4 - 17;
+		let buttonWidth = numberOfPixelsPerSpan * 4 - 5;
 		if (windowWidth < 768) {
-			buttonWidth = numberOfPixelsPerSpan * 6 - 17;
+			buttonWidth = numberOfPixelsPerSpan * 6 - 5;
 		}
 		return (
 			<List
@@ -118,8 +118,10 @@ class Contacts extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<div className="demo-infinite-container">
-					{this.renderContactButton()}
+				<div id="contact-infinite-container">
+					<div className="contact-infinite-container">
+						{this.renderContactButton()}
+					</div>
 				</div>
 			</Content>
 		);
