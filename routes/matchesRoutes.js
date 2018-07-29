@@ -59,13 +59,7 @@ module.exports = app => {
 			const { matchId, matchName } = request.body;
 
 			const userId = request.user._id;
-			let userName;
-			if (request.user.profile.name === undefined) {
-				userName = "Anonymous";
-			} else {
-				userName = request.user.profile.name;
-			}
-
+			const userName = request.user.profile.name;
 			// sets new conversation document to conversation variable
 			const conversation = new ConversationCollection({
 				user1: { name: userName, id: userId },
@@ -111,7 +105,7 @@ module.exports = app => {
 					},
 					{ upsert: true }
 				);
-				response.send(userConversationList);
+				response.send("done");
 			} catch (error) {
 				response.status(422).send(error);
 			}
@@ -141,35 +135,19 @@ module.exports = app => {
 		requireLogin,
 		async (request, response) => {
 			const { matchId } = request.body;
-			const userId = request.user._id;
-
-			let userMatchesDict = await UserCollection.findOne(
-				{ _id: userId },
-				{ matches: true, _id: false }
-			);
-
-			let userMatches = userMatchesDict.matches;
-			let matchIndex = userMatches.indexOf(matchId);
-
-			userMatches.splice(matchIndex, 1);
-
-			// let userMatches = userInDB.matches;
-			const matchInDB = await UserCollection.findOne({ _id: matchId });
-			let matchMatches = matchInDB.matches;
-
-			let userIndex = matchMatches.indexOf(userId);
-			if (userIndex > -1) {
-				matchMatches.splice(userIndex, 1);
-			}
-
+			const userId = mongoose.Types.ObjectId(request.user._id);
+			const matchMongoDBUserId = mongoose.Types.ObjectId(matchId);
 			try {
-				await UserCollection.updateOne(
+				// https://stackoverflow.com/questions/16959099/how-to-remove-array-element-in-mongodb
+				// deletes match from user's matches
+				await UserCollection.update(
 					{ _id: userId },
-					{ $set: { matches: userMatches } }
+					{ $pull: { matches: { id: matchMongoDBUserId } } }
 				);
-				await UserCollection.updateOne(
+				// deletes user from match's matches
+				await UserCollection.findOneAndUpdate(
 					{ _id: matchId },
-					{ $set: { matches: matchMatches } }
+					{ $pull: { matches: { id: userId } } }
 				);
 				response.send("successful");
 			} catch (error) {

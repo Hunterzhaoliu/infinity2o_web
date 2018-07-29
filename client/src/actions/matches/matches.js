@@ -4,8 +4,6 @@ import {
 	UPDATE_INITIAL_MATCH,
 	ON_NEXT_MATCH,
 	MOVE_TO_CONVERSATIONS,
-	UPDATE_CONTACTS,
-	UPDATE_CONTACTS_ERROR,
 	DELETED_MATCH_IN_DB,
 	DELETED_MATCH_IN_DB_ERROR,
 	DECREMENT_NUMBER_OF_UNSEEN_MATCHES
@@ -79,10 +77,6 @@ export const onStartConversation = (
 	matchName,
 	matchId
 ) => async dispatch => {
-	const matchInfo = {
-		matchId: matchId,
-		matchName: matchName
-	};
 	// 1) need to remove match from current user
 	// 2) need to remove current user from match's matches
 	const response1 = await axios.delete("/api/matches/delete_match", {
@@ -93,6 +87,10 @@ export const onStartConversation = (
 			type: DELETED_MATCH_IN_DB
 		});
 
+		const matchInfo = {
+			matchId: matchId,
+			matchName: matchName
+		};
 		// 3) update current user's conversations with new conversation
 		// 4) update match's conversations with new conversation
 		const response2 = await axios.post(
@@ -103,19 +101,7 @@ export const onStartConversation = (
 			dispatch({
 				type: MOVE_TO_CONVERSATIONS
 			});
-			dispatch({
-				type: UPDATE_CONTACTS,
-				allContacts: response2.data
-			});
-
-			// deletes the match from the state after Say Hi
-			dispatch({
-				type: ON_NEXT_MATCH,
-				matchId: matchId
-			});
 			history.push("/conversations");
-		} else {
-			dispatch({ type: UPDATE_CONTACTS_ERROR });
 		}
 	} else {
 		dispatch({ type: DELETED_MATCH_IN_DB_ERROR });
