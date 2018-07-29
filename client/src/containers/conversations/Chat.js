@@ -5,18 +5,19 @@ import * as chatActionCreators from "../../actions/conversations/chat";
 import { bindActionCreators } from "redux";
 import "./Chat.css";
 
-import { Layout, Input, Row, Col, Affix, Icon, List } from "antd";
-import { animateScroll as scroll } from "react-scroll";
+import { Layout, Input, Row, Col, Icon, List } from "antd";
 const { Content } = Layout;
 
 class Chat extends Component {
+	componentDidUpdate() {
+		if (document.getElementById("lastMessage") !== null) {
+			document.getElementById("lastMessage").scrollIntoView();
+		}
+	}
+
 	onChangeCurrentMessage = e => {
 		// console.log('e.target.value = ', e.target.value);
 		this.props.onChangeCurrentMessage(e.target.value);
-	};
-
-	scrollToBottom = () => {
-		scroll.scrollToBottom();
 	};
 
 	onPressEnter = () => {
@@ -57,6 +58,12 @@ class Chat extends Component {
 		}
 	}
 
+	renderLastMessageDiv(lastMessageDate, lastItemTimeCreated) {
+		if (lastMessageDate === lastItemTimeCreated) {
+			return <div id="lastMessage" />;
+		}
+	}
+
 	render() {
 		//console.log('Chat this.props = ', this.props);
 		const { colorTheme, chat, name, windowWidth, windowHeight } = this.props;
@@ -74,11 +81,19 @@ class Chat extends Component {
 			inputWidth = numberOfPixelsPerSpan * 18;
 		}
 
+		const last50MessagesLength = chat.last50Messages.length;
+		let lastMessageDate;
+		if (last50MessagesLength > 1) {
+			lastMessageDate =
+				chat.last50Messages[last50MessagesLength - 1].timeCreated;
+		}
+
 		return (
 			<Content
 				style={{
 					textAlign: "center",
-					background: colorTheme.backgroundColor
+					background: colorTheme.backgroundColor,
+					padding: "0px 0px 0px 0px"
 				}}
 			>
 				<div id="chat-window-infinite-container">
@@ -93,6 +108,7 @@ class Chat extends Component {
 								// need to switch to unique identifier
 								justifyValue = "end";
 							}
+
 							return (
 								<Row
 									type="flex"
@@ -132,29 +148,28 @@ class Chat extends Component {
 											{this.renderMessageStatusIcon("delivered", item, name)}
 										</p>
 									</Col>
+									{this.renderLastMessageDiv(lastMessageDate, item.timeCreated)}
 								</Row>
 							);
 						}}
 					/>
 				</div>
-				<Affix offsetBottom={0}>
-					<Row type="flex" justify="start" align="middle">
-						<Col>
-							<Input
-								value={chat.currentMessage}
-								placeholder="type here..."
-								onChange={this.onChangeCurrentMessage}
-								onPressEnter={this.onPressEnter}
-								style={{
-									width: inputWidth,
-									borderColor: colorTheme.text7Color,
-									background: colorTheme.text7Color,
-									color: colorTheme.text1Color
-								}}
-							/>
-						</Col>
-					</Row>
-				</Affix>
+				<Row type="flex" justify="start" align="middle">
+					<Col>
+						<Input
+							value={chat.currentMessage}
+							placeholder="type here..."
+							onChange={this.onChangeCurrentMessage}
+							onPressEnter={this.onPressEnter}
+							style={{
+								width: inputWidth,
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text1Color
+							}}
+						/>
+					</Col>
+				</Row>
 			</Content>
 		);
 	}
