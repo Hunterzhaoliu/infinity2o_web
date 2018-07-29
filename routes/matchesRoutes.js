@@ -144,8 +144,8 @@ module.exports = app => {
 					{ _id: userId },
 					{ $pull: { matches: { id: matchMongoDBUserId } } }
 				);
-				// deletes user from match's matches
-				await UserCollection.findOneAndUpdate(
+				// deletes user from match's matches just in case both people get matched to each other
+				await UserCollection.update(
 					{ _id: matchId },
 					{ $pull: { matches: { id: userId } } }
 				);
