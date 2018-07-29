@@ -78,7 +78,8 @@ export default function(state = initialState, action) {
 				newState.interests = action.profile.interests;
 				newState.linkedInPublicProfileUrl =
 					action.profile.linkedInPublicProfileUrl;
-				newState.githubPublicProfileUrl = action.profile.githubPublicProfileUrl;
+				newState.githubPublicProfileUrl =
+					action.profile.githubPublicProfileUrl;
 				newState.timeZone = action.profile.timeZone;
 				newState.availability = action.profile.availability;
 				newState.newName = action.profile.name;
@@ -93,7 +94,8 @@ export default function(state = initialState, action) {
 				newState.newAvailability = action.profile.availability;
 				newState.asks = action.profile.asks;
 				newState.payment = action.profile.payment;
-				newState.ranInitialMinerva = action.profile.minerva.ranInitialMinerva;
+				newState.ranInitialMinerva =
+					action.profile.minerva.ranInitialMinerva;
 			}
 			return newState;
 		case SAVE_COLOR_THEME_START:
@@ -114,30 +116,41 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_CHANGE_NAME:
 			newState.newName = action.newName;
+			newState.name = newState.newName;
 			newState.hasNameError = action.hasError;
 			return newState;
 		case ON_CHANGE_EMAIL:
 			newState.newEmail = action.newEmail;
+			newState.email = newState.newEmail;
 			newState.hasEmailError = action.hasError;
 			return newState;
 		case ON_CHANGE_AGE:
 			newState.newAge = action.newAge;
+			newState.age = newState.newAge;
 			newState.hasAgeError = action.hasError;
 			return newState;
 		case ON_CHANGE_INTERESTS:
 			newState.newInterests = action.newInterests;
+			newState.interests = newState.newInterests;
 			newState.hasInterestsError = action.hasError;
 			return newState;
 		case ON_CHANGE_LINKEDIN_PROFILE_URL:
-			newState.newLinkedInPublicProfileUrl = action.newLinkedInPublicProfileUrl;
+			newState.newLinkedInPublicProfileUrl =
+				action.newLinkedInPublicProfileUrl;
+			newState.linkedInPublicProfileUrl =
+				newState.newLinkedInPublicProfileUrl;
 			newState.hasLinkedInPublicProfileUrlError = action.hasError;
 			return newState;
 		case ON_CHANGE_GITHUB_PROFILE_URL:
-			newState.newGithubPublicProfileUrl = action.newGithubPublicProfileUrl;
+			newState.newGithubPublicProfileUrl =
+				action.newGithubPublicProfileUrl;
+			newState.githubPublicProfileUrl =
+				newState.newGithubPublicProfileUrl;
 			newState.hasGithubPublicProfileUrlError = action.hasError;
 			return newState;
 		case ON_CHANGE_TIME_ZONE:
 			newState.newTimeZone = action.newTimeZone;
+			newState.timeZone = newState.newTimeZone;
 			newState.hasTimeZoneError = action.hasError;
 			return newState;
 		case ON_CHANGE_TIME_SLOT:
@@ -158,7 +171,7 @@ export default function(state = initialState, action) {
 				newState.newAvailability[dayValue] = [];
 				newState.newAvailability[dayValue].push(timeSlot);
 			}
-
+			newState.availability = newState.newAvailability;
 			return newState;
 		case SAVE_PROFILE_START:
 			newState.save = "save_start";
@@ -183,7 +196,8 @@ export default function(state = initialState, action) {
 			return newState;
 		case UPDATE_NEURONS:
 			if (!newState.payment.infinityStatus) {
-				newState.payment.neuronsInBillions += action.neuronsInBillionsToAdd;
+				newState.payment.neuronsInBillions +=
+					action.neuronsInBillionsToAdd;
 				newState.payment.infinityStatus = action.infinityStatus;
 			} // do nothing if in infinityStatus is true
 			return newState;
