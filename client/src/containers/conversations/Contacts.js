@@ -18,7 +18,7 @@ class Contacts extends Component {
 		}
 	}
 
-	renderContactButton(contact) {
+	renderContactButton() {
 		const {
 			colorTheme,
 			contacts,
@@ -27,70 +27,88 @@ class Contacts extends Component {
 			windowHeight
 		} = this.props;
 
-		const contactWindowHeight = windowHeight * 88.5 / 662;
-		const contactWindowVerticalHeight = contactWindowHeight.toString() + "vh";
+		const contactWindowHeight = windowHeight - 76;
+		const contactWindowVerticalHeight = contactWindowHeight.toString() + "px";
 		document.documentElement.style.setProperty(
 			`--contact-window-vertical-height`,
 			contactWindowVerticalHeight
 		);
-		let borderColor = colorTheme.text8Color;
-		let background = colorTheme.text8Color;
-		let color = colorTheme.text4Color;
-		if (contacts.conversationId === contact.conversationId) {
-			// selected contact
-			borderColor = colorTheme.keyText8Color;
-			background = colorTheme.keyText8Color;
-			color = colorTheme.text2Color;
-		}
-		let buttonWidth = windowWidth * 0.152; // = 183.3/1200
-		if (windowWidth < 576) {
-			// 0.815 = 470/576
-			buttonWidth = windowWidth * 0.815;
-		} else if (windowWidth <= 768) {
-			// 0.2174 = 167/768
-			buttonWidth = windowWidth * 0.2174;
-		} else if (windowWidth < 992) {
-			// 0.2244 = 222.7/992
-			buttonWidth = windowWidth * 0.2244;
+
+		const numberOfPixelsPerSpan = (windowWidth - 100) / 24;
+		let buttonWidth = numberOfPixelsPerSpan * 4 - 17;
+		if (windowWidth < 768) {
+			buttonWidth = numberOfPixelsPerSpan * 6 - 17;
 		}
 		return (
-			<Badge
-				count={contact.numberOfUnseenMessages}
-				style={{
-					backgroundColor: colorTheme.keyText8Color,
-					color: colorTheme.text1Color,
-					boxShadow: "0 0 0 1px " + colorTheme.keyText8Color
-				}}
-				offset={[22, -15]} // [lower, right]
-			>
-				<Button
-					style={{
-						borderColor: borderColor,
-						background: background,
-						color: color,
-						height: "44px",
-						width: buttonWidth
-					}}
-					onClick={e =>
-						onSelectContact(
-							contact.conversationId,
-							contact.isOnline,
-							contact.socketId,
-							contact.matchId,
-							contact.numberOfUnseenMessages
-						)
+			<List
+				dataSource={contacts.allContacts}
+				renderItem={contact => {
+					let borderColor = colorTheme.text8Color;
+					let background = colorTheme.text8Color;
+					let color = colorTheme.text4Color;
+
+					if (contacts.conversationId === contact.conversationId) {
+						// selected contact
+						borderColor = colorTheme.keyText8Color;
+						background = colorTheme.keyText8Color;
+						color = colorTheme.text2Color;
 					}
-				>
-					{contact.matchName}
-					{this.renderOnline(contact.isOnline)}
-				</Button>
-			</Badge>
+
+					let contactName = contact.matchName;
+
+					if (windowWidth < 768) {
+						// only display first name
+						contactName = contact.matchName.replace(/ .*/, "");
+					}
+					return (
+						<List.Item
+							style={{
+								borderColor: colorTheme.backgroundColor,
+								background: colorTheme.backgroundColor,
+								padding: "5px 0px 0px"
+							}}
+						>
+							<Badge
+								count={contact.numberOfUnseenMessages}
+								style={{
+									backgroundColor: colorTheme.keyText8Color,
+									color: colorTheme.text1Color,
+									boxShadow: "0 0 0 1px " + colorTheme.keyText8Color
+								}}
+								offset={[22, -15]} // [lower, right]
+							>
+								<Button
+									style={{
+										borderColor: borderColor,
+										background: background,
+										color: color,
+										height: "44px",
+										width: buttonWidth
+									}}
+									onClick={e =>
+										onSelectContact(
+											contact.conversationId,
+											contact.isOnline,
+											contact.socketId,
+											contact.matchId,
+											contact.numberOfUnseenMessages
+										)
+									}
+								>
+									{contactName}
+									{this.renderOnline(contact.isOnline)}
+								</Button>
+							</Badge>
+						</List.Item>
+					);
+				}}
+			/>
 		);
 	}
 
 	render() {
 		//console.log('Contacts this.props = ', this.props);
-		const { colorTheme, contacts } = this.props;
+		const { colorTheme } = this.props;
 
 		return (
 			<Content
@@ -101,23 +119,7 @@ class Contacts extends Component {
 				}}
 			>
 				<div className="demo-infinite-container">
-					<List
-						dataSource={contacts.allContacts}
-						renderItem={contact => {
-							//console.log('contact = ', contact);
-							return (
-								<List.Item
-									style={{
-										borderColor: colorTheme.backgroundColor,
-										background: colorTheme.backgroundColor,
-										padding: "5px 0px 0px"
-									}}
-								>
-									{this.renderContactButton(contact)}
-								</List.Item>
-							);
-						}}
-					/>
+					{this.renderContactButton()}
 				</div>
 			</Content>
 		);

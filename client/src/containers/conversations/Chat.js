@@ -60,25 +60,20 @@ class Chat extends Component {
 	render() {
 		//console.log('Chat this.props = ', this.props);
 		const { colorTheme, chat, name, windowWidth, windowHeight } = this.props;
-		const chatWindowHeight = windowHeight * 83 / 662;
-		const chatWindowVerticalHeight = chatWindowHeight.toString() + "vh";
+		const chatWindowHeight = windowHeight - 112;
+		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 		document.documentElement.style.setProperty(
 			`--chat-window-vertical-height`,
 			chatWindowVerticalHeight
 		);
-		// 0.3819 = 483.5/1200
-		// 0.3745 = 371.6/992
-		let inputWidth = windowWidth * 0.38; // = 483.5/1200
-		if (windowWidth < 576) {
-			// 0.815 = 470/576
-			inputWidth = windowWidth * 0.815;
-		} else if (windowWidth < 768) {
-			// 0.6523 = 501/768
-			inputWidth = windowWidth * 0.6523;
-		} else if (windowWidth < 992) {
-			// 0.6523 = 668.2/992
-			inputWidth = windowWidth * 0.6735;
+
+		// finding the right number of pixels for the chat input
+		const numberOfPixelsPerSpan = (windowWidth - 100) / 24;
+		let inputWidth = numberOfPixelsPerSpan * 10 - 17;
+		if (windowWidth < 768) {
+			inputWidth = numberOfPixelsPerSpan * 18 - 17;
 		}
+
 		return (
 			<Content
 				style={{
