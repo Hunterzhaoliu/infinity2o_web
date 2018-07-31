@@ -40,7 +40,7 @@ class Conversation extends Component {
 							color: colorTheme.text3Color
 						}}
 					>
-						<Contacts contacts={contacts.allContacts} />
+						<Contacts />
 					</Col>
 					<Col
 						sm={{ span: 18 }}
@@ -51,7 +51,7 @@ class Conversation extends Component {
 							padding: "5px 0px 0px"
 						}}
 					>
-						<Chat chat={chat} />
+						<Chat />
 					</Col>
 					<Col
 						sm={{ span: 0 }}

@@ -99,8 +99,50 @@ class MatchCards extends Component {
 		}
 	}
 
+	renderMatchButtons() {
+		const { activeSection, colorTheme, match, history } = this.props;
+		console.log("activeSection = ", activeSection);
+		if (activeSection === "matches") {
+			return (
+				<Row
+					style={{ padding: "8px 0px 0px 0px" }}
+					type="flex"
+					justify="space-between"
+					align="top"
+				>
+					<Col span={11}>
+						<Button
+							style={{
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text2Color
+							}}
+							onClick={e => this.onNextMatch()}
+						>
+							Next
+						</Button>
+					</Col>
+					<Col span={11}>
+						<Button
+							style={{
+								borderColor: colorTheme.keyText7Color,
+								background: colorTheme.keyText7Color,
+								color: colorTheme.text1Color
+							}}
+							onClick={e =>
+								this.onStartConversation(history, match.name, match.id)
+							}
+						>
+							Say Hi
+						</Button>
+					</Col>
+				</Row>
+			);
+		}
+	}
+
 	render() {
-		const { match, history, colorTheme } = this.props;
+		const { match, colorTheme } = this.props;
 		return (
 			<Row type="flex" justify="center" align="top">
 				<Col>
@@ -158,39 +200,7 @@ class MatchCards extends Component {
 						<Row type="flex" justify="center" align="middle">
 							<Col>{this.renderMatchPicture(match.imageUrl)}</Col>
 						</Row>
-						<Row
-							style={{ padding: "8px 0px 0px 0px" }}
-							type="flex"
-							justify="space-between"
-							align="top"
-						>
-							<Col span={11}>
-								<Button
-									style={{
-										borderColor: colorTheme.text7Color,
-										background: colorTheme.text7Color,
-										color: colorTheme.text2Color
-									}}
-									onClick={e => this.onNextMatch()}
-								>
-									Next
-								</Button>
-							</Col>
-							<Col span={11}>
-								<Button
-									style={{
-										borderColor: colorTheme.keyText7Color,
-										background: colorTheme.keyText7Color,
-										color: colorTheme.text1Color
-									}}
-									onClick={e =>
-										this.onStartConversation(history, match.name, match.id)
-									}
-								>
-									Say Hi
-								</Button>
-							</Col>
-						</Row>
+						{this.renderMatchButtons()}
 					</Card>
 				</Col>
 			</Row>
@@ -205,6 +215,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
+		activeSection: state.colorTheme.activeSection,
 		neuronsInBillions: state.profile.payment.neuronsInBillions,
 		mongoDBUserId: state.auth.mongoDBUserId,
 		nextMatches: state.matches.nextMatches,

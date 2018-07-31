@@ -40,7 +40,7 @@ const generateUniqueUID = () => {
 module.exports = app => {
 	app.get("/api/matches", requireLogin, async (request, response) => {
 		// formats the request string into an array
-		const mongoDBUserId = request.query.mongoDBUserId;
+		const mongoDBUserId = request.user._id;
 		// get user's Match Ids
 		const userInDB = await UserCollection.findOne({ _id: mongoDBUserId });
 		const userMatches = userInDB.matches;
