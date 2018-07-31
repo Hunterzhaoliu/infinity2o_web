@@ -115,13 +115,13 @@ class Chat extends Component {
 									justify={justifyValue}
 									align="middle"
 									style={{
-										padding: "0px 0px 0px"
+										padding: "0px 0px 0px -17px"
 									}}
 								>
 									<Col>
 										<List.Item
 											style={{
-												padding: "0px 0px 0px"
+												padding: "0px 0px 0px 0px"
 											}}
 										>
 											<p
@@ -138,17 +138,20 @@ class Chat extends Component {
 											</p>
 										</List.Item>
 									</Col>
-									<Col xl={{ span: 1 }}>
+									<Col>
 										<p
 											style={{
 												color: colorTheme.text8Color,
-												padding: "12px 4px 0px"
+												padding: "12px 0px 0px 5px"
 											}}
 										>
 											{this.renderMessageStatusIcon("delivered", item, name)}
 										</p>
+										{this.renderLastMessageDiv(
+											lastMessageDate,
+											item.timeCreated
+										)}
 									</Col>
-									{this.renderLastMessageDiv(lastMessageDate, item.timeCreated)}
 								</Row>
 							);
 						}}
