@@ -101,67 +101,62 @@ class Chat extends Component {
 					padding: "0px 0px 0px 0px"
 				}}
 			>
-				<div id="chat-window-infinite-container">
-					<List
-						className="chat-window-infinite-container"
-						dataSource={chat.last50Messages}
-						renderItem={item => {
-							const message = item.content;
-							let justifyValue = "start";
-							if (item.senderName === name) {
-								// TODO: what if both people's names are the senderName
-								// need to switch to unique identifier
-								justifyValue = "end";
-							}
+				<List
+					className="chat-window-infinite-container"
+					dataSource={chat.last50Messages}
+					renderItem={item => {
+						const message = item.content;
+						let justifyValue = "start";
+						if (item.senderName === name) {
+							// TODO: what if both people's names are the senderName
+							// need to switch to unique identifier
+							justifyValue = "end";
+						}
 
-							return (
-								<Row
-									type="flex"
-									justify={justifyValue}
-									align="middle"
-									style={{
-										padding: "0px 0px 0px -17px"
-									}}
-								>
-									<Col>
-										<List.Item
-											style={{
-												padding: "0px 0px 0px 0px"
-											}}
-										>
-											<p
-												style={{
-													borderColor: colorTheme.text8Color,
-													borderWidth: "2px",
-													background: colorTheme.text8Color,
-													color: colorTheme.text3Color,
-													borderRadius: "25px",
-													padding: "4px 15px 4px"
-												}}
-											>
-												{message}
-											</p>
-										</List.Item>
-									</Col>
-									<Col>
+						return (
+							<Row
+								type="flex"
+								justify={justifyValue}
+								align="middle"
+								style={{
+									padding: "0px 0px 0px -17px"
+								}}
+							>
+								<Col>
+									<List.Item
+										style={{
+											padding: "0px 0px 0px 0px"
+										}}
+									>
 										<p
 											style={{
-												color: colorTheme.text8Color,
-												padding: "12px 0px 0px 5px"
+												borderColor: colorTheme.text8Color,
+												borderWidth: "2px",
+												background: colorTheme.text8Color,
+												color: colorTheme.text3Color,
+												borderRadius: "25px",
+												padding: "4px 15px 4px"
 											}}
 										>
-											{this.renderMessageStatusIcon("delivered", item, name)}
+											{message}
 										</p>
-										{this.renderLastMessageDiv(
-											lastMessageDate,
-											item.timeCreated
-										)}
-									</Col>
-								</Row>
-							);
-						}}
-					/>
-				</div>
+									</List.Item>
+								</Col>
+								<Col>
+									<p
+										style={{
+											color: colorTheme.text8Color,
+											padding: "12px 0px 0px 5px"
+										}}
+									>
+										{this.renderMessageStatusIcon("delivered", item, name)}
+									</p>
+									{this.renderLastMessageDiv(lastMessageDate, item.timeCreated)}
+								</Col>
+							</Row>
+						);
+					}}
+				/>
 				<Row type="flex" justify="start" align="middle">
 					<Col>
 						<Input
