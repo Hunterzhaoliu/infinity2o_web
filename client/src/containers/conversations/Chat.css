@@ -1,14 +1,4 @@
-/* #chat-window-infinite-container {
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
-	position: relative;
-} */
-
-::-webkit-scrollbar {
-	width: 0px; /* remove scrollbar space */
-	background: transparent; /* optional: just make scrollbar invisible */
-}
+/* https://stackoverflow.com/questions/3296644/hiding-the-scrollbar-on-an-html-page */
 
 .chat-window-infinite-container {
 	border-radius: 0px;
@@ -18,13 +8,7 @@
 	overflow-x: hidden;
 }
 
-/* .chat-window-infinite-container {
-	border-radius: 0px;
-	padding-right: 0px;
-	height: var(--chat-window-vertical-height);
-	left: 0;
-	margin-right: -17px;
-	overflow-y: scroll;
-} */
-
-/* https://stackoverflow.com/questions/3296644/hiding-the-scrollbar-on-an-html-page */
+::-webkit-scrollbar {
+	width: 0px; /* remove scrollbar space */
+	/* background: transparent;  optional: just make scrollbar invisible */
+}

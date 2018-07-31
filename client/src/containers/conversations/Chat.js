@@ -10,7 +10,11 @@ const { Content } = Layout;
 
 class Chat extends Component {
 	componentDidUpdate() {
-		if (document.getElementById("lastMessage") !== null) {
+		if (
+			this.props.chat.currentMessage === null &&
+			document.getElementById("lastMessage") !== null
+		) {
+			// when typing new message, no need to scroll back down
 			document.getElementById("lastMessage").scrollIntoView();
 		}
 	}
@@ -81,6 +85,7 @@ class Chat extends Component {
 			inputWidth = numberOfPixelsPerSpan * 18;
 		}
 
+		// used to place div after last message
 		const last50MessagesLength = chat.last50Messages.length;
 		let lastMessageDate;
 		if (last50MessagesLength > 1) {
