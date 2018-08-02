@@ -7,7 +7,8 @@ import {
 	ON_SELECT_CONTACT,
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
-	SEEN_MESSAGES
+	SEEN_MESSAGES,
+	UPDATE_SELECTED_CONTACT_INFO
 } from "../types";
 
 export const fetchConversations = () => async dispatch => {
@@ -81,14 +82,14 @@ const selectContact = async (
 	});
 
 	// get previous messages in DB
-	const response = await axios.get(
+	const previousMessagesInDB = await axios.get(
 		"/api/conversations?conversationId=" + conversationId
 	);
 
-	if (response.status === 200) {
+	if (previousMessagesInDB.status === 200) {
 		dispatch({
 			type: UPDATE_CHAT,
-			last50Messages: response.data.last50Messages
+			last50Messages: previousMessagesInDB.data.last50Messages
 		});
 
 		if (numberOfUnseenMessages >= 1) {
@@ -105,6 +106,20 @@ const selectContact = async (
 		}
 	} else {
 		dispatch({ type: UPDATE_CHAT_ERROR });
+	}
+
+	const selectedContactInfo = await axios.get(
+		"/api/matches/selected_contact_info?contactMongoDBUserId=" +
+			contactMongoDBUserId
+	);
+
+	if (selectedContactInfo.status === 200) {
+		// dispatch update selected contact info
+		console.log("selectedContactInfo.data = ", selectedContactInfo.data);
+		dispatch({
+			type: UPDATE_SELECTED_CONTACT_INFO,
+			selectedContactInfo: selectedContactInfo.data
+		});
 	}
 };
 

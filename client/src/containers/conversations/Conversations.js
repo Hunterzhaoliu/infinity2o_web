@@ -17,7 +17,7 @@ class Conversation extends Component {
 	}
 
 	renderConversations() {
-		const { colorTheme, chat, contacts } = this.props;
+		const { colorTheme, contacts } = this.props;
 
 		if (
 			contacts.allContacts !== undefined &&

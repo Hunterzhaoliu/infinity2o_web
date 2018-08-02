@@ -133,7 +133,7 @@ export const initializeApp = () => async dispatch => {
 			// );
 
 			const selectedContactMongoDBUserId = store.getState().contacts
-				.selectedContactMongoDBUserId;
+				.selectedConversationInfo.selectedContactMongoDBUserId;
 			// console.log(
 			// 	"selectedContactMongoDBUserId = ",
 			// 	selectedContactMongoDBUserId

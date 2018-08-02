@@ -9,7 +9,8 @@ import {
 	UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
 	NEW_MESSAGE,
 	UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES,
-	SEEN_MESSAGES
+	SEEN_MESSAGES,
+	UPDATE_SELECTED_CONTACT_INFO
 } from "../actions/types";
 
 let cloneObject = obj => {
@@ -19,10 +20,13 @@ let cloneObject = obj => {
 let initialState = {
 	allContacts: [],
 	hasContactsError: false,
-	conversationId: null,
-	selectedContactOnline: false,
-	selectedContactSocketId: null,
-	selectedContactMongoDBUserId: null,
+	selectedConversationInfo: {
+		conversationId: null,
+		selectedContactOnline: false,
+		selectedContactSocketId: null,
+		selectedContactMongoDBUserId: null,
+		selectedContactMongoDBInfo: null
+	},
 	hasToldRedisClientOnlineError: false,
 	hasSaveUserConversationsError: false,
 	totalNumberOfUnseenMessages: 0
@@ -35,10 +39,15 @@ export default function(state = initialState, action) {
 			newState.allContacts = action.allContacts;
 
 			newState.allContacts.forEach(function(contact) {
-				if (contact.conversationId === newState.conversationId) {
+				if (
+					contact.conversationId ===
+					newState.selectedConversationInfo.conversationId
+				) {
 					// we found the conversation both clients are in
-					newState.selectedContactOnline = contact.isOnline;
-					newState.selectedContactSocketId = contact.socketId;
+					newState.selectedConversationInfo.selectedContactOnline =
+						contact.isOnline;
+					newState.selectedConversationInfo.selectedContactSocketId =
+						contact.socketId;
 				}
 			});
 			return newState;
@@ -46,10 +55,13 @@ export default function(state = initialState, action) {
 			newState.hasContactsError = true;
 			return newState;
 		case ON_SELECT_CONTACT:
-			newState.conversationId = action.conversationId;
-			newState.selectedContactOnline = action.contactIsOnline;
-			newState.selectedContactSocketId = action.contactSocketId;
-			newState.selectedContactMongoDBUserId = action.contactMongoDBUserId;
+			newState.selectedConversationInfo.conversationId = action.conversationId;
+			newState.selectedConversationInfo.selectedContactOnline =
+				action.contactIsOnline;
+			newState.selectedConversationInfo.selectedContactSocketId =
+				action.contactSocketId;
+			newState.selectedConversationInfo.selectedContactMongoDBUserId =
+				action.contactMongoDBUserId;
 			return newState;
 		case TOLD_REDIS_CLIENT_IS_ONLINE:
 			newState.hasToldRedisClientOnlineError = false;
@@ -67,10 +79,13 @@ export default function(state = initialState, action) {
 			// TODO: optimize
 			newState.allContacts.forEach(function(contact) {
 				if (contact.matchId === action.newUserSocketInfo.userId) {
-					if (state.selectedContactSocketId === contact.socketId) {
+					if (
+						state.selectedConversationInfo.selectedContactSocketId ===
+						contact.socketId
+					) {
 						// contact is also the currently selected contact
-						newState.selectedContactOnline = true;
-						newState.selectedContactSocketId =
+						newState.selectedConversationInfo.selectedContactOnline = true;
+						newState.selectedConversationInfo.selectedContactSocketId =
 							action.newUserSocketInfo.socketId;
 					}
 					// we found the contact that is online and are updating their socketId
@@ -98,6 +113,10 @@ export default function(state = initialState, action) {
 					contact.numberOfUnseenMessages = 0;
 				}
 			});
+			return newState;
+		case UPDATE_SELECTED_CONTACT_INFO:
+			newState.selectedConversationInfo.selectedContactMongoDBInfo =
+				action.selectedContactInfo;
 			return newState;
 		default:
 			return state;

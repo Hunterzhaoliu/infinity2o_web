@@ -47,7 +47,10 @@ class Contacts extends Component {
 					let background = colorTheme.text8Color;
 					let color = colorTheme.text4Color;
 
-					if (contacts.conversationId === contact.conversationId) {
+					if (
+						contacts.selectedConversationInfo.conversationId ===
+						contact.conversationId
+					) {
 						// selected contact
 						borderColor = colorTheme.keyText8Color;
 						background = colorTheme.keyText8Color;

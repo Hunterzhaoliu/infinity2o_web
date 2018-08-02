@@ -188,10 +188,13 @@ function mapStateToProps(state) {
 		chat: state.chat,
 		name: state.profile.name,
 		mongoDBUserId: state.auth.mongoDBUserId,
-		conversationId: state.contacts.conversationId,
-		selectedContactOnline: state.contacts.selectedContactOnline,
-		selectedContactSocketId: state.contacts.selectedContactSocketId,
-		selectedContactMongoDBUserId: state.contacts.selectedContactMongoDBUserId,
+		conversationId: state.contacts.selectedConversationInfo.conversationId,
+		selectedContactOnline:
+			state.contacts.selectedConversationInfo.selectedContactOnline,
+		selectedContactSocketId:
+			state.contacts.selectedConversationInfo.selectedContactSocketId,
+		selectedContactMongoDBUserId:
+			state.contacts.selectedConversationInfo.selectedContactMongoDBUserId,
 		windowWidth: state.customHeader.windowWidth,
 		windowHeight: state.customHeader.windowHeight
 	};

@@ -5,28 +5,23 @@ const UserCollection = mongoose.model("users");
 const amqp = require("amqplib/callback_api");
 const keys = require("../config/keys");
 
-const getMatchesInfo = async mongoDBUserIds => {
-	let matchesInfo = [];
-	for (let mongoDBUserId of mongoDBUserIds) {
-		const user = await UserCollection.findById(mongoDBUserId);
-
-		if (user !== null) {
-			matchesInfo.push({
-				name: user.profile.name,
-				age: user.profile.age,
-				linkedInPublicProfileUrl: user.profile.linkedInPublicProfileUrl,
-				githubPublicProfileUrl: user.profile.githubPublicProfileUrl,
-				interests: user.profile.interests,
-				timeZone: user.profile.timeZone,
-				totalUserVotes: user.profile.asks.totalUserVotes,
-				availability: user.profile.availability,
-				asks: user.profile.asks,
-				id: user._id,
-				imageUrl: user.profile.imageUrl
-			});
-		}
+const getMatchesInfo = async mongoDBMatchId => {
+	const match = await UserCollection.findById(mongoDBMatchId);
+	if (match !== null) {
+		return {
+			name: match.profile.name,
+			age: match.profile.age,
+			linkedInPublicProfileUrl: match.profile.linkedInPublicProfileUrl,
+			githubPublicProfileUrl: match.profile.githubPublicProfileUrl,
+			interests: match.profile.interests,
+			timeZone: match.profile.timeZone,
+			totalUserVotes: match.profile.asks.totalUserVotes,
+			availability: match.profile.availability,
+			asks: match.profile.asks,
+			id: match._id,
+			imageUrl: match.profile.imageUrl
+		};
 	}
-	return matchesInfo;
 };
 
 const generateUniqueUID = () => {
@@ -44,13 +39,28 @@ module.exports = app => {
 		// get user's Match Ids
 		const userInDB = await UserCollection.findOne({ _id: mongoDBUserId });
 		const userMatches = userInDB.matches;
-		let mongoDBMatchIds = [];
-		for (let i = 0; i < userMatches.length; i++) {
-			mongoDBMatchIds.push(userMatches[i]["id"]);
+		let matchesInfo = [];
+		for (let match of userMatches) {
+			const matchInfo = await getMatchesInfo(match.id);
+			matchesInfo.push(matchInfo);
 		}
-		let matchesInfo = await getMatchesInfo(mongoDBMatchIds);
 		response.send(matchesInfo);
 	});
+
+	app.get(
+		"/api/matches/selected_contact_info",
+		requireLogin,
+		async (request, response) => {
+			// console.log(
+			// 	"request.query.contactMongoDBUserId = ",
+			// 	request.query.contactMongoDBUserId
+			// );
+			const selectedMatchInfo = await getMatchesInfo(
+				request.query.contactMongoDBUserId
+			);
+			response.send(selectedMatchInfo);
+		}
+	);
 
 	app.post(
 		"/api/matches/start_conversation",
