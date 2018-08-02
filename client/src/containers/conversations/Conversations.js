@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as contactsActionCreators from "../../actions/conversations/contacts";
 import { bindActionCreators } from "redux";
-
+import ContactCard from "./ContactCard";
 import Chat from "./Chat";
 import Contacts from "./Contacts";
 import { Layout, Row, Col } from "antd";
@@ -24,13 +24,15 @@ class Conversation extends Component {
 			contacts.allContacts.length >= 1
 		) {
 			return (
-				<Row type="flex" justify="space-between">
+				<Row type="flex" justify="space-around" align="middle">
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
 						lg={{ span: 5 }}
 						xl={{ span: 5 }}
-					/>
+					>
+						<ContactCard />
+					</Col>
 					<Col
 						sm={{ span: 6 }}
 						md={{ span: 6 }}

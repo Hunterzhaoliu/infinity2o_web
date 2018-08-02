@@ -101,7 +101,7 @@ class MatchCards extends Component {
 
 	renderMatchButtons() {
 		const { activeSection, colorTheme, match, history } = this.props;
-		console.log("activeSection = ", activeSection);
+		// conversations also uses this to show selected contact info
 		if (activeSection === "matches") {
 			return (
 				<Row
