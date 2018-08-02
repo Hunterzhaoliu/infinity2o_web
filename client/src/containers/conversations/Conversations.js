@@ -28,8 +28,8 @@ class Conversation extends Component {
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
+						lg={{ span: 6 }}
+						xl={{ span: 6 }}
 						style={{
 							padding: "0px 5px 0px"
 						}}
@@ -39,8 +39,8 @@ class Conversation extends Component {
 					<Col
 						sm={{ span: 6 }}
 						md={{ span: 6 }}
-						lg={{ span: 4 }}
-						xl={{ span: 4 }}
+						lg={{ span: 3 }}
+						xl={{ span: 3 }}
 						style={{
 							color: colorTheme.text3Color
 						}}
@@ -50,10 +50,10 @@ class Conversation extends Component {
 					<Col
 						sm={{ span: 18 }}
 						md={{ span: 18 }}
-						lg={{ span: 10 }}
-						xl={{ span: 10 }}
+						lg={{ span: 9 }}
+						xl={{ span: 9 }}
 						style={{
-							padding: "5px 0px 0px"
+							padding: "5px 0px 0px 5px"
 						}}
 					>
 						<Chat />
@@ -61,8 +61,8 @@ class Conversation extends Component {
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
+						lg={{ span: 6 }}
+						xl={{ span: 6 }}
 					/>
 				</Row>
 			);

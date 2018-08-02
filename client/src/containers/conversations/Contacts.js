@@ -35,7 +35,7 @@ class Contacts extends Component {
 		);
 
 		const numberOfPixelsPerSpan = windowWidth / 24;
-		let buttonWidth = numberOfPixelsPerSpan * 4;
+		let buttonWidth = numberOfPixelsPerSpan * 3;
 		if (windowWidth < 768) {
 			buttonWidth = numberOfPixelsPerSpan * 6;
 		}

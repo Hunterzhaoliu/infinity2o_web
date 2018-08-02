@@ -79,10 +79,10 @@ class Chat extends Component {
 		);
 
 		// finding the right number of pixels for the chat input
-		const numberOfPixelsPerSpan = (windowWidth - 100) / 24;
-		let inputWidth = numberOfPixelsPerSpan * 10;
+		const numberOfPixelsPerSpan = windowWidth / 24;
+		let inputWidth = numberOfPixelsPerSpan * 9 - 5;
 		if (windowWidth < 768) {
-			inputWidth = numberOfPixelsPerSpan * 18;
+			inputWidth = numberOfPixelsPerSpan * 18 - 5;
 		}
 
 		// used to place div after last message
