@@ -64,7 +64,7 @@ class Matches extends Component {
 		if (hasMatches) {
 			const match = matches.current1DisplayedMatches[0];
 			return (
-				<Col key={match.name}>
+				<Col span={8} key={match.name}>
 					<MatchCards match={match} history={history} />
 				</Col>
 			);

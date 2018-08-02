@@ -17,7 +17,7 @@ class Conversation extends Component {
 	render() {
 		const {} = this.props;
 
-		return <div style={{ width: "200px" }}>{this.renderContactCard()}</div>;
+		return <div>{this.renderContactCard()}</div>;
 	}
 }
 

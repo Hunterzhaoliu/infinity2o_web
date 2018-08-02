@@ -151,7 +151,6 @@ class MatchCards extends Component {
 						borderded="false"
 						loading={false}
 						style={{
-							width: "400px",
 							color: colorTheme.text1Color,
 							borderColor: colorTheme.text8Color,
 							background: colorTheme.text8Color

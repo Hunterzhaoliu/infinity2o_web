@@ -24,12 +24,15 @@ class Conversation extends Component {
 			contacts.allContacts.length >= 1
 		) {
 			return (
-				<Row type="flex" justify="space-around" align="middle">
+				<Row type="flex" justify="start" align="middle">
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
 						lg={{ span: 5 }}
 						xl={{ span: 5 }}
+						style={{
+							padding: "0px 5px 0px"
+						}}
 					>
 						<ContactCard />
 					</Col>
@@ -84,7 +87,7 @@ class Conversation extends Component {
 			<Content
 				style={{
 					textAlign: "center",
-					padding: "75px 50px 0px", // top left&right bottom
+					padding: "75px 0px 0px", // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
