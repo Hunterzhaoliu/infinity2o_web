@@ -24,7 +24,7 @@ class Conversation extends Component {
 			contacts.allContacts.length >= 1
 		) {
 			return (
-				<Row type="flex" justify="start" align="middle">
+				<Row type="flex" justify="center" align="middle">
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
@@ -80,14 +80,13 @@ class Conversation extends Component {
 	}
 
 	render() {
-		//console.log('Conversation this.props = ', this.props);
 		const { colorTheme } = this.props;
 
 		return (
 			<Content
 				style={{
 					textAlign: "center",
-					padding: "75px 0px 0px", // top left&right bottom
+					padding: "75px 0px 0px 0px",
 					background: colorTheme.backgroundColor
 				}}
 			>

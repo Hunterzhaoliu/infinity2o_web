@@ -119,7 +119,7 @@ class Chat extends Component {
 								justify={justifyValue}
 								align="middle"
 								style={{
-									padding: "0px 0px 0px -17px"
+									padding: "0px 0px 0px 0px"
 								}}
 							>
 								<Col>

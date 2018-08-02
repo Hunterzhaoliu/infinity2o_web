@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 import MatchCards from "../matches/MatchCards";
-import { Row, Col } from "antd";
+// import { Row, Col } from "antd";
 
 class Conversation extends Component {
 	renderContactCard() {
@@ -15,8 +15,6 @@ class Conversation extends Component {
 	}
 
 	render() {
-		const {} = this.props;
-
 		return <div>{this.renderContactCard()}</div>;
 	}
 }

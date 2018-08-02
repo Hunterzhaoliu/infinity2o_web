@@ -34,13 +34,14 @@ class Contacts extends Component {
 			contactWindowVerticalHeight
 		);
 
-		const numberOfPixelsPerSpan = (windowWidth - 100) / 24;
-		let buttonWidth = numberOfPixelsPerSpan * 4 - 5;
+		const numberOfPixelsPerSpan = windowWidth / 24;
+		let buttonWidth = numberOfPixelsPerSpan * 4;
 		if (windowWidth < 768) {
-			buttonWidth = numberOfPixelsPerSpan * 6 - 5;
+			buttonWidth = numberOfPixelsPerSpan * 6;
 		}
 		return (
 			<List
+				className="contact-infinite-container"
 				dataSource={contacts.allContacts}
 				renderItem={contact => {
 					let borderColor = colorTheme.text8Color;
@@ -121,11 +122,7 @@ class Contacts extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<div id="contact-infinite-container">
-					<div className="contact-infinite-container">
-						{this.renderContactButton()}
-					</div>
-				</div>
+				{this.renderContactButton()}
 			</Content>
 		);
 	}
