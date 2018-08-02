@@ -23,6 +23,23 @@ class MatchCards extends Component {
 		}
 	}
 
+	renderMatchAge(matchAge, colorThemeText6Color) {
+		if (matchAge !== undefined) {
+			return (
+				<Col>
+					<h2
+						style={{
+							color: colorThemeText6Color
+						}}
+					>
+						{", "}
+						{matchAge}
+					</h2>
+				</Col>
+			);
+		}
+	}
+
 	displayNeedToGetMoreNeurons = () => {
 		message.config({
 			top: 90
@@ -166,16 +183,7 @@ class MatchCards extends Component {
 									{match.name}
 								</h2>
 							</Col>
-							<Col>
-								<h2
-									style={{
-										color: colorTheme.text6Color
-									}}
-								>
-									{", "}
-									{match.age}
-								</h2>
-							</Col>
+							{this.renderMatchAge(match.age, colorTheme.text6Color)}
 							<Col style={{ padding: "0px 0px 10px 10px" }}>
 								<LinkedIn value={match.linkedInPublicProfileUrl} />
 							</Col>
