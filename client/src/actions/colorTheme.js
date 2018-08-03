@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
 	MOVE_TO_TOUR,
 	MOVE_TO_LOGGED_OUT_LANDING,
@@ -12,7 +12,7 @@ import {
 	SAVE_COLOR_THEME_DONE,
 	SAVE_COLOR_THEME_ERROR,
 	MOVE_TO_FOOTER
-} from './types';
+} from "./types";
 import {
 	colors1,
 	colors2,
@@ -32,7 +32,7 @@ import {
 	GREY_7,
 	GREY_8,
 	GREY_9
-} from '../containers/styles/ColorConstants';
+} from "../containers/styles/ColorConstants";
 
 export const onTour = () => {
 	return function(dispatch) {
@@ -40,8 +40,9 @@ export const onTour = () => {
 	};
 };
 
-export const onLanding = loggedInState => {
-	if (loggedInState === 'logged_in') {
+export const onLoggedInLanding = onLoggedInLanding => {
+	console.log("onLoggedInLanding = ", onLoggedInLanding);
+	if (onLoggedInLanding === true) {
 		return function(dispatch) {
 			dispatch({ type: MOVE_TO_LOGGED_IN_LANDING });
 		};
@@ -87,19 +88,11 @@ export const generateRandomColorThemeWith = async dispatch => {
 	let colorPallateIndex = Math.floor(Math.random() * 12);
 	if (isGrey_1) {
 		dispatch(
-			_generateColorThemeBasedOnBackground(
-				colorPallateIndex,
-				GREY_1,
-				null
-			)
+			_generateColorThemeBasedOnBackground(colorPallateIndex, GREY_1, null)
 		);
 	} else {
 		dispatch(
-			_generateColorThemeBasedOnBackground(
-				colorPallateIndex,
-				GREY_9,
-				null
-			)
+			_generateColorThemeBasedOnBackground(colorPallateIndex, GREY_9, null)
 		);
 	}
 };
@@ -111,19 +104,11 @@ export const generateRandomColorTheme = () => async dispatch => {
 	let savedBackgroundColor = GREY_1;
 	if (isGrey_1) {
 		dispatch(
-			_generateColorThemeBasedOnBackground(
-				colorPallateIndex,
-				GREY_1,
-				null
-			)
+			_generateColorThemeBasedOnBackground(colorPallateIndex, GREY_1, null)
 		);
 	} else {
 		dispatch(
-			_generateColorThemeBasedOnBackground(
-				colorPallateIndex,
-				GREY_9,
-				null
-			)
+			_generateColorThemeBasedOnBackground(colorPallateIndex, GREY_9, null)
 		);
 		savedBackgroundColor = GREY_9;
 	}
@@ -132,7 +117,7 @@ export const generateRandomColorTheme = () => async dispatch => {
 		savedBackgroundColor: savedBackgroundColor,
 		savedColorPallateIndex: colorPallateIndex
 	};
-	const response = await axios.put('/api/profile/colorTheme', colorTheme);
+	const response = await axios.put("/api/profile/colorTheme", colorTheme);
 
 	if (response.status === 200) {
 		dispatch({ type: SAVE_COLOR_THEME_DONE });

@@ -1,7 +1,0 @@
-.ant-progress-bg {
-	background-color: var(--progress-color);
-}
-
-.ant-progress-inner {
-	background-color: var(--progress-remaining-color);
-}
