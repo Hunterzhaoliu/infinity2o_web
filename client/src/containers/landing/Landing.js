@@ -181,34 +181,31 @@ class Landing extends Component {
 		const { loggedInState } = this.props;
 
 		const why_part_2 = "Join Earth's largest community of learning partners.";
-		switch (loggedInState) {
-			case "not_logged_in":
-				return (
-					<div>
-						<Row
-							style={{
-								padding: "40px 0px 0px" // top left&right bottom
-							}}
-							type="flex"
-							justify="center"
-						>
-							<Col>
-								<h2
-									key="0"
-									style={{
-										textAlign: "center",
-										color: GREY_7
-									}}
-								>
-									{why_part_2}
-								</h2>
-							</Col>
-						</Row>
-						<LoginButtons />
-					</div>
-				);
-			default:
-				return;
+		if (loggedInState === "not_logged_in") {
+			return (
+				<div>
+					<Row
+						style={{
+							padding: "40px 0px 0px" // top left&right bottom
+						}}
+						type="flex"
+						justify="center"
+					>
+						<Col>
+							<h2
+								key="0"
+								style={{
+									textAlign: "center",
+									color: GREY_7
+								}}
+							>
+								{why_part_2}
+							</h2>
+						</Col>
+					</Row>
+					<LoginButtons />
+				</div>
+			);
 		}
 	}
 
@@ -310,7 +307,6 @@ class Landing extends Component {
 	}
 
 	render() {
-		//console.log('this.props inside Landing', this.props);
 		return (
 			<div>
 				<Content
