@@ -7,7 +7,7 @@ export const testimonialData = [
 	},
 	{
 		quote:
-			"Had a crazy conversation with Chris about how to approach the week 4 Columbia Robotics project ~ Jordan",
+			"Had a great conversation with Chris about how to approach the week 4 Columbia Robotics project ~ Jordan",
 		avatarProfilePicUrl:
 			"https://user-images.githubusercontent.com/2585159/40565601-d5c76f26-6032-11e8-9b72-af5430424ec8.png"
 	},
@@ -25,13 +25,13 @@ export const testimonialData = [
 	},
 	{
 		quote:
-			"I usually like to do things on my own, but I really like talking with people that think like I do. ~ Melody",
+			"I usually like to do things on my own, but this site made me realize that I like talking with people that think like I do. ~ Melody",
 		avatarProfilePicUrl:
 			"https://user-images.githubusercontent.com/2585159/40565605-d64cb00a-6032-11e8-8658-2ab06cfea7da.png"
 	},
 	{
 		quote:
-			"Class discussion pages never worked out for me when I had a question, so finding a partner to talk through the course helped with some of the confusion. ~ Victor",
+			"Class discussion pages never worked out for me so finding a partner to talk through the course helped. ~ Victor",
 		avatarProfilePicUrl:
 			"https://user-images.githubusercontent.com/2585159/40565666-05bc864e-6033-11e8-88f7-cbf321202b62.png"
 	},
