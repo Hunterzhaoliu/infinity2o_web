@@ -116,7 +116,6 @@ const selectContact = async (
 	);
 
 	if (selectedContactInfo.status === 200) {
-		console.log("selectedContactInfo.data = ", selectedContactInfo.data);
 		// dispatch update selected contact info
 		dispatch({
 			type: UPDATE_SELECTED_CONTACT_INFO,

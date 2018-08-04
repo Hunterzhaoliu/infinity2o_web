@@ -58,7 +58,6 @@ module.exports = app => {
 			const selectedMatchInfo = await getMatchesInfo(
 				request.query.contactMongoDBUserId
 			);
-			console.log("selectedMatchInfo = ", selectedMatchInfo);
 			response.send(selectedMatchInfo);
 		}
 	);

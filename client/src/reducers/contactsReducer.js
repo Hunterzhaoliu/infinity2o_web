@@ -130,9 +130,19 @@ export default function(state = initialState, action) {
 			});
 			return newState;
 		case UPDATE_SELECTED_CONTACT_INFO:
-			for (const key in action.selectedContactInfo) {
-				newState.selectedConversationInfo.selectedContactMongoDBInfo[key] =
-					action.selectedContactInfo[key];
+			// sets anything that the contact doesn't have to null
+			for (const key in newState.selectedConversationInfo
+				.selectedContactMongoDBInfo) {
+				if (action.selectedContactInfo[key] !== undefined) {
+					// contact has this information
+					newState.selectedConversationInfo.selectedContactMongoDBInfo[key] =
+						action.selectedContactInfo[key];
+				} else {
+					// contact doesn't have this information
+					newState.selectedConversationInfo.selectedContactMongoDBInfo[
+						key
+					] = null;
+				}
 			}
 			return newState;
 		case UPDATE_VOTE_COMPARISON:

@@ -24,7 +24,7 @@ class MatchCards extends Component {
 	}
 
 	renderMatchAge(matchAge, colorThemeText6Color) {
-		if (matchAge !== undefined) {
+		if (matchAge !== undefined && matchAge !== null) {
 			return (
 				<Col>
 					<h2
@@ -67,7 +67,6 @@ class MatchCards extends Component {
 
 	renderMatchTotalVotes(totalUserVotes) {
 		const { colorTheme } = this.props;
-		let textColor = colorTheme.text3Color;
 
 		let voteDescription;
 		if (totalUserVotes <= 1) {
@@ -80,7 +79,7 @@ class MatchCards extends Component {
 				<Col>
 					<h3
 						style={{
-							color: textColor
+							color: colorTheme.text3Color
 						}}
 					>
 						{totalUserVotes} {voteDescription}
@@ -91,7 +90,7 @@ class MatchCards extends Component {
 	}
 
 	renderMatchPicture(imageUrl) {
-		if (imageUrl !== undefined) {
+		if (imageUrl !== undefined && imageUrl !== null) {
 			return (
 				<Row
 					style={{ padding: "5px 0px 0px 0px" }}
