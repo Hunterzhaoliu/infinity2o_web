@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import ContactCard from "./ContactCard";
 import Chat from "./Chat";
 import Contacts from "./Contacts";
+import VoteComparison from "./VoteComparison";
 import { Layout, Row, Col } from "antd";
 const { Content } = Layout;
 
@@ -13,6 +14,7 @@ class Conversation extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onConversations();
+		// userVotes is to compare the questions that user and contact voted on
 		this.props.fetchConversations();
 	}
 
@@ -63,7 +65,9 @@ class Conversation extends Component {
 						md={{ span: 0 }}
 						lg={{ span: 6 }}
 						xl={{ span: 6 }}
-					/>
+					>
+						<VoteComparison />
+					</Col>
 				</Row>
 			);
 		} else {

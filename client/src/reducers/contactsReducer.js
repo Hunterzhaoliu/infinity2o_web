@@ -10,7 +10,8 @@ import {
 	NEW_MESSAGE,
 	UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES,
 	SEEN_MESSAGES,
-	UPDATE_SELECTED_CONTACT_INFO
+	UPDATE_SELECTED_CONTACT_INFO,
+	UPDATE_VOTE_COMPARISON
 } from "../actions/types";
 
 let cloneObject = obj => {
@@ -25,7 +26,21 @@ let initialState = {
 		selectedContactOnline: false,
 		selectedContactSocketId: null,
 		selectedContactMongoDBUserId: null,
-		selectedContactMongoDBInfo: null
+		selectedContactMongoDBInfo: {
+			name: null,
+			age: null,
+			linkedInPublicProfileUrl: null,
+			githubPublicProfileUrl: null,
+			interests: null,
+			timeZone: null,
+			totalUserVotes: null,
+			availability: null,
+			asks: null,
+			id: null,
+			imageUrl: null
+		},
+		agreedAsks: [],
+		disagreedAsks: []
 	},
 	hasToldRedisClientOnlineError: false,
 	hasSaveUserConversationsError: false,
@@ -115,8 +130,14 @@ export default function(state = initialState, action) {
 			});
 			return newState;
 		case UPDATE_SELECTED_CONTACT_INFO:
-			newState.selectedConversationInfo.selectedContactMongoDBInfo =
-				action.selectedContactInfo;
+			for (const key in action.selectedContactInfo) {
+				newState.selectedConversationInfo.selectedContactMongoDBInfo[key] =
+					action.selectedContactInfo[key];
+			}
+			return newState;
+		case UPDATE_VOTE_COMPARISON:
+			newState.selectedConversationInfo.agreedAsks = action.agreedAsks;
+			newState.selectedConversationInfo.disagreedAsks = action.disagreedAsks;
 			return newState;
 		default:
 			return state;

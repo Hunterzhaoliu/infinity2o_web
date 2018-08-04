@@ -41,7 +41,6 @@ export const onTour = () => {
 };
 
 export const onLoggedInLanding = onLoggedInLanding => {
-	console.log("onLoggedInLanding = ", onLoggedInLanding);
 	if (onLoggedInLanding === true) {
 		return function(dispatch) {
 			dispatch({ type: MOVE_TO_LOGGED_IN_LANDING });

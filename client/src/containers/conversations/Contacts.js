@@ -8,10 +8,6 @@ import "./Contacts.css";
 const { Content } = Layout;
 
 class Contacts extends Component {
-	componentWillMount() {
-		// run once before first render()
-	}
-
 	renderOnline(contactIsOnline) {
 		if (contactIsOnline) {
 			return <Badge status="success" offset={[0, 5]} />;
@@ -111,7 +107,6 @@ class Contacts extends Component {
 	}
 
 	render() {
-		//console.log('Contacts this.props = ', this.props);
 		const { colorTheme } = this.props;
 
 		return (
