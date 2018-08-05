@@ -26,7 +26,6 @@ let initialState = {
 		conversationId: null,
 		selectedContactOnline: false,
 		selectedContactSocketId: null,
-		selectedContactMongoDBUserId: null,
 		selectedContactMongoDBInfo: {
 			name: null,
 			age: null,
@@ -53,19 +52,6 @@ export default function(state = initialState, action) {
 	switch (action.type) {
 		case UPDATE_CONTACTS:
 			newState.allContacts = action.allContacts;
-
-			newState.allContacts.forEach(function(contact) {
-				if (
-					contact.conversationId ===
-					newState.selectedConversationInfo.conversationId
-				) {
-					// we found the conversation both clients are in
-					newState.selectedConversationInfo.selectedContactOnline =
-						contact.isOnline;
-					newState.selectedConversationInfo.selectedContactSocketId =
-						contact.socketId;
-				}
-			});
 			return newState;
 		case UPDATE_CONTACTS_ERROR:
 			newState.hasContactsError = true;
@@ -76,8 +62,6 @@ export default function(state = initialState, action) {
 				action.contactIsOnline;
 			newState.selectedConversationInfo.selectedContactSocketId =
 				action.contactSocketId;
-			newState.selectedConversationInfo.selectedContactMongoDBUserId =
-				action.contactMongoDBUserId;
 			return newState;
 		case TOLD_REDIS_CLIENT_IS_ONLINE:
 			newState.hasToldRedisClientOnlineError = false;

@@ -33,13 +33,13 @@ class Chat extends Component {
 			chat,
 			selectedContactOnline,
 			selectedContactSocketId,
-			selectedContactMongoDBUserId
+			selectedContactMongoDBId
 		} = this.props;
 		this.props.sendMessageToServer(
 			conversationId,
 			selectedContactOnline,
 			selectedContactSocketId,
-			selectedContactMongoDBUserId,
+			selectedContactMongoDBId,
 			name,
 			mongoDBUserId,
 			chat.currentMessage
@@ -193,8 +193,8 @@ function mapStateToProps(state) {
 			state.contacts.selectedConversationInfo.selectedContactOnline,
 		selectedContactSocketId:
 			state.contacts.selectedConversationInfo.selectedContactSocketId,
-		selectedContactMongoDBUserId:
-			state.contacts.selectedConversationInfo.selectedContactMongoDBUserId,
+		selectedContactMongoDBId:
+			state.contacts.selectedConversationInfo.selectedContactMongoDBInfo.id,
 		windowWidth: state.customHeader.windowWidth,
 		windowHeight: state.customHeader.windowHeight
 	};
@@ -222,7 +222,7 @@ function mapDispatchToProps(dispatch) {
 			conversationId,
 			selectedContactOnline,
 			selectedContactSocketId,
-			selectedContactMongoDBUserId,
+			selectedContactMongoDBId,
 			name,
 			mongoDBUserId,
 			currentMessage
@@ -231,7 +231,7 @@ function mapDispatchToProps(dispatch) {
 				conversationId,
 				selectedContactOnline,
 				selectedContactSocketId,
-				selectedContactMongoDBUserId,
+				selectedContactMongoDBId,
 				name,
 				mongoDBUserId,
 				currentMessage
