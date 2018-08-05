@@ -11,9 +11,7 @@ import {
 
 export const fetchUserMatches = mongoDBUserId => async dispatch => {
 	// runs on Matches page
-	const matchesInfo = await axios.get(
-		"/api/matches?mongoDBUserId=" + mongoDBUserId
-	);
+	const matchesInfo = await axios.get("/api/matches");
 	dispatch({
 		type: SAVE_FETCHED_DAILY_MATCHES,
 		dailyMatches: matchesInfo.data

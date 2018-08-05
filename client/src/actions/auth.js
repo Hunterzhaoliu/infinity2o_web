@@ -132,14 +132,14 @@ export const initializeApp = () => async dispatch => {
 			// 	messageInfo
 			// );
 
-			const selectedContactMongoDBUserId = store.getState().contacts
-				.selectedContactMongoDBUserId;
+			const selectedContactMongoDBId = store.getState().contacts
+				.selectedConversationInfo.selectedContactMongoDBInfo.id;
 			// console.log(
-			// 	"selectedContactMongoDBUserId = ",
-			// 	selectedContactMongoDBUserId
+			// 	"selectedContactMongoDBId = ",
+			// 	selectedContactMongoDBId
 			// );
 			// the message should be displayed only if contact is selecting conversation with user
-			if (messageInfo.senderMongoDBUserId === selectedContactMongoDBUserId) {
+			if (messageInfo.senderMongoDBUserId === selectedContactMongoDBId) {
 				dispatch({
 					type: DISPLAY_RECEIVED_MESSAGE,
 					messageInfo: messageInfo

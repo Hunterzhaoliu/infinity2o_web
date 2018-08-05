@@ -18,7 +18,7 @@ export const sendMessageToServer = (
 	conversationId,
 	selectedContactOnline,
 	selectedContactSocketId,
-	selectedContactMongoDBUserId,
+	selectedContactMongoDBId,
 	name,
 	mongoDBUserId,
 	currentMessage
@@ -54,7 +54,7 @@ export const sendMessageToServer = (
 	};
 
 	const incrementUnseenMessagesInfo = {
-		contactMongoDBUserId: selectedContactMongoDBUserId,
+		contactMongoDBUserId: selectedContactMongoDBId,
 		conversationId: conversationId
 	};
 	const sentChat = await axios.post("/api/conversations/chat", messageInfo);

@@ -5,10 +5,20 @@ import * as chatActionCreators from "../../actions/conversations/chat";
 import { bindActionCreators } from "redux";
 import "./Chat.css";
 
-import { Layout, Input, Row, Col, Affix, Icon, List } from "antd";
+import { Layout, Input, Row, Col, Icon, List } from "antd";
 const { Content } = Layout;
 
 class Chat extends Component {
+	componentDidUpdate() {
+		if (
+			this.props.chat.currentMessage === null &&
+			document.getElementById("lastMessage") !== null
+		) {
+			// when typing new message, no need to scroll back down
+			document.getElementById("lastMessage").scrollIntoView();
+		}
+	}
+
 	onChangeCurrentMessage = e => {
 		// console.log('e.target.value = ', e.target.value);
 		this.props.onChangeCurrentMessage(e.target.value);
@@ -23,13 +33,13 @@ class Chat extends Component {
 			chat,
 			selectedContactOnline,
 			selectedContactSocketId,
-			selectedContactMongoDBUserId
+			selectedContactMongoDBId
 		} = this.props;
 		this.props.sendMessageToServer(
 			conversationId,
 			selectedContactOnline,
 			selectedContactSocketId,
-			selectedContactMongoDBUserId,
+			selectedContactMongoDBId,
 			name,
 			mongoDBUserId,
 			chat.currentMessage
@@ -52,100 +62,115 @@ class Chat extends Component {
 		}
 	}
 
+	renderLastMessageDiv(lastMessageDate, lastItemTimeCreated) {
+		if (lastMessageDate === lastItemTimeCreated) {
+			return <div id="lastMessage" />;
+		}
+	}
+
 	render() {
 		//console.log('Chat this.props = ', this.props);
-		const { colorTheme, chat, name, windowWidth } = this.props;
-		// 0.3819 = 483.5/1200
-		// 0.3745 = 371.6/992
-		let inputWidth = windowWidth * 0.38; // = 483.5/1200
-		if (windowWidth < 576) {
-			// 0.815 = 470/576
-			inputWidth = windowWidth * 0.815;
-		} else if (windowWidth < 768) {
-			// 0.6523 = 501/768
-			inputWidth = windowWidth * 0.6523;
-		} else if (windowWidth < 992) {
-			// 0.6523 = 668.2/992
-			inputWidth = windowWidth * 0.6735;
+		const { colorTheme, chat, name, windowWidth, windowHeight } = this.props;
+		const chatWindowHeight = windowHeight - 112;
+		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
+		document.documentElement.style.setProperty(
+			`--chat-window-vertical-height`,
+			chatWindowVerticalHeight
+		);
+
+		// finding the right number of pixels for the chat input
+		const numberOfPixelsPerSpan = windowWidth / 24;
+		let inputWidth = numberOfPixelsPerSpan * 9 - 5;
+		if (windowWidth < 768) {
+			inputWidth = numberOfPixelsPerSpan * 18 - 5;
 		}
+
+		// used to place div after last message
+		const last50MessagesLength = chat.last50Messages.length;
+		let lastMessageDate;
+		if (last50MessagesLength > 1) {
+			lastMessageDate =
+				chat.last50Messages[last50MessagesLength - 1].timeCreated;
+		}
+
 		return (
 			<Content
 				style={{
 					textAlign: "center",
-					background: colorTheme.backgroundColor
+					background: colorTheme.backgroundColor,
+					padding: "0px 0px 0px 0px"
 				}}
 			>
-				<div className="chat-window-infinite-container">
-					<List
-						dataSource={chat.last50Messages}
-						renderItem={item => {
-							const message = item.content;
-							let justifyValue = "start";
-							if (item.senderName === name) {
-								// TODO: what if both people's names are the senderName
-								// need to switch to unique identifier
-								justifyValue = "end";
-							}
-							return (
-								<Row
-									type="flex"
-									justify={justifyValue}
-									align="middle"
-									style={{
-										padding: "0px 0px 0px"
-									}}
-								>
-									<Col>
-										<List.Item
-											style={{
-												padding: "0px 0px 0px"
-											}}
-										>
-											<p
-												style={{
-													borderColor: colorTheme.text8Color,
-													borderWidth: "2px",
-													background: colorTheme.text8Color,
-													color: colorTheme.text3Color,
-													borderRadius: "25px",
-													padding: "4px 15px 4px"
-												}}
-											>
-												{message}
-											</p>
-										</List.Item>
-									</Col>
-									<Col xl={{ span: 1 }}>
+				<List
+					className="chat-window-infinite-container"
+					dataSource={chat.last50Messages}
+					renderItem={item => {
+						const message = item.content;
+						let justifyValue = "start";
+						if (item.senderName === name) {
+							// TODO: what if both people's names are the senderName
+							// need to switch to unique identifier
+							justifyValue = "end";
+						}
+
+						return (
+							<Row
+								type="flex"
+								justify={justifyValue}
+								align="middle"
+								style={{
+									padding: "0px 0px 0px 0px"
+								}}
+							>
+								<Col>
+									<List.Item
+										style={{
+											padding: "0px 0px 0px 0px"
+										}}
+									>
 										<p
 											style={{
-												color: colorTheme.text8Color,
-												padding: "12px 4px 0px"
+												borderColor: colorTheme.text8Color,
+												borderWidth: "2px",
+												background: colorTheme.text8Color,
+												color: colorTheme.text3Color,
+												borderRadius: "25px",
+												padding: "4px 15px 4px"
 											}}
 										>
-											{this.renderMessageStatusIcon("delivered", item, name)}
+											{message}
 										</p>
-									</Col>
-								</Row>
-							);
-						}}
-					/>
-				</div>
+									</List.Item>
+								</Col>
+								<Col>
+									<p
+										style={{
+											color: colorTheme.text8Color,
+											padding: "12px 0px 0px 5px"
+										}}
+									>
+										{this.renderMessageStatusIcon("delivered", item, name)}
+									</p>
+									{this.renderLastMessageDiv(lastMessageDate, item.timeCreated)}
+								</Col>
+							</Row>
+						);
+					}}
+				/>
 				<Row type="flex" justify="start" align="middle">
 					<Col>
-						<Affix offsetBottom={0}>
-							<Input
-								value={chat.currentMessage}
-								placeholder="type here..."
-								onChange={this.onChangeCurrentMessage}
-								onPressEnter={this.onPressEnter}
-								style={{
-									width: inputWidth,
-									borderColor: colorTheme.text7Color,
-									background: colorTheme.text7Color,
-									color: colorTheme.text1Color
-								}}
-							/>
-						</Affix>
+						<Input
+							value={chat.currentMessage}
+							placeholder="type here..."
+							onChange={this.onChangeCurrentMessage}
+							onPressEnter={this.onPressEnter}
+							style={{
+								width: inputWidth,
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text1Color
+							}}
+						/>
 					</Col>
 				</Row>
 			</Content>
@@ -163,11 +188,15 @@ function mapStateToProps(state) {
 		chat: state.chat,
 		name: state.profile.name,
 		mongoDBUserId: state.auth.mongoDBUserId,
-		conversationId: state.contacts.conversationId,
-		selectedContactOnline: state.contacts.selectedContactOnline,
-		selectedContactSocketId: state.contacts.selectedContactSocketId,
-		selectedContactMongoDBUserId: state.contacts.selectedContactMongoDBUserId,
-		windowWidth: state.customHeader.windowWidth
+		conversationId: state.contacts.selectedConversationInfo.conversationId,
+		selectedContactOnline:
+			state.contacts.selectedConversationInfo.selectedContactOnline,
+		selectedContactSocketId:
+			state.contacts.selectedConversationInfo.selectedContactSocketId,
+		selectedContactMongoDBId:
+			state.contacts.selectedConversationInfo.selectedContactMongoDBInfo.id,
+		windowWidth: state.customHeader.windowWidth,
+		windowHeight: state.customHeader.windowHeight
 	};
 }
 
@@ -193,7 +222,7 @@ function mapDispatchToProps(dispatch) {
 			conversationId,
 			selectedContactOnline,
 			selectedContactSocketId,
-			selectedContactMongoDBUserId,
+			selectedContactMongoDBId,
 			name,
 			mongoDBUserId,
 			currentMessage
@@ -202,7 +231,7 @@ function mapDispatchToProps(dispatch) {
 				conversationId,
 				selectedContactOnline,
 				selectedContactSocketId,
-				selectedContactMongoDBUserId,
+				selectedContactMongoDBId,
 				name,
 				mongoDBUserId,
 				currentMessage
