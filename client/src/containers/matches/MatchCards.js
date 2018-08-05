@@ -23,6 +23,23 @@ class MatchCards extends Component {
 		}
 	}
 
+	renderMatchAge(matchAge, colorThemeText6Color) {
+		if (matchAge !== undefined && matchAge !== null) {
+			return (
+				<Col>
+					<h2
+						style={{
+							color: colorThemeText6Color
+						}}
+					>
+						{", "}
+						{matchAge}
+					</h2>
+				</Col>
+			);
+		}
+	}
+
 	displayNeedToGetMoreNeurons = () => {
 		message.config({
 			top: 90
@@ -50,7 +67,6 @@ class MatchCards extends Component {
 
 	renderMatchTotalVotes(totalUserVotes) {
 		const { colorTheme } = this.props;
-		let textColor = colorTheme.text3Color;
 
 		let voteDescription;
 		if (totalUserVotes <= 1) {
@@ -63,7 +79,7 @@ class MatchCards extends Component {
 				<Col>
 					<h3
 						style={{
-							color: textColor
+							color: colorTheme.text3Color
 						}}
 					>
 						{totalUserVotes} {voteDescription}
@@ -74,7 +90,7 @@ class MatchCards extends Component {
 	}
 
 	renderMatchPicture(imageUrl) {
-		if (imageUrl !== undefined) {
+		if (imageUrl !== undefined && imageUrl !== null) {
 			return (
 				<Row
 					style={{ padding: "5px 0px 0px 0px" }}
@@ -99,8 +115,50 @@ class MatchCards extends Component {
 		}
 	}
 
+	renderMatchButtons() {
+		const { activeSection, colorTheme, match, history } = this.props;
+		// conversations also uses this to show selected contact info
+		if (activeSection === "matches") {
+			return (
+				<Row
+					style={{ padding: "8px 0px 0px 0px" }}
+					type="flex"
+					justify="space-between"
+					align="top"
+				>
+					<Col span={11}>
+						<Button
+							style={{
+								borderColor: colorTheme.text7Color,
+								background: colorTheme.text7Color,
+								color: colorTheme.text2Color
+							}}
+							onClick={e => this.onNextMatch()}
+						>
+							Next
+						</Button>
+					</Col>
+					<Col span={11}>
+						<Button
+							style={{
+								borderColor: colorTheme.keyText7Color,
+								background: colorTheme.keyText7Color,
+								color: colorTheme.text1Color
+							}}
+							onClick={e =>
+								this.onStartConversation(history, match.name, match.id)
+							}
+						>
+							Say Hi
+						</Button>
+					</Col>
+				</Row>
+			);
+		}
+	}
+
 	render() {
-		const { match, history, colorTheme } = this.props;
+		const { match, colorTheme } = this.props;
 		return (
 			<Row type="flex" justify="center" align="top">
 				<Col>
@@ -109,7 +167,6 @@ class MatchCards extends Component {
 						borderded="false"
 						loading={false}
 						style={{
-							width: "400px",
 							color: colorTheme.text1Color,
 							borderColor: colorTheme.text8Color,
 							background: colorTheme.text8Color
@@ -125,16 +182,7 @@ class MatchCards extends Component {
 									{match.name}
 								</h2>
 							</Col>
-							<Col>
-								<h2
-									style={{
-										color: colorTheme.text6Color
-									}}
-								>
-									{", "}
-									{match.age}
-								</h2>
-							</Col>
+							{this.renderMatchAge(match.age, colorTheme.text6Color)}
 							<Col style={{ padding: "0px 0px 10px 10px" }}>
 								<LinkedIn value={match.linkedInPublicProfileUrl} />
 							</Col>
@@ -158,39 +206,7 @@ class MatchCards extends Component {
 						<Row type="flex" justify="center" align="middle">
 							<Col>{this.renderMatchPicture(match.imageUrl)}</Col>
 						</Row>
-						<Row
-							style={{ padding: "8px 0px 0px 0px" }}
-							type="flex"
-							justify="space-between"
-							align="top"
-						>
-							<Col span={11}>
-								<Button
-									style={{
-										borderColor: colorTheme.text7Color,
-										background: colorTheme.text7Color,
-										color: colorTheme.text2Color
-									}}
-									onClick={e => this.onNextMatch()}
-								>
-									Next
-								</Button>
-							</Col>
-							<Col span={11}>
-								<Button
-									style={{
-										borderColor: colorTheme.keyText7Color,
-										background: colorTheme.keyText7Color,
-										color: colorTheme.text1Color
-									}}
-									onClick={e =>
-										this.onStartConversation(history, match.name, match.id)
-									}
-								>
-									Say Hi
-								</Button>
-							</Col>
-						</Row>
+						{this.renderMatchButtons()}
 					</Card>
 				</Col>
 			</Row>
@@ -205,6 +221,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
+		activeSection: state.colorTheme.activeSection,
 		neuronsInBillions: state.profile.payment.neuronsInBillions,
 		mongoDBUserId: state.auth.mongoDBUserId,
 		nextMatches: state.matches.nextMatches,

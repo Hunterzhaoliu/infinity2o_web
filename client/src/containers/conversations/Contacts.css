@@ -1,6 +1,12 @@
-.demo-infinite-container {
+.contact-infinite-container {
 	border-radius: 0px;
-	overflow: auto;
 	padding: 0px 0px;
-	height: 90vh;
+	height: var(--contact-window-vertical-height);
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+	width: 0px; /* remove scrollbar space */
+	/* background: transparent;  optional: just make scrollbar invisible */
 }

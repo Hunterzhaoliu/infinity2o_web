@@ -7,8 +7,12 @@ import {
 	ON_SELECT_CONTACT,
 	SAVE_USER_CONVERSATIONS_SUCCESS,
 	SAVE_USER_CONVERSATIONS_ERROR,
-	SEEN_MESSAGES
+	SEEN_MESSAGES,
+	UPDATE_SELECTED_CONTACT_INFO,
+	UPDATE_VOTE_COMPARISON,
+	DELETE_CONVERSATION
 } from "../types";
+import { store } from "../../index";
 
 export const fetchConversations = () => async dispatch => {
 	// 1) hit /api/current_user to get allContacts
@@ -81,14 +85,14 @@ const selectContact = async (
 	});
 
 	// get previous messages in DB
-	const response = await axios.get(
+	const previousMessagesInDB = await axios.get(
 		"/api/conversations?conversationId=" + conversationId
 	);
 
-	if (response.status === 200) {
+	if (previousMessagesInDB.status === 200) {
 		dispatch({
 			type: UPDATE_CHAT,
-			last50Messages: response.data.last50Messages
+			last50Messages: previousMessagesInDB.data.last50Messages
 		});
 
 		if (numberOfUnseenMessages >= 1) {
@@ -106,6 +110,61 @@ const selectContact = async (
 	} else {
 		dispatch({ type: UPDATE_CHAT_ERROR });
 	}
+
+	const selectedContactInfo = await axios.get(
+		"/api/matches/selected_contact_info?contactMongoDBUserId=" +
+			contactMongoDBUserId
+	);
+
+	if (selectedContactInfo.status === 200) {
+		// dispatch update selected contact info
+		dispatch({
+			type: UPDATE_SELECTED_CONTACT_INFO,
+			selectedContactInfo: selectedContactInfo.data
+		});
+		voteComparison(selectedContactInfo.data.asks.votes, dispatch);
+	}
+};
+
+const voteComparison = (contactVotes, dispatch) => {
+	const userVotes = store.getState().profile.asks.votes;
+	let userVoteDict = {};
+	userVotes.forEach(userVote => {
+		userVoteDict[userVote._askId] = {
+			_answerId: userVote._answerId,
+			question: userVote.question,
+			selectedAnswer: userVote.selectedAnswer
+		};
+	});
+
+	let agreedAsks = [];
+	let disagreedAsks = [];
+	contactVotes.forEach(contactVote => {
+		if (userVoteDict[contactVote._askId] !== undefined) {
+			// user and contact both answered this question
+			if (
+				userVoteDict[contactVote._askId]._answerId === contactVote._answerId
+			) {
+				// user and contact answered the same answer
+				agreedAsks.push({
+					question: contactVote.question,
+					userAndContactAnswer: contactVote.selectedAnswer
+				});
+			} else {
+				// user and contact answered differently
+				disagreedAsks.push({
+					question: contactVote.question,
+					contactAnswer: contactVote.selectedAnswer,
+					userAnswer: userVoteDict[contactVote._askId].selectedAnswer
+				});
+			}
+		}
+	});
+	dispatch({
+		type: UPDATE_VOTE_COMPARISON,
+		agreedAsks: agreedAsks,
+		disagreedAsks: disagreedAsks
+	});
 };
 
 export const onSelectContact = (
@@ -123,4 +182,23 @@ export const onSelectContact = (
 		numberOfUnseenMessages,
 		dispatch
 	);
+};
+
+export const onCloseConversation = (
+	conversationId,
+	contactMongoDBId
+) => async dispatch => {
+	const deleteConversation = await axios.delete("/api/conversations/delete", {
+		data: {
+			conversationId: conversationId,
+			contactMongoDBId: contactMongoDBId
+		}
+	});
+
+	if (deleteConversation.status === 200) {
+		dispatch({
+			type: DELETE_CONVERSATION,
+			conversationId: conversationId
+		});
+	}
 };

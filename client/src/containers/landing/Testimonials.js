@@ -1,13 +1,13 @@
-import _ from 'lodash';
-import React, { Component } from 'react';
-import Slider from 'react-slick';
-import { connect } from 'react-redux';
-import '../../../node_modules/slick-carousel/slick/slick.css';
-import '../../../node_modules/slick-carousel/slick/slick-theme.css';
-import { testimonialData } from './testimonialData';
-import { GREY_2, GREY_9 } from '../styles/ColorConstants';
+import _ from "lodash";
+import React, { Component } from "react";
+import Slider from "react-slick";
+import { connect } from "react-redux";
+import "./testimonial-theme.css";
+import "./testimonial.css";
+import { testimonialData } from "./testimonialData";
+import { GREY_2, GREY_9 } from "../styles/ColorConstants";
 
-import { Layout, Row, Col, Card, Avatar } from 'antd';
+import { Layout, Row, Col, Card, Avatar } from "antd";
 const { Content } = Layout;
 
 function SampleNextArrow(props) {
@@ -25,7 +25,7 @@ class Testimonials extends Component {
 				<div key={index}>
 					<Row
 						style={{
-							padding: '0% 0% 0%' // top left&right bottom
+							padding: "0% 0% 0%" // top left&right bottom
 						}}
 						type="flex"
 						justify="center"
@@ -37,14 +37,14 @@ class Testimonials extends Component {
 								borderded="false"
 								loading={false}
 								style={{
-									textAlign: 'center',
+									textAlign: "center",
 									borderColor: GREY_2,
 									background: GREY_2
 								}}
 							>
 								<Avatar
 									size="large"
-									src={testimonial['avatarProfilePicUrl']}
+									src={testimonial["avatarProfilePicUrl"]}
 									style={{
 										width: 125,
 										height: 125
@@ -55,7 +55,7 @@ class Testimonials extends Component {
 										color: GREY_9
 									}}
 								>
-									{testimonial['quote']}
+									{testimonial["quote"]}
 								</p>
 							</Card>
 						</Col>

@@ -1,6 +1,14 @@
+/* https://stackoverflow.com/questions/3296644/hiding-the-scrollbar-on-an-html-page */
+
 .chat-window-infinite-container {
 	border-radius: 0px;
-	overflow: auto;
-	padding: 0px 0px;
-	height: 86vh;
+	padding-right: 0px;
+	height: var(--chat-window-vertical-height);
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+	width: 0px; /* remove scrollbar space */
+	/* background: transparent;  optional: just make scrollbar invisible */
 }

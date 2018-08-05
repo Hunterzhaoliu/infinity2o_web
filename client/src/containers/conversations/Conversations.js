@@ -1,61 +1,118 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as colorThemeActionCreators from '../../actions/colorTheme';
-import * as contactsActionCreators from '../../actions/conversations/contacts';
-import { bindActionCreators } from 'redux';
-
-import Chat from './Chat';
-import Contacts from './Contacts';
-import { Layout, Row, Col } from 'antd';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as colorThemeActionCreators from "../../actions/colorTheme";
+import * as contactsActionCreators from "../../actions/conversations/contacts";
+import { bindActionCreators } from "redux";
+import ContactCard from "./ContactCard";
+import Chat from "./Chat";
+import Contacts from "./Contacts";
+import VoteComparison from "./VoteComparison";
+import { Layout, Row, Col, Button } from "antd";
 const { Content } = Layout;
 
 class Conversation extends Component {
 	componentWillMount() {
 		// run once before first render()
 		this.props.onConversations();
+		// userVotes is to compare the questions that user and contact voted on
 		this.props.fetchConversations();
 	}
 
+	onCloseConversation(conversationId, contactMongoDBId, firstTwoContacts) {
+		// when close conversation, select top most candidate
+		let contactToShow = firstTwoContacts[0];
+		if (firstTwoContacts[0].conversationId === conversationId) {
+			// user trying to delete first conversation so need to show 2nd contact
+			contactToShow = firstTwoContacts[1];
+		}
+		this.props.onSelectContact(
+			contactToShow.conversationId,
+			contactToShow.isOnline,
+			contactToShow.socketId,
+			contactToShow.matchId,
+			contactToShow.numberOfUnseenMessages
+		);
+		this.props.onCloseConversation(conversationId, contactMongoDBId);
+	}
+	renderCloseConversationButton(selectedConversationInfo, firstTwoContacts) {
+		const { colorTheme } = this.props;
+		return (
+			<div style={{ padding: "10px 0px 0px 0px" }}>
+				<Button
+					style={{
+						borderColor: colorTheme.text8Color,
+						background: colorTheme.text8Color,
+						color: colorTheme.text4Color,
+						height: "44px"
+					}}
+					onClick={e =>
+						this.onCloseConversation(
+							selectedConversationInfo.conversationId,
+							selectedConversationInfo.selectedContactMongoDBInfo.id,
+							firstTwoContacts
+						)
+					}
+				>
+					Close Conversation
+				</Button>
+			</div>
+		);
+	}
+
 	renderConversations() {
-		const { colorTheme, chat, contacts } = this.props;
+		const { colorTheme, contacts } = this.props;
 
 		if (
 			contacts.allContacts !== undefined &&
 			contacts.allContacts.length >= 1
 		) {
 			return (
-				<Row type="flex" justify="space-between">
+				<Row type="flex" justify="center" align="middle">
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
-					/>
+						lg={{ span: 6 }}
+						xl={{ span: 6 }}
+						style={{
+							padding: "0px 5px 0px"
+						}}
+					>
+						<ContactCard />
+						{this.renderCloseConversationButton(
+							contacts.selectedConversationInfo,
+							contacts.allContacts.slice(0, 2)
+						)}
+					</Col>
 					<Col
 						sm={{ span: 6 }}
 						md={{ span: 6 }}
-						lg={{ span: 4 }}
-						xl={{ span: 4 }}
+						lg={{ span: 3 }}
+						xl={{ span: 3 }}
 						style={{
 							color: colorTheme.text3Color
 						}}
 					>
-						<Contacts contacts={contacts.allContacts} />
+						<Contacts />
 					</Col>
 					<Col
 						sm={{ span: 18 }}
 						md={{ span: 18 }}
-						lg={{ span: 10 }}
-						xl={{ span: 10 }}
+						lg={{ span: 9 }}
+						xl={{ span: 9 }}
+						style={{
+							padding: "5px 0px 0px 5px"
+						}}
 					>
-						<Chat chat={chat} />
+						<Chat />
 					</Col>
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
-					/>
+						lg={{ span: 6 }}
+						xl={{ span: 6 }}
+					>
+						<VoteComparison />
+					</Col>
 				</Row>
 			);
 		} else {
@@ -72,14 +129,13 @@ class Conversation extends Component {
 	}
 
 	render() {
-		//console.log('Conversation this.props = ', this.props);
 		const { colorTheme } = this.props;
 
 		return (
 			<Content
 				style={{
-					textAlign: 'center',
-					padding: '75px 50px 0px', // top left&right bottom
+					textAlign: "center",
+					padding: "75px 0px 0px 0px",
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -122,6 +178,24 @@ function mapDispatchToProps(dispatch) {
 		},
 		fetchConversations: () => {
 			contactsDispatchers.fetchConversations();
+		},
+		onSelectContact: (
+			conversationId,
+			isOnline,
+			socketId,
+			matchId,
+			numberOfUnseenMessages
+		) => {
+			contactsDispatchers.onSelectContact(
+				conversationId,
+				isOnline,
+				socketId,
+				matchId,
+				numberOfUnseenMessages
+			);
+		},
+		onCloseConversation: (conversationId, contactMongoDBId) => {
+			contactsDispatchers.onCloseConversation(conversationId, contactMongoDBId);
 		}
 	};
 }

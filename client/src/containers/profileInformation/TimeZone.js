@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Row, Col } from 'antd';
-import DisplayField from '../profile/DisplayField';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Row, Col } from "antd";
+import DisplayField from "../profile/DisplayField";
 
 class TimeZone extends Component {
 	render() {
 		const { value, activeSection } = this.props;
-		if (value.length > 0) {
-			let padding = '5px 0px 0px 20px';
-			if (activeSection === 'matches') {
-				padding = '5px 0px 0px 40px';
+		if (value !== null && value.length > 0) {
+			let padding = "5px 0px 0px 20px";
+			if (activeSection === "matches") {
+				padding = "5px 0px 0px 40px";
 			}
 			return (
 				<Row type="flex" justify="start" align="middle">
@@ -17,8 +17,8 @@ class TimeZone extends Component {
 						<img
 							alt="Time Zone: "
 							style={{
-								width: '42px',
-								padding: '0px 0px 0px 5px'
+								width: "42px",
+								padding: "0px 0px 0px 5px"
 							}}
 							src="https://user-images.githubusercontent.com/24757872/40868790-25f907ea-65d6-11e8-8dd1-2f3a79076082.png"
 						/>

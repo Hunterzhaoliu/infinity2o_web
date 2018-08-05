@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as customHeaderActionCreators from '../../actions/customHeader';
-import ChangeThemeButton from '../navigationButtons/ChangeThemeButton';
-import TourButton from '../navigationButtons/TourButton';
-import ProfileButton from '../navigationButtons/ProfileButton';
-import SortingHatButton from '../navigationButtons/SortingHatButton';
-import MatchesButton from '../navigationButtons/MatchesButton';
-import ConversationButton from '../navigationButtons/ConversationButton';
-import LogoutButton from '../navigationButtons/LogoutButton';
-import { GREY_9, GREY_1, RED_ORANGE_7, BLUE_7 } from '../styles/ColorConstants';
-import { Layout, Row, Col, Button, Icon } from 'antd';
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as customHeaderActionCreators from "../../actions/customHeader";
+import ChangeThemeButton from "../navigationButtons/ChangeThemeButton";
+import TourButton from "../navigationButtons/TourButton";
+import ProfileButton from "../navigationButtons/ProfileButton";
+import SortingHatButton from "../navigationButtons/SortingHatButton";
+import MatchesButton from "../navigationButtons/MatchesButton";
+import ConversationButton from "../navigationButtons/ConversationButton";
+import LogoutButton from "../navigationButtons/LogoutButton";
+import { GREY_9, GREY_1, RED_ORANGE_7, BLUE_7 } from "../styles/ColorConstants";
+import { Layout, Row, Col, Button, Icon } from "antd";
 const { Header } = Layout;
 
 class CustomHeader extends Component {
@@ -21,15 +21,15 @@ class CustomHeader extends Component {
 
 	componentDidMount() {
 		this.updateWindowDimensions();
-		window.addEventListener('resize', this.updateWindowDimensions);
-	}
-
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.updateWindowDimensions);
+		window.addEventListener("resize", this.updateWindowDimensions);
 	}
 
 	updateWindowDimensions() {
-		this.props.updateWindowWidth(window.innerWidth);
+		this.props.updateWindowDimensions(window.innerWidth, window.innerHeight);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.updateWindowDimensions);
 	}
 
 	renderHeaderButtons() {
@@ -40,20 +40,20 @@ class CustomHeader extends Component {
 			siderDisplay,
 			toggleSider
 		} = this.props;
-		if (windowWidth < 768 && loggedInState === 'logged_in') {
+		if (windowWidth < 768 && loggedInState === "logged_in") {
 			// show a menu with buttons instead of nav bar
 			let siderIcon;
 			if (siderDisplay === false) {
-				siderIcon = 'menu-unfold';
+				siderIcon = "menu-unfold";
 			} else {
-				siderIcon = 'menu-fold';
+				siderIcon = "menu-fold";
 			}
 
 			return (
 				<Row type="flex" justify="start">
 					<Col
 						style={{
-							padding: '3px 0px 0px'
+							padding: "3px 0px 0px"
 						}}
 						key="0"
 					>
@@ -72,7 +72,7 @@ class CustomHeader extends Component {
 			);
 		}
 		switch (loggedInState) {
-			case 'not_logged_in':
+			case "not_logged_in":
 				return (
 					<Row type="flex" justify="space-between">
 						<Col>
@@ -80,15 +80,15 @@ class CustomHeader extends Component {
 								<Col>
 									<img
 										alt=""
-										style={{ width: '30px' }}
+										style={{ width: "30px" }}
 										src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
 									/>
 								</Col>
 								<Col>
-									{' '}
+									{" "}
 									<h2
 										style={{
-											padding: '0px 8px 0px',
+											padding: "0px 8px 0px",
 											color: GREY_1
 										}}
 									>
@@ -108,18 +108,15 @@ class CustomHeader extends Component {
 										}}
 									>
 										<a href="/auth/google">
-											Gmail Login{' '}
-											<Icon
-												style={{ fontSize: 15 }}
-												type="google"
-											/>
+											Gmail Login{" "}
+											<Icon style={{ fontSize: 15 }} type="google" />
 										</a>
 									</Button>
 								</Col>
 								<Col
 									xs={{ span: 12 }}
 									style={{
-										padding: '0px 16px 0px'
+										padding: "0px 16px 0px"
 									}}
 								>
 									<Button
@@ -130,11 +127,8 @@ class CustomHeader extends Component {
 										}}
 									>
 										<a href="/auth/linkedIn">
-											LinkedIn Login{' '}
-											<Icon
-												style={{ fontSize: 15 }}
-												type="linkedin"
-											/>
+											LinkedIn Login{" "}
+											<Icon style={{ fontSize: 15 }} type="linkedin" />
 										</a>
 									</Button>
 								</Col>
@@ -142,7 +136,7 @@ class CustomHeader extends Component {
 						</Col>
 					</Row>
 				);
-			case 'logged_in':
+			case "logged_in":
 				return (
 					<div>
 						<Row type="flex" justify="space-between">
@@ -166,7 +160,7 @@ class CustomHeader extends Component {
 					</div>
 				);
 			default:
-				console.log('ERROR: site in invalid state = ', loggedInState);
+				console.log("ERROR: site in invalid state = ", loggedInState);
 		}
 	}
 
@@ -174,10 +168,10 @@ class CustomHeader extends Component {
 		const { colorTheme, loggedInState } = this.props;
 		let headerBackground;
 		switch (loggedInState) {
-			case 'not_logged_in':
+			case "not_logged_in":
 				headerBackground = GREY_9;
 				break;
-			case 'logged_in':
+			case "logged_in":
 				headerBackground = colorTheme.text8Color;
 				break;
 			default:
@@ -186,9 +180,9 @@ class CustomHeader extends Component {
 			<Header
 				style={{
 					background: headerBackground,
-					position: 'fixed',
+					position: "fixed",
 					zIndex: 1, // make every component display under the header
-					width: '100%'
+					width: "100%"
 				}}
 			>
 				{this.renderHeaderButtons()}
@@ -220,8 +214,11 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 	return {
-		updateWindowWidth: newWindowWidth => {
-			customHeaderDispatchers.updateWindowWidth(newWindowWidth);
+		updateWindowDimensions: (newWindowWidth, newWindowHeight) => {
+			customHeaderDispatchers.updateWindowDimensions(
+				newWindowWidth,
+				newWindowHeight
+			);
 		},
 		toggleSider: () => {
 			customHeaderDispatchers.toggleSider();
