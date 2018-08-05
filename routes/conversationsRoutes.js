@@ -2,6 +2,7 @@ const _ = require("lodash");
 const requireLogin = require("../middlewares/requireLogin");
 const mongoose = require("mongoose");
 const ConversationCollection = mongoose.model("conversations");
+const UserCollection = mongoose.model("users");
 
 const tellContactsUserIsOnline = async (
 	userConversations,
@@ -166,6 +167,45 @@ module.exports = app => {
 				);
 
 				response.send(last50Messages);
+			} catch (error) {
+				response.status(422).send(error);
+			}
+		}
+	);
+
+	app.delete(
+		"/api/conversations/delete",
+		requireLogin,
+		async (request, response) => {
+			const { conversationId, contactMongoDBId } = request.body;
+			const userId = request.user._id;
+			try {
+				// https://stackoverflow.com/questions/16959099/how-to-remove-array-element-in-mongodb
+				// deletes conversation in the conversation collection
+				await ConversationCollection.deleteOne({ _id: conversationId });
+				// deletes conversation from user's conversations
+				await UserCollection.update(
+					{ _id: userId },
+					{
+						$pull: {
+							"conversations.userConversations": {
+								conversationId: conversationId
+							}
+						}
+					}
+				);
+				// deletes conversation in contact's conversations
+				await UserCollection.update(
+					{ _id: contactMongoDBId },
+					{
+						$pull: {
+							"conversations.userConversations": {
+								conversationId: conversationId
+							}
+						}
+					}
+				);
+				response.send("done");
 			} catch (error) {
 				response.status(422).send(error);
 			}

@@ -7,7 +7,7 @@ import ContactCard from "./ContactCard";
 import Chat from "./Chat";
 import Contacts from "./Contacts";
 import VoteComparison from "./VoteComparison";
-import { Layout, Row, Col } from "antd";
+import { Layout, Row, Col, Button } from "antd";
 const { Content } = Layout;
 
 class Conversation extends Component {
@@ -16,6 +16,47 @@ class Conversation extends Component {
 		this.props.onConversations();
 		// userVotes is to compare the questions that user and contact voted on
 		this.props.fetchConversations();
+	}
+
+	onCloseConversation(conversationId, contactMongoDBId, firstTwoContacts) {
+		// when close conversation, select top most candidate
+		let contactToShow = firstTwoContacts[0];
+		if (firstTwoContacts[0].conversationId === conversationId) {
+			// user trying to delete first conversation so need to show 2nd contact
+			contactToShow = firstTwoContacts[1];
+		}
+		this.props.onSelectContact(
+			contactToShow.conversationId,
+			contactToShow.isOnline,
+			contactToShow.socketId,
+			contactToShow.matchId,
+			contactToShow.numberOfUnseenMessages
+		);
+		this.props.onCloseConversation(conversationId, contactMongoDBId);
+	}
+	renderCloseConversationButton(selectedConversationInfo, firstTwoContacts) {
+		const { colorTheme } = this.props;
+		return (
+			<div style={{ padding: "10px 0px 0px 0px" }}>
+				<Button
+					style={{
+						borderColor: colorTheme.text8Color,
+						background: colorTheme.text8Color,
+						color: colorTheme.text4Color,
+						height: "44px"
+					}}
+					onClick={e =>
+						this.onCloseConversation(
+							selectedConversationInfo.conversationId,
+							selectedConversationInfo.selectedContactMongoDBInfo.id,
+							firstTwoContacts
+						)
+					}
+				>
+					Close Conversation
+				</Button>
+			</div>
+		);
 	}
 
 	renderConversations() {
@@ -37,6 +78,10 @@ class Conversation extends Component {
 						}}
 					>
 						<ContactCard />
+						{this.renderCloseConversationButton(
+							contacts.selectedConversationInfo,
+							contacts.allContacts.slice(0, 2)
+						)}
 					</Col>
 					<Col
 						sm={{ span: 6 }}
@@ -133,6 +178,24 @@ function mapDispatchToProps(dispatch) {
 		},
 		fetchConversations: () => {
 			contactsDispatchers.fetchConversations();
+		},
+		onSelectContact: (
+			conversationId,
+			isOnline,
+			socketId,
+			matchId,
+			numberOfUnseenMessages
+		) => {
+			contactsDispatchers.onSelectContact(
+				conversationId,
+				isOnline,
+				socketId,
+				matchId,
+				numberOfUnseenMessages
+			);
+		},
+		onCloseConversation: (conversationId, contactMongoDBId) => {
+			contactsDispatchers.onCloseConversation(conversationId, contactMongoDBId);
 		}
 	};
 }

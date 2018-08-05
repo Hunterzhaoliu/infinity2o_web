@@ -11,7 +11,8 @@ import {
 	UPDATE_TOTAL_NUMBER_OF_UNSEEN_MESSAGES,
 	SEEN_MESSAGES,
 	UPDATE_SELECTED_CONTACT_INFO,
-	UPDATE_VOTE_COMPARISON
+	UPDATE_VOTE_COMPARISON,
+	DELETE_CONVERSATION
 } from "../actions/types";
 
 let cloneObject = obj => {
@@ -148,6 +149,14 @@ export default function(state = initialState, action) {
 		case UPDATE_VOTE_COMPARISON:
 			newState.selectedConversationInfo.agreedAsks = action.agreedAsks;
 			newState.selectedConversationInfo.disagreedAsks = action.disagreedAsks;
+			return newState;
+		case DELETE_CONVERSATION:
+			for (let i = 0; i < state.allContacts.length; i++) {
+				if (state.allContacts[i].conversationId === action.conversationId) {
+					newState.allContacts.splice(i, 1);
+					break;
+				}
+			}
 			return newState;
 		default:
 			return state;

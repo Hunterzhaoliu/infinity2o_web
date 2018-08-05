@@ -9,7 +9,8 @@ import {
 	SAVE_USER_CONVERSATIONS_ERROR,
 	SEEN_MESSAGES,
 	UPDATE_SELECTED_CONTACT_INFO,
-	UPDATE_VOTE_COMPARISON
+	UPDATE_VOTE_COMPARISON,
+	DELETE_CONVERSATION
 } from "../types";
 import { store } from "../../index";
 
@@ -181,4 +182,23 @@ export const onSelectContact = (
 		numberOfUnseenMessages,
 		dispatch
 	);
+};
+
+export const onCloseConversation = (
+	conversationId,
+	contactMongoDBId
+) => async dispatch => {
+	const deleteConversation = await axios.delete("/api/conversations/delete", {
+		data: {
+			conversationId: conversationId,
+			contactMongoDBId: contactMongoDBId
+		}
+	});
+
+	if (deleteConversation.status === 200) {
+		dispatch({
+			type: DELETE_CONVERSATION,
+			conversationId: conversationId
+		});
+	}
 };
