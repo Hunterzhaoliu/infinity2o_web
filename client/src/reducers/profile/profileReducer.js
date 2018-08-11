@@ -38,14 +38,6 @@ let initialState = {
 	timeZone: [],
 	availability: {},
 	imageUrl: null,
-	newName: null,
-	newEmail: null,
-	newAge: null,
-	newInterests: [],
-	newLinkedInPublicProfileUrl: null,
-	newGithubPublicProfileUrl: null,
-	newTimeZone: null,
-	newAvailability: {},
 	hasAgeError: false,
 	hasNameError: false,
 	hasEmailError: false,
@@ -82,16 +74,6 @@ export default function(state = initialState, action) {
 					action.profile.githubPublicProfileUrl;
 				newState.timeZone = action.profile.timeZone;
 				newState.availability = action.profile.availability;
-				newState.newName = action.profile.name;
-				newState.newEmail = action.profile.email;
-				newState.newAge = action.profile.age;
-				newState.newInterests = action.profile.interests;
-				newState.newLinkedInPublicProfileUrl =
-					action.profile.linkedInPublicProfileUrl;
-				newState.newGithubPublicProfileUrl =
-					action.profile.githubPublicProfileUrl;
-				newState.newTimeZone = action.profile.timeZone;
-				newState.newAvailability = action.profile.availability;
 				newState.asks = action.profile.asks;
 				newState.payment = action.profile.payment;
 				newState.ranInitialMinerva =
@@ -115,63 +97,53 @@ export default function(state = initialState, action) {
 			newState.payment.hasAddNeuronError = true;
 			return newState;
 		case ON_CHANGE_NAME:
-			newState.newName = action.newName;
-			newState.name = newState.newName;
+			newState.name = action.name;
 			newState.hasNameError = action.hasError;
 			return newState;
 		case ON_CHANGE_EMAIL:
-			newState.newEmail = action.newEmail;
-			newState.email = newState.newEmail;
+			newState.email = action.email;
 			newState.hasEmailError = action.hasError;
 			return newState;
 		case ON_CHANGE_AGE:
-			newState.newAge = action.newAge;
-			newState.age = newState.newAge;
+			newState.age = action.age;
 			newState.hasAgeError = action.hasError;
 			return newState;
 		case ON_CHANGE_INTERESTS:
-			newState.newInterests = action.newInterests;
-			newState.interests = newState.newInterests;
+			newState.interests = action.interests;
 			newState.hasInterestsError = action.hasError;
 			return newState;
 		case ON_CHANGE_LINKEDIN_PROFILE_URL:
-			newState.newLinkedInPublicProfileUrl =
-				action.newLinkedInPublicProfileUrl;
 			newState.linkedInPublicProfileUrl =
-				newState.newLinkedInPublicProfileUrl;
+				action.inkedInPublicProfileUrl;
 			newState.hasLinkedInPublicProfileUrlError = action.hasError;
 			return newState;
 		case ON_CHANGE_GITHUB_PROFILE_URL:
-			newState.newGithubPublicProfileUrl =
-				action.newGithubPublicProfileUrl;
 			newState.githubPublicProfileUrl =
-				newState.newGithubPublicProfileUrl;
+				action.githubPublicProfileUrl;
 			newState.hasGithubPublicProfileUrlError = action.hasError;
 			return newState;
 		case ON_CHANGE_TIME_ZONE:
-			newState.newTimeZone = action.newTimeZone;
-			newState.timeZone = newState.newTimeZone;
+			newState.timeZone = action.timeZone;
 			newState.hasTimeZoneError = action.hasError;
 			return newState;
 		case ON_CHANGE_TIME_SLOT:
-			const dayValue = action.newTimeSlot[0];
-			const timeSlot = action.newTimeSlot[1];
-			if (newState.newAvailability === undefined) {
-				newState.newAvailability = {};
+			const dayValue = action.timeSlot[0];
+			const timeSlot = action.timeSlot[1];
+			if (newState.availability === undefined) {
+				newState.availability = {};
 			}
-			if (newState.newAvailability[dayValue] !== undefined) {
-				let i = newState.newAvailability[dayValue].indexOf(timeSlot);
+			if (newState.availability[dayValue] !== undefined) {
+				let i = newState.availability[dayValue].indexOf(timeSlot);
 				if (i !== -1) {
 					// time slot is already checked so uncheck by removind
-					newState.newAvailability[dayValue].splice(i, 1);
+					newState.availability[dayValue].splice(i, 1);
 				} else {
-					newState.newAvailability[dayValue].push(timeSlot);
+					newState.availability[dayValue].push(timeSlot);
 				}
 			} else {
-				newState.newAvailability[dayValue] = [];
-				newState.newAvailability[dayValue].push(timeSlot);
+				newState.availability[dayValue] = [];
+				newState.availability[dayValue].push(timeSlot);
 			}
-			newState.availability = newState.newAvailability;
 			return newState;
 		case SAVE_PROFILE_START:
 			newState.save = "save_start";

@@ -5,41 +5,24 @@ const isValidNameRegex = /^[a-zA-Z ]{1,30}$/;
 const isValidEmailRegex = /\S+@\S+\.\S+/;
 
 export const isValidName = name => {
-  const isValidName = isValidNameRegex.test(name) === true;
-
-  if (isValidName) {
-    return true;
-  } else {
-    return false;
-  }
+  return isValidNameRegex.test(name);
 };
 
 export const isValidEmail = email => {
-  const isValidEmail = isValidEmailRegex.test(email) === true;
-
-  if (isValidEmail) {
-    return true;
-  } else {
-    return false;
-  }
+  return isValidEmailRegex.test(email)
 };
 
 export const isValidUrl = url => {
-  if (validUrl.isUri(url)) {
-    return true;
-  } else {
-    return false;
-  }
+  return validUrl.isUri(url)
 };
 
 export const isValidAge = age => {
   const num_age = Number(age);
+  // !isNaN determines if variable is a valid number
   const isNumber = !isNaN(num_age);
 
-  if (isNumber) {
-    if (num_age >= 13 && num_age <= 125) {
+  if (isNumber && num_age >= 13 && num_age <= 125) {
       return true;
-    }
   }
 
   return false;

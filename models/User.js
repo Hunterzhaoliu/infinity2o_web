@@ -21,7 +21,10 @@ const userSchema = new Schema(
 				savedColorPallateIndex: { type: Number, default: 4 }
 			},
 			name: String,
-			email: String,
+			emailInformation: {
+				email: String,
+				wantsEmailNotifications: Boolean
+			},
 			imageUrl: String,
 			linkedInPublicProfileUrl: String,
 			githubPublicProfileUrl: String,
