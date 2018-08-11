@@ -55,6 +55,7 @@ require("./routes/askRoutes")(app);
 require("./routes/matchesRoutes")(app);
 require("./routes/conversationsRoutes")(app);
 require("./routes/legalRoutes")(app);
+require("./routes/emailSubscriptionRoutes")(app);
 
 // connection to redis
 const redis = require("redis").createClient(keys.redisURL);
