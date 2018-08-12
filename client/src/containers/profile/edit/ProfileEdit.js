@@ -23,7 +23,11 @@ class ProfileEdit extends Component {
 			profile.hasNameError ||
 			profile.hasAgeError ||
 			profile.hasInterestsError ||
-			profile.hasTimeZoneError
+			profile.hasTimeZoneError ||
+			profile.hasEmailError ||
+			profile.hasLinkedInPublicProfileUrlError ||
+			profile.hasGithubPublicProfileUrlError ||
+			profile.hasAvailabilityError
 		) {
 			return true;
 		} else {
@@ -252,8 +256,8 @@ function mapDispatchToProps(dispatch) {
 		onProfile: () => {
 			colorThemeDispatchers.onProfile();
 		},
-		saveProfile: (values, history) => {
-			profileDispatchers.saveProfile(values, history);
+		saveProfile: (profile, history) => {
+			profileDispatchers.saveProfile(profile, history);
 		},
 		onChangeName: name => {
 			profileDispatchers.onChangeName(name);

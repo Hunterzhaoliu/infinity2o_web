@@ -62,10 +62,11 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case SAVE_FETCHED_USER_PROFILE:
+			console.log('action.profile = ', action.profile);
 			if (action.profile !== undefined) {
 				newState.imageUrl = action.profile.imageUrl;
 				newState.name = action.profile.name;
-				newState.email = action.profile.email;
+				newState.email = action.profile.emailInformation.email;
 				newState.age = action.profile.age;
 				newState.interests = action.profile.interests;
 				newState.linkedInPublicProfileUrl =
@@ -114,7 +115,7 @@ export default function(state = initialState, action) {
 			return newState;
 		case ON_CHANGE_LINKEDIN_PROFILE_URL:
 			newState.linkedInPublicProfileUrl =
-				action.inkedInPublicProfileUrl;
+				action.linkedInPublicProfileUrl;
 			newState.hasLinkedInPublicProfileUrlError = action.hasError;
 			return newState;
 		case ON_CHANGE_GITHUB_PROFILE_URL:
@@ -135,7 +136,7 @@ export default function(state = initialState, action) {
 			if (newState.availability[dayValue] !== undefined) {
 				let i = newState.availability[dayValue].indexOf(timeSlot);
 				if (i !== -1) {
-					// time slot is already checked so uncheck by removind
+					// time slot is already checked so uncheck by removing
 					newState.availability[dayValue].splice(i, 1);
 				} else {
 					newState.availability[dayValue].push(timeSlot);

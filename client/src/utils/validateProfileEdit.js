@@ -13,7 +13,11 @@ export const isValidEmail = email => {
 };
 
 export const isValidUrl = url => {
-  return validUrl.isUri(url)
+  if (url.length > 0) {
+    return validUrl.isUri(url)
+  } else {
+    return true;
+  }
 };
 
 export const isValidAge = age => {

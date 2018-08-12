@@ -31,7 +31,7 @@ export const onChangeEmail = email => dispatch => {
     dispatch({
       type: ON_CHANGE_EMAIL,
       email: email,
-      hasError: isValidEmail(email)
+      hasError: !isValidEmail(email)
     });
 };
 
@@ -39,19 +39,20 @@ export const onChangeLinkedInPublicProfileUrl = linkedInPublicProfileUrl => disp
     dispatch({
       type: ON_CHANGE_LINKEDIN_PROFILE_URL,
       linkedInPublicProfileUrl: linkedInPublicProfileUrl,
-      hasError: isValidUrl(linkedInPublicProfileUrl)
+      hasError: !isValidUrl(linkedInPublicProfileUrl)
     });
 };
+
 export const onChangeGithubPublicProfileUrl = githubPublicProfileUrl => dispatch => {
     dispatch({
       type: ON_CHANGE_GITHUB_PROFILE_URL,
       githubPublicProfileUrl: githubPublicProfileUrl,
-      hasError: isValidUrl(githubPublicProfileUrl)
+      hasError: !isValidUrl(githubPublicProfileUrl)
     });
 };
 
 export const onChangeAge = age => dispatch => {
-    dispatch({ type: ON_CHANGE_AGE, age: age, hasError: isValidAge(age) });
+    dispatch({ type: ON_CHANGE_AGE, age: age, hasError: !isValidAge(age) });
 
 };
 
@@ -59,7 +60,7 @@ export const onChangeInterests = interests => dispatch => {
     dispatch({
       type: ON_CHANGE_INTERESTS,
       interests: interests,
-      hasError: isValidInterests(interests)
+      hasError: !isValidInterests(interests)
     });
 };
 
@@ -67,7 +68,7 @@ export const onChangeTimeZone = timeZone => dispatch => {
     dispatch({
       type: ON_CHANGE_TIME_ZONE,
       timeZone: timeZone,
-      hasError: isValidTimeZone(timeZone)
+      hasError: !isValidTimeZone(timeZone)
     });
 };
 
@@ -79,9 +80,9 @@ export const onChangeTimeSlot = newTimeSlot => dispatch => {
   });
 };
 
-export const saveProfile = (values, history) => async dispatch => {
+export const saveProfile = (profile, history) => async dispatch => {
   dispatch({ type: SAVE_PROFILE_START });
-  const response = await axios.post("/api/profile", values);
+  const response = await axios.post("/api/profile", profile);
   if (response.status === 200) {
     dispatch({ type: SAVE_PROFILE_DONE });
     history.push("/profile");
