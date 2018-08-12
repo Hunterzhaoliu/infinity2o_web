@@ -25,7 +25,7 @@ passport.use(
 				// update their name & email if they don't have one
 				if (
 					existingUser.profile.name === undefined ||
-					existingUser.profile.email === undefined ||
+					existingUser.profile.emailInformation.email === undefined ||
 					existingUser.profile.imageUrl === undefined
 				) {
 					await UserCollection.updateOne(
@@ -35,7 +35,7 @@ passport.use(
 						{
 							$set: {
 								"profile.name": profile.displayName,
-								"profile.email": profile.emails[0].value,
+								"profile.emailInformation.email": profile.emails[0].value,
 								"profile.imageUrl": biggerImageUrl
 							}
 						}
@@ -50,7 +50,7 @@ passport.use(
 					},
 					profile: {
 						name: profile.displayName,
-						email: profile.emails[0].value,
+						'emailInformation.email': profile.emails[0].value,
 						imageUrl: biggerImageUrl
 					}
 				}).save();
@@ -80,7 +80,7 @@ passport.use(
 				// update their name, email, linkedInPublicProfileUrl if they don't have one
 				if (
 					existingUser.profile.name === undefined ||
-					existingUser.profile.email === undefined ||
+					existingUser.profile.emailInformation.email === undefined ||
 					existingUser.profile.linkedInPublicProfileUrl === undefined ||
 					existingUser.profile.imageUrl === undefined
 				) {
@@ -91,7 +91,7 @@ passport.use(
 						{
 							$set: {
 								"profile.name": profile.displayName,
-								"profile.email": profile.emails[0].value,
+								"profile.emailInformation.email": profile.emails[0].value,
 								"profile.linkedInPublicProfileUrl":
 									profile._json.publicProfileUrl,
 								"profile.imageUrl": profile.photos[0].value
@@ -110,7 +110,7 @@ passport.use(
 					},
 					profile: {
 						name: profile.displayName,
-						email: profile.emails[0].value,
+						'emailInformation.email': profile.emails[0].value,
 						linkedInPublicProfileUrl: profile._json.publicProfileUrl,
 						imageUrl: profile.photos[0].value
 					}

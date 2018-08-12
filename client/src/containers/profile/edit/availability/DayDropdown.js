@@ -25,7 +25,7 @@ class DayDropdown extends Component {
 
   renderMenuItems(day) {
     const { colorTheme, profile } = this.props;
-    const newTimeSlots = profile.newAvailability[day.value];
+    const timeSlots = profile.availability[day.value];
 
     document.documentElement.style.setProperty(
       `--text2Color`,
@@ -48,6 +48,7 @@ class DayDropdown extends Component {
       colorTheme.text7Color
     );
 
+    // the value inside of checkbox gets put into e.target.value onChangeTimeSlot
     return _.map(timeSlotOptions, timeSlot => {
       return (
         <Menu.Item
@@ -63,7 +64,7 @@ class DayDropdown extends Component {
               background: colorTheme.text7Color,
               color: colorTheme.text2Color
             }}
-            checked={this.isChecked(timeSlot, newTimeSlots)}
+            checked={this.isChecked(timeSlot, timeSlots)}
             value={[day.value, timeSlot]}
             onChange={this.onChangeTimeSlot}
           >
@@ -74,8 +75,8 @@ class DayDropdown extends Component {
     });
   }
 
-  isChecked(timeSlot, newTimeSlots) {
-    if (newTimeSlots !== undefined && newTimeSlots.includes(timeSlot)) {
+  isChecked(timeSlot, timeSlots) {
+    if (timeSlots !== undefined && timeSlots.includes(timeSlot)) {
       return true;
     }
   }
@@ -136,8 +137,8 @@ function mapDispatchToProps(dispatch) {
   );
 
   return {
-    onChangeTimeSlot: newTimeSlots => {
-      profileDispatchers.onChangeTimeSlot(newTimeSlots);
+    onChangeTimeSlot: editedTimeSlot => {
+      profileDispatchers.onChangeTimeSlot(editedTimeSlot);
     }
   };
 }

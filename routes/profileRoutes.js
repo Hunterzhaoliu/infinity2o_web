@@ -16,7 +16,7 @@ module.exports = app => {
 		} = request.body;
 
 		request.user.profile.name = name;
-		request.user.profile.email = email;
+		request.user.profile.emailInformation.email = email;
 		request.user.profile.age = age;
 		request.user.profile.interests = interests;
 		request.user.profile.linkedInPublicProfileUrl = linkedInPublicProfileUrl;

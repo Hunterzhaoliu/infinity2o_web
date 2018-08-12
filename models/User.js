@@ -23,7 +23,7 @@ const userSchema = new Schema(
 			name: String,
 			emailInformation: {
 				email: String,
-				wantsEmailNotifications: Boolean
+				wantsEmailNotifications: { type: Boolean, default: true }
 			},
 			imageUrl: String,
 			linkedInPublicProfileUrl: String,

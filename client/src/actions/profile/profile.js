@@ -72,10 +72,10 @@ export const onChangeTimeZone = timeZone => dispatch => {
     });
 };
 
-export const onChangeTimeSlot = newTimeSlot => dispatch => {
+export const onChangeTimeSlot = editedTimeSlot => dispatch => {
   dispatch({
     type: ON_CHANGE_TIME_SLOT,
-    newTimeSlot: newTimeSlot,
+    editedTimeSlot: editedTimeSlot,
     hasError: false
   });
 };

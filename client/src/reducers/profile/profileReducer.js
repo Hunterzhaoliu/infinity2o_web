@@ -62,7 +62,6 @@ export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case SAVE_FETCHED_USER_PROFILE:
-			console.log('action.profile = ', action.profile);
 			if (action.profile !== undefined) {
 				newState.imageUrl = action.profile.imageUrl;
 				newState.name = action.profile.name;
@@ -128,22 +127,19 @@ export default function(state = initialState, action) {
 			newState.hasTimeZoneError = action.hasError;
 			return newState;
 		case ON_CHANGE_TIME_SLOT:
-			const dayValue = action.timeSlot[0];
-			const timeSlot = action.timeSlot[1];
-			if (newState.availability === undefined) {
-				newState.availability = {};
-			}
+			const dayValue = action.editedTimeSlot[0];
+			const hours = action.editedTimeSlot[1];
 			if (newState.availability[dayValue] !== undefined) {
-				let i = newState.availability[dayValue].indexOf(timeSlot);
+				const i = newState.availability[dayValue].indexOf(hours);
 				if (i !== -1) {
 					// time slot is already checked so uncheck by removing
 					newState.availability[dayValue].splice(i, 1);
 				} else {
-					newState.availability[dayValue].push(timeSlot);
+					newState.availability[dayValue].push(hours);
 				}
 			} else {
 				newState.availability[dayValue] = [];
-				newState.availability[dayValue].push(timeSlot);
+				newState.availability[dayValue].push(hours);
 			}
 			return newState;
 		case SAVE_PROFILE_START:
