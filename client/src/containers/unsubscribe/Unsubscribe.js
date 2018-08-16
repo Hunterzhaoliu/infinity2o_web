@@ -15,8 +15,8 @@ class Unsubscribe extends Component {
   }
 
   render() {
-    const { colorTheme } = this.props;
-
+    const { colorTheme, name } = this.props;
+    const userFirstName = name.split(" ")[0];
     return (
       <Content
         style={{
@@ -25,7 +25,7 @@ class Unsubscribe extends Component {
           background: colorTheme.backgroundColor
         }}
       >
-        Hello World
+        Hey {userFirstName}
       </Content>
     );
   }
@@ -37,7 +37,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
   return {
-    colorTheme: state.colorTheme
+    colorTheme: state.colorTheme,
+    name: state.profile.name
   };
 }
 

@@ -7,7 +7,8 @@ export const userUnsubscribed = userId => async dispatch => {
   });
   if ((unsubscribeResponse.status = 200)) {
     dispatch({
-      type: USER_UNSUBSCRIBED
+      type: USER_UNSUBSCRIBED,
+      name: unsubscribeResponse.data
     });
   }
 };
