@@ -22,10 +22,10 @@ passport.use(
 			if (existingUser) {
 				// we already have this user in db
 
-				// update their name & email if they don't have one
+				// update their name, email, and picture if they don't have one
 				if (
 					existingUser.profile.name === undefined ||
-					existingUser.profile.emailInformation.email === undefined ||
+					existingUser.profile.emailInformation.email.length === 0 ||
 					existingUser.profile.imageUrl === undefined
 				) {
 					await UserCollection.updateOne(
