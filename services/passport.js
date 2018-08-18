@@ -25,7 +25,7 @@ passport.use(
 				// update their name, email, and picture if they don't have one
 				if (
 					existingUser.profile.name === undefined ||
-					existingUser.profile.emailInformation.email.length === 0 ||
+					existingUser.profile.email === undefined ||
 					existingUser.profile.imageUrl === undefined
 				) {
 					await UserCollection.updateOne(

@@ -79,6 +79,18 @@
 2. Edit `config/dev.js` to have socketDomain = `'52.4.101.52:5000'` and redirectDomain = `'52.4.101.52:3000'`
 3. You can view the running development server code at `http://52.4.101.52:3000/`.
 
+### Copy production MongoDB data to other MongoDB database:
+
+1. clone the remote folder on Bitbucket to local computer
+2. `cd` into `prod`
+3. `mongodump -h ds153412.mlab.com:53412 -d infinity2o-prod -u infinity2o-prod -p mxFxxxxxIxxxx -o <output directory>`
+where `<output directory>` is the current date
+4. commit the new data to Bitbucket
+5. go to the database in MongoDB and find the mongorestore command under the tools tab
+6. delete all collections in database and then mongorestore the production data by `cd` into wanted production data date folder 
+  * Development Example: `mongorestore -h ds121686.mlab.com:21686 -d infinity2o-dev -u infinity2o-dev -p 2134711p <input db directory>`
+  where `<input db directory>` is `infinity2o-prod`
+
 ### Development workflow checklists
 
 When you want to add something...
