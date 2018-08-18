@@ -6,7 +6,7 @@ import { Col, Icon } from "antd";
 class LinkedIn extends Component {
 	render() {
 		const { value } = this.props;
-		if (value !== undefined && value !== null) {
+		if (value !== undefined && value !== null && value.length > 0) {
 			return (
 				<Col>
 					<a href={value} target="_blank">

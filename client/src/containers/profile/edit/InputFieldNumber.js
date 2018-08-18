@@ -37,7 +37,7 @@ class InputFieldNumber extends Component {
 						xl={{ span: 19, offset: 1 }}
 					>
 						<Input
-							value={profile.newAge}
+							value={profile.age}
 							onChange={this.onChangeAge}
 							style={{
 								width: width,

@@ -19,19 +19,25 @@ class Conversation extends Component {
 	}
 
 	onCloseConversation(conversationId, contactMongoDBId, firstTwoContacts) {
-		// when close conversation, select top most candidate
-		let contactToShow = firstTwoContacts[0];
-		if (firstTwoContacts[0].conversationId === conversationId) {
-			// user trying to delete first conversation so need to show 2nd contact
-			contactToShow = firstTwoContacts[1];
+		if (firstTwoContacts.length === 1) {
+			// no other contacts, don't need to select a different contact
+		} else {
+			// when close conversation, select top most candidate
+			let contactToShow = firstTwoContacts[0];
+			if (firstTwoContacts[0].conversationId === conversationId) {
+				// user trying to delete first conversation so need to show 2nd contact
+				contactToShow = firstTwoContacts[1];
+			}
+			
+			this.props.onSelectContact(
+				contactToShow.conversationId,
+				contactToShow.isOnline,
+				contactToShow.socketId,
+				contactToShow.matchId,
+				contactToShow.numberOfUnseenMessages
+			);
 		}
-		this.props.onSelectContact(
-			contactToShow.conversationId,
-			contactToShow.isOnline,
-			contactToShow.socketId,
-			contactToShow.matchId,
-			contactToShow.numberOfUnseenMessages
-		);
+
 		this.props.onCloseConversation(conversationId, contactMongoDBId);
 	}
 	renderCloseConversationButton(selectedConversationInfo, firstTwoContacts) {

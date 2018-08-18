@@ -10,7 +10,7 @@ class Github extends Component {
 		if (loggedInState === "not_logged_in") {
 			textColor = GREY_3;
 		}
-		if (value !== undefined && value !== null) {
+		if (value !== undefined && value !== null && value.length > 0) {
 			return (
 				<Col>
 					<a href={value} target="_blank">

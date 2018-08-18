@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cookieSession = require("cookie-session");
-const passport = require("passport");
+const cookieSession = require("cookie-session"); // gives access to cookies
+const passport = require("passport"); // tells passport that we are using cookies
 const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 require("./models/User");
@@ -34,12 +34,14 @@ const io = require("socket.io")(server);
 // middlewares = small functions that modify incoming requests to our
 // app before requests are sent to route handlers
 app.use(bodyParser.json());
+// extracts cookie data and deencrpts the data inside
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    keys: [keys.cookieKey]
+    keys: [keys.cookieKey] // encrypts the cookie (can provide multiple cookieKeys and then cookieSession randomly picks one)
   })
 );
+// pulls user id out of cookie data and turn into user through deserializeUser
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -53,6 +55,7 @@ require("./routes/askRoutes")(app);
 require("./routes/matchesRoutes")(app);
 require("./routes/conversationsRoutes")(app);
 require("./routes/legalRoutes")(app);
+require("./routes/unsubscribeRoutes")(app);
 
 // connection to redis
 const redis = require("redis").createClient(keys.redisURL);
