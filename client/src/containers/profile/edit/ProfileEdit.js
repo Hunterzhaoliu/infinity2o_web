@@ -23,7 +23,11 @@ class ProfileEdit extends Component {
 			profile.hasNameError ||
 			profile.hasAgeError ||
 			profile.hasInterestsError ||
-			profile.hasTimeZoneError
+			profile.hasTimeZoneError ||
+			profile.hasEmailError ||
+			profile.hasLinkedInPublicProfileUrlError ||
+			profile.hasGithubPublicProfileUrlError ||
+			profile.hasAvailabilityError
 		) {
 			return true;
 		} else {
@@ -65,7 +69,7 @@ class ProfileEdit extends Component {
 				>
 					<Col span={24}>
 						<InputField
-							value={profile.newName}
+							value={profile.name}
 							width={280}
 							label="Name:"
 							errorMessage="Cool name! But we need 1 to 30 valid letters"
@@ -84,7 +88,7 @@ class ProfileEdit extends Component {
 				>
 					<Col span={24}>
 						<InputField
-							value={profile.newEmail}
+							value={profile.email}
 							width={280}
 							label="E-mail:"
 							errorMessage="Invalid e-mail format"
@@ -127,7 +131,7 @@ class ProfileEdit extends Component {
 				>
 					<Col span={24}>
 						<InputField
-							value={profile.newLinkedInPublicProfileUrl}
+							value={profile.linkedInPublicProfileUrl}
 							width={280}
 							label="LinkedIn:"
 							errorMessage="Invalid LinkedIn link. Needs to start with http:// or https://"
@@ -146,7 +150,7 @@ class ProfileEdit extends Component {
 				>
 					<Col span={24}>
 						<InputField
-							value={profile.newGithubPublicProfileUrl}
+							value={profile.githubPublicProfileUrl}
 							width={280}
 							label="Github:"
 							errorMessage="Invalid github link. Needs to start with http:// or https://"
@@ -205,7 +209,6 @@ class ProfileEdit extends Component {
 	}
 
 	render() {
-		//console.log('this.props in ProfileEdit.js', this.props);
 		const { colorTheme } = this.props;
 		return (
 			<Content
@@ -253,23 +256,23 @@ function mapDispatchToProps(dispatch) {
 		onProfile: () => {
 			colorThemeDispatchers.onProfile();
 		},
-		saveProfile: (values, history) => {
-			profileDispatchers.saveProfile(values, history);
+		saveProfile: (profile, history) => {
+			profileDispatchers.saveProfile(profile, history);
 		},
-		onChangeName: newName => {
-			profileDispatchers.onChangeName(newName);
+		onChangeName: name => {
+			profileDispatchers.onChangeName(name);
 		},
-		onChangeEmail: newEmail => {
-			profileDispatchers.onChangeEmail(newEmail);
+		onChangeEmail: email => {
+			profileDispatchers.onChangeEmail(email);
 		},
-		onChangeLinkedInPublicProfileUrl: newLinkedInPublicProfileUrl => {
+		onChangeLinkedInPublicProfileUrl: linkedInPublicProfileUrl => {
 			profileDispatchers.onChangeLinkedInPublicProfileUrl(
-				newLinkedInPublicProfileUrl
+				linkedInPublicProfileUrl
 			);
 		},
-		onChangeGithubPublicProfileUrl: newGithubPublicProfileUrl => {
+		onChangeGithubPublicProfileUrl: githubPublicProfileUrl => {
 			profileDispatchers.onChangeGithubPublicProfileUrl(
-				newGithubPublicProfileUrl
+				githubPublicProfileUrl
 			);
 		}
 	};

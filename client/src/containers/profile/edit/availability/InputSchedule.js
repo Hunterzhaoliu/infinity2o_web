@@ -6,18 +6,18 @@ import { Row, Col } from "antd";
 import daysOfWeek from "./daysOfWeek";
 
 class InputSchedule extends Component {
-  renderDaysOfWeekDropdowns(availability) {
+  renderDaysOfWeekDropdowns() {
     return _.map(daysOfWeek, day => {
       return (
         <Col span={3} key={day.label}>
-          <DayDropdown day={day} oldTimeSlots={availability[day.value]} />
+          <DayDropdown day={day} />
         </Col>
       );
     });
   }
 
   render() {
-    const { colorTheme, profile } = this.props;
+    const { colorTheme } = this.props;
 
     return (
       <div>
@@ -36,7 +36,7 @@ class InputSchedule extends Component {
             </Row>
             <Row type="flex" justify="space-around" align="middle">
               <Col span={24}>
-                {this.renderDaysOfWeekDropdowns(profile.availability)}
+                {this.renderDaysOfWeekDropdowns()}
               </Col>
             </Row>
           </Col>
@@ -52,8 +52,7 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
   return {
-    colorTheme: state.colorTheme,
-    profile: state.profile
+    colorTheme: state.colorTheme
   };
 }
 

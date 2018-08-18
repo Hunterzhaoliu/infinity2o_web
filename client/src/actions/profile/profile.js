@@ -19,138 +19,70 @@ import {
   isValidAge,
   isValidInterests,
   isValidEmail,
-  isValidTimeZone
+  isValidTimeZone,
+  isValidUrl
 } from "../../utils/validateProfileEdit";
-import validUrl from "valid-url";
 
-export const onChangeName = newName => dispatch => {
-  if (isValidName(newName)) {
-    dispatch({ type: ON_CHANGE_NAME, newName: newName, hasError: false });
-  } else {
-    dispatch({ type: ON_CHANGE_NAME, newName: newName, hasError: true });
-  }
+export const onChangeName = name => dispatch => {
+    dispatch({ type: ON_CHANGE_NAME, name: name, hasError: !isValidName(name) });
 };
 
-export const onChangeEmail = newEmail => dispatch => {
-  if (isValidEmail(newEmail)) {
+export const onChangeEmail = email => dispatch => {
     dispatch({
       type: ON_CHANGE_EMAIL,
-      newEmail: newEmail,
-      hasError: false
+      email: email,
+      hasError: !isValidEmail(email)
     });
-  } else {
-    dispatch({ type: ON_CHANGE_EMAIL, newEmail: newEmail, hasError: true });
-  }
 };
 
-export const onChangeLinkedInPublicProfileUrl = newLinkedInPublicProfileUrl => dispatch => {
-  if (validUrl.isUri(newLinkedInPublicProfileUrl)) {
+export const onChangeLinkedInPublicProfileUrl = linkedInPublicProfileUrl => dispatch => {
     dispatch({
       type: ON_CHANGE_LINKEDIN_PROFILE_URL,
-      newLinkedInPublicProfileUrl: newLinkedInPublicProfileUrl,
-      hasError: false
+      linkedInPublicProfileUrl: linkedInPublicProfileUrl,
+      hasError: !isValidUrl(linkedInPublicProfileUrl)
     });
-  } else {
-    dispatch({
-      type: ON_CHANGE_LINKEDIN_PROFILE_URL,
-      newLinkedInPublicProfileUrl: newLinkedInPublicProfileUrl,
-      hasError: true
-    });
-  }
 };
-export const onChangeGithubPublicProfileUrl = newGithubPublicProfileUrl => dispatch => {
-  if (validUrl.isUri(newGithubPublicProfileUrl)) {
+
+export const onChangeGithubPublicProfileUrl = githubPublicProfileUrl => dispatch => {
     dispatch({
       type: ON_CHANGE_GITHUB_PROFILE_URL,
-      newGithubPublicProfileUrl: newGithubPublicProfileUrl,
-      hasError: false
+      githubPublicProfileUrl: githubPublicProfileUrl,
+      hasError: !isValidUrl(githubPublicProfileUrl)
     });
-  } else {
-    dispatch({
-      type: ON_CHANGE_GITHUB_PROFILE_URL,
-      newGithubPublicProfileUrl: newGithubPublicProfileUrl,
-      hasError: true
-    });
-  }
 };
 
-export const onChangeAge = newAge => dispatch => {
-  if (isValidAge(newAge)) {
-    dispatch({ type: ON_CHANGE_AGE, newAge: newAge, hasError: false });
-  } else {
-    dispatch({ type: ON_CHANGE_AGE, newAge: newAge, hasError: true });
-  }
+export const onChangeAge = age => dispatch => {
+    dispatch({ type: ON_CHANGE_AGE, age: age, hasError: !isValidAge(age) });
+
 };
 
-export const onChangeInterests = newInterests => dispatch => {
-  if (isValidInterests(newInterests)) {
+export const onChangeInterests = interests => dispatch => {
     dispatch({
       type: ON_CHANGE_INTERESTS,
-      newInterests: newInterests,
-      hasError: false
+      interests: interests,
+      hasError: !isValidInterests(interests)
     });
-  } else {
-    dispatch({
-      type: ON_CHANGE_INTERESTS,
-      newInterests: newInterests,
-      hasError: true
-    });
-  }
 };
 
-export const onChangeTimeZone = newTimeZone => dispatch => {
-  if (isValidTimeZone) {
+export const onChangeTimeZone = timeZone => dispatch => {
     dispatch({
       type: ON_CHANGE_TIME_ZONE,
-      newTimeZone: newTimeZone,
-      hasError: false
+      timeZone: timeZone,
+      hasError: !isValidTimeZone(timeZone)
     });
-  } else {
-    dispatch({
-      type: ON_CHANGE_TIME_ZONE,
-      newTimeZone: newTimeZone,
-      hasError: true
-    });
-  }
 };
 
-export const onChangeTimeSlot = newTimeSlot => dispatch => {
+export const onChangeTimeSlot = editedTimeSlot => dispatch => {
   dispatch({
     type: ON_CHANGE_TIME_SLOT,
-    newTimeSlot: newTimeSlot,
+    editedTimeSlot: editedTimeSlot,
     hasError: false
   });
 };
 
-export const saveProfile = (values, history) => async dispatch => {
+export const saveProfile = (profile, history) => async dispatch => {
   dispatch({ type: SAVE_PROFILE_START });
-  // if the user already has profile data saved and makes a edit to one
-  // field we need to make sure we send the old unedited data for profile
-  if (values.newName === null) {
-    values.newName = values.name;
-  }
-  if (values.newAge === null) {
-    values.newAge = values.age;
-  }
-  if (values.newInterests.length === 0) {
-    values.newInterests = values.interests;
-  }
-  if (values.newTimeZone === null) {
-    values.newTimeZone = values.timeZone;
-  }
-  if (Object.keys(values.newAvailability).length === 0) {
-    values.newAvailability = values.availability;
-  }
-  if (values.newEmail === null) {
-    values.newEmail = values.email;
-  }
-  if (values.newLinkedInPublicProfileUrl === null) {
-    values.newLinkedInPublicProfileUrl = values.linkedInPublicProfileUrl;
-  }
-  if (values.newGithubPublicProfileUrl === null) {
-    values.newGithubPublicProfileUrl = values.githubPublicProfileUrl;
-  }
-  const response = await axios.post("/api/profile", values);
+  const response = await axios.post("/api/profile", profile);
   if (response.status === 200) {
     dispatch({ type: SAVE_PROFILE_DONE });
     history.push("/profile");

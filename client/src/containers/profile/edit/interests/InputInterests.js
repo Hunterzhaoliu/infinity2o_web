@@ -82,7 +82,7 @@ class InputInterests extends Component {
               style={{
                 width: width
               }}
-              value={profile.newInterests}
+              value={profile.interests}
               onChange={this.onChangeInterests}
             >
               {this.renderOptions()}

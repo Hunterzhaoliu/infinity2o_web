@@ -66,7 +66,7 @@ class InputTimeZone extends Component {
                 width: width,
                 background: colorTheme.text8Color
               }}
-              value={profile.newTimeZone}
+              value={profile.timeZone}
               onChange={this.onChangeTimeZone}
               options={timeZones}
               expandTrigger="hover"

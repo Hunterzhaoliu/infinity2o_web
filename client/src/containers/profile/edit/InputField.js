@@ -4,13 +4,12 @@ import { Input, Row, Col } from 'antd';
 import ErrorMessage from './ErrorMessage';
 
 class InputField extends Component {
-	onChange = e => {
+	onModify = e => {
 		const { onChange } = this.props;
 		onChange(e.target.value);
 	};
 
 	render() {
-		//console.log('InputField this.props = ', this.props);
 		const {
 			value,
 			colorTheme,
@@ -45,7 +44,7 @@ class InputField extends Component {
 					>
 						<Input
 							value={value}
-							onChange={this.onChange}
+							onChange={this.onModify}
 							style={{
 								width: width,
 								color: colorTheme.text2Color,
