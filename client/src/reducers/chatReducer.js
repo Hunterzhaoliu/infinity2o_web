@@ -32,8 +32,9 @@ export default function(state = initialState, action) {
       return newState;
     case DISPLAY_SENT_MESSAGE:
       newState.last50Messages.push({
-        senderName: action.senderName,
+        senderId: action.senderId,
         content: newState.currentMessage,
+        timeCreated: action.timeCreated,
         status: "sent"
       });
       if (newState.last50Messages.length > 50) {
@@ -51,11 +52,12 @@ export default function(state = initialState, action) {
       return newState;
     case DISPLAY_RECEIVED_MESSAGE:
       //console.log('action.messageInfo = ', action.messageInfo);
-      const senderName = action.messageInfo.senderName;
       const message = action.messageInfo.message;
       newState.last50Messages.push({
-        senderName: senderName,
-        content: message
+        senderId: action.messageInfo.senderId,
+        content: message,
+        timeCreated: action.messageInfo.timeCreated,
+        status: "delivered"
       });
       if (newState.last50Messages.length > 50) {
         newState.last50Messages.shift();
