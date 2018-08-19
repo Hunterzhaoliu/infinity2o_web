@@ -80,7 +80,7 @@ module.exports = app => {
       try {
         const conversationInDB = await conversation.save();
         // console.log('conversationInDB = ', conversationInDB);
-        userConversationList.push({
+        userConversationList.unshift({
           conversationId: conversationInDB._id,
           matchName: matchName,
           matchId: matchId
@@ -90,7 +90,7 @@ module.exports = app => {
           { $set: { "conversations.userConversations": userConversationList } },
           { upsert: true }
         );
-        matchConversationList.push({
+        matchConversationList.unshift({
           conversationId: conversationInDB._id,
           matchName: userName,
           matchId: userId
