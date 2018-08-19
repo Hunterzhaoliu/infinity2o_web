@@ -84,10 +84,10 @@ io.on("connection", function(serverSocket) {
   serverSocket.on("TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A", function(
     messageInfo
   ) {
-    console.log(
-      "TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo index = ",
-      messageInfo
-    );
+    // console.log(
+    //   "TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A messageInfo index = ",
+    //   messageInfo
+    // );
 
     // sends private message to other client
     serverSocket
