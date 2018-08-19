@@ -24,14 +24,6 @@ const getMatchesInfo = async mongoDBMatchId => {
   }
 };
 
-const generateUniqueUID = () => {
-  return (
-    Math.random().toString() +
-    Math.random().toString() +
-    Math.random().toString()
-  );
-};
-
 module.exports = app => {
   app.get("/api/matches", requireLogin, async (request, response) => {
     // formats the request string into an array
@@ -91,9 +83,7 @@ module.exports = app => {
         userConversationList.push({
           conversationId: conversationInDB._id,
           matchName: matchName,
-          matchId: matchId,
-          isOnline: false,
-          socketId: null
+          matchId: matchId
         });
         await UserCollection.updateOne(
           { _id: userId },
@@ -103,9 +93,7 @@ module.exports = app => {
         matchConversationList.push({
           conversationId: conversationInDB._id,
           matchName: userName,
-          matchId: userId,
-          isOnline: false,
-          socketId: null
+          matchId: userId
         });
 
         await UserCollection.updateOne(
@@ -178,7 +166,11 @@ module.exports = app => {
           error,
           replyToQueueObject
         ) {
-          const correlationId = generateUniqueUID();
+          // generateUniqueUID
+          const correlationId =
+            Math.random().toString() +
+            Math.random().toString() +
+            Math.random().toString();
 
           console.log(
             " [x] Requesting Athena matches for mongoDBUserId=%s",

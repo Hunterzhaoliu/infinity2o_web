@@ -15,6 +15,25 @@ module.exports = app => {
       availability
     } = request.body;
 
+    if (request.user.profile.name !== name) {
+      //user changed their name, need to also update all of their
+      // contacts with their new name
+
+      const userConversations = request.user.conversations.userConversations;
+      for (let i = 0; i < userConversations.length; i++) {
+        await UserCollection.findOneAndUpdate(
+          {
+            _id: userConversations[i]["matchId"],
+            "conversations.userConversations.matchId": request.user._id
+          },
+          {
+            $set: {
+              "conversations.userConversations.$.matchName": name
+            }
+          }
+        );
+      }
+    }
     request.user.profile.name = name;
     request.user.profile.emailInformation.email = email;
     request.user.profile.age = age;
