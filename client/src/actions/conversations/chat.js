@@ -37,10 +37,10 @@ export const sendMessageToServer = (
       message: currentMessage,
       timeCreated: timeCreated
     });
-    // console.log(
-    // 	'TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A currentMessage chat = ',
-    // 	currentMessage
-    // );
+    console.log(
+      "TELL_SERVER:MESSAGE_TO_CLIENT_B_FROM_CLIENT_A currentMessage chat = ",
+      currentMessage
+    );
   }
   // save sent message into database and update the numberOfUnseenMessages for
   // the contact
