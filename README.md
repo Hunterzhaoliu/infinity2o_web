@@ -10,7 +10,7 @@
 
 ### heroku.com:
 
-1.  1.  Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1.  Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 2.  Heroku Redis addons:
 
 -   Local Development & Staging: `heroku addons:info redis-transparent-42654`
@@ -35,7 +35,7 @@
 
 ### LinkedIn OAuth:
 
-1.  Login TODO:
+1.  Login TODO: Hunter knows this
 
 ### Stripe.com login:
 
