@@ -5,14 +5,14 @@ let cloneObject = obj => {
 };
 
 let initialState = {
-	teamInfo: null
+	teamMembers: null
 };
 
 export default function(state = initialState, action) {
 	let newState = cloneObject(state);
 	switch (action.type) {
 		case SAVE_FETCHED_TEAM_INFO:
-			newState.teamInfo = action.teamInfo;
+			newState.teamMembers = action.teamMembers;
 			return newState;
 		default:
 			return state;

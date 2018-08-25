@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as matchesActionCreators from "../../actions/matches/matches";
@@ -15,6 +16,19 @@ class About extends Component {
 			qLiuMongoDBUserId,
 			hunterLiuMongoDBUserId
 		]);
+	}
+
+	renderTeam() {
+		const { teamMembers, colorTheme } = this.props;
+
+		console.log("teamMembers = ", teamMembers);
+		return _.map(teamMembers, teamMember => {
+			return (
+				<Col>
+					<h1 style={{ color: colorTheme.text2Color }}>Hi</h1>
+				</Col>
+			);
+		});
 	}
 
 	render() {
@@ -153,7 +167,7 @@ class About extends Component {
 					</Col>
 				</Row>
 				<Row type="flex" justify="center">
-					<Col />
+					{this.renderTeam()}
 				</Row>
 			</Content>
 		);
@@ -167,7 +181,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		loggedInState: state.auth.loggedInState
+		loggedInState: state.auth.loggedInState,
+		teamMembers: state.about.teamMembers
 	};
 }
 

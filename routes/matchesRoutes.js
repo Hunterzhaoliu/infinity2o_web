@@ -26,10 +26,6 @@ const getUserInfo = async mongoDBMatchId => {
 
 module.exports = app => {
 	app.get("/api/users", requireLogin, async (request, response) => {
-		console.log(
-			"/api/users request = ",
-			request.query.listOfUserMongoDBUserId
-		);
 		const mongoDBUserIds = request.query.listOfUserMongoDBUserId;
 		let usersInfo = [];
 		for (let mongoDBUserId of mongoDBUserIds) {

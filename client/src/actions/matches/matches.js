@@ -11,14 +11,14 @@ import {
 } from "../types";
 
 export const fetchListOfUsers = listOfUserMongoDBUserId => async dispatch => {
-	const teamInfo = await axios.get("/api/users", {
+	const teamMembers = await axios.get("/api/users", {
 		params: {
 			listOfUserMongoDBUserId: listOfUserMongoDBUserId
 		}
 	});
 	dispatch({
 		type: SAVE_FETCHED_TEAM_INFO,
-		teamInfo: teamInfo.data
+		teamMembers: teamMembers.data
 	});
 };
 
