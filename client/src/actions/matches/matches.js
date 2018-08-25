@@ -6,8 +6,21 @@ import {
 	MOVE_TO_CONVERSATIONS,
 	DELETED_MATCH_IN_DB,
 	DELETED_MATCH_IN_DB_ERROR,
-	DECREMENT_NUMBER_OF_UNSEEN_MATCHES
+	DECREMENT_NUMBER_OF_UNSEEN_MATCHES,
+	SAVE_FETCHED_TEAM_INFO
 } from "../types";
+
+export const fetchListOfUsers = listOfUserMongoDBUserId => async dispatch => {
+	const teamInfo = await axios.get("/api/users", {
+		params: {
+			listOfUserMongoDBUserId: listOfUserMongoDBUserId
+		}
+	});
+	dispatch({
+		type: SAVE_FETCHED_TEAM_INFO,
+		teamInfo: teamInfo.data
+	});
+};
 
 export const fetchUserMatches = mongoDBUserId => async dispatch => {
 	// runs on Matches page

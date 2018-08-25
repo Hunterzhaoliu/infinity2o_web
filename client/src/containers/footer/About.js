@@ -1,10 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as matchesActionCreators from "../../actions/matches/matches";
+import { bindActionCreators } from "redux";
 import { GREY_1, GREY_9 } from "../styles/ColorConstants";
 import { Layout, Row, Col } from "antd";
 const { Content } = Layout;
 
 class About extends Component {
+	componentWillMount() {
+		// run once before first render()
+		const qLiuMongoDBUserId = "5ae6725046dc7c001428ab7b";
+		const hunterLiuMongoDBUserId = "5b25a085bf0a8f0014da8d9a";
+		this.props.fetchListOfUsers([
+			qLiuMongoDBUserId,
+			hunterLiuMongoDBUserId
+		]);
+	}
+
 	render() {
 		const { colorTheme, loggedInState } = this.props;
 
@@ -140,6 +152,9 @@ class About extends Component {
 						<h1 style={{ color: textColor }}>Team</h1>
 					</Col>
 				</Row>
+				<Row type="flex" justify="center">
+					<Col />
+				</Row>
 			</Content>
 		);
 	}
@@ -161,7 +176,16 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
-	return {};
+	const matchesDispatchers = bindActionCreators(
+		matchesActionCreators,
+		dispatch
+	);
+
+	return {
+		fetchListOfUsers: listOfUserMongoDBUserId => {
+			matchesDispatchers.fetchListOfUsers(listOfUserMongoDBUserId);
+		}
+	};
 }
 
 export default connect(
