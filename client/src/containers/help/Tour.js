@@ -33,14 +33,22 @@ class Tour extends Component {
 						<h1
 							key="0"
 							style={{
-								color: colorTheme.text2Color
+								color: colorTheme.text2Color,
+								fontFamily: "Titillium Web",
+								fontSize: "35px",
+								fontWeight: "bold",
+								padding: "25px 0px 0px 0px"
 							}}
 						>
 							{welcome}
 						</h1>
 					</Col>
 				</Row>
-				<Row type="flex" justify="center">
+				<Row
+					style={{ padding: "25px 0px 0px 0px" }}
+					type="flex"
+					justify="center"
+				>
 					<Col span={24}>
 						<iframe
 							title="tour-video"
@@ -52,6 +60,9 @@ class Tour extends Component {
 							allowFullScreen
 						/>
 					</Col>
+				</Row>
+				<Row type="flex" justify="center">
+					<div style={{ height: "30px" }} />
 				</Row>
 			</Content>
 		);
