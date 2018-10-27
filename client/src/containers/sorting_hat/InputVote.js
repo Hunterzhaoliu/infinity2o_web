@@ -1,9 +1,9 @@
-import _ from 'lodash';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as sortingHatActionCreators from '../../actions/sorting_hat/sortingHat';
-import * as landingActionCreators from '../../actions/landing';
-import { bindActionCreators } from 'redux';
+import _ from "lodash";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as sortingHatActionCreators from "../../actions/sorting_hat/sortingHat";
+import * as landingActionCreators from "../../actions/landing";
+import { bindActionCreators } from "redux";
 import {
 	GREY_9,
 	GREY_8,
@@ -12,10 +12,10 @@ import {
 	GREY_2,
 	GREY_1,
 	RED_ORANGE_3
-} from '../styles/ColorConstants';
-import LoginButtons from '../landing/LoginButtons';
-import './InputVote.css';
-import { Button, Card, Col, Layout, Row, Icon, Modal } from 'antd';
+} from "../styles/ColorConstants";
+import LoginButtons from "../landing/LoginButtons";
+import "./InputVote.css";
+import { Button, Card, Col, Layout, Row, Icon, Modal } from "antd";
 const { Content } = Layout;
 
 class InputVote extends Component {
@@ -64,16 +64,17 @@ class InputVote extends Component {
 	renderNextAskButton(askIndex, isDisplayingAskStats) {
 		const { colorTheme, activeSection } = this.props;
 
-		if (activeSection !== 'sorting_hat') {
+		if (activeSection !== "sorting_hat") {
 			return;
 		} else {
 			return (
-				<Row style={{ padding: '8px 0px 0px' }}>
+				<Row style={{ padding: "8px 0px 0px" }}>
 					<Button
 						style={{
 							borderColor: colorTheme.text7Color,
 							background: colorTheme.text7Color,
-							color: colorTheme.text2Color
+							color: colorTheme.text2Color,
+							fontFamily: "Titillium Web"
 						}}
 						onClick={e => this.onNextAsk(askIndex)}
 					>
@@ -95,11 +96,26 @@ class InputVote extends Component {
 
 		return (
 			<Modal visible={visible} onCancel={this.handleCancel} footer={null}>
-				<h2 style={{ textAlign: 'center', color: GREY_9 }}>
+				<h2
+					style={{
+						textAlign: "center",
+						color: GREY_9,
+						fontFamily: "Titllium Web",
+						fontWeight: "bold",
+						fontSize: "35px"
+					}}
+				>
 					Congrats on your first vote!
 				</h2>
-				<p style={{ textAlign: 'center', color: GREY_7 }}>
-					To make your vote count login with
+				<p
+					style={{
+						textAlign: "center",
+						color: GREY_7,
+						fontFamily: "Titillium Web",
+						fontSize: "25px"
+					}}
+				>
+					To make your vote count, login with
 				</p>
 				<LoginButtons />
 			</Modal>
@@ -112,7 +128,7 @@ class InputVote extends Component {
 		const answerId = ask.answers[answerIndex]._id;
 		if (
 			landing.numberOfLandingVotes === 0 &&
-			loggedInState === 'not_logged_in'
+			loggedInState === "not_logged_in"
 		) {
 			this.setState({
 				visible: true
@@ -134,13 +150,14 @@ class InputVote extends Component {
 	) {
 		const { activeSection } = this.props;
 
-		if (activeSection !== 'sorting_hat') {
+		if (activeSection !== "sorting_hat") {
 			return (
 				<Button
 					style={{
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
-						color: answerButtonTextColor
+						color: answerButtonTextColor,
+						fontFamily: "Titillium Web"
 					}}
 					onClick={e => this.onVoteLanding(answerIndex, askIndex)}
 				>
@@ -153,7 +170,8 @@ class InputVote extends Component {
 					style={{
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
-						color: answerButtonTextColor
+						color: answerButtonTextColor,
+						fontFamily: "Titillium Web"
 					}}
 					onClick={e => this.onVote(answerIndex, askIndex, askId)}
 				>
@@ -181,7 +199,7 @@ class InputVote extends Component {
 		let answerButtonTextColor = colorTheme.text2Color;
 		let votedAnswerButtonColor = colorTheme.keyText7Color;
 		let votingPlace = sortingHat;
-		if (activeSection !== 'sorting_hat') {
+		if (activeSection !== "sorting_hat") {
 			answerButtonColor = GREY_3;
 			answerButtonTextColor = GREY_8;
 			votedAnswerButtonColor = RED_ORANGE_3;
@@ -213,7 +231,7 @@ class InputVote extends Component {
 			}
 
 			return (
-				<Row style={{ padding: '8px 0px 0px' }} key={answerIndex}>
+				<Row style={{ padding: "8px 0px 0px" }} key={answerIndex}>
 					<Col span={this.renderSpanChange(isDisplayingAskStats)}>
 						{this.renderAnswerButton(
 							displayAnswerButtonColor,
@@ -228,7 +246,7 @@ class InputVote extends Component {
 					</Col>
 					<Col
 						style={{
-							padding: '5px 0px 0px'
+							padding: "5px 0px 0px"
 						}}
 						span={this.renderSpanChange(isDisplayingAskStats)}
 					>
@@ -265,36 +283,36 @@ class InputVote extends Component {
 			if (askIndex === 0) {
 				switch (numberOfAsDiffBetween1stAnd2ndAsk) {
 					case -2:
-						return '108px';
+						return "108px";
 					case -1:
-						return '72px';
+						return "72px";
 					case 0:
-						return '36px';
+						return "36px";
 					case 1:
-						return '36px';
+						return "36px";
 					case 2:
-						return '36px';
+						return "36px";
 					default:
-						return '36px';
+						return "36px";
 				}
 			} else if (askIndex === 1) {
 				switch (numberOfAsDiffBetween1stAnd2ndAsk) {
 					case -2:
-						return '36px';
+						return "36px";
 					case -1:
-						return '36px';
+						return "36px";
 					case 0:
-						return '36px';
+						return "36px";
 					case 1:
-						return '72px';
+						return "72px";
 					case 2:
-						return '108px';
+						return "108px";
 					default:
-						return '36px';
+						return "36px";
 				}
 			}
 		} else {
-			return '36px';
+			return "36px";
 		}
 	}
 
@@ -305,7 +323,7 @@ class InputVote extends Component {
 		let cardColor = colorTheme.text8Color;
 		let cardTextColor = colorTheme.text2Color;
 		let voteColor = colorTheme.text3Color;
-		if (activeSection !== 'sorting_hat') {
+		if (activeSection !== "sorting_hat") {
 			fourAsks = landing.landingAsks;
 			cardColor = GREY_2;
 			cardTextColor = GREY_8;
@@ -358,7 +376,8 @@ class InputVote extends Component {
 							>
 								<h3
 									style={{
-										color: cardTextColor
+										color: cardTextColor,
+										fontFamily: "Titillium Web"
 									}}
 								>
 									{displayQuestion}
@@ -388,7 +407,7 @@ class InputVote extends Component {
 							</Card>
 							<Row
 								style={{
-									padding: '0px 0px ' + heightBetweenCards // top left&right bottom
+									padding: "0px 0px " + heightBetweenCards // top left&right bottom
 								}}
 							/>
 						</Col>
@@ -399,7 +418,8 @@ class InputVote extends Component {
 			return (
 				<h3
 					style={{
-						color: colorTheme.text2Color
+						color: colorTheme.text2Color,
+						fontFamily: "Titillium Web"
 					}}
 				>
 					Looks like you've done a lot of voting; you should ask a
@@ -411,11 +431,11 @@ class InputVote extends Component {
 
 	renderSaveIcon(saveState, saveIndex, isDisplaying) {
 		if (isDisplaying) {
-			if (saveState[saveIndex] === 'save_start') {
+			if (saveState[saveIndex] === "save_start") {
 				return <Icon type="loading" />;
-			} else if (saveState[saveIndex] === 'save_done') {
+			} else if (saveState[saveIndex] === "save_done") {
 				return <Icon type="check" />;
-			} else if (saveState[saveIndex] === 'save_error') {
+			} else if (saveState[saveIndex] === "save_error") {
 				return <Icon type="warning" />;
 			}
 		}
@@ -423,7 +443,9 @@ class InputVote extends Component {
 
 	renderAskStats(answerVotes, askTotalVotes, isDisplayingAskStats) {
 		if (isDisplayingAskStats) {
-			return String((answerVotes / askTotalVotes * 100).toFixed(1)) + '%';
+			return (
+				String(((answerVotes / askTotalVotes) * 100).toFixed(1)) + "%"
+			);
 		}
 	}
 
@@ -435,15 +457,15 @@ class InputVote extends Component {
 
 	renderAskDoneWord(isDisplayingAskStats) {
 		if (isDisplayingAskStats) {
-			return 'Next Question';
+			return "Next Question";
 		} else {
-			return 'Pass';
+			return "Pass";
 		}
 	}
 
 	renderTotalVotes(askTotalVotes, isDisplayingAskStats) {
 		if (isDisplayingAskStats) {
-			return String(askTotalVotes) + ' vote(s)';
+			return String(askTotalVotes) + " vote(s)";
 		}
 	}
 
@@ -461,7 +483,7 @@ class InputVote extends Component {
 				justify="center"
 				align="middle"
 				style={{
-					padding: '0px 0px 15px' // top left&right bottom
+					padding: "0px 0px 15px" // top left&right bottom
 				}}
 			>
 				<Col
@@ -474,7 +496,8 @@ class InputVote extends Component {
 						style={{
 							borderColor: theme.newestButtonColor,
 							background: theme.newestButtonColor,
-							color: theme.newestButtonTextColor
+							color: theme.newestButtonTextColor,
+							fontFamily: "Titillium Web"
 						}}
 						onClick={onNewestAsks}
 					>
@@ -491,7 +514,8 @@ class InputVote extends Component {
 						style={{
 							borderColor: theme.popularButtonColor,
 							background: theme.popularButtonColor,
-							color: theme.popularButtonTextColor
+							color: theme.popularButtonTextColor,
+							fontFamily: "Titillium Web"
 						}}
 						onClick={onPopularAsks}
 					>
@@ -508,7 +532,8 @@ class InputVote extends Component {
 						style={{
 							borderColor: theme.controversialButtonColor,
 							background: theme.controversialButtonColor,
-							color: theme.controversialButtonTextColor
+							color: theme.controversialButtonTextColor,
+							fontFamily: "Titillium Web"
 						}}
 						onClick={onControversialAsks}
 					>
@@ -523,14 +548,14 @@ class InputVote extends Component {
 		const { colorTheme, activeSection } = this.props;
 
 		let background = colorTheme.backgroundColor;
-		if (activeSection !== 'sorting_hat') {
+		if (activeSection !== "sorting_hat") {
 			background = GREY_1;
 		}
 
 		return (
 			<Content
 				style={{
-					overflow: 'initial',
+					overflow: "initial",
 					background: background
 				}}
 			>
@@ -540,7 +565,7 @@ class InputVote extends Component {
 					justify="center"
 					align="top"
 					style={{
-						padding: '5px 0px 0px' // top left&right bottom
+						padding: "5px 0px 0px" // top left&right bottom
 					}}
 					gutter={36}
 				>
@@ -623,4 +648,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputVote);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(InputVote);

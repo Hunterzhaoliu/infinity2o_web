@@ -52,7 +52,8 @@ class Landing extends Component {
 										color: GREY_2,
 										fontFamily: "Titillium Web",
 										fontWeight: "bold",
-										fontSize: 22
+										fontSize: 22,
+										padding: "0px 15px 0px 0px"
 									}}
 								>
 									Online class alone
@@ -68,7 +69,10 @@ class Landing extends Component {
 							<Col>
 								<img
 									alt=""
-									style={{ height: "290px" }}
+									style={{
+										height: "290px",
+										padding: "0px 0px 0px 15px"
+									}}
 									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
 								/>
 							</Col>
@@ -89,7 +93,8 @@ class Landing extends Component {
 										color: GREY_2,
 										fontFamily: "Titillium Web",
 										fontWeight: "bold",
-										fontSize: 22
+										fontSize: 22,
+										padding: "0px 220px 0px 0px"
 									}}
 								>
 									Online class through infinity2o
@@ -103,7 +108,10 @@ class Landing extends Component {
 							<Col>
 								<img
 									alt=""
-									style={{ height: "300px" }}
+									style={{
+										height: "300px",
+										padding: "0px 250px 0px 0px"
+									}}
 									src="https://user-images.githubusercontent.com/2585159/40999319-20ee0d16-68d0-11e8-900a-0c239b422906.png"
 								/>
 							</Col>
@@ -143,26 +151,113 @@ class Landing extends Component {
 		);
 	}
 
-	renderTestimonials() {
+	renderLandingAsks() {
+		const how_part_0 =
+			"Find the best matches by expressing your beliefs to the Sorting Hat";
+		const how_part_1 = "by voting or asking questions";
+
 		return (
-			<Row
-				style={{
-					padding: "40px 0px 0px" // top left&right bottom
-				}}
-				type="flex"
-				justify="center"
-				align="top"
-			>
-				<Col
-					xs={{ span: 24 }}
-					sm={{ span: 14 }}
-					md={{ span: 10 }}
-					lg={{ span: 8 }}
-					xl={{ span: 6 }}
+			<div>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: "100px 0px 0px" }}
 				>
-					<Testimonials />
-				</Col>
-			</Row>
+					<Col>
+						<h1
+							style={{
+								textAlign: "center",
+								color: GREY_9,
+								fontSize: 30,
+								fontFamily: "Titillium Web",
+								fontWeight: "bold"
+							}}
+						>
+							{how_part_0}{" "}
+							<img
+								alt=""
+								style={{
+									width: 50,
+									padding: "0px 0px 5px 5px"
+								}}
+								src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
+							/>
+						</h1>
+					</Col>
+				</Row>
+				<Row type="flex" justify="center">
+					<Col>
+						<h1
+							style={{
+								textAlign: "center",
+								color: GREY_7,
+								fontSize: 25,
+								fontFamily: "Titillium Web"
+							}}
+						>
+							{how_part_1}
+						</h1>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					align="middle"
+					style={{
+						textAlign: "center",
+						padding: "75px 0px 0px 0px"
+					}}
+				>
+					<Col>
+						<InputVote />
+					</Col>
+				</Row>
+			</div>
+		);
+	}
+
+	renderMatch() {
+		const how_part_2 = "Chat with the matches you want to learn with";
+
+		return (
+			<div>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: "100px 0px 0px 50px" }}
+				>
+					<Col>
+						<h1
+							style={{
+								textAlign: "center",
+								color: GREY_1,
+								fontSize: 30,
+								fontFamily: "Titillium Web",
+								fontWeight: "bold"
+							}}
+						>
+							{how_part_2}
+						</h1>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					align="middle"
+					style={{
+						textAlign: "center",
+						padding: "20px 0px 0px 0px"
+					}}
+				>
+					<Col>
+						<img
+							alt="Match Example"
+							style={{ height: "350px" }}
+							src="https://user-images.githubusercontent.com/2585159/41510382-32448628-7229-11e8-8017-e87d7f761aea.png"
+						/>
+					</Col>
+				</Row>
+			</div>
 		);
 	}
 
@@ -197,108 +292,26 @@ class Landing extends Component {
 		}
 	}
 
-	renderLandingAsks() {
-		const how_part_0 =
-			"Find the best matches by expressing your beliefs to the Sorting Hat";
-		const how_part_1 = "by voting or asking questions";
-
+	renderTestimonials() {
 		return (
-			<div>
-				<Row
-					type="flex"
-					justify="center"
-					style={{ padding: "20px 0px 0px" }}
+			<Row
+				style={{
+					padding: "40px 0px 0px" // top left&right bottom
+				}}
+				type="flex"
+				justify="center"
+				align="top"
+			>
+				<Col
+					xs={{ span: 24 }}
+					sm={{ span: 14 }}
+					md={{ span: 10 }}
+					lg={{ span: 8 }}
+					xl={{ span: 6 }}
 				>
-					<Col>
-						<h1
-							style={{
-								textAlign: "center",
-								color: GREY_9,
-								fontSize: 35
-							}}
-						>
-							{how_part_0}{" "}
-							<img
-								alt=""
-								style={{
-									width: 50,
-									padding: "0px 0px 5px 5px"
-								}}
-								src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
-							/>
-						</h1>
-					</Col>
-				</Row>
-				<Row type="flex" justify="center">
-					<Col>
-						<h1
-							style={{
-								textAlign: "center",
-								color: GREY_7,
-								fontSize: 25
-							}}
-						>
-							{how_part_1}
-						</h1>
-					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="center"
-					align="middle"
-					style={{
-						textAlign: "center",
-						padding: "20px 0px 0px 0px"
-					}}
-				>
-					<Col>
-						<InputVote />
-					</Col>
-				</Row>
-			</div>
-		);
-	}
-
-	renderMatches() {
-		const how_part_2 = "Chat with the matches you want to learn with";
-
-		return (
-			<div>
-				<Row
-					type="flex"
-					justify="center"
-					style={{ padding: "30px 0px 0px" }}
-				>
-					<Col>
-						<h1
-							style={{
-								textAlign: "center",
-								color: GREY_1,
-								fontSize: 35
-							}}
-						>
-							{how_part_2}
-						</h1>
-					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="center"
-					align="middle"
-					style={{
-						textAlign: "center",
-						padding: "20px 0px 0px 0px"
-					}}
-				>
-					<Col>
-						<img
-							alt="Match Example"
-							style={{ height: "350px" }}
-							src="https://user-images.githubusercontent.com/2585159/41510382-32448628-7229-11e8-8017-e87d7f761aea.png"
-						/>
-					</Col>
-				</Row>
-			</div>
+					<Testimonials />
+				</Col>
+			</Row>
 		);
 	}
 
@@ -315,7 +328,7 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						padding: "0px 50px 50px", // top left&right bottom
+						padding: "0px 255px 100px", // top left&right bottom
 						background: GREY_1
 					}}
 				>
@@ -327,7 +340,7 @@ class Landing extends Component {
 						background: GREY_9
 					}}
 				>
-					{this.renderMatches()}
+					{this.renderMatch()}
 				</Content>
 				<Content
 					style={{
