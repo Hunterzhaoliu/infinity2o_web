@@ -31,7 +31,7 @@ class Landing extends Component {
 			<div>
 				<Row
 					style={{
-						padding: "75px 0px 0px 0px" // top left&right bottom
+						padding: "65px 0px 0px 0px" // top left&right bottom
 					}}
 					type="flex"
 					justify="center"
@@ -41,17 +41,11 @@ class Landing extends Component {
 						xs={{ span: 24 }}
 						sm={{ span: 12 }}
 						md={{ span: 8 }}
-						lg={{ span: 6 }}
-						xl={{ span: 5 }}
+						lg={{ span: 12 }}
+						xl={{ span: 12 }}
 					>
-						<Row type="flex" justify="center">
-							<Col
-								xs={{ span: 7, offset: 4 }}
-								sm={{ span: 14, offset: 4 }}
-								md={{ span: 15, offset: 4 }}
-								lg={{ span: 15, offset: 4 }}
-								xl={{ span: 15, offset: 4 }}
-							>
+						<Row type="flex" justify="center" align="middle">
+							<Col>
 								<h2
 									style={{
 										textAlign: "center",
@@ -63,15 +57,20 @@ class Landing extends Component {
 								>
 									Online class alone
 								</h2>
-								<Row type="flex" justify="center">
-									<Col>
-										<img
-											alt=""
-											style={{ height: "240px" }}
-											src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
-										/>
-									</Col>
-								</Row>
+							</Col>
+						</Row>
+						<Row type="flex" justify="center" align="middle">
+							<Col>
+								<div style={{ height: "30px" }} />
+							</Col>
+						</Row>
+						<Row type="flex" justify="center">
+							<Col>
+								<img
+									alt=""
+									style={{ height: "290px" }}
+									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
+								/>
 							</Col>
 						</Row>
 					</Col>
@@ -80,16 +79,26 @@ class Landing extends Component {
 						sm={{ span: 14 }}
 						md={{ span: 16 }}
 						lg={{ span: 11 }}
-						xl={{ span: 9, offset: 3 }}
+						xl={{ span: 12 }}
 					>
-						<h2
-							style={{
-								textAlign: "center",
-								color: GREY_2
-							}}
-						>
-							Online class through infinity2o
-						</h2>
+						<Row type="flex" justify="center">
+							<Col>
+								<h2
+									style={{
+										textAlign: "center",
+										color: GREY_2,
+										fontFamily: "Titillium Web",
+										fontWeight: "bold",
+										fontSize: 22
+									}}
+								>
+									Online class through infinity2o
+								</h2>
+							</Col>
+						</Row>
+						<Row type="flex" justify="center" align="middle">
+							<div style={{ height: "35px" }} />
+						</Row>
 						<Row type="flex" justify="center">
 							<Col>
 								<img
@@ -111,7 +120,7 @@ class Landing extends Component {
 				<Row
 					type="flex"
 					justify="center"
-					style={{ padding: "150px 0px 0px" }}
+					style={{ padding: "135px 0px 0px" }}
 				>
 					<Col>
 						<h1
