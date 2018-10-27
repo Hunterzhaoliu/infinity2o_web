@@ -31,7 +31,7 @@ class Landing extends Component {
 			<div>
 				<Row
 					style={{
-						padding: "150px 0px 0px" // top left&right bottom
+						padding: "75px 0px 0px 0px" // top left&right bottom
 					}}
 					type="flex"
 					justify="center"
@@ -55,7 +55,10 @@ class Landing extends Component {
 								<h2
 									style={{
 										textAlign: "center",
-										color: GREY_2
+										color: GREY_2,
+										fontFamily: "Titillium Web",
+										fontWeight: "bold",
+										fontSize: 22
 									}}
 								>
 									Online class alone
@@ -69,33 +72,6 @@ class Landing extends Component {
 										/>
 									</Col>
 								</Row>
-							</Col>
-							<Col
-								xs={{ span: 3 }}
-								sm={{ span: 5 }}
-								md={{ span: 5 }}
-								lg={{ span: 5 }}
-								xl={{ span: 5 }}
-							>
-								<div className="arrow">
-									<img
-										alt=""
-										style={{
-											padding: "180px 0px 0px",
-											height: "195px"
-										}}
-										src="https://user-images.githubusercontent.com/24757872/41196729-b7ea3038-6c0d-11e8-8b2f-cb4c4fe4afb7.png"
-									/>
-								</div>
-								<p
-									style={{
-										color: GREY_1,
-										padding: "2px 0px 0px 28px",
-										textAlign: "center"
-									}}
-								>
-									invisible chair
-								</p>
 							</Col>
 						</Row>
 					</Col>
@@ -130,26 +106,30 @@ class Landing extends Component {
 	}
 
 	renderMarketingInfo() {
-		const why_part_0 =
-			"Meet people with similar beliefs to take online courses with.";
-
 		return (
 			<div>
-				{this.renderCartoons()}
-				<Row type="flex" justify="center" style={{ padding: "70px 0px 0px" }}>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: "150px 0px 0px" }}
+				>
 					<Col>
 						<h1
 							key="0"
 							style={{
 								textAlign: "center",
 								color: GREY_1,
-								fontSize: 35
+								fontSize: 35,
+								fontFamily: "Titillium Web",
+								fontWeight: "bold"
 							}}
 						>
-							{why_part_0}
+							Meet people with similar beliefs to take online
+							courses with.
 						</h1>
 					</Col>
 				</Row>
+				{this.renderCartoons()}
 			</div>
 		);
 	}
@@ -179,8 +159,6 @@ class Landing extends Component {
 
 	renderLogin() {
 		const { loggedInState } = this.props;
-
-		const why_part_2 = "Join Earth's largest community of learning partners.";
 		if (loggedInState === "not_logged_in") {
 			return (
 				<div>
@@ -199,7 +177,8 @@ class Landing extends Component {
 									color: GREY_7
 								}}
 							>
-								{why_part_2}
+								Join Earth's largest community of learning
+								partners.
 							</h2>
 						</Col>
 					</Row>
@@ -216,7 +195,11 @@ class Landing extends Component {
 
 		return (
 			<div>
-				<Row type="flex" justify="center" style={{ padding: "20px 0px 0px" }}>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: "20px 0px 0px" }}
+				>
 					<Col>
 						<h1
 							style={{
@@ -272,7 +255,11 @@ class Landing extends Component {
 
 		return (
 			<div>
-				<Row type="flex" justify="center" style={{ padding: "30px 0px 0px" }}>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: "30px 0px 0px" }}
+				>
 					<Col>
 						<h1
 							style={{
@@ -363,7 +350,10 @@ This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
 	const landingDispatchers = bindActionCreators(landingActions, dispatch);
-	const colorThemeDispatchers = bindActionCreators(colorThemeActions, dispatch);
+	const colorThemeDispatchers = bindActionCreators(
+		colorThemeActions,
+		dispatch
+	);
 	return {
 		fetchLandingPageSortingHatAsks: () => {
 			landingDispatchers.fetchLandingPageSortingHatAsks();
@@ -374,4 +364,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Landing);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Landing);
