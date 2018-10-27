@@ -102,7 +102,8 @@ class InputVote extends Component {
 						color: GREY_9,
 						fontFamily: "Titllium Web",
 						fontWeight: "bold",
-						fontSize: "35px"
+						fontSize: "35px",
+						padding: "50px 0px 0px"
 					}}
 				>
 					Congrats on your first vote!
@@ -112,12 +113,15 @@ class InputVote extends Component {
 						textAlign: "center",
 						color: GREY_7,
 						fontFamily: "Titillium Web",
-						fontSize: "25px"
+						fontSize: "25px",
+						padding: "25px 0px 0px"
 					}}
 				>
 					To make your vote count, login with
 				</p>
+				<div style={{ height: "25px" }} />
 				<LoginButtons />
+				<div style={{ height: "50px" }} />
 			</Modal>
 		);
 	}

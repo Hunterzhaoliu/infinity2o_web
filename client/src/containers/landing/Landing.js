@@ -221,11 +221,7 @@ class Landing extends Component {
 
 		return (
 			<div>
-				<Row
-					type="flex"
-					justify="center"
-					style={{ padding: "100px 0px 0px 50px" }}
-				>
+				<Row type="flex" justify="center">
 					<Col>
 						<h1
 							style={{
@@ -233,7 +229,8 @@ class Landing extends Component {
 								color: GREY_1,
 								fontSize: 30,
 								fontFamily: "Titillium Web",
-								fontWeight: "bold"
+								fontWeight: "bold",
+								padding: "100px 0px 0px 0px"
 							}}
 						>
 							{how_part_2}
@@ -246,13 +243,15 @@ class Landing extends Component {
 					align="middle"
 					style={{
 						textAlign: "center",
-						padding: "20px 0px 0px 0px"
+						padding: "50px 0px 0px 0px"
 					}}
 				>
 					<Col>
 						<img
 							alt="Match Example"
-							style={{ height: "350px" }}
+							style={{
+								height: "350px"
+							}}
 							src="https://user-images.githubusercontent.com/2585159/41510382-32448628-7229-11e8-8017-e87d7f761aea.png"
 						/>
 					</Col>
@@ -268,7 +267,7 @@ class Landing extends Component {
 				<div>
 					<Row
 						style={{
-							padding: "40px 0px 0px" // top left&right bottom
+							padding: "100px 0px 0px" // top left&right bottom
 						}}
 						type="flex"
 						justify="center"
@@ -278,15 +277,28 @@ class Landing extends Component {
 								key="0"
 								style={{
 									textAlign: "center",
-									color: GREY_7
+									color: GREY_9,
+									fontFamily: "Titillium Web",
+									fontSize: "30px",
+									fontWeight: "bold"
 								}}
 							>
-								Join Earth's largest community of learning
-								partners.
+								Come join Earth's largest community of online
+								learners.
 							</h2>
 						</Col>
 					</Row>
-					<LoginButtons />
+					<Row
+						style={{
+							padding: "50px 0px 0px" // top left&right bottom
+						}}
+						type="flex"
+						justify="center"
+					>
+						<Col>
+							<LoginButtons />
+						</Col>
+					</Row>
 				</div>
 			);
 		}
@@ -336,7 +348,7 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						padding: "0px 50px 50px", // top left&right bottom
+						padding: "0px 50px 100px", // top left&right bottom
 						background: GREY_9
 					}}
 				>
@@ -344,11 +356,10 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						padding: "0px 50px 50px", // top left&right bottom
+						padding: "0px 50px 100px", // top left&right bottom
 						background: GREY_1
 					}}
 				>
-					{this.renderTestimonials()}
 					{this.renderLogin()}
 				</Content>
 			</div>

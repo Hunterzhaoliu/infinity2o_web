@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import * as colorThemeActionCreators from '../../actions/colorTheme';
-import { connect } from 'react-redux';
-import { GREY_1, GREY_2, GREY_3, GREY_4 } from '../styles/ColorConstants';
-import { Layout, Row, Col, Button } from 'antd';
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import * as colorThemeActionCreators from "../../actions/colorTheme";
+import { connect } from "react-redux";
+import { GREY_1, GREY_2, GREY_3, GREY_4 } from "../styles/ColorConstants";
+import { Layout, Row, Col, Button } from "antd";
 const { Footer } = Layout;
 
 class CustomFooter extends Component {
@@ -13,20 +13,20 @@ class CustomFooter extends Component {
 		let textColor = this.props.colorTheme.text7Color;
 		let aboutButtonColor = this.props.colorTheme.text8Color;
 		let textColor2 = this.props.colorTheme.text6Color;
-		if (loggedInState === 'not_logged_in') {
+		if (loggedInState === "not_logged_in") {
 			backgroundColor = GREY_1;
 			textColor = GREY_3;
 			aboutButtonColor = GREY_2;
 			textColor2 = GREY_4;
 		}
 
-		if (colorTheme.activeSection === 'conversations') {
+		if (colorTheme.activeSection === "conversations") {
 			return <div />;
 		} else {
 			return (
 				<Footer
 					style={{
-						textAlign: 'center',
+						textAlign: "center",
 						background: backgroundColor,
 						color: textColor
 					}}
@@ -36,9 +36,10 @@ class CustomFooter extends Component {
 							<Button
 								style={{
 									borderColor: aboutButtonColor,
-									background: aboutButtonColor
+									background: aboutButtonColor,
+									fontFamily: "Titilliium Web"
 								}}
-								size={'small'}
+								size={"small"}
 								onClick={onFooter}
 							>
 								<a
@@ -53,15 +54,16 @@ class CustomFooter extends Component {
 						</Col>
 						<Col
 							style={{
-								padding: '0px 0px 0px 10px'
+								padding: "0px 0px 0px 10px"
 							}}
 						>
 							<Button
 								style={{
 									borderColor: aboutButtonColor,
-									background: aboutButtonColor
+									background: aboutButtonColor,
+									fontFamily: "Titilliium Web"
 								}}
-								size={'small'}
+								size={"small"}
 								onClick={onFooter}
 							>
 								<a
@@ -76,15 +78,16 @@ class CustomFooter extends Component {
 						</Col>
 						<Col
 							style={{
-								padding: '0px 0px 0px 10px'
+								padding: "0px 0px 0px 10px"
 							}}
 						>
 							<Button
 								style={{
 									borderColor: aboutButtonColor,
-									background: aboutButtonColor
+									background: aboutButtonColor,
+									fontFamily: "Titilliium Web"
 								}}
-								size={'small'}
+								size={"small"}
 								onClick={onFooter}
 							>
 								<a
@@ -103,7 +106,8 @@ class CustomFooter extends Component {
 							<p
 								style={{
 									color: textColor,
-									padding: '10px 0px 0px 0px'
+									padding: "10px 0px 0px 0px",
+									fontFamily: "Titillium Web"
 								}}
 							>
 								Infinity2o © 2018 -> ∞
@@ -143,4 +147,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomFooter);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(CustomFooter);

@@ -7,7 +7,7 @@ export default () => {
 		<Row type="flex" justify="center">
 			<Col
 				style={{
-					padding: "10px 0px 0px" // top left&right bottom
+					padding: "0px 30px 0px 0px" // top left&right bottom
 				}}
 			>
 				<Button
@@ -28,7 +28,7 @@ export default () => {
 			</Col>
 			<Col
 				style={{
-					padding: "10px 0px 0px 10px" // top left&right bottom
+					padding: "0px 0px 0px 10px" // top left&right bottom
 				}}
 			>
 				<Button
