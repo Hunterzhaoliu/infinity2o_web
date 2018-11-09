@@ -1,15 +1,16 @@
-import { combineReducers } from 'redux';
-import authReducer from './authReducer';
-import colorThemeReducer from './colorThemeReducer';
-import customHeaderReducer from './customHeaderReducer';
-import landingReducer from './landingReducer';
-import profileReducer from './profile/profileReducer';
-import voteEditReducer from './profile/voteEditReducer';
-import askReducer from './askReducer';
-import sortingHatReducer from './sortingHatReducer';
-import matchesReducer from './matchesReducer';
-import contactsReducer from './contactsReducer';
-import chatReducer from './chatReducer';
+import { combineReducers } from "redux";
+import authReducer from "./authReducer";
+import colorThemeReducer from "./colorThemeReducer";
+import customHeaderReducer from "./customHeaderReducer";
+import landingReducer from "./landingReducer";
+import profileReducer from "./profile/profileReducer";
+import voteEditReducer from "./profile/voteEditReducer";
+import askReducer from "./askReducer";
+import sortingHatReducer from "./sortingHatReducer";
+import matchesReducer from "./matchesReducer";
+import contactsReducer from "./contactsReducer";
+import chatReducer from "./chatReducer";
+import aboutReducer from "./aboutReducer";
 
 export default combineReducers({
 	auth: authReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
 	sortingHat: sortingHatReducer,
 	matches: matchesReducer,
 	contacts: contactsReducer,
-	chat: chatReducer
+	chat: chatReducer,
+	about: aboutReducer
 });

@@ -19,7 +19,8 @@ class MatchesButton extends Component {
 					style={{
 						borderColor: colorTheme.matchesButtonColor,
 						background: colorTheme.matchesButtonColor,
-						color: colorTheme.matchesButtonTextColor
+						color: colorTheme.matchesButtonTextColor,
+						fontFamily: "Titillium Web"
 					}}
 				>
 					<a href="/matches">
@@ -60,4 +61,7 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(MatchesButton);
+export default connect(
+	mapStateToProps,
+	null
+)(MatchesButton);

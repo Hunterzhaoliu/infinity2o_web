@@ -25,7 +25,10 @@ class CustomHeader extends Component {
 	}
 
 	updateWindowDimensions() {
-		this.props.updateWindowDimensions(window.innerWidth, window.innerHeight);
+		this.props.updateWindowDimensions(
+			window.innerWidth,
+			window.innerHeight
+		);
 	}
 
 	componentWillUnmount() {
@@ -89,7 +92,8 @@ class CustomHeader extends Component {
 									<h2
 										style={{
 											padding: "0px 8px 0px",
-											color: GREY_1
+											color: GREY_1,
+											fontFamily: "Titillium Web"
 										}}
 									>
 										infinity2o
@@ -104,12 +108,16 @@ class CustomHeader extends Component {
 										style={{
 											borderColor: RED_ORANGE_7,
 											background: RED_ORANGE_7,
-											color: GREY_1
+											color: GREY_1,
+											fontFamily: "Titillium Web"
 										}}
 									>
 										<a href="/auth/google">
 											Gmail Login{" "}
-											<Icon style={{ fontSize: 15 }} type="google" />
+											<Icon
+												style={{ fontSize: 15 }}
+												type="google"
+											/>
 										</a>
 									</Button>
 								</Col>
@@ -123,12 +131,16 @@ class CustomHeader extends Component {
 										style={{
 											borderColor: BLUE_7,
 											background: BLUE_7,
-											color: GREY_1
+											color: GREY_1,
+											fontFamily: "Titillium Web"
 										}}
 									>
 										<a href="/auth/linkedIn">
 											LinkedIn Login{" "}
-											<Icon style={{ fontSize: 15 }} type="linkedin" />
+											<Icon
+												style={{ fontSize: 15 }}
+												type="linkedin"
+											/>
 										</a>
 									</Button>
 								</Col>
@@ -226,4 +238,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomHeader);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(CustomHeader);
