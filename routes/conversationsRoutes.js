@@ -70,8 +70,8 @@ const updateUserConversationsWithOnlineContacts = async (
 		.then(function() {
 			// console.log('All operations are done');
 		})
-		.catch(function(err) {
-			console.log(err);
+		.catch(function(error) {
+			console.log(error);
 		});
 	return userConversations;
 };
