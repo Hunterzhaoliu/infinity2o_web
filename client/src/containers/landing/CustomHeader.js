@@ -151,7 +151,7 @@ class CustomHeader extends Component {
 			case "logged_in":
 				return (
 					<div>
-						<Row type="flex" justify="space-between">
+						<Row type="flex">
 							<Col
 								md={{ span: 22, offset: 0 }}
 								lg={{ span: 22, offset: 0 }}

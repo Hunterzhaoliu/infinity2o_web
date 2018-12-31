@@ -31,24 +31,22 @@ class Landing extends Component {
 			<div>
 				<Row
 					style={{
-						padding: "65px 0px 0px 0px" // top left&right bottom
+						padding: "60px 0px 0px 0px"
 					}}
 					type="flex"
-					justify="center"
-					align="top"
+					justify="left"
 				>
 					<Col
 						xs={{ span: 24 }}
 						sm={{ span: 12 }}
 						md={{ span: 8 }}
 						lg={{ span: 12 }}
-						xl={{ span: 12 }}
+						xl={{ offset: 3, span: 9 }} // half of the screen
 					>
-						<Row type="flex" justify="center" align="middle">
+						<Row type="flex" justify="center">
 							<Col>
 								<h2
 									style={{
-										textAlign: "center",
 										color: GREY_2,
 										fontFamily: "Lucida Grande",
 										fontWeight: "bold",
@@ -60,18 +58,16 @@ class Landing extends Component {
 								</h2>
 							</Col>
 						</Row>
-						<Row type="flex" justify="center" align="middle">
-							<Col>
-								<div style={{ height: "30px" }} />
-							</Col>
+						<Row>
+							<Col style={{ height: "30px" }} />
 						</Row>
 						<Row type="flex" justify="center">
 							<Col>
 								<img
 									alt=""
 									style={{
-										height: "290px",
-										padding: "0px 0px 0px 15px"
+										height: "300px",
+										padding: "0px 0px 0px 0px"
 									}}
 									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
 								/>
@@ -83,7 +79,7 @@ class Landing extends Component {
 						sm={{ span: 14 }}
 						md={{ span: 16 }}
 						lg={{ span: 11 }}
-						xl={{ span: 12 }}
+						xl={{ span: 6 }}
 					>
 						<Row type="flex" justify="center">
 							<Col>
@@ -94,15 +90,15 @@ class Landing extends Component {
 										fontFamily: "Lucida Grande",
 										fontWeight: "bold",
 										fontSize: 22,
-										padding: "0px 220px 0px 0px"
+										padding: "0px 0px 0px 0px"
 									}}
 								>
 									Online class through infinity2o
 								</h2>
 							</Col>
 						</Row>
-						<Row type="flex" justify="center" align="middle">
-							<div style={{ height: "35px" }} />
+						<Row>
+							<Col style={{ height: "30px" }} />
 						</Row>
 						<Row type="flex" justify="center">
 							<Col>
@@ -110,7 +106,7 @@ class Landing extends Component {
 									alt=""
 									style={{
 										height: "300px",
-										padding: "0px 250px 0px 0px"
+										padding: "0px 0px 0px 0px"
 									}}
 									src="https://user-images.githubusercontent.com/2585159/40999319-20ee0d16-68d0-11e8-900a-0c239b422906.png"
 								/>
@@ -128,7 +124,7 @@ class Landing extends Component {
 				<Row
 					type="flex"
 					justify="center"
-					style={{ padding: "135px 0px 0px 0px" }}
+					style={{ padding: "180px 0px 0px 0px" }}
 				>
 					<Col>
 						<h1
@@ -147,6 +143,9 @@ class Landing extends Component {
 					</Col>
 				</Row>
 				{this.renderCartoons()}
+				<Row>
+					<Col style={{ height: "120px" }} />
+				</Row>
 			</div>
 		);
 	}
@@ -332,7 +331,6 @@ class Landing extends Component {
 			<div>
 				<Content
 					style={{
-						height: "96vh",
 						background: GREY_9
 					}}
 				>
