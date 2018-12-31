@@ -20,7 +20,7 @@ class MatchesButton extends Component {
 						borderColor: colorTheme.matchesButtonColor,
 						background: colorTheme.matchesButtonColor,
 						color: colorTheme.matchesButtonTextColor,
-						fontFamily: "Titillium Web"
+						fontFamily: "Lucida Grande"
 					}}
 				>
 					<a href="/matches">

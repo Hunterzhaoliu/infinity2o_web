@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { bindActionCreators } from "redux";
 import Options from "../payment/Options";
-import DisplayField from "./DisplayField";
 import VoteEdit from "./votes/VoteEdit";
 import { Layout, Row, Col, Button, Avatar } from "antd";
 import LinkedIn from "../profileInformation/LinkedIn";

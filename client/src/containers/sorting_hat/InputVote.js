@@ -74,7 +74,7 @@ class InputVote extends Component {
 							borderColor: colorTheme.text7Color,
 							background: colorTheme.text7Color,
 							color: colorTheme.text2Color,
-							fontFamily: "Titillium Web"
+							fontFamily: "Lucida Grande"
 						}}
 						onClick={e => this.onNextAsk(askIndex)}
 					>
@@ -112,7 +112,7 @@ class InputVote extends Component {
 					style={{
 						textAlign: "center",
 						color: GREY_7,
-						fontFamily: "Titillium Web",
+						fontFamily: "Lucida Grande",
 						fontSize: "25px",
 						padding: "25px 0px 0px"
 					}}
@@ -161,7 +161,7 @@ class InputVote extends Component {
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
 						color: answerButtonTextColor,
-						fontFamily: "Titillium Web"
+						fontFamily: "Lucida Grande"
 					}}
 					onClick={e => this.onVoteLanding(answerIndex, askIndex)}
 				>
@@ -175,7 +175,7 @@ class InputVote extends Component {
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
 						color: answerButtonTextColor,
-						fontFamily: "Titillium Web"
+						fontFamily: "Lucida Grande"
 					}}
 					onClick={e => this.onVote(answerIndex, askIndex, askId)}
 				>
@@ -381,7 +381,7 @@ class InputVote extends Component {
 								<h3
 									style={{
 										color: cardTextColor,
-										fontFamily: "Titillium Web"
+										fontFamily: "Lucida Grande"
 									}}
 								>
 									{displayQuestion}
@@ -423,7 +423,7 @@ class InputVote extends Component {
 				<h3
 					style={{
 						color: colorTheme.text2Color,
-						fontFamily: "Titillium Web"
+						fontFamily: "Lucida Grande"
 					}}
 				>
 					Looks like you've done a lot of voting; you should ask a
@@ -501,7 +501,7 @@ class InputVote extends Component {
 							borderColor: theme.newestButtonColor,
 							background: theme.newestButtonColor,
 							color: theme.newestButtonTextColor,
-							fontFamily: "Titillium Web"
+							fontFamily: "Lucida Grande"
 						}}
 						onClick={onNewestAsks}
 					>
@@ -519,7 +519,7 @@ class InputVote extends Component {
 							borderColor: theme.popularButtonColor,
 							background: theme.popularButtonColor,
 							color: theme.popularButtonTextColor,
-							fontFamily: "Titillium Web"
+							fontFamily: "Lucida Grande"
 						}}
 						onClick={onPopularAsks}
 					>
@@ -537,7 +537,7 @@ class InputVote extends Component {
 							borderColor: theme.controversialButtonColor,
 							background: theme.controversialButtonColor,
 							color: theme.controversialButtonTextColor,
-							fontFamily: "Titillium Web"
+							fontFamily: "Lucida Grande"
 						}}
 						onClick={onControversialAsks}
 					>

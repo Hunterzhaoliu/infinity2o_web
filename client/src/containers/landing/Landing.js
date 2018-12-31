@@ -50,10 +50,10 @@ class Landing extends Component {
 									style={{
 										textAlign: "center",
 										color: GREY_2,
-										fontFamily: "Titillium Web",
+										fontFamily: "Lucida Grande",
 										fontWeight: "bold",
 										fontSize: 22,
-										padding: "0px 15px 0px 0px"
+										padding: "0px 0px 0px 0px"
 									}}
 								>
 									Online class alone
@@ -91,7 +91,7 @@ class Landing extends Component {
 									style={{
 										textAlign: "center",
 										color: GREY_2,
-										fontFamily: "Titillium Web",
+										fontFamily: "Lucida Grande",
 										fontWeight: "bold",
 										fontSize: 22,
 										padding: "0px 220px 0px 0px"
@@ -128,7 +128,7 @@ class Landing extends Component {
 				<Row
 					type="flex"
 					justify="center"
-					style={{ padding: "135px 0px 0px" }}
+					style={{ padding: "135px 0px 0px 0px" }}
 				>
 					<Col>
 						<h1
@@ -136,8 +136,8 @@ class Landing extends Component {
 							style={{
 								textAlign: "center",
 								color: GREY_1,
-								fontSize: 35,
-								fontFamily: "Titillium Web",
+								fontSize: 32,
+								fontFamily: "Lucida Grande",
 								fontWeight: "bold"
 							}}
 						>
@@ -169,7 +169,7 @@ class Landing extends Component {
 								textAlign: "center",
 								color: GREY_9,
 								fontSize: 30,
-								fontFamily: "Titillium Web",
+								fontFamily: "Lucida Grande",
 								fontWeight: "bold"
 							}}
 						>
@@ -192,7 +192,7 @@ class Landing extends Component {
 								textAlign: "center",
 								color: GREY_7,
 								fontSize: 25,
-								fontFamily: "Titillium Web"
+								fontFamily: "Lucida Grande"
 							}}
 						>
 							{how_part_1}
@@ -228,7 +228,7 @@ class Landing extends Component {
 								textAlign: "center",
 								color: GREY_1,
 								fontSize: 30,
-								fontFamily: "Titillium Web",
+								fontFamily: "Lucida Grande",
 								fontWeight: "bold",
 								padding: "100px 0px 0px 0px"
 							}}
@@ -278,7 +278,7 @@ class Landing extends Component {
 								style={{
 									textAlign: "center",
 									color: GREY_9,
-									fontFamily: "Titillium Web",
+									fontFamily: "Lucida Grande",
 									fontSize: "30px",
 									fontWeight: "bold"
 								}}

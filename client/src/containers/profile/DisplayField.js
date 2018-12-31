@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { GREY_2 } from "../styles/ColorConstants";
-import { Row, Col, Table, Popover, Button, Icon } from "antd";
+import { Row, Col, Popover, Button, Icon } from "antd";
 import "./DisplayField.css";
 
 class DisplayField extends Component {

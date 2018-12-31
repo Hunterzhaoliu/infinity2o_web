@@ -19,7 +19,7 @@ class ProfileButton extends Component {
 					borderColor: colorTheme.profileButtonColor,
 					background: colorTheme.profileButtonColor,
 					color: colorTheme.profileButtonTextColor,
-					fontFamily: "Titillium Web"
+					fontFamily: "Lucida Grande"
 				}}
 			>
 				<a href="/profile">

@@ -93,7 +93,7 @@ class CustomHeader extends Component {
 										style={{
 											padding: "0px 8px 0px",
 											color: GREY_1,
-											fontFamily: "Titillium Web"
+											fontFamily: "Lucida Grande"
 										}}
 									>
 										infinity2o
@@ -109,7 +109,7 @@ class CustomHeader extends Component {
 											borderColor: RED_ORANGE_7,
 											background: RED_ORANGE_7,
 											color: GREY_1,
-											fontFamily: "Titillium Web"
+											fontFamily: "Lucida Grande"
 										}}
 									>
 										<a href="/auth/google">
@@ -132,7 +132,7 @@ class CustomHeader extends Component {
 											borderColor: BLUE_7,
 											background: BLUE_7,
 											color: GREY_1,
-											fontFamily: "Titillium Web"
+											fontFamily: "Lucida Grande"
 										}}
 									>
 										<a href="/auth/linkedIn">

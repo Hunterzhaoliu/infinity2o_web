@@ -107,7 +107,7 @@ class CustomFooter extends Component {
 								style={{
 									color: textColor,
 									padding: "10px 0px 0px 0px",
-									fontFamily: "Titillium Web"
+									fontFamily: "Lucida Grande"
 								}}
 							>
 								Infinity2o © 2018 -> ∞

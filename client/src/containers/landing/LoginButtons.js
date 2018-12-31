@@ -17,7 +17,7 @@ export default () => {
 						borderColor: RED_ORANGE_3,
 						background: RED_ORANGE_3,
 						color: GREY_9,
-						fontFamily: "Titillium Web"
+						fontFamily: "Lucida Grande"
 					}}
 				>
 					<a href="/auth/google">
@@ -38,7 +38,7 @@ export default () => {
 						borderColor: BLUE_3,
 						background: BLUE_3,
 						color: GREY_9,
-						fontFamily: "Titillium Web"
+						fontFamily: "Lucida Grande"
 					}}
 				>
 					<a href="/auth/linkedIn">

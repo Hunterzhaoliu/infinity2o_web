@@ -12,7 +12,7 @@ class SortingHatButton extends Component {
 					borderColor: colorTheme.sortingHatButtonColor,
 					background: colorTheme.sortingHatButtonColor,
 					color: colorTheme.sortingHatButtonTextColor,
-					fontFamily: "Titillium Web"
+					fontFamily: "Lucida Grande"
 				}}
 			>
 				<a href="/sorting_hat">
