@@ -11,8 +11,7 @@ class ConversationButton extends Component {
 				count={totalNumberOfUnseenMessages}
 				style={{
 					backgroundColor: colorTheme.keyText8Color,
-					color: colorTheme.text1Color,
-					boxShadow: "0 0 0 1px " + colorTheme.keyText8Color
+					color: colorTheme.text1Color
 				}}
 			>
 				<Button
@@ -21,14 +20,13 @@ class ConversationButton extends Component {
 						borderColor: colorTheme.conversationsButtonColor,
 						background: colorTheme.conversationsButtonColor,
 						color: colorTheme.conversationsButtonTextColor,
-						padding: "0px 0px 0px",
-						width: 35
+						padding: "0px 10px 0px"
 					}}
 				>
 					<a href="/conversations">
 						<img
 							alt=""
-							style={{ width: 18, padding: "0px 0px 4px" }}
+							style={{ width: 18 }}
 							src="https://user-images.githubusercontent.com/24757872/40881815-7ea6867c-6696-11e8-9690-4b691d249fa8.png"
 						/>
 					</a>
@@ -40,7 +38,6 @@ class ConversationButton extends Component {
 	render() {
 		return (
 			<Col
-				style={{ padding: "1.5px 0px 0px" }}
 				md={{ offset: 1 }}
 				lg={{ offset: 1 }}
 				xl={{ offset: 1 }}

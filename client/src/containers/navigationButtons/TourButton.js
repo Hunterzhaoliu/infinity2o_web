@@ -9,18 +9,16 @@ class TourButton extends Component {
 		return (
 			<Button
 				style={{
-					fontSize: 17,
 					borderColor: colorTheme.tourButtonColor,
 					background: colorTheme.tourButtonColor,
 					color: colorTheme.tourButtonTextColor,
-					padding: "0px 0px 0px 0px",
-					width: 34
+					padding: "0px 10px 0px"
 				}}
 			>
 				<a href="/tour">
 					<img
 						alt=""
-						style={{ width: 22, padding: "0px 0px 1px 0px" }}
+						style={{ width: 22 }}
 						src="https://user-images.githubusercontent.com/24757872/40939951-cffbddd0-680b-11e8-870f-21ab81eabc02.png"
 					/>
 				</a>
@@ -31,7 +29,6 @@ class TourButton extends Component {
 	render() {
 		return (
 			<Col
-				style={{ padding: "2px 0px 0px" }}
 				md={{ offset: 1 }}
 				lg={{ offset: 3 }}
 				xl={{ offset: 2 }}

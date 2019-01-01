@@ -76,7 +76,6 @@ async function storeUserSocketIdInRedis(
 }
 
 export const initializeApp = () => async dispatch => {
-	console.log("initializeApp");
 	const response = await axios.get("/api/current_user");
 	dispatch({
 		type: SAVE_FETCHED_USER_AUTH,
@@ -85,7 +84,7 @@ export const initializeApp = () => async dispatch => {
 	});
 	if (response.data.auth !== undefined) {
 		// user is logged in
-		console.log("window.location.href = ", window.location.href);
+		// console.log("window.location.href = ", window.location.href);
 		// in production, staging, or development
 		if (window.location.href.includes("infinity2o")) {
 			// in production or staging
@@ -98,7 +97,6 @@ export const initializeApp = () => async dispatch => {
 					transports: ["websocket"]
 				});
 			}
-			console.log("socket code is running");
 			clientSocket.on("connect", () => {
 				// https://stackoverflow.com/questions/44270239/how-to-get-socket-id-of-a-connection-on-client-side
 				storeUserSocketIdInRedis(

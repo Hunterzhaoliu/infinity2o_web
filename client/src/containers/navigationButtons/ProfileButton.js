@@ -23,14 +23,12 @@ class ProfileButton extends Component {
 				}}
 			>
 				<a href="/profile">
-					<div style={{ padding: "1px 0px 0px" }}>
-						<img
-							alt=""
-							style={{ width: 20, padding: "1px 0px 0px" }}
-							src="https://user-images.githubusercontent.com/24757872/40881386-00fbc094-668b-11e8-96ca-47c0a9fafd56.png"
-						/>
-						{displayText}
-					</div>
+					<img
+						alt=""
+						style={{ width: 20 }}
+						src="https://user-images.githubusercontent.com/24757872/40881386-00fbc094-668b-11e8-96ca-47c0a9fafd56.png"
+					/>
+					{displayText}
 				</a>
 			</Button>
 		);
@@ -39,7 +37,6 @@ class ProfileButton extends Component {
 	render() {
 		return (
 			<Col
-				style={{ padding: ".5px 0px 0px" }}
 				md={{ offset: 1 }}
 				lg={{ offset: 1 }}
 				xl={{ offset: 1 }}

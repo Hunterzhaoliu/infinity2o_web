@@ -11,8 +11,7 @@ class MatchesButton extends Component {
 				count={numberOfUnseenMatches}
 				style={{
 					backgroundColor: colorTheme.keyText8Color,
-					color: colorTheme.text1Color,
-					boxShadow: "0 0 0 1px " + colorTheme.keyText8Color
+					color: colorTheme.text1Color
 				}}
 			>
 				<Button
@@ -26,7 +25,7 @@ class MatchesButton extends Component {
 					<a href="/matches">
 						<img
 							alt=""
-							style={{ width: 32, padding: "0px 0px 1px" }}
+							style={{ width: 32 }}
 							src="https://user-images.githubusercontent.com/24757872/40881562-23db47c0-668f-11e8-84a6-29020f352353.png"
 						/>Matches
 					</a>
@@ -38,7 +37,6 @@ class MatchesButton extends Component {
 	render() {
 		return (
 			<Col
-				style={{ padding: "1px 0px 0px" }}
 				md={{ offset: 1 }}
 				lg={{ offset: 1 }}
 				xl={{ offset: 1 }}

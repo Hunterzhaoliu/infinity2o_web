@@ -152,11 +152,9 @@ class CustomHeader extends Component {
 				return (
 					<Row type="flex" justify="center">
 						<Col
-							md={{ span: 22, offset: 0 }}
-							lg={{ span: 22, offset: 0 }}
-							xl={{ span: 22, offset: 0 }}
-							key="0"
-							style={{ height: 50 }}
+							md={{ span: 22 }}
+							lg={{ span: 22 }}
+							xl={{ span: 22 }}
 						>
 							<Row type="flex" align="middle">
 								<ChangeThemeButton />
@@ -193,8 +191,7 @@ class CustomHeader extends Component {
 					background: headerBackground,
 					position: "fixed",
 					zIndex: 1, // make every component display under the header
-					width: "100%",
-					height: 50
+					width: "100%"
 				}}
 			>
 				{this.renderHeaderButtons()}
