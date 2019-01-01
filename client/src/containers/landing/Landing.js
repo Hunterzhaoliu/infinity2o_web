@@ -51,7 +51,9 @@ class Landing extends Component {
 										fontFamily: "Lucida Grande",
 										fontWeight: "bold",
 										fontSize: 22,
-										padding: "0px 0px 0px 0px"
+										padding: "0px 0px 0px 0px",
+										marginBottom: 0,
+										lineHeight: 1
 									}}
 								>
 									Online class alone
@@ -59,7 +61,7 @@ class Landing extends Component {
 							</Col>
 						</Row>
 						<Row>
-							<Col style={{ height: "30px" }} />
+							<Col style={{ height: "60px" }} />
 						</Row>
 						<Row type="flex" justify="center">
 							<Col>
@@ -90,7 +92,8 @@ class Landing extends Component {
 										fontFamily: "Lucida Grande",
 										fontWeight: "bold",
 										fontSize: 22,
-										padding: "0px 0px 0px 0px"
+										marginBottom: 0,
+										lineHeight: 1
 									}}
 								>
 									Online class through infinity2o
@@ -98,7 +101,7 @@ class Landing extends Component {
 							</Col>
 						</Row>
 						<Row>
-							<Col style={{ height: "30px" }} />
+							<Col style={{ height: "60px" }} />
 						</Row>
 						<Row type="flex" justify="center">
 							<Col>
@@ -134,7 +137,9 @@ class Landing extends Component {
 								color: GREY_1,
 								fontSize: 32,
 								fontFamily: "Lucida Grande",
-								fontWeight: "bold"
+								fontWeight: "bold",
+								marginBottom: 0,
+								lineHeight: 1
 							}}
 						>
 							Meet people with similar beliefs to take online
@@ -160,80 +165,48 @@ class Landing extends Component {
 				<Row
 					type="flex"
 					justify="center"
-					style={{ padding: "100px 0px 0px" }}
+					style={{ padding: "120px 0px 0px" }}
 				>
-					<Col>
-						<h1
+					<Col style={{ height: "50px" }}>
+						<p
 							style={{
 								textAlign: "center",
 								color: GREY_9,
-								fontSize: 30,
+								fontSize: 27,
 								fontFamily: "Lucida Grande",
-								fontWeight: "bold"
+								fontWeight: "bold",
+								marginBottom: 0,
+								lineHeight: 1
 							}}
 						>
 							{how_part_0}{" "}
 							<img
 								alt=""
 								style={{
-									width: 50,
-									padding: "0px 0px 5px 5px"
+									width: 50
 								}}
 								src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
 							/>
-						</h1>
+						</p>
 					</Col>
+				</Row>
+				<Row>
+					<Col style={{ height: "30px" }} />
 				</Row>
 				<Row type="flex" justify="center">
 					<Col>
-						<h1
+						<p
 							style={{
 								textAlign: "center",
 								color: GREY_7,
-								fontSize: 25,
-								fontFamily: "Lucida Grande"
+								fontSize: 23,
+								fontFamily: "Lucida Grande",
+								marginBottom: 0,
+								lineHeight: 1
 							}}
 						>
 							{how_part_1}
-						</h1>
-					</Col>
-				</Row>
-				<Row
-					type="flex"
-					justify="center"
-					align="middle"
-					style={{
-						textAlign: "center",
-						padding: "75px 0px 0px 0px"
-					}}
-				>
-					<Col>
-						<InputVote />
-					</Col>
-				</Row>
-			</div>
-		);
-	}
-
-	renderMatch() {
-		const how_part_2 = "Chat with the matches you want to learn with";
-
-		return (
-			<div>
-				<Row type="flex" justify="center">
-					<Col>
-						<h1
-							style={{
-								textAlign: "center",
-								color: GREY_1,
-								fontSize: 30,
-								fontFamily: "Lucida Grande",
-								fontWeight: "bold",
-								padding: "100px 0px 0px 0px"
-							}}
-						>
-							{how_part_2}
-						</h1>
+						</p>
 					</Col>
 				</Row>
 				<Row
@@ -245,11 +218,54 @@ class Landing extends Component {
 						padding: "50px 0px 0px 0px"
 					}}
 				>
+					<Col
+						xs={{ span: 24 }}
+						sm={{ span: 12 }}
+						md={{ span: 8 }}
+						lg={{ span: 12 }}
+						xl={{ span: 16 }}
+					>
+						<InputVote />
+					</Col>
+				</Row>
+			</div>
+		);
+	}
+
+	renderMatch() {
+		return (
+			<div>
+				<Row type="flex" justify="center">
+					<Col>
+						<h1
+							style={{
+								textAlign: "center",
+								color: GREY_1,
+								fontSize: 28,
+								fontFamily: "Lucida Grande",
+								fontWeight: "bold",
+								padding: "120px 0px 0px 0px",
+								marginBottom: 0,
+								lineHeight: 1
+							}}
+						>
+							Chat with the matches you want to learn with
+						</h1>
+					</Col>
+				</Row>
+				<Row
+					type="flex"
+					justify="center"
+					style={{
+						textAlign: "center",
+						padding: "60px 0px 0px 0px"
+					}}
+				>
 					<Col>
 						<img
 							alt="Match Example"
 							style={{
-								height: "350px"
+								height: "400px"
 							}}
 							src="https://user-images.githubusercontent.com/2585159/41510382-32448628-7229-11e8-8017-e87d7f761aea.png"
 						/>
@@ -266,7 +282,7 @@ class Landing extends Component {
 				<div>
 					<Row
 						style={{
-							padding: "100px 0px 0px" // top left&right bottom
+							padding: "120px 0px 0px"
 						}}
 						type="flex"
 						justify="center"
@@ -278,18 +294,20 @@ class Landing extends Component {
 									textAlign: "center",
 									color: GREY_9,
 									fontFamily: "Lucida Grande",
-									fontSize: "30px",
-									fontWeight: "bold"
+									fontSize: "28px",
+									fontWeight: "bold",
+									marginBottom: 0,
+									lineHeight: 1
 								}}
 							>
-								Come join Earth's largest community of online
+								Join Earth's largest community of online
 								learners.
 							</h2>
 						</Col>
 					</Row>
 					<Row
 						style={{
-							padding: "50px 0px 0px" // top left&right bottom
+							padding: "60px 0px 0px"
 						}}
 						type="flex"
 						justify="center"
@@ -297,6 +315,9 @@ class Landing extends Component {
 						<Col>
 							<LoginButtons />
 						</Col>
+					</Row>
+					<Row>
+						<Col style={{ height: "120px" }} />
 					</Row>
 				</div>
 			);
@@ -338,7 +359,7 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						padding: "0px 255px 100px", // top left&right bottom
+						padding: "0px 0px 120px",
 						background: GREY_1
 					}}
 				>
@@ -346,7 +367,7 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						padding: "0px 50px 100px", // top left&right bottom
+						padding: "0px 0px 120px",
 						background: GREY_9
 					}}
 				>
@@ -354,7 +375,6 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						padding: "0px 50px 100px", // top left&right bottom
 						background: GREY_1
 					}}
 				>
