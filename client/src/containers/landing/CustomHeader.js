@@ -150,7 +150,7 @@ class CustomHeader extends Component {
 				);
 			case "logged_in":
 				return (
-					<Row type="flex" justify="center">
+					<Row type="flex" justify="center" align="middle">
 						<Col
 							md={{ span: 22 }}
 							lg={{ span: 22 }}
@@ -191,7 +191,9 @@ class CustomHeader extends Component {
 					background: headerBackground,
 					position: "fixed",
 					zIndex: 1, // make every component display under the header
-					width: "100%"
+					width: "100%",
+					height: "60px",
+					lineHeight: "60px"
 				}}
 			>
 				{this.renderHeaderButtons()}
