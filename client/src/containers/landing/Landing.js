@@ -135,7 +135,7 @@ class Landing extends Component {
 							style={{
 								textAlign: "center",
 								color: GREY_1,
-								fontSize: 32,
+								fontSize: 31,
 								fontFamily: "Lucida Grande",
 								fontWeight: "bold",
 								marginBottom: 0,
@@ -172,7 +172,7 @@ class Landing extends Component {
 							style={{
 								textAlign: "center",
 								color: GREY_9,
-								fontSize: 27,
+								fontSize: 26,
 								fontFamily: "Lucida Grande",
 								fontWeight: "bold",
 								marginBottom: 0,
