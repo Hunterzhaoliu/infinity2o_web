@@ -68,4 +68,7 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 
-export default connect(mapStateToProps, null)(ConversationButton);
+export default connect(
+	mapStateToProps,
+	null
+)(ConversationButton);

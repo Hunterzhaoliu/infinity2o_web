@@ -150,26 +150,25 @@ class CustomHeader extends Component {
 				);
 			case "logged_in":
 				return (
-					<div>
-						<Row type="flex">
-							<Col
-								md={{ span: 22, offset: 0 }}
-								lg={{ span: 22, offset: 0 }}
-								xl={{ span: 22, offset: 0 }}
-								key="0"
-							>
-								<Row type="flex">
-									<ChangeThemeButton />
-									<TourButton />
-									<ProfileButton />
-									<SortingHatButton />
-									<MatchesButton />
-									<ConversationButton />
-								</Row>
-							</Col>
-							<LogoutButton />
-						</Row>
-					</div>
+					<Row type="flex" justify="center">
+						<Col
+							md={{ span: 22, offset: 0 }}
+							lg={{ span: 22, offset: 0 }}
+							xl={{ span: 22, offset: 0 }}
+							key="0"
+							style={{ height: 50 }}
+						>
+							<Row type="flex" align="middle">
+								<ChangeThemeButton />
+								<TourButton />
+								<ProfileButton />
+								<SortingHatButton />
+								<MatchesButton />
+								<ConversationButton />
+							</Row>
+						</Col>
+						<LogoutButton />
+					</Row>
 				);
 			default:
 				console.log("ERROR: site in invalid state = ", loggedInState);
@@ -194,7 +193,8 @@ class CustomHeader extends Component {
 					background: headerBackground,
 					position: "fixed",
 					zIndex: 1, // make every component display under the header
-					width: "100%"
+					width: "100%",
+					height: 50
 				}}
 			>
 				{this.renderHeaderButtons()}

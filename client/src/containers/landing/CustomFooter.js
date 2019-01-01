@@ -11,12 +11,12 @@ class CustomFooter extends Component {
 		const { colorTheme, loggedInState, onFooter } = this.props;
 		let backgroundColor = this.props.colorTheme.backgroundColor;
 		let textColor = this.props.colorTheme.text7Color;
-		let aboutButtonColor = this.props.colorTheme.text8Color;
+		let buttonColor = this.props.colorTheme.text8Color;
 		let textColor2 = this.props.colorTheme.text6Color;
 		if (loggedInState === "not_logged_in") {
 			backgroundColor = GREY_1;
 			textColor = GREY_3;
-			aboutButtonColor = GREY_2;
+			buttonColor = GREY_2;
 			textColor2 = GREY_4;
 		}
 
@@ -27,17 +27,16 @@ class CustomFooter extends Component {
 				<Footer
 					style={{
 						textAlign: "center",
-						background: backgroundColor,
-						color: textColor
+						background: backgroundColor
 					}}
 				>
 					<Row type="flex" justify="center">
 						<Col>
 							<Button
 								style={{
-									borderColor: aboutButtonColor,
-									background: aboutButtonColor,
-									fontFamily: "Titilliium Web"
+									borderColor: buttonColor,
+									background: buttonColor,
+									fontFamily: "Lucida Grande"
 								}}
 								size={"small"}
 								onClick={onFooter}
@@ -54,14 +53,14 @@ class CustomFooter extends Component {
 						</Col>
 						<Col
 							style={{
-								padding: "0px 0px 0px 10px"
+								padding: "0px 0px 0px 20px"
 							}}
 						>
 							<Button
 								style={{
-									borderColor: aboutButtonColor,
-									background: aboutButtonColor,
-									fontFamily: "Titilliium Web"
+									borderColor: buttonColor,
+									background: buttonColor,
+									fontFamily: "Lucida Grande"
 								}}
 								size={"small"}
 								onClick={onFooter}
@@ -78,14 +77,14 @@ class CustomFooter extends Component {
 						</Col>
 						<Col
 							style={{
-								padding: "0px 0px 0px 10px"
+								padding: "0px 0px 0px 20px"
 							}}
 						>
 							<Button
 								style={{
-									borderColor: aboutButtonColor,
-									background: aboutButtonColor,
-									fontFamily: "Titilliium Web"
+									borderColor: buttonColor,
+									background: buttonColor,
+									fontFamily: "Lucida Grande"
 								}}
 								size={"small"}
 								onClick={onFooter}
@@ -106,11 +105,12 @@ class CustomFooter extends Component {
 							<p
 								style={{
 									color: textColor,
-									padding: "10px 0px 0px 0px",
-									fontFamily: "Lucida Grande"
+									padding: "20px 0px 0px 0px",
+									fontFamily: "Lucida Grande",
+									marginBottom: 0
 								}}
 							>
-								Infinity2o © 2018 -> ∞
+								infinity2o © 2018
 							</p>
 						</Col>
 					</Row>
