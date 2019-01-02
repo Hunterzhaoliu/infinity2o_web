@@ -26,6 +26,40 @@ class Landing extends Component {
 		}
 	}
 
+	renderMarketingInfo() {
+		return (
+			<div>
+				<Row
+					type="flex"
+					justify="center"
+					style={{ padding: "180px 0px 0px 0px" }}
+				>
+					<Col>
+						<h1
+							key="0"
+							style={{
+								textAlign: "center",
+								color: GREY_1,
+								fontSize: 31,
+								fontFamily: "Lucida Grande",
+								fontWeight: "bold",
+								marginBottom: 0,
+								lineHeight: 1
+							}}
+						>
+							Meet people with similar beliefs to take online
+							courses with.
+						</h1>
+					</Col>
+				</Row>
+				{this.renderCartoons()}
+				<Row>
+					<Col style={{ height: "120px" }} />
+				</Row>
+			</div>
+		);
+	}
+
 	renderCartoons() {
 		return (
 			<div>
@@ -116,40 +150,6 @@ class Landing extends Component {
 							</Col>
 						</Row>
 					</Col>
-				</Row>
-			</div>
-		);
-	}
-
-	renderMarketingInfo() {
-		return (
-			<div>
-				<Row
-					type="flex"
-					justify="center"
-					style={{ padding: "180px 0px 0px 0px" }}
-				>
-					<Col>
-						<h1
-							key="0"
-							style={{
-								textAlign: "center",
-								color: GREY_1,
-								fontSize: 31,
-								fontFamily: "Lucida Grande",
-								fontWeight: "bold",
-								marginBottom: 0,
-								lineHeight: 1
-							}}
-						>
-							Meet people with similar beliefs to take online
-							courses with.
-						</h1>
-					</Col>
-				</Row>
-				{this.renderCartoons()}
-				<Row>
-					<Col style={{ height: "120px" }} />
 				</Row>
 			</div>
 		);
