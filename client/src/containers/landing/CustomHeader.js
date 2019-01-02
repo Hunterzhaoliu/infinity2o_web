@@ -35,6 +35,96 @@ class CustomHeader extends Component {
 		window.removeEventListener("resize", this.updateWindowDimensions);
 	}
 
+	renderNotLoggedInHeaderButtons(windowWidth) {
+		let largeGmailLoginText = "Gmail Login ";
+		let largeLinkedInLoginText = "Gmail Login ";
+		let smallLoginText = "";
+		let paddingBetweenLoginButtons = "0px 0px 0px 30px";
+
+		if (windowWidth < 768) {
+			// less than medium screen, need to change where the infinity2o logo
+			// is and adjust text size
+			largeGmailLoginText = "";
+			largeLinkedInLoginText = "";
+			smallLoginText = " Login";
+			paddingBetweenLoginButtons = "0px 0px 0px 10px";
+		}
+		return (
+			<Row type="flex" justify="center" align="middle">
+				<Col
+					xs={{ span: 10 }}
+					sm={{ span: 10 }}
+					md={{ span: 14 }}
+					lg={{ span: 14 }}
+					xl={{ span: 17 }}
+				>
+					<Row type="flex" justify="start" align="middle">
+						<Col>
+							<img
+								alt=""
+								style={{ width: "32px" }}
+								src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
+							/>
+						</Col>
+						<Col>
+							{" "}
+							<h2
+								style={{
+									padding: "0px 0px 0px 10px",
+									color: GREY_1,
+									fontFamily: "Lucida Grande",
+									marginBottom: 0,
+									lineHeight: 1,
+									fontSize: 20
+								}}
+							>
+								infinity2o
+							</h2>
+						</Col>
+					</Row>
+				</Col>
+				<Col>
+					<Button
+						style={{
+							borderColor: RED_ORANGE_7,
+							background: RED_ORANGE_7,
+							color: GREY_1,
+							fontFamily: "Lucida Grande",
+							height: 32
+						}}
+					>
+						<a href="/auth/google">
+							{largeGmailLoginText}
+							<Icon style={{ fontSize: 15 }} type="google" />
+							{smallLoginText}
+						</a>
+					</Button>
+				</Col>
+				<Col
+					style={{
+						padding: paddingBetweenLoginButtons
+					}}
+				>
+					<Button
+						style={{
+							borderColor: BLUE_7,
+							background: BLUE_7,
+							color: GREY_1,
+							fontFamily: "Lucida Grande",
+							height: 32
+						}}
+					>
+						<a href="/auth/linkedIn">
+							{largeLinkedInLoginText}
+							<Icon style={{ fontSize: 15 }} type="linkedin" />
+							{smallLoginText}
+						</a>
+					</Button>
+				</Col>
+			</Row>
+		);
+	}
+
 	renderHeaderButtons() {
 		const {
 			colorTheme,
@@ -43,6 +133,7 @@ class CustomHeader extends Component {
 			siderDisplay,
 			toggleSider
 		} = this.props;
+
 		if (windowWidth < 768 && loggedInState === "logged_in") {
 			// show a menu with buttons instead of nav bar
 			let siderIcon;
@@ -74,77 +165,7 @@ class CustomHeader extends Component {
 				</Row>
 			);
 		} else if (loggedInState === "not_logged_in") {
-			return (
-				<Row type="flex" justify="space-between">
-					<Col>
-						<Row type="flex" justify="start">
-							<Col>
-								<img
-									alt=""
-									style={{ width: "30px" }}
-									src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
-								/>
-							</Col>
-							<Col>
-								{" "}
-								<h2
-									style={{
-										padding: "0px 0px 0px 10px",
-										color: GREY_1,
-										fontFamily: "Lucida Grande"
-									}}
-								>
-									infinity2o
-								</h2>
-							</Col>
-						</Row>
-					</Col>
-					<Col>
-						<Row type="flex" justify="end">
-							<Col>
-								<Button
-									style={{
-										borderColor: RED_ORANGE_7,
-										background: RED_ORANGE_7,
-										color: GREY_1,
-										fontFamily: "Lucida Grande"
-									}}
-								>
-									<a href="/auth/google">
-										Gmail Login{" "}
-										<Icon
-											style={{ fontSize: 15 }}
-											type="google"
-										/>
-									</a>
-								</Button>
-							</Col>
-							<Col
-								style={{
-									padding: "0px 0px 0px 10px"
-								}}
-							>
-								<Button
-									style={{
-										borderColor: BLUE_7,
-										background: BLUE_7,
-										color: GREY_1,
-										fontFamily: "Lucida Grande"
-									}}
-								>
-									<a href="/auth/linkedIn">
-										LinkedIn Login{" "}
-										<Icon
-											style={{ fontSize: 15 }}
-											type="linkedin"
-										/>
-									</a>
-								</Button>
-							</Col>
-						</Row>
-					</Col>
-				</Row>
-			);
+			return this.renderNotLoggedInHeaderButtons(windowWidth);
 		} else if (loggedInState === "logged_in") {
 			return (
 				<Row type="flex" justify="center" align="middle">
