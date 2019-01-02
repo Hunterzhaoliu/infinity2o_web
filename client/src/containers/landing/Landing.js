@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import * as colorThemeActions from "../../actions/colorTheme";
 import * as landingActions from "../../actions/landing";
 import { bindActionCreators } from "redux";
-import Testimonials from "./Testimonials";
 import { GREY_9, GREY_7, GREY_2, GREY_1 } from "../styles/ColorConstants";
 import LoginButtons from "./LoginButtons";
 import InputVote from "../sorting_hat/InputVote";
@@ -322,29 +321,6 @@ class Landing extends Component {
 				</div>
 			);
 		}
-	}
-
-	renderTestimonials() {
-		return (
-			<Row
-				style={{
-					padding: "40px 0px 0px" // top left&right bottom
-				}}
-				type="flex"
-				justify="center"
-				align="top"
-			>
-				<Col
-					xs={{ span: 24 }}
-					sm={{ span: 14 }}
-					md={{ span: 10 }}
-					lg={{ span: 8 }}
-					xl={{ span: 6 }}
-				>
-					<Testimonials />
-				</Col>
-			</Row>
-		);
 	}
 
 	render() {
