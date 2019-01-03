@@ -53,9 +53,9 @@ class CustomHeader extends Component {
 			<Row type="flex" justify="center" align="middle">
 				<Col
 					xs={{ span: 10 }}
-					sm={{ span: 10 }}
+					sm={{ span: 15 }}
 					md={{ span: 14 }}
-					lg={{ span: 14 }}
+					lg={{ span: 15 }}
 					xl={{ span: 17 }}
 				>
 					<Row type="flex" justify="start" align="middle">
