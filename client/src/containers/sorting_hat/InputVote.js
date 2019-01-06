@@ -23,10 +23,6 @@ class InputVote extends Component {
 		visible: false
 	};
 
-	componentWillMount() {
-		// run once before first render()
-	}
-
 	onVote(answerIndex, askIndex, askId) {
 		const { sortingHat, history, mongoDBUserId } = this.props;
 		//console.log('onVote this.props = ', this.props);
@@ -365,8 +361,8 @@ class InputVote extends Component {
 					return (
 						<Col
 							sm={{ span: 24 }}
-							md={{ span: 24 }}
-							lg={{ span: 24 }}
+							md={{ span: 12 }}
+							lg={{ span: 12 }}
 							xl={{ span: 12 }}
 							key={askIndex}
 						>
@@ -559,20 +555,11 @@ class InputVote extends Component {
 		return (
 			<Content
 				style={{
-					overflow: "initial",
 					background: background
 				}}
 			>
 				{this.renderModal()}
-				<Row
-					type="flex"
-					justify="center"
-					align="top"
-					style={{
-						padding: "5px 0px 0px" // top left&right bottom
-					}}
-					gutter={36}
-				>
+				<Row type="flex" justify="center" align="top" gutter={36}>
 					{this.renderQandAs()}
 				</Row>
 			</Content>

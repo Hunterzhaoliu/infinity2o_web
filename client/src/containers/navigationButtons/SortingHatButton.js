@@ -18,9 +18,10 @@ class SortingHatButton extends Component {
 				<a href="/sorting_hat">
 					<img
 						alt=""
-						style={{ width: 32 }}
-						src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
-					/>Sorting Hat
+						style={{ height: 25, padding: "0px 5px 0px 0px" }}
+						src="https://user-images.githubusercontent.com/24757872/50742136-b9d11a00-11cc-11e9-960c-6d015d01d890.png"
+					/>
+					Sorting Hat
 				</a>
 			</Button>
 		);

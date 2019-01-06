@@ -73,7 +73,7 @@ class Marketing extends Component {
 						sm={{ span: 11 }}
 						md={{ span: 12 }}
 						lg={{ span: 11 }}
-						xl={{ span: 6 }}
+						xl={{ span: 7 }}
 					>
 						<Row type="flex" justify="center">
 							<Col>

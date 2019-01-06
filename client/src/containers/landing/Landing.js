@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as colorThemeActions from "../../actions/colorTheme";
 import * as landingActions from "../../actions/landing";
 import { bindActionCreators } from "redux";
-import { GREY_9, GREY_7, GREY_1 } from "../styles/ColorConstants";
+import { GREY_9, GREY_1 } from "../styles/ColorConstants";
 import LoginButtons from "./LoginButtons";
 import InputVote from "../sorting_hat/InputVote";
 import Marketing from "./Marketing";
@@ -27,23 +27,35 @@ class Landing extends Component {
 	}
 
 	renderLandingAsks() {
+		const { windowWidth } = this.props;
 		const how_part_0 =
 			"Find the best matches by expressing your beliefs to the Sorting Hat";
-		const how_part_1 = "by voting or asking questions";
+
+		let h2Padding = "120px 0px 0px";
+		let imageHeight = 35;
+		let h2FontSize = 26;
+		let finalRowPadding = "60px 0px 120px 0px";
+
+		if (windowWidth < 768) {
+			h2Padding = "60px 0px 0px";
+			imageHeight = 25;
+			h2FontSize = 22;
+			finalRowPadding = "30px 0px 60px 0px";
+		}
 
 		return (
 			<div>
 				<Row
 					type="flex"
 					justify="center"
-					style={{ padding: "120px 0px 0px" }}
+					style={{ padding: h2Padding }}
 				>
-					<Col style={{ height: "50px" }}>
-						<p
+					<Col xs={{ span: 21 }} sm={{ span: 21 }} md={{ span: 22 }}>
+						<h2
 							style={{
 								textAlign: "center",
 								color: GREY_9,
-								fontSize: 26,
+								fontSize: h2FontSize,
 								fontFamily: "Lucida Grande",
 								fontWeight: "bold",
 								marginBottom: 0,
@@ -54,47 +66,27 @@ class Landing extends Component {
 							<img
 								alt=""
 								style={{
-									width: 50
+									height: imageHeight
 								}}
-								src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
+								src="https://user-images.githubusercontent.com/24757872/50742136-b9d11a00-11cc-11e9-960c-6d015d01d890.png"
 							/>
-						</p>
-					</Col>
-				</Row>
-				<Row>
-					<Col style={{ height: "30px" }} />
-				</Row>
-				<Row type="flex" justify="center">
-					<Col>
-						<p
-							style={{
-								textAlign: "center",
-								color: GREY_7,
-								fontSize: 23,
-								fontFamily: "Lucida Grande",
-								marginBottom: 0,
-								lineHeight: 1
-							}}
-						>
-							{how_part_1}
-						</p>
+						</h2>
 					</Col>
 				</Row>
 				<Row
 					type="flex"
 					justify="center"
-					align="middle"
 					style={{
 						textAlign: "center",
-						padding: "50px 0px 0px 0px"
+						padding: finalRowPadding
 					}}
 				>
 					<Col
-						xs={{ span: 24 }}
-						sm={{ span: 12 }}
-						md={{ span: 8 }}
-						lg={{ span: 12 }}
-						xl={{ span: 16 }}
+						xs={{ span: 19 }}
+						sm={{ span: 16 }}
+						md={{ span: 20 }}
+						lg={{ span: 18 }}
+						xl={{ span: 15 }}
 					>
 						<InputVote />
 					</Col>
@@ -207,7 +199,6 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						padding: "0px 0px 120px",
 						background: GREY_1
 					}}
 				>
@@ -239,7 +230,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		loggedInState: state.auth.loggedInState
+		loggedInState: state.auth.loggedInState,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 
