@@ -213,10 +213,11 @@ class InputVote extends Component {
 	getHeightBetweenCards(fourAsks, askIndex) {
 		const { windowWidth } = this.props;
 		if (windowWidth >= 1200 && (askIndex === 0 || askIndex === 1)) {
-			// to display to second Ask with the same height as the first Ask
+			// to display the second Ask with the same height as the first Ask
 			const numberOfAsOn1stAsk = fourAsks[0].answers.length;
 			let numberOfAsOn2ndAsk = 0;
 			if (fourAsks.length > 1) {
+				// make sure that there is a second ask
 				numberOfAsOn2ndAsk = fourAsks[1].answers.length;
 			}
 
@@ -322,7 +323,7 @@ class InputVote extends Component {
 									color: cardTextColor,
 									textAlign: "center"
 								}}
-								bodyStyle={{ padding: "30px" }}
+								bodyStyle={{ padding: "30px" }} // padding around inside border of card
 								hoverable
 							>
 								<h3

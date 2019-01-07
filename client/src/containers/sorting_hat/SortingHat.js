@@ -15,7 +15,18 @@ class SortingHat extends Component {
 	}
 
 	render() {
-		const { colorTheme, history } = this.props;
+		const { colorTheme, history, windowWidth } = this.props;
+
+		let mainH2FontSize = 32;
+		let votingH2FontSize = 24;
+		let pFontSize = 20;
+		let questionColPadding = "0px 0px 0px 15px";
+		if (windowWidth < 768) {
+			mainH2FontSize = 26;
+			pFontSize = 17;
+			votingH2FontSize = 18;
+			questionColPadding = "30px 0px 0px 0px";
+		}
 		return (
 			<Content
 				style={{
@@ -30,18 +41,15 @@ class SortingHat extends Component {
 								color: colorTheme.text2Color,
 								marginBottom: 0,
 								lineHeight: 1,
-								fontSize: 32,
-								fontFamily: "Lucida Grande"
+								fontSize: mainH2FontSize,
+								fontFamily: "Lucida Grande",
+								textAlign: "center"
 							}}
 						>
-							Help the Sorting Hat find you great partners by
+							Help the Sorting Hat find you matches by
 						</h2>
 					</Col>
-					<Col
-						style={{
-							padding: "0px 0px 0px 10px"
-						}}
-					>
+					<Col style={{ padding: questionColPadding }}>
 						<Button
 							style={{
 								borderColor: colorTheme.keyText7Color,
@@ -53,7 +61,7 @@ class SortingHat extends Component {
 								<p
 									style={{
 										color: colorTheme.text2Color,
-										fontSize: 20,
+										fontSize: pFontSize,
 										fontFamily: "Lucida Grande",
 										marginBottom: 0,
 										lineHeight: 1
@@ -77,7 +85,7 @@ class SortingHat extends Component {
 								color: colorTheme.text4Color,
 								marginBottom: 0,
 								lineHeight: 1,
-								fontSize: 20,
+								fontSize: votingH2FontSize,
 								fontFamily: "Lucida Grande"
 							}}
 						>
@@ -108,7 +116,8 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		auth: state.auth
+		auth: state.auth,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 
