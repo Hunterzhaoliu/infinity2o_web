@@ -1,42 +1,37 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as sortingHatActionCreators from '../../actions/sorting_hat/sortingHat';
-import * as colorThemeActionCreators from '../../actions/colorTheme';
-import { bindActionCreators } from 'redux';
-import { Layout, Row, Col, Button } from 'antd';
-import InputVote from './InputVote';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as sortingHatActionCreators from "../../actions/sorting_hat/sortingHat";
+import * as colorThemeActionCreators from "../../actions/colorTheme";
+import { bindActionCreators } from "redux";
+import { Layout, Row, Col, Button } from "antd";
+import InputVote from "./InputVote";
 const { Content } = Layout;
 
 class SortingHat extends Component {
-  componentWillMount() {
-    // run once before first render()
-    this.props.onSortingHat();
-    this.props.fetchUserSortingHatAsks(this.props.auth.mongoDBUserId);
-  }
+	componentWillMount() {
+		// run once before first render()
+		this.props.onSortingHat();
+		this.props.fetchUserSortingHatAsks(this.props.auth.mongoDBUserId);
+	}
 
 	render() {
-		// console.log('this.props in SortingHat.js', this.props);
 		const { colorTheme, history } = this.props;
 		return (
 			<Content
 				style={{
-					padding: '75px 50px 0px', // top left&right bottom
+					padding: "120px 0px 0px 0px",
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Row
-					type="flex"
-					justify="center"
-					align="middle"
-					style={{
-						textAlign: 'center'
-					}}
-				>
+				<Row type="flex" justify="center" align="middle">
 					<Col>
 						<h2
 							style={{
 								color: colorTheme.text2Color,
-								padding: '12px 0px 0px' // top left&right bottom
+								marginBottom: 0,
+								lineHeight: 1,
+								fontSize: 32,
+								fontFamily: "Lucida Grande"
 							}}
 						>
 							Help the Sorting Hat find you great partners by
@@ -44,20 +39,24 @@ class SortingHat extends Component {
 					</Col>
 					<Col
 						style={{
-							padding: '0px 0px 0px 8px' // top left&right bottom
+							padding: "0px 0px 0px 10px"
 						}}
 					>
 						<Button
 							style={{
 								borderColor: colorTheme.keyText7Color,
-								background: colorTheme.keyText7Color
+								background: colorTheme.keyText7Color,
+								height: 32
 							}}
 						>
 							<a href="/sorting_hat/ask">
 								<p
 									style={{
 										color: colorTheme.text2Color,
-										fontSize: 20
+										fontSize: 20,
+										fontFamily: "Lucida Grande",
+										marginBottom: 0,
+										lineHeight: 1
 									}}
 								>
 									asking a question
@@ -66,54 +65,36 @@ class SortingHat extends Component {
 						</Button>
 					</Col>
 				</Row>
-				<Row
-					type="flex"
-					justify="center"
-					align="middle"
-					style={{
-						padding: '0px 0px 0px' // top left&right bottom
-					}}
-				>
-					<Col md={{ span: 24 }}>
+				<Row type="flex" justify="center" align="middle">
+					<Col
+						style={{
+							padding: "30px 0px 30px 0px"
+						}}
+					>
 						<h2
 							style={{
-								textAlign: 'center',
-								color: colorTheme.text4Color
+								textAlign: "center",
+								color: colorTheme.text4Color,
+								marginBottom: 0,
+								lineHeight: 1,
+								fontSize: 20,
+								fontFamily: "Lucida Grande"
 							}}
 						>
 							Or voting on questions that matter to you:
 						</h2>
 					</Col>
 				</Row>
-				<Row
-					type="flex"
-					justify="start"
-					align="middle"
-					style={{
-						textAlign: 'center',
-						padding: '0px 0px 0px' // top left&right bottom
-					}}
-				>
+				<Row type="flex" justify="center">
 					<Col
-						sm={{ span: 0 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
-					/>
-					<Col
-						sm={{ span: 24 }}
-						md={{ span: 14 }}
-						lg={{ span: 14 }}
-						xl={{ span: 14 }}
+						xs={{ span: 19 }}
+						sm={{ span: 16 }}
+						md={{ span: 20 }}
+						lg={{ span: 18 }}
+						xl={{ span: 15 }}
 					>
 						<InputVote history={history} />
 					</Col>
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
-					/>
 				</Row>
 			</Content>
 		);
@@ -156,4 +137,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortingHat);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(SortingHat);

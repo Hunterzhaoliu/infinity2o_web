@@ -77,7 +77,6 @@ class Landing extends Component {
 					type="flex"
 					justify="center"
 					style={{
-						textAlign: "center",
 						padding: finalRowPadding
 					}}
 				>

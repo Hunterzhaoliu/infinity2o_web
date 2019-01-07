@@ -41,23 +41,24 @@ class InputVote extends Component {
 		);
 	}
 
-	onNextAsk(removeAskIndex) {
-		const { sortingHat, mongoDBUserId } = this.props;
-		this.props.onNextAsk(
-			sortingHat.nextAsks,
-			removeAskIndex,
-			mongoDBUserId
-		);
-	}
-
 	renderNextAskButton(askIndex, isDisplayingAskStats) {
-		const { colorTheme, activeSection } = this.props;
+		const {
+			colorTheme,
+			activeSection,
+			sortingHat,
+			mongoDBUserId
+		} = this.props;
+
+		let buttonText = "Pass";
+		if (isDisplayingAskStats) {
+			buttonText = "Next Question";
+		}
 
 		if (activeSection !== "sorting_hat") {
 			return;
 		} else {
 			return (
-				<Row style={{ padding: "8px 0px 0px" }}>
+				<Row style={{ padding: "10px 0px 0px" }}>
 					<Button
 						style={{
 							borderColor: colorTheme.text7Color,
@@ -65,9 +66,15 @@ class InputVote extends Component {
 							color: colorTheme.text2Color,
 							fontFamily: "Lucida Grande"
 						}}
-						onClick={e => this.onNextAsk(askIndex)}
+						onClick={e =>
+							this.props.onNextAsk(
+								sortingHat.nextAsks,
+								askIndex,
+								mongoDBUserId
+							)
+						}
 					>
-						{this.renderAskDoneWord(isDisplayingAskStats)}
+						{buttonText}
 					</Button>
 				</Row>
 			);
@@ -178,7 +185,7 @@ class InputVote extends Component {
 			}
 
 			return (
-				<Row style={{ padding: "8px 0px 0px" }} key={answerIndex}>
+				<Row style={{ padding: "10px 0px 0px" }} key={answerIndex}>
 					<Col span={this.renderSpanChange(isDisplayingAskStats)}>
 						{this.renderAnswerButton(
 							displayAnswerButtonColor,
@@ -191,12 +198,7 @@ class InputVote extends Component {
 							isDisplayingSaveIcon
 						)}
 					</Col>
-					<Col
-						style={{
-							padding: "5px 0px 0px"
-						}}
-						span={this.renderSpanChange(isDisplayingAskStats)}
-					>
+					<Col span={this.renderSpanChange(isDisplayingAskStats)}>
 						{this.renderAskStats(
 							answerVotes,
 							askTotalVotes,
@@ -259,7 +261,7 @@ class InputVote extends Component {
 				}
 			}
 		} else {
-			return "36px";
+			return "30px";
 		}
 	}
 
@@ -317,14 +319,19 @@ class InputVote extends Component {
 								style={{
 									borderColor: cardColor,
 									background: cardColor,
-									color: cardTextColor
+									color: cardTextColor,
+									textAlign: "center"
 								}}
+								bodyStyle={{ padding: "30px" }}
 								hoverable
 							>
 								<h3
 									style={{
 										color: cardTextColor,
-										fontFamily: "Lucida Grande"
+										fontFamily: "Lucida Grande",
+										marginBottom: 0,
+										lineHeight: 1,
+										padding: "0px 0px 5px 0px"
 									}}
 								>
 									{displayQuestion}
@@ -402,93 +409,10 @@ class InputVote extends Component {
 		}
 	}
 
-	renderAskDoneWord(isDisplayingAskStats) {
-		if (isDisplayingAskStats) {
-			return "Next Question";
-		} else {
-			return "Pass";
-		}
-	}
-
 	renderTotalVotes(askTotalVotes, isDisplayingAskStats) {
 		if (isDisplayingAskStats) {
 			return String(askTotalVotes) + " vote(s)";
 		}
-	}
-
-	renderAskCategories() {
-		const {
-			onNewestAsks,
-			onPopularAsks,
-			onControversialAsks,
-			theme
-		} = this.props;
-
-		return (
-			<Row
-				type="flex"
-				justify="center"
-				align="middle"
-				style={{
-					padding: "0px 0px 15px" // top left&right bottom
-				}}
-			>
-				<Col
-					sm={{ span: 7 }}
-					md={{ span: 6 }}
-					lg={{ span: 5 }}
-					xl={{ span: 4 }}
-				>
-					<Button
-						style={{
-							borderColor: theme.newestButtonColor,
-							background: theme.newestButtonColor,
-							color: theme.newestButtonTextColor,
-							fontFamily: "Lucida Grande"
-						}}
-						onClick={onNewestAsks}
-					>
-						Newest
-					</Button>
-				</Col>
-				<Col
-					sm={{ span: 7 }}
-					md={{ span: 6 }}
-					lg={{ span: 5 }}
-					xl={{ span: 4 }}
-				>
-					<Button
-						style={{
-							borderColor: theme.popularButtonColor,
-							background: theme.popularButtonColor,
-							color: theme.popularButtonTextColor,
-							fontFamily: "Lucida Grande"
-						}}
-						onClick={onPopularAsks}
-					>
-						Popular
-					</Button>
-				</Col>
-				<Col
-					sm={{ span: 8 }}
-					md={{ span: 7 }}
-					lg={{ span: 6 }}
-					xl={{ span: 5 }}
-				>
-					<Button
-						style={{
-							borderColor: theme.controversialButtonColor,
-							background: theme.controversialButtonColor,
-							color: theme.controversialButtonTextColor,
-							fontFamily: "Lucida Grande"
-						}}
-						onClick={onControversialAsks}
-					>
-						Controversial
-					</Button>
-				</Col>
-			</Row>
-		);
 	}
 
 	render() {
@@ -506,7 +430,7 @@ class InputVote extends Component {
 				}}
 			>
 				<FirstVote />
-				<Row type="flex" justify="center" align="top" gutter={36}>
+				<Row type="flex" justify="center" gutter={30}>
 					{this.renderQandAs()}
 				</Row>
 			</Content>
@@ -514,26 +438,17 @@ class InputVote extends Component {
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		sortingHat: state.sortingHat,
 		mongoDBUserId: state.auth.mongoDBUserId,
 		windowWidth: state.customHeader.windowWidth,
-		theme: state.sortingHat.theme,
 		landing: state.landing,
 		activeSection: state.colorTheme.activeSection
 	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
 function mapDispatchToProps(dispatch) {
 	const sortingHatDispatchers = bindActionCreators(
 		sortingHatActionCreators,
@@ -546,15 +461,6 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		onNewestAsks: () => {
-			sortingHatDispatchers.onNewestAsks();
-		},
-		onPopularAsks: () => {
-			sortingHatDispatchers.onPopularAsks();
-		},
-		onControversialAsks: () => {
-			sortingHatDispatchers.onControversialAsks();
-		},
 		onNextAsk: (nextAsks, removeAskIndex, mongoDBUserId) => {
 			sortingHatDispatchers.onNextAsk(
 				nextAsks,
