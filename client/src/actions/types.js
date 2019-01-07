@@ -14,6 +14,7 @@ export const DISPLAY_RECEIVED_MESSAGE = "DISPLAY_RECEIVED_MESSAGE";
 // Landing.js
 export const SAVE_FETCHED_LANDING_ASKS = "SAVE_FETCHED_LANDING_ASKS";
 export const ON_VOTE_LANDING = "ON_VOTE_LANDING";
+export const CLOSE_MODAL = "CLOSE_MODAL";
 
 // CustomHeader.js
 export const MOVE_TO_TOUR = "MOVE_TO_TOUR";

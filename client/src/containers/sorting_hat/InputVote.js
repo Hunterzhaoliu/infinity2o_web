@@ -5,7 +5,6 @@ import * as sortingHatActionCreators from "../../actions/sorting_hat/sortingHat"
 import * as landingActionCreators from "../../actions/landing";
 import { bindActionCreators } from "redux";
 import {
-	GREY_9,
 	GREY_8,
 	GREY_7,
 	GREY_3,
@@ -13,19 +12,13 @@ import {
 	GREY_1,
 	RED_ORANGE_3
 } from "../styles/ColorConstants";
-import LoginButtons from "../landing/LoginButtons";
-import "./InputVote.css";
-import { Button, Card, Col, Layout, Row, Icon, Modal } from "antd";
+import FirstVote from "../landing/FirstVote";
+import { Button, Card, Col, Layout, Row, Icon } from "antd";
 const { Content } = Layout;
 
 class InputVote extends Component {
-	state = {
-		visible: false
-	};
-
 	onVote(answerIndex, askIndex, askId) {
 		const { sortingHat, history, mongoDBUserId } = this.props;
-		//console.log('onVote this.props = ', this.props);
 		// now we know which answer user pressed so let's pass the answesId too
 		const ask = sortingHat.current4DisplayedAsks[askIndex];
 		const answerId = ask.answers[answerIndex]._id;
@@ -81,63 +74,6 @@ class InputVote extends Component {
 		}
 	}
 
-	handleCancel = () => {
-		this.setState({ visible: false });
-	};
-
-	renderModal() {
-		const { visible } = this.state;
-
-		document.documentElement.style.setProperty(`--GREY_1`, GREY_1);
-
-		return (
-			<Modal visible={visible} onCancel={this.handleCancel} footer={null}>
-				<h2
-					style={{
-						textAlign: "center",
-						color: GREY_9,
-						fontFamily: "Titllium Web",
-						fontWeight: "bold",
-						fontSize: "35px",
-						padding: "50px 0px 0px"
-					}}
-				>
-					Congrats on your first vote!
-				</h2>
-				<p
-					style={{
-						textAlign: "center",
-						color: GREY_7,
-						fontFamily: "Lucida Grande",
-						fontSize: "25px",
-						padding: "25px 0px 0px"
-					}}
-				>
-					To make your vote count, login with
-				</p>
-				<div style={{ height: "25px" }} />
-				<LoginButtons />
-				<div style={{ height: "50px" }} />
-			</Modal>
-		);
-	}
-
-	onVoteLanding(answerIndex, askIndex) {
-		const { landing, loggedInState } = this.props;
-		const ask = landing.landingAsks[askIndex];
-		const answerId = ask.answers[answerIndex]._id;
-		if (
-			landing.numberOfLandingVotes === 0 &&
-			loggedInState === "not_logged_in"
-		) {
-			this.setState({
-				visible: true
-			});
-		}
-
-		this.props.onVoteLanding(answerIndex, answerId, askIndex);
-	}
-
 	renderAnswerButton(
 		displayAnswerButtonColor,
 		answerButtonTextColor,
@@ -184,6 +120,17 @@ class InputVote extends Component {
 				</Button>
 			);
 		}
+	}
+
+	onVoteLanding(answerIndex, askIndex) {
+		const { landing } = this.props;
+		let isFirstVote = false;
+
+		if (landing.numberOfLandingVotes === 0) {
+			isFirstVote = true;
+		}
+
+		this.props.onVoteLanding(answerIndex, askIndex, isFirstVote);
 	}
 
 	renderAnswers(
@@ -558,7 +505,7 @@ class InputVote extends Component {
 					background: background
 				}}
 			>
-				{this.renderModal()}
+				<FirstVote />
 				<Row type="flex" justify="center" align="top" gutter={36}>
 					{this.renderQandAs()}
 				</Row>
@@ -579,7 +526,6 @@ function mapStateToProps(state) {
 		windowWidth: state.customHeader.windowWidth,
 		theme: state.sortingHat.theme,
 		landing: state.landing,
-		loggedInState: state.auth.loggedInState,
 		activeSection: state.colorTheme.activeSection
 	};
 }
@@ -633,8 +579,12 @@ function mapDispatchToProps(dispatch) {
 				mongoDBUserId
 			);
 		},
-		onVoteLanding: (answerIndex, answerId, askIndex) => {
-			landingDispatchers.onVoteLanding(answerIndex, answerId, askIndex);
+		onVoteLanding: (answerIndex, askIndex, isFirstVote) => {
+			landingDispatchers.onVoteLanding(
+				answerIndex,
+				askIndex,
+				isFirstVote
+			);
 		}
 	};
 }
