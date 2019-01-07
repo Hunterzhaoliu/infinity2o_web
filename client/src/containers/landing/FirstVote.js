@@ -9,17 +9,17 @@ import { Modal } from "antd";
 
 class FirstVote extends Component {
 	render() {
-		// const { isFirstVoteModalOpen } = this.props;
+		const { isFirstVoteModalOpen } = this.props;
 
 		document.documentElement.style.setProperty(`--GREY_1`, GREY_1);
 
 		return (
 			<Modal
-				visible={true}
+				visible={isFirstVoteModalOpen}
 				onCancel={e => this.props.closeModal()}
 				footer={null}
 				centered={true}
-				style={{ padding: "100px 0px 0px 0px" }}
+				style={{ padding: "90px 0px 0px 0px" }}
 			>
 				<h2
 					style={{
@@ -28,7 +28,9 @@ class FirstVote extends Component {
 						fontFamily: "Lucida Grande",
 						fontWeight: "bold",
 						fontSize: "32px",
-						padding: "60px 0px 0px"
+						padding: "60px 0px 0px",
+						marginBottom: 0,
+						lineHeight: 1
 					}}
 				>
 					Congrats on your first vote!
@@ -39,7 +41,9 @@ class FirstVote extends Component {
 						color: GREY_7,
 						fontFamily: "Lucida Grande",
 						fontSize: "22px",
-						padding: "30px 0px 0px"
+						padding: "60px 0px 0px",
+						marginBottom: 0,
+						lineHeight: 1
 					}}
 				>
 					To make your vote count:
