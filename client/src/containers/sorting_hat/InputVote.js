@@ -213,10 +213,6 @@ class InputVote extends Component {
 	renderQandAs() {
 		const { colorTheme, sortingHat, landing, activeSection } = this.props;
 
-		console.log(
-			"sortingHat.current4DisplayedAsks = ",
-			sortingHat.current4DisplayedAsks
-		);
 		let fourAsks;
 		let cardColor = colorTheme.text8Color;
 		let cardTextColor = colorTheme.text2Color;

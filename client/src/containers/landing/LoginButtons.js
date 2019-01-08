@@ -26,11 +26,7 @@ export default () => {
 					</a>
 				</Button>
 			</Col>
-			<Col
-				style={{
-					padding: "0px 0px 0px 10px" // top left&right bottom
-				}}
-			>
+			<Col>
 				<Button
 					size="large"
 					key="0"

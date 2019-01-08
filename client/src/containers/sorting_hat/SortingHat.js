@@ -9,7 +9,6 @@ const { Content } = Layout;
 
 class SortingHat extends Component {
 	componentWillMount() {
-		console.log("componentWillMount");
 		// run once before first render()
 		this.props.onSortingHat();
 		this.props.fetchUserSortingHatAsks(this.props.auth.mongoDBUserId);

@@ -3,15 +3,17 @@ import { connect } from "react-redux";
 import * as landingActionCreators from "../../actions/landing";
 import { bindActionCreators } from "redux";
 import { GREY_9, GREY_7, GREY_1 } from "../styles/ColorConstants";
-import "./FirstVote.css";
 import LoginButtons from "./LoginButtons";
 import { Modal } from "antd";
 
 class FirstVote extends Component {
 	render() {
-		const { isFirstVoteModalOpen } = this.props;
+		const { isFirstVoteModalOpen, windowWidth } = this.props;
 
-		document.documentElement.style.setProperty(`--GREY_1`, GREY_1);
+		let h2LineHeight = 1;
+		if (windowWidth < 768) {
+			h2LineHeight = 1.5;
+		}
 
 		return (
 			<Modal
@@ -19,6 +21,7 @@ class FirstVote extends Component {
 				onCancel={e => this.props.closeModal()}
 				footer={null}
 				centered={true}
+				bodyStyle={{ padding: "0px 10px", backgroundColor: GREY_1 }}
 				style={{ padding: "90px 0px 0px 0px" }}
 			>
 				<h2
@@ -27,10 +30,10 @@ class FirstVote extends Component {
 						color: GREY_9,
 						fontFamily: "Lucida Grande",
 						fontWeight: "bold",
-						fontSize: "32px",
+						fontSize: 32,
 						padding: "60px 0px 0px",
 						marginBottom: 0,
-						lineHeight: 1
+						lineHeight: h2LineHeight
 					}}
 				>
 					Congrats on your first vote!
@@ -40,7 +43,7 @@ class FirstVote extends Component {
 						textAlign: "center",
 						color: GREY_7,
 						fontFamily: "Lucida Grande",
-						fontSize: "22px",
+						fontSize: 22,
 						padding: "60px 0px 0px",
 						marginBottom: 0,
 						lineHeight: 1
@@ -58,7 +61,8 @@ class FirstVote extends Component {
 
 function mapStateToProps(state) {
 	return {
-		isFirstVoteModalOpen: state.landing.isFirstVoteModalOpen
+		isFirstVoteModalOpen: state.landing.isFirstVoteModalOpen,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 

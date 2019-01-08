@@ -95,39 +95,52 @@ class Landing extends Component {
 	}
 
 	renderMatch() {
+		const { windowWidth } = this.props;
+
+		let h2Padding = "120px 0px 0px";
+		let imageHeight = 400;
+		let h2FontSize = 28;
+		let pictureRowPadding = "60px 0px 120px";
+
+		if (windowWidth < 768) {
+			h2Padding = "60px 0px 0px";
+			imageHeight = 250;
+			h2FontSize = 22;
+			pictureRowPadding = "30px 0px 60px";
+		}
+
 		return (
 			<div>
 				<Row type="flex" justify="center">
-					<Col>
-						<h1
+					<Col xs={{ span: 21 }} sm={{ span: 24 }}>
+						<h2
 							style={{
 								textAlign: "center",
 								color: GREY_1,
-								fontSize: 28,
+								fontSize: h2FontSize,
 								fontFamily: "Lucida Grande",
 								fontWeight: "bold",
-								padding: "120px 0px 0px 0px",
+								padding: h2Padding,
 								marginBottom: 0,
 								lineHeight: 1
 							}}
 						>
 							Chat with the matches you want to learn with
-						</h1>
+						</h2>
 					</Col>
 				</Row>
 				<Row
 					type="flex"
 					justify="center"
 					style={{
-						textAlign: "center",
-						padding: "60px 0px 0px 0px"
+						padding: pictureRowPadding
 					}}
 				>
 					<Col>
 						<img
 							alt="Match Example"
 							style={{
-								height: "400px"
+								height: imageHeight
 							}}
 							src="https://user-images.githubusercontent.com/2585159/41510382-32448628-7229-11e8-8017-e87d7f761aea.png"
 						/>
@@ -205,7 +218,6 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						padding: "0px 0px 120px",
 						background: GREY_9
 					}}
 				>
