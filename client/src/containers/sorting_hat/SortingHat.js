@@ -9,6 +9,7 @@ const { Content } = Layout;
 
 class SortingHat extends Component {
 	componentWillMount() {
+		console.log("componentWillMount");
 		// run once before first render()
 		this.props.onSortingHat();
 		this.props.fetchUserSortingHatAsks(this.props.auth.mongoDBUserId);
@@ -95,6 +96,7 @@ class SortingHat extends Component {
 				</Row>
 				<Row type="flex" justify="center">
 					<Col
+						style={{ padding: "0px 0px 30px 0px" }}
 						xs={{ span: 19 }}
 						sm={{ span: 16 }}
 						md={{ span: 20 }}

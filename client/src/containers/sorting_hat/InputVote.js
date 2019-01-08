@@ -210,65 +210,13 @@ class InputVote extends Component {
 		});
 	}
 
-	getHeightBetweenCards(fourAsks, askIndex) {
-		const { windowWidth } = this.props;
-		if (windowWidth >= 1200 && (askIndex === 0 || askIndex === 1)) {
-			// to display the second Ask with the same height as the first Ask
-			const numberOfAsOn1stAsk = fourAsks[0].answers.length;
-			let numberOfAsOn2ndAsk = 0;
-			if (fourAsks.length > 1) {
-				// make sure that there is a second ask
-				numberOfAsOn2ndAsk = fourAsks[1].answers.length;
-			}
-
-			// add height below card on 1st or 2nd Ask to match each other
-			const numberOfAsDiffBetween1stAnd2ndAsk =
-				numberOfAsOn1stAsk - numberOfAsOn2ndAsk;
-			// console.log('askIndex = ', askIndex);
-			// console.log(
-			// 	'numberOfAsDiffBetween1stAnd2ndAsk = ',
-			// 	numberOfAsDiffBetween1stAnd2ndAsk
-			// );
-			// can equal -2, -1, 0, 1, or 2
-			if (askIndex === 0) {
-				switch (numberOfAsDiffBetween1stAnd2ndAsk) {
-					case -2:
-						return "108px";
-					case -1:
-						return "72px";
-					case 0:
-						return "36px";
-					case 1:
-						return "36px";
-					case 2:
-						return "36px";
-					default:
-						return "36px";
-				}
-			} else if (askIndex === 1) {
-				switch (numberOfAsDiffBetween1stAnd2ndAsk) {
-					case -2:
-						return "36px";
-					case -1:
-						return "36px";
-					case 0:
-						return "36px";
-					case 1:
-						return "72px";
-					case 2:
-						return "108px";
-					default:
-						return "36px";
-				}
-			}
-		} else {
-			return "30px";
-		}
-	}
-
 	renderQandAs() {
 		const { colorTheme, sortingHat, landing, activeSection } = this.props;
 
+		console.log(
+			"sortingHat.current4DisplayedAsks = ",
+			sortingHat.current4DisplayedAsks
+		);
 		let fourAsks;
 		let cardColor = colorTheme.text8Color;
 		let cardTextColor = colorTheme.text2Color;
@@ -284,11 +232,6 @@ class InputVote extends Component {
 
 		if (fourAsks.length > 0) {
 			return _.map(fourAsks, (Ask, askIndex) => {
-				const heightBetweenCards = this.getHeightBetweenCards(
-					fourAsks,
-					askIndex
-				);
-
 				let displayQuestion;
 				let displayAnswers;
 
@@ -362,7 +305,7 @@ class InputVote extends Component {
 							</Card>
 							<Row
 								style={{
-									padding: "0px 0px " + heightBetweenCards // top left&right bottom
+									padding: "0px 0px 30px"
 								}}
 							/>
 						</Col>
@@ -374,10 +317,15 @@ class InputVote extends Component {
 				<h3
 					style={{
 						color: colorTheme.text2Color,
-						fontFamily: "Lucida Grande"
+						fontFamily: "Lucida Grande",
+						marginBottom: 0,
+						lineHeight: 1,
+						fontSize: 28,
+						padding: "90px 0px 0px",
+						textAlign: "center"
 					}}
 				>
-					Looks like you've done a lot of voting; you should ask a
+					Looks like you've done a lot of voting. Try asking a
 					question!
 				</h3>
 			);
