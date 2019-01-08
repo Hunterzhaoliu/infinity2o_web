@@ -27,7 +27,8 @@ class CustomFooter extends Component {
 				<Footer
 					style={{
 						textAlign: "center",
-						background: backgroundColor
+						background: backgroundColor,
+						padding: "0px 0px 20px"
 					}}
 				>
 					<Row type="flex" justify="center">

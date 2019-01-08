@@ -151,25 +151,36 @@ class Landing extends Component {
 	}
 
 	renderLogin() {
-		const { loggedInState } = this.props;
+		const { loggedInState, windowWidth } = this.props;
+
+		let callToActionPadding = "120px 0px 60px";
+		let callToActionFontSize = 28;
+		let loginPadding = "0px 0px 120px";
+
+		if (windowWidth < 768) {
+			callToActionPadding = "60px 0px 30px";
+			callToActionFontSize = 22;
+			loginPadding = "0px 0px 60px";
+		}
+
 		if (loggedInState === "not_logged_in") {
 			return (
 				<div>
 					<Row
 						style={{
-							padding: "120px 0px 0px"
+							padding: callToActionPadding
 						}}
 						type="flex"
 						justify="center"
 					>
-						<Col>
+						<Col xs={{ span: 21 }} sm={{ span: 24 }}>
 							<h2
 								key="0"
 								style={{
 									textAlign: "center",
 									color: GREY_9,
 									fontFamily: "Lucida Grande",
-									fontSize: "28px",
+									fontSize: callToActionFontSize,
 									fontWeight: "bold",
 									marginBottom: 0,
 									lineHeight: 1
@@ -181,18 +192,13 @@ class Landing extends Component {
 						</Col>
 					</Row>
 					<Row
-						style={{
-							padding: "60px 0px 0px"
-						}}
 						type="flex"
 						justify="center"
+						style={{ padding: loginPadding }}
 					>
 						<Col>
 							<LoginButtons />
 						</Col>
-					</Row>
-					<Row>
-						<Col style={{ height: "120px" }} />
 					</Row>
 				</div>
 			);
