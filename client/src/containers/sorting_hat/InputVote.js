@@ -198,7 +198,7 @@ class InputVote extends Component {
 							isDisplayingSaveIcon
 						)}
 					</Col>
-					<Col span={this.renderSpanChange(isDisplayingAskStats)}>
+					<Col sm={{ offset: 1 }}>
 						{this.renderAskStats(
 							answerVotes,
 							askTotalVotes,
@@ -234,6 +234,7 @@ class InputVote extends Component {
 				let askId;
 				let askTotalVotes;
 				let isDisplayingAskStats = false;
+				let totalVotesDisplay;
 
 				if (Ask !== null && Ask !== undefined) {
 					displayQuestion = Ask.question;
@@ -244,11 +245,15 @@ class InputVote extends Component {
 						sortingHat.votes[askId] !== undefined ||
 						landing.votes[askId] !== undefined
 					) {
+						// user has voted on this question
 						isDisplayingAskStats = true;
+						// need to display the total number of votes on ask
+						totalVotesDisplay = String(askTotalVotes) + " vote(s)";
 					}
 
 					return (
 						<Col
+							xs={{ span: 24 }}
 							sm={{ span: 24 }}
 							md={{ span: 12 }}
 							lg={{ span: 12 }}
@@ -271,20 +276,18 @@ class InputVote extends Component {
 										fontFamily: "Lucida Grande",
 										marginBottom: 0,
 										lineHeight: 1,
-										padding: "0px 0px 5px 0px"
+										padding: "0px 0px 10px 0px"
 									}}
 								>
 									{displayQuestion}
 								</h3>
 								<div
 									style={{
-										color: voteColor
+										color: voteColor,
+										lineHeight: 1
 									}}
 								>
-									{this.renderTotalVotes(
-										askTotalVotes,
-										isDisplayingAskStats
-									)}
+									{totalVotesDisplay}
 								</div>
 								{this.renderAnswers(
 									displayAnswers,
@@ -349,23 +352,31 @@ class InputVote extends Component {
 	}
 
 	renderSpanChange(isDisplayingAskStats) {
+		const { windowWidth } = this.props;
 		if (isDisplayingAskStats) {
-			return 12;
-		}
-	}
-
-	renderTotalVotes(askTotalVotes, isDisplayingAskStats) {
-		if (isDisplayingAskStats) {
-			return String(askTotalVotes) + " vote(s)";
+			if (windowWidth > 1250) {
+				return 15;
+			} else if (windowWidth > 992) {
+				return 18;
+			} else if (windowWidth > 768) {
+				return 20;
+			} else {
+				return 20;
+			}
 		}
 	}
 
 	render() {
-		const { colorTheme, activeSection } = this.props;
+		const { colorTheme, activeSection, windowWidth } = this.props;
 
 		let background = colorTheme.backgroundColor;
 		if (activeSection !== "sorting_hat") {
 			background = GREY_1;
+		}
+
+		let gutter = 30;
+		if (windowWidth < 768) {
+			gutter = 0;
 		}
 
 		return (
@@ -375,7 +386,7 @@ class InputVote extends Component {
 				}}
 			>
 				<FirstVote />
-				<Row type="flex" justify="center" gutter={30}>
+				<Row type="flex" justify="center" gutter={gutter}>
 					{this.renderQandAs()}
 				</Row>
 			</Content>
