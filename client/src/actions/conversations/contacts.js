@@ -1,203 +1,223 @@
 import axios from "axios";
 import {
-  UPDATE_CONTACTS,
-  UPDATE_CONTACTS_ERROR,
-  UPDATE_CHAT,
-  UPDATE_CHAT_ERROR,
-  ON_SELECT_CONTACT,
-  SAVE_USER_CONVERSATIONS_SUCCESS,
-  SAVE_USER_CONVERSATIONS_ERROR,
-  SEEN_MESSAGES,
-  UPDATE_SELECTED_CONTACT_INFO,
-  UPDATE_VOTE_COMPARISON,
-  DELETE_CONVERSATION
+	UPDATE_CONTACTS,
+	UPDATE_CONTACTS_ERROR,
+	UPDATE_CHAT,
+	UPDATE_CHAT_ERROR,
+	ON_SELECT_CONTACT,
+	SAVE_USER_CONVERSATIONS_SUCCESS,
+	SAVE_USER_CONVERSATIONS_ERROR,
+	SEEN_MESSAGES,
+	UPDATE_SELECTED_CONTACT_INFO,
+	UPDATE_VOTE_COMPARISON,
+	DELETE_CONVERSATION
 } from "../types";
 import { store } from "../../index";
 
 export const fetchConversations = () => async dispatch => {
-  // 1) hit /api/current_user to get allContacts
-  const userResponse = await axios.get("/api/current_user");
-  if (userResponse.status === 200) {
-    const userConversations = userResponse.data.conversations.userConversations;
-    // 2) update user conversations with newest contact clientSocket ids
-    const updatedUserConversationsResponse = await axios.put(
-      "/api/conversations/online_contacts",
-      userConversations
-    );
+	// 1) hit /api/current_user to get allContacts
+	const userResponse = await axios.get("/api/current_user");
+	if (userResponse.status === 200) {
+		const userConversations =
+			userResponse.data.conversations.userConversations;
+		// 2) update user conversations with newest contact clientSocket ids if in
+		// production, staging, or development
+		let updatedUserConversationsResponse = userConversations;
+		if (process.env.NODE_ENV === "production") {
+			// in production or staging, need to search database to find which
+			// clients are in redis for live chatting
+			updatedUserConversationsResponse = await axios.put(
+				"/api/conversations/online_contacts",
+				userConversations
+			);
+		}
 
-    if (updatedUserConversationsResponse.status === 200) {
-      const updatedUserConversations = updatedUserConversationsResponse.data;
-      dispatch({
-        type: UPDATE_CONTACTS,
-        allContacts: updatedUserConversations
-      });
-      dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
+		if (
+			updatedUserConversationsResponse.status === 200 ||
+			updatedUserConversationsResponse.status === undefined
+		) {
+			let updatedUserConversations = updatedUserConversationsResponse;
+			if (process.env.NODE_ENV === "production") {
+				// in production or staging, need to set the updatedUserConversations
+				// equal to the response.data rather
+				updatedUserConversations =
+					updatedUserConversationsResponse.data;
+			}
 
-      const contactChatDisplayIndex = 0;
-      // 3) display chat log of first conversation
-      if (
-        updatedUserConversations !== undefined &&
-        updatedUserConversations.length >= 1
-      ) {
-        const conversationId =
-          updatedUserConversations[contactChatDisplayIndex].conversationId;
-        const contactIsOnline =
-          updatedUserConversations[contactChatDisplayIndex].isOnline;
-        const contactSocketId =
-          updatedUserConversations[contactChatDisplayIndex].socketId;
-        const contactMongoDBId =
-          updatedUserConversations[contactChatDisplayIndex].matchId;
-        const numberOfUnseenMessages =
-          updatedUserConversations[contactChatDisplayIndex]
-            .numberOfUnseenMessages;
+			dispatch({
+				type: UPDATE_CONTACTS,
+				allContacts: updatedUserConversations
+			});
+			dispatch({ type: SAVE_USER_CONVERSATIONS_SUCCESS });
 
-        selectContact(
-          conversationId,
-          contactIsOnline,
-          contactSocketId,
-          contactMongoDBId,
-          numberOfUnseenMessages,
-          dispatch
-        );
-      }
-    } else {
-      dispatch({ type: UPDATE_CONTACTS_ERROR });
+			const contactChatDisplayIndex = 0;
+			// 3) display chat log of first conversation
+			if (
+				updatedUserConversations !== undefined &&
+				updatedUserConversations.length >= 1
+			) {
+				const conversationId =
+					updatedUserConversations[contactChatDisplayIndex]
+						.conversationId;
+				const contactIsOnline =
+					updatedUserConversations[contactChatDisplayIndex].isOnline;
+				const contactSocketId =
+					updatedUserConversations[contactChatDisplayIndex].socketId;
+				const contactMongoDBId =
+					updatedUserConversations[contactChatDisplayIndex].matchId;
+				const numberOfUnseenMessages =
+					updatedUserConversations[contactChatDisplayIndex]
+						.numberOfUnseenMessages;
 
-      dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
-    }
-  }
+				selectContact(
+					conversationId,
+					contactIsOnline,
+					contactSocketId,
+					contactMongoDBId,
+					numberOfUnseenMessages,
+					dispatch
+				);
+			}
+		} else {
+			dispatch({ type: UPDATE_CONTACTS_ERROR });
+
+			dispatch({ type: SAVE_USER_CONVERSATIONS_ERROR });
+		}
+	}
 };
 
 const selectContact = async (
-  conversationId,
-  contactIsOnline,
-  contactSocketId,
-  contactMongoDBId,
-  numberOfUnseenMessages,
-  dispatch
+	conversationId,
+	contactIsOnline,
+	contactSocketId,
+	contactMongoDBId,
+	numberOfUnseenMessages,
+	dispatch
 ) => {
-  dispatch({
-    type: ON_SELECT_CONTACT,
-    conversationId: conversationId,
-    contactIsOnline: contactIsOnline,
-    contactSocketId: contactSocketId,
-    contactMongoDBId: contactMongoDBId
-  });
+	dispatch({
+		type: ON_SELECT_CONTACT,
+		conversationId: conversationId,
+		contactIsOnline: contactIsOnline,
+		contactSocketId: contactSocketId,
+		contactMongoDBId: contactMongoDBId
+	});
 
-  // get previous messages in DB
-  const previousMessagesInDB = await axios.get(
-    "/api/conversations?conversationId=" + conversationId
-  );
+	// get previous messages in DB
+	const previousMessagesInDB = await axios.get(
+		"/api/conversations?conversationId=" + conversationId
+	);
 
-  if (previousMessagesInDB.status === 200) {
-    dispatch({
-      type: UPDATE_CHAT,
-      last50Messages: previousMessagesInDB.data.last50Messages
-    });
+	if (previousMessagesInDB.status === 200) {
+		dispatch({
+			type: UPDATE_CHAT,
+			last50Messages: previousMessagesInDB.data.last50Messages
+		});
 
-    if (numberOfUnseenMessages >= 1) {
-      dispatch({
-        type: SEEN_MESSAGES,
-        conversationId: conversationId,
-        numberOfUnseenMessages: numberOfUnseenMessages
-      });
-      const seenMessagesInfo = {
-        conversationId: conversationId,
-        numberOfUnseenMessages: numberOfUnseenMessages
-      };
-      await axios.put("/api/profile/seen_messages", seenMessagesInfo);
-    }
-  } else {
-    dispatch({ type: UPDATE_CHAT_ERROR });
-  }
+		if (numberOfUnseenMessages >= 1) {
+			dispatch({
+				type: SEEN_MESSAGES,
+				conversationId: conversationId,
+				numberOfUnseenMessages: numberOfUnseenMessages
+			});
+			const seenMessagesInfo = {
+				conversationId: conversationId,
+				numberOfUnseenMessages: numberOfUnseenMessages
+			};
+			await axios.put("/api/profile/seen_messages", seenMessagesInfo);
+		}
+	} else {
+		dispatch({ type: UPDATE_CHAT_ERROR });
+	}
 
-  const selectedContactInfo = await axios.get(
-    "/api/matches/selected_contact_info?contactMongoDBId=" + contactMongoDBId
-  );
+	const selectedContactInfo = await axios.get(
+		"/api/matches/selected_contact_info?contactMongoDBId=" +
+			contactMongoDBId
+	);
 
-  if (selectedContactInfo.status === 200) {
-    // dispatch update selected contact info
-    dispatch({
-      type: UPDATE_SELECTED_CONTACT_INFO,
-      selectedContactInfo: selectedContactInfo.data
-    });
-    voteComparison(selectedContactInfo.data.asks.votes, dispatch);
-  }
+	if (selectedContactInfo.status === 200) {
+		// dispatch update selected contact info
+		dispatch({
+			type: UPDATE_SELECTED_CONTACT_INFO,
+			selectedContactInfo: selectedContactInfo.data
+		});
+		voteComparison(selectedContactInfo.data.asks.votes, dispatch);
+	}
 };
 
 const voteComparison = (contactVotes, dispatch) => {
-  const userVotes = store.getState().profile.asks.votes;
-  let userVoteDict = {};
-  userVotes.forEach(userVote => {
-    userVoteDict[userVote._askId] = {
-      _answerId: userVote._answerId,
-      question: userVote.question,
-      selectedAnswer: userVote.selectedAnswer
-    };
-  });
+	const userVotes = store.getState().profile.asks.votes;
+	let userVoteDict = {};
+	userVotes.forEach(userVote => {
+		userVoteDict[userVote._askId] = {
+			_answerId: userVote._answerId,
+			question: userVote.question,
+			selectedAnswer: userVote.selectedAnswer
+		};
+	});
 
-  let agreedAsks = [];
-  let disagreedAsks = [];
-  contactVotes.forEach(contactVote => {
-    if (userVoteDict[contactVote._askId] !== undefined) {
-      // user and contact both answered this question
-      if (
-        userVoteDict[contactVote._askId]._answerId === contactVote._answerId
-      ) {
-        // user and contact answered the same answer
-        agreedAsks.push({
-          question: contactVote.question,
-          userAndContactAnswer: contactVote.selectedAnswer
-        });
-      } else {
-        // user and contact answered differently
-        disagreedAsks.push({
-          question: contactVote.question,
-          contactAnswer: contactVote.selectedAnswer,
-          userAnswer: userVoteDict[contactVote._askId].selectedAnswer
-        });
-      }
-    }
-  });
-  dispatch({
-    type: UPDATE_VOTE_COMPARISON,
-    agreedAsks: agreedAsks,
-    disagreedAsks: disagreedAsks
-  });
+	let agreedAsks = [];
+	let disagreedAsks = [];
+	contactVotes.forEach(contactVote => {
+		if (userVoteDict[contactVote._askId] !== undefined) {
+			// user and contact both answered this question
+			if (
+				userVoteDict[contactVote._askId]._answerId ===
+				contactVote._answerId
+			) {
+				// user and contact answered the same answer
+				agreedAsks.push({
+					question: contactVote.question,
+					userAndContactAnswer: contactVote.selectedAnswer
+				});
+			} else {
+				// user and contact answered differently
+				disagreedAsks.push({
+					question: contactVote.question,
+					contactAnswer: contactVote.selectedAnswer,
+					userAnswer: userVoteDict[contactVote._askId].selectedAnswer
+				});
+			}
+		}
+	});
+	dispatch({
+		type: UPDATE_VOTE_COMPARISON,
+		agreedAsks: agreedAsks,
+		disagreedAsks: disagreedAsks
+	});
 };
 
 export const onSelectContact = (
-  conversationId,
-  contactIsOnline,
-  contactSocketId,
-  contactMongoDBId,
-  numberOfUnseenMessages
+	conversationId,
+	contactIsOnline,
+	contactSocketId,
+	contactMongoDBId,
+	numberOfUnseenMessages
 ) => async dispatch => {
-  selectContact(
-    conversationId,
-    contactIsOnline,
-    contactSocketId,
-    contactMongoDBId,
-    numberOfUnseenMessages,
-    dispatch
-  );
+	selectContact(
+		conversationId,
+		contactIsOnline,
+		contactSocketId,
+		contactMongoDBId,
+		numberOfUnseenMessages,
+		dispatch
+	);
 };
 
 export const onCloseConversation = (
-  conversationId,
-  contactMongoDBId
+	conversationId,
+	contactMongoDBId
 ) => async dispatch => {
-  const deleteConversation = await axios.delete("/api/conversations/delete", {
-    data: {
-      conversationId: conversationId,
-      contactMongoDBId: contactMongoDBId
-    }
-  });
+	const deleteConversation = await axios.delete("/api/conversations/delete", {
+		data: {
+			conversationId: conversationId,
+			contactMongoDBId: contactMongoDBId
+		}
+	});
 
-  if (deleteConversation.status === 200) {
-    dispatch({
-      type: DELETE_CONVERSATION,
-      conversationId: conversationId
-    });
-  }
+	if (deleteConversation.status === 200) {
+		dispatch({
+			type: DELETE_CONVERSATION,
+			conversationId: conversationId
+		});
+	}
 };

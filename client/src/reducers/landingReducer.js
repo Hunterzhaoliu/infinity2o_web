@@ -1,4 +1,8 @@
-import { SAVE_FETCHED_LANDING_ASKS, ON_VOTE_LANDING } from '../actions/types';
+import {
+	SAVE_FETCHED_LANDING_ASKS,
+	ON_VOTE_LANDING,
+	CLOSE_MODAL
+} from "../actions/types";
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
@@ -7,7 +11,8 @@ let cloneObject = obj => {
 let initialState = {
 	landingAsks: [],
 	votes: {},
-	numberOfLandingVotes: 0
+	numberOfLandingVotes: 0,
+	isFirstVoteModalOpen: false
 };
 
 export default function(state = initialState, action) {
@@ -26,6 +31,10 @@ export default function(state = initialState, action) {
 				answer: votedAnswer.answer
 			};
 			newState.numberOfLandingVotes += 1;
+			newState.isFirstVoteModalOpen = action.isFirstVote;
+			return newState;
+		case CLOSE_MODAL:
+			newState.isFirstVoteModalOpen = false;
 			return newState;
 		default:
 			return state;

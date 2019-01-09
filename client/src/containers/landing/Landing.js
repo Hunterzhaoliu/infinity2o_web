@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import * as colorThemeActions from "../../actions/colorTheme";
 import * as landingActions from "../../actions/landing";
 import { bindActionCreators } from "redux";
-import Testimonials from "./Testimonials";
-import { GREY_9, GREY_7, GREY_2, GREY_1 } from "../styles/ColorConstants";
+import { GREY_9, GREY_1 } from "../styles/ColorConstants";
 import LoginButtons from "./LoginButtons";
 import InputVote from "../sorting_hat/InputVote";
+import Marketing from "./Marketing";
 import { Layout, Row, Col } from "antd";
 const { Content } = Layout;
 
@@ -26,189 +26,67 @@ class Landing extends Component {
 		}
 	}
 
-	renderCartoons() {
-		return (
-			<div>
-				<Row
-					style={{
-						padding: "65px 0px 0px 0px" // top left&right bottom
-					}}
-					type="flex"
-					justify="center"
-					align="top"
-				>
-					<Col
-						xs={{ span: 24 }}
-						sm={{ span: 12 }}
-						md={{ span: 8 }}
-						lg={{ span: 12 }}
-						xl={{ span: 12 }}
-					>
-						<Row type="flex" justify="center" align="middle">
-							<Col>
-								<h2
-									style={{
-										textAlign: "center",
-										color: GREY_2,
-										fontFamily: "Titillium Web",
-										fontWeight: "bold",
-										fontSize: 22,
-										padding: "0px 15px 0px 0px"
-									}}
-								>
-									Online class alone
-								</h2>
-							</Col>
-						</Row>
-						<Row type="flex" justify="center" align="middle">
-							<Col>
-								<div style={{ height: "30px" }} />
-							</Col>
-						</Row>
-						<Row type="flex" justify="center">
-							<Col>
-								<img
-									alt=""
-									style={{
-										height: "290px",
-										padding: "0px 0px 0px 15px"
-									}}
-									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
-								/>
-							</Col>
-						</Row>
-					</Col>
-					<Col
-						xs={{ span: 24 }}
-						sm={{ span: 14 }}
-						md={{ span: 16 }}
-						lg={{ span: 11 }}
-						xl={{ span: 12 }}
-					>
-						<Row type="flex" justify="center">
-							<Col>
-								<h2
-									style={{
-										textAlign: "center",
-										color: GREY_2,
-										fontFamily: "Titillium Web",
-										fontWeight: "bold",
-										fontSize: 22,
-										padding: "0px 220px 0px 0px"
-									}}
-								>
-									Online class through infinity2o
-								</h2>
-							</Col>
-						</Row>
-						<Row type="flex" justify="center" align="middle">
-							<div style={{ height: "35px" }} />
-						</Row>
-						<Row type="flex" justify="center">
-							<Col>
-								<img
-									alt=""
-									style={{
-										height: "300px",
-										padding: "0px 250px 0px 0px"
-									}}
-									src="https://user-images.githubusercontent.com/2585159/40999319-20ee0d16-68d0-11e8-900a-0c239b422906.png"
-								/>
-							</Col>
-						</Row>
-					</Col>
-				</Row>
-			</div>
-		);
-	}
-
-	renderMarketingInfo() {
-		return (
-			<div>
-				<Row
-					type="flex"
-					justify="center"
-					style={{ padding: "135px 0px 0px" }}
-				>
-					<Col>
-						<h1
-							key="0"
-							style={{
-								textAlign: "center",
-								color: GREY_1,
-								fontSize: 35,
-								fontFamily: "Titillium Web",
-								fontWeight: "bold"
-							}}
-						>
-							Meet people with similar beliefs to take online
-							courses with.
-						</h1>
-					</Col>
-				</Row>
-				{this.renderCartoons()}
-			</div>
-		);
-	}
-
 	renderLandingAsks() {
+		const { windowWidth } = this.props;
 		const how_part_0 =
 			"Find the best matches by expressing your beliefs to the Sorting Hat";
-		const how_part_1 = "by voting or asking questions";
+
+		let h2Padding = "120px 0px 0px";
+		let imageHeight = 35;
+		let h2FontSize = 26;
+		let finalRowPadding = "60px 0px 90px 0px";
+
+		if (windowWidth < 768) {
+			h2Padding = "60px 0px 0px";
+			imageHeight = 25;
+			h2FontSize = 22;
+			finalRowPadding = "30px 0px 30px 0px";
+		}
 
 		return (
 			<div>
 				<Row
 					type="flex"
 					justify="center"
-					style={{ padding: "100px 0px 0px" }}
+					style={{ padding: h2Padding }}
 				>
-					<Col>
-						<h1
+					<Col xs={{ span: 21 }} sm={{ span: 21 }} md={{ span: 22 }}>
+						<h2
 							style={{
 								textAlign: "center",
 								color: GREY_9,
-								fontSize: 30,
-								fontFamily: "Titillium Web",
-								fontWeight: "bold"
+								fontSize: h2FontSize,
+								fontFamily: "Lucida Grande",
+								fontWeight: "bold",
+								marginBottom: 0,
+								lineHeight: 1
 							}}
 						>
 							{how_part_0}{" "}
 							<img
 								alt=""
 								style={{
-									width: 50,
-									padding: "0px 0px 5px 5px"
+									height: imageHeight
 								}}
-								src="https://user-images.githubusercontent.com/24757872/40881487-37bb7a50-668d-11e8-8d2e-d3be80bdef09.png"
+								src="https://user-images.githubusercontent.com/24757872/50742136-b9d11a00-11cc-11e9-960c-6d015d01d890.png"
 							/>
-						</h1>
-					</Col>
-				</Row>
-				<Row type="flex" justify="center">
-					<Col>
-						<h1
-							style={{
-								textAlign: "center",
-								color: GREY_7,
-								fontSize: 25,
-								fontFamily: "Titillium Web"
-							}}
-						>
-							{how_part_1}
-						</h1>
+						</h2>
 					</Col>
 				</Row>
 				<Row
 					type="flex"
 					justify="center"
-					align="middle"
 					style={{
-						textAlign: "center",
-						padding: "75px 0px 0px 0px"
+						padding: finalRowPadding
 					}}
 				>
-					<Col>
+					<Col
+						xs={{ span: 19 }}
+						sm={{ span: 16 }}
+						md={{ span: 20 }}
+						lg={{ span: 18 }}
+						xl={{ span: 15 }}
+					>
 						<InputVote />
 					</Col>
 				</Row>
@@ -217,40 +95,52 @@ class Landing extends Component {
 	}
 
 	renderMatch() {
-		const how_part_2 = "Chat with the matches you want to learn with";
+		const { windowWidth } = this.props;
+
+		let h2Padding = "120px 0px 0px";
+		let imageHeight = 400;
+		let h2FontSize = 28;
+		let pictureRowPadding = "60px 0px 120px";
+
+		if (windowWidth < 768) {
+			h2Padding = "60px 0px 0px";
+			imageHeight = 250;
+			h2FontSize = 22;
+			pictureRowPadding = "30px 0px 60px";
+		}
 
 		return (
 			<div>
 				<Row type="flex" justify="center">
-					<Col>
-						<h1
+					<Col xs={{ span: 21 }} sm={{ span: 24 }}>
+						<h2
 							style={{
 								textAlign: "center",
 								color: GREY_1,
-								fontSize: 30,
-								fontFamily: "Titillium Web",
+								fontSize: h2FontSize,
+								fontFamily: "Lucida Grande",
 								fontWeight: "bold",
-								padding: "100px 0px 0px 0px"
+								padding: h2Padding,
+								marginBottom: 0,
+								lineHeight: 1
 							}}
 						>
-							{how_part_2}
-						</h1>
+							Chat with the matches you want to learn with
+						</h2>
 					</Col>
 				</Row>
 				<Row
 					type="flex"
 					justify="center"
-					align="middle"
 					style={{
-						textAlign: "center",
-						padding: "50px 0px 0px 0px"
+						padding: pictureRowPadding
 					}}
 				>
 					<Col>
 						<img
 							alt="Match Example"
 							style={{
-								height: "350px"
+								height: imageHeight
 							}}
 							src="https://user-images.githubusercontent.com/2585159/41510382-32448628-7229-11e8-8017-e87d7f761aea.png"
 						/>
@@ -261,39 +151,50 @@ class Landing extends Component {
 	}
 
 	renderLogin() {
-		const { loggedInState } = this.props;
+		const { loggedInState, windowWidth } = this.props;
+
+		let callToActionPadding = "120px 0px 60px";
+		let callToActionFontSize = 28;
+		let loginPadding = "0px 0px 120px";
+
+		if (windowWidth < 768) {
+			callToActionPadding = "60px 0px 30px";
+			callToActionFontSize = 22;
+			loginPadding = "0px 0px 60px";
+		}
+
 		if (loggedInState === "not_logged_in") {
 			return (
 				<div>
 					<Row
 						style={{
-							padding: "100px 0px 0px" // top left&right bottom
+							padding: callToActionPadding
 						}}
 						type="flex"
 						justify="center"
 					>
-						<Col>
+						<Col xs={{ span: 21 }} sm={{ span: 24 }}>
 							<h2
 								key="0"
 								style={{
 									textAlign: "center",
 									color: GREY_9,
-									fontFamily: "Titillium Web",
-									fontSize: "30px",
-									fontWeight: "bold"
+									fontFamily: "Lucida Grande",
+									fontSize: callToActionFontSize,
+									fontWeight: "bold",
+									marginBottom: 0,
+									lineHeight: 1
 								}}
 							>
-								Come join Earth's largest community of online
+								Join Earth's largest community of online
 								learners.
 							</h2>
 						</Col>
 					</Row>
 					<Row
-						style={{
-							padding: "50px 0px 0px" // top left&right bottom
-						}}
 						type="flex"
 						justify="center"
+						style={{ padding: loginPadding }}
 					>
 						<Col>
 							<LoginButtons />
@@ -304,43 +205,18 @@ class Landing extends Component {
 		}
 	}
 
-	renderTestimonials() {
-		return (
-			<Row
-				style={{
-					padding: "40px 0px 0px" // top left&right bottom
-				}}
-				type="flex"
-				justify="center"
-				align="top"
-			>
-				<Col
-					xs={{ span: 24 }}
-					sm={{ span: 14 }}
-					md={{ span: 10 }}
-					lg={{ span: 8 }}
-					xl={{ span: 6 }}
-				>
-					<Testimonials />
-				</Col>
-			</Row>
-		);
-	}
-
 	render() {
 		return (
 			<div>
 				<Content
 					style={{
-						height: "96vh",
 						background: GREY_9
 					}}
 				>
-					{this.renderMarketingInfo()}
+					<Marketing />
 				</Content>
 				<Content
 					style={{
-						padding: "0px 255px 100px", // top left&right bottom
 						background: GREY_1
 					}}
 				>
@@ -348,7 +224,6 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						padding: "0px 50px 100px", // top left&right bottom
 						background: GREY_9
 					}}
 				>
@@ -356,7 +231,6 @@ class Landing extends Component {
 				</Content>
 				<Content
 					style={{
-						padding: "0px 50px 100px", // top left&right bottom
 						background: GREY_1
 					}}
 				>
@@ -373,7 +247,8 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		loggedInState: state.auth.loggedInState
+		loggedInState: state.auth.loggedInState,
+		windowWidth: state.customHeader.windowWidth
 	};
 }
 
