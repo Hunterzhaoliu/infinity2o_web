@@ -11,7 +11,8 @@ class MatchesButton extends Component {
 				count={numberOfUnseenMatches}
 				style={{
 					backgroundColor: colorTheme.keyText8Color,
-					color: colorTheme.text1Color
+					color: colorTheme.text1Color,
+					boxShadow: "0 0 0 1px " + colorTheme.keyText8Color
 				}}
 			>
 				<Button
@@ -27,7 +28,8 @@ class MatchesButton extends Component {
 							alt=""
 							style={{ width: 32 }}
 							src="https://user-images.githubusercontent.com/24757872/40881562-23db47c0-668f-11e8-84a6-29020f352353.png"
-						/>Matches
+						/>
+						Matches
 					</a>
 				</Button>
 			</Badge>
