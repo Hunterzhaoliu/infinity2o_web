@@ -21,14 +21,13 @@ class ConversationButton extends Component {
 						borderColor: colorTheme.conversationsButtonColor,
 						background: colorTheme.conversationsButtonColor,
 						color: colorTheme.conversationsButtonTextColor,
-						padding: "0px 0px 0px",
-						width: 35
+						padding: "0px 10px 0px"
 					}}
 				>
 					<a href="/conversations">
 						<img
 							alt=""
-							style={{ width: 18, padding: "0px 0px 4px" }}
+							style={{ width: 18 }}
 							src="https://user-images.githubusercontent.com/24757872/40881815-7ea6867c-6696-11e8-9690-4b691d249fa8.png"
 						/>
 					</a>
@@ -40,7 +39,6 @@ class ConversationButton extends Component {
 	render() {
 		return (
 			<Col
-				style={{ padding: "1.5px 0px 0px" }}
 				md={{ offset: 1 }}
 				lg={{ offset: 1 }}
 				xl={{ offset: 1 }}
@@ -68,4 +66,7 @@ So we have a state and a UI(with props).
 This function gives the UI the functions it will need to be called.
 */
 
-export default connect(mapStateToProps, null)(ConversationButton);
+export default connect(
+	mapStateToProps,
+	null
+)(ConversationButton);

@@ -5,7 +5,6 @@ import * as sortingHatActionCreators from "../../actions/sorting_hat/sortingHat"
 import * as landingActionCreators from "../../actions/landing";
 import { bindActionCreators } from "redux";
 import {
-	GREY_9,
 	GREY_8,
 	GREY_7,
 	GREY_3,
@@ -13,23 +12,13 @@ import {
 	GREY_1,
 	RED_ORANGE_3
 } from "../styles/ColorConstants";
-import LoginButtons from "../landing/LoginButtons";
-import "./InputVote.css";
-import { Button, Card, Col, Layout, Row, Icon, Modal } from "antd";
+import FirstVote from "../landing/FirstVote";
+import { Button, Card, Col, Layout, Row, Icon } from "antd";
 const { Content } = Layout;
 
 class InputVote extends Component {
-	state = {
-		visible: false
-	};
-
-	componentWillMount() {
-		// run once before first render()
-	}
-
 	onVote(answerIndex, askIndex, askId) {
 		const { sortingHat, history, mongoDBUserId } = this.props;
-		//console.log('onVote this.props = ', this.props);
 		// now we know which answer user pressed so let's pass the answesId too
 		const ask = sortingHat.current4DisplayedAsks[askIndex];
 		const answerId = ask.answers[answerIndex]._id;
@@ -52,94 +41,44 @@ class InputVote extends Component {
 		);
 	}
 
-	onNextAsk(removeAskIndex) {
-		const { sortingHat, mongoDBUserId } = this.props;
-		this.props.onNextAsk(
-			sortingHat.nextAsks,
-			removeAskIndex,
-			mongoDBUserId
-		);
-	}
-
 	renderNextAskButton(askIndex, isDisplayingAskStats) {
-		const { colorTheme, activeSection } = this.props;
+		const {
+			colorTheme,
+			activeSection,
+			sortingHat,
+			mongoDBUserId
+		} = this.props;
+
+		let buttonText = "Pass";
+		if (isDisplayingAskStats) {
+			buttonText = "Next Question";
+		}
 
 		if (activeSection !== "sorting_hat") {
 			return;
 		} else {
 			return (
-				<Row style={{ padding: "8px 0px 0px" }}>
+				<Row style={{ padding: "10px 0px 0px" }}>
 					<Button
 						style={{
 							borderColor: colorTheme.text7Color,
 							background: colorTheme.text7Color,
 							color: colorTheme.text2Color,
-							fontFamily: "Titillium Web"
+							fontFamily: "Lucida Grande"
 						}}
-						onClick={e => this.onNextAsk(askIndex)}
+						onClick={e =>
+							this.props.onNextAsk(
+								sortingHat.nextAsks,
+								askIndex,
+								mongoDBUserId
+							)
+						}
 					>
-						{this.renderAskDoneWord(isDisplayingAskStats)}
+						{buttonText}
 					</Button>
 				</Row>
 			);
 		}
-	}
-
-	handleCancel = () => {
-		this.setState({ visible: false });
-	};
-
-	renderModal() {
-		const { visible } = this.state;
-
-		document.documentElement.style.setProperty(`--GREY_1`, GREY_1);
-
-		return (
-			<Modal visible={visible} onCancel={this.handleCancel} footer={null}>
-				<h2
-					style={{
-						textAlign: "center",
-						color: GREY_9,
-						fontFamily: "Titllium Web",
-						fontWeight: "bold",
-						fontSize: "35px",
-						padding: "50px 0px 0px"
-					}}
-				>
-					Congrats on your first vote!
-				</h2>
-				<p
-					style={{
-						textAlign: "center",
-						color: GREY_7,
-						fontFamily: "Titillium Web",
-						fontSize: "25px",
-						padding: "25px 0px 0px"
-					}}
-				>
-					To make your vote count, login with
-				</p>
-				<div style={{ height: "25px" }} />
-				<LoginButtons />
-				<div style={{ height: "50px" }} />
-			</Modal>
-		);
-	}
-
-	onVoteLanding(answerIndex, askIndex) {
-		const { landing, loggedInState } = this.props;
-		const ask = landing.landingAsks[askIndex];
-		const answerId = ask.answers[answerIndex]._id;
-		if (
-			landing.numberOfLandingVotes === 0 &&
-			loggedInState === "not_logged_in"
-		) {
-			this.setState({
-				visible: true
-			});
-		}
-
-		this.props.onVoteLanding(answerIndex, answerId, askIndex);
 	}
 
 	renderAnswerButton(
@@ -161,7 +100,7 @@ class InputVote extends Component {
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
 						color: answerButtonTextColor,
-						fontFamily: "Titillium Web"
+						fontFamily: "Lucida Grande"
 					}}
 					onClick={e => this.onVoteLanding(answerIndex, askIndex)}
 				>
@@ -175,7 +114,7 @@ class InputVote extends Component {
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
 						color: answerButtonTextColor,
-						fontFamily: "Titillium Web"
+						fontFamily: "Lucida Grande"
 					}}
 					onClick={e => this.onVote(answerIndex, askIndex, askId)}
 				>
@@ -188,6 +127,17 @@ class InputVote extends Component {
 				</Button>
 			);
 		}
+	}
+
+	onVoteLanding(answerIndex, askIndex) {
+		const { landing } = this.props;
+		let isFirstVote = false;
+
+		if (landing.numberOfLandingVotes === 0) {
+			isFirstVote = true;
+		}
+
+		this.props.onVoteLanding(answerIndex, askIndex, isFirstVote);
 	}
 
 	renderAnswers(
@@ -235,7 +185,7 @@ class InputVote extends Component {
 			}
 
 			return (
-				<Row style={{ padding: "8px 0px 0px" }} key={answerIndex}>
+				<Row style={{ padding: "10px 0px 0px" }} key={answerIndex}>
 					<Col span={this.renderSpanChange(isDisplayingAskStats)}>
 						{this.renderAnswerButton(
 							displayAnswerButtonColor,
@@ -248,12 +198,7 @@ class InputVote extends Component {
 							isDisplayingSaveIcon
 						)}
 					</Col>
-					<Col
-						style={{
-							padding: "5px 0px 0px"
-						}}
-						span={this.renderSpanChange(isDisplayingAskStats)}
-					>
+					<Col>
 						{this.renderAskStats(
 							answerVotes,
 							askTotalVotes,
@@ -263,61 +208,6 @@ class InputVote extends Component {
 				</Row>
 			);
 		});
-	}
-
-	getHeightBetweenCards(fourAsks, askIndex) {
-		const { windowWidth } = this.props;
-		if (windowWidth >= 1200 && (askIndex === 0 || askIndex === 1)) {
-			// to display to second Ask with the same height as the first Ask
-			const numberOfAsOn1stAsk = fourAsks[0].answers.length;
-			let numberOfAsOn2ndAsk = 0;
-			if (fourAsks.length > 1) {
-				numberOfAsOn2ndAsk = fourAsks[1].answers.length;
-			}
-
-			// add height below card on 1st or 2nd Ask to match each other
-			const numberOfAsDiffBetween1stAnd2ndAsk =
-				numberOfAsOn1stAsk - numberOfAsOn2ndAsk;
-			// console.log('askIndex = ', askIndex);
-			// console.log(
-			// 	'numberOfAsDiffBetween1stAnd2ndAsk = ',
-			// 	numberOfAsDiffBetween1stAnd2ndAsk
-			// );
-			// can equal -2, -1, 0, 1, or 2
-			if (askIndex === 0) {
-				switch (numberOfAsDiffBetween1stAnd2ndAsk) {
-					case -2:
-						return "108px";
-					case -1:
-						return "72px";
-					case 0:
-						return "36px";
-					case 1:
-						return "36px";
-					case 2:
-						return "36px";
-					default:
-						return "36px";
-				}
-			} else if (askIndex === 1) {
-				switch (numberOfAsDiffBetween1stAnd2ndAsk) {
-					case -2:
-						return "36px";
-					case -1:
-						return "36px";
-					case 0:
-						return "36px";
-					case 1:
-						return "72px";
-					case 2:
-						return "108px";
-					default:
-						return "36px";
-				}
-			}
-		} else {
-			return "36px";
-		}
 	}
 
 	renderQandAs() {
@@ -338,17 +228,13 @@ class InputVote extends Component {
 
 		if (fourAsks.length > 0) {
 			return _.map(fourAsks, (Ask, askIndex) => {
-				const heightBetweenCards = this.getHeightBetweenCards(
-					fourAsks,
-					askIndex
-				);
-
 				let displayQuestion;
 				let displayAnswers;
 
 				let askId;
 				let askTotalVotes;
 				let isDisplayingAskStats = false;
+				let totalVotesDisplay;
 
 				if (Ask !== null && Ask !== undefined) {
 					displayQuestion = Ask.question;
@@ -359,14 +245,18 @@ class InputVote extends Component {
 						sortingHat.votes[askId] !== undefined ||
 						landing.votes[askId] !== undefined
 					) {
+						// user has voted on this question
 						isDisplayingAskStats = true;
+						// need to display the total number of votes on ask
+						totalVotesDisplay = String(askTotalVotes) + " vote(s)";
 					}
 
 					return (
 						<Col
+							xs={{ span: 24 }}
 							sm={{ span: 24 }}
-							md={{ span: 24 }}
-							lg={{ span: 24 }}
+							md={{ span: 12 }}
+							lg={{ span: 12 }}
 							xl={{ span: 12 }}
 							key={askIndex}
 						>
@@ -374,27 +264,30 @@ class InputVote extends Component {
 								style={{
 									borderColor: cardColor,
 									background: cardColor,
-									color: cardTextColor
+									color: cardTextColor,
+									textAlign: "center"
 								}}
+								bodyStyle={{ padding: "30px" }} // padding around inside border of card
 								hoverable
 							>
 								<h3
 									style={{
 										color: cardTextColor,
-										fontFamily: "Titillium Web"
+										fontFamily: "Lucida Grande",
+										marginBottom: 0,
+										lineHeight: 1,
+										padding: "0px 0px 10px 0px"
 									}}
 								>
 									{displayQuestion}
 								</h3>
 								<div
 									style={{
-										color: voteColor
+										color: voteColor,
+										lineHeight: 1
 									}}
 								>
-									{this.renderTotalVotes(
-										askTotalVotes,
-										isDisplayingAskStats
-									)}
+									{totalVotesDisplay}
 								</div>
 								{this.renderAnswers(
 									displayAnswers,
@@ -411,7 +304,7 @@ class InputVote extends Component {
 							</Card>
 							<Row
 								style={{
-									padding: "0px 0px " + heightBetweenCards // top left&right bottom
+									padding: "0px 0px 30px"
 								}}
 							/>
 						</Col>
@@ -423,10 +316,15 @@ class InputVote extends Component {
 				<h3
 					style={{
 						color: colorTheme.text2Color,
-						fontFamily: "Titillium Web"
+						fontFamily: "Lucida Grande",
+						marginBottom: 0,
+						lineHeight: 1,
+						fontSize: 28,
+						padding: "90px 0px 0px",
+						textAlign: "center"
 					}}
 				>
-					Looks like you've done a lot of voting; you should ask a
+					Looks like you've done a lot of voting. Try asking a
 					question!
 				</h3>
 			);
@@ -447,132 +345,56 @@ class InputVote extends Component {
 
 	renderAskStats(answerVotes, askTotalVotes, isDisplayingAskStats) {
 		if (isDisplayingAskStats) {
+			const askStat =
+				String(((answerVotes / askTotalVotes) * 100).toFixed(1)) + "%";
+
 			return (
-				String(((answerVotes / askTotalVotes) * 100).toFixed(1)) + "%"
+				<div
+					style={{
+						marginBottom: 0,
+						lineHeight: 1,
+						fontFamily: "Lucida Grande",
+						padding: "8px 0px 0px"
+					}}
+				>
+					{askStat}
+				</div>
 			);
 		}
 	}
 
 	renderSpanChange(isDisplayingAskStats) {
+		const { windowWidth } = this.props;
 		if (isDisplayingAskStats) {
-			return 12;
+			if (windowWidth > 1250) {
+				return 16;
+			} else {
+				return 19;
+			}
 		}
-	}
-
-	renderAskDoneWord(isDisplayingAskStats) {
-		if (isDisplayingAskStats) {
-			return "Next Question";
-		} else {
-			return "Pass";
-		}
-	}
-
-	renderTotalVotes(askTotalVotes, isDisplayingAskStats) {
-		if (isDisplayingAskStats) {
-			return String(askTotalVotes) + " vote(s)";
-		}
-	}
-
-	renderAskCategories() {
-		const {
-			onNewestAsks,
-			onPopularAsks,
-			onControversialAsks,
-			theme
-		} = this.props;
-
-		return (
-			<Row
-				type="flex"
-				justify="center"
-				align="middle"
-				style={{
-					padding: "0px 0px 15px" // top left&right bottom
-				}}
-			>
-				<Col
-					sm={{ span: 7 }}
-					md={{ span: 6 }}
-					lg={{ span: 5 }}
-					xl={{ span: 4 }}
-				>
-					<Button
-						style={{
-							borderColor: theme.newestButtonColor,
-							background: theme.newestButtonColor,
-							color: theme.newestButtonTextColor,
-							fontFamily: "Titillium Web"
-						}}
-						onClick={onNewestAsks}
-					>
-						Newest
-					</Button>
-				</Col>
-				<Col
-					sm={{ span: 7 }}
-					md={{ span: 6 }}
-					lg={{ span: 5 }}
-					xl={{ span: 4 }}
-				>
-					<Button
-						style={{
-							borderColor: theme.popularButtonColor,
-							background: theme.popularButtonColor,
-							color: theme.popularButtonTextColor,
-							fontFamily: "Titillium Web"
-						}}
-						onClick={onPopularAsks}
-					>
-						Popular
-					</Button>
-				</Col>
-				<Col
-					sm={{ span: 8 }}
-					md={{ span: 7 }}
-					lg={{ span: 6 }}
-					xl={{ span: 5 }}
-				>
-					<Button
-						style={{
-							borderColor: theme.controversialButtonColor,
-							background: theme.controversialButtonColor,
-							color: theme.controversialButtonTextColor,
-							fontFamily: "Titillium Web"
-						}}
-						onClick={onControversialAsks}
-					>
-						Controversial
-					</Button>
-				</Col>
-			</Row>
-		);
 	}
 
 	render() {
-		const { colorTheme, activeSection } = this.props;
+		const { colorTheme, activeSection, windowWidth } = this.props;
 
 		let background = colorTheme.backgroundColor;
 		if (activeSection !== "sorting_hat") {
 			background = GREY_1;
 		}
 
+		let gutter = 30;
+		if (windowWidth < 768) {
+			gutter = 0;
+		}
+
 		return (
 			<Content
 				style={{
-					overflow: "initial",
 					background: background
 				}}
 			>
-				{this.renderModal()}
-				<Row
-					type="flex"
-					justify="center"
-					align="top"
-					style={{
-						padding: "5px 0px 0px" // top left&right bottom
-					}}
-					gutter={36}
-				>
+				<FirstVote />
+				<Row type="flex" justify="center" gutter={gutter}>
 					{this.renderQandAs()}
 				</Row>
 			</Content>
@@ -580,27 +402,17 @@ class InputVote extends Component {
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		sortingHat: state.sortingHat,
 		mongoDBUserId: state.auth.mongoDBUserId,
 		windowWidth: state.customHeader.windowWidth,
-		theme: state.sortingHat.theme,
 		landing: state.landing,
-		loggedInState: state.auth.loggedInState,
 		activeSection: state.colorTheme.activeSection
 	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
 function mapDispatchToProps(dispatch) {
 	const sortingHatDispatchers = bindActionCreators(
 		sortingHatActionCreators,
@@ -613,15 +425,6 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		onNewestAsks: () => {
-			sortingHatDispatchers.onNewestAsks();
-		},
-		onPopularAsks: () => {
-			sortingHatDispatchers.onPopularAsks();
-		},
-		onControversialAsks: () => {
-			sortingHatDispatchers.onControversialAsks();
-		},
 		onNextAsk: (nextAsks, removeAskIndex, mongoDBUserId) => {
 			sortingHatDispatchers.onNextAsk(
 				nextAsks,
@@ -646,8 +449,12 @@ function mapDispatchToProps(dispatch) {
 				mongoDBUserId
 			);
 		},
-		onVoteLanding: (answerIndex, answerId, askIndex) => {
-			landingDispatchers.onVoteLanding(answerIndex, answerId, askIndex);
+		onVoteLanding: (answerIndex, askIndex, isFirstVote) => {
+			landingDispatchers.onVoteLanding(
+				answerIndex,
+				askIndex,
+				isFirstVote
+			);
 		}
 	};
 }

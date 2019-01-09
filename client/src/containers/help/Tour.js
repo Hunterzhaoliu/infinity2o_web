@@ -18,13 +18,11 @@ class Tour extends Component {
 		const HEIGHT_RATIO = 0.38;
 		const videoWidth = windowWidth * WIDTH_RATIO;
 		const videoHeight = windowWidth * HEIGHT_RATIO;
-		const welcome = `Welcome to Infinity2o`;
 		return (
 			<Content
 				style={{
 					textAlign: "center",
-					padding: "75px 50px 0px", // top left&right bottom
-					height: 3000,
+					padding: 66,
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -34,13 +32,13 @@ class Tour extends Component {
 							key="0"
 							style={{
 								color: colorTheme.text2Color,
-								fontFamily: "Titillium Web",
+								fontFamily: "Lucida Grande",
 								fontSize: "35px",
 								fontWeight: "bold",
 								padding: "25px 0px 0px 0px"
 							}}
 						>
-							{welcome}
+							Welcome to infinity2o
 						</h1>
 					</Col>
 				</Row>
