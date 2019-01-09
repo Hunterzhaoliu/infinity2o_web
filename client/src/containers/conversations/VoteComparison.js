@@ -5,14 +5,6 @@ import { connect } from "react-redux";
 import { Row, Col, Card, Avatar } from "antd";
 import "./vote-comparison.css";
 
-function SampleNextArrow() {
-	return <div />;
-}
-
-function SamplePrevArrow() {
-	return <div />;
-}
-
 class VoteComparison extends Component {
 	renderAvatar(pictureURL) {
 		if (pictureURL !== null) {
@@ -161,8 +153,7 @@ class VoteComparison extends Component {
 			autoplaySpeed: 6000, // delay between each auto scroll (in milliseconds)
 			slidesToShow: 1,
 			slidesToScroll: 1,
-			nextArrow: <SampleNextArrow />,
-			prevArrow: <SamplePrevArrow />,
+			arrows: false,
 			pauseOnDotsHover: false,
 			pauseOnFocus: true
 		};
@@ -172,13 +163,14 @@ class VoteComparison extends Component {
 				<div style={{ padding: "0px 0px 10px 0px" }}>
 					<Slider {...settings}>{this.renderAgreedAsks()}</Slider>
 				</div>
-				<div>
-					<Slider {...settings}>{this.renderDisagreedAsks()}</Slider>
-				</div>
 			</div>
 		);
 	}
 }
+
+// <div>
+// 	<Slider {...settings}>{this.renderDisagreedAsks()}</Slider>
+// </div>
 
 function mapStateToProps(state) {
 	return {
@@ -192,4 +184,7 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(VoteComparison);
+export default connect(
+	mapStateToProps,
+	null
+)(VoteComparison);
