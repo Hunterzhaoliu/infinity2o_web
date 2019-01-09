@@ -111,7 +111,7 @@ class CustomFooter extends Component {
 									marginBottom: 0
 								}}
 							>
-								infinity2o © 2018
+								infinity2o © 2019
 							</p>
 						</Col>
 					</Row>
