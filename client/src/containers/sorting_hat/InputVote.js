@@ -198,7 +198,7 @@ class InputVote extends Component {
 							isDisplayingSaveIcon
 						)}
 					</Col>
-					<Col sm={{ offset: 1 }}>
+					<Col>
 						{this.renderAskStats(
 							answerVotes,
 							askTotalVotes,
@@ -345,8 +345,20 @@ class InputVote extends Component {
 
 	renderAskStats(answerVotes, askTotalVotes, isDisplayingAskStats) {
 		if (isDisplayingAskStats) {
+			const askStat =
+				String(((answerVotes / askTotalVotes) * 100).toFixed(1)) + "%";
+
 			return (
-				String(((answerVotes / askTotalVotes) * 100).toFixed(1)) + "%"
+				<div
+					style={{
+						marginBottom: 0,
+						lineHeight: 1,
+						fontFamily: "Lucida Grande",
+						padding: "8px 0px 0px"
+					}}
+				>
+					{askStat}
+				</div>
 			);
 		}
 	}
@@ -355,13 +367,9 @@ class InputVote extends Component {
 		const { windowWidth } = this.props;
 		if (isDisplayingAskStats) {
 			if (windowWidth > 1250) {
-				return 15;
-			} else if (windowWidth > 992) {
-				return 18;
-			} else if (windowWidth > 768) {
-				return 20;
+				return 16;
 			} else {
-				return 20;
+				return 19;
 			}
 		}
 	}

@@ -49,7 +49,17 @@ class SortingHat extends Component {
 							Help the Sorting Hat find you matches by
 						</h2>
 					</Col>
-					<Col style={{ padding: questionColPadding }}>
+					<Col
+						xs={{ span: 24 }}
+						sm={{ span: 24 }}
+						md={{ span: 6 }}
+						lg={{ span: 5 }}
+						xl={{ span: 4 }}
+						style={{
+							padding: questionColPadding,
+							textAlign: "center" // for the button to stay centered
+						}}
+					>
 						<Button
 							style={{
 								borderColor: colorTheme.keyText7Color,
@@ -96,7 +106,7 @@ class SortingHat extends Component {
 				<Row type="flex" justify="center">
 					<Col
 						style={{ padding: "0px 0px 30px 0px" }}
-						xs={{ span: 20 }}
+						xs={{ span: 21 }}
 						sm={{ span: 16 }}
 						md={{ span: 20 }}
 						lg={{ span: 18 }}
