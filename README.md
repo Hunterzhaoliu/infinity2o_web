@@ -2,9 +2,8 @@
 
 ## Setup
 
-1.  Get a Mac
-2.  `node -v` = v8.9.3 & `npm -v` = 5.6.0
-3.  `heroku -v` = `heroku-cli/6.15.13-3dce47c (darwin-x64) node-v9.3.0`
+1.  `node -v` = v8.9.3 & `npm -v` = 5.6.0
+2.  `heroku -v` = `heroku-cli/6.15.13-3dce47c (darwin-x64) node-v9.3.0`
 
 ## Backend & frontend development setup
 
@@ -75,9 +74,9 @@
 
 ### AWS development setup:
 
-1.  `cd` into `minerva/config` and SHH into server with `chmod 400 infinity2o-minerva.pem` and `ssh -i infinity2o-minerva.pem ubuntu@52.4.101.52`.
-2.  Edit `config/dev.js` to have socketDomain = `'52.4.101.52:5000'` and redirectDomain = `'52.4.101.52:3000'`
-3.  You can view the running development server code at `http://52.4.101.52:3000/`.
+1.  `cd` into `minerva/config` and SHH into server with `chmod 400 infinity2o-minerva.pem` and `ssh -i infinity2o-minerva.pem ubuntu@18.234.188.1`.
+2.  Edit `config/dev.js` to have socketDomain = `'18.234.188.1:5000'` and redirectDomain = `'18.234.188.1:3000'`
+3.  You can view the running development server code at `http://18.234.188.1:3000/`.
 
 ### Copy production MongoDB data to other MongoDB database:
 
