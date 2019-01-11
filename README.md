@@ -74,9 +74,8 @@
 
 ### AWS development setup:
 
-1.  `cd` into `minerva/config` and SHH into server with `chmod 400 infinity2o-minerva.pem` and `ssh -i infinity2o-minerva.pem ubuntu@18.234.188.1`.
-2.  Edit `config/dev.js` to have socketDomain = `'18.234.188.1:5000'` and redirectDomain = `'18.234.188.1:3000'`
-3.  You can view the running development server code at `http://18.234.188.1:3000/`.
+1.  `cd` into `minerva/config` and SSH into server with `chmod 400 infinity2o-minerva.pem` and `ssh -i infinity2o-minerva.pem ubuntu@18.234.188.1`.
+2.  Clone minerva repository and update staging and production config files
 
 ### Copy production MongoDB data to other MongoDB database:
 
