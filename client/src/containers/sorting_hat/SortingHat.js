@@ -105,7 +105,6 @@ class SortingHat extends Component {
 				</Row>
 				<Row type="flex" justify="center">
 					<Col
-						style={{ padding: "0px 0px 30px 0px" }}
 						xs={{ span: 21 }}
 						sm={{ span: 16 }}
 						md={{ span: 20 }}

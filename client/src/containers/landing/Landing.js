@@ -100,13 +100,13 @@ class Landing extends Component {
 		let h2Padding = "120px 0px 0px";
 		let imageHeight = 400;
 		let h2FontSize = 28;
-		let pictureRowPadding = "60px 0px 120px";
+		let pictureRowPadding = "60px 0px 90px";
 
 		if (windowWidth < 768) {
 			h2Padding = "60px 0px 0px";
 			imageHeight = 250;
 			h2FontSize = 22;
-			pictureRowPadding = "30px 0px 60px";
+			pictureRowPadding = "30px 0px 30px";
 		}
 
 		return (
