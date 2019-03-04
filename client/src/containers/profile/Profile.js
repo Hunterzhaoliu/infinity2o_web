@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { bindActionCreators } from "redux";
-import VoteEdit from "./votes/VoteEdit";
+import VoteEdit from "./VoteEdit";
 import { Layout, Row, Col, Button, Avatar } from "antd";
 import LinkedIn from "../profileInformation/LinkedIn";
 import Github from "../profileInformation/Github";
@@ -34,7 +34,7 @@ class Profile extends Component {
 		const { colorTheme, profile } = this.props;
 		return (
 			<div>
-				<Row type="flex" justify="start" align="middle">
+				<Row type="flex" justify="center" align="middle">
 					<Col span={2} />
 					<Col span={22}>
 						<Avatar shape="circle" src={profile.imageUrl} />
@@ -90,9 +90,11 @@ class Profile extends Component {
 		);
 	}
 
-	renderQuestions(asks, colorTheme) {
-		if (asks != null) {
-			const newest8Questions = asks.questions.slice(-8).reverse();
+	renderQuestions() {
+		const { colorTheme, profile } = this.props;
+		if (profile.asks != null) {
+			// user has asked a question in sorting hat
+			const newest8Questions = profile.asks.questions.slice(-8).reverse();
 			return _.map(newest8Questions, (question, key) => {
 				return (
 					<Row key={key}>
@@ -112,20 +114,20 @@ class Profile extends Component {
 	}
 
 	render() {
-		const { colorTheme, profile } = this.props;
+		const { colorTheme } = this.props;
 		return (
 			<Content
 				style={{
-					padding: "75px 50px 0px", // top right bottom left
+					padding: "120px 0px 0px", // top right bottom left
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Row type="flex" justify="start" align="middle">
+				<Row type="flex" justify="center" align="middle">
 					<Col
-						sm={{ span: 24 }}
-						md={{ span: 19 }}
-						lg={{ span: 19 }}
-						xl={{ span: 19 }}
+						sm={{ span: 21 }}
+						md={{ span: 21 }}
+						lg={{ span: 20 }}
+						xl={{ span: 20 }}
 					>
 						{this.renderProfile()}
 						<Row>
@@ -157,7 +159,7 @@ class Profile extends Component {
 								</h2>
 							</Col>
 						</Row>
-						{this.renderQuestions(profile.asks, colorTheme)}
+						{this.renderQuestions()}
 					</Col>
 					<Col
 						sm={{ span: 0 }}

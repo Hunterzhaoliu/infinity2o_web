@@ -369,7 +369,7 @@ class InputVote extends Component {
 			if (windowWidth > 1250) {
 				return 16;
 			} else {
-				return 19;
+				return 20;
 			}
 		}
 	}

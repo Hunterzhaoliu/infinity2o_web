@@ -1,10 +1,10 @@
-import _ from 'lodash';
-import React, { Component } from 'react';
-import * as voteEditActionCreators from '../../../actions/profile/voteEdit';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import _ from "lodash";
+import React, { Component } from "react";
+import * as voteEditActionCreators from "../../actions/profile/voteEdit";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-import { Row, Col, Button, Icon, Card } from 'antd';
+import { Row, Col, Button, Icon, Card } from "antd";
 
 class VoteEdit extends Component {
 	onPressPage(displayPage) {
@@ -13,11 +13,11 @@ class VoteEdit extends Component {
 
 	renderFetchIcon(index) {
 		const { voteEdit } = this.props;
-		if (voteEdit.fetchState[index] === 'start') {
+		if (voteEdit.fetchState[index] === "start") {
 			return <Icon type="loading" />;
-		} else if (voteEdit.fetchState[index] === 'done') {
+		} else if (voteEdit.fetchState[index] === "done") {
 			return <Icon type="check" />;
-		} else if (voteEdit.fetchState[index] === 'error') {
+		} else if (voteEdit.fetchState[index] === "error") {
 			return <Icon type="warning" />;
 		}
 	}
@@ -53,7 +53,7 @@ class VoteEdit extends Component {
 				<Col
 					key={index}
 					style={{
-						padding: '0px 3px'
+						padding: "0px 3px"
 					}}
 				>
 					<Button
@@ -89,7 +89,7 @@ class VoteEdit extends Component {
 					<Row key={index} type="flex" justify="start" align="middle">
 						<Col
 							style={{
-								padding: '0px 0px 8px'
+								padding: "0px 0px 8px"
 							}}
 							span={24}
 						>
@@ -109,11 +109,11 @@ class VoteEdit extends Component {
 							>
 								<p
 									style={{
-										padding: '4px 0px 0px',
+										padding: "4px 0px 0px",
 										color: colorTheme.text3Color
 									}}
 								>
-									{vote.question}{' '}
+									{vote.question}{" "}
 									{this.renderFetchIcon(index)}
 								</p>
 							</Button>
@@ -134,14 +134,14 @@ class VoteEdit extends Component {
 							color: colorTheme.keyText2Color
 						}}
 					>
-						{'0.0%'}
+						{"0.0%"}
 					</div>
 					<div
 						style={{
 							color: colorTheme.keyText7Color
 						}}
 					>
-						{'0.0%'}
+						{"0.0%"}
 					</div>
 				</div>
 			);
@@ -155,11 +155,11 @@ class VoteEdit extends Component {
 				>
 					{String(
 						(
-							answerObject.votesIn /
-							voteEdit.askToRevote.totalRevotes *
+							(answerObject.votesIn /
+								voteEdit.askToRevote.totalRevotes) *
 							100
 						).toFixed(1)
-					) + '%'}
+					) + "%"}
 				</div>
 				<div
 					style={{
@@ -168,22 +168,22 @@ class VoteEdit extends Component {
 				>
 					{String(
 						(
-							answerObject.votesOut /
-							voteEdit.askToRevote.totalRevotes *
+							(answerObject.votesOut /
+								voteEdit.askToRevote.totalRevotes) *
 							100
 						).toFixed(1)
-					) + '%'}
+					) + "%"}
 				</div>
 			</div>
 		);
 	}
 
 	renderSaveIcon(saveState, saveIndex) {
-		if (saveState[saveIndex] === 'start') {
+		if (saveState[saveIndex] === "start") {
 			return <Icon type="loading" />;
-		} else if (saveState[saveIndex] === 'done') {
+		} else if (saveState[saveIndex] === "done") {
 			return <Icon type="check" />;
-		} else if (saveState[saveIndex] === 'error') {
+		} else if (saveState[saveIndex] === "error") {
 			return <Icon type="warning" />;
 		}
 	}
@@ -219,7 +219,7 @@ class VoteEdit extends Component {
 					type="flex"
 					justify="space-around"
 					align="middle"
-					style={{ padding: '8px 0px 0px' }}
+					style={{ padding: "8px 0px 0px" }}
 					key={answerIndex}
 				>
 					<Col
@@ -229,7 +229,7 @@ class VoteEdit extends Component {
 						lg={{ span: 14 }}
 						xl={{ span: 14 }}
 						style={{
-							textAlign: 'center',
+							textAlign: "center",
 							color: colorTheme.text2Color
 						}}
 					>
@@ -265,17 +265,17 @@ class VoteEdit extends Component {
 						lg={{ span: 4 }}
 						xl={{ span: 4 }}
 						style={{
-							textAlign: 'center',
+							textAlign: "center",
 							color: colorTheme.text2Color
 						}}
 					>
 						{String(
 							(
-								answerObject.votes /
-								voteEdit.askToRevote.totalVotes *
+								(answerObject.votes /
+									voteEdit.askToRevote.totalVotes) *
 								100
 							).toFixed(1)
-						) + '%'}
+						) + "%"}
 					</Col>
 					<Col
 						xs={{ span: 6 }}
@@ -284,7 +284,7 @@ class VoteEdit extends Component {
 						lg={{ span: 6 }}
 						xl={{ span: 6 }}
 						style={{
-							textAlign: 'center'
+							textAlign: "center"
 						}}
 					>
 						{this.renderRevoteStats(answerObject)}
@@ -297,32 +297,32 @@ class VoteEdit extends Component {
 	renderVoteCount() {
 		const { colorTheme, voteEdit } = this.props;
 
-		let voteWord = ' vote ';
+		let voteWord = " vote ";
 		if (
 			voteEdit.askToRevote.totalVotes === 0 ||
 			voteEdit.askToRevote.totalVotes > 1
 		) {
-			voteWord = ' votes ';
+			voteWord = " votes ";
 		}
 
-		let revoteWord = ' revote ';
+		let revoteWord = " revote ";
 		if (
 			voteEdit.askToRevote.totalRevotes === 0 ||
 			voteEdit.askToRevote.totalRevotes > 1
 		) {
-			revoteWord = ' revotes ';
+			revoteWord = " revotes ";
 		}
 
 		return (
 			<p
 				style={{
-					textAlign: 'center',
+					textAlign: "center",
 					color: colorTheme.text3Color
 				}}
 			>
 				{voteEdit.askToRevote.totalVotes +
 					voteWord +
-					' & ' +
+					" & " +
 					voteEdit.askToRevote.totalRevotes +
 					revoteWord}
 			</p>
@@ -347,7 +347,7 @@ class VoteEdit extends Component {
 				>
 					<h3
 						style={{
-							textAlign: 'center',
+							textAlign: "center",
 							color: colorTheme.text2Color
 						}}
 					>
@@ -358,8 +358,8 @@ class VoteEdit extends Component {
 						<Col span={14}>
 							<p
 								style={{
-									padding: '13px 0px 0px',
-									textAlign: 'center',
+									padding: "13px 0px 0px",
+									textAlign: "center",
 									color: colorTheme.text4Color
 								}}
 							>
@@ -369,8 +369,8 @@ class VoteEdit extends Component {
 						<Col span={4}>
 							<p
 								style={{
-									padding: '13px 0px 0px',
-									textAlign: 'center',
+									padding: "13px 0px 0px",
+									textAlign: "center",
 									color: colorTheme.text4Color
 								}}
 							>
@@ -380,7 +380,7 @@ class VoteEdit extends Component {
 						<Col span={6}>
 							<div
 								style={{
-									textAlign: 'center',
+									textAlign: "center",
 									color: colorTheme.keyText2Color
 								}}
 							>
@@ -388,7 +388,7 @@ class VoteEdit extends Component {
 							</div>
 							<div
 								style={{
-									textAlign: 'center',
+									textAlign: "center",
 									color: colorTheme.keyText7Color
 								}}
 							>
@@ -430,7 +430,7 @@ class VoteEdit extends Component {
 				</Row>
 				<Row
 					style={{
-						padding: '10px 0px 0px'
+						padding: "10px 0px 0px"
 					}}
 					type="flex"
 					justify="start"
@@ -499,4 +499,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VoteEdit);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(VoteEdit);
