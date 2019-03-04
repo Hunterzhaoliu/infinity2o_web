@@ -34,7 +34,7 @@
 
 ### LinkedIn OAuth:
 
-1.  Login TODO: Hunter knows this
+1.  Login TODO: Hunter knows
 
 ### Stripe.com login:
 
