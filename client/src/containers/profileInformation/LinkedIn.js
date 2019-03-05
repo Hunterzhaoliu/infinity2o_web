@@ -8,7 +8,7 @@ class LinkedIn extends Component {
 		const { value } = this.props;
 		if (value !== undefined && value !== null && value.length > 0) {
 			return (
-				<Col>
+				<Col style={{ padding: "0px 0px 0px 10px" }}>
 					<a href={value} target="_blank">
 						<Icon
 							alt="LinkedIn: "
@@ -43,4 +43,7 @@ function mapDispatchToProps(dispatch) {
 	return {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LinkedIn);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(LinkedIn);

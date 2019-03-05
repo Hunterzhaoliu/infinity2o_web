@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { bindActionCreators } from "redux";
 import VoteEdit from "./VoteEdit";
-import { Layout, Row, Col, Button, Avatar } from "antd";
+import { Layout, Row, Col, Button, Avatar, Card } from "antd";
 import LinkedIn from "../profileInformation/LinkedIn";
 import Github from "../profileInformation/Github";
 import Neurons from "../profileInformation/Neurons";
@@ -33,35 +33,52 @@ class Profile extends Component {
 	renderProfile() {
 		const { colorTheme, profile } = this.props;
 		return (
-			<div>
+			<Card
+				hoverable={true}
+				bordered="false"
+				loading={false}
+				style={{
+					color: colorTheme.text1Color,
+					borderColor: "rgb(245, 245, 245)",
+					background: "rgb(245, 245, 245)"
+				}}
+				bodyStyle={{ padding: "0px" }} // padding around inside border of card
+			>
 				<Row type="flex" justify="center" align="middle">
-					<Col span={2} />
-					<Col span={22}>
-						<Avatar shape="circle" src={profile.imageUrl} />
-					</Col>
+					<div
+						style={{
+							width: "100%",
+							height: "130px",
+							backgroundColor: colorTheme.key
+						}}
+					/>
+					<Avatar
+						style={{ position: "absolute", top: "50px" }}
+						shape="circle"
+						src={profile.imageUrl}
+					/>
 				</Row>
 				<Row
+					style={{ padding: "90px 0px 0px 0px" }}
 					type="flex"
-					justify="start"
+					justify="center"
 					align="middle"
-					style={{ padding: "2px 0px 0px" }}
 				>
-					<Col span={1} />
-					<Col style={{ padding: "10px 0px 0px 18px" }}>
-						<h2
+					<Col>
+						<p
 							style={{
-								color: colorTheme.keyText6Color
+								color: colorTheme.keyText6Color,
+								fontFamily: "Lucida Grande",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: 26
 							}}
 						>
 							{this.renderNameAndAge()}
-						</h2>
+						</p>
 					</Col>
-					<Col style={{ padding: "0px 0px 0px 10px" }}>
-						<LinkedIn value={profile.linkedInPublicProfileUrl} />
-					</Col>
-					<Col style={{ padding: "0px 0px 0px 10px" }}>
-						<Github value={profile.githubPublicProfileUrl} />
-					</Col>
+					<LinkedIn value={profile.linkedInPublicProfileUrl} />
+					<Github value={profile.githubPublicProfileUrl} />
 				</Row>
 				<Neurons value={profile.payment.neuronsInBillions} />
 				<Interests interests={profile.interests} />
@@ -86,7 +103,7 @@ class Profile extends Component {
 						</Button>
 					</Col>
 				</Row>
-			</div>
+			</Card>
 		);
 	}
 
@@ -129,7 +146,16 @@ class Profile extends Component {
 						lg={{ span: 20 }}
 						xl={{ span: 20 }}
 					>
-						{this.renderProfile()}
+						<Row type="flex" justify="center">
+							<Col
+								sm={{ span: 21 }}
+								md={{ span: 21 }}
+								lg={{ span: 20 }}
+								xl={{ span: 8 }}
+							>
+								{this.renderProfile()}
+							</Col>
+						</Row>
 						<Row>
 							<Col>
 								<h2
