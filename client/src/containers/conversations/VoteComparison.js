@@ -163,14 +163,13 @@ class VoteComparison extends Component {
 				<div style={{ padding: "0px 0px 10px 0px" }}>
 					<Slider {...settings}>{this.renderAgreedAsks()}</Slider>
 				</div>
+				<div>
+					<Slider {...settings}>{this.renderDisagreedAsks()}</Slider>
+				</div>
 			</div>
 		);
 	}
 }
-
-// <div>
-// 	<Slider {...settings}>{this.renderDisagreedAsks()}</Slider>
-// </div>
 
 function mapStateToProps(state) {
 	return {
