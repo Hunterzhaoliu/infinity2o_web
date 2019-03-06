@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
-import DisplayField from "../profile/DisplayField";
 
 class Interests extends Component {
 	renderInterests() {

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col, Popover, Button, Icon } from "antd";
-import DisplayField from "../profile/DisplayField";
 
 class Neurons extends Component {
 	numberWithCommas = x => {

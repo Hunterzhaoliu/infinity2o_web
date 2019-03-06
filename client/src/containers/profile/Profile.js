@@ -81,31 +81,29 @@ class Profile extends Component {
 					<Github value={profile.githubPublicProfileUrl} />
 				</Row>
 				<Neurons payment={profile.payment} />
-				<Row
-					style={{ padding: "20px 0px 0px 20px" }}
-					type="flex"
-					justify="center"
-				>
+				<Row style={{ padding: "20px 0px 20px 20px" }}>
 					<Interests interests={profile.interests} />
 				</Row>
-				<Email value={profile.email} />
-				<TimeZone value={profile.timeZone} />
-				<Row
-					type="flex"
-					justify="start"
-					style={{
-						padding: "15px 0px 0px" // top right bottom left
-					}}
-				>
-					<Col>
+				<Row style={{ padding: "0px 0px 0px 20px" }}>
+					<Email email={profile.email} />
+				</Row>
+				<Row style={{ padding: "20px 0px 0px 20px" }}>
+					<TimeZone timeZone={profile.timeZone} />
+				</Row>
+				<Row type="flex" justify="center">
+					<Col style={{ padding: "20px 0px 60px 0px" }}>
 						<Button
 							style={{
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text3Color
+								borderColor: colorTheme.backgroundColor,
+								background: colorTheme.backgroundColor,
+								color: colorTheme.text3Color,
+								fontFamily: "Lucida Grande",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: 16
 							}}
 						>
-							<a href="/profile/edit">Edit</a>
+							<a href="/profile/edit">Edit Info</a>
 						</Button>
 					</Col>
 				</Row>

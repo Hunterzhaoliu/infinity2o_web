@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import { bindActionCreators } from "redux";
-import { connect } from 'react-redux';
-import { Row, Col } from 'antd';
-import DisplayField from '../profile/DisplayField';
+import { connect } from "react-redux";
+import { Row, Col } from "antd";
 
 class Email extends Component {
 	render() {
-		const { value } = this.props;
+		const { email } = this.props;
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col span={1}>
 					<img
 						alt="Email: "
 						style={{
-							width: '35px',
-							padding: '0px 0px 0px 12px'
+							width: "25px"
 						}}
 						src="https://user-images.githubusercontent.com/24757872/40867452-d7a6feaa-65c9-11e8-849f-9d144103b0c3.png"
 					/>
@@ -22,30 +20,21 @@ class Email extends Component {
 				<Col
 					span={23}
 					style={{
-						padding: '4px 0px 0px 20px' // top right bottom left
+						padding: "0px 0px 0px 20px",
+						fontFamily: "Lucida Grande",
+						lineHeight: 1,
+						marginBottom: 0,
+						fontSize: 16
 					}}
 				>
-					<DisplayField label="E-mail: " value={value} />
+					{email}
 				</Col>
 			</Row>
 		);
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
-function mapStateToProps(state) {
-	return {};
-}
-
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-function mapDispatchToProps(dispatch) {
-	return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Email);
+export default connect(
+	null,
+	null
+)(Email);
