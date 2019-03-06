@@ -1,0 +1,12 @@
+.button {
+	border-color: var(--text8Color);
+	background-color: var(--text8Color);
+	border-radius: 0;
+	padding: 0px 16px;
+	border-bottom: 2px solid var(--keyText5Color);
+}
+
+.button-div:hover {
+	height: 58px;
+	border-bottom: 2px solid var(--keyText5Color);
+}

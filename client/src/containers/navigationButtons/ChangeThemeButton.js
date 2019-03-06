@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { connect } from "react-redux";
 import { Col, Button, Icon } from "antd";
+import "./change-theme-button.css";
 
 class ChangeThemeButton extends Component {
 	renderSaveIcon(saveState) {
@@ -18,22 +19,26 @@ class ChangeThemeButton extends Component {
 	renderChangeThemeButton() {
 		const { colorTheme, onRandomColorTheme, colorThemeSave } = this.props;
 
+		document.documentElement.style.setProperty(
+			`--text8Color`,
+			colorTheme.text8Color
+		);
+		document.documentElement.style.setProperty(
+			`--keyText5Color`,
+			colorTheme.keyText5Color
+		);
+
 		if (colorThemeSave === "save_done" || colorThemeSave === null) {
 			return (
-				<Button
-					style={{
-						borderColor: colorTheme.text7Color,
-						background: colorTheme.text7Color,
-						color: colorTheme.text4Color
-					}}
-					onClick={onRandomColorTheme}
-				>
-					<img
-						alt=""
-						style={{ width: "32px" }}
-						src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
-					/>
-				</Button>
+				<div className="button-div">
+					<button className="button" onClick={onRandomColorTheme}>
+						<img
+							alt=""
+							style={{ width: "32px" }}
+							src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
+						/>
+					</button>
+				</div>
 			);
 		} else {
 			return (

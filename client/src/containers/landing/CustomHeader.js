@@ -145,12 +145,7 @@ class CustomHeader extends Component {
 
 			return (
 				<Row type="flex" justify="start">
-					<Col
-						style={{
-							padding: "3px 0px 0px"
-						}}
-						key="0"
-					>
+					<Col key="0">
 						<Button
 							style={{
 								borderColor: colorTheme.text7Color,
@@ -182,8 +177,6 @@ class CustomHeader extends Component {
 					<LogoutButton />
 				</Row>
 			);
-		} else {
-			console.log("ERROR: site in invalid state = ", loggedInState);
 		}
 	}
 
