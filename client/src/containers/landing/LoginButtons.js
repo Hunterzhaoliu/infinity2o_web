@@ -11,7 +11,7 @@ class LoginButtons extends Component {
 		let buttonPadding = "0px 30px 0px 0px";
 
 		if (windowWidth < 768) {
-			buttonSize = "medium";
+			buttonSize = "default";
 			buttonPadding = "0px 15px 0px 0px";
 		}
 
