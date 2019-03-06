@@ -4,7 +4,7 @@ import * as voteEditActionCreators from "../../actions/profile/voteEdit";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { Row, Col, Button, Icon, Card } from "antd";
+import { Row, Col, Button, Icon, Modal } from "antd";
 
 class VoteEdit extends Component {
 	onPressPage(displayPage) {
@@ -38,8 +38,8 @@ class VoteEdit extends Component {
 		if (profile.asks != null) {
 			numberOfItems = profile.asks.votes.length;
 		}
-		const numberOfButtons = this.roundUp(numberOfItems / 8, 0);
-		return _.map(new Array(numberOfButtons), (pageButton, index) => {
+		const numberOfPageButtons = this.roundUp(numberOfItems / 8, 0);
+		return _.map(new Array(numberOfPageButtons), (pageButton, index) => {
 			let textColor = colorTheme.text5Color;
 			const displayPage = index + 1;
 			if (voteEdit.page === displayPage) {
@@ -49,14 +49,18 @@ class VoteEdit extends Component {
 				<Col
 					key={index}
 					style={{
-						padding: "0px 3px"
+						padding: "0px 5px 0px 0px"
 					}}
 				>
 					<Button
 						style={{
 							borderColor: colorTheme.text8Color,
 							background: colorTheme.text8Color,
-							color: textColor
+							color: textColor,
+							fontFamily: "Lucida Grande",
+							fontSize: 14,
+							lineHeight: 1,
+							marginBottom: 0
 						}}
 						onClick={e => this.onPressPage(displayPage)}
 					>
@@ -85,9 +89,8 @@ class VoteEdit extends Component {
 					<Row key={index} type="flex" justify="start" align="middle">
 						<Col
 							style={{
-								padding: "0px 0px 8px"
+								padding: "0px 0px 10px"
 							}}
-							span={24}
 						>
 							<Button
 								style={{
@@ -105,8 +108,11 @@ class VoteEdit extends Component {
 							>
 								<p
 									style={{
-										padding: "4px 0px 0px",
-										color: colorTheme.text3Color
+										color: colorTheme.text3Color,
+										fontFamily: "Lucida Grande",
+										fontSize: 14,
+										lineHeight: 1,
+										marginBottom: 0
 									}}
 								>
 									{vote.question}{" "}
@@ -141,37 +147,38 @@ class VoteEdit extends Component {
 					</div>
 				</div>
 			);
+		} else {
+			return (
+				<div>
+					<div
+						style={{
+							color: colorTheme.keyText2Color
+						}}
+					>
+						{String(
+							(
+								(answerObject.votesIn /
+									voteEdit.askToRevote.totalRevotes) *
+								100
+							).toFixed(1)
+						) + "%"}
+					</div>
+					<div
+						style={{
+							color: colorTheme.keyText7Color
+						}}
+					>
+						{String(
+							(
+								(answerObject.votesOut /
+									voteEdit.askToRevote.totalRevotes) *
+								100
+							).toFixed(1)
+						) + "%"}
+					</div>
+				</div>
+			);
 		}
-		return (
-			<div>
-				<div
-					style={{
-						color: colorTheme.keyText2Color
-					}}
-				>
-					{String(
-						(
-							(answerObject.votesIn /
-								voteEdit.askToRevote.totalRevotes) *
-							100
-						).toFixed(1)
-					) + "%"}
-				</div>
-				<div
-					style={{
-						color: colorTheme.keyText7Color
-					}}
-				>
-					{String(
-						(
-							(answerObject.votesOut /
-								voteEdit.askToRevote.totalRevotes) *
-							100
-						).toFixed(1)
-					) + "%"}
-				</div>
-			</div>
-		);
 	}
 
 	renderSaveIcon(saveState, saveIndex) {
@@ -184,7 +191,7 @@ class VoteEdit extends Component {
 		}
 	}
 
-	renderAnswers(answers, isDisplayingAskStats) {
+	renderAnswers(answers) {
 		const { colorTheme, voteEdit, mongoDBUserId } = this.props;
 		return _.map(answers, (answerObject, answerIndex) => {
 			// displaying actual answers
@@ -213,27 +220,30 @@ class VoteEdit extends Component {
 			return (
 				<Row
 					type="flex"
-					justify="space-around"
+					justify="center"
 					align="middle"
-					style={{ padding: "8px 0px 0px" }}
+					style={{ padding: "10px 0px 0px" }}
 					key={answerIndex}
 				>
 					<Col
-						xs={{ span: 24 }}
-						sm={{ span: 14 }}
-						md={{ span: 14 }}
-						lg={{ span: 14 }}
-						xl={{ span: 14 }}
+						// xs={{ span: 24 }}
+						// sm={{ span: 14 }}
+						// md={{ span: 14 }}
+						// lg={{ span: 14 }}
+						xl={{ span: 12 }}
 						style={{
-							textAlign: "center",
-							color: colorTheme.text2Color
+							textAlign: "center"
 						}}
 					>
 						<Button
 							style={{
 								borderColor: displayAnswerButtonColor,
 								background: displayAnswerButtonColor,
-								color: colorTheme.text2Color
+								color: colorTheme.text2Color,
+								fontFamily: "Lucida Grande",
+								fontSize: 14,
+								lineHeight: 1,
+								marginBottom: 0
 							}}
 							onClick={e =>
 								this.props.onRevote(
@@ -255,14 +265,13 @@ class VoteEdit extends Component {
 						</Button>
 					</Col>
 					<Col
-						xs={{ span: 6 }}
+						xs={{ span: 4 }}
 						sm={{ span: 4 }}
 						md={{ span: 4 }}
 						lg={{ span: 4 }}
 						xl={{ span: 4 }}
 						style={{
-							textAlign: "center",
-							color: colorTheme.text2Color
+							textAlign: "center"
 						}}
 					>
 						{String(
@@ -313,7 +322,11 @@ class VoteEdit extends Component {
 			<p
 				style={{
 					textAlign: "center",
-					color: colorTheme.text3Color
+					color: colorTheme.text3Color,
+					fontFamily: "Lucida Grande",
+					lineHeight: 1,
+					marginBottom: 0,
+					fontSize: 14
 				}}
 			>
 				{voteEdit.askToRevote.totalVotes +
@@ -330,33 +343,53 @@ class VoteEdit extends Component {
 
 		if (voteEdit.askToRevote !== null) {
 			return (
-				<Card
-					sm={{ span: 24 }}
-					md={{ span: 24 }}
-					lg={{ span: 24 }}
-					xl={{ span: 12 }}
-					style={{
-						borderColor: colorTheme.text8Color,
-						background: colorTheme.text8Color,
-						color: colorTheme.text2Color
+				<Modal
+					visible={voteEdit.isRevoteModalOpen}
+					onCancel={e => this.props.closeRevoteModal()}
+					footer={null}
+					centered={true}
+					bodyStyle={{
+						padding: "60px 10px",
+						backgroundColor: colorTheme.textColor1
 					}}
+					style={{ padding: "90px 0px 0px 0px" }} // where the modal is
 				>
-					<h3
-						style={{
-							textAlign: "center",
-							color: colorTheme.text2Color
-						}}
+					<Row type="flex" justify="center">
+						<h3
+							style={{
+								textAlign: "center",
+								color: colorTheme.text2Color,
+								fontFamily: "Lucida Grande",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: 18
+							}}
+						>
+							{voteEdit.askToRevote.question}
+						</h3>
+					</Row>
+					<Row
+						style={{ padding: "30px 0px 0px" }}
+						type="flex"
+						justify="center"
 					>
-						{voteEdit.askToRevote.question}
-					</h3>
-					{this.renderVoteCount()}
-					<Row type="flex" justify="space-around" align="middle">
-						<Col span={14}>
+						{this.renderVoteCount()}
+					</Row>
+					<Row
+						style={{ padding: "15px 0px 0px 0px" }}
+						type="flex"
+						justify="center"
+						align="middle"
+					>
+						<Col span={12}>
 							<p
 								style={{
-									padding: "13px 0px 0px",
+									color: colorTheme.text4Color,
 									textAlign: "center",
-									color: colorTheme.text4Color
+									fontFamily: "Lucida Grande",
+									lineHeight: 1,
+									marginBottom: 0,
+									fontSize: 16
 								}}
 							>
 								Answer
@@ -365,9 +398,12 @@ class VoteEdit extends Component {
 						<Col span={4}>
 							<p
 								style={{
-									padding: "13px 0px 0px",
 									textAlign: "center",
-									color: colorTheme.text4Color
+									color: colorTheme.text4Color,
+									fontFamily: "Lucida Grande",
+									lineHeight: 1,
+									marginBottom: 0,
+									fontSize: 16
 								}}
 							>
 								Vote %
@@ -377,7 +413,11 @@ class VoteEdit extends Component {
 							<div
 								style={{
 									textAlign: "center",
-									color: colorTheme.keyText2Color
+									color: colorTheme.keyText2Color,
+									fontFamily: "Lucida Grande",
+									lineHeight: 1,
+									marginBottom: 0,
+									fontSize: 16
 								}}
 							>
 								Revote In %
@@ -385,15 +425,19 @@ class VoteEdit extends Component {
 							<div
 								style={{
 									textAlign: "center",
-									color: colorTheme.keyText7Color
+									color: colorTheme.keyText7Color,
+									fontFamily: "Lucida Grande",
+									lineHeight: 1,
+									marginBottom: 0,
+									fontSize: 16
 								}}
 							>
 								Revote Out %
 							</div>
 						</Col>
 					</Row>
-					{this.renderAnswers(voteEdit.askToRevote.answers, true)}
-				</Card>
+					{this.renderAnswers(voteEdit.askToRevote.answers)}
+				</Modal>
 			);
 		} else {
 			return;
@@ -404,24 +448,9 @@ class VoteEdit extends Component {
 		return (
 			<div>
 				<Row type="flex" justify="start" align="top">
-					<Col
-						sm={{ span: 12 }}
-						md={{ span: 12 }}
-						lg={{ span: 12 }}
-						xl={{ span: 12 }}
-					>
-						{this.renderVotes()}
-					</Col>
-					<Col
-						xs={{ span: 24 }}
-						sm={{ span: 24 }}
-						md={{ span: 21 }}
-						lg={{ span: 15 }}
-						xl={{ span: 12 }}
-					>
-						{this.renderAskToRevote()}
-					</Col>
+					<Col>{this.renderVotes()}</Col>
 				</Row>
+				{this.renderAskToRevote()}
 				<Row
 					style={{
 						padding: "10px 0px 0px"
@@ -489,6 +518,9 @@ function mapDispatchToProps(dispatch) {
 				currentMongoDBAnswerId,
 				mongoDBUserId
 			);
+		},
+		closeRevoteModal: () => {
+			voteEditDispatchers.closeRevoteModal();
 		}
 	};
 }

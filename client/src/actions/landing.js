@@ -2,7 +2,7 @@ import axios from "axios";
 import {
 	SAVE_FETCHED_LANDING_ASKS,
 	ON_VOTE_LANDING,
-	CLOSE_MODAL
+	CLOSE_FIRST_VOTE_MODAL
 } from "./types";
 
 export const fetchLandingPageSortingHatAsks = () => async dispatch => {
@@ -26,8 +26,8 @@ export const onVoteLanding = (
 	});
 };
 
-export const closeModal = () => dispatch => {
+export const closeFirstVoteModal = () => dispatch => {
 	dispatch({
-		type: CLOSE_MODAL
+		type: CLOSE_FIRST_VOTE_MODAL
 	});
 };

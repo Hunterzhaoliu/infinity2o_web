@@ -1,7 +1,7 @@
 import {
 	SAVE_FETCHED_LANDING_ASKS,
 	ON_VOTE_LANDING,
-	CLOSE_MODAL
+	CLOSE_FIRST_VOTE_MODAL
 } from "../actions/types";
 
 let cloneObject = obj => {
@@ -33,7 +33,7 @@ export default function(state = initialState, action) {
 			newState.numberOfLandingVotes += 1;
 			newState.isFirstVoteModalOpen = action.isFirstVote;
 			return newState;
-		case CLOSE_MODAL:
+		case CLOSE_FIRST_VOTE_MODAL:
 			newState.isFirstVoteModalOpen = false;
 			return newState;
 		default:
