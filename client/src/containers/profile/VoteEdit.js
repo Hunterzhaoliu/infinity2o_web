@@ -133,14 +133,22 @@ class VoteEdit extends Component {
 				<div>
 					<div
 						style={{
-							color: colorTheme.keyText2Color
+							color: colorTheme.keyText2Color,
+							fontFamily: "Lucida Grande",
+							fontSize: 14,
+							lineHeight: 1,
+							marginBottom: 0
 						}}
 					>
 						{"0.0%"}
 					</div>
 					<div
 						style={{
-							color: colorTheme.keyText7Color
+							color: colorTheme.keyText7Color,
+							fontFamily: "Lucida Grande",
+							fontSize: 14,
+							lineHeight: 1,
+							marginBottom: 0
 						}}
 					>
 						{"0.0%"}
@@ -152,7 +160,11 @@ class VoteEdit extends Component {
 				<div>
 					<div
 						style={{
-							color: colorTheme.keyText2Color
+							color: colorTheme.keyText2Color,
+							fontFamily: "Lucida Grande",
+							fontSize: 14,
+							lineHeight: 1,
+							marginBottom: 0
 						}}
 					>
 						{String(
@@ -165,7 +177,11 @@ class VoteEdit extends Component {
 					</div>
 					<div
 						style={{
-							color: colorTheme.keyText7Color
+							color: colorTheme.keyText7Color,
+							fontFamily: "Lucida Grande",
+							fontSize: 14,
+							lineHeight: 1,
+							marginBottom: 0
 						}}
 					>
 						{String(
@@ -239,7 +255,7 @@ class VoteEdit extends Component {
 							style={{
 								borderColor: displayAnswerButtonColor,
 								background: displayAnswerButtonColor,
-								color: colorTheme.text2Color,
+								color: colorTheme.text3Color,
 								fontFamily: "Lucida Grande",
 								fontSize: 14,
 								lineHeight: 1,
@@ -274,13 +290,23 @@ class VoteEdit extends Component {
 							textAlign: "center"
 						}}
 					>
-						{String(
-							(
-								(answerObject.votes /
-									voteEdit.askToRevote.totalVotes) *
-								100
-							).toFixed(1)
-						) + "%"}
+						<div
+							style={{
+								color: colorTheme.text3Color,
+								fontFamily: "Lucida Grande",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: 14
+							}}
+						>
+							{String(
+								(
+									(answerObject.votes /
+										voteEdit.askToRevote.totalVotes) *
+									100
+								).toFixed(1)
+							) + "%"}
+						</div>
 					</Col>
 					<Col
 						xs={{ span: 6 }}
