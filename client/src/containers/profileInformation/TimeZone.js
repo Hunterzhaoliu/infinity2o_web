@@ -5,7 +5,11 @@ import { Row, Col } from "antd";
 class TimeZone extends Component {
 	render() {
 		const { timeZone } = this.props;
-		if (timeZone !== null && timeZone.length > 0) {
+		if (
+			timeZone !== null &&
+			timeZone !== undefined &&
+			timeZone.length > 0
+		) {
 			return (
 				<Row type="flex" justify="start" align="middle">
 					<Col span={1}>
