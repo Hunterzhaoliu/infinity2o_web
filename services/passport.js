@@ -12,6 +12,7 @@ passport.use(
 			clientID: keys.googleClientID,
 			clientSecret: keys.googleClientSecret,
 			callbackURL: "/auth/google/callback",
+			userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
 			proxy: true
 		},
 		async (accessToken, refreshToken, profile, done) => {
@@ -35,7 +36,8 @@ passport.use(
 						{
 							$set: {
 								"profile.name": profile.displayName,
-								"profile.emailInformation.email": profile.emails[0].value,
+								"profile.emailInformation.email":
+									profile.emails[0].value,
 								"profile.imageUrl": biggerImageUrl
 							}
 						}
@@ -50,7 +52,7 @@ passport.use(
 					},
 					profile: {
 						name: profile.displayName,
-						'emailInformation.email': profile.emails[0].value,
+						"emailInformation.email": profile.emails[0].value,
 						imageUrl: biggerImageUrl
 					}
 				}).save();
@@ -81,7 +83,8 @@ passport.use(
 				if (
 					existingUser.profile.name === undefined ||
 					existingUser.profile.emailInformation.email === undefined ||
-					existingUser.profile.linkedInPublicProfileUrl === undefined ||
+					existingUser.profile.linkedInPublicProfileUrl ===
+						undefined ||
 					existingUser.profile.imageUrl === undefined
 				) {
 					await UserCollection.updateOne(
@@ -91,7 +94,8 @@ passport.use(
 						{
 							$set: {
 								"profile.name": profile.displayName,
-								"profile.emailInformation.email": profile.emails[0].value,
+								"profile.emailInformation.email":
+									profile.emails[0].value,
 								"profile.linkedInPublicProfileUrl":
 									profile._json.publicProfileUrl,
 								"profile.imageUrl": profile.photos[0].value
@@ -110,8 +114,9 @@ passport.use(
 					},
 					profile: {
 						name: profile.displayName,
-						'emailInformation.email': profile.emails[0].value,
-						linkedInPublicProfileUrl: profile._json.publicProfileUrl,
+						"emailInformation.email": profile.emails[0].value,
+						linkedInPublicProfileUrl:
+							profile._json.publicProfileUrl,
 						imageUrl: profile.photos[0].value
 					}
 				}).save();
