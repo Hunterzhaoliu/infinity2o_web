@@ -1,129 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { GREY_2 } from "../styles/ColorConstants";
-import { Row, Col, Popover, Button, Icon } from "antd";
-import "./DisplayField.css";
+import { Row, Col } from "antd";
 
 class DisplayField extends Component {
-	numberWithCommas = x => {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	};
-
-	renderNeuronExplanation() {
-		const { colorTheme } = this.props;
-		document.documentElement.style.setProperty(
-			`--text7Color`,
-			colorTheme.text7Color
-		);
-		document.documentElement.style.setProperty(
-			`--text8Color`,
-			colorTheme.text8Color
-		);
-
-		const neuronExplanation = (
-			<div>
-				<p
-					style={{
-						padding: "7px 0px 0px",
-						color: colorTheme.text2Color
-					}}
-				>
-					Use neurons to 'Say Hi' to more matches.
-				</p>
-			</div>
-		);
-
-		return (
-			<Popover
-				style={{
-					borderColor: colorTheme.text8Color,
-					backgroundColor: colorTheme.text8Color,
-					color: colorTheme.text3Color
-				}}
-				content={neuronExplanation}
-			>
-				<Button
-					style={{
-						borderColor: colorTheme.text8Color,
-						backgroundColor: colorTheme.text8Color,
-						color: colorTheme.text3Color,
-						padding: "0px 5px 0px"
-					}}
-					size="small"
-				>
-					<Icon
-						style={{
-							fontSize: 12,
-							padding: "0px 0px 6px"
-						}}
-						type="question-circle-o"
-					/>
-				</Button>
-			</Popover>
-		);
-	}
-
 	renderValue(label, value) {
-		const { colorTheme, infinityStatus } = this.props;
-		document.documentElement.style.setProperty(
-			`--backgroundColor`,
-			colorTheme.backgroundColor
-		);
-		document.documentElement.style.setProperty(
-			`--text3Color`,
-			colorTheme.text3Color
-		);
-		document.documentElement.style.setProperty(
-			`--text4Color`,
-			colorTheme.text4Color
-		);
-		document.documentElement.style.setProperty(
-			`--text7Color`,
-			colorTheme.text7Color
-		);
-		document.documentElement.style.setProperty(
-			`--text8Color`,
-			colorTheme.text8Color
-		);
-
+		const { colorTheme } = this.props;
 		if (
-			label === "Neurons: " ||
 			label === "Name: " ||
 			label === "E-mail: " ||
 			label === "Age: " ||
 			label === "Time Zone: "
 		) {
-			if (label === "Neurons: " && infinityStatus) {
-				return (
-					<div>
-						<Col>
-							<p>"infinity"</p>
-						</Col>
-						<Col>{this.renderNeuronExplanation()}</Col>
-					</div>
-				);
-			} else if (label === "Neurons: " && !infinityStatus) {
-				let displayNeuronsInBillions = value;
-				if (displayNeuronsInBillions !== undefined) {
-					displayNeuronsInBillions *= 1000000000;
-					let finalDisplayString =
-						this.numberWithCommas(displayNeuronsInBillions) +
-						" (" +
-						value +
-						") Billion Neurons";
-
-					return (
-						<Row type="flex" justify="start" align="middle">
-							<Col style={{ padding: "25px 0px 0px" }}>
-								<p>{finalDisplayString}</p>
-							</Col>
-							<Col offset={1} style={{ padding: "7px 0px 0px" }}>
-								{this.renderNeuronExplanation()}
-							</Col>
-						</Row>
-					);
-				}
-			} else if (
+			if (
 				value === null ||
 				value === undefined ||
 				typeof value === "string" ||

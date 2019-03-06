@@ -1,55 +1,129 @@
-import React, { Component } from 'react';
-// import { bindActionCreators } from "redux";
-import { connect } from 'react-redux';
-import { Row, Col } from 'antd';
-import DisplayField from '../profile/DisplayField';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Row, Col, Popover, Button, Icon } from "antd";
+import DisplayField from "../profile/DisplayField";
 
 class Neurons extends Component {
-	render() {
+	numberWithCommas = x => {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	};
+
+	renderNumberOfNeurons() {
 		const { value } = this.props;
-		let neuronsInBillions = value;
-		if (neuronsInBillions !== undefined) {
-			neuronsInBillions = neuronsInBillions.toFixed(1);
+
+		if (value.infinityStatus) {
+			return (
+				<Col>
+					<p>"infinity"</p>
+				</Col>
+			);
+		} else {
+			let displayNeuronsInBillions = value.neuronsInBillions.toFixed(1);
+			if (displayNeuronsInBillions !== undefined) {
+				return (
+					this.numberWithCommas(
+						displayNeuronsInBillions * 1000000000
+					) +
+					" (" +
+					displayNeuronsInBillions +
+					" Billion) Neurons"
+				);
+			}
 		}
+	}
+	renderNeuronExplanation() {
+		const { colorTheme } = this.props;
+		document.documentElement.style.setProperty(
+			`--text7Color`,
+			colorTheme.text7Color
+		);
+		document.documentElement.style.setProperty(
+			`--text8Color`,
+			colorTheme.text8Color
+		);
+
+		const neuronExplanation = (
+			<div>
+				<p
+					style={{
+						color: colorTheme.text2Color,
+						fontFamily: "Lucida Grande",
+						lineHeight: 1.5,
+						marginBottom: 0,
+						fontSize: 14
+					}}
+				>
+					Use neurons to 'Say Hi' to more matches.
+				</p>
+			</div>
+		);
+
 		return (
-			<Row type="flex" justify="start" align="middle">
+			<Popover content={neuronExplanation}>
+				<Button
+					style={{
+						borderColor: colorTheme.backgroundColor,
+						backgroundColor: colorTheme.backgroundColor,
+						color: colorTheme.text3Color,
+						padding: "0px 5px 0px"
+					}}
+					size="small"
+				>
+					<Icon
+						style={{
+							fontSize: 12,
+							padding: "0px 0px 6px"
+						}}
+						type="question-circle-o"
+					/>
+				</Button>
+			</Popover>
+		);
+	}
+
+	render() {
+		return (
+			<Row
+				style={{
+					padding: "0px 0px 0px 20px"
+				}}
+				type="flex"
+				justify="start"
+				align="middle"
+			>
 				<Col span={1}>
 					<img
 						alt="Neurons: "
 						style={{
-							width: '35px',
-							padding: '0px 0px 0px 10px' // top right bottom left
+							width: "25px"
 						}}
 						src="https://user-images.githubusercontent.com/24757872/40867763-8f2df248-65cc-11e8-892f-3e22b4032b4a.png"
 					/>
 				</Col>
 				<Col
-					span={23}
 					style={{
-						padding: '0px 0px 0px 20px' // top right bottom left
+						padding: "0px 0px 0px 20px",
+						fontFamily: "Lucida Grande",
+						lineHeight: 1,
+						marginBottom: 0,
+						fontSize: 16
 					}}
 				>
-					<DisplayField label="Neurons: " value={neuronsInBillions} />
+					{this.renderNumberOfNeurons()}
 				</Col>
+				<Col offset={1}>{this.renderNeuronExplanation()}</Col>
 			</Row>
 		);
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
 function mapStateToProps(state) {
-	return {};
+	return {
+		colorTheme: state.colorTheme
+	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-function mapDispatchToProps(dispatch) {
-	return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Neurons);
+export default connect(
+	mapStateToProps,
+	null
+)(Neurons);

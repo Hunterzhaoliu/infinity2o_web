@@ -59,7 +59,7 @@ class Profile extends Component {
 					/>
 				</Row>
 				<Row
-					style={{ padding: "90px 0px 0px 0px" }}
+					style={{ padding: "90px 0px 20px 0px" }}
 					type="flex"
 					justify="center"
 					align="middle"
@@ -80,7 +80,7 @@ class Profile extends Component {
 					<LinkedIn value={profile.linkedInPublicProfileUrl} />
 					<Github value={profile.githubPublicProfileUrl} />
 				</Row>
-				<Neurons value={profile.payment.neuronsInBillions} />
+				<Neurons value={profile.payment} />
 				<Interests interests={profile.interests} />
 				<Email value={profile.email} />
 				<TimeZone value={profile.timeZone} />
