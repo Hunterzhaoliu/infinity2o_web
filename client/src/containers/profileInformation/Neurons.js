@@ -9,16 +9,16 @@ class Neurons extends Component {
 	};
 
 	renderNumberOfNeurons() {
-		const { value } = this.props;
+		const { payment } = this.props;
 
-		if (value.infinityStatus) {
+		if (payment.infinityStatus) {
 			return (
 				<Col>
 					<p>"infinity"</p>
 				</Col>
 			);
 		} else {
-			let displayNeuronsInBillions = value.neuronsInBillions.toFixed(1);
+			let displayNeuronsInBillions = payment.neuronsInBillions.toFixed(1);
 			if (displayNeuronsInBillions !== undefined) {
 				return (
 					this.numberWithCommas(

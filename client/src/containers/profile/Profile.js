@@ -44,7 +44,7 @@ class Profile extends Component {
 				}}
 				bodyStyle={{ padding: "0px" }} // padding around inside border of card
 			>
-				<Row type="flex" justify="center" align="middle">
+				<Row type="flex" justify="center">
 					<div
 						style={{
 							width: "100%",
@@ -80,8 +80,14 @@ class Profile extends Component {
 					<LinkedIn value={profile.linkedInPublicProfileUrl} />
 					<Github value={profile.githubPublicProfileUrl} />
 				</Row>
-				<Neurons value={profile.payment} />
-				<Interests interests={profile.interests} />
+				<Neurons payment={profile.payment} />
+				<Row
+					style={{ padding: "20px 0px 0px 20px" }}
+					type="flex"
+					justify="center"
+				>
+					<Interests interests={profile.interests} />
+				</Row>
 				<Email value={profile.email} />
 				<TimeZone value={profile.timeZone} />
 				<Row
