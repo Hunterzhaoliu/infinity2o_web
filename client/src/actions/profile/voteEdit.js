@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
 	ON_PRESS_PAGE,
 	FETCH_ASK_TO_REVOTE_START,
@@ -6,10 +6,11 @@ import {
 	FETCH_ASK_TO_REVOTE_ERROR,
 	SAVE_REVOTE_START,
 	SAVE_REVOTE_DONE,
-	SAVE_REVOTE_ERROR
-} from '../types';
-import { saveAndAddNeurons } from '../sorting_hat/ask';
-import { NUMBER_NEURONS_GIVEN_FOR_VOTE_IN_BILLIONS } from '../../containers/payment/prices';
+	SAVE_REVOTE_ERROR,
+	CLOSE_REVOTE_MODAL
+} from "../types";
+import { saveAndAddNeurons } from "../sorting_hat/ask";
+import { NUMBER_NEURONS_GIVEN_FOR_VOTE_IN_BILLIONS } from "../../containers/payment/prices";
 
 export const onPressPage = newPage => dispatch => {
 	dispatch({ type: ON_PRESS_PAGE, newPage: newPage });
@@ -27,7 +28,7 @@ export const onPressAsk = (
 	});
 
 	const askToRevoteResponse = await axios.get(
-		'/api/voteEdit?mongoDBAskId=' + mongoDBAskId
+		"/api/voteEdit?mongoDBAskId=" + mongoDBAskId
 	);
 
 	if (askToRevoteResponse.status === 200) {
@@ -70,7 +71,7 @@ export const onRevote = (
 			newAnswer: newAnswer
 		};
 
-		const response = await axios.put('/api/sorting_hat/revote', revoteInfo);
+		const response = await axios.put("/api/sorting_hat/revote", revoteInfo);
 		if (response.status === 200) {
 			dispatch({
 				type: SAVE_REVOTE_DONE,
@@ -88,4 +89,10 @@ export const onRevote = (
 	} else {
 		return;
 	}
+};
+
+export const closeRevoteModal = () => dispatch => {
+	dispatch({
+		type: CLOSE_REVOTE_MODAL
+	});
 };

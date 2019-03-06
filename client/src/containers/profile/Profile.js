@@ -119,14 +119,19 @@ class Profile extends Component {
 			return _.map(newest8Questions, (question, key) => {
 				return (
 					<Row key={key}>
-						<Col span={24}>
-							<h3
+						<Col>
+							<p
 								style={{
-									color: colorTheme.text6Color
+									color: colorTheme.text6Color,
+									fontFamily: "Lucida Grande",
+									lineHeight: 2.29, // height of vote button/font size: 32/14
+									marginBottom: 0,
+									fontSize: 14,
+									padding: "0px 0px 10px 0px"
 								}}
 							>
 								{question.question}
-							</h3>
+							</p>
 						</Col>
 					</Row>
 				);
@@ -160,11 +165,42 @@ class Profile extends Component {
 								{this.renderProfile()}
 							</Col>
 						</Row>
-						<Row>
-							<Col>
+						<Row style={{ padding: "60px 0px 0px 0px" }}>
+							<Col span={12}>
+								<Row type="flex" justify="left">
+									<h2
+										style={{
+											padding: "0px 0px 5px 0px",
+											color: colorTheme.keyText6Color,
+											fontFamily: "Lucida Grande",
+											lineHeight: 1,
+											marginBottom: 0,
+											fontSize: 32
+										}}
+									>
+										Votes
+									</h2>
+								</Row>
+								<hr
+									style={{
+										backgroundColor:
+											colorTheme.keyText7Color,
+										width: "90%",
+										height: 2,
+										border: 0,
+										margin: "0px 0px 30px 0px"
+									}}
+								/>
+								<Row type="flex" justify="start">
+									<Col>
+										<VoteEdit />
+									</Col>
+								</Row>
+							</Col>
+							<Col span={12}>
 								<h2
 									style={{
-										padding: "60px 0px 5px 0px",
+										padding: "0px 0px 5px 0px",
 										color: colorTheme.keyText6Color,
 										fontFamily: "Lucida Grande",
 										lineHeight: 1,
@@ -172,45 +208,22 @@ class Profile extends Component {
 										fontSize: 32
 									}}
 								>
-									Votes
+									Questions
 								</h2>
 								<hr
 									style={{
 										backgroundColor:
 											colorTheme.keyText7Color,
-										width: "100%",
-										height: 4,
+										width: "90%",
+										height: 2,
 										border: 0,
 										margin: "0px 0px 30px 0px"
 									}}
 								/>
+								{this.renderQuestions()}
 							</Col>
 						</Row>
-						<Row type="flex" justify="start">
-							<Col span={24}>
-								<VoteEdit />
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<h2
-									style={{
-										padding: "25px 0px 0px", // top right bottom left
-										color: colorTheme.keyText6Color
-									}}
-								>
-									Questions
-								</h2>
-							</Col>
-						</Row>
-						{this.renderQuestions()}
 					</Col>
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5 }}
-					/>
 				</Row>
 			</Content>
 		);
