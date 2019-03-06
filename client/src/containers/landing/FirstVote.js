@@ -18,7 +18,7 @@ class FirstVote extends Component {
 		return (
 			<Modal
 				visible={isFirstVoteModalOpen}
-				onCancel={e => this.props.closeModal()}
+				onCancel={e => this.props.closeFirstVoteModal()}
 				footer={null}
 				centered={true}
 				bodyStyle={{ padding: "0px 10px", backgroundColor: GREY_1 }}
@@ -73,8 +73,8 @@ function mapDispatchToProps(dispatch) {
 	);
 
 	return {
-		closeModal: () => {
-			landingDispatchers.closeModal();
+		closeFirstVoteModal: () => {
+			landingDispatchers.closeFirstVoteModal();
 		}
 	};
 }
