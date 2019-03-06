@@ -26,10 +26,6 @@ class VoteEdit extends Component {
 		this.props.onPressAsk(mongoDBAskId, index, mongoDBAnswerId);
 	}
 
-	/**
-	 * @param num The number to round
-	 * @param precision The number of decimal places to preserve
-	 */
 	roundUp(num, precision) {
 		precision = Math.pow(10, precision);
 		return Math.ceil(num * precision) / precision;
@@ -405,8 +401,6 @@ class VoteEdit extends Component {
 	}
 
 	render() {
-		//console.log('this.props inside VoteEdit', this.props);
-
 		return (
 			<div>
 				<Row type="flex" justify="start" align="top">

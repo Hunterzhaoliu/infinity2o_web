@@ -164,15 +164,29 @@ class Profile extends Component {
 							<Col>
 								<h2
 									style={{
-										padding: "25px 0px 0px", // top right bottom left
-										color: colorTheme.keyText6Color
+										padding: "60px 0px 5px 0px",
+										color: colorTheme.keyText6Color,
+										fontFamily: "Lucida Grande",
+										lineHeight: 1,
+										marginBottom: 0,
+										fontSize: 32
 									}}
 								>
 									Votes
 								</h2>
+								<hr
+									style={{
+										backgroundColor:
+											colorTheme.keyText7Color,
+										width: "100%",
+										height: 4,
+										border: 0,
+										margin: "0px 0px 30px 0px"
+									}}
+								/>
 							</Col>
 						</Row>
-						<Row type="flex" justify="start" align="middle">
+						<Row type="flex" justify="start">
 							<Col span={24}>
 								<VoteEdit />
 							</Col>
