@@ -122,7 +122,7 @@ class Profile extends Component {
 						<Col>
 							<p
 								style={{
-									color: colorTheme.text6Color,
+									color: colorTheme.text3Color,
 									fontFamily: "Lucida Grande",
 									lineHeight: 2.29, // height of vote button/font size: 32/14
 									marginBottom: 0,
@@ -140,7 +140,7 @@ class Profile extends Component {
 	}
 
 	render() {
-		const { colorTheme } = this.props;
+		const { colorTheme, profile } = this.props;
 		return (
 			<Content
 				style={{
@@ -167,10 +167,14 @@ class Profile extends Component {
 						</Row>
 						<Row style={{ padding: "60px 0px 0px 0px" }}>
 							<Col span={12}>
-								<Row type="flex" justify="left">
+								<Row
+									style={{ padding: "0px 0px 5px 0px" }}
+									type="flex"
+									justify="left"
+									align="bottom"
+								>
 									<h2
 										style={{
-											padding: "0px 0px 5px 0px",
 											color: colorTheme.keyText6Color,
 											fontFamily: "Lucida Grande",
 											lineHeight: 1,
@@ -180,6 +184,22 @@ class Profile extends Component {
 									>
 										Votes
 									</h2>
+									<p
+										style={{
+											padding: "0px 0px 0px 10px",
+											color: colorTheme.text6Color,
+											fontFamily: "Lucida Grande",
+											lineHeight: 1,
+											marginBottom: 0,
+											fontSize: 18
+										}}
+									>
+										{"(" +
+											String(
+												profile.asks.totalUserVotes
+											) +
+											")"}
+									</p>
 								</Row>
 								<hr
 									style={{
@@ -198,18 +218,40 @@ class Profile extends Component {
 								</Row>
 							</Col>
 							<Col span={12}>
-								<h2
-									style={{
-										padding: "0px 0px 5px 0px",
-										color: colorTheme.keyText6Color,
-										fontFamily: "Lucida Grande",
-										lineHeight: 1,
-										marginBottom: 0,
-										fontSize: 32
-									}}
+								<Row
+									style={{ padding: "0px 0px 5px 0px" }}
+									type="flex"
+									justify="left"
+									align="bottom"
 								>
-									Questions
-								</h2>
+									<h2
+										style={{
+											color: colorTheme.keyText6Color,
+											fontFamily: "Lucida Grande",
+											lineHeight: 1,
+											marginBottom: 0,
+											fontSize: 32
+										}}
+									>
+										Questions
+									</h2>
+									<p
+										style={{
+											padding: "0px 0px 0px 10px",
+											color: colorTheme.text6Color,
+											fontFamily: "Lucida Grande",
+											lineHeight: 1,
+											marginBottom: 0,
+											fontSize: 18
+										}}
+									>
+										{"(" +
+											String(
+												profile.asks.questions.length
+											) +
+											")"}
+									</p>
+								</Row>
 								<hr
 									style={{
 										backgroundColor:
