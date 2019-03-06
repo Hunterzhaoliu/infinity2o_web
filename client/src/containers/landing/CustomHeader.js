@@ -37,7 +37,7 @@ class CustomHeader extends Component {
 
 	renderNotLoggedInHeaderButtons(windowWidth) {
 		let largeGmailLoginText = "Gmail Login ";
-		let largeLinkedInLoginText = "Gmail Login ";
+		let largeLinkedInLoginText = "LinkedIn Login ";
 		let smallLoginText = "";
 		let paddingBetweenLoginButtons = "0px 0px 0px 30px";
 
