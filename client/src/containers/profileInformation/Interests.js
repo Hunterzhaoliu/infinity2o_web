@@ -1,9 +1,43 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
-import DisplayField from "../profile/DisplayField";
 
 class Interests extends Component {
+	renderInterests() {
+		const { interests } = this.props;
+		// interests = profile.interests
+		let formattedInterests = "";
+		let upperCaseInterest = "";
+		for (let i = 0; i < interests.length; i++) {
+			upperCaseInterest =
+				interests[i][0].toUpperCase() + interests[i].substring(1);
+			// replaces underscore in two word interests with space
+			upperCaseInterest = upperCaseInterest.replace(/_/g, " ");
+			const spaceIndex = upperCaseInterest.indexOf(" ");
+			if (spaceIndex !== -1) {
+				const secondWordFirstLetterIndex = spaceIndex + 1;
+				upperCaseInterest =
+					upperCaseInterest.substr(0, secondWordFirstLetterIndex) +
+					upperCaseInterest[
+						secondWordFirstLetterIndex
+					].toUpperCase() +
+					upperCaseInterest.substr(secondWordFirstLetterIndex + 1);
+			}
+
+			formattedInterests += upperCaseInterest;
+			// adds comma between interests
+			if (interests.length === 2 && i === 0) {
+				formattedInterests += " & ";
+			} else if (i !== interests.length - 1) {
+				formattedInterests += ", ";
+				if (i === interests.length - 2) {
+					formattedInterests += "& ";
+				}
+			}
+		}
+		return formattedInterests;
+	}
+
 	render() {
 		const { interests } = this.props;
 
@@ -14,8 +48,7 @@ class Interests extends Component {
 						<img
 							alt="Interests: "
 							style={{
-								width: "35px",
-								padding: "0px 0px 10px 10px"
+								width: "25px"
 							}}
 							src="https://user-images.githubusercontent.com/24757872/40868785-206477b0-65d6-11e8-9d7a-5482bcd504c3.png"
 						/>
@@ -23,10 +56,13 @@ class Interests extends Component {
 					<Col
 						span={23}
 						style={{
-							padding: "0px 0px 0px 20px" // top right bottom left
+							padding: "0px 0px 0px 20px",
+							fontFamily: "Lucida Grande",
+							lineHeight: 1.2,
+							fontSize: 16
 						}}
 					>
-						<DisplayField label="Interest(s): " value={interests} />
+						{this.renderInterests()}
 					</Col>
 				</Row>
 			);
@@ -36,20 +72,7 @@ class Interests extends Component {
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
-// function mapStateToProps(state) {
-// 	return {};
-// }
-
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-// function mapDispatchToProps(dispatch) {
-// 	return {};
-// }
-
-export default connect(null, null)(Interests);
+export default connect(
+	null,
+	null
+)(Interests);

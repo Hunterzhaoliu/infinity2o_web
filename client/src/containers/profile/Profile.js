@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { bindActionCreators } from "redux";
 import VoteEdit from "./VoteEdit";
-import { Layout, Row, Col, Button, Avatar } from "antd";
+import { Layout, Row, Col, Button, Avatar, Card } from "antd";
 import LinkedIn from "../profileInformation/LinkedIn";
 import Github from "../profileInformation/Github";
 import Neurons from "../profileInformation/Neurons";
@@ -33,60 +33,81 @@ class Profile extends Component {
 	renderProfile() {
 		const { colorTheme, profile } = this.props;
 		return (
-			<div>
-				<Row type="flex" justify="center" align="middle">
-					<Col span={2} />
-					<Col span={22}>
-						<Avatar shape="circle" src={profile.imageUrl} />
-					</Col>
+			<Card
+				hoverable={true}
+				bordered="false"
+				loading={false}
+				style={{
+					color: colorTheme.text1Color,
+					borderColor: "rgb(245, 245, 245)",
+					background: "rgb(245, 245, 245)"
+				}}
+				bodyStyle={{ padding: "0px" }} // padding around inside border of card
+			>
+				<Row type="flex" justify="center">
+					<div
+						style={{
+							width: "100%",
+							height: "130px",
+							backgroundColor: colorTheme.key
+						}}
+					/>
+					<Avatar
+						style={{ position: "absolute", top: "50px" }}
+						shape="circle"
+						src={profile.imageUrl}
+					/>
 				</Row>
 				<Row
+					style={{ padding: "90px 0px 20px 0px" }}
 					type="flex"
-					justify="start"
+					justify="center"
 					align="middle"
-					style={{ padding: "2px 0px 0px" }}
 				>
-					<Col span={1} />
-					<Col style={{ padding: "10px 0px 0px 18px" }}>
-						<h2
+					<Col>
+						<p
 							style={{
-								color: colorTheme.keyText6Color
+								color: colorTheme.keyText6Color,
+								fontFamily: "Lucida Grande",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: 26
 							}}
 						>
 							{this.renderNameAndAge()}
-						</h2>
+						</p>
 					</Col>
-					<Col style={{ padding: "0px 0px 0px 10px" }}>
-						<LinkedIn value={profile.linkedInPublicProfileUrl} />
-					</Col>
-					<Col style={{ padding: "0px 0px 0px 10px" }}>
-						<Github value={profile.githubPublicProfileUrl} />
-					</Col>
+					<LinkedIn value={profile.linkedInPublicProfileUrl} />
+					<Github value={profile.githubPublicProfileUrl} />
 				</Row>
-				<Neurons value={profile.payment.neuronsInBillions} />
-				<Interests interests={profile.interests} />
-				<Email value={profile.email} />
-				<TimeZone value={profile.timeZone} />
-				<Row
-					type="flex"
-					justify="start"
-					style={{
-						padding: "15px 0px 0px" // top right bottom left
-					}}
-				>
-					<Col>
+				<Neurons payment={profile.payment} />
+				<Row style={{ padding: "20px 0px 20px 20px" }}>
+					<Interests interests={profile.interests} />
+				</Row>
+				<Row style={{ padding: "0px 0px 0px 20px" }}>
+					<Email email={profile.email} />
+				</Row>
+				<Row style={{ padding: "20px 0px 0px 20px" }}>
+					<TimeZone timeZone={profile.timeZone} />
+				</Row>
+				<Row type="flex" justify="center">
+					<Col style={{ padding: "20px 0px 60px 0px" }}>
 						<Button
 							style={{
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text3Color
+								borderColor: colorTheme.backgroundColor,
+								background: colorTheme.backgroundColor,
+								color: colorTheme.text3Color,
+								fontFamily: "Lucida Grande",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: 16
 							}}
 						>
-							<a href="/profile/edit">Edit</a>
+							<a href="/profile/edit">Edit Info</a>
 						</Button>
 					</Col>
 				</Row>
-			</div>
+			</Card>
 		);
 	}
 
@@ -129,20 +150,43 @@ class Profile extends Component {
 						lg={{ span: 20 }}
 						xl={{ span: 20 }}
 					>
-						{this.renderProfile()}
+						<Row type="flex" justify="center">
+							<Col
+								sm={{ span: 21 }}
+								md={{ span: 21 }}
+								lg={{ span: 20 }}
+								xl={{ span: 8 }}
+							>
+								{this.renderProfile()}
+							</Col>
+						</Row>
 						<Row>
 							<Col>
 								<h2
 									style={{
-										padding: "25px 0px 0px", // top right bottom left
-										color: colorTheme.keyText6Color
+										padding: "60px 0px 5px 0px",
+										color: colorTheme.keyText6Color,
+										fontFamily: "Lucida Grande",
+										lineHeight: 1,
+										marginBottom: 0,
+										fontSize: 32
 									}}
 								>
 									Votes
 								</h2>
+								<hr
+									style={{
+										backgroundColor:
+											colorTheme.keyText7Color,
+										width: "100%",
+										height: 4,
+										border: 0,
+										margin: "0px 0px 30px 0px"
+									}}
+								/>
 							</Col>
 						</Row>
-						<Row type="flex" justify="start" align="middle">
+						<Row type="flex" justify="start">
 							<Col span={24}>
 								<VoteEdit />
 							</Col>

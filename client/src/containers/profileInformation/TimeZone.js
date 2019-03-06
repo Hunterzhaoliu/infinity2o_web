@@ -1,24 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
-import DisplayField from "../profile/DisplayField";
 
 class TimeZone extends Component {
 	render() {
-		const { value, activeSection } = this.props;
-		if (value !== null && value.length > 0) {
-			let padding = "5px 0px 0px 20px";
-			if (activeSection === "matches") {
-				padding = "5px 0px 0px 40px";
-			}
+		const { timeZone } = this.props;
+		if (timeZone !== null && timeZone.length > 0) {
 			return (
 				<Row type="flex" justify="start" align="middle">
 					<Col span={1}>
 						<img
 							alt="Time Zone: "
 							style={{
-								width: "42px",
-								padding: "0px 0px 0px 5px"
+								width: "25px",
+								padding: "0px 0px 0px 0px"
 							}}
 							src="https://user-images.githubusercontent.com/24757872/40868790-25f907ea-65d6-11e8-8dd1-2f3a79076082.png"
 						/>
@@ -26,10 +21,14 @@ class TimeZone extends Component {
 					<Col
 						span={23}
 						style={{
-							padding: padding // top right bottom left
+							padding: "0px 0px 0px 20px",
+							fontFamily: "Lucida Grande",
+							lineHeight: 1,
+							marginBottom: 0,
+							fontSize: 16
 						}}
 					>
-						<DisplayField label="Time Zone: " value={value[1]} />
+						{timeZone[1]}
 					</Col>
 				</Row>
 			);
@@ -38,22 +37,8 @@ class TimeZone extends Component {
 		}
 	}
 }
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
-function mapStateToProps(state) {
-	return {
-		activeSection: state.colorTheme.activeSection
-	};
-}
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-function mapDispatchToProps(dispatch) {
-	return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimeZone);
+export default connect(
+	null,
+	null
+)(TimeZone);
