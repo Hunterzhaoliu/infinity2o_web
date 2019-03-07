@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Button, Badge } from "antd";
+import { Col, Badge } from "antd";
+import "./general-header-button.css";
 
 class MatchesButton extends Component {
 	renderMatchesButton() {
@@ -16,23 +17,21 @@ class MatchesButton extends Component {
 					fontFamily: "Lucida Grande"
 				}}
 			>
-				<Button
+				<button
 					style={{
-						borderColor: colorTheme.matchesButtonColor,
-						background: colorTheme.matchesButtonColor,
-						color: colorTheme.matchesButtonTextColor,
-						fontFamily: "Lucida Grande"
+						borderBottom:
+							"3px solid " + colorTheme.matchesButtonColor
 					}}
 				>
-					<a href="/matches">
-						<img
-							alt=""
-							style={{ width: 32 }}
-							src="https://user-images.githubusercontent.com/24757872/40881562-23db47c0-668f-11e8-84a6-29020f352353.png"
-						/>
+					<a
+						style={{
+							color: colorTheme.matchesButtonColor
+						}}
+						href="/matches"
+					>
 						Matches
 					</a>
-				</Button>
+				</button>
 			</Badge>
 		);
 	}

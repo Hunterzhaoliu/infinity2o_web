@@ -11,7 +11,7 @@ button {
 }
 
 button:hover {
-	border-bottom: 3px solid var(--keyText5Color);
+	border-bottom: 3px solid var(--keyText5Color) !important;
 }
 
 /* removes the border on the left and top of the button */

@@ -1,36 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Button } from "antd";
+import { Col } from "antd";
+import "./general-header-button.css";
 
 class ProfileButton extends Component {
 	renderProfileButton() {
-		const { colorTheme, neuronsInBillions, infinityStatus } = this.props;
-		let shortNeuronsInBillions;
-		if (neuronsInBillions !== undefined) {
-			shortNeuronsInBillions = neuronsInBillions.toFixed(1);
-		}
-		let displayText = " " + shortNeuronsInBillions + " B";
-		if (infinityStatus) {
-			displayText = " ∞";
-		}
+		const { colorTheme } = this.props;
 		return (
-			<Button
+			<button
 				style={{
-					borderColor: colorTheme.profileButtonColor,
-					background: colorTheme.profileButtonColor,
-					color: colorTheme.profileButtonTextColor,
-					fontFamily: "Lucida Grande"
+					borderBottom: "3px solid " + colorTheme.profileButtonColor
 				}}
 			>
-				<a href="/profile">
-					<img
-						alt=""
-						style={{ width: 20 }}
-						src="https://user-images.githubusercontent.com/24757872/40881386-00fbc094-668b-11e8-96ca-47c0a9fafd56.png"
-					/>
-					{displayText}
+				<a
+					style={{
+						color: colorTheme.profileButtonColor
+					}}
+					href="/profile"
+				>
+					Profile
 				</a>
-			</Button>
+			</button>
 		);
 	}
 
@@ -54,9 +44,7 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme,
-		neuronsInBillions: state.profile.payment.neuronsInBillions,
-		infinityStatus: state.profile.payment.infinityStatus
+		colorTheme: state.colorTheme
 	};
 }
 

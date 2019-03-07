@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Button, Badge } from "antd";
+import { Col, Badge } from "antd";
+import "./general-header-button.css";
 
 class ConversationButton extends Component {
 	renderConversationsButton() {
@@ -16,23 +17,21 @@ class ConversationButton extends Component {
 					fontFamily: "Lucida Grande"
 				}}
 			>
-				<Button
+				<button
 					style={{
-						fontSize: 17,
-						borderColor: colorTheme.conversationsButtonColor,
-						background: colorTheme.conversationsButtonColor,
-						color: colorTheme.conversationsButtonTextColor,
-						padding: "0px 10px 0px"
+						borderBottom:
+							"3px solid " + colorTheme.conversationsButtonColor
 					}}
 				>
-					<a href="/conversations">
-						<img
-							alt=""
-							style={{ width: 18 }}
-							src="https://user-images.githubusercontent.com/24757872/40881815-7ea6867c-6696-11e8-9690-4b691d249fa8.png"
-						/>
+					<a
+						style={{
+							color: colorTheme.conversationsButtonColor
+						}}
+						href="/conversations"
+					>
+						Conversations
 					</a>
-				</Button>
+				</button>
 			</Badge>
 		);
 	}

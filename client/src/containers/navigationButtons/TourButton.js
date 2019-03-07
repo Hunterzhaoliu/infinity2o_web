@@ -7,15 +7,6 @@ class TourButton extends Component {
 	render() {
 		const { colorTheme } = this.props;
 
-		document.documentElement.style.setProperty(
-			`--text8Color`,
-			colorTheme.text8Color
-		);
-		document.documentElement.style.setProperty(
-			`--keyText5Color`,
-			colorTheme.keyText5Color
-		);
-
 		return (
 			<Col
 				md={{ offset: 1 }}

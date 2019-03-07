@@ -50,14 +50,7 @@ class ChangeThemeButton extends Component {
 			);
 		} else {
 			return (
-				<button
-					style={{
-						borderColor: colorTheme.text7Color,
-						background: colorTheme.text7Color,
-						color: colorTheme.text4Color
-					}}
-					onClick={onRandomColorTheme}
-				>
+				<button onClick={onRandomColorTheme}>
 					{this.renderSaveIcon(colorThemeSave)}
 				</button>
 			);
