@@ -1,32 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Button } from "antd";
+import { Col } from "antd";
+import "./general-header-button.css";
 
 class TourButton extends Component {
-	renderTourButton() {
+	render() {
 		const { colorTheme } = this.props;
 
-		return (
-			<Button
-				style={{
-					borderColor: colorTheme.tourButtonColor,
-					background: colorTheme.tourButtonColor,
-					color: colorTheme.tourButtonTextColor,
-					padding: "0px 10px 0px"
-				}}
-			>
-				<a href="/tour">
-					<img
-						alt=""
-						style={{ width: 22 }}
-						src="https://user-images.githubusercontent.com/24757872/40939951-cffbddd0-680b-11e8-870f-21ab81eabc02.png"
-					/>
-				</a>
-			</Button>
+		document.documentElement.style.setProperty(
+			`--text8Color`,
+			colorTheme.text8Color
 		);
-	}
+		document.documentElement.style.setProperty(
+			`--keyText5Color`,
+			colorTheme.keyText5Color
+		);
 
-	render() {
 		return (
 			<Col
 				md={{ offset: 1 }}
@@ -34,20 +23,29 @@ class TourButton extends Component {
 				xl={{ offset: 2 }}
 				key="1"
 			>
-				{this.renderTourButton()}
+				<div
+					className="button-div"
+					style={{
+						borderBottom: "3px solid " + colorTheme.tourButtonColor
+					}}
+				>
+					<button>
+						<a
+							style={{ color: colorTheme.tourButtonColor }}
+							href="/tour"
+						>
+							Tour
+						</a>
+					</button>
+				</div>
 			</Col>
 		);
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
 function mapStateToProps(state) {
 	return {
-		colorTheme: state.colorTheme,
-		colorThemeSave: state.profile.colorThemeSave
+		colorTheme: state.colorTheme
 	};
 }
 

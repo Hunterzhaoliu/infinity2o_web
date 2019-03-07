@@ -4,22 +4,25 @@ button {
 	border-radius: 0;
 	padding: 0px 16px;
 	height: 60px;
+	font-family: "Lucida Grande";
+	font-size: 16px;
+	line-height: 1;
+	margin-bottom: 0;
 }
 
 .button-div {
 	height: 60px;
 }
 
-button:hover {
-	cursor: pointer;
-}
-
 .button-div:hover {
 	border-bottom: 3px solid var(--keyText5Color) !important;
-	cursor: pointer;
 }
 
-button:focus {
-	outline: none;
+button:active {
 	border: 1px solid var(--text8Color);
+}
+
+/* removes underline from word in button */
+a:focus {
+	text-decoration: none;
 }

@@ -2,17 +2,27 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { connect } from "react-redux";
-import { Col, Button, Icon } from "antd";
+import { Col, Icon } from "antd";
 import "./change-theme-button.css";
 
 class ChangeThemeButton extends Component {
 	renderSaveIcon(saveState) {
 		if (saveState === "save_start") {
-			return <Icon style={{ padding: "0px 9px 0px" }} type="loading" />;
+			return (
+				<Icon
+					style={{ width: "32px", padding: "0px 16px 0px" }}
+					type="loading"
+				/>
+			);
 		} else if (saveState === "save_done") {
 			return;
 		} else if (saveState === "save_error") {
-			return <Icon style={{ padding: "0px 9px 0px" }} type="warning" />;
+			return (
+				<Icon
+					style={{ width: "32px", padding: "0px 16px 0px" }}
+					type="warning"
+				/>
+			);
 		}
 	}
 
@@ -31,7 +41,7 @@ class ChangeThemeButton extends Component {
 		if (colorThemeSave === "save_done" || colorThemeSave === null) {
 			return (
 				<div className="button-div">
-					<button className="button" onClick={onRandomColorTheme}>
+					<button onClick={onRandomColorTheme}>
 						<img
 							alt=""
 							style={{ width: "32px" }}
@@ -42,16 +52,9 @@ class ChangeThemeButton extends Component {
 			);
 		} else {
 			return (
-				<Button
-					style={{
-						borderColor: colorTheme.text7Color,
-						background: colorTheme.text7Color,
-						color: colorTheme.text4Color
-					}}
-					onClick={onRandomColorTheme}
-				>
+				<button onClick={onRandomColorTheme}>
 					{this.renderSaveIcon(colorThemeSave)}
-				</Button>
+				</button>
 			);
 		}
 	}
