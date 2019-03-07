@@ -6,20 +6,13 @@ button {
 	height: 60px;
 }
 
-.button-div {
-	height: 60px;
-}
-
 button:hover {
 	cursor: pointer;
-}
-
-.button-div:hover {
-	border-bottom: 3px solid var(--keyText5Color) !important;
-	cursor: pointer;
+	border-bottom: 3px solid var(--keyText5Color);
 }
 
 button:focus {
 	outline: none;
-	border: 1px solid var(--text8Color);
+	border-left: 1px solid var(--text8Color);
+	border-top: 1px solid var(--text8Color);
 }
