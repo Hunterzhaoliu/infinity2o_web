@@ -26,7 +26,7 @@ class ChangeThemeButton extends Component {
 		}
 	}
 
-	render() {
+	renderChangeThemeButton() {
 		const { colorTheme, onRandomColorTheme, colorThemeSave } = this.props;
 
 		document.documentElement.style.setProperty(
@@ -50,11 +50,22 @@ class ChangeThemeButton extends Component {
 			);
 		} else {
 			return (
-				<button onClick={onRandomColorTheme}>
+				<button
+					style={{
+						borderColor: colorTheme.text7Color,
+						background: colorTheme.text7Color,
+						color: colorTheme.text4Color
+					}}
+					onClick={onRandomColorTheme}
+				>
 					{this.renderSaveIcon(colorThemeSave)}
 				</button>
 			);
 		}
+	}
+
+	render() {
+		return <Col key="0">{this.renderChangeThemeButton()}</Col>;
 	}
 }
 

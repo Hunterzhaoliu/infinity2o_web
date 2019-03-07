@@ -23,21 +23,20 @@ class TourButton extends Component {
 				xl={{ offset: 2 }}
 				key="1"
 			>
-				<div
-					className="button-div"
+				<button
 					style={{
 						borderBottom: "3px solid " + colorTheme.tourButtonColor
 					}}
 				>
-					<button>
-						<a
-							style={{ color: colorTheme.tourButtonColor }}
-							href="/tour"
-						>
-							Tour
-						</a>
-					</button>
-				</div>
+					<a
+						style={{
+							color: colorTheme.tourButtonColor
+						}}
+						href="/tour"
+					>
+						Tour
+					</a>
+				</button>
 			</Col>
 		);
 	}

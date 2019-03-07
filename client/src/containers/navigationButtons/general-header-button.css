@@ -10,14 +10,11 @@ button {
 	margin-bottom: 0;
 }
 
-.button-div {
-	height: 60px;
+button:hover {
+	border-bottom: 3px solid var(--keyText5Color);
 }
 
-.button-div:hover {
-	border-bottom: 3px solid var(--keyText5Color) !important;
-}
-
+/* removes the border on the left and top of the button */
 button:active {
 	border: 1px solid var(--text8Color);
 }
