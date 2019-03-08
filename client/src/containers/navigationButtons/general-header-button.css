@@ -12,8 +12,8 @@ button {
 }
 
 button:hover {
-	box-shadow: 0px -3px 0px 0px var(--keyText5Color) inset !important;
-	color: var(--keyText5Color) !important;
+	box-shadow: 0px -3px 0px 0px var(--keyText4Color) inset !important;
+	color: var(--keyText4Color) !important;
 }
 
 /* removes underline from word in button */
@@ -27,4 +27,8 @@ div {
 	font-size: 16px;
 	line-height: 1;
 	margin-bottom: 0;
+}
+
+button:hover div {
+	color: var(--keyText4Color) !important;
 }
