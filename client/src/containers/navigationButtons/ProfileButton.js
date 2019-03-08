@@ -1,24 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Col } from "antd";
+import "./general-header-button.css";
 
 class ProfileButton extends Component {
 	render() {
 		const { colorTheme } = this.props;
 		return (
-			<button
-				style={{
-					borderBottom: "3px solid " + colorTheme.profileButtonColor
-				}}
-			>
-				<a
-					style={{
-						color: colorTheme.profileButtonColor
-					}}
-					href="/profile"
-				>
-					Profile
+			<Col>
+				<a href="/profile">
+					<button
+						style={{
+							borderBottom:
+								"3px solid " + colorTheme.profileButtonColor,
+							color: colorTheme.profileButtonColor
+						}}
+					>
+						Profile
+					</button>
 				</a>
-			</button>
+			</Col>
 		);
 	}
 }

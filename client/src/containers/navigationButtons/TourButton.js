@@ -1,26 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import "./general-header-button.css";
+import { Col } from "antd";
+import "./general-header-button.css";
 
 class TourButton extends Component {
 	render() {
 		const { colorTheme } = this.props;
 
 		return (
-			<button
-				style={{
-					borderBottom: "3px solid " + colorTheme.tourButtonColor
-				}}
-			>
-				<a
-					style={{
-						color: colorTheme.tourButtonColor
-					}}
-					href="/tour"
-				>
-					Tour
+			<Col md={{ offset: 1 }} lg={{ offset: 3 }} xl={{ offset: 2 }}>
+				<a href="/tour">
+					<button
+						style={{
+							borderBottom:
+								"3px solid " + colorTheme.tourButtonColor,
+							color: colorTheme.tourButtonColor
+						}}
+					>
+						Tour
+					</button>
 				</a>
-			</button>
+			</Col>
 		);
 	}
 }

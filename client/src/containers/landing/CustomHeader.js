@@ -167,46 +167,14 @@ class CustomHeader extends Component {
 					<Col md={{ span: 20 }} lg={{ span: 20 }} xl={{ span: 20 }}>
 						<Row type="flex" align="top">
 							<ChangeThemeButton />
-							<Col
-								md={{ offset: 1 }}
-								lg={{ offset: 3 }}
-								xl={{ offset: 2 }}
-							>
-								<TourButton />
-							</Col>
-							<Col
-								md={{ offset: 1 }}
-								lg={{ offset: 1 }}
-								xl={{ offset: 1 }}
-							>
-								<ProfileButton />
-							</Col>
-							<Col
-								md={{ offset: 1 }}
-								lg={{ offset: 1 }}
-								xl={{ offset: 1 }}
-							>
-								<SortingHatButton />
-							</Col>
-							<Col
-								md={{ offset: 1 }}
-								lg={{ offset: 1 }}
-								xl={{ offset: 1 }}
-							>
-								<MatchesButton />
-							</Col>
-							<Col
-								md={{ offset: 1 }}
-								lg={{ offset: 1 }}
-								xl={{ offset: 1 }}
-							>
-								<ConversationButton />
-							</Col>
+							<TourButton />
+							<ProfileButton />
+							<SortingHatButton />
+							<MatchesButton />
+							<ConversationButton />
 						</Row>
 					</Col>
-					<Col>
-						<LogoutButton />
-					</Col>
+					<LogoutButton />
 				</Row>
 			);
 		}

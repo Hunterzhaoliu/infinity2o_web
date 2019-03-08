@@ -3,11 +3,11 @@ button {
 	background-color: var(--text8Color);
 	border-radius: 0;
 	padding: 0px 16px;
-	height: 60px;
 	font-family: "Lucida Grande";
 	font-size: 16px;
 	line-height: 1;
 	margin-bottom: 0;
+	height: "60px";
 }
 
 button:hover {
@@ -22,4 +22,12 @@ button:active {
 /* removes underline from word in button */
 a:focus {
 	text-decoration: none;
+}
+
+/* for the matches and conversations button because the badge gets in the way */
+div {
+	font-family: "Lucida Grande";
+	font-size: 16px;
+	line-height: 1;
+	margin-bottom: 0;
 }

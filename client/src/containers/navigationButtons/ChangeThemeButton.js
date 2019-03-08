@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { connect } from "react-redux";
-import { Icon } from "antd";
+import { Icon, Col } from "antd";
 import "./change-theme-button.css";
 
 class ChangeThemeButton extends Component {

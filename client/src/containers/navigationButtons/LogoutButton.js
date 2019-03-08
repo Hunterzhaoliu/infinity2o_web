@@ -1,16 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Col } from "antd";
 
 class LogoutButton extends Component {
 	render() {
 		const { colorTheme } = this.props;
 
 		return (
-			<button>
-				<a style={{ color: colorTheme.text4Color }} href="/api/logout">
-					Logout
-				</a>
-			</button>
+			<Col>
+				<button>
+					<a
+						style={{ color: colorTheme.text4Color }}
+						href="/api/logout"
+					>
+						Logout
+					</a>
+				</button>
+			</Col>
 		);
 	}
 }

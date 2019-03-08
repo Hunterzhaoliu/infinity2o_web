@@ -1,26 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Col } from "antd";
+import "./general-header-button.css";
 
 class SortingHatButton extends Component {
 	render() {
 		const { colorTheme } = this.props;
 
 		return (
-			<button
-				style={{
-					borderBottom:
-						"3px solid " + colorTheme.sortingHatButtonColor
-				}}
-			>
-				<a
-					style={{
-						color: colorTheme.sortingHatButtonColor
-					}}
-					href="/sorting_hat"
-				>
-					Sorting Hat
+			<Col>
+				<a href="/sorting_hat">
+					<button
+						style={{
+							borderBottom:
+								"3px solid " + colorTheme.sortingHatButtonColor,
+							color: colorTheme.sortingHatButtonColor
+						}}
+					>
+						Sorting Hat
+					</button>
 				</a>
-			</button>
+			</Col>
 		);
 	}
 }
