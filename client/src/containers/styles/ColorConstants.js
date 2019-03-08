@@ -199,25 +199,25 @@ export const colors1 = [
 		keyCompliment1: BLUE_VIOLET_1,
 		keyCompliment2: BLUE_GREEN_1,
 		thirdColor: GREEN_1
-	},
-	{
-		key: ORANGE_YELLOW_1,
-		keyCompliment1: VIOLET_1,
-		keyCompliment2: BLUE_1,
-		thirdColor: BLUE_GREEN_1
-	},
-	{
-		key: YELLOW_1,
-		keyCompliment1: RED_VIOLET_1,
-		keyCompliment2: BLUE_VIOLET_1,
-		thirdColor: BLUE_1
-	},
-	{
-		key: YELLOW_GREEN_1,
-		keyCompliment1: RED_1,
-		keyCompliment2: YELLOW_GREEN_1,
-		thirdColor: BLUE_VIOLET_1
 	}
+	// {
+	// 	key: ORANGE_YELLOW_1,
+	// 	keyCompliment1: VIOLET_1,
+	// 	keyCompliment2: BLUE_1,
+	// 	thirdColor: BLUE_GREEN_1
+	// },
+	// {
+	// 	key: YELLOW_1,
+	// 	keyCompliment1: RED_VIOLET_1,
+	// 	keyCompliment2: BLUE_VIOLET_1,
+	// 	thirdColor: BLUE_1
+	// },
+	// {
+	// 	key: YELLOW_GREEN_1,
+	// 	keyCompliment1: RED_1,
+	// 	keyCompliment2: YELLOW_GREEN_1,
+	// 	thirdColor: BLUE_VIOLET_1
+	// }
 ];
 
 export const colors2 = [
@@ -274,24 +274,6 @@ export const colors2 = [
 		keyCompliment1: BLUE_VIOLET_2,
 		keyCompliment2: BLUE_GREEN_2,
 		thirdColor: GREEN_2
-	},
-	{
-		key: ORANGE_YELLOW_2,
-		keyCompliment1: VIOLET_2,
-		keyCompliment2: BLUE_2,
-		thirdColor: BLUE_GREEN_2
-	},
-	{
-		key: YELLOW_2,
-		keyCompliment1: RED_VIOLET_2,
-		keyCompliment2: BLUE_VIOLET_2,
-		thirdColor: BLUE_2
-	},
-	{
-		key: YELLOW_GREEN_2,
-		keyCompliment1: RED_2,
-		keyCompliment2: YELLOW_GREEN_2,
-		thirdColor: BLUE_VIOLET_2
 	}
 ];
 
@@ -349,24 +331,6 @@ export const colors3 = [
 		keyCompliment1: BLUE_VIOLET_3,
 		keyCompliment2: BLUE_GREEN_3,
 		thirdColor: GREEN_3
-	},
-	{
-		key: ORANGE_YELLOW_3,
-		keyCompliment1: VIOLET_3,
-		keyCompliment2: BLUE_3,
-		thirdColor: BLUE_GREEN_3
-	},
-	{
-		key: YELLOW_3,
-		keyCompliment1: RED_VIOLET_3,
-		keyCompliment2: BLUE_VIOLET_3,
-		thirdColor: BLUE_3
-	},
-	{
-		key: YELLOW_GREEN_3,
-		keyCompliment1: RED_3,
-		keyCompliment2: YELLOW_GREEN_3,
-		thirdColor: BLUE_VIOLET_3
 	}
 ];
 
@@ -424,24 +388,6 @@ export const colors4 = [
 		keyCompliment1: BLUE_VIOLET_4,
 		keyCompliment2: BLUE_GREEN_4,
 		thirdColor: GREEN_4
-	},
-	{
-		key: ORANGE_YELLOW_4,
-		keyCompliment1: VIOLET_4,
-		keyCompliment2: BLUE_4,
-		thirdColor: BLUE_GREEN_4
-	},
-	{
-		key: YELLOW_4,
-		keyCompliment1: RED_VIOLET_4,
-		keyCompliment2: BLUE_VIOLET_4,
-		thirdColor: BLUE_4
-	},
-	{
-		key: YELLOW_GREEN_4,
-		keyCompliment1: RED_4,
-		keyCompliment2: YELLOW_GREEN_4,
-		thirdColor: BLUE_VIOLET_4
 	}
 ];
 
@@ -499,24 +445,6 @@ export const colors5 = [
 		keyCompliment1: BLUE_VIOLET_5,
 		keyCompliment2: BLUE_GREEN_5,
 		thirdColor: GREEN_5
-	},
-	{
-		key: ORANGE_YELLOW_5,
-		keyCompliment1: VIOLET_5,
-		keyCompliment2: BLUE_5,
-		thirdColor: BLUE_GREEN_5
-	},
-	{
-		key: YELLOW_5,
-		keyCompliment1: RED_VIOLET_5,
-		keyCompliment2: BLUE_VIOLET_5,
-		thirdColor: BLUE_5
-	},
-	{
-		key: YELLOW_GREEN_5,
-		keyCompliment1: RED_5,
-		keyCompliment2: YELLOW_GREEN_5,
-		thirdColor: BLUE_VIOLET_5
 	}
 ];
 
@@ -574,24 +502,6 @@ export const colors6 = [
 		keyCompliment1: BLUE_VIOLET_6,
 		keyCompliment2: BLUE_GREEN_6,
 		thirdColor: GREEN_6
-	},
-	{
-		key: ORANGE_YELLOW_6,
-		keyCompliment1: VIOLET_6,
-		keyCompliment2: BLUE_6,
-		thirdColor: BLUE_GREEN_6
-	},
-	{
-		key: YELLOW_6,
-		keyCompliment1: RED_VIOLET_6,
-		keyCompliment2: BLUE_VIOLET_6,
-		thirdColor: BLUE_6
-	},
-	{
-		key: YELLOW_GREEN_6,
-		keyCompliment1: RED_6,
-		keyCompliment2: YELLOW_GREEN_6,
-		thirdColor: BLUE_VIOLET_6
 	}
 ];
 
@@ -649,24 +559,6 @@ export const colors7 = [
 		keyCompliment1: BLUE_VIOLET_7,
 		keyCompliment2: BLUE_GREEN_7,
 		thirdColor: GREEN_7
-	},
-	{
-		key: ORANGE_YELLOW_7,
-		keyCompliment1: VIOLET_7,
-		keyCompliment2: BLUE_7,
-		thirdColor: BLUE_GREEN_7
-	},
-	{
-		key: YELLOW_7,
-		keyCompliment1: RED_VIOLET_7,
-		keyCompliment2: BLUE_VIOLET_7,
-		thirdColor: BLUE_7
-	},
-	{
-		key: YELLOW_GREEN_7,
-		keyCompliment1: RED_7,
-		keyCompliment2: YELLOW_GREEN_7,
-		thirdColor: BLUE_VIOLET_7
 	}
 ];
 
@@ -724,24 +616,6 @@ export const colors8 = [
 		keyCompliment1: BLUE_VIOLET_8,
 		keyCompliment2: BLUE_GREEN_8,
 		thirdColor: GREEN_8
-	},
-	{
-		key: ORANGE_YELLOW_8,
-		keyCompliment1: VIOLET_8,
-		keyCompliment2: BLUE_8,
-		thirdColor: BLUE_GREEN_8
-	},
-	{
-		key: YELLOW_8,
-		keyCompliment1: RED_VIOLET_8,
-		keyCompliment2: BLUE_VIOLET_8,
-		thirdColor: BLUE_8
-	},
-	{
-		key: YELLOW_GREEN_8,
-		keyCompliment1: RED_8,
-		keyCompliment2: YELLOW_GREEN_8,
-		thirdColor: BLUE_VIOLET_8
 	}
 ];
 
@@ -799,23 +673,5 @@ export const colors9 = [
 		keyCompliment1: BLUE_VIOLET_9,
 		keyCompliment2: BLUE_GREEN_9,
 		thirdColor: GREEN_9
-	},
-	{
-		key: ORANGE_YELLOW_9,
-		keyCompliment1: VIOLET_9,
-		keyCompliment2: BLUE_9,
-		thirdColor: BLUE_GREEN_9
-	},
-	{
-		key: YELLOW_9,
-		keyCompliment1: RED_VIOLET_9,
-		keyCompliment2: BLUE_VIOLET_9,
-		thirdColor: BLUE_9
-	},
-	{
-		key: YELLOW_GREEN_9,
-		keyCompliment1: RED_9,
-		keyCompliment2: YELLOW_GREEN_9,
-		thirdColor: BLUE_VIOLET_9
 	}
 ];
