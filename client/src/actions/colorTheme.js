@@ -84,28 +84,6 @@ export const onFooter = () => {
 	};
 };
 
-export const generateRandomColorThemeWith = async dispatch => {
-	let isGrey_1 = Math.floor(Math.random() * 2) < 0.5;
-	let colorPallateIndex = Math.floor(Math.random() * 12);
-	if (isGrey_1) {
-		dispatch(
-			_generateColorThemeBasedOnBackground(
-				colorPallateIndex,
-				GREY_1,
-				null
-			)
-		);
-	} else {
-		dispatch(
-			_generateColorThemeBasedOnBackground(
-				colorPallateIndex,
-				GREY_9,
-				null
-			)
-		);
-	}
-};
-
 export const generateRandomColorTheme = () => async dispatch => {
 	dispatch({ type: SAVE_COLOR_THEME_START });
 	let isGrey_1 = Math.floor(Math.random() * 2) < 0.5;

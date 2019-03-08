@@ -33,7 +33,8 @@ class ConversationButton extends Component {
 						>
 							<div
 								style={{
-									color: colorTheme.conversationsButtonColor
+									color:
+										colorTheme.conversationsButtonTextColor
 								}}
 							>
 								Conversations

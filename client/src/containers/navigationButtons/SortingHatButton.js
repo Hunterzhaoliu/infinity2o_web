@@ -16,7 +16,7 @@ class SortingHatButton extends Component {
 								"0px -3px 0px 0px " +
 								colorTheme.sortingHatButtonColor +
 								" inset",
-							color: colorTheme.sortingHatButtonColor
+							color: colorTheme.sortingHatButtonTextColor
 						}}
 					>
 						Sorting Hat

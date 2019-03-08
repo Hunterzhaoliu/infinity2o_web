@@ -16,7 +16,7 @@ class TourButton extends Component {
 								"0px -3px 0px 0px " +
 								colorTheme.tourButtonColor +
 								" inset",
-							color: colorTheme.tourButtonColor
+							color: colorTheme.tourButtonTextColor
 						}}
 					>
 						Tour

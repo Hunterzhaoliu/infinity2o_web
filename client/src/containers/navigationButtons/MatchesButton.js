@@ -33,7 +33,7 @@ class MatchesButton extends Component {
 						>
 							<div
 								style={{
-									color: colorTheme.matchesButtonColor
+									color: colorTheme.matchesButtonTextColor
 								}}
 							>
 								Matches

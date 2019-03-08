@@ -15,7 +15,7 @@ class ProfileButton extends Component {
 								"0px -3px 0px 0px " +
 								colorTheme.profileButtonColor +
 								" inset",
-							color: colorTheme.profileButtonColor
+							color: colorTheme.profileButtonTextColor
 						}}
 					>
 						Profile
