@@ -8,15 +8,12 @@ button {
 	line-height: 1;
 	margin-bottom: 0;
 	height: "60px";
+	border: 0;
 }
 
 button:hover {
-	border-bottom: 3px solid var(--keyText5Color) !important;
-}
-
-/* removes the border on the left and top of the button */
-button:active {
-	border: 1px solid var(--text8Color);
+	box-shadow: 0px -3px 0px 0px var(--keyText4Color) inset !important;
+	color: var(--keyText4Color) !important;
 }
 
 /* removes underline from word in button */
@@ -30,4 +27,8 @@ div {
 	font-size: 16px;
 	line-height: 1;
 	margin-bottom: 0;
+}
+
+button:hover div {
+	color: var(--keyText4Color) !important;
 }

@@ -8,12 +8,14 @@ class MatchesButton extends Component {
 		const { colorTheme, numberOfUnseenMatches } = this.props;
 
 		return (
-			<Col>
+			<Col style={{ padding: "0px 0px 0px 10px" }}>
 				<a href="/matches">
 					<button
 						style={{
-							borderBottom:
-								"3px solid " + colorTheme.matchesButtonColor
+							boxShadow:
+								"0px -3px 0px 0px " +
+								colorTheme.matchesButtonColor +
+								" inset"
 						}}
 					>
 						<Badge
@@ -31,7 +33,7 @@ class MatchesButton extends Component {
 						>
 							<div
 								style={{
-									color: colorTheme.matchesButtonColor
+									color: colorTheme.matchesButtonTextColor
 								}}
 							>
 								Matches

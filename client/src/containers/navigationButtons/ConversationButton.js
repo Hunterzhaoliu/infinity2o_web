@@ -8,13 +8,14 @@ class ConversationButton extends Component {
 		const { colorTheme, totalNumberOfUnseenMessages } = this.props;
 
 		return (
-			<Col>
+			<Col style={{ padding: "0px 0px 0px 10px" }}>
 				<a href="/conversations">
 					<button
 						style={{
-							borderBottom:
-								"3px solid " +
-								colorTheme.conversationsButtonColor
+							boxShadow:
+								"0px -3px 0px 0px " +
+								colorTheme.conversationsButtonColor +
+								" inset"
 						}}
 					>
 						<Badge
@@ -32,7 +33,8 @@ class ConversationButton extends Component {
 						>
 							<div
 								style={{
-									color: colorTheme.conversationsButtonColor
+									color:
+										colorTheme.conversationsButtonTextColor
 								}}
 							>
 								Conversations

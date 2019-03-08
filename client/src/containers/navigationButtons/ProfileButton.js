@@ -7,13 +7,15 @@ class ProfileButton extends Component {
 	render() {
 		const { colorTheme } = this.props;
 		return (
-			<Col>
+			<Col style={{ padding: "0px 0px 0px 10px" }}>
 				<a href="/profile">
 					<button
 						style={{
-							borderBottom:
-								"3px solid " + colorTheme.profileButtonColor,
-							color: colorTheme.profileButtonColor
+							boxShadow:
+								"0px -3px 0px 0px " +
+								colorTheme.profileButtonColor +
+								" inset",
+							color: colorTheme.profileButtonTextColor
 						}}
 					>
 						Profile

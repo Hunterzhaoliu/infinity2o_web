@@ -50,7 +50,12 @@ class CustomHeader extends Component {
 			paddingBetweenLoginButtons = "0px 0px 0px 10px";
 		}
 		return (
-			<Row type="flex" justify="center" align="middle">
+			<Row
+				style={{ height: "60px" }}
+				type="flex"
+				justify="center"
+				align="middle"
+			>
 				<Col
 					xs={{ span: 10 }}
 					sm={{ span: 15 }}
@@ -163,9 +168,9 @@ class CustomHeader extends Component {
 			return this.renderNotLoggedInHeaderButtons(windowWidth);
 		} else if (loggedInState === "logged_in") {
 			return (
-				<Row type="flex" justify="center" align="top">
+				<Row type="flex" justify="center" align="middle">
 					<Col md={{ span: 20 }} lg={{ span: 20 }} xl={{ span: 20 }}>
-						<Row type="flex" align="top">
+						<Row type="flex" align="middle">
 							<ChangeThemeButton />
 							<TourButton />
 							<ProfileButton />
