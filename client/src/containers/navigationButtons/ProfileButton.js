@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col } from "antd";
 import "./general-header-button.css";
 
 class ProfileButton extends Component {
-	renderProfileButton() {
+	render() {
 		const { colorTheme } = this.props;
 		return (
 			<button
@@ -21,19 +20,6 @@ class ProfileButton extends Component {
 					Profile
 				</a>
 			</button>
-		);
-	}
-
-	render() {
-		return (
-			<Col
-				md={{ offset: 1 }}
-				lg={{ offset: 1 }}
-				xl={{ offset: 1 }}
-				key="2"
-			>
-				{this.renderProfileButton()}
-			</Col>
 		);
 	}
 }

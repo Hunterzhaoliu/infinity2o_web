@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Badge } from "antd";
+import { Badge } from "antd";
 import "./general-header-button.css";
 
 class MatchesButton extends Component {
-	renderMatchesButton() {
+	render() {
 		const { colorTheme, numberOfUnseenMatches } = this.props;
 
 		return (
@@ -33,19 +33,6 @@ class MatchesButton extends Component {
 					</a>
 				</button>
 			</Badge>
-		);
-	}
-
-	render() {
-		return (
-			<Col
-				md={{ offset: 1 }}
-				lg={{ offset: 1 }}
-				xl={{ offset: 1 }}
-				key="4"
-			>
-				{this.renderMatchesButton()}
-			</Col>
 		);
 	}
 }

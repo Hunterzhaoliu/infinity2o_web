@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Badge } from "antd";
+import { Badge } from "antd";
 import "./general-header-button.css";
 
 class ConversationButton extends Component {
-	renderConversationsButton() {
+	render() {
 		const { colorTheme, totalNumberOfUnseenMessages } = this.props;
 
 		return (
@@ -33,19 +33,6 @@ class ConversationButton extends Component {
 					</a>
 				</button>
 			</Badge>
-		);
-	}
-
-	render() {
-		return (
-			<Col
-				md={{ offset: 1 }}
-				lg={{ offset: 1 }}
-				xl={{ offset: 1 }}
-				key="5"
-			>
-				{this.renderConversationsButton()}
-			</Col>
 		);
 	}
 }

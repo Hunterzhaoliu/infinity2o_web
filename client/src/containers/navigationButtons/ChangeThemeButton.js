@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { connect } from "react-redux";
-import { Col, Icon } from "antd";
+import { Icon } from "antd";
 import "./change-theme-button.css";
 
 class ChangeThemeButton extends Component {
@@ -26,7 +26,7 @@ class ChangeThemeButton extends Component {
 		}
 	}
 
-	renderChangeThemeButton() {
+	render() {
 		const { colorTheme, onRandomColorTheme, colorThemeSave } = this.props;
 
 		document.documentElement.style.setProperty(
@@ -56,16 +56,8 @@ class ChangeThemeButton extends Component {
 			);
 		}
 	}
-
-	render() {
-		return <Col key="0">{this.renderChangeThemeButton()}</Col>;
-	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
@@ -73,10 +65,6 @@ function mapStateToProps(state) {
 	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
 function mapDispatchToProps(dispatch) {
 	const colorThemeDispatchers = bindActionCreators(
 		colorThemeActionCreators,

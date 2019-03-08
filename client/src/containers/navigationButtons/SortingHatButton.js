@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col } from "antd";
 import "./general-header-button.css";
 
 class SortingHatButton extends Component {
-	renderSortingHatButton() {
+	render() {
 		const { colorTheme } = this.props;
 
 		return (
@@ -23,19 +22,6 @@ class SortingHatButton extends Component {
 					Sorting Hat
 				</a>
 			</button>
-		);
-	}
-
-	render() {
-		return (
-			<Col
-				md={{ offset: 1 }}
-				lg={{ offset: 1 }}
-				xl={{ offset: 1 }}
-				key="3"
-			>
-				{this.renderSortingHatButton()}
-			</Col>
 		);
 	}
 }
