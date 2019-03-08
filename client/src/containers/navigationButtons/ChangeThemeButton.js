@@ -34,8 +34,8 @@ class ChangeThemeButton extends Component {
 			colorTheme.text8Color
 		);
 		document.documentElement.style.setProperty(
-			`--keyText5Color`,
-			colorTheme.keyText5Color
+			`--keyText4Color`,
+			colorTheme.keyText4Color
 		);
 
 		if (colorThemeSave === "save_done" || colorThemeSave === null) {

@@ -8,13 +8,15 @@ class SortingHatButton extends Component {
 		const { colorTheme } = this.props;
 
 		return (
-			<Col>
+			<Col style={{ padding: "0px 0px 0px 10px" }}>
 				<a href="/sorting_hat">
 					<button
 						style={{
-							borderBottom:
-								"3px solid " + colorTheme.sortingHatButtonColor,
-							color: colorTheme.sortingHatButtonColor
+							boxShadow:
+								"0px -3px 0px 0px " +
+								colorTheme.sortingHatButtonColor +
+								" inset",
+							color: colorTheme.sortingHatButtonTextColor
 						}}
 					>
 						Sorting Hat
