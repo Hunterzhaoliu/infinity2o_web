@@ -87,7 +87,7 @@ export const onFooter = () => {
 export const generateRandomColorTheme = () => async dispatch => {
 	dispatch({ type: SAVE_COLOR_THEME_START });
 	let isGrey_1 = Math.floor(Math.random() * 2) < 0.5;
-	let colorPallateIndex = Math.floor(Math.random() * 12);
+	let colorPallateIndex = Math.floor(Math.random() * 9); // multiply by 12 if yellow and yellow orange are used
 	let savedBackgroundColor = GREY_1;
 	if (isGrey_1) {
 		dispatch(
