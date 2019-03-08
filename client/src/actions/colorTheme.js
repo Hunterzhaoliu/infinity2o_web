@@ -23,6 +23,7 @@ import {
 	colors7,
 	colors8,
 	colors9,
+	GREY_DOT_5,
 	GREY_1,
 	GREY_2,
 	GREY_3,
@@ -31,7 +32,8 @@ import {
 	GREY_6,
 	GREY_7,
 	GREY_8,
-	GREY_9
+	GREY_9,
+	GREY_9_DOT_5
 } from "../containers/styles/ColorConstants";
 
 export const onTour = () => {
@@ -87,11 +89,19 @@ export const generateRandomColorThemeWith = async dispatch => {
 	let colorPallateIndex = Math.floor(Math.random() * 12);
 	if (isGrey_1) {
 		dispatch(
-			_generateColorThemeBasedOnBackground(colorPallateIndex, GREY_1, null)
+			_generateColorThemeBasedOnBackground(
+				colorPallateIndex,
+				GREY_1,
+				null
+			)
 		);
 	} else {
 		dispatch(
-			_generateColorThemeBasedOnBackground(colorPallateIndex, GREY_9, null)
+			_generateColorThemeBasedOnBackground(
+				colorPallateIndex,
+				GREY_9,
+				null
+			)
 		);
 	}
 };
@@ -103,11 +113,19 @@ export const generateRandomColorTheme = () => async dispatch => {
 	let savedBackgroundColor = GREY_1;
 	if (isGrey_1) {
 		dispatch(
-			_generateColorThemeBasedOnBackground(colorPallateIndex, GREY_1, null)
+			_generateColorThemeBasedOnBackground(
+				colorPallateIndex,
+				GREY_1,
+				null
+			)
 		);
 	} else {
 		dispatch(
-			_generateColorThemeBasedOnBackground(colorPallateIndex, GREY_9, null)
+			_generateColorThemeBasedOnBackground(
+				colorPallateIndex,
+				GREY_9,
+				null
+			)
 		);
 		savedBackgroundColor = GREY_9;
 	}
@@ -157,6 +175,7 @@ function _generateColorThemeBasedOnBackground(
 	let newText6Color = GREY_4;
 	let newText7Color = GREY_3;
 	let newText8Color = GREY_2;
+	let newText95Color = GREY_DOT_5;
 	let newKeyText1Color = colors9[colorPallateIndex].key;
 	let newKeyText2Color = colors8[colorPallateIndex].key;
 	let newKeyText3Color = colors7[colorPallateIndex].key;
@@ -180,6 +199,7 @@ function _generateColorThemeBasedOnBackground(
 		newText6Color = GREY_6;
 		newText7Color = GREY_7;
 		newText8Color = GREY_8;
+		newText95Color = GREY_9_DOT_5; //9.5
 		newKeyText1Color = colors1[colorPallateIndex].key;
 		newKeyText2Color = colors2[colorPallateIndex].key;
 		newKeyText3Color = colors3[colorPallateIndex].key;
@@ -197,6 +217,7 @@ function _generateColorThemeBasedOnBackground(
 		keyCompliment1: newKeyCompliment1,
 		keyCompliment2: newKeyCompliment2,
 		thirdColor: newThirdColor,
+		text05Color: newText95Color,
 		text1Color: newText1Color,
 		text2Color: newText2Color,
 		text3Color: newText3Color,

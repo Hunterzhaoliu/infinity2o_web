@@ -1,52 +1,42 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Button, Badge } from "antd";
+import { Badge, Col } from "antd";
+import "./general-header-button.css";
 
 class ConversationButton extends Component {
-	renderConversationsButton() {
+	render() {
 		const { colorTheme, totalNumberOfUnseenMessages } = this.props;
 
 		return (
-			<Badge
-				count={totalNumberOfUnseenMessages}
-				style={{
-					backgroundColor: colorTheme.keyText8Color,
-					color: colorTheme.text2Color,
-					boxShadow: "0 0 0 1px " + colorTheme.keyText8Color,
-					fontFamily: "Lucida Grande"
-				}}
-			>
-				<Button
+			<a href="/conversations">
+				<button
 					style={{
-						fontSize: 17,
-						borderColor: colorTheme.conversationsButtonColor,
-						background: colorTheme.conversationsButtonColor,
-						color: colorTheme.conversationsButtonTextColor,
-						padding: "0px 10px 0px"
+						borderBottom:
+							"3px solid " + colorTheme.conversationsButtonColor
 					}}
 				>
-					<a href="/conversations">
-						<img
-							alt=""
-							style={{ width: 18 }}
-							src="https://user-images.githubusercontent.com/24757872/40881815-7ea6867c-6696-11e8-9690-4b691d249fa8.png"
-						/>
-					</a>
-				</Button>
-			</Badge>
-		);
-	}
-
-	render() {
-		return (
-			<Col
-				md={{ offset: 1 }}
-				lg={{ offset: 1 }}
-				xl={{ offset: 1 }}
-				key="5"
-			>
-				{this.renderConversationsButton()}
-			</Col>
+					<Badge
+						count={totalNumberOfUnseenMessages}
+						style={{
+							backgroundColor: colorTheme.keyText8Color,
+							color: colorTheme.text5Color,
+							boxShadow: "0 0 0 1px " + colorTheme.keyText8Color,
+							fontFamily: "Lucida Grande",
+							fontSize: "12px",
+							top: "-20px",
+							right: "-30px"
+						}}
+					>
+						<div
+							style={{
+								color: colorTheme.conversationsButtonColor
+							}}
+						>
+							Conversations
+						</div>
+					</Badge>
+				</button>
+			</a>
 		);
 	}
 }

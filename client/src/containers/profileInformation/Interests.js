@@ -43,7 +43,12 @@ class Interests extends Component {
 
 		if (interests !== null && interests.length > 0) {
 			return (
-				<Row type="flex" justify="start" align="middle">
+				<Row
+					style={{ padding: "20px 0px 0px 20px" }}
+					type="flex"
+					justify="start"
+					align="middle"
+				>
 					<Col span={1}>
 						<img
 							alt="Interests: "

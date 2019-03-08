@@ -7,7 +7,12 @@ class Email extends Component {
 	render() {
 		const { email } = this.props;
 		return (
-			<Row type="flex" justify="start" align="middle">
+			<Row
+				style={{ padding: "20px 0px 0px 20px" }}
+				type="flex"
+				justify="start"
+				align="middle"
+			>
 				<Col span={1}>
 					<img
 						alt="Email: "
