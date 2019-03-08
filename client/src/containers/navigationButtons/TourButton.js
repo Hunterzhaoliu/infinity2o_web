@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./general-header-button.css";
+// import "./general-header-button.css";
 
 class TourButton extends Component {
 	render() {

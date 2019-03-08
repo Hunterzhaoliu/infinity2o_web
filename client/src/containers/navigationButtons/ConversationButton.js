@@ -1,26 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Badge } from "antd";
-import "./general-header-button.css";
 
 class ConversationButton extends Component {
 	render() {
 		const { colorTheme, totalNumberOfUnseenMessages } = this.props;
 
 		return (
-			<Badge
-				count={totalNumberOfUnseenMessages}
+			<button
 				style={{
-					backgroundColor: colorTheme.keyText8Color,
-					color: colorTheme.text2Color,
-					boxShadow: "0 0 0 1px " + colorTheme.keyText8Color,
-					fontFamily: "Lucida Grande"
+					borderBottom:
+						"3px solid " + colorTheme.conversationsButtonColor
 				}}
 			>
-				<button
+				<Badge
+					count={totalNumberOfUnseenMessages}
 					style={{
-						borderBottom:
-							"3px solid " + colorTheme.conversationsButtonColor
+						backgroundColor: colorTheme.keyText8Color,
+						color: colorTheme.text5Color,
+						boxShadow: "0 0 0 1px " + colorTheme.keyText8Color,
+						fontFamily: "Lucida Grande",
+						fontSize: "12px",
+						top: "-20px",
+						right: "-30px"
 					}}
 				>
 					<a
@@ -31,8 +33,8 @@ class ConversationButton extends Component {
 					>
 						Conversations
 					</a>
-				</button>
-			</Badge>
+				</Badge>
+			</button>
 		);
 	}
 }

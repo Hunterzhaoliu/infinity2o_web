@@ -1,26 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Badge } from "antd";
-import "./general-header-button.css";
 
 class MatchesButton extends Component {
 	render() {
 		const { colorTheme, numberOfUnseenMatches } = this.props;
 
 		return (
-			<Badge
-				count={numberOfUnseenMatches}
+			<button
 				style={{
-					backgroundColor: colorTheme.keyText8Color,
-					color: colorTheme.text2Color,
-					boxShadow: "0 0 0 1px " + colorTheme.keyText8Color,
-					fontFamily: "Lucida Grande"
+					borderBottom: "3px solid " + colorTheme.matchesButtonColor
 				}}
 			>
-				<button
+				<Badge
+					count={numberOfUnseenMatches}
 					style={{
-						borderBottom:
-							"3px solid " + colorTheme.matchesButtonColor
+						backgroundColor: colorTheme.keyText8Color,
+						color: colorTheme.text5Color,
+						boxShadow: "0 0 0 1px " + colorTheme.keyText8Color,
+						fontFamily: "Lucida Grande",
+						fontSize: "12px",
+						top: "-20px", // starts at the top of "s" in matches
+						right: "-30px" // starts in the middle of the wod "matches"
 					}}
 				>
 					<a
@@ -31,8 +32,8 @@ class MatchesButton extends Component {
 					>
 						Matches
 					</a>
-				</button>
-			</Badge>
+				</Badge>
+			</button>
 		);
 	}
 }
