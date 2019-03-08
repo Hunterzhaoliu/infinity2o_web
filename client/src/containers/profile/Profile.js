@@ -39,8 +39,8 @@ class Profile extends Component {
 				loading={false}
 				style={{
 					color: colorTheme.text1Color,
-					borderColor: "rgb(245, 245, 245)",
-					background: "rgb(245, 245, 245)"
+					borderColor: colorTheme.text05Color,
+					background: colorTheme.text05Color
 				}}
 				bodyStyle={{ padding: "0px" }} // padding around inside border of card
 			>
@@ -81,13 +81,13 @@ class Profile extends Component {
 					<Github value={profile.githubPublicProfileUrl} />
 				</Row>
 				<Neurons payment={profile.payment} />
-				<Row style={{ padding: "20px 0px 20px 20px" }}>
+				<Row>
 					<Interests interests={profile.interests} />
 				</Row>
-				<Row style={{ padding: "0px 0px 0px 20px" }}>
+				<Row>
 					<Email email={profile.email} />
 				</Row>
-				<Row style={{ padding: "20px 0px 0px 20px" }}>
+				<Row>
 					<TimeZone timeZone={profile.timeZone} />
 				</Row>
 				<Row type="flex" justify="center">

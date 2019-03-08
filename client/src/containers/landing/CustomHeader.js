@@ -145,12 +145,7 @@ class CustomHeader extends Component {
 
 			return (
 				<Row type="flex" justify="start">
-					<Col
-						style={{
-							padding: "3px 0px 0px"
-						}}
-						key="0"
-					>
+					<Col key="0">
 						<Button
 							style={{
 								borderColor: colorTheme.text7Color,
@@ -168,9 +163,9 @@ class CustomHeader extends Component {
 			return this.renderNotLoggedInHeaderButtons(windowWidth);
 		} else if (loggedInState === "logged_in") {
 			return (
-				<Row type="flex" justify="center" align="middle">
+				<Row type="flex" justify="center" align="top">
 					<Col md={{ span: 20 }} lg={{ span: 20 }} xl={{ span: 20 }}>
-						<Row type="flex" align="middle">
+						<Row type="flex" align="top">
 							<ChangeThemeButton />
 							<TourButton />
 							<ProfileButton />
@@ -182,8 +177,6 @@ class CustomHeader extends Component {
 					<LogoutButton />
 				</Row>
 			);
-		} else {
-			console.log("ERROR: site in invalid state = ", loggedInState);
 		}
 	}
 
@@ -207,8 +200,7 @@ class CustomHeader extends Component {
 					zIndex: 1, // make every component display under the header
 					width: "100%",
 					height: "60px",
-					lineHeight: "60px",
-					padding: "0px 0px 0px 0px"
+					lineHeight: "60px"
 				}}
 			>
 				{this.renderHeaderButtons()}
