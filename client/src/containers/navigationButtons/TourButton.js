@@ -12,8 +12,10 @@ class TourButton extends Component {
 				<a href="/tour">
 					<button
 						style={{
-							borderBottom:
-								"3px solid " + colorTheme.tourButtonColor,
+							boxShadow:
+								"0px -3px 0px 0px " +
+								colorTheme.tourButtonColor +
+								" inset",
 							color: colorTheme.tourButtonColor
 						}}
 					>
