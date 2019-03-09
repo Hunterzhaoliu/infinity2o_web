@@ -25,7 +25,7 @@ class MatchesButton extends Component {
 								color: colorTheme.text5Color,
 								boxShadow:
 									"0 0 0 1px " + colorTheme.keyText8Color,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								fontSize: "12px",
 								top: "-20px", // starts at the top of "s" in matches
 								right: "-30px" // starts in the middle of the wod "matches"

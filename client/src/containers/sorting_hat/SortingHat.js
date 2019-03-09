@@ -42,7 +42,7 @@ class SortingHat extends Component {
 								marginBottom: 0,
 								lineHeight: 1,
 								fontSize: mainH2FontSize,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								textAlign: "center"
 							}}
 						>
@@ -72,7 +72,7 @@ class SortingHat extends Component {
 									style={{
 										color: colorTheme.text2Color,
 										fontSize: pFontSize,
-										fontFamily: "Lucida Grande",
+										fontFamily: "Overpass",
 										marginBottom: 0,
 										lineHeight: 1
 									}}
@@ -96,7 +96,7 @@ class SortingHat extends Component {
 								marginBottom: 0,
 								lineHeight: 1,
 								fontSize: votingH2FontSize,
-								fontFamily: "Lucida Grande"
+								fontFamily: "Overpass"
 							}}
 						>
 							Or voting on questions that matter to you:

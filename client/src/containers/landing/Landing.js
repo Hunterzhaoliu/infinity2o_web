@@ -32,13 +32,11 @@ class Landing extends Component {
 			"Find the best matches by expressing your beliefs to the Sorting Hat";
 
 		let h2Padding = "120px 0px 0px";
-		let imageHeight = 35;
 		let h2FontSize = 26;
 		let finalRowPadding = "60px 0px 90px 0px";
 
 		if (windowWidth < 768) {
 			h2Padding = "60px 0px 0px";
-			imageHeight = 25;
 			h2FontSize = 22;
 			finalRowPadding = "30px 0px 30px 0px";
 		}
@@ -56,20 +54,13 @@ class Landing extends Component {
 								textAlign: "center",
 								color: GREY_9,
 								fontSize: h2FontSize,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								fontWeight: "bold",
 								marginBottom: 0,
 								lineHeight: 1
 							}}
 						>
-							{how_part_0}{" "}
-							<img
-								alt=""
-								style={{
-									height: imageHeight
-								}}
-								src="https://user-images.githubusercontent.com/24757872/50742136-b9d11a00-11cc-11e9-960c-6d015d01d890.png"
-							/>
+							{how_part_0}
 						</h2>
 					</Col>
 				</Row>
@@ -100,13 +91,13 @@ class Landing extends Component {
 		let h2Padding = "120px 0px 0px";
 		let imageHeight = 400;
 		let h2FontSize = 28;
-		let pictureRowPadding = "60px 0px 90px";
+		let pictureRowPadding = "60px 0px 120px";
 
 		if (windowWidth < 768) {
 			h2Padding = "60px 0px 0px";
 			imageHeight = 250;
 			h2FontSize = 22;
-			pictureRowPadding = "30px 0px 30px";
+			pictureRowPadding = "30px 0px 60px";
 		}
 
 		return (
@@ -118,7 +109,7 @@ class Landing extends Component {
 								textAlign: "center",
 								color: GREY_1,
 								fontSize: h2FontSize,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								fontWeight: "bold",
 								padding: h2Padding,
 								marginBottom: 0,
@@ -179,7 +170,7 @@ class Landing extends Component {
 								style={{
 									textAlign: "center",
 									color: GREY_9,
-									fontFamily: "Lucida Grande",
+									fontFamily: "Overpass",
 									fontSize: callToActionFontSize,
 									fontWeight: "bold",
 									marginBottom: 0,

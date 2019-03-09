@@ -29,7 +29,7 @@ class LoginButtons extends Component {
 							borderColor: RED_ORANGE_3,
 							background: RED_ORANGE_3,
 							color: GREY_9,
-							fontFamily: "Lucida Grande"
+							fontFamily: "Overpass"
 						}}
 					>
 						<a href="/auth/google">
@@ -46,7 +46,7 @@ class LoginButtons extends Component {
 							borderColor: BLUE_3,
 							background: BLUE_3,
 							color: GREY_9,
-							fontFamily: "Lucida Grande"
+							fontFamily: "Overpass"
 						}}
 					>
 						<a href="/auth/linkedIn">

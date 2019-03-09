@@ -33,7 +33,7 @@ class AskCategories extends Component {
 							borderColor: theme.newestButtonColor,
 							background: theme.newestButtonColor,
 							color: theme.newestButtonTextColor,
-							fontFamily: "Lucida Grande"
+							fontFamily: "Overpass"
 						}}
 						onClick={onNewestAsks}
 					>
@@ -51,7 +51,7 @@ class AskCategories extends Component {
 							borderColor: theme.popularButtonColor,
 							background: theme.popularButtonColor,
 							color: theme.popularButtonTextColor,
-							fontFamily: "Lucida Grande"
+							fontFamily: "Overpass"
 						}}
 						onClick={onPopularAsks}
 					>
@@ -69,7 +69,7 @@ class AskCategories extends Component {
 							borderColor: theme.controversialButtonColor,
 							background: theme.controversialButtonColor,
 							color: theme.controversialButtonTextColor,
-							fontFamily: "Lucida Grande"
+							fontFamily: "Overpass"
 						}}
 						onClick={onControversialAsks}
 					>

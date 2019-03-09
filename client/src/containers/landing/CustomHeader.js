@@ -53,13 +53,13 @@ class CustomHeader extends Component {
 			<Row
 				style={{ height: "60px" }}
 				type="flex"
-				justify="center"
+				justify="start"
 				align="middle"
 			>
 				<Col
-					xs={{ span: 10 }}
-					sm={{ span: 15 }}
-					md={{ span: 14 }}
+					xs={{ span: 11 }}
+					sm={{ span: 14 }}
+					md={{ span: 13 }}
 					lg={{ span: 15 }}
 					xl={{ span: 17 }}
 				>
@@ -77,7 +77,7 @@ class CustomHeader extends Component {
 								style={{
 									padding: "0px 0px 0px 10px",
 									color: GREY_1,
-									fontFamily: "Lucida Grande",
+									fontFamily: "Overpass",
 									marginBottom: 0,
 									lineHeight: 1,
 									fontSize: 20
@@ -94,7 +94,7 @@ class CustomHeader extends Component {
 							borderColor: RED_ORANGE_7,
 							background: RED_ORANGE_7,
 							color: GREY_1,
-							fontFamily: "Lucida Grande",
+							fontFamily: "Overpass",
 							height: 32
 						}}
 					>
@@ -115,7 +115,7 @@ class CustomHeader extends Component {
 							borderColor: BLUE_7,
 							background: BLUE_7,
 							color: GREY_1,
-							fontFamily: "Lucida Grande",
+							fontFamily: "Overpass",
 							height: 32
 						}}
 					>
@@ -205,7 +205,8 @@ class CustomHeader extends Component {
 					zIndex: 1, // make every component display under the header
 					width: "100%",
 					height: "60px",
-					lineHeight: "60px"
+					lineHeight: "60px",
+					padding: "0px 20px"
 				}}
 			>
 				{this.renderHeaderButtons()}
