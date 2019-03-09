@@ -1,4 +1,32 @@
 /* placeholder color */
 .ant-input::-webkit-input-placeholder {
-  color: var(--text5Color);
+	color: var(--text5Color);
+}
+
+/* modal background color */
+.ant-modal-content {
+	background-color: var(--text8Color);
+}
+
+input {
+	border: none;
+	background: var(--text8Color);
+	color: var(--text5Color);
+	box-shadow: 0px -3px 0px 0px var(--text5Color) inset;
+	font-family: "Overpass";
+	line-height: 1;
+	margin-bottom: 0;
+	font-size: 24px;
+}
+
+input:focus {
+	outline: none;
+}
+
+h6 {
+	color: var(--text5Color);
+	font-family: "Overpass";
+	line-height: 1;
+	margin-bottom: 0;
+	font-size: 16px;
 }

@@ -193,9 +193,14 @@ class Ask extends Component {
 			windowWidth,
 			mongoDBUserId
 		} = this.props;
+		let modalWidth = windowWidth / 1.618;
 		let answerInputWidth = windowWidth * 0.183; // = 220/1200
-		let questionInputWidth = answerInputWidth * 2;
+		let questionInputWidth = modalWidth / 1.618;
 
+		document.documentElement.style.setProperty(
+			`--text8Color`,
+			colorTheme.text8Color
+		);
 		document.documentElement.style.setProperty(
 			`--text5Color`,
 			colorTheme.text5Color
@@ -208,27 +213,17 @@ class Ask extends Component {
 				footer={null}
 				centered={true}
 				bodyStyle={{
-					padding: "60px 10px",
-					backgroundColor: colorTheme.textColor1
+					padding: "60px 20px"
 				}}
-				style={{ padding: "40px 0px 0px 0px" }} // where the modal is
+				style={{ padding: "60px 0px 0px 0px" }} // where the modal is
+				width={modalWidth}
 			>
-				<Row
-					type="flex"
-					justify="center"
-					align="middle"
-					style={{
-						padding: "0px 0px 0px" // top left&right bottom
-					}}
-				>
-					<Col>
-						<Input
+				<Row type="flex" justify="left" align="bottom">
+					<Col xl={{ offset: 4 }}>
+						<input
 							onChange={this.onChangeQuestion}
 							style={{
-								width: questionInputWidth,
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text3Color
+								width: questionInputWidth
 							}}
 							placeholder="Question"
 						/>
@@ -239,13 +234,7 @@ class Ask extends Component {
 						lg={{ offset: 1 }}
 						xl={{ offset: 1 }}
 					>
-						<h5
-							style={{
-								color: colorTheme.text4Color
-							}}
-						>
-							{50 - ask.questionLength}
-						</h5>
+						<h6>{50 - ask.questionLength}</h6>
 					</Col>
 				</Row>
 				<ErrorMessage
