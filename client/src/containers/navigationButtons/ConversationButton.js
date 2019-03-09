@@ -25,7 +25,7 @@ class ConversationButton extends Component {
 								color: colorTheme.text5Color,
 								boxShadow:
 									"0 0 0 1px " + colorTheme.keyText8Color,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								fontSize: "12px",
 								top: "-20px",
 								right: "-30px"

@@ -20,7 +20,7 @@ let cloneObject = obj => {
 let initialState = {
 	current1DisplayedMatches: [],
 	nextMatches: [],
-	hasDeleteMatchInDBError: false,
+	hasDeleteMatcOverpassBError: false,
 	totalUserVotesAcrossAllSessions: 0,
 	runningAthenaForUser: false,
 	hasErrorRunningAthenaForUser: false,
@@ -70,10 +70,10 @@ export default function(state = initialState, action) {
 			}
 			return newState;
 		case DELETED_MATCH_IN_DB:
-			newState.hasDeleteMatchInDBError = false;
+			newState.hasDeleteMatcOverpassBError = false;
 			return newState;
 		case DELETED_MATCH_IN_DB_ERROR:
-			newState.hasDeleteMatchInDBError = true;
+			newState.hasDeleteMatcOverpassBError = true;
 			return newState;
 		case UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS:
 			newState.totalUserVotesAcrossAllSessions += action.additionalVotes;

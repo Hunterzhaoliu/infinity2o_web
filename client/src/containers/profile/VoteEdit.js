@@ -57,7 +57,7 @@ class VoteEdit extends Component {
 							borderColor: colorTheme.text8Color,
 							background: colorTheme.text8Color,
 							color: textColor,
-							fontFamily: "Lucida Grande",
+							fontFamily: "Overpass",
 							fontSize: 14,
 							lineHeight: 1,
 							marginBottom: 0
@@ -109,7 +109,7 @@ class VoteEdit extends Component {
 								<p
 									style={{
 										color: colorTheme.text3Color,
-										fontFamily: "Lucida Grande",
+										fontFamily: "Overpass",
 										fontSize: 14,
 										lineHeight: 1,
 										marginBottom: 0
@@ -134,7 +134,7 @@ class VoteEdit extends Component {
 					<div
 						style={{
 							color: colorTheme.keyText2Color,
-							fontFamily: "Lucida Grande",
+							fontFamily: "Overpass",
 							fontSize: 14,
 							lineHeight: 1,
 							marginBottom: 0
@@ -145,7 +145,7 @@ class VoteEdit extends Component {
 					<div
 						style={{
 							color: colorTheme.keyText7Color,
-							fontFamily: "Lucida Grande",
+							fontFamily: "Overpass",
 							fontSize: 14,
 							lineHeight: 1,
 							marginBottom: 0
@@ -161,7 +161,7 @@ class VoteEdit extends Component {
 					<div
 						style={{
 							color: colorTheme.keyText2Color,
-							fontFamily: "Lucida Grande",
+							fontFamily: "Overpass",
 							fontSize: 14,
 							lineHeight: 1,
 							marginBottom: 0
@@ -178,7 +178,7 @@ class VoteEdit extends Component {
 					<div
 						style={{
 							color: colorTheme.keyText7Color,
-							fontFamily: "Lucida Grande",
+							fontFamily: "Overpass",
 							fontSize: 14,
 							lineHeight: 1,
 							marginBottom: 0
@@ -256,7 +256,7 @@ class VoteEdit extends Component {
 								borderColor: displayAnswerButtonColor,
 								background: displayAnswerButtonColor,
 								color: colorTheme.text3Color,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								fontSize: 14,
 								lineHeight: 1,
 								marginBottom: 0
@@ -293,7 +293,7 @@ class VoteEdit extends Component {
 						<div
 							style={{
 								color: colorTheme.text3Color,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								lineHeight: 1,
 								marginBottom: 0,
 								fontSize: 14
@@ -349,7 +349,7 @@ class VoteEdit extends Component {
 				style={{
 					textAlign: "center",
 					color: colorTheme.text3Color,
-					fontFamily: "Lucida Grande",
+					fontFamily: "Overpass",
 					lineHeight: 1,
 					marginBottom: 0,
 					fontSize: 14
@@ -385,7 +385,7 @@ class VoteEdit extends Component {
 							style={{
 								textAlign: "center",
 								color: colorTheme.text2Color,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								lineHeight: 1,
 								marginBottom: 0,
 								fontSize: 18
@@ -412,7 +412,7 @@ class VoteEdit extends Component {
 								style={{
 									color: colorTheme.text4Color,
 									textAlign: "center",
-									fontFamily: "Lucida Grande",
+									fontFamily: "Overpass",
 									lineHeight: 1,
 									marginBottom: 0,
 									fontSize: 16
@@ -426,7 +426,7 @@ class VoteEdit extends Component {
 								style={{
 									textAlign: "center",
 									color: colorTheme.text4Color,
-									fontFamily: "Lucida Grande",
+									fontFamily: "Overpass",
 									lineHeight: 1,
 									marginBottom: 0,
 									fontSize: 16
@@ -440,7 +440,7 @@ class VoteEdit extends Component {
 								style={{
 									textAlign: "center",
 									color: colorTheme.keyText2Color,
-									fontFamily: "Lucida Grande",
+									fontFamily: "Overpass",
 									lineHeight: 1,
 									marginBottom: 0,
 									fontSize: 16
@@ -452,7 +452,7 @@ class VoteEdit extends Component {
 								style={{
 									textAlign: "center",
 									color: colorTheme.keyText7Color,
-									fontFamily: "Lucida Grande",
+									fontFamily: "Overpass",
 									lineHeight: 1,
 									marginBottom: 0,
 									fontSize: 16

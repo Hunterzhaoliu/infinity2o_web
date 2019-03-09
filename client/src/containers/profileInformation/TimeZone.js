@@ -31,7 +31,7 @@ class TimeZone extends Component {
 						span={23}
 						style={{
 							padding: "0px 0px 0px 20px",
-							fontFamily: "Lucida Grande",
+							fontFamily: "Overpass",
 							lineHeight: 1,
 							marginBottom: 0,
 							fontSize: 16

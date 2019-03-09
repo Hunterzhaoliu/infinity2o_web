@@ -36,7 +36,7 @@ class Marketing extends Component {
 								<h2
 									style={{
 										color: GREY_2,
-										fontFamily: "Lucida Grande",
+										fontFamily: "Overpass",
 										fontWeight: "bold",
 										fontSize: h2FontSize,
 										marginBottom: 0,
@@ -81,7 +81,7 @@ class Marketing extends Component {
 									style={{
 										textAlign: "center",
 										color: GREY_2,
-										fontFamily: "Lucida Grande",
+										fontFamily: "Overpass",
 										fontWeight: "bold",
 										fontSize: h2FontSize,
 										marginBottom: 0,
@@ -120,10 +120,10 @@ class Marketing extends Component {
 
 		let h1Padding = "180px 0px 0px 0px";
 		let endColumnHeight = "120px";
-		let h1FontSize = 31;
+		let h1FontSize = 42;
 		if (windowWidth < 768) {
 			h1Padding = "120px 0px 0px 0px";
-			h1FontSize = 27;
+			h1FontSize = 28;
 			endColumnHeight = "60px";
 		}
 
@@ -147,7 +147,7 @@ class Marketing extends Component {
 								textAlign: "center",
 								color: GREY_1,
 								fontSize: h1FontSize,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								fontWeight: "bold",
 								marginBottom: 0,
 								lineHeight: 1

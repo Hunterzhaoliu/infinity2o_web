@@ -28,7 +28,7 @@ class FirstVote extends Component {
 					style={{
 						textAlign: "center",
 						color: GREY_9,
-						fontFamily: "Lucida Grande",
+						fontFamily: "Overpass",
 						fontWeight: "bold",
 						fontSize: 32,
 						padding: "60px 0px 0px",
@@ -42,7 +42,7 @@ class FirstVote extends Component {
 					style={{
 						textAlign: "center",
 						color: GREY_7,
-						fontFamily: "Lucida Grande",
+						fontFamily: "Overpass",
 						fontSize: 22,
 						padding: "60px 0px 0px",
 						marginBottom: 0,

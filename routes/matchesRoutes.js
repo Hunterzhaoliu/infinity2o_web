@@ -83,9 +83,9 @@ module.exports = app => {
 			const userInDB = await UserCollection.findOne({ _id: userId });
 			let userConversationList = userInDB.conversations.userConversations;
 			// console.log('userConversationList = ', userConversationList);
-			const matchInDB = await UserCollection.findOne({ _id: matchId });
+			const matcOverpassB = await UserCollection.findOne({ _id: matchId });
 			let matchConversationList =
-				matchInDB.conversations.userConversations;
+				matcOverpassB.conversations.userConversations;
 			// console.log('matchConversationList = ', matchConversationList);
 
 			try {
