@@ -1,5 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 import {
+	OPEN_ASK_MODAL,
+	CLOSE_ASK_MODAL,
 	ON_CHANGE_QUESTION,
 	ON_CLICK_ADD_ANSWER,
 	ON_CHANGE_ANSWER,
@@ -11,10 +13,18 @@ import {
 	DUPLICATE_ANSWER_ERROR,
 	ADD_NEURONS,
 	ADD_NEURONS_ERROR
-} from '../types';
+} from "../types";
 
-import { isValidQuestion, isValidAnswer } from '../../utils/validateAsk';
-import { NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS } from '../../containers/payment/prices';
+import { isValidQuestion, isValidAnswer } from "../../utils/validateAsk";
+import { NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS } from "../../containers/payment/prices";
+
+export const openAskModal = () => dispatch => {
+	dispatch({ type: OPEN_ASK_MODAL });
+};
+
+export const closeAskModal = () => dispatch => {
+	dispatch({ type: CLOSE_ASK_MODAL });
+};
 
 export const onChangeQuestion = newQuestion => dispatch => {
 	if (isValidQuestion(newQuestion)) {
@@ -90,7 +100,7 @@ export const saveAndAddNeurons = async (
 		mongoDBUserId: mongoDBUserId,
 		neuronsInBillions: neuronsInBillions
 	};
-	const response2 = await axios.put('/api/profile/add_neurons', info);
+	const response2 = await axios.put("/api/profile/add_neurons", info);
 	if (response2.status === 200) {
 		dispatch({
 			type: ADD_NEURONS,
@@ -101,7 +111,7 @@ export const saveAndAddNeurons = async (
 	}
 };
 
-export const saveAsk = (ask, history, mongoDBUserId) => async dispatch => {
+export const saveAsk = (ask, mongoDBUserId) => async dispatch => {
 	dispatch({ type: SAVE_QUESTION_START });
 	let validatedAnswers = [];
 	//remove empty answers
@@ -113,7 +123,7 @@ export const saveAsk = (ask, history, mongoDBUserId) => async dispatch => {
 	ask.newAnswers = validatedAnswers;
 
 	// returns ask in DB
-	const response = await axios.post('/api/ask', ask);
+	const response = await axios.post("/api/ask", ask);
 	if (response.status === 200) {
 		// sends new Ask to SortingHat reducer
 		dispatch({ type: ADD_NEW_ASK_TO_STATE, ask: response.data });
@@ -123,9 +133,8 @@ export const saveAsk = (ask, history, mongoDBUserId) => async dispatch => {
 			dispatch,
 			NUMBER_NEURONS_GIVEN_FOR_ASK_IN_BILLIONS
 		);
-		// TODO: animate added neurons
-		history.push('/sorting_hat');
 	} else {
 		dispatch({ type: SAVE_QUESTION_ERROR });
 	}
+	dispatch({ type: CLOSE_ASK_MODAL });
 };
