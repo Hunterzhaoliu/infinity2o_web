@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as sortingHatActionCreators from "../../actions/sorting_hat/sortingHat";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
+import * as askActionCreators from "../../actions/sorting_hat/ask";
 import { bindActionCreators } from "redux";
 import { Layout, Row, Col, Button } from "antd";
 import InputVote from "./InputVote";
+import Ask from "./Ask";
 const { Content } = Layout;
 
 class SortingHat extends Component {
@@ -34,6 +36,7 @@ class SortingHat extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
+				<Ask />
 				<Row type="flex" justify="center" align="middle">
 					<Col>
 						<h2
@@ -66,20 +69,19 @@ class SortingHat extends Component {
 								background: colorTheme.keyText7Color,
 								height: 32
 							}}
+							onClick={e => this.props.openAskModal()}
 						>
-							<a href="/sorting_hat/ask">
-								<p
-									style={{
-										color: colorTheme.text2Color,
-										fontSize: pFontSize,
-										fontFamily: "Overpass",
-										marginBottom: 0,
-										lineHeight: 1
-									}}
-								>
-									asking a question
-								</p>
-							</a>
+							<p
+								style={{
+									color: colorTheme.text2Color,
+									fontSize: pFontSize,
+									fontFamily: "Overpass",
+									marginBottom: 0,
+									lineHeight: 1
+								}}
+							>
+								asking a question
+							</p>
 						</Button>
 					</Col>
 				</Row>
@@ -146,12 +148,17 @@ function mapDispatchToProps(dispatch) {
 		dispatch
 	);
 
+	const askDispatchers = bindActionCreators(askActionCreators, dispatch);
+
 	return {
 		onSortingHat: () => {
 			colorThemeDispatchers.onSortingHat();
 		},
 		fetchUserSortingHatAsks: mongoDBUserId => {
 			sortingHatDispatchers.fetchUserSortingHatAsks(mongoDBUserId);
+		},
+		openAskModal: () => {
+			askDispatchers.openAskModal();
 		}
 	};
 }
