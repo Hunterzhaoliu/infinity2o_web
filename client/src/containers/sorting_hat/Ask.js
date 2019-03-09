@@ -6,7 +6,7 @@ import * as askActionCreators from "../../actions/sorting_hat/ask";
 import { bindActionCreators } from "redux";
 import { Row, Col, Button, Icon, Modal } from "antd";
 import ErrorMessage from "./ErrorMessage";
-import "./ask.css";
+import "./Ask.css";
 
 class Ask extends Component {
 	componentWillMount() {
