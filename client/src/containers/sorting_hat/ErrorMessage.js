@@ -3,33 +3,30 @@ import { connect } from "react-redux";
 import { Row, Col } from "antd";
 
 class ErrorMessage extends Component {
-	renderMessage(hasError, message) {
-		if (hasError) {
-			return message;
-		} else {
-			return;
-		}
-	}
 	render() {
 		const { colorTheme, message, hasError } = this.props;
-		return (
-			<Row
-				style={{ padding: "5px 0px 0px 0px" }}
-				type="flex"
-				justify="start"
-				align="middle"
-			>
-				<Col xl={{ offset: 4 }}>
-					<div
-						style={{
-							color: colorTheme.text1Color
-						}}
-					>
-						{this.renderMessage(hasError, message)}
-					</div>
-				</Col>
-			</Row>
-		);
+		if (hasError) {
+			return (
+				<Row
+					style={{ padding: "5px 0px 0px 0px" }}
+					type="flex"
+					justify="start"
+					align="middle"
+				>
+					<Col xl={{ offset: 4 }}>
+						<div
+							style={{
+								color: colorTheme.text3Color
+							}}
+						>
+							{message}
+						</div>
+					</Col>
+				</Row>
+			);
+		} else {
+			return <div />;
+		}
 	}
 }
 

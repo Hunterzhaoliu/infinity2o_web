@@ -8,15 +8,20 @@
 	background-color: var(--text8Color);
 }
 
+/* to change the placeholder text color */
+::placeholder {
+	color: var(--text7Color);
+}
+
 input {
 	border: none;
 	background: var(--text8Color);
-	color: var(--text5Color);
-	box-shadow: 0px -3px 0px 0px var(--text5Color) inset;
+	color: var(--text4Color);
+	box-shadow: 0px -3px 0px 0px var(--text4Color) inset;
 	font-family: "Overpass";
 	line-height: 1;
 	margin-bottom: 0;
-	font-size: 24px;
+	width: 100%;
 }
 
 input:focus {

@@ -136,4 +136,5 @@ export const saveAsk = (ask, mongoDBUserId) => async dispatch => {
 	} else {
 		dispatch({ type: SAVE_QUESTION_ERROR });
 	}
+	dispatch({ type: CLOSE_ASK_MODAL });
 };

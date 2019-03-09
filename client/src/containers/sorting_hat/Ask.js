@@ -4,11 +4,9 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as askActionCreators from "../../actions/sorting_hat/ask";
 import { bindActionCreators } from "redux";
-import { Layout, Row, Col, Button, Input, Icon, Modal } from "antd";
+import { Row, Col, Button, Icon, Modal } from "antd";
 import ErrorMessage from "./ErrorMessage";
 import "./ask.css";
-
-const { Content } = Layout;
 
 class Ask extends Component {
 	componentWillMount() {
@@ -30,64 +28,61 @@ class Ask extends Component {
 		);
 	};
 
+	renderAnswerCharacterCount(answerLength) {
+		if (answerLength > 0) {
+			return (
+				<Col
+					sm={{ offset: 1 }}
+					md={{ offset: 1 }}
+					lg={{ offset: 1 }}
+					xl={{ offset: 1 }}
+				>
+					<h6>{25 - answerLength}</h6>
+				</Col>
+			);
+		}
+	}
+
 	renderAnswerInputs(newAnswers) {
-		const { colorTheme, ask, windowWidth } = this.props;
-		// let answerInputWidth = windowWidth * 0.183; // = 220/1200
-		let answerInputWidth = windowWidth * 0.32; // = 220/1200
+		const { ask } = this.props;
 
 		return _.map(newAnswers, (answer, key) => {
 			return (
 				<div key={key}>
 					<Row
 						type="flex"
-						justify="center"
+						justify="start"
 						align="middle"
 						style={{
-							padding: "25px 0px 0px" // top left&right bottom
+							padding: "20px 0px 0px" // top left&right bottom
 						}}
 					>
-						<Col>
+						<Col
+							sm={{ offset: 4 }}
+							md={{ offset: 4 }}
+							lg={{ offset: 4 }}
+							xl={{ offset: 4, span: 2 }}
+						>
 							<img
 								alt=""
 								style={{
-									width: "32px",
+									width: "28px",
 									padding: "0px 0px 0px 0px" // top right bottom left
 								}}
 								src="https://user-images.githubusercontent.com/24757872/40994715-96be843e-68c2-11e8-8df8-1cb8e2dc7d07.png"
 							/>
 						</Col>
-						<Col
-							sm={{ offset: 1 }}
-							md={{ offset: 1 }}
-							lg={{ offset: 1 }}
-							xl={{ offset: 1 }}
-						>
-							<Input
+						<Col xl={{ span: 13 }}>
+							<input
 								name={key}
 								onChange={this.onChangeAnswer}
-								style={{
-									width: answerInputWidth,
-									borderColor: colorTheme.text7Color,
-									background: colorTheme.text7Color,
-									color: colorTheme.text3Color
-								}}
 								placeholder={"Answer " + (key + 1).toString()}
+								style={{ fontSize: "20px" }}
 							/>
 						</Col>
-						<Col
-							sm={{ offset: 1 }}
-							md={{ offset: 1 }}
-							lg={{ offset: 1 }}
-							xl={{ offset: 1 }}
-						>
-							<h5
-								style={{
-									color: colorTheme.text4Color
-								}}
-							>
-								{25 - ask.newAnswers[key].length}
-							</h5>
-						</Col>
+						{this.renderAnswerCharacterCount(
+							ask.newAnswers[key].length
+						)}
 					</Row>
 					<ErrorMessage
 						message="Between 1 & 25 characters"
@@ -135,7 +130,7 @@ class Ask extends Component {
 		if (ask.displayAddAnswerButton) {
 			displayRemoveAnswerButtonOffset = 1;
 		} else {
-			displayRemoveAnswerButtonOffset = 0;
+			displayRemoveAnswerButtonOffset = 4;
 		}
 		if (ask.displayRemoveAnswerButton) {
 			return (
@@ -144,13 +139,13 @@ class Ask extends Component {
 					md={{ offset: displayRemoveAnswerButtonOffset }}
 					lg={{ offset: displayRemoveAnswerButtonOffset }}
 					xl={{ offset: displayRemoveAnswerButtonOffset }}
-					style={{ padding: "0px 0px 0px 2px" }}
 				>
 					<Button
 						style={{
 							borderColor: colorTheme.keyText7Color,
 							background: colorTheme.keyText7Color,
-							color: colorTheme.text2Color
+							color: colorTheme.text2Color,
+							fontSize: "16px"
 						}}
 						onClick={onClickRemoveAnswer}
 					>
@@ -167,12 +162,13 @@ class Ask extends Component {
 		const { onClickAddAnswer, ask, colorTheme } = this.props;
 		if (ask.displayAddAnswerButton) {
 			return (
-				<Col style={{ padding: "0px 0px 0px 5px" }}>
+				<Col xl={{ offset: 4 }}>
 					<Button
 						style={{
 							borderColor: colorTheme.keyText7Color,
 							background: colorTheme.keyText7Color,
-							color: colorTheme.text2Color
+							color: colorTheme.text2Color,
+							fontSize: "16px"
 						}}
 						onClick={onClickAddAnswer}
 					>
@@ -185,6 +181,21 @@ class Ask extends Component {
 		}
 	}
 
+	renderQuestionCharacterCount(questionLength) {
+		if (questionLength > 0) {
+			return (
+				<Col
+					sm={{ offset: 1 }}
+					md={{ offset: 1 }}
+					lg={{ offset: 1 }}
+					xl={{ offset: 1 }}
+				>
+					<h6>{50 - questionLength}</h6>
+				</Col>
+			);
+		}
+	}
+
 	render() {
 		const {
 			colorTheme,
@@ -194,21 +205,27 @@ class Ask extends Component {
 			mongoDBUserId
 		} = this.props;
 		let modalWidth = windowWidth / 1.618;
-		let answerInputWidth = windowWidth * 0.183; // = 220/1200
-		let questionInputWidth = modalWidth / 1.618;
 
 		document.documentElement.style.setProperty(
-			`--text8Color`,
-			colorTheme.text8Color
+			`--text4Color`,
+			colorTheme.text4Color
 		);
 		document.documentElement.style.setProperty(
 			`--text5Color`,
 			colorTheme.text5Color
 		);
+		document.documentElement.style.setProperty(
+			`--text6Color`,
+			colorTheme.text6Color
+		);
+		document.documentElement.style.setProperty(
+			`--text8Color`,
+			colorTheme.text8Color
+		);
 
 		return (
 			<Modal
-				visible={true}
+				visible={ask.isAskModalOpen}
 				onCancel={e => this.props.closeAskModal()}
 				footer={null}
 				centered={true}
@@ -218,43 +235,29 @@ class Ask extends Component {
 				style={{ padding: "60px 0px 0px 0px" }} // where the modal is
 				width={modalWidth}
 			>
-				<Row type="flex" justify="left" align="bottom">
-					<Col xl={{ offset: 4 }}>
+				<Row type="flex" justify="left" align="middle">
+					<Col xl={{ offset: 4, span: 15 }}>
 						<input
 							onChange={this.onChangeQuestion}
-							style={{
-								width: questionInputWidth
-							}}
-							placeholder="Question"
+							placeHolder="Question"
+							style={{ fontSize: "26px" }}
 						/>
 					</Col>
-					<Col
-						sm={{ offset: 1 }}
-						md={{ offset: 1 }}
-						lg={{ offset: 1 }}
-						xl={{ offset: 1 }}
-					>
-						<h6>{50 - ask.questionLength}</h6>
-					</Col>
+					{this.renderQuestionCharacterCount(ask.questionLength)}
 				</Row>
 				<ErrorMessage
 					message="Between 8 to 50 characters"
 					hasError={ask.hasQuestionError}
 				/>
+				<Row style={{ padding: "10px 0px 0px" }} />
 				{this.renderAnswerInputs(ask.newAnswers)}
 				<Row
 					type="flex"
 					justify="start"
 					style={{
-						padding: "25px 0px 0px" // top left&right bottom
+						padding: "30px 0px 0px"
 					}}
 				>
-					<Col
-						sm={{ span: 5 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 3 }}
-					/>
 					{this.renderAddAnswerButton()}
 					{this.renderRemoveAnswerButton()}
 				</Row>
@@ -262,21 +265,16 @@ class Ask extends Component {
 					type="flex"
 					justify="start"
 					style={{
-						padding: "25px 0px 0px" // top left&right bottom
+						padding: "30px 0px 0px"
 					}}
 				>
-					<Col
-						sm={{ span: 5 }}
-						md={{ span: 5 }}
-						lg={{ span: 5 }}
-						xl={{ span: 3 }}
-					/>
-					<Col style={{ padding: "0px 0px 0px 5px" }}>
+					<Col xl={{ offset: 4, span: 15 }}>
 						<Button
 							style={{
 								borderColor: colorTheme.key,
 								background: colorTheme.key,
-								color: colorTheme.text1Color
+								color: colorTheme.text1Color,
+								fontSize: "16px"
 							}}
 							disabled={this.isAskDisabled(ask)}
 							onClick={() => saveAsk(ask, mongoDBUserId)}
@@ -291,10 +289,6 @@ class Ask extends Component {
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
