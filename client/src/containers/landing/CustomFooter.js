@@ -37,7 +37,7 @@ class CustomFooter extends Component {
 								style={{
 									borderColor: buttonColor,
 									background: buttonColor,
-									fontFamily: "Lucida Grande"
+									fontFamily: "Overpass"
 								}}
 								size={"small"}
 								onClick={onFooter}
@@ -61,7 +61,7 @@ class CustomFooter extends Component {
 								style={{
 									borderColor: buttonColor,
 									background: buttonColor,
-									fontFamily: "Lucida Grande"
+									fontFamily: "Overpass"
 								}}
 								size={"small"}
 								onClick={onFooter}
@@ -85,7 +85,7 @@ class CustomFooter extends Component {
 								style={{
 									borderColor: buttonColor,
 									background: buttonColor,
-									fontFamily: "Lucida Grande"
+									fontFamily: "Overpass"
 								}}
 								size={"small"}
 								onClick={onFooter}
@@ -107,7 +107,7 @@ class CustomFooter extends Component {
 								style={{
 									color: textColor,
 									padding: "20px 0px 0px 0px",
-									fontFamily: "Lucida Grande",
+									fontFamily: "Overpass",
 									marginBottom: 0
 								}}
 							>

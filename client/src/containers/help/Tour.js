@@ -32,7 +32,7 @@ class Tour extends Component {
 							key="0"
 							style={{
 								color: colorTheme.text2Color,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								fontSize: "35px",
 								fontWeight: "bold",
 								padding: "25px 0px 0px 0px"

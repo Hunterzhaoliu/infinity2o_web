@@ -68,7 +68,7 @@ class Profile extends Component {
 						<p
 							style={{
 								color: colorTheme.keyText6Color,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								lineHeight: 1,
 								marginBottom: 0,
 								fontSize: 26
@@ -97,7 +97,7 @@ class Profile extends Component {
 								borderColor: colorTheme.backgroundColor,
 								background: colorTheme.backgroundColor,
 								color: colorTheme.text3Color,
-								fontFamily: "Lucida Grande",
+								fontFamily: "Overpass",
 								lineHeight: 1,
 								marginBottom: 0,
 								fontSize: 16
@@ -123,7 +123,7 @@ class Profile extends Component {
 							<p
 								style={{
 									color: colorTheme.text3Color,
-									fontFamily: "Lucida Grande",
+									fontFamily: "Overpass",
 									lineHeight: 2.29, // height of vote button/font size: 32/14
 									marginBottom: 0,
 									fontSize: 14,
@@ -176,7 +176,7 @@ class Profile extends Component {
 									<h2
 										style={{
 											color: colorTheme.keyText6Color,
-											fontFamily: "Lucida Grande",
+											fontFamily: "Overpass",
 											lineHeight: 1,
 											marginBottom: 0,
 											fontSize: 32
@@ -188,7 +188,7 @@ class Profile extends Component {
 										style={{
 											padding: "0px 0px 0px 10px",
 											color: colorTheme.text6Color,
-											fontFamily: "Lucida Grande",
+											fontFamily: "Overpass",
 											lineHeight: 1,
 											marginBottom: 0,
 											fontSize: 18
@@ -227,7 +227,7 @@ class Profile extends Component {
 									<h2
 										style={{
 											color: colorTheme.keyText6Color,
-											fontFamily: "Lucida Grande",
+											fontFamily: "Overpass",
 											lineHeight: 1,
 											marginBottom: 0,
 											fontSize: 32
@@ -239,7 +239,7 @@ class Profile extends Component {
 										style={{
 											padding: "0px 0px 0px 10px",
 											color: colorTheme.text6Color,
-											fontFamily: "Lucida Grande",
+											fontFamily: "Overpass",
 											lineHeight: 1,
 											marginBottom: 0,
 											fontSize: 18

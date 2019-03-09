@@ -64,7 +64,7 @@ class InputVote extends Component {
 							borderColor: colorTheme.text7Color,
 							background: colorTheme.text7Color,
 							color: colorTheme.text2Color,
-							fontFamily: "Lucida Grande"
+							fontFamily: "Overpass"
 						}}
 						onClick={e =>
 							this.props.onNextAsk(
@@ -100,7 +100,7 @@ class InputVote extends Component {
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
 						color: answerButtonTextColor,
-						fontFamily: "Lucida Grande"
+						fontFamily: "Overpass"
 					}}
 					onClick={e => this.onVoteLanding(answerIndex, askIndex)}
 				>
@@ -114,7 +114,7 @@ class InputVote extends Component {
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
 						color: answerButtonTextColor,
-						fontFamily: "Lucida Grande"
+						fontFamily: "Overpass"
 					}}
 					onClick={e => this.onVote(answerIndex, askIndex, askId)}
 				>
@@ -273,7 +273,7 @@ class InputVote extends Component {
 								<h3
 									style={{
 										color: cardTextColor,
-										fontFamily: "Lucida Grande",
+										fontFamily: "Overpass",
 										marginBottom: 0,
 										lineHeight: 1,
 										padding: "0px 0px 10px 0px"
@@ -316,7 +316,7 @@ class InputVote extends Component {
 				<h3
 					style={{
 						color: colorTheme.text2Color,
-						fontFamily: "Lucida Grande",
+						fontFamily: "Overpass",
 						marginBottom: 0,
 						lineHeight: 1,
 						fontSize: 28,
@@ -353,7 +353,7 @@ class InputVote extends Component {
 					style={{
 						marginBottom: 0,
 						lineHeight: 1,
-						fontFamily: "Lucida Grande",
+						fontFamily: "Overpass",
 						padding: "8px 0px 0px"
 					}}
 				>
