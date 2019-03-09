@@ -72,6 +72,8 @@ export const ON_NEXT_QUESTION = "ON_NEXT_QUESTION";
 export const ON_NEXT_ASK = "ON_NEXT_ASK";
 
 // sorting_hat/Ask.js
+export const OPEN_ASK_MODAL = "OPEN_ASK_MODAL";
+export const CLOSE_ASK_MODAL = "CLOSE_ASK_MODAL";
 export const ON_CHANGE_QUESTION = "ON_CHANGE_QUESTION";
 export const ON_CLICK_ADD_ANSWER = "ON_CLICK_ADD_ANSWER";
 export const ON_CHANGE_ANSWER = "ON_CHANGE_ANSWER";
