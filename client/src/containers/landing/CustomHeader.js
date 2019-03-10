@@ -10,7 +10,7 @@ import MatchesButton from "../navigationButtons/MatchesButton";
 import ConversationButton from "../navigationButtons/ConversationButton";
 import LogoutButton from "../navigationButtons/LogoutButton";
 import LoginButtons from "./LoginButtons";
-import { GREY_9, GREY_1, RED_ORANGE_7, BLUE_7 } from "../styles/ColorConstants";
+import { GREY_9, GREY_1 } from "../styles/ColorConstants";
 import { Layout, Row, Col, Button, Icon } from "antd";
 const { Header } = Layout;
 
@@ -41,7 +41,7 @@ class CustomHeader extends Component {
 			<Row
 				style={{ height: "60px" }}
 				type="flex"
-				justify="start"
+				justify="center"
 				align="middle"
 			>
 				<Col
@@ -49,7 +49,7 @@ class CustomHeader extends Component {
 					sm={{ span: 14 }}
 					md={{ span: 13 }}
 					lg={{ span: 15 }}
-					xl={{ span: 17 }}
+					xl={{ span: 14 }}
 				>
 					<Row type="flex" justify="start" align="middle">
 						<Col>

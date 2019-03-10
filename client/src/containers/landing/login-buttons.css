@@ -1,17 +1,13 @@
-.google-login-button,
-.linkedIn-login-button {
-	color: red;
+.google-login-anchor,
+.linkedIn-login-anchor {
+	color: var(--GREY_1);
 	font-family: "Overpass";
-	height: 40px;
-	padding: 0px 16px;
-}
-
-.google-login-button {
-	border-color: var(--RED_ORANGE_3);
-	background: var(--RED_ORANGE_3);
-}
-
-.linkedIn-login-button {
-	border-color: var(--BLUE_3);
-	background: var(--BLUE_3);
+	line-height: 40px;
+	display: inline-block;
+	text-align: center;
+	padding: 0px 14px;
+	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+	border-radius: 4px;
+	font-size: 15px;
+	font-weight: 500;
 }
