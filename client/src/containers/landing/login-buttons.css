@@ -1,0 +1,17 @@
+.google-login-button,
+.linkedIn-login-button {
+	color: red;
+	font-family: "Overpass";
+	height: 40px;
+	padding: 0px 16px;
+}
+
+.google-login-button {
+	border-color: var(--RED_ORANGE_3);
+	background: var(--RED_ORANGE_3);
+}
+
+.linkedIn-login-button {
+	border-color: var(--BLUE_3);
+	background: var(--BLUE_3);
+}

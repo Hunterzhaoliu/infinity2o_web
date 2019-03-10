@@ -9,6 +9,7 @@ import SortingHatButton from "../navigationButtons/SortingHatButton";
 import MatchesButton from "../navigationButtons/MatchesButton";
 import ConversationButton from "../navigationButtons/ConversationButton";
 import LogoutButton from "../navigationButtons/LogoutButton";
+import LoginButtons from "./LoginButtons";
 import { GREY_9, GREY_1, RED_ORANGE_7, BLUE_7 } from "../styles/ColorConstants";
 import { Layout, Row, Col, Button, Icon } from "antd";
 const { Header } = Layout;
@@ -36,19 +37,6 @@ class CustomHeader extends Component {
 	}
 
 	renderNotLoggedInHeaderButtons(windowWidth) {
-		let largeGmailLoginText = "Gmail Login ";
-		let largeLinkedInLoginText = "LinkedIn Login ";
-		let smallLoginText = "";
-		let paddingBetweenLoginButtons = "0px 0px 0px 30px";
-
-		if (windowWidth < 768) {
-			// less than medium screen, need to change where the infinity2o logo
-			// is and adjust text size
-			largeGmailLoginText = "";
-			largeLinkedInLoginText = "";
-			smallLoginText = " Login";
-			paddingBetweenLoginButtons = "0px 0px 0px 10px";
-		}
 		return (
 			<Row
 				style={{ height: "60px" }}
@@ -88,44 +76,7 @@ class CustomHeader extends Component {
 						</Col>
 					</Row>
 				</Col>
-				<Col>
-					<Button
-						style={{
-							borderColor: RED_ORANGE_7,
-							background: RED_ORANGE_7,
-							color: GREY_1,
-							fontFamily: "Overpass",
-							height: 32
-						}}
-					>
-						<a href="/auth/google">
-							{largeGmailLoginText}
-							<Icon style={{ fontSize: 15 }} type="google" />
-							{smallLoginText}
-						</a>
-					</Button>
-				</Col>
-				<Col
-					style={{
-						padding: paddingBetweenLoginButtons
-					}}
-				>
-					<Button
-						style={{
-							borderColor: BLUE_7,
-							background: BLUE_7,
-							color: GREY_1,
-							fontFamily: "Overpass",
-							height: 32
-						}}
-					>
-						<a href="/auth/linkedIn">
-							{largeLinkedInLoginText}
-							<Icon style={{ fontSize: 15 }} type="linkedin" />
-							{smallLoginText}
-						</a>
-					</Button>
-				</Col>
+				<LoginButtons />
 			</Row>
 		);
 	}

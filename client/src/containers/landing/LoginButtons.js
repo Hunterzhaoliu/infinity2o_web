@@ -1,61 +1,54 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { GREY_9, BLUE_3, RED_ORANGE_3 } from "../styles/ColorConstants";
-import { Button, Row, Col, Icon } from "antd";
+import { Row, Col, Icon } from "antd";
+import "./login-buttons.css";
 
 class LoginButtons extends Component {
 	render() {
 		const { windowWidth } = this.props;
 
-		let buttonSize = "large";
+		document.documentElement.style.setProperty(`--BLUE_3`, BLUE_3);
+		document.documentElement.style.setProperty(
+			`--RED_ORANGE_3`,
+			RED_ORANGE_3
+		);
+
+		let largeGmailLoginText = "Google Login ";
+		let largeLinkedInLoginText = "LinkedIn Login ";
+		let paddingBetweenLoginButtons = "0px 0px 0px 30px";
 		let buttonPadding = "0px 30px 0px 0px";
+		let smallLoginText = "";
 
 		if (windowWidth < 768) {
-			buttonSize = "default";
+			// less than medium screen, need to change where the infinity2o logo
+			// is and adjust text size
+			largeGmailLoginText = "";
+			largeLinkedInLoginText = "";
+			smallLoginText = " Login";
+			paddingBetweenLoginButtons = "0px 0px 0px 10px";
 			buttonPadding = "0px 15px 0px 0px";
 		}
 
 		return (
-			<Row type="flex" justify="center">
-				<Col
-					style={{
-						padding: buttonPadding
-					}}
-				>
-					<Button
-						size={buttonSize}
-						key="-1"
-						style={{
-							borderColor: RED_ORANGE_3,
-							background: RED_ORANGE_3,
-							color: GREY_9,
-							fontFamily: "Overpass"
-						}}
-					>
+			<div>
+				<Col>
+					<button className="google-login-button">
 						<a href="/auth/google">
 							Gmail Login{" "}
 							<Icon style={{ fontSize: 18 }} type="google" />
 						</a>
-					</Button>
+					</button>
 				</Col>
 				<Col>
-					<Button
-						size={buttonSize}
-						key="0"
-						style={{
-							borderColor: BLUE_3,
-							background: BLUE_3,
-							color: GREY_9,
-							fontFamily: "Overpass"
-						}}
-					>
+					<button className="linkedIn-login-button">
 						<a href="/auth/linkedIn">
 							LinkedIn Login{" "}
 							<Icon style={{ fontSize: 18 }} type="linkedin" />
 						</a>
-					</Button>
+					</button>
 				</Col>
-			</Row>
+			</div>
 		);
 	}
 }
