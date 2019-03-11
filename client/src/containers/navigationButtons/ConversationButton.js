@@ -9,8 +9,9 @@ class ConversationButton extends Component {
 
 		return (
 			<Col style={{ padding: "0px 0px 0px 10px" }}>
-				<a href="/conversations">
+				<a className="header-anchor" href="/conversations">
 					<button
+						className="general-header-button"
 						style={{
 							boxShadow:
 								"0px -3px 0px 0px " +
@@ -32,6 +33,7 @@ class ConversationButton extends Component {
 							}}
 						>
 							<div
+								className="header-badge-div"
 								style={{
 									color:
 										colorTheme.conversationsButtonTextColor

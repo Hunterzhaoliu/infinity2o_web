@@ -9,9 +9,9 @@ class LogoutButton extends Component {
 
 		return (
 			<Col>
-				<a href="/api/logout">
+				<a className="header-anchor" href="/api/logout">
 					<button
-						className="logout-button"
+						className="general-header-button"
 						style={{ color: colorTheme.text6Color }}
 					>
 						Logout

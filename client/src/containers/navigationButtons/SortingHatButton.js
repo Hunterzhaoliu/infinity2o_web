@@ -9,8 +9,9 @@ class SortingHatButton extends Component {
 
 		return (
 			<Col style={{ padding: "0px 0px 0px 10px" }}>
-				<a href="/sorting_hat">
+				<a className="header-anchor" href="/sorting_hat">
 					<button
+						className="general-header-button"
 						style={{
 							boxShadow:
 								"0px -3px 0px 0px " +

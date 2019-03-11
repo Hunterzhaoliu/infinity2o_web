@@ -40,7 +40,10 @@ class ChangeThemeButton extends Component {
 
 		if (colorThemeSave === "save_done" || colorThemeSave === null) {
 			return (
-				<button onClick={onRandomColorTheme}>
+				<button
+					className="change-theme-button"
+					onClick={onRandomColorTheme}
+				>
 					<img
 						alt=""
 						style={{ width: "32px" }}
@@ -50,7 +53,10 @@ class ChangeThemeButton extends Component {
 			);
 		} else {
 			return (
-				<button onClick={onRandomColorTheme}>
+				<button
+					className="change-theme-button"
+					onClick={onRandomColorTheme}
+				>
 					{this.renderSaveIcon(colorThemeSave)}
 				</button>
 			);

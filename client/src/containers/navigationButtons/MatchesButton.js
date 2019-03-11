@@ -9,8 +9,9 @@ class MatchesButton extends Component {
 
 		return (
 			<Col style={{ padding: "0px 0px 0px 10px" }}>
-				<a href="/matches">
+				<a className="header-anchor" href="/matches">
 					<button
+						className="general-header-button"
 						style={{
 							boxShadow:
 								"0px -3px 0px 0px " +
@@ -32,6 +33,7 @@ class MatchesButton extends Component {
 							}}
 						>
 							<div
+								className="header-badge-div"
 								style={{
 									color: colorTheme.matchesButtonTextColor
 								}}

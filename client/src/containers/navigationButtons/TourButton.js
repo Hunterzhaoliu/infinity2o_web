@@ -9,8 +9,9 @@ class TourButton extends Component {
 
 		return (
 			<Col md={{ offset: 1 }} lg={{ offset: 3 }} xl={{ offset: 2 }}>
-				<a href="/tour">
+				<a className="header-anchor" href="/tour">
 					<button
+						className="general-header-button"
 						style={{
 							boxShadow:
 								"0px -3px 0px 0px " +
