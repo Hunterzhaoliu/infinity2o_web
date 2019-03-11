@@ -8,8 +8,9 @@ class ProfileButton extends Component {
 		const { colorTheme } = this.props;
 		return (
 			<Col style={{ padding: "0px 0px 0px 10px" }}>
-				<a href="/profile">
+				<a className="header-anchor" href="/profile">
 					<button
+						className="general-header-button"
 						style={{
 							boxShadow:
 								"0px -3px 0px 0px " +

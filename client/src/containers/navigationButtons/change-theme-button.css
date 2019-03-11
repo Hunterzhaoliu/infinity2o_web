@@ -1,4 +1,4 @@
-button {
+.change-theme-button {
 	border-color: var(--text8Color);
 	background-color: var(--text8Color);
 	border-radius: 0;
@@ -6,11 +6,11 @@ button {
 	height: 60px;
 }
 
-button:hover {
+.change-theme-button:hover {
 	cursor: pointer;
 	box-shadow: 0px -3px 0px 0px var(--keyText4Color) inset;
 }
 
-button:focus {
+.change-theme-button:focus {
 	outline: none;
 }
