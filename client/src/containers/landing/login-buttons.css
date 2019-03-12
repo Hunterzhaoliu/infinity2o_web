@@ -1,5 +1,4 @@
-.google-login-anchor,
-.linkedIn-login-anchor {
+.login-anchor {
 	color: var(--GREY_1);
 	font-family: "Overpass";
 	line-height: 40px;
@@ -10,4 +9,10 @@
 	border-radius: 4px;
 	font-size: 15px;
 	font-weight: 500;
+}
+
+.login-anchor:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+	color: var(--GREY_1);
 }
