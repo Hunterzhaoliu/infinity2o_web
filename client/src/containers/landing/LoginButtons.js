@@ -10,21 +10,17 @@ class LoginButtons extends Component {
 
 		document.documentElement.style.setProperty(`--GREY_1`, GREY_1);
 
-		// let largeGmailLoginText = "Google Login ";
-		// let largeLinkedInLoginText = "LinkedIn Login ";
-		// let paddingBetweenLoginButtons = "0px 0px 0px 30px";
-		// let buttonPadding = "0px 30px 0px 0px";
-		// let smallLoginText = "";
-		//
-		// if (windowWidth < 768) {
-		// 	// less than medium screen, need to change where the infinity2o logo
-		// 	// is and adjust text size
-		// 	largeGmailLoginText = "";
-		// 	largeLinkedInLoginText = "";
-		// 	smallLoginText = " Login";
-		// 	paddingBetweenLoginButtons = "0px 0px 0px 10px";
-		// 	buttonPadding = "0px 15px 0px 0px";
-		// }
+		let largeGmailLoginText = "Google Login ";
+		let largeLinkedInLoginText = "LinkedIn Login ";
+		let smallLoginText = "";
+
+		if (windowWidth < 768) {
+			// less than medium screen, need to change where the infinity2o logo
+			// is and adjust text size
+			largeGmailLoginText = "";
+			largeLinkedInLoginText = "";
+			smallLoginText = " Login";
+		}
 
 		return (
 			<Col>
@@ -35,21 +31,23 @@ class LoginButtons extends Component {
 								borderColor: RED_ORANGE_7,
 								background: RED_ORANGE_7
 							}}
-							className="google-login-anchor"
+							className="login-anchor"
 							href="/auth/google"
 						>
-							Google Login{" "}
+							{largeGmailLoginText}
 							<Icon style={{ fontSize: 18 }} type="google" />
+							{smallLoginText}
 						</a>
 					</Col>
 					<Col style={{ padding: "0px 0px 0px 20px" }}>
 						<a
 							style={{ borderColor: BLUE_7, background: BLUE_7 }}
-							className="linkedIn-login-anchor"
+							className="login-anchor"
 							href="/auth/linkedIn"
 						>
-							LinkedIn Login{" "}
+							{largeLinkedInLoginText}
 							<Icon style={{ fontSize: 18 }} type="linkedin" />
+							{smallLoginText}
 						</a>
 					</Col>
 				</Row>
