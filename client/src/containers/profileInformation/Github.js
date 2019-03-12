@@ -10,6 +10,7 @@ class Github extends Component {
 		if (loggedInState === "not_logged_in") {
 			textColor = GREY_3;
 		}
+
 		if (value !== undefined && value !== null && value.length > 0) {
 			return (
 				<Col style={{ padding: "0px 0px 0px 10px" }}>
@@ -42,15 +43,7 @@ function mapStateToProps(state) {
 	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-function mapDispatchToProps(dispatch) {
-	return {};
-}
-
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	null
 )(Github);

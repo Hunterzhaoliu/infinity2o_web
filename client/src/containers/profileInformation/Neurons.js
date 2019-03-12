@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Popover, Button, Icon } from "antd";
+import { Row, Col, Popover, Icon } from "antd";
+import "./neurons.css";
 
 class Neurons extends Component {
 	numberWithCommas = x => {
@@ -59,14 +60,13 @@ class Neurons extends Component {
 
 		return (
 			<Popover content={neuronExplanation}>
-				<Button
+				<button
+					className="popover-button"
 					style={{
 						borderColor: colorTheme.backgroundColor,
 						backgroundColor: colorTheme.backgroundColor,
-						color: colorTheme.text3Color,
-						padding: "0px 5px 0px"
+						color: colorTheme.text3Color
 					}}
-					size="small"
 				>
 					<Icon
 						style={{
@@ -75,7 +75,7 @@ class Neurons extends Component {
 						}}
 						type="question-circle-o"
 					/>
-				</Button>
+				</button>
 			</Popover>
 		);
 	}

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Col, Icon } from "antd";
 
@@ -27,23 +26,7 @@ class LinkedIn extends Component {
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
-function mapStateToProps(state) {
-	return {};
-}
-
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-function mapDispatchToProps(dispatch) {
-	return {};
-}
-
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps
+	null,
+	null
 )(LinkedIn);
