@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { bindActionCreators } from "redux";
 import VoteEdit from "./VoteEdit";
-import { Layout, Row, Col, Button, Avatar, Card } from "antd";
+import { Layout, Row, Col, Avatar, Card } from "antd";
 import LinkedIn from "../profileInformation/LinkedIn";
 import Github from "../profileInformation/Github";
 import Neurons from "../profileInformation/Neurons";
@@ -34,7 +34,6 @@ class Profile extends Component {
 		const { colorTheme, profile } = this.props;
 		return (
 			<Card
-				hoverable={true}
 				bordered="false"
 				loading={false}
 				style={{
@@ -92,19 +91,16 @@ class Profile extends Component {
 				</Row>
 				<Row type="flex" justify="center">
 					<Col style={{ padding: "20px 0px 60px 0px" }}>
-						<Button
+						<button
+							className="profile-edit-button"
 							style={{
 								borderColor: colorTheme.backgroundColor,
 								background: colorTheme.backgroundColor,
-								color: colorTheme.text3Color,
-								fontFamily: "Overpass",
-								lineHeight: 1,
-								marginBottom: 0,
-								fontSize: 16
+								color: colorTheme.text3Color
 							}}
 						>
 							<a href="/profile/edit">Edit Info</a>
-						</Button>
+						</button>
 					</Col>
 				</Row>
 			</Card>
