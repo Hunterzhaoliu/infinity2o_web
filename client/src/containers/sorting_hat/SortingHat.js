@@ -4,9 +4,11 @@ import * as sortingHatActionCreators from "../../actions/sorting_hat/sortingHat"
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as askActionCreators from "../../actions/sorting_hat/ask";
 import { bindActionCreators } from "redux";
-import { Layout, Row, Col, Button } from "antd";
+import { Layout, Row, Col } from "antd";
 import InputVote from "./InputVote";
 import Ask from "./Ask";
+import "./sorting-hat.css";
+
 const { Content } = Layout;
 
 class SortingHat extends Component {
@@ -20,14 +22,10 @@ class SortingHat extends Component {
 		const { colorTheme, history, windowWidth } = this.props;
 
 		let mainH2FontSize = 32;
-		let votingH2FontSize = 24;
-		let pFontSize = 20;
-		let questionColPadding = "0px 0px 0px 15px";
+		let votingH3FontSize = 24;
 		if (windowWidth < 768) {
 			mainH2FontSize = 26;
-			pFontSize = 17;
-			votingH2FontSize = 18;
-			questionColPadding = "30px 0px 0px 0px";
+			votingH3FontSize = 18;
 		}
 		return (
 			<Content
@@ -52,57 +50,38 @@ class SortingHat extends Component {
 							Help the Sorting Hat find you matches by
 						</h2>
 					</Col>
-					<Col
-						xs={{ span: 24 }}
-						sm={{ span: 24 }}
-						md={{ span: 6 }}
-						lg={{ span: 5 }}
-						xl={{ span: 4 }}
-						style={{
-							padding: questionColPadding,
-							textAlign: "center" // for the button to stay centered
-						}}
-					>
-						<Button
+					<Col style={{ padding: "0px 0px 0px 10px" }}>
+						<a
+							className="sorting-hat-anchor"
 							style={{
 								borderColor: colorTheme.keyText7Color,
 								background: colorTheme.keyText7Color,
-								height: 32
+								color: colorTheme.text2Color
 							}}
 							onClick={e => this.props.openAskModal()}
 						>
-							<p
-								style={{
-									color: colorTheme.text2Color,
-									fontSize: pFontSize,
-									fontFamily: "Overpass",
-									marginBottom: 0,
-									lineHeight: 1
-								}}
-							>
-								asking a question
-							</p>
-						</Button>
+							asking a question
+						</a>
 					</Col>
 				</Row>
 				<Row type="flex" justify="center" align="middle">
 					<Col
 						style={{
-							padding: "30px 0px 30px 0px"
+							padding: "30px 0px 40px 0px"
 						}}
 					>
-						<h2
+						<h3
 							style={{
 								textAlign: "center",
 								color: colorTheme.text4Color,
 								marginBottom: 0,
 								lineHeight: 1,
-								fontSize: votingH2FontSize,
+								fontSize: votingH3FontSize,
 								fontFamily: "Overpass"
 							}}
 						>
 							Or voting on questions that matter to you:
-						</h2>
+						</h3>
 					</Col>
 				</Row>
 				<Row type="flex" justify="center">
@@ -121,10 +100,6 @@ class SortingHat extends Component {
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
@@ -133,10 +108,6 @@ function mapStateToProps(state) {
 	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
 function mapDispatchToProps(dispatch) {
 	const colorThemeDispatchers = bindActionCreators(
 		colorThemeActionCreators,
