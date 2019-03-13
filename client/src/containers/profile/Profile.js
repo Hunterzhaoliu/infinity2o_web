@@ -91,16 +91,17 @@ class Profile extends Component {
 				</Row>
 				<Row type="flex" justify="center">
 					<Col style={{ padding: "20px 0px 60px 0px" }}>
-						<button
-							className="profile-edit-button"
+						<a
+							className="profile-edit-anchor"
 							style={{
 								borderColor: colorTheme.backgroundColor,
 								background: colorTheme.backgroundColor,
 								color: colorTheme.text3Color
 							}}
+							href="/profile/edit"
 						>
-							<a href="/profile/edit">Edit Info</a>
-						</button>
+							Edit Info
+						</a>
 					</Col>
 				</Row>
 			</Card>
@@ -122,7 +123,7 @@ class Profile extends Component {
 									fontFamily: "Overpass",
 									lineHeight: 2.29, // height of vote button/font size: 32/14
 									marginBottom: 0,
-									fontSize: 14,
+									fontSize: 16,
 									padding: "0px 0px 10px 0px"
 								}}
 							>
