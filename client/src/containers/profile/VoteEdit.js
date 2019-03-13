@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import * as voteEditActionCreators from "../../actions/profile/voteEdit";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import "./vote-edit.css";
 
-import { Row, Col, Button, Icon, Modal } from "antd";
+import { Row, Col, Icon, Modal } from "antd";
 
 class VoteEdit extends Component {
 	onPressPage(displayPage) {
@@ -52,20 +53,18 @@ class VoteEdit extends Component {
 						padding: "0px 5px 0px 0px"
 					}}
 				>
-					<Button
+					<a
+						className="vote-edit-anchor"
 						style={{
 							borderColor: colorTheme.text8Color,
 							background: colorTheme.text8Color,
 							color: textColor,
-							fontFamily: "Overpass",
-							fontSize: 14,
-							lineHeight: 1,
-							marginBottom: 0
+							width: "40px"
 						}}
 						onClick={e => this.onPressPage(displayPage)}
 					>
 						{displayPage}
-					</Button>
+					</a>
 				</Col>
 			);
 		});
@@ -92,7 +91,8 @@ class VoteEdit extends Component {
 								padding: "0px 0px 10px"
 							}}
 						>
-							<Button
+							<a
+								className="vote-edit-anchor"
 								style={{
 									borderColor: colorTheme.text8Color,
 									background: colorTheme.text8Color,
@@ -108,17 +108,13 @@ class VoteEdit extends Component {
 							>
 								<p
 									style={{
-										color: colorTheme.text3Color,
-										fontFamily: "Overpass",
-										fontSize: 14,
-										lineHeight: 1,
 										marginBottom: 0
 									}}
 								>
 									{vote.question}{" "}
 									{this.renderFetchIcon(index)}
 								</p>
-							</Button>
+							</a>
 						</Col>
 					</Row>
 				);
@@ -162,7 +158,7 @@ class VoteEdit extends Component {
 						style={{
 							color: colorTheme.keyText2Color,
 							fontFamily: "Overpass",
-							fontSize: 14,
+							fontSize: 16,
 							lineHeight: 1,
 							marginBottom: 0
 						}}
@@ -179,7 +175,7 @@ class VoteEdit extends Component {
 						style={{
 							color: colorTheme.keyText7Color,
 							fontFamily: "Overpass",
-							fontSize: 14,
+							fontSize: 16,
 							lineHeight: 1,
 							marginBottom: 0
 						}}
@@ -242,24 +238,17 @@ class VoteEdit extends Component {
 					key={answerIndex}
 				>
 					<Col
-						// xs={{ span: 24 }}
-						// sm={{ span: 14 }}
-						// md={{ span: 14 }}
-						// lg={{ span: 14 }}
 						xl={{ span: 12 }}
 						style={{
 							textAlign: "center"
 						}}
 					>
-						<Button
+						<a
+							className="vote-edit-anchor"
 							style={{
 								borderColor: displayAnswerButtonColor,
 								background: displayAnswerButtonColor,
-								color: colorTheme.text3Color,
-								fontFamily: "Overpass",
-								fontSize: 14,
-								lineHeight: 1,
-								marginBottom: 0
+								color: colorTheme.text3Color
 							}}
 							onClick={e =>
 								this.props.onRevote(
@@ -278,7 +267,7 @@ class VoteEdit extends Component {
 								voteEdit.revoteSaveState,
 								answerIndex
 							)}
-						</Button>
+						</a>
 					</Col>
 					<Col
 						xs={{ span: 4 }}
@@ -296,7 +285,7 @@ class VoteEdit extends Component {
 								fontFamily: "Overpass",
 								lineHeight: 1,
 								marginBottom: 0,
-								fontSize: 14
+								fontSize: 16
 							}}
 						>
 							{String(
@@ -352,7 +341,7 @@ class VoteEdit extends Component {
 					fontFamily: "Overpass",
 					lineHeight: 1,
 					marginBottom: 0,
-					fontSize: 14
+					fontSize: 20
 				}}
 			>
 				{voteEdit.askToRevote.totalVotes +
@@ -370,12 +359,13 @@ class VoteEdit extends Component {
 		if (voteEdit.askToRevote !== null) {
 			return (
 				<Modal
+					width="700px"
 					visible={voteEdit.isRevoteModalOpen}
 					onCancel={e => this.props.closeRevoteModal()}
 					footer={null}
 					centered={true}
 					bodyStyle={{
-						padding: "60px 10px",
+						padding: "60px 60px",
 						backgroundColor: colorTheme.textColor1
 					}}
 					style={{ padding: "90px 0px 0px 0px" }} // where the modal is
@@ -388,7 +378,7 @@ class VoteEdit extends Component {
 								fontFamily: "Overpass",
 								lineHeight: 1,
 								marginBottom: 0,
-								fontSize: 18
+								fontSize: 24
 							}}
 						>
 							{voteEdit.askToRevote.question}
@@ -415,7 +405,7 @@ class VoteEdit extends Component {
 									fontFamily: "Overpass",
 									lineHeight: 1,
 									marginBottom: 0,
-									fontSize: 16
+									fontSize: 20
 								}}
 							>
 								Answer
@@ -429,7 +419,7 @@ class VoteEdit extends Component {
 									fontFamily: "Overpass",
 									lineHeight: 1,
 									marginBottom: 0,
-									fontSize: 16
+									fontSize: 20
 								}}
 							>
 								Vote %
@@ -443,7 +433,7 @@ class VoteEdit extends Component {
 									fontFamily: "Overpass",
 									lineHeight: 1,
 									marginBottom: 0,
-									fontSize: 16
+									fontSize: 20
 								}}
 							>
 								Revote In %
@@ -455,7 +445,7 @@ class VoteEdit extends Component {
 									fontFamily: "Overpass",
 									lineHeight: 1,
 									marginBottom: 0,
-									fontSize: 16
+									fontSize: 20
 								}}
 							>
 								Revote Out %
