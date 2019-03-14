@@ -11,7 +11,7 @@ import ConversationButton from "../navigationButtons/ConversationButton";
 import LogoutButton from "../navigationButtons/LogoutButton";
 import LoginButtons from "./LoginButtons";
 import { GREY_9, GREY_1 } from "../styles/ColorConstants";
-import { Layout, Row, Col, Button, Icon } from "antd";
+import { Layout, Row, Col, Icon } from "antd";
 const { Header } = Layout;
 
 class CustomHeader extends Component {
@@ -102,7 +102,7 @@ class CustomHeader extends Component {
 			return (
 				<Row type="flex" justify="start">
 					<Col key="0">
-						<Button
+						<a
 							style={{
 								borderColor: colorTheme.text7Color,
 								background: colorTheme.text7Color,
@@ -111,7 +111,7 @@ class CustomHeader extends Component {
 							onClick={toggleSider}
 						>
 							<Icon type={siderIcon} />
-						</Button>
+						</a>
 					</Col>
 				</Row>
 			);

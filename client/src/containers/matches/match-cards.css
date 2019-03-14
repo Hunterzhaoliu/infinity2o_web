@@ -1,28 +1,16 @@
-.contact-infinite-container {
-	border-radius: 0px;
-	padding: 0px 0px;
-	height: var(--contact-window-vertical-height);
-	overflow: scroll;
-	overflow-x: hidden;
-}
-
-::-webkit-scrollbar {
-	width: 0px; /* remove scrollbar space */
-	/* background: transparent;  optional: just make scrollbar invisible */
-}
-
-.contacts-anchor {
+.match-cards-anchor {
 	font-family: "Overpass";
 	line-height: 40px;
 	display: inline-block;
 	text-align: center;
+	padding: 0px 14px;
 	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 	border-radius: 4px;
 	font-size: 16px;
 	font-weight: 500;
 }
 
-.contacts-anchor:hover {
+.match-cards-anchor:hover {
 	transform: translateY(-1px);
 	box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 	cursor: pointer;

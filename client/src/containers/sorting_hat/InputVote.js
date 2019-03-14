@@ -13,7 +13,9 @@ import {
 	RED_ORANGE_3
 } from "../styles/ColorConstants";
 import FirstVote from "../landing/FirstVote";
-import { Button, Card, Col, Layout, Row, Icon } from "antd";
+import { Card, Col, Layout, Row, Icon } from "antd";
+import "./input-vote.css";
+
 const { Content } = Layout;
 
 class InputVote extends Component {
@@ -59,12 +61,12 @@ class InputVote extends Component {
 		} else {
 			return (
 				<Row style={{ padding: "10px 0px 0px" }}>
-					<Button
+					<a
+						className="input-vote-anchor"
 						style={{
 							borderColor: colorTheme.text7Color,
 							background: colorTheme.text7Color,
-							color: colorTheme.text2Color,
-							fontFamily: "Overpass"
+							color: colorTheme.text2Color
 						}}
 						onClick={e =>
 							this.props.onNextAsk(
@@ -75,7 +77,7 @@ class InputVote extends Component {
 						}
 					>
 						{buttonText}
-					</Button>
+					</a>
 				</Row>
 			);
 		}
@@ -95,26 +97,26 @@ class InputVote extends Component {
 
 		if (activeSection !== "sorting_hat") {
 			return (
-				<Button
+				<a
+					className="input-vote-anchor"
 					style={{
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
-						color: answerButtonTextColor,
-						fontFamily: "Overpass"
+						color: answerButtonTextColor
 					}}
 					onClick={e => this.onVoteLanding(answerIndex, askIndex)}
 				>
 					{displayAnswer}
-				</Button>
+				</a>
 			);
 		} else {
 			return (
-				<Button
+				<a
+					className="input-vote-anchor"
 					style={{
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
-						color: answerButtonTextColor,
-						fontFamily: "Overpass"
+						color: answerButtonTextColor
 					}}
 					onClick={e => this.onVote(answerIndex, askIndex, askId)}
 				>
@@ -124,7 +126,7 @@ class InputVote extends Component {
 						askIndex,
 						isDisplayingSaveIcon
 					)}
-				</Button>
+				</a>
 			);
 		}
 	}
@@ -268,7 +270,6 @@ class InputVote extends Component {
 									textAlign: "center"
 								}}
 								bodyStyle={{ padding: "30px" }} // padding around inside border of card
-								hoverable
 							>
 								<h3
 									style={{
