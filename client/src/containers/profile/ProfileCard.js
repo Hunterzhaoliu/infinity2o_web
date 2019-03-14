@@ -24,12 +24,7 @@ class ProfileCard extends Component {
 		const { colorTheme, profile } = this.props;
 		return (
 			<Row type="flex" justify="center">
-				<Col
-					sm={{ span: 21 }}
-					md={{ span: 21 }}
-					lg={{ span: 20 }}
-					xl={{ span: 8 }}
-				>
+				<Col xl={{ span: 8 }}>
 					<Card
 						bordered="false"
 						loading={false}
@@ -49,7 +44,10 @@ class ProfileCard extends Component {
 								}}
 							/>
 							<Avatar
-								style={{ position: "absolute", top: "50px" }}
+								style={{
+									position: "absolute",
+									top: "50px"
+								}}
 								shape="circle"
 								src={profile.imageUrl}
 							/>

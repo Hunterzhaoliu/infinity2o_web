@@ -56,21 +56,25 @@ class Matches extends Component {
 		if (hasMatches) {
 			const match = matches.current1DisplayedMatches[0];
 			return (
-				<Col style={{ width: "400px" }} key={match.name}>
+				<Col xl={{ span: 6 }}>
 					<MatchCards match={match} history={history} />
 				</Col>
 			);
 		} else if (runningAthenaForUser) {
 			return (
 				<Col>
-					<h2
+					<h4
 						style={{
-							color: colorTheme.text2Color
+							color: colorTheme.text2Color,
+							fontFamily: "Overpass",
+							fontSize: "24px",
+							lineHeight: 1,
+							marginBottom: 0
 						}}
 					>
 						We will have matches for you in a moment{" "}
 						<Icon type="loading" />
-					</h2>
+					</h4>
 				</Col>
 			);
 		} else if (
@@ -90,21 +94,30 @@ class Matches extends Component {
 					lg={{ span: 18 }}
 					xl={{ span: 14 }}
 				>
-					<h2
+					<h4
 						style={{
-							color: colorTheme.text3Color
+							color: colorTheme.text3Color,
+							fontFamily: "Overpass",
+							fontSize: "24px",
+							lineHeight: 1,
+							marginBottom: 0
 						}}
 					>
 						Recieve your first 2 matches by voting on 8 questions in
 						Sorting Hat
-					</h2>
-					<h3
+					</h4>
+					<h6
 						style={{
-							color: colorTheme.text4Color
+							color: colorTheme.text4Color,
+							color: colorTheme.text3Color,
+							fontFamily: "Overpass",
+							fontSize: "18px",
+							lineHeight: 1,
+							marginBottom: 0
 						}}
 					>
 						You have {votesToGo} to go!
-					</h3>
+					</h6>
 					<Progress
 						percent={percentVotes}
 						showInfo={false}
@@ -114,21 +127,19 @@ class Matches extends Component {
 			);
 		} else {
 			return (
-				<Col
-					sm={{ span: 24 }}
-					md={{ span: 22 }}
-					lg={{ span: 18 }}
-					xl={{ span: 14 }}
+				<h6
+					style={{
+						color: colorTheme.text3Color,
+						color: colorTheme.text3Color,
+						fontFamily: "Overpass",
+						fontSize: "24px",
+						lineHeight: 1,
+						marginBottom: 0
+					}}
 				>
-					<h2
-						style={{
-							color: colorTheme.text3Color
-						}}
-					>
-						You're out of matches for today. Vote on questions in
-						Sorting Hat to get better matches.
-					</h2>
-				</Col>
+					You're out of matches for today. Vote on questions in
+					Sorting Hat to get better matches.
+				</h6>
 			);
 		}
 	}
@@ -139,63 +150,33 @@ class Matches extends Component {
 			<Content
 				style={{
 					textAlign: "center",
-					padding: "75px 50px 0px", // top left&right bottom
+					padding: "120px 20px 0px",
 					background: colorTheme.backgroundColor
 				}}
 			>
-				<Row
-					type="flex"
-					justify="center"
-					align="top"
-					style={{ padding: "20px 0px 0px 0px" }}
-				>
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 1 }}
-						lg={{ span: 3 }}
-						xl={{ span: 5 }}
-					/>
-					<Col
-						sm={{ span: 24 }}
-						md={{ span: 22 }}
-						lg={{ span: 18 }}
-						xl={{ span: 14 }}
-					>
+				<Row type="flex" justify="center">
+					<Col>
 						<h2
 							style={{
-								color: colorTheme.text2Color
+								color: colorTheme.text2Color,
+								fontFamily: "Overpass",
+								fontSize: "32px",
+								lineHeight: 1,
+								marginBottom: 0
 							}}
 						>
-							Sorting Hat finds your 2 best matches every day at 9
+							Sorting Hat finds your best 2 matches every day at 9
 							AM CST
 						</h2>
 					</Col>
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 1 }}
-						lg={{ span: 3 }}
-						xl={{ span: 5 }}
-					/>
 				</Row>
 				<Row
 					type="flex"
 					justify="center"
 					align="top"
-					style={{ padding: "20px 0px 0px 0px" }}
+					style={{ padding: "60px 0px 0px 0px" }}
 				>
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 1 }}
-						lg={{ span: 3 }}
-						xl={{ span: 5 }}
-					/>
 					{this.renderMatches()}
-					<Col
-						sm={{ span: 0 }}
-						md={{ span: 1 }}
-						lg={{ span: 3 }}
-						xl={{ span: 5 }}
-					/>
 				</Row>
 			</Content>
 		);
