@@ -8,8 +8,9 @@ import InputFieldNumber from "./InputFieldNumber";
 import InputInterests from "./interests/InputInterests";
 import InputSchedule from "./availability/InputSchedule";
 import InputTimeZone from "./timeZone/InputTimeZone";
+import { Layout, Row, Col, Icon } from "antd";
 import "./ProfileEdit.css";
-import { Layout, Row, Col, Button, Icon } from "antd";
+
 const { Content } = Layout;
 
 class ProfileEdit extends Component {
@@ -191,7 +192,8 @@ class ProfileEdit extends Component {
 					}}
 				>
 					<Col span={24}>
-						<Button
+						<a
+							className="profile-edit-anchor"
 							style={{
 								borderColor: colorTheme.key,
 								background: colorTheme.key,
@@ -201,7 +203,7 @@ class ProfileEdit extends Component {
 							onClick={() => saveProfile(profile, history)}
 						>
 							Save {this.renderSaveIcon(profile.save)}
-						</Button>
+						</a>
 					</Col>
 				</Row>
 			</div>
