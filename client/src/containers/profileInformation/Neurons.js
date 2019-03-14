@@ -84,7 +84,7 @@ class Neurons extends Component {
 		return (
 			<Row
 				style={{
-					padding: "0px 0px 0px 20px"
+					padding: "20px 0px 0px 0px"
 				}}
 				type="flex"
 				justify="start"

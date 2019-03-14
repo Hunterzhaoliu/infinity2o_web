@@ -30,8 +30,8 @@ class ProfileCard extends Component {
 						loading={false}
 						style={{
 							color: colorTheme.text1Color,
-							borderColor: colorTheme.text05Color,
-							background: colorTheme.text05Color
+							borderColor: colorTheme.textDot5Color,
+							background: colorTheme.textDot5Color
 						}}
 						bodyStyle={{ padding: "0px" }} // padding around inside border of card
 					>
@@ -53,13 +53,13 @@ class ProfileCard extends Component {
 							/>
 						</Row>
 						<Row
-							style={{ padding: "90px 0px 20px 0px" }}
+							style={{ padding: "90px 0px 0px 0px" }}
 							type="flex"
 							justify="center"
 							align="middle"
 						>
 							<Col>
-								<p
+								<h4
 									style={{
 										color: colorTheme.keyText6Color,
 										fontFamily: "Overpass",
@@ -69,36 +69,43 @@ class ProfileCard extends Component {
 									}}
 								>
 									{this.renderNameAndAge()}
-								</p>
+								</h4>
 							</Col>
 							<LinkedIn
 								value={profile.linkedInPublicProfileUrl}
 							/>
 							<Github value={profile.githubPublicProfileUrl} />
 						</Row>
-						<Neurons payment={profile.payment} />
-						<Row>
-							<Interests interests={profile.interests} />
-						</Row>
-						<Row>
-							<Email email={profile.email} />
-						</Row>
-						<Row>
-							<TimeZone timeZone={profile.timeZone} />
-						</Row>
-						<Row type="flex" justify="center">
-							<Col style={{ padding: "20px 0px 60px 0px" }}>
-								<a
-									className="profile-edit-anchor"
-									style={{
-										borderColor: colorTheme.backgroundColor,
-										background: colorTheme.backgroundColor,
-										color: colorTheme.text3Color
-									}}
-									href="/profile/edit"
-								>
-									Edit Info
-								</a>
+						<Row
+							style={{ padding: "0px 0px 0px 20px" }}
+							type="flex"
+							justify="start"
+							align="middle"
+						>
+							<Col>
+								<Neurons payment={profile.payment} />
+								<Interests interests={profile.interests} />
+								<Email email={profile.email} />
+								<TimeZone timeZone={profile.timeZone} />
+								<Row type="flex" justify="center">
+									<Col
+										style={{ padding: "20px 0px 60px 0px" }}
+									>
+										<a
+											className="profile-edit-anchor"
+											style={{
+												borderColor:
+													colorTheme.backgroundColor,
+												background:
+													colorTheme.backgroundColor,
+												color: colorTheme.text3Color
+											}}
+											href="/profile/edit"
+										>
+											Edit Info
+										</a>
+									</Col>
+								</Row>
 							</Col>
 						</Row>
 					</Card>

@@ -56,7 +56,7 @@ class Matches extends Component {
 		if (hasMatches) {
 			const match = matches.current1DisplayedMatches[0];
 			return (
-				<Col xl={{ span: 6 }}>
+				<Col xl={{ span: 7 }}>
 					<MatchCards match={match} history={history} />
 				</Col>
 			);
@@ -109,7 +109,6 @@ class Matches extends Component {
 					<h6
 						style={{
 							color: colorTheme.text4Color,
-							color: colorTheme.text3Color,
 							fontFamily: "Overpass",
 							fontSize: "18px",
 							lineHeight: 1,
@@ -129,7 +128,6 @@ class Matches extends Component {
 			return (
 				<h6
 					style={{
-						color: colorTheme.text3Color,
 						color: colorTheme.text3Color,
 						fontFamily: "Overpass",
 						fontSize: "24px",

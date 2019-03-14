@@ -28,14 +28,18 @@ class MatchCards extends Component {
 		if (matchAge !== undefined && matchAge !== null) {
 			return (
 				<Col>
-					<h2
+					<h4
 						style={{
-							color: colorThemeText6Color
+							color: colorThemeText6Color,
+							fontFamily: "Overpass",
+							lineHeight: 1,
+							marginBottom: 0,
+							fontSize: 26
 						}}
 					>
 						{", "}
 						{matchAge}
-					</h2>
+					</h4>
 				</Col>
 			);
 		}
@@ -76,17 +80,19 @@ class MatchCards extends Component {
 			voteDescription = " votes";
 		}
 		return (
-			<Row type="flex" justify="start" align="middle">
-				<Col>
-					<h3
-						style={{
-							color: colorTheme.text3Color
-						}}
-					>
-						{totalUserVotes} {voteDescription}
-					</h3>
-				</Col>
-			</Row>
+			<Col>
+				<h4
+					style={{
+						color: colorTheme.keyText6Color,
+						fontFamily: "Overpass",
+						lineHeight: 1,
+						marginBottom: 0,
+						fontSize: 26
+					}}
+				>
+					{totalUserVotes} {voteDescription}
+				</h4>
+			</Col>
 		);
 	}
 
@@ -174,46 +180,54 @@ class MatchCards extends Component {
 				loading={false}
 				style={{
 					color: colorTheme.text1Color,
-					borderColor: colorTheme.text8Color,
-					background: colorTheme.text8Color
+					borderColor: colorTheme.textDot5Color,
+					background: colorTheme.textDot5Color
 				}}
 				bodyStyle={{ padding: "0px" }} // padding around inside border of card
 			>
 				{this.renderMatchPicture(match.imageUrl, colorTheme.key)}
-				<Row type="flex" justify="center" align="middle">
+
+				<Row
+					style={{ padding: "90px 0px 0px 0px" }}
+					type="flex"
+					justify="center"
+					align="middle"
+				>
 					<Col>
-						<h2
+						<h4
 							style={{
-								color: colorTheme.keyText6Color
+								color: colorTheme.keyText6Color,
+								fontFamily: "Overpass",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: 26
 							}}
 						>
 							{match.name}
-						</h2>
+						</h4>
 					</Col>
 					{this.renderMatchAge(match.age, colorTheme.text6Color)}
-					<Col style={{ padding: "0px 0px 10px 10px" }}>
-						<LinkedIn value={match.linkedInPublicProfileUrl} />
-					</Col>
-					<Col style={{ padding: "0px 0px 10px 10px" }}>
-						<Github value={match.githubPublicProfileUrl} />
-					</Col>
+					<LinkedIn value={match.linkedInPublicProfileUrl} />
+					<Github value={match.githubPublicProfileUrl} />
 				</Row>
-				<Row type="flex" justify="center" align="middle">
+				<Row
+					style={{ padding: "0px 0px 0px 20px" }}
+					type="flex"
+					justify="start"
+					align="middle"
+				>
 					<Col>
-						{this.renderMatchTotalVotes(match.totalUserVotes)}
-					</Col>
-				</Row>
-				<Row type="flex" justify="center" align="middle">
-					<Col>
+						<Row type="flex" justify="center" align="middle">
+							<Col>
+								{this.renderMatchTotalVotes(
+									match.totalUserVotes
+								)}
+							</Col>
+						</Row>
 						<Interests interests={match.interests} />
-					</Col>
-				</Row>
-				<Row type="flex" justify="center" align="middle">
-					<Col>
 						<TimeZone value={match.timeZone} />
 					</Col>
 				</Row>
-
 				{this.renderMatchButtons()}
 			</Card>
 		);
