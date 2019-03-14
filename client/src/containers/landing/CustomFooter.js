@@ -3,7 +3,9 @@ import { bindActionCreators } from "redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { connect } from "react-redux";
 import { GREY_1, GREY_2, GREY_3, GREY_4 } from "../styles/ColorConstants";
-import { Layout, Row, Col, Button } from "antd";
+import { Layout, Row, Col } from "antd";
+import "./custom-footer.css";
+
 const { Footer } = Layout;
 
 class CustomFooter extends Component {
@@ -33,72 +35,57 @@ class CustomFooter extends Component {
 				>
 					<Row type="flex" justify="center">
 						<Col>
-							<Button
+							<a
+								className="custom-footer-anchor"
 								style={{
 									borderColor: buttonColor,
 									background: buttonColor,
-									fontFamily: "Overpass"
+									color: textColor2
 								}}
 								size={"small"}
 								onClick={onFooter}
+								href="/terms"
 							>
-								<a
-									style={{
-										color: textColor2
-									}}
-									href="/terms"
-								>
-									Terms
-								</a>
-							</Button>
+								Terms
+							</a>
 						</Col>
 						<Col
 							style={{
 								padding: "0px 0px 0px 20px"
 							}}
 						>
-							<Button
+							<a
+								className="custom-footer-anchor"
 								style={{
 									borderColor: buttonColor,
 									background: buttonColor,
-									fontFamily: "Overpass"
+									color: textColor2
 								}}
 								size={"small"}
 								onClick={onFooter}
+								href="/privacy"
 							>
-								<a
-									style={{
-										color: textColor2
-									}}
-									href="/privacy"
-								>
-									Privacy
-								</a>
-							</Button>
+								Privacy
+							</a>
 						</Col>
 						<Col
 							style={{
 								padding: "0px 0px 0px 20px"
 							}}
 						>
-							<Button
+							<a
+								className="custom-footer-anchor"
 								style={{
 									borderColor: buttonColor,
 									background: buttonColor,
-									fontFamily: "Overpass"
+									color: textColor2
 								}}
 								size={"small"}
 								onClick={onFooter}
+								href="/about"
 							>
-								<a
-									style={{
-										color: textColor2
-									}}
-									href="/about"
-								>
-									About
-								</a>
-							</Button>
+								About
+							</a>
 						</Col>
 					</Row>
 					<Row type="flex" justify="center">

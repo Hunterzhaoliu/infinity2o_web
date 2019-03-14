@@ -7,7 +7,7 @@ import ContactCard from "./ContactCard";
 import Chat from "./Chat";
 import Contacts from "./Contacts";
 import VoteComparison from "./VoteComparison";
-import { Layout, Row, Col, Button } from "antd";
+import { Layout, Row, Col } from "antd";
 const { Content } = Layout;
 
 class Conversation extends Component {
@@ -28,7 +28,7 @@ class Conversation extends Component {
 				// user trying to delete first conversation so need to show 2nd contact
 				contactToShow = firstTwoContacts[1];
 			}
-			
+
 			this.props.onSelectContact(
 				contactToShow.conversationId,
 				contactToShow.isOnline,
@@ -44,7 +44,7 @@ class Conversation extends Component {
 		const { colorTheme } = this.props;
 		return (
 			<div style={{ padding: "10px 0px 0px 0px" }}>
-				<Button
+				<a
 					style={{
 						borderColor: colorTheme.text8Color,
 						background: colorTheme.text8Color,
@@ -54,13 +54,14 @@ class Conversation extends Component {
 					onClick={e =>
 						this.onCloseConversation(
 							selectedConversationInfo.conversationId,
-							selectedConversationInfo.selectedContactMongoDBInfo.id,
+							selectedConversationInfo.selectedContactMongoDBInfo
+								.id,
 							firstTwoContacts
 						)
 					}
 				>
 					Close Conversation
-				</Button>
+				</a>
 			</div>
 		);
 	}
@@ -201,9 +202,15 @@ function mapDispatchToProps(dispatch) {
 			);
 		},
 		onCloseConversation: (conversationId, contactMongoDBId) => {
-			contactsDispatchers.onCloseConversation(conversationId, contactMongoDBId);
+			contactsDispatchers.onCloseConversation(
+				conversationId,
+				contactMongoDBId
+			);
 		}
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Conversation);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Conversation);

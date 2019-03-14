@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as contactsActionCreators from "../../actions/conversations/contacts";
 import { bindActionCreators } from "redux";
-import { Layout, List, Button, Badge } from "antd";
+import { Layout, List, Badge } from "antd";
 import "./Contacts.css";
 const { Content } = Layout;
 
@@ -24,7 +24,8 @@ class Contacts extends Component {
 		} = this.props;
 
 		const contactWindowHeight = windowHeight - 76;
-		const contactWindowVerticalHeight = contactWindowHeight.toString() + "px";
+		const contactWindowVerticalHeight =
+			contactWindowHeight.toString() + "px";
 		document.documentElement.style.setProperty(
 			`--contact-window-vertical-height`,
 			contactWindowVerticalHeight
@@ -73,16 +74,17 @@ class Contacts extends Component {
 								style={{
 									backgroundColor: colorTheme.keyText8Color,
 									color: colorTheme.text1Color,
-									boxShadow: "0 0 0 1px " + colorTheme.keyText8Color
+									boxShadow:
+										"0 0 0 1px " + colorTheme.keyText8Color
 								}}
 								offset={[22, -15]} // [lower, right]
 							>
-								<Button
+								<a
+									className="contacts-anchor"
 									style={{
 										borderColor: borderColor,
 										background: background,
 										color: color,
-										height: "44px",
 										width: buttonWidth
 									}}
 									onClick={e =>
@@ -97,7 +99,7 @@ class Contacts extends Component {
 								>
 									{contactName}
 									{this.renderOnline(contact.isOnline)}
-								</Button>
+								</a>
 							</Badge>
 						</List.Item>
 					);
@@ -113,7 +115,6 @@ class Contacts extends Component {
 			<Content
 				style={{
 					textAlign: "center",
-					padding: "0px 0px 0px", // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
@@ -173,4 +174,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contacts);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Contacts);

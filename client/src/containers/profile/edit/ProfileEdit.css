@@ -1,5 +1,17 @@
-/* .ant-select-selection {
-  border-color: var(--text3Color);
-  background-color: var(--text3Color);
-  color: var(--text2Color);
-} */
+.profile-edit-anchor {
+	font-family: "Overpass";
+	line-height: 40px;
+	display: inline-block;
+	text-align: center;
+	padding: 0px 14px;
+	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+	border-radius: 4px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.profile-edit-anchor:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+	cursor: pointer;
+}

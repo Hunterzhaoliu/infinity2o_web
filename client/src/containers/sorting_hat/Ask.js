@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as askActionCreators from "../../actions/sorting_hat/ask";
 import { bindActionCreators } from "redux";
-import { Row, Col, Button, Icon, Modal } from "antd";
+import { Row, Col, Icon, Modal } from "antd";
 import ErrorMessage from "./ErrorMessage";
 import "./Ask.css";
 
@@ -140,17 +140,17 @@ class Ask extends Component {
 					lg={{ offset: displayRemoveAnswerButtonOffset }}
 					xl={{ offset: displayRemoveAnswerButtonOffset }}
 				>
-					<Button
+					<a
+						className="ask-anchor"
 						style={{
 							borderColor: colorTheme.keyText7Color,
 							background: colorTheme.keyText7Color,
-							color: colorTheme.text2Color,
-							fontSize: "16px"
+							color: colorTheme.text2Color
 						}}
 						onClick={onClickRemoveAnswer}
 					>
 						Remove Answer
-					</Button>
+					</a>
 				</Col>
 			);
 		} else {
@@ -163,17 +163,17 @@ class Ask extends Component {
 		if (ask.displayAddAnswerButton) {
 			return (
 				<Col xl={{ offset: 4 }}>
-					<Button
+					<a
+						className="ask-anchor"
 						style={{
 							borderColor: colorTheme.keyText7Color,
 							background: colorTheme.keyText7Color,
-							color: colorTheme.text2Color,
-							fontSize: "16px"
+							color: colorTheme.text2Color
 						}}
 						onClick={onClickAddAnswer}
 					>
 						Add Answer
-					</Button>
+					</a>
 				</Col>
 			);
 		} else {
@@ -269,19 +269,19 @@ class Ask extends Component {
 					}}
 				>
 					<Col xl={{ offset: 4, span: 15 }}>
-						<Button
+						<a
+							className="ask-anchor"
 							style={{
 								borderColor: colorTheme.key,
 								background: colorTheme.key,
-								color: colorTheme.text1Color,
-								fontSize: "16px"
+								color: colorTheme.text1Color
 							}}
 							disabled={this.isAskDisabled(ask)}
 							onClick={() => saveAsk(ask, mongoDBUserId)}
 						>
 							Ask
 							{this.renderAskIcon(ask.save)}
-						</Button>
+						</a>
 					</Col>
 				</Row>
 			</Modal>
