@@ -14,3 +14,8 @@
 .change-theme-button:focus {
 	outline: none;
 }
+
+/* need to keep border or else size changes */
+.change-theme-button:active {
+	border-color: transparent;
+}

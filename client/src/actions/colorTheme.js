@@ -153,7 +153,7 @@ function _generateColorThemeBasedOnBackground(
 	let newText6Color = GREY_4;
 	let newText7Color = GREY_3;
 	let newText8Color = GREY_2;
-	let newText95Color = GREY_DOT_5;
+	let newText9Dot5Color = GREY_DOT_5;
 	let newKeyText1Color = colors9[colorPallateIndex].key;
 	let newKeyText2Color = colors8[colorPallateIndex].key;
 	let newKeyText3Color = colors7[colorPallateIndex].key;
@@ -177,7 +177,7 @@ function _generateColorThemeBasedOnBackground(
 		newText6Color = GREY_6;
 		newText7Color = GREY_7;
 		newText8Color = GREY_8;
-		newText95Color = GREY_9_DOT_5; //9.5
+		newText9Dot5Color = GREY_9_DOT_5; //9.5
 		newKeyText1Color = colors1[colorPallateIndex].key;
 		newKeyText2Color = colors2[colorPallateIndex].key;
 		newKeyText3Color = colors3[colorPallateIndex].key;
@@ -195,7 +195,7 @@ function _generateColorThemeBasedOnBackground(
 		keyCompliment1: newKeyCompliment1,
 		keyCompliment2: newKeyCompliment2,
 		thirdColor: newThirdColor,
-		text05Color: newText95Color,
+		textDot5Color: newText9Dot5Color,
 		text1Color: newText1Color,
 		text2Color: newText2Color,
 		text3Color: newText3Color,
