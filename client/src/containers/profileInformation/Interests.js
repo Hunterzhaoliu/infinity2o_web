@@ -44,7 +44,7 @@ class Interests extends Component {
 		if (interests !== null && interests.length > 0) {
 			return (
 				<Row
-					style={{ padding: "20px 0px 0px 0px" }}
+					style={{ padding: "15px 0px 0px 0px" }}
 					type="flex"
 					justify="start"
 					align="middle"

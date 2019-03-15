@@ -80,19 +80,26 @@ class MatchCards extends Component {
 			voteDescription = " votes";
 		}
 		return (
-			<Col>
-				<h4
-					style={{
-						color: colorTheme.keyText6Color,
-						fontFamily: "Overpass",
-						lineHeight: 1,
-						marginBottom: 0,
-						fontSize: 26
-					}}
-				>
-					{totalUserVotes} {voteDescription}
-				</h4>
-			</Col>
+			<Row
+				style={{ padding: "15px 0px 0px 0px" }}
+				type="flex"
+				justify="center"
+				align="middle"
+			>
+				<Col>
+					<h4
+						style={{
+							color: colorTheme.text4Color,
+							fontFamily: "Overpass",
+							lineHeight: 1,
+							marginBottom: 0,
+							fontSize: 20
+						}}
+					>
+						{totalUserVotes} {voteDescription}
+					</h4>
+				</Col>
+			</Row>
 		);
 	}
 
@@ -130,17 +137,16 @@ class MatchCards extends Component {
 		if (activeSection === "matches") {
 			return (
 				<Row
-					style={{ padding: "8px 0px 0px 0px" }}
+					style={{ padding: "30px 0px 0px 0px" }}
 					type="flex"
-					justify="space-between"
-					align="top"
+					justify="center"
 				>
-					<Col span={11}>
+					<Col>
 						<a
 							className="match-cards-anchor"
 							style={{
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
+								borderColor: colorTheme.backgroundColor,
+								background: colorTheme.backgroundColor,
 								color: colorTheme.text2Color
 							}}
 							onClick={e => this.onNextMatch()}
@@ -148,7 +154,7 @@ class MatchCards extends Component {
 							Next
 						</a>
 					</Col>
-					<Col span={11}>
+					<Col xl={{ offset: 4 }}>
 						<a
 							className="match-cards-anchor"
 							style={{
@@ -183,7 +189,7 @@ class MatchCards extends Component {
 					borderColor: colorTheme.textDot5Color,
 					background: colorTheme.textDot5Color
 				}}
-				bodyStyle={{ padding: "0px" }} // padding around inside border of card
+				bodyStyle={{ padding: "0px 0px 60px 0px" }} // padding around inside border of card
 			>
 				{this.renderMatchPicture(match.imageUrl, colorTheme.key)}
 
@@ -210,6 +216,8 @@ class MatchCards extends Component {
 					<LinkedIn value={match.linkedInPublicProfileUrl} />
 					<Github value={match.githubPublicProfileUrl} />
 				</Row>
+
+				{this.renderMatchTotalVotes(match.totalUserVotes)}
 				<Row
 					style={{ padding: "0px 0px 0px 20px" }}
 					type="flex"
@@ -217,13 +225,6 @@ class MatchCards extends Component {
 					align="middle"
 				>
 					<Col>
-						<Row type="flex" justify="center" align="middle">
-							<Col>
-								{this.renderMatchTotalVotes(
-									match.totalUserVotes
-								)}
-							</Col>
-						</Row>
 						<Interests interests={match.interests} />
 						<TimeZone value={match.timeZone} />
 					</Col>

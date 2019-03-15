@@ -163,8 +163,7 @@ class Matches extends Component {
 								marginBottom: 0
 							}}
 						>
-							Sorting Hat finds your best 2 matches every day at 9
-							AM CST
+							Best 2 Matches. Every Single Day. At 9 AM.
 						</h2>
 					</Col>
 				</Row>
@@ -172,7 +171,7 @@ class Matches extends Component {
 					type="flex"
 					justify="center"
 					align="top"
-					style={{ padding: "60px 0px 0px 0px" }}
+					style={{ padding: "45px 0px 0px 0px" }}
 				>
 					{this.renderMatches()}
 				</Row>
