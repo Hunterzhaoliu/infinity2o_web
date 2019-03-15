@@ -20,7 +20,7 @@ let initialState = {
 	keyCompliment1: null,
 	keyCompliment2: null,
 	thirdColor: null,
-	text05Color: null,
+	textDot5Color: null,
 	text1Color: null,
 	text2Color: null,
 	text3Color: null,
@@ -143,7 +143,7 @@ function _updateColorTheme(newState, action) {
 	newState.keyCompliment1 = action.keyCompliment1;
 	newState.keyCompliment2 = action.keyCompliment2;
 	newState.thirdColor = action.thirdColor;
-	newState.text05Color = action.text05Color;
+	newState.textDot5Color = action.textDot5Color;
 	newState.text1Color = action.text1Color;
 	newState.text2Color = action.text2Color;
 	newState.text3Color = action.text3Color;

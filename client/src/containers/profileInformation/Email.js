@@ -8,7 +8,7 @@ class Email extends Component {
 		const { email } = this.props;
 		return (
 			<Row
-				style={{ padding: "20px 0px 0px 20px" }}
+				style={{ padding: "15px 0px 0px 0px" }}
 				type="flex"
 				justify="start"
 				align="middle"
