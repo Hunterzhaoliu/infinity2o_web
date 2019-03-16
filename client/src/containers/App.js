@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as authActionCreators from "../actions/auth";
 import { bindActionCreators } from "redux";
 
-import CustomSider from "./landing/CustomSider";
+import CustomMenu from "./landing/CustomMenu";
 import CustomHeader from "./landing/CustomHeader";
 import Landing from "./landing/Landing";
 import Tour from "./help/Tour";
@@ -31,7 +31,7 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<Layout>
-					<CustomSider />
+					<CustomMenu />
 					<Layout style={{ height: "100vh" }}>
 						<CustomHeader />
 						<Route exact={true} path="/" component={Landing} />

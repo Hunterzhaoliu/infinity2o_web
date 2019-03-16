@@ -1,4 +1,4 @@
-import { UPDATE_WINDOW_DIMENSIONS, TOGGLE_SIDER } from "./types";
+import { UPDATE_WINDOW_DIMENSIONS, TOGGLE_MENU } from "./types";
 
 export const updateWindowDimensions = (
 	newWindowWidth,
@@ -11,8 +11,8 @@ export const updateWindowDimensions = (
 	});
 };
 
-export const toggleSider = () => dispatch => {
+export const toggleMenu = () => dispatch => {
 	dispatch({
-		type: TOGGLE_SIDER
+		type: TOGGLE_MENU
 	});
 };

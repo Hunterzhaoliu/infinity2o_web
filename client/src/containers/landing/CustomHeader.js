@@ -11,7 +11,7 @@ import ConversationButton from "../navigationButtons/ConversationButton";
 import LogoutButton from "../navigationButtons/LogoutButton";
 import LoginButtons from "./LoginButtons";
 import { GREY_9, GREY_1 } from "../styles/ColorConstants";
-import { Layout, Row, Col, Icon } from "antd";
+import { Layout, Row, Col } from "antd";
 const { Header } = Layout;
 
 class CustomHeader extends Component {
@@ -82,35 +82,14 @@ class CustomHeader extends Component {
 	}
 
 	renderHeaderButtons() {
-		const {
-			colorTheme,
-			loggedInState,
-			windowWidth,
-			siderDisplay,
-			toggleSider
-		} = this.props;
+		const { loggedInState, windowWidth, toggleMenu } = this.props;
 
 		if (windowWidth < 768 && loggedInState === "logged_in") {
-			// show a menu with buttons instead of nav bar
-			let siderIcon;
-			if (siderDisplay === false) {
-				siderIcon = "menu-unfold";
-			} else {
-				siderIcon = "menu-fold";
-			}
-
 			return (
 				<Row type="flex" justify="start">
-					<Col key="0">
-						<a
-							style={{
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text2Color
-							}}
-							onClick={toggleSider}
-						>
-							<Icon type={siderIcon} />
+					<Col>
+						<a onClick={toggleMenu}>
+							<ChangeThemeButton />
 						</a>
 					</Col>
 				</Row>
@@ -174,7 +153,7 @@ function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
 		windowWidth: state.customHeader.windowWidth,
-		siderDisplay: state.customHeader.siderDisplay,
+		menuIsDisplayed: state.customHeader.menuIsDisplayed,
 		loggedInState: state.auth.loggedInState
 	};
 }
@@ -195,8 +174,8 @@ function mapDispatchToProps(dispatch) {
 				newWindowHeight
 			);
 		},
-		toggleSider: () => {
-			customHeaderDispatchers.toggleSider();
+		toggleMenu: () => {
+			customHeaderDispatchers.toggleMenu();
 		}
 	};
 }
