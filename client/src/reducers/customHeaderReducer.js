@@ -1,4 +1,4 @@
-import { UPDATE_WINDOW_DIMENSIONS, TOGGLE_SIDER } from "../actions/types";
+import { UPDATE_WINDOW_DIMENSIONS, TOGGLE_MENU } from "../actions/types";
 
 let cloneObject = obj => {
 	return JSON.parse(JSON.stringify(obj));
@@ -7,7 +7,7 @@ let cloneObject = obj => {
 let initialState = {
 	windowWidth: null,
 	windowHeight: null,
-	siderDisplay: false
+	menuIsDisplayed: false
 };
 
 export default function(state = initialState, action) {
@@ -17,8 +17,8 @@ export default function(state = initialState, action) {
 			newState.windowWidth = action.newWindowWidth;
 			newState.windowHeight = action.newWindowHeight;
 			return newState;
-		case TOGGLE_SIDER:
-			newState.siderDisplay = !state.siderDisplay;
+		case TOGGLE_MENU:
+			newState.menuIsDisplayed = !state.menuIsDisplayed;
 			return newState;
 		default:
 			return state;
