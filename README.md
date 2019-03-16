@@ -44,6 +44,10 @@
 
 1.  Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 
+### Google Domains
+
+1.  Login with `hunterzhaoliu@gmail.com`
+
 ### Godaddy.com login:
 
 1.  Login with `q42liu@gmail.com` & password = `49xxxxxx@wxxxxx`
