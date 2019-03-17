@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Layout } from "antd";
+import { Layout, Row, Col } from "antd";
 import TourButton from "../navigationButtons/TourButton";
 import ProfileButton from "../navigationButtons/ProfileButton";
 import SortingHatButton from "../navigationButtons/SortingHatButton";
@@ -21,12 +21,36 @@ class CustomMenu extends Component {
 						background: colorTheme.text8Color
 					}}
 				>
-					<TourButton />
-					<ProfileButton />
-					<SortingHatButton />
-					<MatchesButton />
-					<ConversationButton />
-					<LogoutButton />
+					<Row type="flex" justify="center">
+						<Col>
+							<TourButton />
+						</Col>
+					</Row>
+					<Row type="flex" justify="center">
+						<Col>
+							<ProfileButton />
+						</Col>
+					</Row>
+					<Row type="flex" justify="center">
+						<Col>
+							<SortingHatButton />
+						</Col>
+					</Row>
+					<Row type="flex" justify="center">
+						<Col>
+							<MatchesButton />
+						</Col>
+					</Row>
+					<Row type="flex" justify="center">
+						<Col>
+							<ConversationButton />
+						</Col>
+					</Row>
+					<Row type="flex" justify="center">
+						<Col>
+							<LogoutButton />
+						</Col>
+					</Row>
 				</Content>
 			);
 		} else {
