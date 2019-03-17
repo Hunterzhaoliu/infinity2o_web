@@ -1,28 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col } from "antd";
 import "./general-header-button.css";
 
 class ProfileButton extends Component {
 	render() {
 		const { colorTheme } = this.props;
 		return (
-			<Col style={{ padding: "0px 0px 0px 10px" }}>
-				<a className="header-anchor" href="/profile">
-					<button
-						className="general-header-button"
-						style={{
-							boxShadow:
-								"0px -3px 0px 0px " +
-								colorTheme.profileButtonColor +
-								" inset",
-							color: colorTheme.profileButtonTextColor
-						}}
-					>
-						Profile
-					</button>
-				</a>
-			</Col>
+			<a className="header-anchor" href="/profile">
+				<button
+					className="general-header-button"
+					style={{
+						boxShadow:
+							"0px -3px 0px 0px " +
+							colorTheme.profileButtonColor +
+							" inset",
+						color: colorTheme.profileButtonTextColor
+					}}
+				>
+					Profile
+				</button>
+			</a>
 		);
 	}
 }

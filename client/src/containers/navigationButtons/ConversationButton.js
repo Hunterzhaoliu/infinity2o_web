@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Badge, Col } from "antd";
+import { Badge } from "antd";
 import "./general-header-button.css";
 
 class ConversationButton extends Component {
@@ -8,43 +8,39 @@ class ConversationButton extends Component {
 		const { colorTheme, totalNumberOfUnseenMessages } = this.props;
 
 		return (
-			<Col style={{ padding: "0px 0px 0px 10px" }}>
-				<a className="header-anchor" href="/conversations">
-					<button
-						className="general-header-button"
+			<a className="header-anchor" href="/conversations">
+				<button
+					className="general-header-button"
+					style={{
+						boxShadow:
+							"0px -3px 0px 0px " +
+							colorTheme.conversationsButtonColor +
+							" inset"
+					}}
+				>
+					<Badge
+						count={totalNumberOfUnseenMessages}
 						style={{
-							boxShadow:
-								"0px -3px 0px 0px " +
-								colorTheme.conversationsButtonColor +
-								" inset"
+							backgroundColor: colorTheme.keyText8Color,
+							color: colorTheme.text5Color,
+							boxShadow: "0 0 0 1px " + colorTheme.keyText8Color,
+							fontFamily: "Overpass",
+							fontSize: "12px",
+							top: "-20px",
+							right: "-30px"
 						}}
 					>
-						<Badge
-							count={totalNumberOfUnseenMessages}
+						<div
+							className="header-badge-div"
 							style={{
-								backgroundColor: colorTheme.keyText8Color,
-								color: colorTheme.text5Color,
-								boxShadow:
-									"0 0 0 1px " + colorTheme.keyText8Color,
-								fontFamily: "Overpass",
-								fontSize: "12px",
-								top: "-20px",
-								right: "-30px"
+								color: colorTheme.conversationsButtonTextColor
 							}}
 						>
-							<div
-								className="header-badge-div"
-								style={{
-									color:
-										colorTheme.conversationsButtonTextColor
-								}}
-							>
-								Conversations
-							</div>
-						</Badge>
-					</button>
-				</a>
-			</Col>
+							Conversations
+						</div>
+					</Badge>
+				</button>
+			</a>
 		);
 	}
 }

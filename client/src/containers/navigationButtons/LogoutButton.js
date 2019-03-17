@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col } from "antd";
 import "./general-header-button.css";
 
 class LogoutButton extends Component {
@@ -8,16 +7,14 @@ class LogoutButton extends Component {
 		const { colorTheme } = this.props;
 
 		return (
-			<Col>
-				<a className="header-anchor" href="/api/logout">
-					<button
-						className="general-header-button"
-						style={{ color: colorTheme.text6Color }}
-					>
-						Logout
-					</button>
-				</a>
-			</Col>
+			<a className="header-anchor" href="/api/logout">
+				<button
+					className="general-header-button"
+					style={{ color: colorTheme.text6Color }}
+				>
+					Logout
+				</button>
+			</a>
 		);
 	}
 }

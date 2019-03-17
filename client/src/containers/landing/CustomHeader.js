@@ -101,12 +101,25 @@ class CustomHeader extends Component {
 				<Row type="flex" justify="center" align="middle">
 					<Col md={{ span: 20 }} lg={{ span: 20 }} xl={{ span: 20 }}>
 						<Row type="flex" align="middle">
-							<ChangeThemeButton />
-							<TourButton />
-							<ProfileButton />
-							<SortingHatButton />
-							<MatchesButton />
-							<ConversationButton />
+							<Col>
+								<ChangeThemeButton />
+							</Col>
+							<Col xl={{ offset: 2 }} />
+							<Col style={{ padding: "0px 0px 0px 10px" }}>
+								<TourButton />
+							</Col>
+							<Col style={{ padding: "0px 0px 0px 10px" }}>
+								<ProfileButton />
+							</Col>
+							<Col style={{ padding: "0px 0px 0px 10px" }}>
+								<SortingHatButton />
+							</Col>
+							<Col style={{ padding: "0px 0px 0px 10px" }}>
+								<MatchesButton />
+							</Col>
+							<Col style={{ padding: "0px 0px 0px 10px" }}>
+								<ConversationButton />
+							</Col>
 						</Row>
 					</Col>
 					<LogoutButton />
