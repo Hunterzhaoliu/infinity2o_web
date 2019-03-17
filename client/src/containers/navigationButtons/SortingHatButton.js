@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col } from "antd";
 import "./general-header-button.css";
 
 class SortingHatButton extends Component {
@@ -8,22 +7,20 @@ class SortingHatButton extends Component {
 		const { colorTheme } = this.props;
 
 		return (
-			<Col style={{ padding: "0px 0px 0px 10px" }}>
-				<a className="header-anchor" href="/sorting_hat">
-					<button
-						className="general-header-button"
-						style={{
-							boxShadow:
-								"0px -3px 0px 0px " +
-								colorTheme.sortingHatButtonColor +
-								" inset",
-							color: colorTheme.sortingHatButtonTextColor
-						}}
-					>
-						Sorting Hat
-					</button>
-				</a>
-			</Col>
+			<a className="header-anchor" href="/sorting_hat">
+				<button
+					className="general-header-button"
+					style={{
+						boxShadow:
+							"0px -3px 0px 0px " +
+							colorTheme.sortingHatButtonColor +
+							" inset",
+						color: colorTheme.sortingHatButtonTextColor
+					}}
+				>
+					Sorting Hat
+				</button>
+			</a>
 		);
 	}
 }

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col } from "antd";
 import "./general-header-button.css";
 
 class TourButton extends Component {
@@ -8,22 +7,20 @@ class TourButton extends Component {
 		const { colorTheme } = this.props;
 
 		return (
-			<Col md={{ offset: 1 }} lg={{ offset: 3 }} xl={{ offset: 2 }}>
-				<a className="header-anchor" href="/tour">
-					<button
-						className="general-header-button"
-						style={{
-							boxShadow:
-								"0px -3px 0px 0px " +
-								colorTheme.tourButtonColor +
-								" inset",
-							color: colorTheme.tourButtonTextColor
-						}}
-					>
-						Tour
-					</button>
-				</a>
-			</Col>
+			<a className="header-anchor" href="/tour">
+				<button
+					className="general-header-button"
+					style={{
+						boxShadow:
+							"0px -3px 0px 0px " +
+							colorTheme.tourButtonColor +
+							" inset",
+						color: colorTheme.tourButtonTextColor
+					}}
+				>
+					Tour
+				</button>
+			</a>
 		);
 	}
 }
