@@ -4,6 +4,7 @@
 	border-radius: 0;
 	padding: 0px 16px;
 	height: 60px;
+	border: none;
 }
 
 .change-theme-button:hover {
@@ -13,9 +14,4 @@
 
 .change-theme-button:focus {
 	outline: none;
-}
-
-/* need to keep border or else size changes */
-.change-theme-button:active {
-	border-color: transparent;
 }
