@@ -98,9 +98,9 @@ class CustomHeader extends Component {
 			return this.renderNotLoggedInHeaderButtons(windowWidth);
 		} else if (loggedInState === "logged_in") {
 			return (
-				<Row type="flex" justify="center" align="middle">
+				<Row type="flex" justify="center" align="top">
 					<Col md={{ span: 20 }} lg={{ span: 20 }} xl={{ span: 20 }}>
-						<Row type="flex" align="middle">
+						<Row type="flex" align="top">
 							<Col>
 								<ChangeThemeButton />
 							</Col>
@@ -122,7 +122,9 @@ class CustomHeader extends Component {
 							</Col>
 						</Row>
 					</Col>
-					<LogoutButton />
+					<Col>
+						<LogoutButton />
+					</Col>
 				</Row>
 			);
 		}
@@ -145,7 +147,7 @@ class CustomHeader extends Component {
 				style={{
 					background: headerBackground,
 					position: "fixed",
-					zIndex: 1, // make every component display under the header
+					zIndex: 2, // make every component display under the header
 					width: "100%",
 					height: "60px",
 					lineHeight: "60px",
