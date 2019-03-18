@@ -31,9 +31,9 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<Layout>
-					<CustomMenu />
 					<Layout style={{ height: "100vh" }}>
 						<CustomHeader />
+						<CustomMenu />
 						<Route exact={true} path="/" component={Landing} />
 						<Route exact={true} path="/tour" component={Tour} />
 						<Route

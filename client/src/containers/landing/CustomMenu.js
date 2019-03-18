@@ -18,7 +18,12 @@ class CustomMenu extends Component {
 				<Content
 					style={{
 						borderColor: colorTheme.text8Color,
-						background: colorTheme.text8Color
+						background: colorTheme.text8Color,
+						padding: "60px 0px 0px 0px",
+						position: "fixed",
+						width: "100%",
+						height: "100%",
+						zIndex: 1
 					}}
 				>
 					<Row type="flex" justify="center">
