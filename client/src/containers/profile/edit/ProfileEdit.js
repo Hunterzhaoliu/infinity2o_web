@@ -60,18 +60,10 @@ class ProfileEdit extends Component {
 
 		return (
 			<div>
-				<Row
-					type="flex"
-					justify="start"
-					align="middle"
-					style={{
-						padding: "0% 0% 0%" // top left&right bottom
-					}}
-				>
-					<Col span={24}>
+				<Row type="flex" justify="start" align="middle">
+					<Col>
 						<InputField
 							value={profile.name}
-							width={280}
 							label="Name:"
 							errorMessage="Cool name! But we need 1 to 30 valid letters"
 							hasError={profile.hasNameError}
@@ -84,13 +76,12 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: "1% 0% 0%" // top left&right bottom
+						padding: "30px 0px 0px 0px"
 					}}
 				>
-					<Col span={24}>
+					<Col>
 						<InputField
 							value={profile.email}
-							width={280}
 							label="E-mail:"
 							errorMessage="Invalid e-mail format"
 							hasError={profile.hasEmailError}
@@ -103,10 +94,10 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: "1% 0% 0%" // top left&right bottom
+						padding: "30px 0px 0px 0px"
 					}}
 				>
-					<Col span={24}>
+					<Col>
 						<InputFieldNumber width={48} label="Age:" />
 					</Col>
 				</Row>
@@ -115,11 +106,11 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: "1% 0% 0%" // top left&right bottom
+						padding: "30px 0px 0px 0px"
 					}}
 				>
-					<Col span={24}>
-						<InputInterests width={280} label="Interest(s):" />
+					<Col>
+						<InputInterests label="Interest(s):" />
 					</Col>
 				</Row>
 				<Row
@@ -127,13 +118,12 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: "1% 0% 0%" // top left&right bottom
+						padding: "30px 0px 0px 0px"
 					}}
 				>
-					<Col span={24}>
+					<Col>
 						<InputField
 							value={profile.linkedInPublicProfileUrl}
-							width={280}
 							label="LinkedIn:"
 							errorMessage="Invalid LinkedIn link. Needs to start with http:// or https://"
 							hasError={profile.hasLinkedInPublicProfileUrlError}
@@ -146,13 +136,12 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: "1% 0% 0%" // top left&right bottom
+						padding: "30px 0px 0px 0px"
 					}}
 				>
-					<Col span={24}>
+					<Col>
 						<InputField
 							value={profile.githubPublicProfileUrl}
-							width={280}
 							label="Github:"
 							errorMessage="Invalid github link. Needs to start with http:// or https://"
 							hasError={profile.hasGithubPublicProfileUrlError}
@@ -165,11 +154,11 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: "1% 0% 0%" // top left&right bottom
+						padding: "30px 0px 0px 0px"
 					}}
 				>
-					<Col span={24}>
-						<InputTimeZone width={280} label="Time Zone:" />
+					<Col>
+						<InputTimeZone label="Time Zone:" />
 					</Col>
 				</Row>
 				<Row
@@ -177,10 +166,10 @@ class ProfileEdit extends Component {
 					justify="start"
 					align="middle"
 					style={{
-						padding: "2% 0% 0%" // top left&right bottom
+						padding: "30px 0px 0px 0px"
 					}}
 				>
-					<Col span={24}>
+					<Col>
 						<InputSchedule />
 					</Col>
 				</Row>
@@ -188,10 +177,10 @@ class ProfileEdit extends Component {
 					type="flex"
 					justify="start"
 					style={{
-						padding: "5% 0% 0%" // top left&right bottom
+						padding: "30px 0px 0px 0px"
 					}}
 				>
-					<Col span={24}>
+					<Col>
 						<a
 							className="profile-edit-anchor"
 							style={{
@@ -215,24 +204,18 @@ class ProfileEdit extends Component {
 		return (
 			<Content
 				style={{
-					padding: "75px 50px 0px", // top left&right bottom
+					padding: "120px 0px 0px", // top left&right bottom
 					background: colorTheme.backgroundColor
 				}}
 			>
 				<Row type="flex" justify="start" align="middle">
-					<Col xl={{ span: 5 }} />
-					<Col xl={{ span: 14 }}>{this.renderContent()}</Col>
-					<Col xl={{ span: 5 }} />
+					<Col xl={{ offset: 5 }}>{this.renderContent()}</Col>
 				</Row>
 			</Content>
 		);
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
@@ -240,10 +223,6 @@ function mapStateToProps(state) {
 	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
 function mapDispatchToProps(dispatch) {
 	const profileDispatchers = bindActionCreators(
 		profileActionCreators,

@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Input, Row, Col } from 'antd';
-import ErrorMessage from './ErrorMessage';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Row, Col } from "antd";
+import ErrorMessage from "./ErrorMessage";
+import "./input-field.css";
 
 class InputField extends Component {
 	onModify = e => {
@@ -10,43 +11,30 @@ class InputField extends Component {
 	};
 
 	render() {
-		const {
-			value,
-			colorTheme,
-			label,
-			width,
-			errorMessage,
-			hasError
-		} = this.props;
+		const { value, colorTheme, label, errorMessage, hasError } = this.props;
 
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col
-						sm={{ span: 6 }}
-						md={{ span: 6 }}
-						lg={{ span: 6 }}
-						xl={{ span: 4 }}
-					>
-						<h3
+					<Col xl={{ span: 6 }}>
+						<h4
 							style={{
-								color: colorTheme.text4Color
+								color: colorTheme.text4Color,
+								fontFamily: "Overpass",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: "20px"
 							}}
 						>
 							{label}
-						</h3>
+						</h4>
 					</Col>
-					<Col
-						sm={{ span: 16, offset: 1 }}
-						md={{ span: 17, offset: 1 }}
-						lg={{ span: 17, offset: 1 }}
-						xl={{ span: 19, offset: 1 }}
-					>
-						<Input
+					<Col xl={{ offset: 1 }}>
+						<input
+							className="input-field-input"
 							value={value}
 							onChange={this.onModify}
 							style={{
-								width: width,
 								color: colorTheme.text2Color,
 								borderColor: colorTheme.text8Color,
 								backgroundColor: colorTheme.text8Color
@@ -71,4 +59,7 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, null)(InputField);
+export default connect(
+	mapStateToProps,
+	null
+)(InputField);
