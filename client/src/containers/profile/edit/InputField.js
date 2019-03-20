@@ -16,7 +16,7 @@ class InputField extends Component {
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col xl={{ span: 6 }}>
+					<Col>
 						<h4
 							style={{
 								color: colorTheme.text4Color,
@@ -29,7 +29,7 @@ class InputField extends Component {
 							{label}
 						</h4>
 					</Col>
-					<Col xl={{ offset: 1 }}>
+					<Col style={{ padding: "0px 0px 0px 30px" }}>
 						<input
 							className="input-field-input"
 							value={value}
