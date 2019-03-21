@@ -13,6 +13,18 @@ import "./ProfileEdit.css";
 
 const { Content } = Layout;
 
+/*
+
+<Col>
+    <InputField
+        value={profile.name}
+        label="Name:"
+        errorMessage="Cool name! But we need 1 to 30 valid letters"
+        hasError={profile.hasNameError}
+        onChange={onChangeName}
+    />
+</Col>
+*/
 class ProfileEdit extends Component {
 	componentWillMount() {
 		// run once before first render()
@@ -62,12 +74,28 @@ class ProfileEdit extends Component {
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col>
-						<InputField
+						<h4
+							style={{
+								color: colorTheme.text4Color,
+								fontFamily: "Overpass",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: "20px"
+							}}
+						>
+							Name:
+						</h4>
+					</Col>
+					<Col xl={{ offset: 2 }}>
+						<input
+							className="input-field-input"
 							value={profile.name}
-							label="Name:"
-							errorMessage="Cool name! But we need 1 to 30 valid letters"
-							hasError={profile.hasNameError}
-							onChange={onChangeName}
+							onChange={this.onModify}
+							style={{
+								color: colorTheme.text2Color,
+								borderColor: colorTheme.text8Color,
+								backgroundColor: colorTheme.text8Color
+							}}
 						/>
 					</Col>
 				</Row>
