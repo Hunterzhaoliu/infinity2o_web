@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
 import ErrorMessage from "./ErrorMessage";
-import "./input-field.css";
+// import "./input-field.css";
 
 class InputField extends Component {
 	onModify = e => {
@@ -29,7 +29,7 @@ class InputField extends Component {
 							{label}
 						</h4>
 					</Col>
-					<Col style={{ padding: "0px 0px 0px 30px" }}>
+					<Col xl={{ offset: 2 }}>
 						<input
 							className="input-field-input"
 							value={value}
