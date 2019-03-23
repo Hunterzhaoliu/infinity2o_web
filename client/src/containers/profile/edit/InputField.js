@@ -14,7 +14,7 @@ class InputField extends Component {
 		const { value, colorTheme, label, errorMessage, hasError } = this.props;
 
 		return (
-			<div>
+			<Col>
 				<Row type="flex" justify="start" align="middle">
 					<Col>
 						<h4
@@ -43,7 +43,7 @@ class InputField extends Component {
 					</Col>
 				</Row>
 				<ErrorMessage message={errorMessage} hasError={hasError} />
-			</div>
+			</Col>
 		);
 	}
 }
