@@ -11,17 +11,7 @@ import InputTimeZone from "./timeZone/InputTimeZone";
 import { Layout, Row, Col, Icon } from "antd";
 import "./ProfileEdit.css";
 
-import ErrorMessage from "./ErrorMessage.js";
-
 const { Content } = Layout;
-
-// <InputField
-//     value={profile.name}
-//     label="Name:"
-//     errorMessage="Cool name! But we need 1 to 30 valid letters"
-//     hasError={profile.hasNameError}
-//     onChange={onChangeName}
-// />
 
 class ProfileEdit extends Component {
 	componentWillMount() {
@@ -71,56 +61,31 @@ class ProfileEdit extends Component {
 		return (
 			<Row type="flex" justify="start" align="middle">
 				<Col xl={{ offset: 5 }}>
-					<Row type="flex" justify="start" align="middle">
-						<Col>
-							<h4
-								style={{
-									color: colorTheme.text4Color,
-									fontFamily: "Overpass",
-									lineHeight: 1,
-									marginBottom: 0,
-									fontSize: "20px"
-								}}
-							>
-								Name:
-							</h4>
-						</Col>
-						<Col xl={{ offset: 2 }}>
-							<input
-								className="input-field-input"
-								value={profile.name}
-								onChange={this.onModify}
-								style={{
-									color: colorTheme.text2Color,
-									borderColor: colorTheme.text8Color,
-									backgroundColor: colorTheme.text8Color
-								}}
-							/>
-						</Col>
-						<ErrorMessage message={"error"} hasError={false} />
-					</Row>
+					<InputField
+						value={profile.name}
+						label="Name:"
+						errorMessage="Cool name! But we need 1 to 30 valid letters"
+						hasError={profile.hasNameError}
+						onChange={onChangeName}
+					/>
 					<Row
-						type="flex"
-						justify="start"
-						align="middle"
 						style={{
-							padding: "30px 0px 0px 0px"
+							height: "11px"
 						}}
-					>
-						<InputField
-							value={profile.email}
-							label="E-mail:"
-							errorMessage="Invalid e-mail format"
-							hasError={profile.hasEmailError}
-							onChange={onChangeEmail}
-						/>
-					</Row>
+					/>
+					<InputField
+						value={profile.email}
+						label="E-mail:"
+						errorMessage="Invalid e-mail format"
+						hasError={profile.hasEmailError}
+						onChange={onChangeEmail}
+					/>
 					<Row
 						type="flex"
 						justify="start"
 						align="middle"
 						style={{
-							padding: "30px 0px 0px 0px"
+							padding: "11px 0px 0px 0px"
 						}}
 					>
 						<Col>
