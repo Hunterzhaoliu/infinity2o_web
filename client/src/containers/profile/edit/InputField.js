@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
 import ErrorMessage from "./ErrorMessage";
-// import "./input-field.css";
+import "./input-field.css";
 
 class InputField extends Component {
 	onModify = e => {
@@ -14,9 +14,9 @@ class InputField extends Component {
 		const { value, colorTheme, label, errorMessage, hasError } = this.props;
 
 		return (
-			<Col>
+			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col>
+					<Col xl={{ span: 2 }}>
 						<h4
 							style={{
 								color: colorTheme.text4Color,
@@ -29,7 +29,7 @@ class InputField extends Component {
 							{label}
 						</h4>
 					</Col>
-					<Col xl={{ offset: 2 }}>
+					<Col xl={{ offset: 1 }}>
 						<input
 							className="input-field-input"
 							value={value}
@@ -43,7 +43,7 @@ class InputField extends Component {
 					</Col>
 				</Row>
 				<ErrorMessage message={errorMessage} hasError={hasError} />
-			</Col>
+			</div>
 		);
 	}
 }

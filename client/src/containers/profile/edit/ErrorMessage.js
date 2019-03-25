@@ -13,12 +13,21 @@ class ErrorMessage extends Component {
 	render() {
 		const { colorTheme, message, hasError } = this.props;
 		return (
-			<Row type="flex" justify="start" align="middle">
+			<Row
+				style={{ padding: "5px 0px 0px 0px" }}
+				type="flex"
+				justify="start"
+				align="middle"
+			>
 				<Col>
 					<div
 						style={{
-							marginBottom: "10px",
-							color: colorTheme.keyText1Color
+							color: colorTheme.keyText1Color,
+							lineHeight: 1,
+							fontFamily: "Overpass",
+							marginBottom: 0,
+							fontSize: "14px",
+							height: "14px"
 						}}
 					>
 						{this.renderMessage(hasError, message)}
