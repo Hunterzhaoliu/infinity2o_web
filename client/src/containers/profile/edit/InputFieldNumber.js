@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import * as profileActionCreators from '../../../actions/profile/profile';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Input, Row, Col } from 'antd';
-import ErrorMessage from './ErrorMessage';
+import React, { Component } from "react";
+import * as profileActionCreators from "../../../actions/profile/profile";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Row, Col } from "antd";
+import ErrorMessage from "./ErrorMessage";
+import "./input-field.css";
 
 class InputFieldNumber extends Component {
 	onChangeAge = e => {
@@ -11,17 +12,11 @@ class InputFieldNumber extends Component {
 	};
 
 	render() {
-		//console.log('this.props in InputFieldNumber', this.props);
 		const { colorTheme, label, width, profile } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
-					<Col
-						sm={{ span: 6 }}
-						md={{ span: 6 }}
-						lg={{ span: 6 }}
-						xl={{ span: 4 }}
-					>
+					<Col xl={{ span: 2 }}>
 						<h3
 							style={{
 								color: colorTheme.text4Color
@@ -30,13 +25,9 @@ class InputFieldNumber extends Component {
 							{label}
 						</h3>
 					</Col>
-					<Col
-						sm={{ span: 16, offset: 1 }}
-						md={{ span: 17, offset: 1 }}
-						lg={{ span: 17, offset: 1 }}
-						xl={{ span: 19, offset: 1 }}
-					>
-						<Input
+					<Col xl={{ span: 5, offset: 1 }}>
+						<input
+							className="input-field"
 							value={profile.age}
 							onChange={this.onChangeAge}
 							style={{
@@ -56,11 +47,6 @@ class InputFieldNumber extends Component {
 		);
 	}
 }
-
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
 
 function mapStateToProps(state) {
 	return {
@@ -85,4 +71,7 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputFieldNumber);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(InputFieldNumber);

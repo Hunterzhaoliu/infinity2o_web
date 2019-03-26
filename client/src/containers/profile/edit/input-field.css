@@ -1,8 +1,7 @@
-.input-field-input {
+.input-field {
 	line-height: 40px;
 	box-shadow: none;
 	border-radius: 4px;
 	font-size: 16px;
 	padding: 0px 0px 0px 10px;
-	width: 250px;
 }
