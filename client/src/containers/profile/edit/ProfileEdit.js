@@ -30,8 +30,17 @@ class ProfileEdit extends Component {
 			profile.hasGithubPublicProfileUrlError ||
 			profile.hasAvailabilityError
 		) {
+			// save should be disabled
+			document.documentElement.style.setProperty(
+				`--cursor-state`,
+				"not-allowed"
+			);
 			return true;
 		} else {
+			document.documentElement.style.setProperty(
+				`--cursor-state`,
+				"pointer"
+			);
 			return false;
 		}
 	}
@@ -70,7 +79,7 @@ class ProfileEdit extends Component {
 					/>
 					<Row
 						style={{
-							height: "11px"
+							height: "41px"
 						}}
 					/>
 					<InputField
@@ -81,69 +90,41 @@ class ProfileEdit extends Component {
 						onChange={onChangeEmail}
 					/>
 					<Row
-						type="flex"
-						justify="start"
-						align="middle"
 						style={{
-							padding: "11px 0px 0px 0px"
+							height: "41px"
 						}}
-					>
-						<Col>
-							<InputFieldNumber width={48} label="Age:" />
-						</Col>
-					</Row>
+					/>
+					<InputFieldNumber width={48} label="Age:" />
 					<Row
-						type="flex"
-						justify="start"
-						align="middle"
+						style={{
+							height: "30px"
+						}}
+					/>
+					<InputInterests label="Interest(s):" />
+					<Row
+						style={{
+							height: "30px"
+						}}
+					/>
+					<InputField
+						value={profile.linkedInPublicProfileUrl}
+						label="LinkedIn:"
+						errorMessage="Invalid LinkedIn link. Needs to start with http:// or https://"
+						hasError={profile.hasLinkedInPublicProfileUrlError}
+						onChange={onChangeLinkedInPublicProfileUrl}
+					/>
+					<Row
 						style={{
 							padding: "30px 0px 0px 0px"
 						}}
-					>
-						<Col>
-							<InputInterests label="Interest(s):" />
-						</Col>
-					</Row>
-					<Row
-						type="flex"
-						justify="start"
-						align="middle"
-						style={{
-							padding: "30px 0px 0px 0px"
-						}}
-					>
-						<Col>
-							<InputField
-								value={profile.linkedInPublicProfileUrl}
-								label="LinkedIn:"
-								errorMessage="Invalid LinkedIn link. Needs to start with http:// or https://"
-								hasError={
-									profile.hasLinkedInPublicProfileUrlError
-								}
-								onChange={onChangeLinkedInPublicProfileUrl}
-							/>
-						</Col>
-					</Row>
-					<Row
-						type="flex"
-						justify="start"
-						align="middle"
-						style={{
-							padding: "30px 0px 0px 0px"
-						}}
-					>
-						<Col>
-							<InputField
-								value={profile.githubPublicProfileUrl}
-								label="Github:"
-								errorMessage="Invalid github link. Needs to start with http:// or https://"
-								hasError={
-									profile.hasGithubPublicProfileUrlError
-								}
-								onChange={onChangeGithubPublicProfileUrl}
-							/>
-						</Col>
-					</Row>
+					/>
+					<InputField
+						value={profile.githubPublicProfileUrl}
+						label="Github:"
+						errorMessage="Invalid github link. Needs to start with http:// or https://"
+						hasError={profile.hasGithubPublicProfileUrlError}
+						onChange={onChangeGithubPublicProfileUrl}
+					/>
 					<Row
 						type="flex"
 						justify="start"
@@ -176,8 +157,8 @@ class ProfileEdit extends Component {
 						}}
 					>
 						<Col>
-							<a
-								className="profile-edit-anchor"
+							<button
+								className="profile-edit-button"
 								style={{
 									borderColor: colorTheme.key,
 									background: colorTheme.key,
@@ -187,7 +168,7 @@ class ProfileEdit extends Component {
 								onClick={() => saveProfile(profile, history)}
 							>
 								Save {this.renderSaveIcon(profile.save)}
-							</a>
+							</button>
 						</Col>
 					</Row>
 				</Col>

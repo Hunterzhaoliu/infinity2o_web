@@ -29,9 +29,9 @@ class InputField extends Component {
 							{label}
 						</h4>
 					</Col>
-					<Col xl={{ offset: 1 }}>
+					<Col xl={{ offset: 1, span: 10 }}>
 						<input
-							className="input-field-input"
+							className="input-field"
 							value={value}
 							onChange={this.onModify}
 							style={{
@@ -48,10 +48,6 @@ class InputField extends Component {
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
