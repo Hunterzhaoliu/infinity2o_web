@@ -13,7 +13,7 @@
 	color: var(--text7Color);
 }
 
-input {
+.ask-input {
 	border: none;
 	background: var(--text8Color);
 	color: var(--text4Color);
@@ -24,7 +24,7 @@ input {
 	width: 100%;
 }
 
-input:focus {
+.ask-input:focus {
 	outline: none;
 }
 

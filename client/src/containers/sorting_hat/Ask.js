@@ -75,6 +75,7 @@ class Ask extends Component {
 						<Col xl={{ span: 13 }}>
 							<input
 								name={key}
+								className="ask-input"
 								onChange={this.onChangeAnswer}
 								placeholder={"Answer " + (key + 1).toString()}
 								style={{ fontSize: "20px" }}
@@ -238,6 +239,7 @@ class Ask extends Component {
 				<Row type="flex" justify="left" align="middle">
 					<Col xl={{ offset: 4, span: 15 }}>
 						<input
+							className="ask-input"
 							onChange={this.onChangeQuestion}
 							placeHolder="Question"
 							style={{ fontSize: "26px" }}
