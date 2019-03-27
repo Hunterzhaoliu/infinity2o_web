@@ -27,7 +27,7 @@ class InputFieldNumber extends Component {
 					</Col>
 					<Col xl={{ span: 5, offset: 1 }}>
 						<input
-							className="input-field"
+							className="input-field-input"
 							value={profile.age}
 							onChange={this.onChangeAge}
 							style={{
