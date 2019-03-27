@@ -5,62 +5,64 @@
 
 /* colors of entire interest box */
 .ant-select-selection {
-  border-color: var(--text8Color);
-  background-color: var(--text8Color);
-  color: var(--text2Color);
+	border-color: var(--text8Color);
+	background-color: var(--text8Color);
+	color: var(--text2Color);
 }
 
 /* color of border around interest box */
 .ant-select-selection:hover {
-  border-color: var(--text7Color);
+	border-color: var(--text7Color);
 }
 
 /* color of border around interest box when interest box is selected */
 .ant-select-open .ant-select-selection {
-  border-color: var(--text7Color);
+	border-color: var(--text7Color);
 }
 
 /* color of random little box inside of interest box */
 .ant-select-search--inline .ant-select-search__field {
-  background: var(--text8Color);
+	background: var(--text8Color);
 }
 
 /* color, backgroundColor, and border color of selected Interests */
 .ant-select-selection--multiple .ant-select-selection__choice {
-  color: var(--text1Color);
-  background-color: var(--text7Color);
-  border: 1px solid var(--text7Color);
+	color: var(--text1Color);
+	background-color: var(--text7Color);
+	border: 1px solid var(--text7Color);
 }
 
 /* controls color of remove icon */
 .ant-select-selection--multiple .ant-select-selection__choice__remove {
-  color: var(--text2Color);
-}
-
-/* color of shadow around interests selection box */
-.ant-select-dropdown {
-  /* color: red;
-  background-color: red;
-  -webkit-box-shadow: 0 2px 8px red; */
-  box-shadow: 3px 0px 10px var(--text7Color);
+	color: var(--text2Color);
 }
 
 /* color of checkMark of unselected interests */
 .ant-select-dropdown.ant-select-dropdown--multiple
-  .ant-select-dropdown-menu-item:after {
-  color: var(--text8Color);
+	.ant-select-dropdown-menu-item:after {
+	color: var(--text8Color);
 }
 
 /* color of checkMark on hovered interest */
 .ant-select-dropdown.ant-select-dropdown--multiple
-  .ant-select-dropdown-menu-item:hover:after {
-  color: var(--text3Color);
+	.ant-select-dropdown-menu-item:hover:after {
+	color: var(--text3Color);
 }
 
 /*color of checkMark of selected interest(s) */
 .ant-select-dropdown.ant-select-dropdown--multiple
-  .ant-select-dropdown-menu-item-selected:after,
+	.ant-select-dropdown-menu-item-selected:after,
 .ant-select-dropdown.ant-select-dropdown--multiple
-  .ant-select-dropdown-menu-item-selected:hover:after {
-  color: var(--text3Color);
+	.ant-select-dropdown-menu-item-selected:hover:after {
+	color: var(--text3Color);
+}
+
+.ant-select-selection:active {
+	border: transparent;
+	box-shadow: none;
+}
+
+.ant-select-selection:focus {
+	border: transparent;
+	box-shadow: none;
 }

@@ -31,7 +31,7 @@ class InputField extends Component {
 					</Col>
 					<Col xl={{ offset: 1, span: 10 }}>
 						<input
-							className="input-field"
+							className="input-field-input"
 							value={value}
 							onChange={this.onModify}
 							style={{
