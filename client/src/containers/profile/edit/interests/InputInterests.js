@@ -36,7 +36,7 @@ class InputInterests extends Component {
 	};
 
 	render() {
-		const { colorTheme, label, width, profile } = this.props;
+		const { colorTheme, profile } = this.props;
 		document.documentElement.style.setProperty(
 			`--text2Color`,
 			colorTheme.text2Color
@@ -63,15 +63,12 @@ class InputInterests extends Component {
 								color: colorTheme.text4Color
 							}}
 						>
-							{label}
+							Interest(s):
 						</h3>
 					</Col>
-					<Col xl={{ span: 10, offset: 1 }}>
+					<Col xl={{ span: 20, offset: 1 }}>
 						<Select
 							mode="multiple"
-							style={{
-								width: width
-							}}
 							value={profile.interests}
 							onChange={this.onChangeInterests}
 						>
