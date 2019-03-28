@@ -94,13 +94,13 @@ class ProfileEdit extends Component {
 							height: "41px"
 						}}
 					/>
-					<InputFieldNumber width={48} label="Age:" />
+					<InputFieldNumber label="Age:" />
 					<Row
 						style={{
 							height: "30px"
 						}}
 					/>
-					<InputInterests label="Interest(s):" />
+					<InputInterests />
 					<Row
 						style={{
 							height: "30px"
@@ -134,7 +134,7 @@ class ProfileEdit extends Component {
 						}}
 					>
 						<Col>
-							<InputTimeZone label="Time Zone:" />
+							<InputTimeZone />
 						</Col>
 					</Row>
 					<Row

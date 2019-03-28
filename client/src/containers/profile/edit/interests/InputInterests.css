@@ -1,8 +1,3 @@
-/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
-/* stylelint-disable no-duplicate-selectors */
-/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
-/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors */
-
 /* colors of entire interest box */
 .ant-select-selection {
 	border-color: var(--text8Color);
@@ -57,12 +52,21 @@
 	color: var(--text3Color);
 }
 
+.ant-select-focused .ant-select-selection {
+	box-shadow: none;
+	border-color: transparent;
+}
+
 .ant-select-selection:active {
-	border: transparent;
+	border-color: transparent;
 	box-shadow: none;
 }
 
+.ant-select:focus {
+	outline: none;
+}
+
 .ant-select-selection:focus {
-	border: transparent;
+	border-color: transparent;
 	box-shadow: none;
 }
