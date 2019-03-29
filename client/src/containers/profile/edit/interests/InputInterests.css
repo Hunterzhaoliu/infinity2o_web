@@ -70,3 +70,17 @@
 	border-color: transparent;
 	box-shadow: none;
 }
+
+.ant-select-selection--multiple {
+	min-height: 40px;
+}
+
+.ant-select-selection--multiple .ant-select-selection__rendered {
+	height: 40px;
+}
+
+.ant-select-selection--multiple .ant-select-selection__rendered > ul > li {
+	line-height: 28px;
+	height: 30px;
+	margin-top: 5px;
+}
