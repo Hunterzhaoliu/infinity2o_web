@@ -66,11 +66,12 @@ class InputInterests extends Component {
 							Interest(s):
 						</h3>
 					</Col>
-					<Col xl={{ span: 20, offset: 1 }}>
+					<Col xl={{ offset: 1 }}>
 						<Select
 							mode="multiple"
 							value={profile.interests}
 							onChange={this.onChangeInterests}
+							style={{ width: "475px" }}
 						>
 							{this.renderOptions()}
 						</Select>

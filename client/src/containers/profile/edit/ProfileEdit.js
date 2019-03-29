@@ -69,7 +69,7 @@ class ProfileEdit extends Component {
 
 		return (
 			<Row type="flex" justify="start" align="middle">
-				<Col xl={{ offset: 5 }}>
+				<Col xl={{ offset: 5, span: 19 }}>
 					<InputField
 						value={profile.name}
 						label="Name:"
