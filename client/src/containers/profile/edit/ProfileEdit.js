@@ -4,7 +4,7 @@ import * as colorThemeActionCreators from "../../../actions/colorTheme";
 import * as profileActionCreators from "../../../actions/profile/profile";
 import { bindActionCreators } from "redux";
 import InputField from "./InputField";
-import InputFieldNumber from "./InputFieldNumber";
+import InputAge from "./InputAge";
 import InputInterests from "./interests/InputInterests";
 import InputSchedule from "./availability/InputSchedule";
 import InputTimeZone from "./timeZone/InputTimeZone";
@@ -79,7 +79,7 @@ class ProfileEdit extends Component {
 					/>
 					<Row
 						style={{
-							height: "41px"
+							height: "26px"
 						}}
 					/>
 					<InputField
@@ -91,19 +91,19 @@ class ProfileEdit extends Component {
 					/>
 					<Row
 						style={{
-							height: "41px"
+							height: "26px"
 						}}
 					/>
-					<InputFieldNumber label="Age:" />
+					<InputAge label="Age:" />
 					<Row
 						style={{
-							height: "30px"
+							height: "15px"
 						}}
 					/>
 					<InputInterests />
 					<Row
 						style={{
-							height: "30px"
+							height: "15px"
 						}}
 					/>
 					<InputField
@@ -115,7 +115,7 @@ class ProfileEdit extends Component {
 					/>
 					<Row
 						style={{
-							padding: "30px 0px 0px 0px"
+							padding: "15px 0px 0px 0px"
 						}}
 					/>
 					<InputField
@@ -130,7 +130,7 @@ class ProfileEdit extends Component {
 						justify="start"
 						align="middle"
 						style={{
-							padding: "30px 0px 0px 0px"
+							padding: "15px 0px 0px 0px"
 						}}
 					>
 						<Col>
@@ -142,7 +142,7 @@ class ProfileEdit extends Component {
 						justify="start"
 						align="middle"
 						style={{
-							padding: "30px 0px 0px 0px"
+							padding: "15px 0px 0px 0px"
 						}}
 					>
 						<Col>
@@ -153,7 +153,7 @@ class ProfileEdit extends Component {
 						type="flex"
 						justify="start"
 						style={{
-							padding: "30px 0px 0px 0px"
+							padding: "15px 0px 0px 0px"
 						}}
 					>
 						<Col>

@@ -60,7 +60,11 @@ class InputInterests extends Component {
 					<Col xl={{ span: 2 }}>
 						<h3
 							style={{
-								color: colorTheme.text4Color
+								color: colorTheme.text4Color,
+								fontFamily: "Overpass",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: "20px"
 							}}
 						>
 							Interest(s):

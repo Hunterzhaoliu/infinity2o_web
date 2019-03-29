@@ -6,35 +6,39 @@ import { Row, Col } from "antd";
 import ErrorMessage from "./ErrorMessage";
 import "./input-field.css";
 
-class InputFieldNumber extends Component {
+class InputAge extends Component {
 	onChangeAge = e => {
 		this.props.onChangeAge(e.target.value);
 	};
 
 	render() {
-		const { colorTheme, label, width, profile } = this.props;
+		const { colorTheme, label, profile } = this.props;
 		return (
 			<div>
 				<Row type="flex" justify="start" align="middle">
 					<Col xl={{ span: 2 }}>
 						<h3
 							style={{
-								color: colorTheme.text4Color
+								color: colorTheme.text4Color,
+								lineHeight: 1,
+								marginBottom: 0,
+								fontFamily: "Overpass",
+								fontSize: "20px"
 							}}
 						>
 							{label}
 						</h3>
 					</Col>
-					<Col xl={{ span: 5, offset: 1 }}>
+					<Col xl={{ offset: 1 }}>
 						<input
 							className="input-field-input"
 							value={profile.age}
 							onChange={this.onChangeAge}
 							style={{
-								width: width,
 								color: colorTheme.text2Color,
 								borderColor: colorTheme.text8Color,
-								backgroundColor: colorTheme.text8Color
+								backgroundColor: colorTheme.text8Color,
+								width: "40px"
 							}}
 						/>
 					</Col>
@@ -74,4 +78,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(InputFieldNumber);
+)(InputAge);
