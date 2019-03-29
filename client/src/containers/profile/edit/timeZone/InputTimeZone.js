@@ -44,13 +44,17 @@ class InputTimeZone extends Component {
 					<Col xl={{ span: 2 }}>
 						<h3
 							style={{
-								color: colorTheme.text4Color
+								color: colorTheme.text4Color,
+								fontFamily: "Overpass",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: "20px"
 							}}
 						>
 							Time Zone:
 						</h3>
 					</Col>
-					<Col xl={{ span: 19, offset: 1 }}>
+					<Col xl={{ offset: 1 }}>
 						<Cascader
 							style={{
 								background: colorTheme.text8Color
@@ -72,10 +76,7 @@ class InputTimeZone extends Component {
 		);
 	}
 }
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
+
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
