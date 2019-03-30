@@ -64,7 +64,7 @@ class InputInterests extends Component {
 								fontFamily: "Overpass",
 								lineHeight: 1,
 								marginBottom: 0,
-								fontSize: "20px"
+								fontSize: "19px"
 							}}
 						>
 							Interest(s):
