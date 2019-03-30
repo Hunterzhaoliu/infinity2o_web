@@ -23,7 +23,7 @@ class InputAge extends Component {
 								lineHeight: 1,
 								marginBottom: 0,
 								fontFamily: "Overpass",
-								fontSize: "20px"
+								fontSize: "19px"
 							}}
 						>
 							{label}

@@ -132,11 +132,8 @@ class ProfileEdit extends Component {
 						style={{
 							padding: "15px 0px 0px 0px"
 						}}
-					>
-						<Col>
-							<InputTimeZone />
-						</Col>
-					</Row>
+					/>
+					<InputTimeZone />
 					<Row
 						type="flex"
 						justify="start"
@@ -144,11 +141,16 @@ class ProfileEdit extends Component {
 						style={{
 							padding: "15px 0px 0px 0px"
 						}}
-					>
-						<Col>
-							<InputSchedule />
-						</Col>
-					</Row>
+					/>
+					<InputSchedule />
+					<Row
+						type="flex"
+						justify="start"
+						align="middle"
+						style={{
+							padding: "15px 0px 0px 0px"
+						}}
+					/>
 					<Row
 						type="flex"
 						justify="start"
