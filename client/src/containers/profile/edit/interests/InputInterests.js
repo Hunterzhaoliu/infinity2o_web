@@ -67,7 +67,7 @@ class InputInterests extends Component {
 								fontSize: "19px"
 							}}
 						>
-							Interest(s):
+							Interest(s)
 						</h3>
 					</Col>
 					<Col xl={{ offset: 1 }}>
