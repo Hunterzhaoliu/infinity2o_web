@@ -142,8 +142,8 @@ class MatchCards extends Component {
 					justify="center"
 				>
 					<Col>
-						<a
-							className="match-cards-anchor"
+						<button
+							className="match-cards-button"
 							style={{
 								borderColor: colorTheme.backgroundColor,
 								background: colorTheme.backgroundColor,
@@ -152,11 +152,11 @@ class MatchCards extends Component {
 							onClick={e => this.onNextMatch()}
 						>
 							Next
-						</a>
+						</button>
 					</Col>
 					<Col xl={{ offset: 4 }}>
-						<a
-							className="match-cards-anchor"
+						<button
+							className="match-cards-button"
 							style={{
 								borderColor: colorTheme.keyText7Color,
 								background: colorTheme.keyText7Color,
@@ -171,7 +171,7 @@ class MatchCards extends Component {
 							}
 						>
 							Say Hi
-						</a>
+						</button>
 					</Col>
 				</Row>
 			);

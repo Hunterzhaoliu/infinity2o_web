@@ -141,8 +141,8 @@ class Ask extends Component {
 					lg={{ offset: displayRemoveAnswerButtonOffset }}
 					xl={{ offset: displayRemoveAnswerButtonOffset }}
 				>
-					<a
-						className="ask-anchor"
+					<button
+						className="ask-button"
 						style={{
 							borderColor: colorTheme.keyText7Color,
 							background: colorTheme.keyText7Color,
@@ -151,7 +151,7 @@ class Ask extends Component {
 						onClick={onClickRemoveAnswer}
 					>
 						Remove Answer
-					</a>
+					</button>
 				</Col>
 			);
 		} else {
@@ -164,8 +164,8 @@ class Ask extends Component {
 		if (ask.displayAddAnswerButton) {
 			return (
 				<Col xl={{ offset: 4 }}>
-					<a
-						className="ask-anchor"
+					<button
+						className="ask-button"
 						style={{
 							borderColor: colorTheme.keyText7Color,
 							background: colorTheme.keyText7Color,
@@ -174,7 +174,7 @@ class Ask extends Component {
 						onClick={onClickAddAnswer}
 					>
 						Add Answer
-					</a>
+					</button>
 				</Col>
 			);
 		} else {
@@ -271,8 +271,8 @@ class Ask extends Component {
 					}}
 				>
 					<Col xl={{ offset: 4, span: 15 }}>
-						<a
-							className="ask-anchor"
+						<button
+							className="ask-button"
 							style={{
 								borderColor: colorTheme.key,
 								background: colorTheme.key,
@@ -283,7 +283,7 @@ class Ask extends Component {
 						>
 							Ask
 							{this.renderAskIcon(ask.save)}
-						</a>
+						</button>
 					</Col>
 				</Row>
 			</Modal>
@@ -300,10 +300,6 @@ function mapStateToProps(state) {
 	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
 function mapDispatchToProps(dispatch) {
 	const colorThemeDispatchers = bindActionCreators(
 		colorThemeActionCreators,

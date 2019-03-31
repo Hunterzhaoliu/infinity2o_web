@@ -104,17 +104,21 @@ class DayDropdown extends Component {
 				visible={this.state.visible}
 				overlay={menu}
 			>
-				<a
+				<button
 					style={{
 						color: colorTheme.text2Color,
 						fontFamily: "Overpass",
 						lineHeight: 1,
 						marginBottom: 0,
-						fontSize: "16px"
+						fontSize: "16px",
+						backgroundColor: "transparent",
+						border: "none",
+						padding: "0px",
+						cursor: "pointer"
 					}}
 				>
 					{day.label} <Icon type="down" />
-				</a>
+				</button>
 			</Dropdown>
 		);
 	}

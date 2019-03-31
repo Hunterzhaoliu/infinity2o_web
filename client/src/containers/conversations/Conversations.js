@@ -44,7 +44,7 @@ class Conversation extends Component {
 		const { colorTheme } = this.props;
 		return (
 			<div style={{ padding: "10px 0px 0px 0px" }}>
-				<a
+				<button
 					style={{
 						borderColor: colorTheme.text8Color,
 						background: colorTheme.text8Color,
@@ -61,7 +61,7 @@ class Conversation extends Component {
 					}
 				>
 					Close Conversation
-				</a>
+				</button>
 			</div>
 		);
 	}

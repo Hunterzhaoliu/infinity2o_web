@@ -61,8 +61,8 @@ class InputVote extends Component {
 		} else {
 			return (
 				<Row style={{ padding: "10px 0px 0px" }}>
-					<a
-						className="input-vote-anchor"
+					<button
+						className="input-vote-button"
 						style={{
 							borderColor: colorTheme.text7Color,
 							background: colorTheme.text7Color,
@@ -77,7 +77,7 @@ class InputVote extends Component {
 						}
 					>
 						{buttonText}
-					</a>
+					</button>
 				</Row>
 			);
 		}
@@ -97,8 +97,8 @@ class InputVote extends Component {
 
 		if (activeSection !== "sorting_hat") {
 			return (
-				<a
-					className="input-vote-anchor"
+				<button
+					className="input-vote-button"
 					style={{
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
@@ -107,12 +107,12 @@ class InputVote extends Component {
 					onClick={e => this.onVoteLanding(answerIndex, askIndex)}
 				>
 					{displayAnswer}
-				</a>
+				</button>
 			);
 		} else {
 			return (
-				<a
-					className="input-vote-anchor"
+				<button
+					className="input-vote-button"
 					style={{
 						borderColor: displayAnswerButtonColor,
 						background: displayAnswerButtonColor,
@@ -126,7 +126,7 @@ class InputVote extends Component {
 						askIndex,
 						isDisplayingSaveIcon
 					)}
-				</a>
+				</button>
 			);
 		}
 	}
