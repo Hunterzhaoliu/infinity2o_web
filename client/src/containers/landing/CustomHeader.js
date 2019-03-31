@@ -88,9 +88,16 @@ class CustomHeader extends Component {
 			return (
 				<Row type="flex" justify="start">
 					<Col>
-						<a onClick={toggleMenu}>
+						<button
+							style={{
+								backgroundColor: "transparent",
+								border: "none",
+								padding: "0px"
+							}}
+							onClick={toggleMenu}
+						>
 							<ChangeThemeButton />
-						</a>
+						</button>
 					</Col>
 				</Row>
 			);

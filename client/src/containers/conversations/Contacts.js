@@ -79,8 +79,8 @@ class Contacts extends Component {
 								}}
 								offset={[22, -15]} // [lower, right]
 							>
-								<a
-									className="contacts-anchor"
+								<button
+									className="contacts-button"
 									style={{
 										borderColor: borderColor,
 										background: background,
@@ -99,7 +99,7 @@ class Contacts extends Component {
 								>
 									{contactName}
 									{this.renderOnline(contact.isOnline)}
-								</a>
+								</button>
 							</Badge>
 						</List.Item>
 					);
