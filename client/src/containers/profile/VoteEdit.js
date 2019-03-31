@@ -53,8 +53,8 @@ class VoteEdit extends Component {
 						padding: "0px 5px 0px 0px"
 					}}
 				>
-					<a
-						className="vote-edit-anchor"
+					<button
+						className="vote-edit-button"
 						style={{
 							borderColor: colorTheme.text8Color,
 							background: colorTheme.text8Color,
@@ -64,7 +64,7 @@ class VoteEdit extends Component {
 						onClick={e => this.onPressPage(displayPage)}
 					>
 						{displayPage}
-					</a>
+					</button>
 				</Col>
 			);
 		});
@@ -91,8 +91,8 @@ class VoteEdit extends Component {
 								padding: "0px 0px 10px"
 							}}
 						>
-							<a
-								className="vote-edit-anchor"
+							<button
+								className="vote-edit-button"
 								style={{
 									borderColor: colorTheme.text8Color,
 									background: colorTheme.text8Color,
@@ -114,7 +114,7 @@ class VoteEdit extends Component {
 									{vote.question}{" "}
 									{this.renderFetchIcon(index)}
 								</p>
-							</a>
+							</button>
 						</Col>
 					</Row>
 				);
@@ -243,8 +243,8 @@ class VoteEdit extends Component {
 							textAlign: "center"
 						}}
 					>
-						<a
-							className="vote-edit-anchor"
+						<button
+							className="vote-edit-button"
 							style={{
 								borderColor: displayAnswerButtonColor,
 								background: displayAnswerButtonColor,
@@ -267,7 +267,7 @@ class VoteEdit extends Component {
 								voteEdit.revoteSaveState,
 								answerIndex
 							)}
-						</a>
+						</button>
 					</Col>
 					<Col
 						xs={{ span: 4 }}

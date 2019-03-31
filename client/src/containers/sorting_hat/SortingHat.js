@@ -51,8 +51,8 @@ class SortingHat extends Component {
 						</h2>
 					</Col>
 					<Col style={{ padding: "0px 0px 0px 10px" }}>
-						<a
-							className="sorting-hat-anchor"
+						<button
+							className="sorting-hat-button"
 							style={{
 								borderColor: colorTheme.keyText7Color,
 								background: colorTheme.keyText7Color,
@@ -61,7 +61,7 @@ class SortingHat extends Component {
 							onClick={e => this.props.openAskModal()}
 						>
 							asking a question
-						</a>
+						</button>
 					</Col>
 				</Row>
 				<Row type="flex" justify="center" align="middle">
