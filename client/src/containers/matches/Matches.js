@@ -51,6 +51,14 @@ class Matches extends Component {
 			`--text7Color`,
 			colorTheme.text7Color
 		);
+		document.documentElement.style.setProperty(
+			`--text8Color`,
+			colorTheme.text8Color
+		);
+		document.documentElement.style.setProperty(
+			`--keyText7Color`,
+			colorTheme.keyText7Color
+		);
 
 		const hasMatches = matches.current1DisplayedMatches.length > 0;
 		if (hasMatches) {
@@ -69,12 +77,20 @@ class Matches extends Component {
 							fontFamily: "Overpass",
 							fontSize: "24px",
 							lineHeight: 1,
-							marginBottom: 0
+							marginBottom: 0,
+							display: "inline-block"
 						}}
 					>
-						We will have matches for you in a moment{" "}
-						<Icon type="loading" />
+						We will have matches for you in a moment
 					</h4>
+					<Icon
+						style={{
+							padding: "0px 0px 0px 10px",
+							fontSize: "24px",
+							color: colorTheme.text2Color
+						}}
+						type="loading"
+					/>
 				</Col>
 			);
 		} else if (
@@ -96,6 +112,7 @@ class Matches extends Component {
 				>
 					<h4
 						style={{
+							padding: "15px 0px 30px 0px",
 							color: colorTheme.text3Color,
 							fontFamily: "Overpass",
 							fontSize: "24px",
@@ -118,6 +135,7 @@ class Matches extends Component {
 						You have {votesToGo} to go!
 					</h6>
 					<Progress
+						style={{ padding: "30px 0px 0px" }}
 						percent={percentVotes}
 						showInfo={false}
 						status="active"
@@ -126,18 +144,21 @@ class Matches extends Component {
 			);
 		} else {
 			return (
-				<h6
-					style={{
-						color: colorTheme.text3Color,
-						fontFamily: "Overpass",
-						fontSize: "24px",
-						lineHeight: 1,
-						marginBottom: 0
-					}}
-				>
-					You're out of matches for today. Vote on questions in
-					Sorting Hat to get better matches.
-				</h6>
+				<Col>
+					<h6
+						style={{
+							padding: "15px 0px 0px 0px",
+							color: colorTheme.text3Color,
+							fontFamily: "Overpass",
+							fontSize: "24px",
+							lineHeight: 1,
+							marginBottom: 0
+						}}
+					>
+						You're out of matches for today. Vote on questions in
+						Sorting Hat to get better matches.
+					</h6>
+				</Col>
 			);
 		}
 	}
@@ -170,7 +191,6 @@ class Matches extends Component {
 				<Row
 					type="flex"
 					justify="center"
-					align="top"
 					style={{ padding: "45px 0px 0px 0px" }}
 				>
 					{this.renderMatches()}

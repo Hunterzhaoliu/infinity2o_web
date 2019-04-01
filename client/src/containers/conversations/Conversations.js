@@ -126,10 +126,15 @@ class Conversation extends Component {
 			return (
 				<h2
 					style={{
-						color: colorTheme.text2Color
+						padding: "60px 0px 0px",
+						color: colorTheme.text2Color,
+						fontFamily: "Overpass",
+						lineHeight: 1,
+						marginBottom: 0,
+						fontSize: "32px"
 					}}
 				>
-					You have no conversations right now. Start one in Matches.
+					Start a new conversation in Matches.
 				</h2>
 			);
 		}
