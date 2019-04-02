@@ -12,10 +12,16 @@ const { Content } = Layout;
 
 class Conversation extends Component {
 	componentWillMount() {
-		// run once before first render()
-		this.props.onConversations();
-		// userVotes is to compare the questions that user and contact voted on
-		this.props.fetchConversations();
+		const { loggedInState } = this.props;
+		if (loggedInState === "not_logged_in") {
+			// push user to landing page
+			this.props.history.push("/");
+		} else {
+			// run once before first render()
+			this.props.onConversations();
+			// userVotes is to compare the questions that user and contact voted on
+			this.props.fetchConversations();
+		}
 	}
 
 	onCloseConversation(conversationId, contactMongoDBId, firstTwoContacts) {
@@ -157,22 +163,15 @@ class Conversation extends Component {
 	}
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
 function mapStateToProps(state) {
 	return {
+		loggedInState: state.auth.loggedInState,
 		colorTheme: state.colorTheme,
 		chat: state.chat,
 		contacts: state.contacts
 	};
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
 function mapDispatchToProps(dispatch) {
 	const colorThemeDispatchers = bindActionCreators(
 		colorThemeActionCreators,

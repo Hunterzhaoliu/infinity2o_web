@@ -11,8 +11,13 @@ const { Content } = Layout;
 
 class Profile extends Component {
 	componentWillMount() {
-		// run once before first render()
-		this.props.onProfile();
+		const { loggedInState } = this.props;
+		if (loggedInState === "not_logged_in") {
+			// push user to landing page
+			this.props.history.push("/");
+		} else {
+			this.props.onProfile();
+		}
 	}
 
 	renderQuestions() {
@@ -173,6 +178,7 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
+		loggedInState: state.auth.loggedInState,
 		colorTheme: state.colorTheme,
 		profile: state.profile
 	};
