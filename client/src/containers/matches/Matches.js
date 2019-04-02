@@ -12,8 +12,14 @@ const { Content } = Layout;
 class Matches extends Component {
 	componentWillMount() {
 		// run once before first render()
-		this.props.onMatches();
-		this.props.fetchUserMatches(this.props.mongoDBUserId);
+		const { loggedInState } = this.props;
+		if (loggedInState === "not_logged_in") {
+			// push user to landing page
+			this.props.history.push("/");
+		} else {
+			this.props.onMatches();
+			this.props.fetchUserMatches(this.props.mongoDBUserId);
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -206,6 +212,7 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
+		loggedInState: state.auth.loggedInState,
 		colorTheme: state.colorTheme,
 		matches: state.matches,
 		totalUserVotesAcrossAllSessions:
