@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import MatchCards from "../matches/MatchCards";
 
 class Conversation extends Component {
-	renderContactCard() {
+	render() {
 		const { history, selectedContactMongoDBInfo } = this.props;
 		if (selectedContactMongoDBInfo !== null) {
 			return (
@@ -13,10 +13,6 @@ class Conversation extends Component {
 				/>
 			);
 		}
-	}
-
-	render() {
-		return <div>{this.renderContactCard()}</div>;
 	}
 }
 
