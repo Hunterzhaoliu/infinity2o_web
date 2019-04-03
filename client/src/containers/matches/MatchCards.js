@@ -110,7 +110,7 @@ class MatchCards extends Component {
 					<div
 						style={{
 							width: "100%",
-							height: "130px",
+							height: "90px",
 							backgroundColor: keyColor
 						}}
 					/>
@@ -178,6 +178,23 @@ class MatchCards extends Component {
 		}
 	}
 
+	renderCloseConversationButton(text5Color) {
+		const { activeSection } = this.props;
+		// conversations also uses this to show selected contact info
+		if (activeSection === "conversations") {
+			// need to display button to close conversation on conversations page
+			return (
+				<button
+					style={{
+						color: text5Color
+					}}
+					className="close-conversation-button"
+				>
+					x
+				</button>
+			);
+		}
+	}
 	render() {
 		const { match, colorTheme } = this.props;
 		return (
@@ -191,8 +208,18 @@ class MatchCards extends Component {
 				}}
 				bodyStyle={{ padding: "0px 0px 60px 0px" }} // padding around inside border of card
 			>
+				<Row
+					style={{
+						backgroundColor: colorTheme.key,
+						height: "40px"
+					}}
+					type="flex"
+					justify="end"
+					align="middle"
+				>
+					{this.renderCloseConversationButton(colorTheme.text5Color)}
+				</Row>
 				{this.renderMatchPicture(match.imageUrl, colorTheme.key)}
-
 				<Row
 					style={{ padding: "90px 0px 0px 0px" }}
 					type="flex"
