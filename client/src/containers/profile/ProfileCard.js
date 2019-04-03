@@ -82,7 +82,7 @@ class ProfileCard extends Component {
 							justify="start"
 							align="middle"
 						>
-							<Col>
+							<Col xl={{ span: 24 }}>
 								<Neurons payment={profile.payment} />
 								<Interests interests={profile.interests} />
 								<Email email={profile.email} />
