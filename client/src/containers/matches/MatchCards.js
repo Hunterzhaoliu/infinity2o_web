@@ -110,16 +110,14 @@ class MatchCards extends Component {
 					<div
 						style={{
 							width: "100%",
-							height: "90px",
+							height: "130px",
 							backgroundColor: keyColor
 						}}
 					/>
 					<Avatar
 						style={{
 							position: "absolute",
-							top: "60px",
-							width: "125px",
-							height: "125px"
+							top: "50px"
 						}}
 						shape="circle"
 						src={imageUrl}
@@ -132,69 +130,49 @@ class MatchCards extends Component {
 	}
 
 	renderMatchButtons() {
-		const { activeSection, colorTheme, match, history } = this.props;
-		// conversations also uses this to show selected contact info
-		if (activeSection === "matches") {
-			return (
-				<Row
-					style={{ padding: "30px 0px 0px 0px" }}
-					type="flex"
-					justify="center"
-				>
-					<Col>
-						<button
-							className="match-cards-button"
-							style={{
-								borderColor: colorTheme.backgroundColor,
-								background: colorTheme.backgroundColor,
-								color: colorTheme.text2Color
-							}}
-							onClick={e => this.onNextMatch()}
-						>
-							Next
-						</button>
-					</Col>
-					<Col xl={{ offset: 4 }}>
-						<button
-							className="match-cards-button"
-							style={{
-								borderColor: colorTheme.keyText7Color,
-								background: colorTheme.keyText7Color,
-								color: colorTheme.text1Color
-							}}
-							onClick={e =>
-								this.onStartConversation(
-									history,
-									match.name,
-									match.id
-								)
-							}
-						>
-							Say Hi
-						</button>
-					</Col>
-				</Row>
-			);
-		}
+		const { colorTheme, match, history } = this.props;
+		return (
+			<Row
+				style={{ padding: "30px 0px 0px 0px" }}
+				type="flex"
+				justify="center"
+			>
+				<Col>
+					<button
+						className="match-cards-button"
+						style={{
+							borderColor: colorTheme.backgroundColor,
+							background: colorTheme.backgroundColor,
+							color: colorTheme.text2Color
+						}}
+						onClick={e => this.onNextMatch()}
+					>
+						Next
+					</button>
+				</Col>
+				<Col xl={{ offset: 4 }}>
+					<button
+						className="match-cards-button"
+						style={{
+							borderColor: colorTheme.keyText7Color,
+							background: colorTheme.keyText7Color,
+							color: colorTheme.text1Color
+						}}
+						onClick={e =>
+							this.onStartConversation(
+								history,
+								match.name,
+								match.id
+							)
+						}
+					>
+						Say Hi
+					</button>
+				</Col>
+			</Row>
+		);
 	}
 
-	renderCloseConversationButton(text5Color) {
-		const { activeSection } = this.props;
-		// conversations also uses this to show selected contact info
-		if (activeSection === "conversations") {
-			// need to display button to close conversation on conversations page
-			return (
-				<button
-					style={{
-						color: text5Color
-					}}
-					className="close-conversation-button"
-				>
-					x
-				</button>
-			);
-		}
-	}
 	render() {
 		const { match, colorTheme } = this.props;
 		return (
@@ -208,17 +186,6 @@ class MatchCards extends Component {
 				}}
 				bodyStyle={{ padding: "0px 0px 60px 0px" }} // padding around inside border of card
 			>
-				<Row
-					style={{
-						backgroundColor: colorTheme.key,
-						height: "40px"
-					}}
-					type="flex"
-					justify="end"
-					align="middle"
-				>
-					{this.renderCloseConversationButton(colorTheme.text5Color)}
-				</Row>
 				{this.renderMatchPicture(match.imageUrl, colorTheme.key)}
 				<Row
 					style={{ padding: "90px 0px 0px 0px" }}
@@ -269,7 +236,6 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		activeSection: state.colorTheme.activeSection,
 		neuronsInBillions: state.profile.payment.neuronsInBillions,
 		mongoDBUserId: state.auth.mongoDBUserId,
 		nextMatches: state.matches.nextMatches,

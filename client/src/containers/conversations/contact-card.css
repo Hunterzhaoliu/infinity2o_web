@@ -1,0 +1,15 @@
+.close-conversation-button {
+	font-family: "Overpass";
+	line-height: 40px;
+	padding: 0px 14px;
+	font-size: 28px;
+	font-weight: 500;
+	border-style: none;
+	border-color: none;
+	background-color: inherit;
+}
+
+.close-conversation-button:hover {
+	cursor: pointer;
+	font-weight: 800;
+}

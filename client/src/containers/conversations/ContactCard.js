@@ -1,29 +1,217 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import MatchCards from "../matches/MatchCards";
+import { Row, Col, Card, Avatar } from "antd";
+import * as contactsActionCreators from "../../actions/conversations/contacts";
+import { bindActionCreators } from "redux";
+import LinkedIn from "../profileInformation/LinkedIn";
+import Github from "../profileInformation/Github";
+import Interests from "../profileInformation/Interests";
+import TimeZone from "../profileInformation/TimeZone";
+import "./contact-card.css";
 
-class Conversation extends Component {
-	render() {
-		const { history, selectedContactMongoDBInfo } = this.props;
-		if (selectedContactMongoDBInfo !== null) {
+class ContactCard extends Component {
+	renderContactAge(matchAge, colorThemeText6Color) {
+		if (matchAge !== undefined && matchAge !== null) {
 			return (
-				<MatchCards
-					match={selectedContactMongoDBInfo}
-					history={history}
-				/>
+				<Col>
+					<h4
+						style={{
+							color: colorThemeText6Color,
+							fontFamily: "Overpass",
+							lineHeight: 1,
+							marginBottom: 0,
+							fontSize: 26
+						}}
+					>
+						{", "}
+						{matchAge}
+					</h4>
+				</Col>
 			);
 		}
 	}
+
+	renderContactTotalVotes(totalUserVotes) {
+		const { colorTheme } = this.props;
+
+		let voteDescription;
+		if (totalUserVotes <= 1) {
+			voteDescription = " vote";
+		} else {
+			voteDescription = " votes";
+		}
+		return (
+			<Row
+				style={{ padding: "15px 0px 0px 0px" }}
+				type="flex"
+				justify="center"
+				align="middle"
+			>
+				<Col>
+					<h4
+						style={{
+							color: colorTheme.text4Color,
+							fontFamily: "Overpass",
+							lineHeight: 1,
+							marginBottom: 0,
+							fontSize: 20
+						}}
+					>
+						{totalUserVotes} {voteDescription}
+					</h4>
+				</Col>
+			</Row>
+		);
+	}
+
+	renderContactPicture(imageUrl, keyColor) {
+		if (imageUrl !== undefined && imageUrl !== null) {
+			return (
+				<Row type="flex" justify="center" align="middle">
+					<div
+						style={{
+							width: "100%",
+							height: "90px",
+							backgroundColor: keyColor
+						}}
+					/>
+					<Avatar
+						style={{
+							position: "absolute",
+							top: "60px",
+							width: "125px",
+							height: "125px"
+						}}
+						shape="circle"
+						src={imageUrl}
+					/>
+				</Row>
+			);
+		} else {
+			return <div />;
+		}
+	}
+
+	renderCloseConversationButton(text5Color) {
+		return (
+			<button
+				style={{
+					color: text5Color
+				}}
+				className="close-conversation-button"
+			>
+				x
+			</button>
+		);
+	}
+
+	render() {
+		const { selectedContact, colorTheme } = this.props;
+		return (
+			<Card
+				bordered="false"
+				loading={false}
+				style={{
+					color: colorTheme.text1Color,
+					borderColor: colorTheme.textDot5Color,
+					background: colorTheme.textDot5Color
+				}}
+				bodyStyle={{ padding: "0px 0px 60px 0px" }} // padding around inside border of card
+			>
+				<Row
+					style={{
+						backgroundColor: colorTheme.key,
+						height: "40px"
+					}}
+					type="flex"
+					justify="end"
+					align="middle"
+				>
+					{this.renderCloseConversationButton(colorTheme.text5Color)}
+				</Row>
+				{this.renderContactPicture(
+					selectedContact.imageUrl,
+					colorTheme.key
+				)}
+				<Row
+					style={{ padding: "90px 0px 0px 0px" }}
+					type="flex"
+					justify="center"
+					align="middle"
+				>
+					<Col>
+						<h4
+							style={{
+								color: colorTheme.keyText6Color,
+								fontFamily: "Overpass",
+								lineHeight: 1,
+								marginBottom: 0,
+								fontSize: 26
+							}}
+						>
+							{selectedContact.name}
+						</h4>
+					</Col>
+					{this.renderContactAge(
+						selectedContact.age,
+						colorTheme.text6Color
+					)}
+					<LinkedIn
+						value={selectedContact.linkedInPublicProfileUrl}
+					/>
+					<Github value={selectedContact.githubPublicProfileUrl} />
+				</Row>
+
+				{this.renderContactTotalVotes(selectedContact.totalUserVotes)}
+				<Row
+					style={{ padding: "0px 0px 0px 20px" }}
+					type="flex"
+					justify="start"
+					align="middle"
+				>
+					<Col>
+						<Interests interests={selectedContact.interests} />
+						<TimeZone value={selectedContact.timeZone} />
+					</Col>
+				</Row>
+			</Card>
+		);
+	}
 }
 
+/*
+So we have a state and a UI(with props).
+This function gives the UI the parts of the state it will need to display.
+*/
 function mapStateToProps(state) {
 	return {
-		selectedContactMongoDBInfo:
+		colorTheme: state.colorTheme,
+		selectedContact:
 			state.contacts.selectedConversationInfo.selectedContactMongoDBInfo
+	};
+}
+
+/*
+So we have a state and a UI(with props).
+This function gives the UI the functions it will need to be called.
+*/
+function mapDispatchToProps(dispatch) {
+	const contactsDispatchers = bindActionCreators(
+		contactsActionCreators,
+		dispatch
+	);
+
+	return {
+		onCloseConversation: (conversationId, contactMongoDBId) => {
+			contactsDispatchers.onCloseConversation(
+				conversationId,
+				contactMongoDBId
+			);
+		}
 	};
 }
 
 export default connect(
 	mapStateToProps,
-	null
-)(Conversation);
+	mapDispatchToProps
+)(ContactCard);
