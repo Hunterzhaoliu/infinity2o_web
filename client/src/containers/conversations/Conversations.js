@@ -204,12 +204,6 @@ function mapDispatchToProps(dispatch) {
 				matchId,
 				numberOfUnseenMessages
 			);
-		},
-		onCloseConversation: (conversationId, contactMongoDBId) => {
-			contactsDispatchers.onCloseConversation(
-				conversationId,
-				contactMongoDBId
-			);
 		}
 	};
 }

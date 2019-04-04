@@ -14,19 +14,3 @@
 	box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 	cursor: pointer;
 }
-
-.close-conversation-button {
-	font-family: "Overpass";
-	line-height: 40px;
-	padding: 0px 14px;
-	font-size: 28px;
-	font-weight: 500;
-	border-style: none;
-	border-color: none;
-	background-color: inherit;
-}
-
-.close-conversation-button:hover {
-	cursor: pointer;
-	font-weight: 800;
-}
