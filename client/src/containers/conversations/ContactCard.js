@@ -93,12 +93,21 @@ class ContactCard extends Component {
 	}
 
 	renderCloseConversationButton(text5Color) {
+		const { contacts } = this.props;
 		return (
 			<button
 				style={{
 					color: text5Color
 				}}
 				className="close-conversation-button"
+				onClick={e =>
+					this.onCloseConversation(
+						contacts.selectedConversationInfo.conversationId,
+						contacts.selectedConversationInfo
+							.selectedContactMongoDBInfo.id,
+						contacts.allContacts.slice(0, 2)
+					)
+				}
 			>
 				x
 			</button>
@@ -106,7 +115,10 @@ class ContactCard extends Component {
 	}
 
 	render() {
-		const { selectedContact, colorTheme } = this.props;
+		const { contacts, colorTheme } = this.props;
+
+		const selectedContact =
+			contacts.selectedConversationInfo.selectedContactMongoDBInfo;
 		return (
 			<Card
 				bordered="false"
@@ -161,7 +173,6 @@ class ContactCard extends Component {
 					/>
 					<Github value={selectedContact.githubPublicProfileUrl} />
 				</Row>
-
 				{this.renderContactTotalVotes(selectedContact.totalUserVotes)}
 				<Row
 					style={{ padding: "0px 0px 0px 20px" }}
@@ -186,8 +197,7 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		selectedContact:
-			state.contacts.selectedConversationInfo.selectedContactMongoDBInfo
+		contacts: state.contacts
 	};
 }
 
