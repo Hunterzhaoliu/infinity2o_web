@@ -92,12 +92,12 @@ class ContactCard extends Component {
 		}
 	}
 
-	renderCloseConversationButton(text5Color) {
+	renderCloseConversationButton(text6Color) {
 		const { contacts } = this.props;
 		return (
 			<button
 				style={{
-					color: text5Color
+					color: text6Color
 				}}
 				className="close-conversation-button"
 				onClick={e =>
@@ -112,6 +112,29 @@ class ContactCard extends Component {
 				x
 			</button>
 		);
+	}
+
+	onCloseConversation(conversationId, contactMongoDBId, firstTwoContacts) {
+		if (firstTwoContacts.length === 1) {
+			// no other contacts, don't need to select a different contact
+		} else {
+			// when close conversation, select top most candidate
+			let contactToShow = firstTwoContacts[0];
+			if (firstTwoContacts[0].conversationId === conversationId) {
+				// user trying to delete first conversation so need to show 2nd contact
+				contactToShow = firstTwoContacts[1];
+			}
+
+			this.props.onSelectContact(
+				contactToShow.conversationId,
+				contactToShow.isOnline,
+				contactToShow.socketId,
+				contactToShow.matchId,
+				contactToShow.numberOfUnseenMessages
+			);
+		}
+
+		this.props.onCloseConversation(conversationId, contactMongoDBId);
 	}
 
 	render() {
@@ -139,7 +162,7 @@ class ContactCard extends Component {
 					justify="end"
 					align="middle"
 				>
-					{this.renderCloseConversationButton(colorTheme.text5Color)}
+					{this.renderCloseConversationButton(colorTheme.text6Color)}
 				</Row>
 				{this.renderContactPicture(
 					selectedContact.imageUrl,
