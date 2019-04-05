@@ -24,54 +24,6 @@ class Conversation extends Component {
 		}
 	}
 
-	onCloseConversation(conversationId, contactMongoDBId, firstTwoContacts) {
-		if (firstTwoContacts.length === 1) {
-			// no other contacts, don't need to select a different contact
-		} else {
-			// when close conversation, select top most candidate
-			let contactToShow = firstTwoContacts[0];
-			if (firstTwoContacts[0].conversationId === conversationId) {
-				// user trying to delete first conversation so need to show 2nd contact
-				contactToShow = firstTwoContacts[1];
-			}
-
-			this.props.onSelectContact(
-				contactToShow.conversationId,
-				contactToShow.isOnline,
-				contactToShow.socketId,
-				contactToShow.matchId,
-				contactToShow.numberOfUnseenMessages
-			);
-		}
-
-		this.props.onCloseConversation(conversationId, contactMongoDBId);
-	}
-	renderCloseConversationButton(selectedConversationInfo, firstTwoContacts) {
-		const { colorTheme } = this.props;
-		return (
-			<div style={{ padding: "10px 0px 0px 0px" }}>
-				<button
-					style={{
-						borderColor: colorTheme.text8Color,
-						background: colorTheme.text8Color,
-						color: colorTheme.text4Color,
-						height: "44px"
-					}}
-					onClick={e =>
-						this.onCloseConversation(
-							selectedConversationInfo.conversationId,
-							selectedConversationInfo.selectedContactMongoDBInfo
-								.id,
-							firstTwoContacts
-						)
-					}
-				>
-					Close Conversation
-				</button>
-			</div>
-		);
-	}
-
 	renderConversations() {
 		const { colorTheme, contacts } = this.props;
 
@@ -80,21 +32,21 @@ class Conversation extends Component {
 			contacts.allContacts.length >= 1
 		) {
 			return (
-				<Row type="flex" justify="center" align="middle">
+				<Row
+					style={{
+						padding: "0px 0px 0px"
+					}}
+					type="flex"
+					justify="center"
+					align="middle"
+				>
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
 						lg={{ span: 6 }}
 						xl={{ span: 6 }}
-						style={{
-							padding: "0px 5px 0px"
-						}}
 					>
 						<ContactCard />
-						{this.renderCloseConversationButton(
-							contacts.selectedConversationInfo,
-							contacts.allContacts.slice(0, 2)
-						)}
 					</Col>
 					<Col
 						sm={{ span: 6 }}
