@@ -41,14 +41,6 @@ class Conversation extends Component {
 					align="middle"
 				>
 					<Col
-						sm={{ span: 0 }}
-						md={{ span: 0 }}
-						lg={{ span: 6 }}
-						xl={{ span: 6 }}
-					>
-						<ContactCard />
-					</Col>
-					<Col
 						sm={{ span: 6 }}
 						md={{ span: 6 }}
 						lg={{ span: 3 }}
@@ -70,13 +62,23 @@ class Conversation extends Component {
 					>
 						<Chat />
 					</Col>
+
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
 						lg={{ span: 6 }}
 						xl={{ span: 6 }}
 					>
-						<VoteComparison />
+						<Row>
+							<Col>
+								<ContactCard />
+							</Col>
+						</Row>
+						<Row>
+							<Col>
+								<VoteComparison />
+							</Col>
+						</Row>
 					</Col>
 				</Row>
 			);
@@ -105,7 +107,7 @@ class Conversation extends Component {
 			<Content
 				style={{
 					textAlign: "center",
-					padding: "75px 0px 0px 0px",
+					padding: "90px 0px 0px 0px",
 					background: colorTheme.backgroundColor
 				}}
 			>
