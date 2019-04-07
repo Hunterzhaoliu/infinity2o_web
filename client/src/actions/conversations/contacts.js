@@ -10,7 +10,8 @@ import {
 	SEEN_MESSAGES,
 	UPDATE_SELECTED_CONTACT_INFO,
 	UPDATE_VOTE_COMPARISON,
-	DELETE_CONVERSATION
+	DELETE_CONVERSATION,
+	TOGGLE_BELIEF_COMPARISON
 } from "../types";
 import { store } from "../../index";
 
@@ -220,4 +221,11 @@ export const onCloseConversation = (
 			conversationId: conversationId
 		});
 	}
+};
+
+export const toggleBeliefComparison = showContactCard => dispatch => {
+	dispatch({
+		type: TOGGLE_BELIEF_COMPARISON,
+		showContactCard: showContactCard
+	});
 };
