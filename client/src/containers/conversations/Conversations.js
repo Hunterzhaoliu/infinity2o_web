@@ -24,6 +24,25 @@ class Conversation extends Component {
 		}
 	}
 
+	renderContactInformation() {
+		if (showContactCard) {
+			return (
+				<Row>
+					<Col>
+						<ContactCard />
+					</Col>
+				</Row>
+			);
+		} else {
+			return (
+				<Row>
+					<Col>
+						<VoteComparison />
+					</Col>
+				</Row>
+			);
+		}
+	}
 	renderConversations() {
 		const { colorTheme, contacts } = this.props;
 
@@ -32,14 +51,7 @@ class Conversation extends Component {
 			contacts.allContacts.length >= 1
 		) {
 			return (
-				<Row
-					style={{
-						padding: "0px 0px 0px"
-					}}
-					type="flex"
-					justify="center"
-					align="middle"
-				>
+				<Row type="flex" justify="center" align="middle">
 					<Col
 						sm={{ span: 6 }}
 						md={{ span: 6 }}
@@ -62,23 +74,13 @@ class Conversation extends Component {
 					>
 						<Chat />
 					</Col>
-
 					<Col
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
 						lg={{ span: 6 }}
-						xl={{ span: 6 }}
+						xl={{ offset: 2, span: 6 }}
 					>
-						<Row>
-							<Col>
-								<ContactCard />
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<VoteComparison />
-							</Col>
-						</Row>
+						{this.renderContactInformation()}
 					</Col>
 				</Row>
 			);
@@ -86,7 +88,6 @@ class Conversation extends Component {
 			return (
 				<h2
 					style={{
-						padding: "60px 0px 0px",
 						color: colorTheme.text2Color,
 						fontFamily: "Overpass",
 						lineHeight: 1,
@@ -107,7 +108,7 @@ class Conversation extends Component {
 			<Content
 				style={{
 					textAlign: "center",
-					padding: "90px 0px 0px 0px",
+					padding: "60px 0px 0px 0px",
 					background: colorTheme.backgroundColor
 				}}
 			>

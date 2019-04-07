@@ -66,7 +66,7 @@ class Contacts extends Component {
 							style={{
 								borderColor: colorTheme.backgroundColor,
 								background: colorTheme.backgroundColor,
-								padding: "5px 0px 0px"
+								padding: "0px 0px 5px"
 							}}
 						>
 							<Badge
