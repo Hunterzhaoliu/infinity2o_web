@@ -25,7 +25,8 @@ class Conversation extends Component {
 	}
 
 	renderContactInformation() {
-		if (showContactCard) {
+		const { contacts, colorTheme } = this.props;
+		if (contacts.selectedConversationInfo.showContactCard) {
 			return (
 				<Row>
 					<Col>

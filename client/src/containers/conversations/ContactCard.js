@@ -208,6 +208,26 @@ class ContactCard extends Component {
 						<TimeZone value={selectedContact.timeZone} />
 					</Col>
 				</Row>
+				<Row style={{ padding: "20px 0px 0px 0px" }}>
+					<Col>
+						<button
+							style={{
+								borderColor: colorTheme.backgroundColor,
+								background: colorTheme.backgroundColor,
+								color: colorTheme.keyText8Color
+							}}
+							className="compare-beliefs-button"
+							onClick={e =>
+								this.props.toggleBeliefComparison(
+									contacts.selectedConversationInfo
+										.showContactCard
+								)
+							}
+						>
+							Compare our beliefs
+						</button>
+					</Col>
+				</Row>
 			</Card>
 		);
 	}
@@ -240,6 +260,9 @@ function mapDispatchToProps(dispatch) {
 				conversationId,
 				contactMongoDBId
 			);
+		},
+		toggleBeliefComparison: showContactCard => {
+			contactsDispatchers.toggleBeliefComparison(showContactCard);
 		}
 	};
 }

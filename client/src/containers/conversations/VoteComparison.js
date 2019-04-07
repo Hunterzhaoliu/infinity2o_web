@@ -1,7 +1,9 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import Slider from "react-slick";
 import { connect } from "react-redux";
+import * as contactsActionCreators from "../../actions/conversations/contacts";
+import { bindActionCreators } from "redux";
+import Slider from "react-slick";
 import { Row, Col, Card, Avatar } from "antd";
 import "./vote-comparison.css";
 
@@ -23,126 +25,142 @@ class VoteComparison extends Component {
 	renderAgreedAsks() {
 		const {
 			colorTheme,
-			agreedAsks,
-			userPictureURL,
-			contactPictureURL
+			selectedConversationInfo,
+			userPictureURL
 		} = this.props;
-		return _.map(agreedAsks, (agreedAsk, index) => {
-			return (
-				<div key={index}>
-					<Card
-						id="voteComparison"
-						hoverable={true}
-						borderded="false"
-						loading={false}
-						style={{
-							textAlign: "center",
-							borderColor: colorTheme.text8Color,
-							background: colorTheme.text8Color
-						}}
-					>
-						<Row type="flex" justify="center" align="middle">
-							<Col>
-								<p
-									style={{
-										color: colorTheme.text3Color,
-										fontSize: "17px"
-									}}
-								>
-									{agreedAsk.question}
-								</p>
-							</Col>
-						</Row>
-						<Row type="flex" justify="start" align="middle">
-							<Col offset={2}>
-								<div className="contact-picture">
-									{this.renderAvatar(contactPictureURL)}
-								</div>
-								<div>{this.renderAvatar(userPictureURL)}</div>
-							</Col>
-							<Col offset={3}>
-								<p
-									style={{
-										color: colorTheme.keyText5Color,
-										fontSize: "15px"
-									}}
-								>
-									{agreedAsk.userAndContactAnswer}
-								</p>
-							</Col>
-						</Row>
-					</Card>
-				</div>
-			);
-		});
+		return _.map(
+			selectedConversationInfo.agreedAsks,
+			(agreedAsk, index) => {
+				return (
+					<div key={index}>
+						<Card
+							id="voteComparison"
+							hoverable={true}
+							borderded="false"
+							loading={false}
+							style={{
+								textAlign: "center",
+								borderColor: colorTheme.text8Color,
+								background: colorTheme.text8Color
+							}}
+						>
+							<Row type="flex" justify="center" align="middle">
+								<Col>
+									<p
+										style={{
+											color: colorTheme.text3Color,
+											fontSize: "17px"
+										}}
+									>
+										{agreedAsk.question}
+									</p>
+								</Col>
+							</Row>
+							<Row type="flex" justify="start" align="middle">
+								<Col offset={2}>
+									<div className="contact-picture">
+										{this.renderAvatar(
+											selectedConversationInfo
+												.selectedContactMongoDBInfo
+												.imageUrl
+										)}
+									</div>
+									<div>
+										{this.renderAvatar(userPictureURL)}
+									</div>
+								</Col>
+								<Col offset={3}>
+									<p
+										style={{
+											color: colorTheme.keyText5Color,
+											fontSize: "15px"
+										}}
+									>
+										{agreedAsk.userAndContactAnswer}
+									</p>
+								</Col>
+							</Row>
+						</Card>
+					</div>
+				);
+			}
+		);
 	}
 
 	renderDisagreedAsks() {
 		const {
 			colorTheme,
-			disagreedAsks,
 			userPictureURL,
-			contactPictureURL
+			selectedConversationInfo
 		} = this.props;
-		return _.map(disagreedAsks, (disagreedAsk, index) => {
-			return (
-				<div key={index}>
-					<Card
-						id="voteComparison"
-						hoverable={true}
-						borderded="false"
-						loading={false}
-						style={{
-							textAlign: "center",
-							borderColor: colorTheme.text8Color,
-							background: colorTheme.text8Color
-						}}
-					>
-						<Row type="flex" justify="center" align="middle">
-							<Col>
-								<p
-									style={{
-										color: colorTheme.text3Color,
-										fontSize: "17px"
-									}}
-								>
-									{disagreedAsk.question}
-								</p>
-							</Col>
-						</Row>
-						<Row type="flex" justify="center" align="middle">
-							<Col>{this.renderAvatar(contactPictureURL)}</Col>
-							<Col offset={2}>
-								<p
-									style={{
-										color: colorTheme.keyText5Color,
-										fontSize: "15px"
-									}}
-								>
-									{disagreedAsk.contactAnswer}
-								</p>
-							</Col>
-						</Row>
-						<Row type="flex" justify="center" align="middle">
-							<Col>{this.renderAvatar(userPictureURL)}</Col>
-							<Col offset={2}>
-								<p
-									style={{
-										color: colorTheme.keyCompliment2,
-										fontSize: "14px"
-									}}
-								>
-									{disagreedAsk.userAnswer}
-								</p>
-							</Col>
-						</Row>
-					</Card>
-				</div>
-			);
-		});
+		return _.map(
+			selectedConversationInfo.disagreedAsks,
+			(disagreedAsk, index) => {
+				return (
+					<div key={index}>
+						<Card
+							id="voteComparison"
+							hoverable={true}
+							borderded="false"
+							loading={false}
+							style={{
+								textAlign: "center",
+								borderColor: colorTheme.text8Color,
+								background: colorTheme.text8Color
+							}}
+						>
+							<Row type="flex" justify="center" align="middle">
+								<Col>
+									<p
+										style={{
+											color: colorTheme.text3Color,
+											fontSize: "17px"
+										}}
+									>
+										{disagreedAsk.question}
+									</p>
+								</Col>
+							</Row>
+							<Row type="flex" justify="center" align="middle">
+								<Col>
+									{this.renderAvatar(
+										selectedConversationInfo
+											.selectedContactMongoDBInfo.imageUrl
+									)}
+								</Col>
+								<Col offset={2}>
+									<p
+										style={{
+											color: colorTheme.keyText5Color,
+											fontSize: "15px"
+										}}
+									>
+										{disagreedAsk.contactAnswer}
+									</p>
+								</Col>
+							</Row>
+							<Row type="flex" justify="center" align="middle">
+								<Col>{this.renderAvatar(userPictureURL)}</Col>
+								<Col offset={2}>
+									<p
+										style={{
+											color: colorTheme.keyCompliment2,
+											fontSize: "14px"
+										}}
+									>
+										{disagreedAsk.userAnswer}
+									</p>
+								</Col>
+							</Row>
+						</Card>
+					</div>
+				);
+			}
+		);
 	}
 
 	render() {
+		const { colorTheme, selectedConversationInfo } = this.props;
 		const settings = {
 			dots: false,
 			adaptiveHeight: true,
@@ -166,6 +184,25 @@ class VoteComparison extends Component {
 				<div>
 					<Slider {...settings}>{this.renderDisagreedAsks()}</Slider>
 				</div>
+				<Row style={{ padding: "20px 0px 0px 0px" }}>
+					<Col>
+						<button
+							style={{
+								borderColor: colorTheme.textDot5Color,
+								background: colorTheme.textDot5Color,
+								color: colorTheme.keyText8Color
+							}}
+							className="contact-information-button"
+							onClick={e =>
+								this.props.toggleBeliefComparison(
+									selectedConversationInfo.showContactCard
+								)
+							}
+						>
+							Contact Info
+						</button>
+					</Col>
+				</Row>
 			</div>
 		);
 	}
@@ -174,16 +211,25 @@ class VoteComparison extends Component {
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		agreedAsks: state.contacts.selectedConversationInfo.agreedAsks,
-		disagreedAsks: state.contacts.selectedConversationInfo.disagreedAsks,
-		userPictureURL: state.profile.imageUrl,
-		contactPictureURL:
-			state.contacts.selectedConversationInfo.selectedContactMongoDBInfo
-				.imageUrl
+		selectedConversationInfo: state.contacts.selectedConversationInfo,
+		userPictureURL: state.profile.imageUrl
+	};
+}
+
+function mapDispatchToProps(dispatch) {
+	const contactsDispatchers = bindActionCreators(
+		contactsActionCreators,
+		dispatch
+	);
+
+	return {
+		toggleBeliefComparison: showContactCard => {
+			contactsDispatchers.toggleBeliefComparison(showContactCard);
+		}
 	};
 }
 
 export default connect(
 	mapStateToProps,
-	null
+	mapDispatchToProps
 )(VoteComparison);
