@@ -1,6 +1,6 @@
 .contact-picture {
 	position: absolute;
-	left: 30px;
+	left: 40px;
 }
 
 /* Dots */
@@ -103,6 +103,20 @@
 
 .slick-initialized .slick-slide {
 	display: block;
+}
+
+.vote-comparison-h3 {
+	font-size: 20px;
+	font-family: "Overpass";
+	line-height: 1;
+	margin-bottom: 0;
+}
+
+.vote-comparison-h5 {
+	font-size: 16px;
+	font-family: "Overpass";
+	line-height: 1;
+	margin-bottom: 0;
 }
 
 .contact-information-button {
