@@ -34,30 +34,33 @@ class VoteComparison extends Component {
 				return (
 					<div key={index}>
 						<Card
-							id="voteComparison"
-							hoverable={true}
 							borderded="false"
 							loading={false}
 							style={{
-								textAlign: "center",
 								borderColor: colorTheme.text8Color,
 								background: colorTheme.text8Color
 							}}
+							bodyStyle={{ padding: "30px" }}
 						>
 							<Row type="flex" justify="center" align="middle">
 								<Col>
-									<p
+									<h3
+										className="vote-comparison-h3"
 										style={{
-											color: colorTheme.text3Color,
-											fontSize: "17px"
+											color: colorTheme.text3Color
 										}}
 									>
 										{agreedAsk.question}
-									</p>
+									</h3>
 								</Col>
 							</Row>
-							<Row type="flex" justify="start" align="middle">
-								<Col offset={2}>
+							<Row
+								style={{ padding: "15px 0px 0px 0px" }}
+								type="flex"
+								justify="start"
+								align="middle"
+							>
+								<Col offset={3}>
 									<div className="contact-picture">
 										{this.renderAvatar(
 											selectedConversationInfo
@@ -65,19 +68,17 @@ class VoteComparison extends Component {
 												.imageUrl
 										)}
 									</div>
-									<div>
-										{this.renderAvatar(userPictureURL)}
-									</div>
+									{this.renderAvatar(userPictureURL)}
 								</Col>
 								<Col offset={3}>
-									<p
+									<h5
+										className="vote-comparison-h5"
 										style={{
-											color: colorTheme.keyText5Color,
-											fontSize: "15px"
+											color: colorTheme.keyText5Color
 										}}
 									>
 										{agreedAsk.userAndContactAnswer}
-									</p>
+									</h5>
 								</Col>
 							</Row>
 						</Card>
@@ -99,29 +100,32 @@ class VoteComparison extends Component {
 				return (
 					<div key={index}>
 						<Card
-							id="voteComparison"
-							hoverable={true}
 							borderded="false"
 							loading={false}
 							style={{
-								textAlign: "center",
 								borderColor: colorTheme.text8Color,
 								background: colorTheme.text8Color
 							}}
+							bodyStyle={{ padding: "30px" }}
 						>
 							<Row type="flex" justify="center" align="middle">
 								<Col>
-									<p
+									<h3
+										className="vote-comparison-h3"
 										style={{
-											color: colorTheme.text3Color,
-											fontSize: "17px"
+											color: colorTheme.text3Color
 										}}
 									>
 										{disagreedAsk.question}
-									</p>
+									</h3>
 								</Col>
 							</Row>
-							<Row type="flex" justify="center" align="middle">
+							<Row
+								style={{ padding: "15px 0px 0px" }}
+								type="flex"
+								justify="center"
+								align="middle"
+							>
 								<Col>
 									{this.renderAvatar(
 										selectedConversationInfo
@@ -129,27 +133,27 @@ class VoteComparison extends Component {
 									)}
 								</Col>
 								<Col offset={2}>
-									<p
+									<h5
+										className="vote-comparison-h5"
 										style={{
-											color: colorTheme.keyText5Color,
-											fontSize: "15px"
+											color: colorTheme.keyText5Color
 										}}
 									>
 										{disagreedAsk.contactAnswer}
-									</p>
+									</h5>
 								</Col>
 							</Row>
 							<Row type="flex" justify="center" align="middle">
 								<Col>{this.renderAvatar(userPictureURL)}</Col>
 								<Col offset={2}>
-									<p
+									<h5
+										className="vote-comparison-h5"
 										style={{
-											color: colorTheme.keyCompliment2,
-											fontSize: "14px"
+											color: colorTheme.keyCompliment2
 										}}
 									>
 										{disagreedAsk.userAnswer}
-									</p>
+									</h5>
 								</Col>
 							</Row>
 						</Card>
@@ -177,14 +181,20 @@ class VoteComparison extends Component {
 		};
 
 		return (
-			<div style={{ padding: "0px 5px 0px 5px" }}>
-				<div style={{ padding: "0px 0px 10px 0px" }}>
-					<Slider {...settings}>{this.renderAgreedAsks()}</Slider>
-				</div>
-				<div>
-					<Slider {...settings}>{this.renderDisagreedAsks()}</Slider>
-				</div>
-				<Row style={{ padding: "20px 0px 0px 0px" }}>
+			<div>
+				<Row>
+					<Col>
+						<Slider {...settings}>{this.renderAgreedAsks()}</Slider>
+					</Col>
+				</Row>
+				<Row style={{ padding: "30px 0px 0px 0px" }}>
+					<Col>
+						<Slider {...settings}>
+							{this.renderDisagreedAsks()}
+						</Slider>
+					</Col>
+				</Row>
+				<Row style={{ padding: "30px 0px 0px 0px" }}>
 					<Col>
 						<button
 							style={{
