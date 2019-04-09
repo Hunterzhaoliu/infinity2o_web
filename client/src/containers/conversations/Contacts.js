@@ -114,8 +114,7 @@ class Contacts extends Component {
 		return (
 			<Content
 				style={{
-					textAlign: "center",
-					background: colorTheme.backgroundColor
+					background: colorTheme.textDot5Color
 				}}
 			>
 				{this.renderContactButton()}

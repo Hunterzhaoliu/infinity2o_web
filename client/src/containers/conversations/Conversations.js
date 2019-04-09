@@ -26,8 +26,8 @@ class Conversation extends Component {
 
 	renderContactInformation() {
 		const { contacts } = this.props;
-		contacts.selectedConversationInfo.showContactCard;
-		if (false) {
+
+		if (contacts.selectedConversationInfo.showContactCard) {
 			return (
 				<Row>
 					<Col>
@@ -57,11 +57,8 @@ class Conversation extends Component {
 					<Col
 						sm={{ span: 6 }}
 						md={{ span: 6 }}
-						lg={{ span: 3 }}
-						xl={{ span: 3 }}
-						style={{
-							color: colorTheme.text3Color
-						}}
+						lg={{ span: 5 }}
+						xl={{ span: 5 }}
 					>
 						<Contacts />
 					</Col>
@@ -110,7 +107,7 @@ class Conversation extends Component {
 			<Content
 				style={{
 					textAlign: "center",
-					padding: "60px 0px 0px 0px",
+					padding: "120px 0px 0px 0px",
 					background: colorTheme.backgroundColor
 				}}
 			>
