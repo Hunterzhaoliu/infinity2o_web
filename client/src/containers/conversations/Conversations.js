@@ -53,7 +53,7 @@ class Conversation extends Component {
 			contacts.allContacts.length >= 1
 		) {
 			return (
-				<Row type="flex" justify="center" align="middle">
+				<Row type="flex" justify="center" align="top">
 					<Col
 						sm={{ span: 6 }}
 						md={{ span: 6 }}
