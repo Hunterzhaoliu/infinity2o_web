@@ -23,7 +23,7 @@ class Contacts extends Component {
 			windowHeight
 		} = this.props;
 
-		const contactWindowHeight = windowHeight - 76;
+		const contactWindowHeight = windowHeight - 180;
 		const contactWindowVerticalHeight =
 			contactWindowHeight.toString() + "px";
 		document.documentElement.style.setProperty(
@@ -32,7 +32,7 @@ class Contacts extends Component {
 		);
 
 		const numberOfPixelsPerSpan = windowWidth / 24;
-		let buttonWidth = numberOfPixelsPerSpan * 3;
+		let buttonWidth = numberOfPixelsPerSpan * 5;
 		if (windowWidth < 768) {
 			buttonWidth = numberOfPixelsPerSpan * 6;
 		}
