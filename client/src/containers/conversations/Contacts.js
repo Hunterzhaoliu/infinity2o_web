@@ -41,9 +41,10 @@ class Contacts extends Component {
 				className="contact-infinite-container"
 				dataSource={contacts.allContacts}
 				renderItem={contact => {
-					let borderColor = colorTheme.text8Color;
-					let background = colorTheme.text8Color;
+					let borderColor = colorTheme.textDot5Color;
+					let background = colorTheme.textDot5Color;
 					let color = colorTheme.text4Color;
+					let fontWeight = "400px";
 
 					if (
 						contacts.selectedConversationInfo.conversationId ===
@@ -55,6 +56,11 @@ class Contacts extends Component {
 						color = colorTheme.text2Color;
 					}
 
+					if (contact.numberOfUnseenMessages > 0) {
+						// contact has unread message, make contact name bold
+						fontWeight = "600px";
+					}
+
 					let contactName = contact.matchName;
 
 					if (windowWidth < 768) {
@@ -62,13 +68,7 @@ class Contacts extends Component {
 						contactName = contact.matchName.replace(/ .*/, "");
 					}
 					return (
-						<List.Item
-							style={{
-								borderColor: colorTheme.backgroundColor,
-								background: colorTheme.backgroundColor,
-								padding: "0px 0px 5px"
-							}}
-						>
+						<List.Item style={{ padding: "0px 0px 0px 0px" }}>
 							<Badge
 								count={contact.numberOfUnseenMessages}
 								style={{
@@ -85,7 +85,8 @@ class Contacts extends Component {
 										borderColor: borderColor,
 										background: background,
 										color: color,
-										width: buttonWidth
+										width: buttonWidth,
+										fontWeight: fontWeight
 									}}
 									onClick={e =>
 										onSelectContact(
