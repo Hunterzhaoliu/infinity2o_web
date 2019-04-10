@@ -53,12 +53,12 @@ class Conversation extends Component {
 			contacts.allContacts.length >= 1
 		) {
 			return (
-				<Row type="flex" justify="center" align="top">
+				<Row type="flex" justify="start" align="top">
 					<Col
 						sm={{ span: 6 }}
 						md={{ span: 6 }}
 						lg={{ span: 5 }}
-						xl={{ span: 5 }}
+						xl={{ span: 5, offset: 2 }}
 					>
 						<Contacts />
 					</Col>
@@ -67,9 +67,6 @@ class Conversation extends Component {
 						md={{ span: 18 }}
 						lg={{ span: 9 }}
 						xl={{ span: 9 }}
-						style={{
-							padding: "5px 0px 0px 5px"
-						}}
 					>
 						<Chat />
 					</Col>
@@ -77,7 +74,7 @@ class Conversation extends Component {
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
 						lg={{ span: 6 }}
-						xl={{ offset: 2, span: 6 }}
+						xl={{ span: 6 }}
 					>
 						{this.renderContactInformation()}
 					</Col>
