@@ -14,7 +14,7 @@ class Contacts extends Component {
 		}
 	}
 
-	renderContactButton() {
+	renderContactButtons() {
 		const {
 			colorTheme,
 			contacts,
@@ -43,8 +43,8 @@ class Contacts extends Component {
 				renderItem={contact => {
 					let borderColor = colorTheme.textDot5Color;
 					let background = colorTheme.textDot5Color;
-					let color = colorTheme.text4Color;
 					let fontWeight = "400px";
+					let buttonLeftSideColor = colorTheme.textDot5Color;
 
 					if (
 						contacts.selectedConversationInfo.conversationId ===
@@ -53,7 +53,7 @@ class Contacts extends Component {
 						// selected contact
 						borderColor = colorTheme.keyText8Color;
 						background = colorTheme.keyText8Color;
-						color = colorTheme.text2Color;
+						buttonLeftSideColor = colorTheme.keyText6Color;
 					}
 
 					if (contact.numberOfUnseenMessages > 0) {
@@ -69,39 +69,43 @@ class Contacts extends Component {
 					}
 					return (
 						<List.Item style={{ padding: "0px 0px 0px 0px" }}>
-							<Badge
-								count={contact.numberOfUnseenMessages}
+							<button
+								className="contacts-button"
 								style={{
-									backgroundColor: colorTheme.keyText8Color,
-									color: colorTheme.text1Color,
+									borderColor: borderColor,
+									background: background,
+									color: colorTheme.text4Color,
+									fontWeight: fontWeight,
 									boxShadow:
-										"0 0 0 1px " + colorTheme.keyText8Color
+										"4px 0px 0px 0px " +
+										buttonLeftSideColor +
+										" inset"
 								}}
-								offset={[22, -15]} // [lower, right]
+								onClick={e =>
+									onSelectContact(
+										contact.conversationId,
+										contact.isOnline,
+										contact.socketId,
+										contact.matchId,
+										contact.numberOfUnseenMessages
+									)
+								}
 							>
-								<button
-									className="contacts-button"
+								<Badge
+									count={contact.numberOfUnseenMessages}
 									style={{
-										borderColor: borderColor,
-										background: background,
-										color: color,
-										width: buttonWidth,
-										fontWeight: fontWeight
+										backgroundColor:
+											colorTheme.keyText8Color,
+										color: colorTheme.text1Color,
+										boxShadow:
+											"0 0 0 1px " +
+											colorTheme.keyText8Color
 									}}
-									onClick={e =>
-										onSelectContact(
-											contact.conversationId,
-											contact.isOnline,
-											contact.socketId,
-											contact.matchId,
-											contact.numberOfUnseenMessages
-										)
-									}
-								>
-									{contactName}
-									{this.renderOnline(contact.isOnline)}
-								</button>
-							</Badge>
+									offset={[22, -15]} // [lower, right]
+								/>
+								{contactName}
+								{this.renderOnline(contact.isOnline)}
+							</button>
 						</List.Item>
 					);
 				}}
@@ -118,7 +122,7 @@ class Contacts extends Component {
 					background: colorTheme.textDot5Color
 				}}
 			>
-				{this.renderContactButton()}
+				{this.renderContactButtons()}
 			</Content>
 		);
 	}
