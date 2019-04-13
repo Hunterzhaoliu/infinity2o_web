@@ -30,12 +30,6 @@ class Contacts extends Component {
 			`--contact-window-vertical-height`,
 			contactWindowVerticalHeight
 		);
-
-		const numberOfPixelsPerSpan = windowWidth / 24;
-		let buttonWidth = numberOfPixelsPerSpan * 5;
-		if (windowWidth < 768) {
-			buttonWidth = numberOfPixelsPerSpan * 6;
-		}
 		return (
 			<List
 				className="contact-infinite-container"
@@ -119,7 +113,8 @@ class Contacts extends Component {
 		return (
 			<Content
 				style={{
-					background: colorTheme.textDot5Color
+					background: colorTheme.textDot5Color,
+					borderColor: colorTheme.text8Color
 				}}
 			>
 				{this.renderContactButtons()}

@@ -57,8 +57,8 @@ class Conversation extends Component {
 					<Col
 						sm={{ span: 6 }}
 						md={{ span: 6 }}
-						lg={{ span: 5 }}
-						xl={{ span: 5, offset: 2 }}
+						lg={{ span: 4 }}
+						xl={{ span: 4, offset: 2 }}
 					>
 						<Contacts />
 					</Col>
@@ -74,7 +74,7 @@ class Conversation extends Component {
 						sm={{ span: 0 }}
 						md={{ span: 0 }}
 						lg={{ span: 6 }}
-						xl={{ span: 6 }}
+						xl={{ offset: 1, span: 6 }}
 					>
 						{this.renderContactInformation()}
 					</Col>
