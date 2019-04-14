@@ -12,6 +12,8 @@ import LogoutButton from "../navigationButtons/LogoutButton";
 import LoginButtons from "./LoginButtons";
 import { GREY_9, GREY_1 } from "../styles/ColorConstants";
 import { Layout, Row, Col } from "antd";
+import "./custom-header.css";
+
 const { Header } = Layout;
 
 class CustomHeader extends Component {
@@ -49,30 +51,33 @@ class CustomHeader extends Component {
 					sm={{ span: 14 }}
 					md={{ span: 13 }}
 					lg={{ span: 15 }}
-					xl={{ span: 14 }}
+					xl={{ span: 16 }}
 				>
 					<Row type="flex" justify="start" align="middle">
 						<Col>
-							<img
-								alt=""
-								style={{ width: "32px" }}
-								src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
-							/>
+							<a href="/">
+								<img
+									alt=""
+									style={{ width: "32px" }}
+									src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
+								/>
+							</a>
 						</Col>
 						<Col>
-							{" "}
-							<h2
-								style={{
-									padding: "0px 0px 0px 10px",
-									color: GREY_1,
-									fontFamily: "Overpass",
-									marginBottom: 0,
-									lineHeight: 1,
-									fontSize: 20
-								}}
-							>
-								infinity2o
-							</h2>
+							<a className="custom-header-anchor" href="/">
+								<h2
+									style={{
+										padding: "0px 0px 0px 10px",
+										color: GREY_1,
+										fontFamily: "Overpass",
+										marginBottom: 0,
+										lineHeight: 1,
+										fontSize: 20
+									}}
+								>
+									infinity2o
+								</h2>
+							</a>
 						</Col>
 					</Row>
 				</Col>
