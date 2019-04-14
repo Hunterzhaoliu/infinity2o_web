@@ -1,8 +1,5 @@
 /* https://stackoverflow.com/questions/3296644/hiding-the-scrollbar-on-an-html-page */
-
-.chat-window-infinite-container {
-	border-radius: 0px;
-	padding-right: 0px;
+.chat-list {
 	height: var(--chat-window-vertical-height);
 	overflow: scroll;
 	overflow-x: hidden;
