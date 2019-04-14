@@ -37,8 +37,8 @@ class VoteComparison extends Component {
 							borderded="false"
 							loading={false}
 							style={{
-								borderColor: colorTheme.text8Color,
-								background: colorTheme.text8Color
+								borderColor: colorTheme.textDot5Color,
+								background: colorTheme.textDot5Color
 							}}
 							bodyStyle={{ padding: "30px" }}
 						>
@@ -103,8 +103,8 @@ class VoteComparison extends Component {
 							borderded="false"
 							loading={false}
 							style={{
-								borderColor: colorTheme.text8Color,
-								background: colorTheme.text8Color
+								borderColor: colorTheme.textDot5Color,
+								background: colorTheme.textDot5Color
 							}}
 							bodyStyle={{ padding: "30px" }}
 						>
