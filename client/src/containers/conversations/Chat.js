@@ -75,19 +75,12 @@ class Chat extends Component {
 			windowWidth,
 			windowHeight
 		} = this.props;
-		const chatWindowHeight = windowHeight - 160;
+		const chatWindowHeight = windowHeight - 180;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 		document.documentElement.style.setProperty(
 			`--chat-window-vertical-height`,
 			chatWindowVerticalHeight
 		);
-
-		// finding the right number of pixels for the chat input
-		const numberOfPixelsPerSpan = windowWidth / 24;
-		let inputWidth = numberOfPixelsPerSpan * 9 - 5;
-		if (windowWidth < 768) {
-			inputWidth = numberOfPixelsPerSpan * 18 - 5;
-		}
 
 		// used to place div after last message
 		const last50MessagesLength = chat.last50Messages.length;
@@ -101,7 +94,7 @@ class Chat extends Component {
 			<Content
 				style={{
 					textAlign: "center",
-					background: colorTheme.backgroundColor,
+					background: colorTheme.textDot5Color,
 					padding: "0px 0px 0px 0px"
 				}}
 			>
@@ -169,17 +162,16 @@ class Chat extends Component {
 					}}
 				/>
 				<Row type="flex" justify="start" align="middle">
-					<Col>
+					<Col xl={{ span: 24 }}>
 						<Input
+							className="chat-input"
 							value={chat.currentMessage}
 							placeholder="type here..."
 							onChange={this.onChangeCurrentMessage}
 							onPressEnter={this.onPressEnter}
 							style={{
-								width: inputWidth,
-								borderColor: colorTheme.text7Color,
-								background: colorTheme.text7Color,
-								color: colorTheme.text1Color
+								borderColor: colorTheme.text8Color,
+								background: colorTheme.textDot5Color
 							}}
 						/>
 					</Col>

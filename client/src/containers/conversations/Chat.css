@@ -9,3 +9,18 @@
 	width: 0px; /* remove scrollbar space */
 	/* background: transparent;  optional: just make scrollbar invisible */
 }
+
+.chat-input {
+	border-radius: 0px;
+	border-width: 1px 0px 0px 0px;
+	height: 60px;
+	font-family: "Overpass";
+	line-height: 1;
+	margin-bottom: 0;
+	font-weight: 100;
+	font-size: 16px;
+}
+
+.chat-input:focus {
+	box-shadow: none;
+}
