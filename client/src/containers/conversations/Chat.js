@@ -5,7 +5,7 @@ import * as chatActionCreators from "../../actions/conversations/chat";
 import { bindActionCreators } from "redux";
 import "./Chat.css";
 
-import { Layout, Input, Row, Col, Icon, List } from "antd";
+import { Layout, Row, Col, Icon, List } from "antd";
 const { Content } = Layout;
 
 class Chat extends Component {
@@ -163,7 +163,7 @@ class Chat extends Component {
 				/>
 				<Row type="flex" justify="start" align="middle">
 					<Col xl={{ span: 24 }}>
-						<Input
+						<input
 							className="chat-input"
 							value={chat.currentMessage}
 							placeholder="type here..."
