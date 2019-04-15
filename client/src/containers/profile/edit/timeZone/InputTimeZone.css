@@ -61,15 +61,15 @@
 }
 
 /* color of Time Zone box when hover */
-.ant-input:hover {
+.input-time-zone-cascader .ant-input:hover {
 	border-color: var(--text7Color);
 }
 
-.ant-input {
+.input-time-zone-cascader .ant-input {
 	height: 40px;
 }
 
-.ant-input:focus {
+.input-time-zone-cascader .ant-input:focus {
 	border: none;
 	box-shadow: none;
 }

@@ -23,16 +23,21 @@ class Contacts extends Component {
 			windowHeight
 		} = this.props;
 
-		const contactWindowHeight = windowHeight - 180;
+		const contactWindowHeight = windowHeight - 120;
 		const contactWindowVerticalHeight =
 			contactWindowHeight.toString() + "px";
 		document.documentElement.style.setProperty(
 			`--contact-window-vertical-height`,
 			contactWindowVerticalHeight
 		);
+
+		document.documentElement.style.setProperty(
+			`--keyText8Color`,
+			colorTheme.keyText8Color
+		);
 		return (
 			<List
-				className="contact-infinite-container"
+				className="contacts-list"
 				dataSource={contacts.allContacts}
 				renderItem={contact => {
 					let borderColor = colorTheme.textDot5Color;
