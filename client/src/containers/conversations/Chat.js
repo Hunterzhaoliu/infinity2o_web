@@ -67,14 +67,7 @@ class Chat extends Component {
 	}
 
 	render() {
-		//console.log('Chat this.props = ', this.props);
-		const {
-			colorTheme,
-			chat,
-			userId,
-			windowWidth,
-			windowHeight
-		} = this.props;
+		const { colorTheme, chat, userId, windowHeight } = this.props;
 		const chatWindowHeight = windowHeight - 180;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 		document.documentElement.style.setProperty(
@@ -198,7 +191,6 @@ function mapStateToProps(state) {
 		selectedContactMongoDBId:
 			state.contacts.selectedConversationInfo.selectedContactMongoDBInfo
 				.id,
-		windowWidth: state.customHeader.windowWidth,
 		windowHeight: state.customHeader.windowHeight
 	};
 }
