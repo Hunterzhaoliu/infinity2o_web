@@ -56,6 +56,7 @@ class InputTimeZone extends Component {
 					</Col>
 					<Col xl={{ offset: 1 }}>
 						<Cascader
+							className="input-time-zone-cascader"
 							style={{
 								background: colorTheme.text8Color
 							}}

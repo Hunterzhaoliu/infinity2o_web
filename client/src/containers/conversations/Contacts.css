@@ -1,9 +1,11 @@
-.contact-infinite-container {
-	border-radius: 0px;
-	padding: 0px 0px;
+.contacts-list {
 	height: var(--contact-window-vertical-height);
 	overflow: scroll;
 	overflow-x: hidden;
+}
+
+.ant-list-split .ant-list-item {
+	border-bottom: 0px;
 }
 
 ::-webkit-scrollbar {
@@ -12,12 +14,15 @@
 
 .contacts-button {
 	font-family: "Overpass";
-	line-height: 80px;
+	line-height: 64px;
 	font-size: 18px;
 	border-style: none;
 	width: 100%;
+	padding: 0px;
 }
 
 .contacts-button:hover {
 	cursor: pointer;
+	background-color: var(--keyText8Color) !important;
+	box-shadow: "4px 0px 0px 0px " + var(--keyText8Color) + " inset" !important;
 }
