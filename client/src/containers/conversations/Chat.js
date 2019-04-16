@@ -5,7 +5,7 @@ import * as chatActionCreators from "../../actions/conversations/chat";
 import { bindActionCreators } from "redux";
 import "./Chat.css";
 
-import { Layout, Row, Col, Icon, List } from "antd";
+import { Layout, Input, Row, Col, Icon, List } from "antd";
 const { Content } = Layout;
 
 class Chat extends Component {
@@ -34,14 +34,18 @@ class Chat extends Component {
 			userId,
 			chat
 		} = this.props;
-		this.props.sendMessageToServer(
-			conversationId,
-			selectedContactOnline,
-			selectedContactSocketId,
-			selectedContactMongoDBId,
-			userId,
-			chat.currentMessage
-		);
+
+		if (chat.currentMessage.replace(/\s/g, "").length) {
+			// string does not only contains whitespace
+			this.props.sendMessageToServer(
+				conversationId,
+				selectedContactOnline,
+				selectedContactSocketId,
+				selectedContactMongoDBId,
+				userId,
+				chat.currentMessage
+			);
+		}
 	};
 
 	renderMessageStatusIcon(status, item, userId) {
@@ -70,6 +74,12 @@ class Chat extends Component {
 		const { colorTheme, chat, userId, windowHeight } = this.props;
 		const chatWindowHeight = windowHeight - 180;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
+
+		document.documentElement.style.setProperty(
+			`--text4Color`,
+			colorTheme.text4Color
+		);
+
 		document.documentElement.style.setProperty(
 			`--chat-window-vertical-height`,
 			chatWindowVerticalHeight
@@ -156,15 +166,16 @@ class Chat extends Component {
 				/>
 				<Row type="flex" justify="start" align="middle">
 					<Col xl={{ span: 24 }}>
-						<input
+						<Input
 							className="chat-input"
 							value={chat.currentMessage}
-							placeholder="type here..."
+							placeHolder="Type a message..."
 							onChange={this.onChangeCurrentMessage}
 							onPressEnter={this.onPressEnter}
 							style={{
 								borderColor: colorTheme.text8Color,
-								background: colorTheme.textDot5Color
+								background: colorTheme.textDot5Color,
+								color: colorTheme.text8Color
 							}}
 						/>
 					</Col>

@@ -19,9 +19,9 @@
 	line-height: 1;
 	margin-bottom: 0;
 	font-size: 16px;
-	outline: none;
 }
 
 .chat-input:focus {
 	box-shadow: none;
+	color: var(--text4Color) !important;
 }
