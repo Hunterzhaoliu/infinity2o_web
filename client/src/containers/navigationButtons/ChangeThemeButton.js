@@ -1,21 +1,28 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
+import * as customHeaderActionCreators from "../../actions/customHeader";
 import { connect } from "react-redux";
 import { Icon } from "antd";
 import "./change-theme-button.css";
 
 class ChangeThemeButton extends Component {
-	renderSaveIcon(saveState) {
-		if (saveState === "save_start") {
+	renderButtonDisplay(saveState) {
+		if (saveState === "save_done" || saveState === null) {
+			return (
+				<img
+					alt=""
+					style={{ width: "32px" }}
+					src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
+				/>
+			);
+		} else if (saveState === "save_start") {
 			return (
 				<Icon
 					style={{ width: "32px", padding: "0px 16px 0px" }}
 					type="loading"
 				/>
 			);
-		} else if (saveState === "save_done") {
-			return;
 		} else if (saveState === "save_error") {
 			return (
 				<Icon
@@ -27,28 +34,25 @@ class ChangeThemeButton extends Component {
 	}
 
 	render() {
-		const { colorTheme, onRandomColorTheme, colorThemeSave } = this.props;
+		const {
+			windowWidth,
+			loggedInState,
+			colorTheme,
+			colorThemeSave,
+			onRandomColorTheme,
+			toggleMenu
+		} = this.props;
 
-		document.documentElement.style.setProperty(
-			`--text8Color`,
-			colorTheme.text8Color
-		);
 		document.documentElement.style.setProperty(
 			`--keyText4Color`,
 			colorTheme.keyText4Color
 		);
 
-		if (colorThemeSave === "save_done" || colorThemeSave === null) {
+		if (windowWidth < 768 && loggedInState === "logged_in") {
+			// need to have change theme button toggle the menu instead of changing theme
 			return (
-				<button
-					className="change-theme-button"
-					onClick={onRandomColorTheme}
-				>
-					<img
-						alt=""
-						style={{ width: "32px" }}
-						src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
-					/>
+				<button className="change-theme-button" onClick={toggleMenu}>
+					{this.renderButtonDisplay(colorThemeSave)}
 				</button>
 			);
 		} else {
@@ -57,7 +61,7 @@ class ChangeThemeButton extends Component {
 					className="change-theme-button"
 					onClick={onRandomColorTheme}
 				>
-					{this.renderSaveIcon(colorThemeSave)}
+					{this.renderButtonDisplay(colorThemeSave)}
 				</button>
 			);
 		}
@@ -67,7 +71,9 @@ class ChangeThemeButton extends Component {
 function mapStateToProps(state) {
 	return {
 		colorTheme: state.colorTheme,
-		colorThemeSave: state.profile.colorThemeSave
+		colorThemeSave: state.profile.colorThemeSave,
+		windowWidth: state.customHeader.windowWidth,
+		loggedInState: state.auth.loggedInState
 	};
 }
 
@@ -76,9 +82,18 @@ function mapDispatchToProps(dispatch) {
 		colorThemeActionCreators,
 		dispatch
 	);
+
+	const customHeaderDispatchers = bindActionCreators(
+		customHeaderActionCreators,
+		dispatch
+	);
+
 	return {
 		onRandomColorTheme: () => {
 			colorThemeDispatchers.generateRandomColorTheme();
+		},
+		toggleMenu: () => {
+			customHeaderDispatchers.toggleMenu();
 		}
 	};
 }
