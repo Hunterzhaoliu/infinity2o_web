@@ -1,6 +1,6 @@
 .change-theme-button {
-	border-color: var(--text8Color);
-	background-color: var(--text8Color);
+	border-color: transparent;
+	background-color: transparent;
 	border-radius: 0;
 	padding: 0px 16px;
 	height: 60px;
