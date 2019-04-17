@@ -87,22 +87,13 @@ class CustomHeader extends Component {
 	}
 
 	renderHeaderButtons() {
-		const { loggedInState, windowWidth, toggleMenu } = this.props;
+		const { loggedInState, windowWidth } = this.props;
 
 		if (windowWidth < 768 && loggedInState === "logged_in") {
 			return (
 				<Row type="flex" justify="start">
 					<Col>
-						<button
-							style={{
-								backgroundColor: "transparent",
-								border: "none",
-								padding: "0px"
-							}}
-							onClick={toggleMenu}
-						>
-							<ChangeThemeButton />
-						</button>
+						<ChangeThemeButton />
 					</Col>
 				</Row>
 			);
@@ -200,9 +191,6 @@ function mapDispatchToProps(dispatch) {
 				newWindowWidth,
 				newWindowHeight
 			);
-		},
-		toggleMenu: () => {
-			customHeaderDispatchers.toggleMenu();
 		}
 	};
 }
