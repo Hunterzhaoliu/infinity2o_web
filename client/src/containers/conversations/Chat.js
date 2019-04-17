@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as chatActionCreators from "../../actions/conversations/chat";
 import { bindActionCreators } from "redux";
+import { Layout, Input, Row, Col, Icon, List, Avatar } from "antd";
 import "./Chat.css";
 
-import { Layout, Input, Row, Col, Icon, List } from "antd";
 const { Content } = Layout;
 
 class Chat extends Component {
@@ -26,27 +26,37 @@ class Chat extends Component {
 
 	onPressEnter = () => {
 		//console.log('pressed enter');
-		const {
-			conversationId,
-			selectedContactOnline,
-			selectedContactSocketId,
-			selectedContactMongoDBId,
-			userId,
-			chat
-		} = this.props;
+		const { selectedConversationInfo, userId, chat } = this.props;
 
 		if (chat.currentMessage.replace(/\s/g, "").length) {
 			// string does not only contains whitespace
 			this.props.sendMessageToServer(
-				conversationId,
-				selectedContactOnline,
-				selectedContactSocketId,
-				selectedContactMongoDBId,
+				selectedConversationInfo.conversationId,
+				selectedConversationInfo.selectedContactOnline,
+				selectedConversationInfo.selectedContactSocketId,
+				selectedConversationInfo.selectedContactMongoDBId,
 				userId,
 				chat.currentMessage
 			);
 		}
 	};
+
+	renderPicture(imageUrl) {
+		if (imageUrl !== undefined && imageUrl !== null) {
+			return (
+				<Avatar
+					style={{
+						width: "50px",
+						height: "50px"
+					}}
+					shape="circle"
+					src={imageUrl}
+				/>
+			);
+		} else {
+			return <div />;
+		}
+	}
 
 	renderMessageStatusIcon(status, item, userId) {
 		if (item.senderId === userId) {
@@ -71,7 +81,13 @@ class Chat extends Component {
 	}
 
 	render() {
-		const { colorTheme, chat, userId, windowHeight } = this.props;
+		const {
+			colorTheme,
+			chat,
+			userId,
+			windowHeight,
+			selectedConversationInfo
+		} = this.props;
 		const chatWindowHeight = windowHeight - 180;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 
@@ -101,75 +117,84 @@ class Chat extends Component {
 					padding: "0px 0px 0px 0px"
 				}}
 			>
-				<List
-					className="chat-list"
-					dataSource={chat.last50Messages}
-					renderItem={item => {
-						const message = item.content;
-						let justifyValue = "start";
-						if (item.senderId === userId) {
-							justifyValue = "end";
-						}
+				<Row type="flex" justify="center" align="middle">
+					<Col />
+				</Row>
+				<Row type="flex" justify="center" align="middle">
+					<Col />
+				</Row>
+				<Row>
+					<Col>
+						<List
+							className="chat-list"
+							dataSource={chat.last50Messages}
+							renderItem={item => {
+								const message = item.content;
+								let justifyValue = "start";
+								if (item.senderId === userId) {
+									justifyValue = "end";
+								}
 
-						return (
-							<Row
-								type="flex"
-								justify={justifyValue}
-								align="middle"
-								style={{
-									padding: "0px 0px 0px 0px"
-								}}
-							>
-								<Col>
-									<List.Item
+								return (
+									<Row
+										type="flex"
+										justify={justifyValue}
+										align="middle"
 										style={{
 											padding: "0px 0px 0px 0px"
 										}}
 									>
-										<p
-											style={{
-												borderColor:
-													colorTheme.text8Color,
-												borderWidth: "2px",
-												background:
-													colorTheme.text8Color,
-												color: colorTheme.text3Color,
-												borderRadius: "25px",
-												padding: "4px 15px 4px"
-											}}
-										>
-											{message}
-										</p>
-									</List.Item>
-								</Col>
-								<Col>
-									<p
-										style={{
-											color: colorTheme.text8Color,
-											padding: "12px 0px 0px 5px"
-										}}
-									>
-										{this.renderMessageStatusIcon(
-											"delivered",
-											item,
-											userId
-										)}
-									</p>
-									{this.renderLastMessageDiv(
-										lastMessageDate,
-										item.timeCreated
-									)}
-								</Col>
-							</Row>
-						);
-					}}
-				/>
+										<Col>
+											<List.Item
+												style={{ padding: "0px 0px" }}
+											>
+												<p
+													style={{
+														borderColor:
+															colorTheme.text8Color,
+														borderWidth: "2px",
+														background:
+															colorTheme.text8Color,
+														color:
+															colorTheme.text3Color,
+														padding: "4px 15px 4px"
+													}}
+												>
+													{message}
+												</p>
+											</List.Item>
+										</Col>
+										<Col>
+											<p
+												style={{
+													color:
+														colorTheme.text8Color,
+													padding: "12px 0px 0px 5px"
+												}}
+											>
+												{this.renderMessageStatusIcon(
+													"delivered",
+													item,
+													userId
+												)}
+											</p>
+											{this.renderLastMessageDiv(
+												lastMessageDate,
+												item.timeCreated
+											)}
+										</Col>
+									</Row>
+								);
+							}}
+						/>
+					</Col>
+				</Row>
 				<Row type="flex" justify="start" align="middle">
 					<Col xl={{ span: 24 }}>
 						<Input
 							className="chat-input"
 							value={chat.currentMessage}
-							placeHolder="Type a message..."
+							placeholder="Type a message..."
 							onChange={this.onChangeCurrentMessage}
 							onPressEnter={this.onPressEnter}
 							style={{
@@ -194,14 +219,7 @@ function mapStateToProps(state) {
 		colorTheme: state.colorTheme,
 		chat: state.chat,
 		userId: state.auth.mongoDBUserId,
-		conversationId: state.contacts.selectedConversationInfo.conversationId,
-		selectedContactOnline:
-			state.contacts.selectedConversationInfo.selectedContactOnline,
-		selectedContactSocketId:
-			state.contacts.selectedConversationInfo.selectedContactSocketId,
-		selectedContactMongoDBId:
-			state.contacts.selectedConversationInfo.selectedContactMongoDBInfo
-				.id,
+		selectedConversationInfo: state.contacts.selectedConversationInfo,
 		windowHeight: state.customHeader.windowHeight
 	};
 }
