@@ -58,10 +58,75 @@ class Chat extends Component {
 		}
 	}
 
-	renderLastMessageDiv(lastMessageDate, lastItemTimeCreated) {
-		if (lastMessageDate === lastItemTimeCreated) {
+	renderLastMessageDiv(last50Messages, lastMessageTime) {
+		// used to place div after last message
+		const last50MessagesLength = last50Messages.length;
+		let lastMessageDate;
+		if (last50MessagesLength > 1) {
+			lastMessageDate =
+				last50Messages[last50MessagesLength - 1].timeCreated;
+		}
+
+		if (lastMessageDate === lastMessageTime) {
 			return <div id="lastMessage" />;
 		}
+	}
+
+	renderMessages() {
+		const { chat, colorTheme } = this.props;
+
+		for (
+			let messageIndex = 0;
+			i < chat.last50Messages.length;
+			messageIndex++
+		) {}
+		<List
+			className="chat-list"
+			dataSource={chat.last50Messages}
+			renderItem={item => {
+				const message = item.content;
+				let justifyValue = "start";
+				let messageBackgroundColor = colorTheme.keyText8Color;
+				if (item.senderId === userId) {
+					messageBackgroundColor =
+						colorTheme.keyCompliment1Text8Color;
+					justifyValue = "end";
+				}
+
+				return (
+					<Row
+						type="flex"
+						justify={justifyValue}
+						align="middle"
+						style={{
+							padding: "0px 0px 0px 0px"
+						}}
+					>
+						<Col>
+							<List.Item style={{ padding: "0px 0px" }}>
+								<p
+									style={{
+										background: messageBackgroundColor,
+										color: colorTheme.text3Color,
+										padding: "6px 12px 7px",
+										fontFamily: "Overpass",
+										fontSize: "14px"
+									}}
+								>
+									{message}
+								</p>
+							</List.Item>
+						</Col>
+						<Col>
+							{this.renderLastMessageDiv(
+								chat.last50Messages,
+								item.timeCreated
+							)}
+						</Col>
+					</Row>
+				);
+			}}
+		/>;
 	}
 
 	render() {
@@ -85,14 +150,6 @@ class Chat extends Component {
 			chatWindowVerticalHeight
 		);
 
-		// used to place div after last message
-		const last50MessagesLength = chat.last50Messages.length;
-		let lastMessageDate;
-		if (last50MessagesLength > 1) {
-			lastMessageDate =
-				chat.last50Messages[last50MessagesLength - 1].timeCreated;
-		}
-
 		return (
 			<Content
 				style={{
@@ -109,57 +166,7 @@ class Chat extends Component {
 				</Row>
 				<Row style={{ padding: "0px 30px 0px" }}>
 					<Col>
-						<List
-							className="chat-list"
-							dataSource={chat.last50Messages}
-							renderItem={item => {
-								const message = item.content;
-								let justifyValue = "start";
-								let messageBackgroundColor =
-									colorTheme.keyText8Color;
-								if (item.senderId === userId) {
-									messageBackgroundColor =
-										colorTheme.keyCompliment1Text8Color;
-									justifyValue = "end";
-								}
-
-								return (
-									<Row
-										type="flex"
-										justify={justifyValue}
-										align="middle"
-										style={{
-											padding: "0px 0px 0px 0px"
-										}}
-									>
-										<Col>
-											<List.Item
-												style={{ padding: "0px 0px" }}
-											>
-												<p
-													style={{
-														background: messageBackgroundColor,
-														color:
-															colorTheme.text3Color,
-														padding: "6px 12px 7px",
-														fontFamily: "Overpass",
-														fontSize: "14px"
-													}}
-												>
-													{message}
-												</p>
-											</List.Item>
-										</Col>
-										<Col>
-											{this.renderLastMessageDiv(
-												lastMessageDate,
-												item.timeCreated
-											)}
-										</Col>
-									</Row>
-								);
-							}}
-						/>
+						<li>{this.renderMessages()}</li>
 					</Col>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
