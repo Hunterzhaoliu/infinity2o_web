@@ -143,6 +143,7 @@ function _generateColorThemeBasedOnBackground(
 	}
 	let newKey = colors5[colorPallateIndex].key;
 	let newKeyCompliment1 = colors5[colorPallateIndex].keyCompliment1;
+	let newKeyCompliment1Text8Color = colors2[colorPallateIndex].keyCompliment1;
 	let newKeyCompliment2 = colors5[colorPallateIndex].keyCompliment2;
 	let newThirdColor = colors5[colorPallateIndex].thirdColor;
 	let newText1Color = GREY_9;
@@ -165,10 +166,7 @@ function _generateColorThemeBasedOnBackground(
 
 	if (oldBackgroundColor === GREY_1) {
 		newBackgroundColor = GREY_9;
-		newKey = colors5[colorPallateIndex].key;
-		newKeyCompliment1 = colors5[colorPallateIndex].keyCompliment1;
-		newKeyCompliment2 = colors5[colorPallateIndex].keyCompliment2;
-		newThirdColor = colors5[colorPallateIndex].thirdColor;
+		newKeyCompliment1Text8Color = colors8[colorPallateIndex].keyCompliment1;
 		newText1Color = GREY_1;
 		newText2Color = GREY_2;
 		newText3Color = GREY_3;
@@ -193,6 +191,7 @@ function _generateColorThemeBasedOnBackground(
 		backgroundColor: newBackgroundColor,
 		key: newKey,
 		keyCompliment1: newKeyCompliment1,
+		keyCompliment1Text8Color: newKeyCompliment1Text8Color,
 		keyCompliment2: newKeyCompliment2,
 		thirdColor: newThirdColor,
 		textDot5Color: newText9Dot5Color,

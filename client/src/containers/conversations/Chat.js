@@ -58,22 +58,6 @@ class Chat extends Component {
 		}
 	}
 
-	renderMessageStatusIcon(status, item, userId) {
-		if (item.senderId === userId) {
-			if (status === "sending") {
-				return <Icon type="loading" />;
-			} else if (status === "sent") {
-				return <Icon type="check-circle-o" />;
-			} else if (status === "delivered") {
-				return <Icon type="check-circle" />;
-			} else if (status === "failed-delivery") {
-				return <Icon type="warning" />;
-			}
-		} else {
-			// no need to show if partner's message successfully reached us to us
-		}
-	}
-
 	renderLastMessageDiv(lastMessageDate, lastItemTimeCreated) {
 		if (lastMessageDate === lastItemTimeCreated) {
 			return <div id="lastMessage" />;
@@ -131,7 +115,11 @@ class Chat extends Component {
 							renderItem={item => {
 								const message = item.content;
 								let justifyValue = "start";
+								let messageBackgroundColor =
+									colorTheme.keyText8Color;
 								if (item.senderId === userId) {
+									messageBackgroundColor =
+										colorTheme.keyCompliment1Text8Color;
 									justifyValue = "end";
 								}
 
@@ -150,14 +138,10 @@ class Chat extends Component {
 											>
 												<p
 													style={{
-														borderColor:
-															colorTheme.text8Color,
-														borderWidth: "2px",
-														background:
-															colorTheme.text8Color,
+														background: messageBackgroundColor,
 														color:
 															colorTheme.text3Color,
-														padding: "4px 15px 4px"
+														padding: "6px 12px 7px"
 													}}
 												>
 													{message}
@@ -165,19 +149,6 @@ class Chat extends Component {
 											</List.Item>
 										</Col>
 										<Col>
-											<p
-												style={{
-													color:
-														colorTheme.text8Color,
-													padding: "12px 0px 0px 5px"
-												}}
-											>
-												{this.renderMessageStatusIcon(
-													"delivered",
-													item,
-													userId
-												)}
-											</p>
 											{this.renderLastMessageDiv(
 												lastMessageDate,
 												item.timeCreated
