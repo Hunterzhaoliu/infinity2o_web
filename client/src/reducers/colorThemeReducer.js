@@ -18,6 +18,7 @@ let initialState = {
 	backgroundColor: null,
 	key: null,
 	keyCompliment1: null,
+	keyCompliment1Text8Color: null,
 	keyCompliment2: null,
 	thirdColor: null,
 	textDot5Color: null,
@@ -134,13 +135,9 @@ function _getStateForSection(newState) {
 
 function _updateColorTheme(newState, action) {
 	newState.backgroundColor = action.backgroundColor;
-	newState.keyBackgroundColor = action.keyBackgroundColor;
-	newState.keyCompliment1BackgroundColor =
-		action.keyCompliment1BackgroundColor;
-	newState.keyCompliment2BackgroundColor =
-		action.keyCompliment2BackgroundColor;
 	newState.key = action.key;
 	newState.keyCompliment1 = action.keyCompliment1;
+	newState.keyCompliment1Text8Color = action.keyCompliment1Text8Color;
 	newState.keyCompliment2 = action.keyCompliment2;
 	newState.thirdColor = action.thirdColor;
 	newState.textDot5Color = action.textDot5Color;
