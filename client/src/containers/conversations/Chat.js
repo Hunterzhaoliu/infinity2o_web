@@ -107,7 +107,7 @@ class Chat extends Component {
 				<Row type="flex" justify="center" align="middle">
 					<Col />
 				</Row>
-				<Row>
+				<Row style={{ padding: "0px 30px 0px" }}>
 					<Col>
 						<List
 							className="chat-list"
@@ -141,7 +141,9 @@ class Chat extends Component {
 														background: messageBackgroundColor,
 														color:
 															colorTheme.text3Color,
-														padding: "6px 12px 7px"
+														padding: "6px 12px 7px",
+														fontFamily: "Overpass",
+														fontSize: "14px"
 													}}
 												>
 													{message}
