@@ -58,28 +58,15 @@ class Chat extends Component {
 		}
 	}
 
-	renderLastMessageDiv(last50Messages, lastMessageTime) {
+	renderLastMessageDiv(messageIndex, messagesLength) {
 		// used to place div after last message
-		const last50MessagesLength = last50Messages.length;
-		let lastMessageDate;
-		if (last50MessagesLength > 1) {
-			lastMessageDate =
-				last50Messages[last50MessagesLength - 1].timeCreated;
+		if (messageIndex === messagesLength - 1) {
+			return (
+				<Col>
+					<div id="lastMessage" />
+				</Col>
+			);
 		}
-
-		if (lastMessageDate === lastMessageTime) {
-			return <div id="lastMessage" />;
-		}
-	}
-
-	renderMessages() {
-		const { chat, colorTheme, userId } = this.props;
-
-		for (
-			let messageIndex = 0;
-			messageIndex < chat.last50Messages.length;
-			messageIndex++
-		) {}
 	}
 
 	render() {
@@ -90,7 +77,7 @@ class Chat extends Component {
 			selectedConversationInfo,
 			userId
 		} = this.props;
-		const chatWindowHeight = windowHeight - 180;
+		const chatWindowHeight = windowHeight - 210;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 
 		document.documentElement.style.setProperty(
@@ -117,22 +104,35 @@ class Chat extends Component {
 				<Row type="flex" justify="center" align="middle">
 					<Col />
 				</Row>
-				<Row style={{ padding: "0px 30px 0px" }}>
+				<Row style={{ padding: "0px 30px 30px" }}>
 					<Col>
 						<List
 							className="chat-list"
 							dataSource={chat.last50Messages}
-							renderItem={item => {
-								const message = item.content;
+							renderItem={(messageInfo, messageIndex) => {
+								const message = messageInfo.content;
 								let justifyValue = "start";
 								let messageBackgroundColor =
 									colorTheme.keyText8Color;
-								if (item.senderId === userId) {
+								if (messageInfo.senderId === userId) {
 									messageBackgroundColor =
 										colorTheme.keyCompliment1Text8Color;
 									justifyValue = "end";
 								}
-
+								console.log(
+									"chat.last50Messages[messageIndex + 1] = ",
+									chat.last50Messages[messageIndex + 1]
+								);
+								let messageMarginBottom = "2px";
+								if (
+									messageIndex !==
+										chat.last50Messages.length - 1 &&
+									chat.last50Messages[messageIndex + 1]
+										.senderId !== messageInfo.senderId
+								) {
+									// different person sending upcoming message so need to add additional padding
+									messageMarginBottom = "30px";
+								}
 								return (
 									<Row
 										type="flex"
@@ -153,19 +153,18 @@ class Chat extends Component {
 															colorTheme.text3Color,
 														padding: "6px 12px 7px",
 														fontFamily: "Overpass",
-														fontSize: "14px"
+														fontSize: "14px",
+														marginBottom: messageMarginBottom
 													}}
 												>
 													{message}
 												</p>
 											</List.Item>
 										</Col>
-										<Col>
-											{this.renderLastMessageDiv(
-												chat.last50Messages,
-												item.timeCreated
-											)}
-										</Col>
+										{this.renderLastMessageDiv(
+											messageIndex,
+											chat.last50Messages.length
+										)}
 									</Row>
 								);
 							}}
