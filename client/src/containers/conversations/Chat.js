@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as chatActionCreators from "../../actions/conversations/chat";
 import { bindActionCreators } from "redux";
-import { Layout, Input, Row, Col, Icon, List, Avatar } from "antd";
+import { Layout, Input, Row, Col, List, Avatar } from "antd";
 import "./Chat.css";
 
 const { Content } = Layout;
@@ -58,86 +58,26 @@ class Chat extends Component {
 		}
 	}
 
-	renderLastMessageDiv(last50Messages, lastMessageTime) {
+	renderLastMessageDiv(messageIndex, messagesLength) {
 		// used to place div after last message
-		const last50MessagesLength = last50Messages.length;
-		let lastMessageDate;
-		if (last50MessagesLength > 1) {
-			lastMessageDate =
-				last50Messages[last50MessagesLength - 1].timeCreated;
+		if (messageIndex === messagesLength - 1) {
+			return (
+				<Col>
+					<div id="lastMessage" />
+				</Col>
+			);
 		}
-
-		if (lastMessageDate === lastMessageTime) {
-			return <div id="lastMessage" />;
-		}
-	}
-
-	renderMessages() {
-		const { chat, colorTheme } = this.props;
-
-		for (
-			let messageIndex = 0;
-			i < chat.last50Messages.length;
-			messageIndex++
-		) {}
-		<List
-			className="chat-list"
-			dataSource={chat.last50Messages}
-			renderItem={item => {
-				const message = item.content;
-				let justifyValue = "start";
-				let messageBackgroundColor = colorTheme.keyText8Color;
-				if (item.senderId === userId) {
-					messageBackgroundColor =
-						colorTheme.keyCompliment1Text8Color;
-					justifyValue = "end";
-				}
-
-				return (
-					<Row
-						type="flex"
-						justify={justifyValue}
-						align="middle"
-						style={{
-							padding: "0px 0px 0px 0px"
-						}}
-					>
-						<Col>
-							<List.Item style={{ padding: "0px 0px" }}>
-								<p
-									style={{
-										background: messageBackgroundColor,
-										color: colorTheme.text3Color,
-										padding: "6px 12px 7px",
-										fontFamily: "Overpass",
-										fontSize: "14px"
-									}}
-								>
-									{message}
-								</p>
-							</List.Item>
-						</Col>
-						<Col>
-							{this.renderLastMessageDiv(
-								chat.last50Messages,
-								item.timeCreated
-							)}
-						</Col>
-					</Row>
-				);
-			}}
-		/>;
 	}
 
 	render() {
 		const {
 			colorTheme,
 			chat,
-			userId,
 			windowHeight,
-			selectedConversationInfo
+			selectedConversationInfo,
+			userId
 		} = this.props;
-		const chatWindowHeight = windowHeight - 180;
+		const chatWindowHeight = windowHeight - 210;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 
 		document.documentElement.style.setProperty(
@@ -164,9 +104,71 @@ class Chat extends Component {
 				<Row type="flex" justify="center" align="middle">
 					<Col />
 				</Row>
-				<Row style={{ padding: "0px 30px 0px" }}>
+				<Row style={{ padding: "0px 30px 30px" }}>
 					<Col>
-						<li>{this.renderMessages()}</li>
+						<List
+							className="chat-list"
+							dataSource={chat.last50Messages}
+							renderItem={(messageInfo, messageIndex) => {
+								const message = messageInfo.content;
+								let justifyValue = "start";
+								let messageBackgroundColor =
+									colorTheme.keyText8Color;
+								if (messageInfo.senderId === userId) {
+									messageBackgroundColor =
+										colorTheme.keyCompliment1Text8Color;
+									justifyValue = "end";
+								}
+								console.log(
+									"chat.last50Messages[messageIndex + 1] = ",
+									chat.last50Messages[messageIndex + 1]
+								);
+								let messageMarginBottom = "2px";
+								if (
+									messageIndex !==
+										chat.last50Messages.length - 1 &&
+									chat.last50Messages[messageIndex + 1]
+										.senderId !== messageInfo.senderId
+								) {
+									// different person sending upcoming message so need to add additional padding
+									messageMarginBottom = "30px";
+								}
+								return (
+									<Row
+										type="flex"
+										justify={justifyValue}
+										align="middle"
+										style={{
+											padding: "0px 0px 0px 0px"
+										}}
+									>
+										<Col>
+											<List.Item
+												style={{ padding: "0px 0px" }}
+											>
+												<p
+													style={{
+														background: messageBackgroundColor,
+														color:
+															colorTheme.text3Color,
+														padding: "6px 12px 7px",
+														fontFamily: "Overpass",
+														fontSize: "14px",
+														marginBottom: messageMarginBottom
+													}}
+												>
+													{message}
+												</p>
+											</List.Item>
+										</Col>
+										{this.renderLastMessageDiv(
+											messageIndex,
+											chat.last50Messages.length
+										)}
+									</Row>
+								);
+							}}
+						/>
 					</Col>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
