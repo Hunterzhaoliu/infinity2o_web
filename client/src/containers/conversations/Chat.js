@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as chatActionCreators from "../../actions/conversations/chat";
 import { bindActionCreators } from "redux";
-import { Layout, Input, Row, Col, Icon, List, Avatar } from "antd";
+import { Layout, Input, Row, Col, List, Avatar } from "antd";
 import "./Chat.css";
 
 const { Content } = Layout;
@@ -73,69 +73,22 @@ class Chat extends Component {
 	}
 
 	renderMessages() {
-		const { chat, colorTheme } = this.props;
+		const { chat, colorTheme, userId } = this.props;
 
 		for (
 			let messageIndex = 0;
-			i < chat.last50Messages.length;
+			messageIndex < chat.last50Messages.length;
 			messageIndex++
 		) {}
-		<List
-			className="chat-list"
-			dataSource={chat.last50Messages}
-			renderItem={item => {
-				const message = item.content;
-				let justifyValue = "start";
-				let messageBackgroundColor = colorTheme.keyText8Color;
-				if (item.senderId === userId) {
-					messageBackgroundColor =
-						colorTheme.keyCompliment1Text8Color;
-					justifyValue = "end";
-				}
-
-				return (
-					<Row
-						type="flex"
-						justify={justifyValue}
-						align="middle"
-						style={{
-							padding: "0px 0px 0px 0px"
-						}}
-					>
-						<Col>
-							<List.Item style={{ padding: "0px 0px" }}>
-								<p
-									style={{
-										background: messageBackgroundColor,
-										color: colorTheme.text3Color,
-										padding: "6px 12px 7px",
-										fontFamily: "Overpass",
-										fontSize: "14px"
-									}}
-								>
-									{message}
-								</p>
-							</List.Item>
-						</Col>
-						<Col>
-							{this.renderLastMessageDiv(
-								chat.last50Messages,
-								item.timeCreated
-							)}
-						</Col>
-					</Row>
-				);
-			}}
-		/>;
 	}
 
 	render() {
 		const {
 			colorTheme,
 			chat,
-			userId,
 			windowHeight,
-			selectedConversationInfo
+			selectedConversationInfo,
+			userId
 		} = this.props;
 		const chatWindowHeight = windowHeight - 180;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
@@ -166,7 +119,57 @@ class Chat extends Component {
 				</Row>
 				<Row style={{ padding: "0px 30px 0px" }}>
 					<Col>
-						<li>{this.renderMessages()}</li>
+						<List
+							className="chat-list"
+							dataSource={chat.last50Messages}
+							renderItem={item => {
+								const message = item.content;
+								let justifyValue = "start";
+								let messageBackgroundColor =
+									colorTheme.keyText8Color;
+								if (item.senderId === userId) {
+									messageBackgroundColor =
+										colorTheme.keyCompliment1Text8Color;
+									justifyValue = "end";
+								}
+
+								return (
+									<Row
+										type="flex"
+										justify={justifyValue}
+										align="middle"
+										style={{
+											padding: "0px 0px 0px 0px"
+										}}
+									>
+										<Col>
+											<List.Item
+												style={{ padding: "0px 0px" }}
+											>
+												<p
+													style={{
+														background: messageBackgroundColor,
+														color:
+															colorTheme.text3Color,
+														padding: "6px 12px 7px",
+														fontFamily: "Overpass",
+														fontSize: "14px"
+													}}
+												>
+													{message}
+												</p>
+											</List.Item>
+										</Col>
+										<Col>
+											{this.renderLastMessageDiv(
+												chat.last50Messages,
+												item.timeCreated
+											)}
+										</Col>
+									</Row>
+								);
+							}}
+						/>
 					</Col>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
