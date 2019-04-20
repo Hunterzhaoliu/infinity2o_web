@@ -41,17 +41,35 @@ class Chat extends Component {
 		}
 	};
 
-	renderPicture(imageUrl) {
-		if (imageUrl !== undefined && imageUrl !== null) {
+	renderPicture() {
+		const { selectedConversationInfo, userImageUrl } = this.props;
+
+		const contactImageUrl =
+			selectedConversationInfo.selectedContactMongoDBInfo.imageUrl;
+		if (contactImageUrl && userImageUrl) {
 			return (
-				<Avatar
-					style={{
-						width: "50px",
-						height: "50px"
-					}}
-					shape="circle"
-					src={imageUrl}
-				/>
+				<Row type="flex" justify="center" align="middle">
+					<Col>
+						<Avatar
+							style={{
+								width: "50px",
+								height: "50px"
+							}}
+							shape="circle"
+							src={contactImageUrl}
+						/>
+						<Avatar
+							style={{
+								position: "absolute",
+								left: "40px",
+								width: "50px",
+								height: "50px"
+							}}
+							shape="circle"
+							src={userImageUrl}
+						/>
+					</Col>
+				</Row>
 			);
 		} else {
 			return <div />;
@@ -70,13 +88,7 @@ class Chat extends Component {
 	}
 
 	render() {
-		const {
-			colorTheme,
-			chat,
-			windowHeight,
-			selectedConversationInfo,
-			userId
-		} = this.props;
+		const { colorTheme, chat, windowHeight, userId } = this.props;
 		const chatWindowHeight = windowHeight - 210;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 
@@ -98,12 +110,6 @@ class Chat extends Component {
 					padding: "0px 0px 0px 0px"
 				}}
 			>
-				<Row type="flex" justify="center" align="middle">
-					<Col />
-				</Row>
-				<Row type="flex" justify="center" align="middle">
-					<Col />
-				</Row>
 				<Row style={{ padding: "0px 30px 30px" }}>
 					<Col>
 						<List
@@ -119,10 +125,7 @@ class Chat extends Component {
 										colorTheme.keyCompliment1Text8Color;
 									justifyValue = "end";
 								}
-								console.log(
-									"chat.last50Messages[messageIndex + 1] = ",
-									chat.last50Messages[messageIndex + 1]
-								);
+
 								let messageMarginBottom = "2px";
 								if (
 									messageIndex !==
@@ -202,7 +205,8 @@ function mapStateToProps(state) {
 		chat: state.chat,
 		userId: state.auth.mongoDBUserId,
 		selectedConversationInfo: state.contacts.selectedConversationInfo,
-		windowHeight: state.customHeader.windowHeight
+		windowHeight: state.customHeader.windowHeight,
+		userImageUrl: state.profile.imageUrl
 	};
 }
 
