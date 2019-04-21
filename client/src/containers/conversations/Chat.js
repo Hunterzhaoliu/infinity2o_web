@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as chatActionCreators from "../../actions/conversations/chat";
 import { bindActionCreators } from "redux";
-import { Layout, Input, Row, Col, List, Avatar } from "antd";
+import { Layout, Input, Row, Col, List } from "antd";
 import "./Chat.css";
 
 const { Content } = Layout;
@@ -41,38 +41,32 @@ class Chat extends Component {
 		}
 	};
 
-	renderPicture() {
+	renderGreeting(noMessagesDiv) {
 		const { selectedConversationInfo, userImageUrl } = this.props;
 
 		const contactImageUrl =
 			selectedConversationInfo.selectedContactMongoDBInfo.imageUrl;
 		if (contactImageUrl && userImageUrl) {
-			return (
-				<Row type="flex" justify="center" align="middle">
-					<Col>
-						<Avatar
-							style={{
-								width: "50px",
-								height: "50px"
-							}}
-							shape="circle"
-							src={contactImageUrl}
-						/>
-						<Avatar
-							style={{
-								position: "absolute",
-								left: "40px",
-								width: "50px",
-								height: "50px"
-							}}
-							shape="circle"
-							src={userImageUrl}
-						/>
-					</Col>
-				</Row>
-			);
-		} else {
-			return <div />;
+			console.log("contactImageUrl = ", contactImageUrl);
+			console.log("userImageUrl = ", userImageUrl);
+			noMessagesDiv.innerHTML =
+				`
+            <div>
+		        <img
+		            src=` +
+				contactImageUrl +
+				`>
+		        <img
+		            style={{
+		                position: "absolute",
+		                left: "40px",
+		                width: "50px",
+		                height: "50px"
+		            }}
+		            src=` +
+				userImageUrl +
+				`>
+            </div>`;
 		}
 	}
 
@@ -102,6 +96,12 @@ class Chat extends Component {
 			chatWindowVerticalHeight
 		);
 
+		const noMessagesDiv = document.querySelector(".ant-list-empty-text");
+		if (noMessagesDiv !== null) {
+			// no messages exist
+			this.renderGreeting(noMessagesDiv);
+		}
+
 		return (
 			<Content
 				style={{
@@ -116,6 +116,9 @@ class Chat extends Component {
 							className="chat-list"
 							dataSource={chat.last50Messages}
 							renderItem={(messageInfo, messageIndex) => {
+								// console.log("inside list loop");
+								// console.log("messageInfo = ", messageInfo);
+								// console.log("messageIndex = ", messageIndex);
 								const message = messageInfo.content;
 								let justifyValue = "start";
 								let messageBackgroundColor =
@@ -141,9 +144,6 @@ class Chat extends Component {
 										type="flex"
 										justify={justifyValue}
 										align="middle"
-										style={{
-											padding: "0px 0px 0px 0px"
-										}}
 									>
 										<Col>
 											<List.Item
