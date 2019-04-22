@@ -47,22 +47,16 @@ class Chat extends Component {
 		const contactImageUrl =
 			selectedConversationInfo.selectedContactMongoDBInfo.imageUrl;
 		if (contactImageUrl && userImageUrl) {
-			console.log("contactImageUrl = ", contactImageUrl);
-			console.log("userImageUrl = ", userImageUrl);
 			noMessagesDiv.innerHTML =
 				`
             <div>
 		        <img
+                    class="contact-image"
 		            src=` +
 				contactImageUrl +
 				`>
 		        <img
-		            style={{
-		                position: "absolute",
-		                left: "40px",
-		                width: "50px",
-		                height: "50px"
-		            }}
+                    class="user-image"
 		            src=` +
 				userImageUrl +
 				`>
@@ -83,7 +77,7 @@ class Chat extends Component {
 
 	render() {
 		const { colorTheme, chat, windowHeight, userId } = this.props;
-		const chatWindowHeight = windowHeight - 210;
+		const chatWindowHeight = windowHeight - 240;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 
 		document.documentElement.style.setProperty(
@@ -110,15 +104,12 @@ class Chat extends Component {
 					padding: "0px 0px 0px 0px"
 				}}
 			>
-				<Row style={{ padding: "0px 30px 30px" }}>
+				<Row style={{ padding: "30px" }}>
 					<Col>
 						<List
 							className="chat-list"
 							dataSource={chat.last50Messages}
 							renderItem={(messageInfo, messageIndex) => {
-								// console.log("inside list loop");
-								// console.log("messageInfo = ", messageInfo);
-								// console.log("messageIndex = ", messageIndex);
 								const message = messageInfo.content;
 								let justifyValue = "start";
 								let messageBackgroundColor =

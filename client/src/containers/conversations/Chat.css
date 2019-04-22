@@ -25,3 +25,18 @@
 	box-shadow: none;
 	color: var(--text4Color) !important;
 }
+
+.contact-image {
+	height: 50px;
+	width: 50px;
+}
+
+.user-image {
+	height: 50px;
+	width: 50px;
+	position: absolute;
+}
+
+.ant-list-empty-text {
+	padding: 0px;
+}
