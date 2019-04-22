@@ -9,6 +9,7 @@ import "./vote-comparison.css";
 
 class VoteComparison extends Component {
 	renderAvatar(pictureURL) {
+		const { colorTheme } = this.props;
 		if (pictureURL !== null) {
 			return (
 				<Avatar
@@ -16,7 +17,8 @@ class VoteComparison extends Component {
 					src={pictureURL}
 					style={{
 						width: 50,
-						height: 50
+						height: 50,
+						border: "2px solid " + colorTheme.textDot5Color
 					}}
 				/>
 			);

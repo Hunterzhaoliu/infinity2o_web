@@ -26,17 +26,25 @@
 	color: var(--text4Color) !important;
 }
 
-.contact-image {
+.profile-image {
 	height: 50px;
 	width: 50px;
+	border-radius: 50%;
+	border: 2px solid var(--textDot5Color);
 }
 
 .user-image {
-	height: 50px;
-	width: 50px;
-	position: absolute;
+	margin-left: -20px;
 }
 
 .ant-list-empty-text {
 	padding: 0px;
+}
+
+.welcome-message {
+	padding-top: 15px;
+	font-family: "Overpass";
+	line-height: 1;
+	margin-bottom: 0;
+	font-size: 16px;
 }

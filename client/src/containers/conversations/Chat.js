@@ -51,15 +51,21 @@ class Chat extends Component {
 				`
             <div>
 		        <img
-                    class="contact-image"
+                    class="profile-image"
 		            src=` +
 				contactImageUrl +
 				`>
 		        <img
-                    class="user-image"
+                    class="profile-image user-image"
 		            src=` +
 				userImageUrl +
 				`>
+            </div>
+            <div>
+                <p
+                    class="welcome-message">
+                    Say hi to your new Match!
+                </p>
             </div>`;
 		}
 	}
@@ -80,6 +86,10 @@ class Chat extends Component {
 		const chatWindowHeight = windowHeight - 240;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 
+		document.documentElement.style.setProperty(
+			`--textDot5Color`,
+			colorTheme.textDot5Color
+		);
 		document.documentElement.style.setProperty(
 			`--text4Color`,
 			colorTheme.text4Color
