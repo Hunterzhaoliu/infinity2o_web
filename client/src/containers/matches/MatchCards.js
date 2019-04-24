@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Card, Avatar, message } from "antd";
+import { Row, Col, Card, message } from "antd";
 import * as matchesActionCreators from "../../actions/matches/matches";
 import * as profileActionCreators from "../../actions/profile/profile";
 import { bindActionCreators } from "redux";
@@ -104,6 +104,7 @@ class MatchCards extends Component {
 	}
 
 	renderMatchPicture(imageUrl, keyColor) {
+		console.log("imageUrl = ", imageUrl);
 		if (imageUrl !== undefined && imageUrl !== null) {
 			return (
 				<Row type="flex" justify="center" align="middle">
@@ -114,12 +115,13 @@ class MatchCards extends Component {
 							backgroundColor: keyColor
 						}}
 					/>
-					<Avatar
+					<img
 						style={{
 							position: "absolute",
-							top: "50px"
+							top: "50px",
+							borderRadius: "50%"
 						}}
-						shape="circle"
+						alt=""
 						src={imageUrl}
 					/>
 				</Row>

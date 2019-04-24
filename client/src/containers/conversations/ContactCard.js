@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Card, Avatar } from "antd";
+import { Row, Col, Card } from "antd";
 import * as contactsActionCreators from "../../actions/conversations/contacts";
 import { bindActionCreators } from "redux";
 import LinkedIn from "../profileInformation/LinkedIn";
@@ -65,6 +65,7 @@ class ContactCard extends Component {
 	}
 
 	renderContactPicture(imageUrl, keyColor) {
+		console.log("imageUrl = ", imageUrl);
 		if (imageUrl !== undefined && imageUrl !== null) {
 			return (
 				<Row type="flex" justify="center" align="middle">
@@ -75,15 +76,16 @@ class ContactCard extends Component {
 							backgroundColor: keyColor
 						}}
 					/>
-					<Avatar
+					<img
 						style={{
 							position: "absolute",
 							top: "60px",
 							width: "125px",
-							height: "125px"
+							height: "125px",
+							borderRadius: "50%"
 						}}
-						shape="circle"
 						src={imageUrl}
+						alt=""
 					/>
 				</Row>
 			);
@@ -263,6 +265,21 @@ function mapDispatchToProps(dispatch) {
 		},
 		toggleBeliefComparison: showContactCard => {
 			contactsDispatchers.toggleBeliefComparison(showContactCard);
+		},
+		onSelectContact: (
+			conversationId,
+			isOnline,
+			socketId,
+			matchId,
+			numberOfUnseenMessages
+		) => {
+			contactsDispatchers.onSelectContact(
+				conversationId,
+				isOnline,
+				socketId,
+				matchId,
+				numberOfUnseenMessages
+			);
 		}
 	};
 }
