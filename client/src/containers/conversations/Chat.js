@@ -52,11 +52,13 @@ class Chat extends Component {
             <div>
 		        <img
                     class="profile-image"
+                    alt=""
 		            src=` +
 				contactImageUrl +
 				`>
 		        <img
                     class="profile-image user-image"
+                    alt=""
 		            src=` +
 				userImageUrl +
 				`>
