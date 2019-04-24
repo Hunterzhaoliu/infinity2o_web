@@ -103,9 +103,31 @@ class MatchCards extends Component {
 		);
 	}
 
+	checkImageUrl = imageUrl => {
+		console.log("inside checkImageUrl function");
+		if (imageUrl === undefined) {
+			// user doesn't have an imageUrl, so replace with gender neutral profile image
+			return "hello";
+		} else {
+			const http = new XMLHttpRequest();
+			http.open("HEAD", imageUrl, false);
+			try {
+				http.send();
+			} catch (error) {
+				// invalid imageUrl, replace with gender neutral profile image
+				return "hello";
+			}
+			// imageUrl is valid
+			return imageUrl;
+		}
+	};
+
 	renderMatchPicture(imageUrl, keyColor) {
-		console.log("imageUrl = ", imageUrl);
-		if (imageUrl !== undefined && imageUrl !== null) {
+		if (imageUrl !== null) {
+			// imageUrl hasn't been fetched from mLab
+			// need to check that imageUrl still exists
+			imageUrl = this.checkImageUrl(imageUrl);
+			console.log("imageUrl = ", imageUrl);
 			return (
 				<Row type="flex" justify="center" align="middle">
 					<div
