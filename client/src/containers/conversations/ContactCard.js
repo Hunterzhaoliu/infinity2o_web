@@ -8,6 +8,7 @@ import Github from "../profileInformation/Github";
 import Interests from "../profileInformation/Interests";
 import TimeZone from "../profileInformation/TimeZone";
 import "./contact-card.css";
+import dolphin from "../images/dolphin.jpg";
 
 class ContactCard extends Component {
 	renderContactAge(matchAge, colorThemeText6Color) {
@@ -64,9 +65,30 @@ class ContactCard extends Component {
 		);
 	}
 
+	checkImageUrl = imageUrl => {
+		if (imageUrl === undefined) {
+			// user doesn't have an imageUrl, so replace with gender neutral profile image
+			return dolphin;
+		} else {
+			// user has an imageUrl, but not sure if the link works
+			const http = new XMLHttpRequest();
+			http.open("HEAD", imageUrl, false);
+			try {
+				http.send();
+			} catch (error) {
+				// invalid imageUrl, replace with gender neutral profile image
+				return dolphin;
+			}
+			// imageUrl is valid
+			return imageUrl;
+		}
+	};
+
 	renderContactPicture(imageUrl, keyColor) {
-		console.log("imageUrl = ", imageUrl);
-		if (imageUrl !== undefined && imageUrl !== null) {
+		if (imageUrl !== null) {
+			// imageUrl has been fetched from mLab
+			// need to check that imageUrl still exists
+			imageUrl = this.checkImageUrl(imageUrl);
 			return (
 				<Row type="flex" justify="center" align="middle">
 					<div
