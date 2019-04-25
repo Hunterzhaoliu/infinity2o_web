@@ -4,21 +4,22 @@ import { connect } from "react-redux";
 import * as contactsActionCreators from "../../actions/conversations/contacts";
 import { bindActionCreators } from "redux";
 import Slider from "react-slick";
-import { Row, Col, Card, Avatar } from "antd";
+import { Row, Col, Card } from "antd";
 import "./vote-comparison.css";
 
 class VoteComparison extends Component {
-	renderAvatar(pictureURL) {
+	renderPicture(pictureURL) {
 		const { colorTheme } = this.props;
 		if (pictureURL !== null) {
 			return (
-				<Avatar
+				<img
 					size="large"
 					src={pictureURL}
 					style={{
-						width: 50,
-						height: 50,
-						border: "2px solid " + colorTheme.textDot5Color
+						width: "50px",
+						height: "50px",
+						border: "2px solid " + colorTheme.textDot5Color,
+						borderRadius: "50%"
 					}}
 				/>
 			);
@@ -64,13 +65,13 @@ class VoteComparison extends Component {
 							>
 								<Col offset={3}>
 									<div className="contact-picture">
-										{this.renderAvatar(
+										{this.renderPicture(
 											selectedConversationInfo
 												.selectedContactMongoDBInfo
 												.imageUrl
 										)}
 									</div>
-									{this.renderAvatar(userPictureURL)}
+									{this.renderPicture(userPictureURL)}
 								</Col>
 								<Col offset={3}>
 									<h5
@@ -129,7 +130,7 @@ class VoteComparison extends Component {
 								align="middle"
 							>
 								<Col>
-									{this.renderAvatar(
+									{this.renderPicture(
 										selectedConversationInfo
 											.selectedContactMongoDBInfo.imageUrl
 									)}
@@ -146,7 +147,7 @@ class VoteComparison extends Component {
 								</Col>
 							</Row>
 							<Row type="flex" justify="center" align="middle">
-								<Col>{this.renderAvatar(userPictureURL)}</Col>
+								<Col>{this.renderPicture(userPictureURL)}</Col>
 								<Col offset={2}>
 									<h5
 										className="vote-comparison-h5"
