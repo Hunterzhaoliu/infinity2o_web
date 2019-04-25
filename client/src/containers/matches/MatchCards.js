@@ -13,6 +13,7 @@ import {
 	NUMBER_NEURONS_TO_SAY_HI
 } from "../payment/prices";
 import "./match-cards.css";
+import dolphin from "../images/dolphin.jpg";
 
 class MatchCards extends Component {
 	onNextMatch() {
@@ -104,18 +105,18 @@ class MatchCards extends Component {
 	}
 
 	checkImageUrl = imageUrl => {
-		console.log("inside checkImageUrl function");
 		if (imageUrl === undefined) {
 			// user doesn't have an imageUrl, so replace with gender neutral profile image
-			return "hello";
+			return dolphin;
 		} else {
+			// user has an imageUrl, but not sure if the link works
 			const http = new XMLHttpRequest();
 			http.open("HEAD", imageUrl, false);
 			try {
 				http.send();
 			} catch (error) {
 				// invalid imageUrl, replace with gender neutral profile image
-				return "hello";
+				return dolphin;
 			}
 			// imageUrl is valid
 			return imageUrl;
@@ -124,10 +125,9 @@ class MatchCards extends Component {
 
 	renderMatchPicture(imageUrl, keyColor) {
 		if (imageUrl !== null) {
-			// imageUrl hasn't been fetched from mLab
+			// imageUrl has been fetched from mLab
 			// need to check that imageUrl still exists
 			imageUrl = this.checkImageUrl(imageUrl);
-			console.log("imageUrl = ", imageUrl);
 			return (
 				<Row type="flex" justify="center" align="middle">
 					<div
@@ -141,7 +141,9 @@ class MatchCards extends Component {
 						style={{
 							position: "absolute",
 							top: "50px",
-							borderRadius: "50%"
+							borderRadius: "50%",
+							width: "150px",
+							height: "150px"
 						}}
 						alt=""
 						src={imageUrl}

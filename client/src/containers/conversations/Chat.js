@@ -5,6 +5,7 @@ import * as chatActionCreators from "../../actions/conversations/chat";
 import { bindActionCreators } from "redux";
 import { Layout, Input, Row, Col, List } from "antd";
 import "./Chat.css";
+import dolphin from "../images/dolphin.jpg";
 
 const { Content } = Layout;
 
@@ -41,12 +42,37 @@ class Chat extends Component {
 		}
 	};
 
-	renderGreeting(noMessagesDiv) {
-		const { selectedConversationInfo, userImageUrl } = this.props;
+	checkImageUrl = imageUrl => {
+		if (imageUrl === undefined) {
+			// user doesn't have an imageUrl, so replace with gender neutral profile image
+			return dolphin;
+		} else {
+			// user has an imageUrl, but not sure if the link works
+			const http = new XMLHttpRequest();
+			http.open("HEAD", imageUrl, false);
+			try {
+				http.send();
+			} catch (error) {
+				// invalid imageUrl, replace with gender neutral profile image
+				return dolphin;
+			}
+			// imageUrl is valid
+			return imageUrl;
+		}
+	};
 
-		const contactImageUrl =
+	renderGreeting(noMessagesDiv) {
+		const { selectedConversationInfo } = this.props;
+		let { userImageUrl } = this.props;
+
+		let contactImageUrl =
 			selectedConversationInfo.selectedContactMongoDBInfo.imageUrl;
-		if (contactImageUrl && userImageUrl) {
+		if (contactImageUrl !== null && userImageUrl !== null) {
+			// imageUrl has been fetched from mLab
+			// need to check that imageUrl still exists
+			contactImageUrl = this.checkImageUrl(contactImageUrl);
+			userImageUrl = this.checkImageUrl(userImageUrl);
+
 			noMessagesDiv.innerHTML =
 				`
             <div>
