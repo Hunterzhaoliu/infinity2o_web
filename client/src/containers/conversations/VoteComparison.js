@@ -21,6 +21,7 @@ class VoteComparison extends Component {
 						border: "2px solid " + colorTheme.textDot5Color,
 						borderRadius: "50%"
 					}}
+					alt=""
 				/>
 			);
 		}

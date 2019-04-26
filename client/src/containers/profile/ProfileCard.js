@@ -76,6 +76,7 @@ class ProfileCard extends Component {
 									height: "150px"
 								}}
 								src={imageUrl}
+								alt=""
 							/>
 						</Row>
 						<Row
