@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Avatar, Card } from "antd";
+import { Row, Col, Card } from "antd";
 import LinkedIn from "../profileInformation/LinkedIn";
 import Github from "../profileInformation/Github";
 import Neurons from "../profileInformation/Neurons";
@@ -9,6 +9,7 @@ import Email from "../profileInformation/Email";
 import TimeZone from "../profileInformation/TimeZone";
 
 import "./profile-card.css";
+import dolphin from "../images/dolphin.jpg";
 
 class ProfileCard extends Component {
 	renderNameAndAge() {
@@ -20,8 +21,31 @@ class ProfileCard extends Component {
 		}
 	}
 
+	checkImageUrl = imageUrl => {
+		if (imageUrl === undefined) {
+			// user doesn't have an imageUrl, so replace with gender neutral profile image
+			return dolphin;
+		} else {
+			// user has an imageUrl, but not sure if the link works
+			const http = new XMLHttpRequest();
+			http.open("HEAD", imageUrl, false);
+			try {
+				http.send();
+			} catch (error) {
+				// invalid imageUrl, replace with gender neutral profile image
+				return dolphin;
+			}
+			// imageUrl is valid
+			return imageUrl;
+		}
+	};
+
 	render() {
 		const { colorTheme, profile } = this.props;
+
+		// need to check that imageUrl still exists
+		const imageUrl = this.checkImageUrl(profile.imageUrl);
+
 		return (
 			<Row type="flex" justify="center">
 				<Col xl={{ span: 8 }}>
@@ -43,13 +67,16 @@ class ProfileCard extends Component {
 									backgroundColor: colorTheme.key
 								}}
 							/>
-							<Avatar
+							<img
 								style={{
 									position: "absolute",
-									top: "50px"
+									top: "50px",
+									borderRadius: "50%",
+									width: "150px",
+									height: "150px"
 								}}
-								shape="circle"
-								src={profile.imageUrl}
+								src={imageUrl}
+								alt=""
 							/>
 						</Row>
 						<Row
