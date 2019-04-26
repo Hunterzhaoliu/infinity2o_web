@@ -75,6 +75,7 @@ class Conversation extends Component {
 						md={{ span: 0 }}
 						lg={{ span: 6 }}
 						xl={{ offset: 1, span: 6 }}
+						style={{ padding: "80px 0px 0px 0px" }}
 					>
 						{this.renderContactInformation()}
 					</Col>
