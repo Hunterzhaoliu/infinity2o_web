@@ -137,9 +137,10 @@ class Chat extends Component {
 		return (
 			<Content
 				style={{
-					textAlign: "center",
-					background: colorTheme.textDot5Color,
-					padding: "0px 0px 0px 0px"
+					backgroundColor: colorTheme.textDot5Color,
+					borderWidth: "1px 1px 0px 0px",
+					borderStyle: "solid",
+					borderColor: colorTheme.text8Color
 				}}
 			>
 				<Row style={{ padding: "30px" }}>

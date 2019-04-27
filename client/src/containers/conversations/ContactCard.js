@@ -85,35 +85,46 @@ class ContactCard extends Component {
 	};
 
 	renderContactPicture(imageUrl, keyColor) {
-		if (imageUrl !== null) {
-			// imageUrl has been fetched from mLab
-			// need to check that imageUrl still exists
-			imageUrl = this.checkImageUrl(imageUrl);
-			return (
-				<Row type="flex" justify="center" align="middle">
-					<div
-						style={{
-							width: "100%",
-							height: "90px",
-							backgroundColor: keyColor
-						}}
-					/>
-					<img
-						style={{
-							position: "absolute",
-							top: "60px",
-							width: "125px",
-							height: "125px",
-							borderRadius: "50%"
-						}}
-						src={imageUrl}
-						alt=""
-					/>
-				</Row>
-			);
+		console.log("imageUrl = ", imageUrl);
+
+		if (imageUrl === undefined || imageUrl === null) {
+			// user doesn't have an imageUrl, so replace with gender neutral profile image
+			imageUrl = dolphin;
 		} else {
-			return <div />;
+			// user has an imageUrl, but not sure if the link works
+			const http = new XMLHttpRequest();
+			http.open("HEAD", imageUrl, false);
+			try {
+				http.send();
+			} catch (error) {
+				// invalid imageUrl, replace with gender neutral profile image
+				imageUrl = dolphin;
+			}
+			// imageUrl is valid, don't need to modify the imageUrl
 		}
+
+		return (
+			<Row type="flex" justify="center" align="middle">
+				<div
+					style={{
+						width: "100%",
+						height: "90px",
+						backgroundColor: keyColor
+					}}
+				/>
+				<img
+					style={{
+						position: "absolute",
+						top: "60px",
+						width: "125px",
+						height: "125px",
+						borderRadius: "50%"
+					}}
+					src={imageUrl}
+					alt=""
+				/>
+			</Row>
+		);
 	}
 
 	renderCloseConversationButton(text6Color) {
