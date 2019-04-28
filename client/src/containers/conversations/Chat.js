@@ -42,73 +42,42 @@ class Chat extends Component {
 		}
 	};
 
-	renderGreeting() {
-		const { selectedConversationInfo } = this.props;
-		let { userImageUrl } = this.props;
-
-		let contactImageUrl =
-			selectedConversationInfo.selectedContactMongoDBInfo.imageUrl;
-		if (contactImageUrl === null || contactImageUrl === undefined) {
-			contactImageUrl = dolphin;
+	renderPicture(pictureUrl, textDot5Color) {
+		if (pictureUrl === undefined || pictureUrl === null) {
+			pictureUrl = dolphin;
 		}
-
-		if (userImageUrl === null || userImageUrl === undefined) {
-			userImageUrl = dolphin;
-		}
-
-		let contactImg = document.getElementById("contact-img");
-		//
-		// if (contactImg !== null) {
-		// 	console.log("contactImg = ", contactImg);
-		// 	contactImg.onerror = function() {
-		// 		console.log("inside error function");
-		// 		contactImg.src = dolphin;
-		// 	};
-		// }
-
-		// document.getElementById("contact-img").onerror = function() {
-		// 	console.log("inside error function");
-		// };
-
-		// let profileImg = document.getElementById("profile-img");
-		// profileImg.addEventListener("error", () => {
-		// 	profileImg.src = dolphin;
-		// });
-		console.log("contactImg = ", contactImg);
-
-		noMessagesDiv.innerHTML =
-			`
-            <div>
-		        <img
-                    class = "profile-img"
-                    id="contact-img"
-                    alt=""
-                    src=` +
-			contactImageUrl +
-			`>
-		        <img
-                    class="profile-img"
-                    id="user-img"
-                    alt=""
-		            src=` +
-			userImageUrl +
-			`>
-            </div>
-            <div>
-                <p
-                    class="welcome-message">
-                    Say hi to your new Match!
-                </p>
-            </div>`;
+		return (
+			<img
+				style={{
+					border: "2px solid " + textDot5Color
+				}}
+				onError={error => {
+					// in case the imageUrl is invalid
+					error.target.onerror = null;
+					error.target.src = dolphin;
+				}}
+				className="chat-profile-img"
+				src={pictureUrl}
+				alt=""
+			/>
+		);
 	}
 
 	renderChatDisplay() {
-		const { chat, colorTheme, userId } = this.props;
-		if (chat.last50Messages.length > 0) {
+		const { chat, colorTheme, userId, windowHeight } = this.props;
+
+		const chatWindowHeight = windowHeight - 240;
+		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
+
+		console.log("chat = ", chat);
+		if (
+			chat.last50Messages !== undefined &&
+			chat.last50Messages.length > 0
+		) {
 			// messages exist, return list of messages
 			return (
 				<List
-					className="chat-list"
+					style={{ height: chatWindowVerticalHeight }}
 					dataSource={chat.last50Messages}
 					renderItem={(messageInfo, messageIndex) => {
 						const message = messageInfo.content;
@@ -161,8 +130,26 @@ class Chat extends Component {
 				/>
 			);
 		} else {
-			// no messages exist
-			this.renderGreeting();
+			const { selectedConversationInfo, userImageUrl } = this.props;
+			// no messages exist, display greeting and welcome message
+			return (
+				<div style={{ height: chatWindowVerticalHeight }}>
+					<div className="chat-images">
+						<div className="chat-contact-picture">
+							{this.renderPicture(
+								selectedConversationInfo
+									.selectedContactMongoDBInfo.imageUrl,
+								colorTheme.textDot5Color
+							)}
+						</div>
+						{this.renderPicture(
+							userImageUrl,
+							colorTheme.textDot5Color
+						)}
+					</div>
+					<p className="welcome-message">Say hi to your new Match!</p>
+				</div>
+			);
 		}
 	}
 
@@ -178,9 +165,7 @@ class Chat extends Component {
 	}
 
 	render() {
-		const { colorTheme, chat, windowHeight } = this.props;
-		const chatWindowHeight = windowHeight - 240;
-		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
+		const { colorTheme, chat } = this.props;
 
 		document.documentElement.style.setProperty(
 			`--textDot5Color`,
@@ -189,11 +174,6 @@ class Chat extends Component {
 		document.documentElement.style.setProperty(
 			`--text4Color`,
 			colorTheme.text4Color
-		);
-
-		document.documentElement.style.setProperty(
-			`--chat-window-vertical-height`,
-			chatWindowVerticalHeight
 		);
 
 		return (

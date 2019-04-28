@@ -30,6 +30,7 @@ class VoteComparison extends Component {
 			/>
 		);
 	}
+
 	renderAgreedAsks() {
 		const {
 			colorTheme,
@@ -69,7 +70,7 @@ class VoteComparison extends Component {
 								align="middle"
 							>
 								<Col offset={3}>
-									<div className="contact-picture">
+									<div className="vote-comparison-contact-picture">
 										{this.renderPicture(
 											selectedConversationInfo
 												.selectedContactMongoDBInfo
