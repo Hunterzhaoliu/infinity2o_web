@@ -109,7 +109,7 @@ When you want to add something...
 
 ### Deployment checklist
 
-1.  `cd infinity2o_server`
+1.  `cd infinity2o_web`
 2.  `heroku login` username = `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 3.  If first time, `git remote add heroku-staging https://git.heroku.com/infinity2o-staging.git` and `git remote add heroku https://git.heroku.com/infinity2o.git`
 4.  `git checkout staging`
