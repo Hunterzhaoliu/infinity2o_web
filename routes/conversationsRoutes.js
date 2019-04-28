@@ -44,6 +44,7 @@ const updateUserConversationsWithOnlineContacts = async (
 	userConversations,
 	redis
 ) => {
+	console.log("updateUserConversationsWithOnlineContacts");
 	// https://stackoverflow.com/questions/29693469/node-js-wait-for-all-redis-queries-to-complete-before-continuing-with-execution
 	await Promise.all(
 		_.map(userConversations, userConversation => {
@@ -124,11 +125,15 @@ module.exports = app => {
 		requireLogin,
 		async (request, response) => {
 			const redis = request.app.get("redis");
+			console.log("redis = ", redis);
 			const updatedUserConversations = await updateUserConversationsWithOnlineContacts(
 				request.body,
 				redis
 			);
-
+			console.log(
+				"updatedUserConversations = ",
+				updatedUserConversations
+			);
 			response.send(updatedUserConversations);
 		}
 	);
