@@ -6,25 +6,29 @@ import { bindActionCreators } from "redux";
 import Slider from "react-slick";
 import { Row, Col, Card } from "antd";
 import "./vote-comparison.css";
+import dolphin from "../images/dolphin.jpg";
 
 class VoteComparison extends Component {
-	renderPicture(pictureURL) {
+	renderPicture(pictureUrl) {
 		const { colorTheme } = this.props;
-		if (pictureURL !== null) {
-			return (
-				<img
-					size="large"
-					src={pictureURL}
-					style={{
-						width: "50px",
-						height: "50px",
-						border: "2px solid " + colorTheme.textDot5Color,
-						borderRadius: "50%"
-					}}
-					alt=""
-				/>
-			);
+		if (pictureUrl === undefined || pictureUrl === null) {
+			pictureUrl = dolphin;
 		}
+		return (
+			<img
+				style={{
+					border: "2px solid " + colorTheme.textDot5Color
+				}}
+				onError={error => {
+					// in case the imageUrl is invalid
+					error.target.onerror = null;
+					error.target.src = dolphin;
+				}}
+				className="vote-comparison-img"
+				src={pictureUrl}
+				alt=""
+			/>
+		);
 	}
 	renderAgreedAsks() {
 		const {

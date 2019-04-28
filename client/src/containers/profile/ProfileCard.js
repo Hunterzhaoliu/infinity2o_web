@@ -21,30 +21,12 @@ class ProfileCard extends Component {
 		}
 	}
 
-	checkImageUrl = imageUrl => {
-		if (imageUrl === undefined) {
-			// user doesn't have an imageUrl, so replace with gender neutral profile image
-			return dolphin;
-		} else {
-			// user has an imageUrl, but not sure if the link works
-			const http = new XMLHttpRequest();
-			http.open("HEAD", imageUrl, false);
-			try {
-				http.send();
-			} catch (error) {
-				// invalid imageUrl, replace with gender neutral profile image
-				return dolphin;
-			}
-			// imageUrl is valid
-			return imageUrl;
-		}
-	};
-
 	render() {
 		const { colorTheme, profile } = this.props;
 
-		// need to check that imageUrl still exists
-		const imageUrl = this.checkImageUrl(profile.imageUrl);
+		if (profile.imageUrl === undefined || profile.imageUrl === null) {
+			profile.imageUrl = dolphin;
+		}
 
 		return (
 			<Row type="flex" justify="center">
@@ -68,14 +50,13 @@ class ProfileCard extends Component {
 								}}
 							/>
 							<img
-								style={{
-									position: "absolute",
-									top: "50px",
-									borderRadius: "50%",
-									width: "150px",
-									height: "150px"
+								id="profile-card-img"
+								onError={error => {
+									// in case the imageUrl is invalid
+									error.target.onerror = null;
+									error.target.src = dolphin;
 								}}
-								src={imageUrl}
+								src={profile.imageUrl}
 								alt=""
 							/>
 						</Row>

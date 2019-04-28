@@ -42,52 +42,57 @@ class Chat extends Component {
 		}
 	};
 
-	checkImageUrl = imageUrl => {
-		if (imageUrl === undefined) {
-			// user doesn't have an imageUrl, so replace with gender neutral profile image
-			return dolphin;
-		} else {
-			// user has an imageUrl, but not sure if the link works
-			const http = new XMLHttpRequest();
-			http.open("HEAD", imageUrl, false);
-			try {
-				http.send();
-			} catch (error) {
-				// invalid imageUrl, replace with gender neutral profile image
-				return dolphin;
-			}
-			// imageUrl is valid
-			return imageUrl;
-		}
-	};
-
-	renderGreeting(noMessagesDiv) {
+	renderGreeting() {
 		const { selectedConversationInfo } = this.props;
 		let { userImageUrl } = this.props;
 
 		let contactImageUrl =
 			selectedConversationInfo.selectedContactMongoDBInfo.imageUrl;
-		if (contactImageUrl !== null && userImageUrl !== null) {
-			// imageUrl has been fetched from mLab
-			// need to check that imageUrl still exists
-			contactImageUrl = this.checkImageUrl(contactImageUrl);
-			userImageUrl = this.checkImageUrl(userImageUrl);
+		if (contactImageUrl === null || contactImageUrl === undefined) {
+			contactImageUrl = dolphin;
+		}
 
-			noMessagesDiv.innerHTML =
-				`
+		if (userImageUrl === null || userImageUrl === undefined) {
+			userImageUrl = dolphin;
+		}
+
+		let contactImg = document.getElementById("contact-img");
+		//
+		// if (contactImg !== null) {
+		// 	console.log("contactImg = ", contactImg);
+		// 	contactImg.onerror = function() {
+		// 		console.log("inside error function");
+		// 		contactImg.src = dolphin;
+		// 	};
+		// }
+
+		// document.getElementById("contact-img").onerror = function() {
+		// 	console.log("inside error function");
+		// };
+
+		// let profileImg = document.getElementById("profile-img");
+		// profileImg.addEventListener("error", () => {
+		// 	profileImg.src = dolphin;
+		// });
+		console.log("contactImg = ", contactImg);
+
+		noMessagesDiv.innerHTML =
+			`
             <div>
 		        <img
-                    class="profile-image"
+                    class = "profile-img"
+                    id="contact-img"
                     alt=""
-		            src=` +
-				contactImageUrl +
-				`>
+                    src=` +
+			contactImageUrl +
+			`>
 		        <img
-                    class="profile-image user-image"
+                    class="profile-img"
+                    id="user-img"
                     alt=""
 		            src=` +
-				userImageUrl +
-				`>
+			userImageUrl +
+			`>
             </div>
             <div>
                 <p
@@ -95,6 +100,69 @@ class Chat extends Component {
                     Say hi to your new Match!
                 </p>
             </div>`;
+	}
+
+	renderChatDisplay() {
+		const { chat, colorTheme, userId } = this.props;
+		if (chat.last50Messages.length > 0) {
+			// messages exist, return list of messages
+			return (
+				<List
+					className="chat-list"
+					dataSource={chat.last50Messages}
+					renderItem={(messageInfo, messageIndex) => {
+						const message = messageInfo.content;
+						let justifyValue = "start";
+						let messageBackgroundColor = colorTheme.keyText8Color;
+						if (messageInfo.senderId === userId) {
+							messageBackgroundColor =
+								colorTheme.keyCompliment1Text8Color;
+							justifyValue = "end";
+						}
+
+						let messageMarginBottom = "2px";
+						if (
+							messageIndex !== chat.last50Messages.length - 1 &&
+							chat.last50Messages[messageIndex + 1].senderId !==
+								messageInfo.senderId
+						) {
+							// different person sending upcoming message so need to add additional padding
+							messageMarginBottom = "30px";
+						}
+						return (
+							<Row
+								type="flex"
+								justify={justifyValue}
+								align="middle"
+							>
+								<Col>
+									<List.Item style={{ padding: "0px 0px" }}>
+										<p
+											style={{
+												background: messageBackgroundColor,
+												color: colorTheme.text3Color,
+												padding: "6px 12px 7px",
+												fontFamily: "Overpass",
+												fontSize: "14px",
+												marginBottom: messageMarginBottom
+											}}
+										>
+											{message}
+										</p>
+									</List.Item>
+								</Col>
+								{this.renderLastMessageDiv(
+									messageIndex,
+									chat.last50Messages.length
+								)}
+							</Row>
+						);
+					}}
+				/>
+			);
+		} else {
+			// no messages exist
+			this.renderGreeting();
 		}
 	}
 
@@ -110,7 +178,7 @@ class Chat extends Component {
 	}
 
 	render() {
-		const { colorTheme, chat, windowHeight, userId } = this.props;
+		const { colorTheme, chat, windowHeight } = this.props;
 		const chatWindowHeight = windowHeight - 240;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 
@@ -128,12 +196,6 @@ class Chat extends Component {
 			chatWindowVerticalHeight
 		);
 
-		const noMessagesDiv = document.querySelector(".ant-list-empty-text");
-		if (noMessagesDiv !== null) {
-			// no messages exist
-			this.renderGreeting(noMessagesDiv);
-		}
-
 		return (
 			<Content
 				style={{
@@ -144,65 +206,7 @@ class Chat extends Component {
 				}}
 			>
 				<Row style={{ padding: "30px" }}>
-					<Col>
-						<List
-							className="chat-list"
-							dataSource={chat.last50Messages}
-							renderItem={(messageInfo, messageIndex) => {
-								const message = messageInfo.content;
-								let justifyValue = "start";
-								let messageBackgroundColor =
-									colorTheme.keyText8Color;
-								if (messageInfo.senderId === userId) {
-									messageBackgroundColor =
-										colorTheme.keyCompliment1Text8Color;
-									justifyValue = "end";
-								}
-
-								let messageMarginBottom = "2px";
-								if (
-									messageIndex !==
-										chat.last50Messages.length - 1 &&
-									chat.last50Messages[messageIndex + 1]
-										.senderId !== messageInfo.senderId
-								) {
-									// different person sending upcoming message so need to add additional padding
-									messageMarginBottom = "30px";
-								}
-								return (
-									<Row
-										type="flex"
-										justify={justifyValue}
-										align="middle"
-									>
-										<Col>
-											<List.Item
-												style={{ padding: "0px 0px" }}
-											>
-												<p
-													style={{
-														background: messageBackgroundColor,
-														color:
-															colorTheme.text3Color,
-														padding: "6px 12px 7px",
-														fontFamily: "Overpass",
-														fontSize: "14px",
-														marginBottom: messageMarginBottom
-													}}
-												>
-													{message}
-												</p>
-											</List.Item>
-										</Col>
-										{this.renderLastMessageDiv(
-											messageIndex,
-											chat.last50Messages.length
-										)}
-									</Row>
-								);
-							}}
-						/>
-					</Col>
+					<Col>{this.renderChatDisplay()}</Col>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
 					<Col xl={{ span: 24 }}>

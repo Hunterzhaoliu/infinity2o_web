@@ -26,14 +26,14 @@
 	color: var(--text4Color) !important;
 }
 
-.profile-image {
+.profile-img {
 	height: 50px;
 	width: 50px;
 	border-radius: 50%;
 	border: 2px solid var(--textDot5Color);
 }
 
-.user-image {
+#user-img {
 	margin-left: -20px;
 }
 
