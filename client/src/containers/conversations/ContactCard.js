@@ -65,42 +65,9 @@ class ContactCard extends Component {
 		);
 	}
 
-	checkImageUrl = imageUrl => {
-		if (imageUrl === undefined) {
-			// user doesn't have an imageUrl, so replace with gender neutral profile image
-			return dolphin;
-		} else {
-			// user has an imageUrl, but not sure if the link works
-			const http = new XMLHttpRequest();
-			http.open("HEAD", imageUrl, false);
-			try {
-				http.send();
-			} catch (error) {
-				// invalid imageUrl, replace with gender neutral profile image
-				return dolphin;
-			}
-			// imageUrl is valid
-			return imageUrl;
-		}
-	};
-
 	renderContactPicture(imageUrl, keyColor) {
-		console.log("imageUrl = ", imageUrl);
-
 		if (imageUrl === undefined || imageUrl === null) {
-			// user doesn't have an imageUrl, so replace with gender neutral profile image
 			imageUrl = dolphin;
-		} else {
-			// user has an imageUrl, but not sure if the link works
-			const http = new XMLHttpRequest();
-			http.open("HEAD", imageUrl, false);
-			try {
-				http.send();
-			} catch (error) {
-				// invalid imageUrl, replace with gender neutral profile image
-				imageUrl = dolphin;
-			}
-			// imageUrl is valid, don't need to modify the imageUrl
 		}
 
 		return (
@@ -113,12 +80,11 @@ class ContactCard extends Component {
 					}}
 				/>
 				<img
-					style={{
-						position: "absolute",
-						top: "60px",
-						width: "125px",
-						height: "125px",
-						borderRadius: "50%"
+					className="contact-card-img"
+					onError={error => {
+						// in case the imageUrl is invalid
+						error.target.onerror = null;
+						error.target.src = dolphin;
 					}}
 					src={imageUrl}
 					alt=""
