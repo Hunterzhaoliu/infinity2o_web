@@ -1,6 +1,5 @@
 /* https://stackoverflow.com/questions/3296644/hiding-the-scrollbar-on-an-html-page */
 .chat-list {
-	height: var(--chat-window-vertical-height);
 	overflow: scroll;
 	overflow-x: hidden;
 }
@@ -26,19 +25,16 @@
 	color: var(--text4Color) !important;
 }
 
-.profile-image {
+.chat-profile-img {
 	height: 50px;
 	width: 50px;
 	border-radius: 50%;
 	border: 2px solid var(--textDot5Color);
 }
 
-.user-image {
-	margin-left: -20px;
-}
-
-.ant-list-empty-text {
-	padding: 0px;
+.chat-contact-picture {
+	position: relative;
+	margin-right: -10px;
 }
 
 .welcome-message {
@@ -48,4 +44,9 @@
 	margin-bottom: 0;
 	font-size: 16px;
 	color: var(--text4Color);
+}
+
+.chat-images {
+	display: flex;
+	justify-content: center;
 }

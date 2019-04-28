@@ -42,59 +42,114 @@ class Chat extends Component {
 		}
 	};
 
-	checkImageUrl = imageUrl => {
-		if (imageUrl === undefined) {
-			// user doesn't have an imageUrl, so replace with gender neutral profile image
-			return dolphin;
-		} else {
-			// user has an imageUrl, but not sure if the link works
-			const http = new XMLHttpRequest();
-			http.open("HEAD", imageUrl, false);
-			try {
-				http.send();
-			} catch (error) {
-				// invalid imageUrl, replace with gender neutral profile image
-				return dolphin;
-			}
-			// imageUrl is valid
-			return imageUrl;
+	renderPicture(pictureUrl, textDot5Color) {
+		if (pictureUrl === undefined || pictureUrl === null) {
+			pictureUrl = dolphin;
 		}
-	};
+		return (
+			<img
+				style={{
+					border: "2px solid " + textDot5Color
+				}}
+				onError={error => {
+					// in case the imageUrl is invalid
+					error.target.onerror = null;
+					error.target.src = dolphin;
+				}}
+				className="chat-profile-img"
+				src={pictureUrl}
+				alt=""
+			/>
+		);
+	}
 
-	renderGreeting(noMessagesDiv) {
-		const { selectedConversationInfo } = this.props;
-		let { userImageUrl } = this.props;
+	renderChatDisplay() {
+		const { chat, colorTheme, userId, windowHeight } = this.props;
 
-		let contactImageUrl =
-			selectedConversationInfo.selectedContactMongoDBInfo.imageUrl;
-		if (contactImageUrl !== null && userImageUrl !== null) {
-			// imageUrl has been fetched from mLab
-			// need to check that imageUrl still exists
-			contactImageUrl = this.checkImageUrl(contactImageUrl);
-			userImageUrl = this.checkImageUrl(userImageUrl);
+		const chatWindowHeight = windowHeight - 240;
+		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 
-			noMessagesDiv.innerHTML =
-				`
-            <div>
-		        <img
-                    class="profile-image"
-                    alt=""
-		            src=` +
-				contactImageUrl +
-				`>
-		        <img
-                    class="profile-image user-image"
-                    alt=""
-		            src=` +
-				userImageUrl +
-				`>
-            </div>
-            <div>
-                <p
-                    class="welcome-message">
-                    Say hi to your new Match!
-                </p>
-            </div>`;
+		console.log("chat = ", chat);
+		if (
+			chat.last50Messages !== undefined &&
+			chat.last50Messages.length > 0
+		) {
+			// messages exist, return list of messages
+			return (
+				<List
+					style={{ height: chatWindowVerticalHeight }}
+					dataSource={chat.last50Messages}
+					renderItem={(messageInfo, messageIndex) => {
+						const message = messageInfo.content;
+						let justifyValue = "start";
+						let messageBackgroundColor = colorTheme.keyText8Color;
+						if (messageInfo.senderId === userId) {
+							messageBackgroundColor =
+								colorTheme.keyCompliment1Text8Color;
+							justifyValue = "end";
+						}
+
+						let messageMarginBottom = "2px";
+						if (
+							messageIndex !== chat.last50Messages.length - 1 &&
+							chat.last50Messages[messageIndex + 1].senderId !==
+								messageInfo.senderId
+						) {
+							// different person sending upcoming message so need to add additional padding
+							messageMarginBottom = "30px";
+						}
+						return (
+							<Row
+								type="flex"
+								justify={justifyValue}
+								align="middle"
+							>
+								<Col>
+									<List.Item style={{ padding: "0px 0px" }}>
+										<p
+											style={{
+												background: messageBackgroundColor,
+												color: colorTheme.text3Color,
+												padding: "6px 12px 7px",
+												fontFamily: "Overpass",
+												fontSize: "14px",
+												marginBottom: messageMarginBottom
+											}}
+										>
+											{message}
+										</p>
+									</List.Item>
+								</Col>
+								{this.renderLastMessageDiv(
+									messageIndex,
+									chat.last50Messages.length
+								)}
+							</Row>
+						);
+					}}
+				/>
+			);
+		} else {
+			const { selectedConversationInfo, userImageUrl } = this.props;
+			// no messages exist, display greeting and welcome message
+			return (
+				<div style={{ height: chatWindowVerticalHeight }}>
+					<div className="chat-images">
+						<div className="chat-contact-picture">
+							{this.renderPicture(
+								selectedConversationInfo
+									.selectedContactMongoDBInfo.imageUrl,
+								colorTheme.textDot5Color
+							)}
+						</div>
+						{this.renderPicture(
+							userImageUrl,
+							colorTheme.textDot5Color
+						)}
+					</div>
+					<p className="welcome-message">Say hi to your new Match!</p>
+				</div>
+			);
 		}
 	}
 
@@ -110,9 +165,7 @@ class Chat extends Component {
 	}
 
 	render() {
-		const { colorTheme, chat, windowHeight, userId } = this.props;
-		const chatWindowHeight = windowHeight - 240;
-		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
+		const { colorTheme, chat } = this.props;
 
 		document.documentElement.style.setProperty(
 			`--textDot5Color`,
@@ -122,17 +175,6 @@ class Chat extends Component {
 			`--text4Color`,
 			colorTheme.text4Color
 		);
-
-		document.documentElement.style.setProperty(
-			`--chat-window-vertical-height`,
-			chatWindowVerticalHeight
-		);
-
-		const noMessagesDiv = document.querySelector(".ant-list-empty-text");
-		if (noMessagesDiv !== null) {
-			// no messages exist
-			this.renderGreeting(noMessagesDiv);
-		}
 
 		return (
 			<Content
@@ -144,65 +186,7 @@ class Chat extends Component {
 				}}
 			>
 				<Row style={{ padding: "30px" }}>
-					<Col>
-						<List
-							className="chat-list"
-							dataSource={chat.last50Messages}
-							renderItem={(messageInfo, messageIndex) => {
-								const message = messageInfo.content;
-								let justifyValue = "start";
-								let messageBackgroundColor =
-									colorTheme.keyText8Color;
-								if (messageInfo.senderId === userId) {
-									messageBackgroundColor =
-										colorTheme.keyCompliment1Text8Color;
-									justifyValue = "end";
-								}
-
-								let messageMarginBottom = "2px";
-								if (
-									messageIndex !==
-										chat.last50Messages.length - 1 &&
-									chat.last50Messages[messageIndex + 1]
-										.senderId !== messageInfo.senderId
-								) {
-									// different person sending upcoming message so need to add additional padding
-									messageMarginBottom = "30px";
-								}
-								return (
-									<Row
-										type="flex"
-										justify={justifyValue}
-										align="middle"
-									>
-										<Col>
-											<List.Item
-												style={{ padding: "0px 0px" }}
-											>
-												<p
-													style={{
-														background: messageBackgroundColor,
-														color:
-															colorTheme.text3Color,
-														padding: "6px 12px 7px",
-														fontFamily: "Overpass",
-														fontSize: "14px",
-														marginBottom: messageMarginBottom
-													}}
-												>
-													{message}
-												</p>
-											</List.Item>
-										</Col>
-										{this.renderLastMessageDiv(
-											messageIndex,
-											chat.last50Messages.length
-										)}
-									</Row>
-								);
-							}}
-						/>
-					</Col>
+					<Col>{this.renderChatDisplay()}</Col>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
 					<Col xl={{ span: 24 }}>
