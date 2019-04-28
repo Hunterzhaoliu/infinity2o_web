@@ -21,7 +21,6 @@ class About extends Component {
 	renderTeam() {
 		const { teamMembers, colorTheme } = this.props;
 
-		console.log("teamMembers = ", teamMembers);
 		return _.map(teamMembers, teamMember => {
 			return (
 				<Col>
