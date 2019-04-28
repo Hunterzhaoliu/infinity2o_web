@@ -50,7 +50,7 @@ class ProfileCard extends Component {
 								}}
 							/>
 							<img
-								id="profile-card-img"
+								className="profile-card-img"
 								onError={error => {
 									// in case the imageUrl is invalid
 									error.target.onerror = null;

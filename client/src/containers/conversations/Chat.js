@@ -69,11 +69,7 @@ class Chat extends Component {
 		const chatWindowHeight = windowHeight - 240;
 		const chatWindowVerticalHeight = chatWindowHeight.toString() + "px";
 
-		console.log("chat = ", chat);
-		if (
-			chat.last50Messages !== undefined &&
-			chat.last50Messages.length > 0
-		) {
+		if (chat.last50Messages.length > 0) {
 			// messages exist, return list of messages
 			return (
 				<List
@@ -186,7 +182,7 @@ class Chat extends Component {
 				}}
 			>
 				<Row style={{ padding: "30px" }}>
-					<Col>{this.renderChatDisplay()}</Col>
+					<Col> {this.renderChatDisplay()}</Col>
 				</Row>
 				<Row type="flex" justify="start" align="middle">
 					<Col xl={{ span: 24 }}>

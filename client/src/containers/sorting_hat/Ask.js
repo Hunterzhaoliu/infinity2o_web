@@ -241,7 +241,7 @@ class Ask extends Component {
 						<input
 							className="ask-input"
 							onChange={this.onChangeQuestion}
-							placeHolder="Question"
+							placeholder="Question"
 							style={{ fontSize: "26px" }}
 						/>
 					</Col>
