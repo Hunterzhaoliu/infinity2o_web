@@ -18,12 +18,14 @@ import { store } from "../../index";
 export const fetchConversations = () => async dispatch => {
 	// 1) hit /api/current_user to get allContacts
 	const userResponse = await axios.get("/api/current_user");
+	console.log("userResponse = ", userResponse);
 	if (userResponse.status === 200) {
 		const userConversations =
 			userResponse.data.conversations.userConversations;
 		// 2) update user conversations with newest contact clientSocket ids if in
-		// production, staging, or development
+		// production or staging
 		let updatedUserConversationsResponse = userConversations;
+		console.log("process.env.NODE_ENV = ", process.env.NODE_ENV);
 		if (process.env.NODE_ENV === "production") {
 			// in production or staging, need to search database to find which
 			// clients are in redis for live chatting
@@ -32,7 +34,10 @@ export const fetchConversations = () => async dispatch => {
 				userConversations
 			);
 		}
-
+		console.log(
+			"updatedUserConversationsResponse = ",
+			updatedUserConversationsResponse
+		);
 		if (
 			updatedUserConversationsResponse.status === 200 ||
 			updatedUserConversationsResponse.status === undefined
@@ -40,11 +45,15 @@ export const fetchConversations = () => async dispatch => {
 			let updatedUserConversations = updatedUserConversationsResponse;
 			if (process.env.NODE_ENV === "production") {
 				// in production or staging, need to set the updatedUserConversations
-				// equal to the response.data rather
+				// equal to the new response.data
 				updatedUserConversations =
 					updatedUserConversationsResponse.data;
 			}
 
+			console.log(
+				"updatedUserConversations = ",
+				updatedUserConversations
+			);
 			dispatch({
 				type: UPDATE_CONTACTS,
 				allContacts: updatedUserConversations
