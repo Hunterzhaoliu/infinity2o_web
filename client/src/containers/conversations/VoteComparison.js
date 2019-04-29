@@ -66,10 +66,10 @@ class VoteComparison extends Component {
 							<Row
 								style={{ padding: "15px 0px 0px 0px" }}
 								type="flex"
-								justify="start"
+								justify="center"
 								align="middle"
 							>
-								<Col offset={3}>
+								<Col offset={2}>
 									<div className="vote-comparison-contact-picture">
 										{this.renderPicture(
 											selectedConversationInfo
@@ -83,7 +83,7 @@ class VoteComparison extends Component {
 									<h5
 										className="vote-comparison-h5"
 										style={{
-											color: colorTheme.keyText5Color
+											color: colorTheme.keyText7Color
 										}}
 									>
 										{agreedAsk.userAndContactAnswer}
@@ -145,7 +145,7 @@ class VoteComparison extends Component {
 									<h5
 										className="vote-comparison-h5"
 										style={{
-											color: colorTheme.keyText5Color
+											color: colorTheme.keyText8Color
 										}}
 									>
 										{disagreedAsk.contactAnswer}
@@ -158,7 +158,8 @@ class VoteComparison extends Component {
 									<h5
 										className="vote-comparison-h5"
 										style={{
-											color: colorTheme.keyCompliment2
+											color:
+												colorTheme.keyCompliment1Text8Color
 										}}
 									>
 										{disagreedAsk.userAnswer}

@@ -104,8 +104,7 @@ class MatchCards extends Component {
 		);
 	}
 
-	renderMatchPicture(imageUrl, keyColor) {
-		console.log("imageUrl = ", imageUrl);
+	renderMatchPicture(imageUrl, backgroundColor) {
 		if (imageUrl === undefined || imageUrl === null) {
 			imageUrl = dolphin;
 		}
@@ -116,7 +115,7 @@ class MatchCards extends Component {
 					style={{
 						width: "100%",
 						height: "130px",
-						backgroundColor: keyColor
+						backgroundColor: backgroundColor
 					}}
 				/>
 				<img
@@ -158,8 +157,8 @@ class MatchCards extends Component {
 					<button
 						className="match-cards-button"
 						style={{
-							borderColor: colorTheme.keyText7Color,
-							background: colorTheme.keyText7Color,
+							borderColor: colorTheme.keyText6Color,
+							background: colorTheme.keyText6Color,
 							color: colorTheme.text1Color
 						}}
 						onClick={e =>
@@ -190,7 +189,10 @@ class MatchCards extends Component {
 				}}
 				bodyStyle={{ padding: "0px 0px 60px 0px" }} // padding around inside border of card
 			>
-				{this.renderMatchPicture(match.imageUrl, colorTheme.key)}
+				{this.renderMatchPicture(
+					match.imageUrl,
+					colorTheme.keyText7Color
+				)}
 				<Row
 					style={{ padding: "90px 0px 0px 0px" }}
 					type="flex"
@@ -200,7 +202,7 @@ class MatchCards extends Component {
 					<Col>
 						<h4
 							style={{
-								color: colorTheme.keyText6Color,
+								color: colorTheme.keyText7Color,
 								fontFamily: "Overpass",
 								lineHeight: 1,
 								marginBottom: 0,

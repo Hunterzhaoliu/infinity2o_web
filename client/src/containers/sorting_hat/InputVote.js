@@ -7,9 +7,8 @@ import { bindActionCreators } from "redux";
 import {
 	GREY_8,
 	GREY_7,
-	GREY_3,
-	GREY_2,
 	GREY_1,
+	GREY_DOT_5,
 	RED_ORANGE_3
 } from "../styles/ColorConstants";
 import FirstVote from "../landing/FirstVote";
@@ -64,8 +63,8 @@ class InputVote extends Component {
 					<button
 						className="input-vote-button"
 						style={{
-							borderColor: colorTheme.text7Color,
-							background: colorTheme.text7Color,
+							borderColor: colorTheme.backgroundColor,
+							background: colorTheme.backgroundColor,
 							color: colorTheme.text2Color
 						}}
 						onClick={e =>
@@ -151,12 +150,12 @@ class InputVote extends Component {
 		askTotalVotes
 	) {
 		const { colorTheme, sortingHat, landing, activeSection } = this.props;
-		let answerButtonColor = colorTheme.text7Color;
+		let answerButtonColor = colorTheme.backgroundColor;
 		let answerButtonTextColor = colorTheme.text2Color;
-		let votedAnswerButtonColor = colorTheme.keyText7Color;
+		let votedAnswerButtonColor = colorTheme.keyText8Color;
 		let votingPlace = sortingHat;
 		if (activeSection !== "sorting_hat") {
-			answerButtonColor = GREY_3;
+			answerButtonColor = GREY_1;
 			answerButtonTextColor = GREY_8;
 			votedAnswerButtonColor = RED_ORANGE_3;
 			votingPlace = landing;
@@ -216,12 +215,12 @@ class InputVote extends Component {
 		const { colorTheme, sortingHat, landing, activeSection } = this.props;
 
 		let fourAsks;
-		let cardColor = colorTheme.text8Color;
+		let cardColor = colorTheme.textDot5Color;
 		let cardTextColor = colorTheme.text2Color;
 		let voteColor = colorTheme.text3Color;
 		if (activeSection !== "sorting_hat") {
 			fourAsks = landing.landingAsks;
-			cardColor = GREY_2;
+			cardColor = GREY_DOT_5;
 			cardTextColor = GREY_8;
 			voteColor = GREY_7;
 		} else {
@@ -269,7 +268,9 @@ class InputVote extends Component {
 									color: cardTextColor,
 									textAlign: "center"
 								}}
-								bodyStyle={{ padding: "30px" }} // padding around inside border of card
+								bodyStyle={{
+									padding: "30px"
+								}} // padding around inside border of card
 							>
 								<h3
 									style={{
@@ -277,7 +278,8 @@ class InputVote extends Component {
 										fontFamily: "Overpass",
 										marginBottom: 0,
 										lineHeight: 1,
-										padding: "0px 0px 10px 0px"
+										padding: "0px 0px 10px 0px",
+										fontSize: "20px"
 									}}
 								>
 									{displayQuestion}
@@ -285,7 +287,10 @@ class InputVote extends Component {
 								<div
 									style={{
 										color: voteColor,
-										lineHeight: 1
+										lineHeight: 1,
+										fontFamily: "Overpass",
+										marginBottom: 0,
+										fontSize: "16px"
 									}}
 								>
 									{totalVotesDisplay}

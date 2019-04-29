@@ -54,8 +54,8 @@ class SortingHat extends Component {
 						<button
 							className="sorting-hat-button"
 							style={{
-								borderColor: colorTheme.keyText7Color,
-								background: colorTheme.keyText7Color,
+								borderColor: colorTheme.keyText8Color,
+								background: colorTheme.keyText8Color,
 								color: colorTheme.text2Color
 							}}
 							onClick={e => this.props.openAskModal()}

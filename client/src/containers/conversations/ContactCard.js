@@ -51,7 +51,7 @@ class ContactCard extends Component {
 				<Col>
 					<h4
 						style={{
-							color: colorTheme.text4Color,
+							color: colorTheme.text3Color,
 							fontFamily: "Overpass",
 							lineHeight: 1,
 							marginBottom: 0,
@@ -156,7 +156,7 @@ class ContactCard extends Component {
 			>
 				<Row
 					style={{
-						backgroundColor: colorTheme.key,
+						backgroundColor: colorTheme.keyText7Color,
 						height: "40px"
 					}}
 					type="flex"
@@ -167,7 +167,7 @@ class ContactCard extends Component {
 				</Row>
 				{this.renderContactPicture(
 					selectedContact.imageUrl,
-					colorTheme.key
+					colorTheme.keyText7Color
 				)}
 				<Row
 					style={{ padding: "90px 0px 0px 0px" }}
@@ -178,7 +178,7 @@ class ContactCard extends Component {
 					<Col>
 						<h4
 							style={{
-								color: colorTheme.keyText6Color,
+								color: colorTheme.keyText8Color,
 								fontFamily: "Overpass",
 								lineHeight: 1,
 								marginBottom: 0,
@@ -205,7 +205,10 @@ class ContactCard extends Component {
 					align="middle"
 				>
 					<Col>
-						<Interests interests={selectedContact.interests} />
+						<Interests
+							interests={selectedContact.interests}
+							textColor={colorTheme.text3Color}
+						/>
 						<TimeZone value={selectedContact.timeZone} />
 					</Col>
 				</Row>
@@ -215,7 +218,7 @@ class ContactCard extends Component {
 							style={{
 								borderColor: colorTheme.backgroundColor,
 								background: colorTheme.backgroundColor,
-								color: colorTheme.keyText8Color
+								color: colorTheme.text3Color
 							}}
 							className="compare-beliefs-button"
 							onClick={e =>

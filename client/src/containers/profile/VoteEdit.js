@@ -44,7 +44,7 @@ class VoteEdit extends Component {
 			let textColor = colorTheme.text5Color;
 			const displayPage = index + 1;
 			if (voteEdit.page === displayPage) {
-				textColor = colorTheme.text1Color;
+				textColor = colorTheme.text2Color;
 			}
 			return (
 				<Col
@@ -129,9 +129,9 @@ class VoteEdit extends Component {
 				<div>
 					<div
 						style={{
-							color: colorTheme.keyText2Color,
+							color: colorTheme.keyText4Color,
 							fontFamily: "Overpass",
-							fontSize: 14,
+							fontSize: "16px",
 							lineHeight: 1,
 							marginBottom: 0
 						}}
@@ -140,9 +140,9 @@ class VoteEdit extends Component {
 					</div>
 					<div
 						style={{
-							color: colorTheme.keyText7Color,
+							color: colorTheme.keyText4Color,
 							fontFamily: "Overpass",
-							fontSize: 14,
+							fontSize: "16px",
 							lineHeight: 1,
 							marginBottom: 0
 						}}
@@ -156,9 +156,9 @@ class VoteEdit extends Component {
 				<div>
 					<div
 						style={{
-							color: colorTheme.keyText2Color,
+							color: colorTheme.keyText3Color,
 							fontFamily: "Overpass",
-							fontSize: 16,
+							fontSize: "16px",
 							lineHeight: 1,
 							marginBottom: 0
 						}}
@@ -173,9 +173,9 @@ class VoteEdit extends Component {
 					</div>
 					<div
 						style={{
-							color: colorTheme.keyText7Color,
+							color: colorTheme.keyText5Color,
 							fontFamily: "Overpass",
-							fontSize: 16,
+							fontSize: "16px",
 							lineHeight: 1,
 							marginBottom: 0
 						}}
@@ -366,7 +366,7 @@ class VoteEdit extends Component {
 					centered={true}
 					bodyStyle={{
 						padding: "60px 60px",
-						backgroundColor: colorTheme.textColor1
+						backgroundColor: colorTheme.backgroundColor
 					}}
 					style={{ padding: "90px 0px 0px 0px" }} // where the modal is
 				>
@@ -429,7 +429,7 @@ class VoteEdit extends Component {
 							<div
 								style={{
 									textAlign: "center",
-									color: colorTheme.keyText2Color,
+									color: colorTheme.keyText3Color,
 									fontFamily: "Overpass",
 									lineHeight: 1,
 									marginBottom: 0,
@@ -441,7 +441,7 @@ class VoteEdit extends Component {
 							<div
 								style={{
 									textAlign: "center",
-									color: colorTheme.keyText7Color,
+									color: colorTheme.keyText5Color,
 									fontFamily: "Overpass",
 									lineHeight: 1,
 									marginBottom: 0,

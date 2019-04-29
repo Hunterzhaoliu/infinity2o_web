@@ -35,7 +35,7 @@ class Profile extends Component {
 									fontFamily: "Overpass",
 									lineHeight: 2.29, // height of vote button/font size: 32/14
 									marginBottom: 0,
-									fontSize: 16,
+									fontSize: "16px",
 									padding: "0px 0px 10px 0px"
 								}}
 							>
