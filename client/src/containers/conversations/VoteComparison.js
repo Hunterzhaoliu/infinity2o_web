@@ -66,10 +66,10 @@ class VoteComparison extends Component {
 							<Row
 								style={{ padding: "15px 0px 0px 0px" }}
 								type="flex"
-								justify="start"
+								justify="center"
 								align="middle"
 							>
-								<Col offset={3}>
+								<Col offset={2}>
 									<div className="vote-comparison-contact-picture">
 										{this.renderPicture(
 											selectedConversationInfo

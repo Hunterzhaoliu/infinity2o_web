@@ -39,8 +39,7 @@ class Interests extends Component {
 	}
 
 	render() {
-		const { interests } = this.props;
-
+		const { interests, textColor } = this.props;
 		if (interests !== null && interests.length > 0) {
 			return (
 				<Row
@@ -64,7 +63,8 @@ class Interests extends Component {
 							padding: "0px 0px 0px 20px",
 							fontFamily: "Overpass",
 							lineHeight: 1.2,
-							fontSize: 16
+							fontSize: 16,
+							color: textColor
 						}}
 					>
 						{this.renderInterests()}

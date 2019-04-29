@@ -5,7 +5,7 @@ import { Row, Col } from "antd";
 
 class Email extends Component {
 	render() {
-		const { email } = this.props;
+		const { email, textColor } = this.props;
 		return (
 			<Row
 				style={{ padding: "15px 0px 0px 0px" }}
@@ -29,7 +29,8 @@ class Email extends Component {
 						fontFamily: "Overpass",
 						lineHeight: 1,
 						marginBottom: 0,
-						fontSize: 16
+						fontSize: 16,
+						color: textColor
 					}}
 				>
 					{email}

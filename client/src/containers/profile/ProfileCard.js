@@ -91,10 +91,22 @@ class ProfileCard extends Component {
 							align="middle"
 						>
 							<Col xl={{ span: 24 }}>
-								<Neurons payment={profile.payment} />
-								<Interests interests={profile.interests} />
-								<Email email={profile.email} />
-								<TimeZone timeZone={profile.timeZone} />
+								<Neurons
+									payment={profile.payment}
+									textColor={colorTheme.text3Color}
+								/>
+								<Interests
+									interests={profile.interests}
+									textColor={colorTheme.text3Color}
+								/>
+								<Email
+									email={profile.email}
+									textColor={colorTheme.text3Color}
+								/>
+								<TimeZone
+									timeZone={profile.timeZone}
+									textColor={colorTheme.text3Color}
+								/>
 								<Row type="flex" justify="center">
 									<Col
 										style={{ padding: "20px 0px 60px 0px" }}
