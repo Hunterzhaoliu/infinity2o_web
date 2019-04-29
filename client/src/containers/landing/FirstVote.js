@@ -4,7 +4,7 @@ import * as landingActionCreators from "../../actions/landing";
 import { bindActionCreators } from "redux";
 import { GREY_9, GREY_7, GREY_1 } from "../styles/ColorConstants";
 import LoginButtons from "./LoginButtons";
-import { Modal } from "antd";
+import { Modal, Row, Col } from "antd";
 
 class FirstVote extends Component {
 	render() {
@@ -21,39 +21,52 @@ class FirstVote extends Component {
 				onCancel={e => this.props.closeFirstVoteModal()}
 				footer={null}
 				centered={true}
-				bodyStyle={{ padding: "0px 10px", backgroundColor: GREY_1 }}
-				style={{ padding: "90px 0px 0px 0px" }}
+				bodyStyle={{ padding: "60px ", backgroundColor: GREY_1 }}
+				style={{ padding: "90px 0px 0px 0px" }} // modal relative to screen
 			>
-				<h2
-					style={{
-						textAlign: "center",
-						color: GREY_9,
-						fontFamily: "Overpass",
-						fontWeight: "bold",
-						fontSize: 32,
-						padding: "60px 0px 0px",
-						marginBottom: 0,
-						lineHeight: h2LineHeight
-					}}
+				<Row>
+					<Col>
+						<h2
+							style={{
+								textAlign: "center",
+								color: GREY_9,
+								fontFamily: "Overpass",
+								fontWeight: "bold",
+								fontSize: 32,
+								marginBottom: 0,
+								lineHeight: h2LineHeight
+							}}
+						>
+							Congrats on your first vote!
+						</h2>
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<p
+							style={{
+								textAlign: "center",
+								color: GREY_7,
+								fontFamily: "Overpass",
+								fontSize: 22,
+								padding: "60px 0px 0px",
+								marginBottom: 0,
+								lineHeight: 1
+							}}
+						>
+							To make your vote count:
+						</p>
+					</Col>
+				</Row>
+				<Row
+					style={{ padding: "30px 0px 0px 0px" }}
+					type="flex"
+					justify="center"
 				>
-					Congrats on your first vote!
-				</h2>
-				<p
-					style={{
-						textAlign: "center",
-						color: GREY_7,
-						fontFamily: "Overpass",
-						fontSize: 22,
-						padding: "60px 0px 0px",
-						marginBottom: 0,
-						lineHeight: 1
-					}}
-				>
-					To make your vote count:
-				</p>
-				<div style={{ height: "30px" }} />
-				<LoginButtons />
-				<div style={{ height: "60px" }} />
+					<Col>
+						<LoginButtons />
+					</Col>
+				</Row>
 			</Modal>
 		);
 	}
