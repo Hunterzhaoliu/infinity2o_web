@@ -22,12 +22,12 @@ class MatchesButton extends Component {
 						count={numberOfUnseenMatches}
 						style={{
 							backgroundColor: colorTheme.keyText8Color,
-							color: colorTheme.text5Color,
-							boxShadow: "0 0 0 1px " + colorTheme.keyText8Color,
+							color: colorTheme.text3Color,
+							boxShadow: "none",
 							fontFamily: "Overpass",
 							fontSize: "12px",
-							top: "-20px", // starts at the top of "s" in matches
-							right: "-30px" // starts in the middle of the wod "matches"
+							top: "-15px", // starts at the top of "s" in matches
+							right: "-25px" // starts in the middle of the wod "matches"
 						}}
 					>
 						<div
