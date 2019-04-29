@@ -4,7 +4,7 @@ import { Row, Col } from "antd";
 
 class TimeZone extends Component {
 	render() {
-		const { timeZone } = this.props;
+		const { timeZone, textColor } = this.props;
 		if (
 			timeZone !== null &&
 			timeZone !== undefined &&
@@ -34,7 +34,8 @@ class TimeZone extends Component {
 							fontFamily: "Overpass",
 							lineHeight: 1,
 							marginBottom: 0,
-							fontSize: 16
+							fontSize: 16,
+							color: textColor
 						}}
 					>
 						{timeZone[1]}

@@ -81,6 +81,7 @@ class Neurons extends Component {
 	}
 
 	render() {
+		const { textColor } = this.props;
 		return (
 			<Row
 				style={{
@@ -105,7 +106,8 @@ class Neurons extends Component {
 						fontFamily: "Overpass",
 						lineHeight: 1,
 						marginBottom: 0,
-						fontSize: 16
+						fontSize: 16,
+						color: textColor
 					}}
 				>
 					{this.renderNumberOfNeurons()}

@@ -105,10 +105,10 @@ class Chat extends Component {
 										<p
 											style={{
 												background: messageBackgroundColor,
-												color: colorTheme.text3Color,
+												color: colorTheme.text2Color,
 												padding: "6px 12px 7px",
 												fontFamily: "Overpass",
-												fontSize: "14px",
+												fontSize: "16px",
 												marginBottom: messageMarginBottom
 											}}
 										>
