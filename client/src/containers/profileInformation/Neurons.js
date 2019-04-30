@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col, Popover, Icon } from "antd";
 import "./neurons.css";
+import neuronsIcon from "../images/neuronsIcon.png";
 
 class Neurons extends Component {
 	numberWithCommas = x => {
@@ -97,7 +98,7 @@ class Neurons extends Component {
 						style={{
 							width: "25px"
 						}}
-						src="https://user-images.githubusercontent.com/24757872/40867763-8f2df248-65cc-11e8-892f-3e22b4032b4a.png"
+						src={neuronsIcon}
 					/>
 				</Col>
 				<Col

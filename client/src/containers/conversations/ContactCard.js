@@ -21,7 +21,7 @@ class ContactCard extends Component {
 							fontFamily: "Overpass",
 							lineHeight: 1,
 							marginBottom: 0,
-							fontSize: 26
+							fontSize: "26px"
 						}}
 					>
 						{", "}

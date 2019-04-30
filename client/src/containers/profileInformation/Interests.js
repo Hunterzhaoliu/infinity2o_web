@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
+import interestIcon from "../images/interestIcon.png";
 
 class Interests extends Component {
 	renderInterests() {
@@ -54,7 +55,7 @@ class Interests extends Component {
 							style={{
 								width: "25px"
 							}}
-							src="https://user-images.githubusercontent.com/24757872/40868785-206477b0-65d6-11e8-9d7a-5482bcd504c3.png"
+							src={interestIcon}
 						/>
 					</Col>
 					<Col

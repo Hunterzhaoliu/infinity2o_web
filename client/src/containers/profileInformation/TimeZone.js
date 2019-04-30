@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
+import timeZoneIcon from "../images/timeZoneIcon.png";
 
 class TimeZone extends Component {
 	render() {
@@ -24,7 +25,7 @@ class TimeZone extends Component {
 								width: "25px",
 								padding: "0px 0px 0px 0px"
 							}}
-							src="https://user-images.githubusercontent.com/24757872/40868790-25f907ea-65d6-11e8-8dd1-2f3a79076082.png"
+							src={timeZoneIcon}
 						/>
 					</Col>
 					<Col

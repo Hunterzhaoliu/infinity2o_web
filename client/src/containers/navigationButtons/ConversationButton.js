@@ -22,12 +22,12 @@ class ConversationButton extends Component {
 						count={totalNumberOfUnseenMessages}
 						style={{
 							backgroundColor: colorTheme.keyText8Color,
-							color: colorTheme.text5Color,
-							boxShadow: "0 0 0 1px " + colorTheme.keyText8Color,
+							color: colorTheme.text3Color,
+							boxShadow: "none",
 							fontFamily: "Overpass",
 							fontSize: "12px",
-							top: "-20px",
-							right: "-30px"
+							top: "-15px",
+							right: "-25px"
 						}}
 					>
 						<div

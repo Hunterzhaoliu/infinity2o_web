@@ -1,16 +1,15 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src":
-        "https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+	"short_name": "infinity2o",
+	"name": "infinity2o",
+	"icons": [
+		{
+			"src": "./favicon.ico",
+			"sizes": "64x64 32x32 24x24 16x16",
+			"type": "image/x-icon"
+		}
+	],
+	"start_url": "./index.html",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff"
 }

@@ -5,17 +5,12 @@ import * as customHeaderActionCreators from "../../actions/customHeader";
 import { connect } from "react-redux";
 import { Icon } from "antd";
 import "./change-theme-button.css";
+import logo from "../images/logo.png";
 
 class ChangeThemeButton extends Component {
 	renderButtonDisplay(saveState) {
 		if (saveState === "save_done" || saveState === null) {
-			return (
-				<img
-					alt=""
-					style={{ width: "32px" }}
-					src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
-				/>
-			);
+			return <img alt="" style={{ width: "32px" }} src={logo} />;
 		} else if (saveState === "save_start") {
 			return (
 				<Icon

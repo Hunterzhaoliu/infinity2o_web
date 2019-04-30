@@ -7,7 +7,10 @@ import { GREY_9, GREY_1 } from "../styles/ColorConstants";
 import LoginButtons from "./LoginButtons";
 import InputVote from "../sorting_hat/InputVote";
 import Marketing from "./Marketing";
+import Slider from "react-slick";
 import { Layout, Row, Col } from "antd";
+import firstLandingMatchExample from "../images/first_landing_match_example.png";
+
 const { Content } = Layout;
 
 class Landing extends Component {
@@ -29,16 +32,18 @@ class Landing extends Component {
 	renderLandingAsks() {
 		const { windowWidth } = this.props;
 		const how_part_0 =
-			"Find the best matches by expressing your beliefs to the Sorting Hat";
+			"Let us find you the best partner based on what you're looking for.";
 
 		let h2Padding = "120px 0px 0px";
-		let h2FontSize = 26;
+		let h2FontSize = 32;
+		let h2LineHeight = 1;
 		let finalRowPadding = "60px 0px 90px 0px";
 
 		if (windowWidth < 768) {
 			h2Padding = "60px 0px 0px";
 			h2FontSize = 22;
 			finalRowPadding = "30px 0px 30px 0px";
+			h2LineHeight = 1.3;
 		}
 
 		return (
@@ -57,7 +62,7 @@ class Landing extends Component {
 								fontFamily: "Overpass",
 								fontWeight: "bold",
 								marginBottom: 0,
-								lineHeight: 1
+								lineHeight: h2LineHeight
 							}}
 						>
 							{how_part_0}
@@ -89,16 +94,31 @@ class Landing extends Component {
 		const { windowWidth } = this.props;
 
 		let h2Padding = "120px 0px 0px";
-		let imageHeight = 400;
-		let h2FontSize = 28;
+		let h2FontSize = 32;
+		let h2LineHeight = 1;
 		let pictureRowPadding = "60px 0px 120px";
 
 		if (windowWidth < 768) {
 			h2Padding = "60px 0px 0px";
-			imageHeight = 250;
 			h2FontSize = 22;
+			h2LineHeight = 1.3;
 			pictureRowPadding = "30px 0px 60px";
 		}
+
+		const settings = {
+			dots: false,
+			adaptiveHeight: true,
+			infinite: true,
+			autoplay: true,
+			pauseOnHover: true,
+			speed: 500, // transition speed
+			autoplaySpeed: 6000, // delay between each auto scroll (in milliseconds)
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			arrows: false,
+			pauseOnDotsHover: false,
+			pauseOnFocus: true
+		};
 
 		return (
 			<div>
@@ -113,10 +133,10 @@ class Landing extends Component {
 								fontWeight: "bold",
 								padding: h2Padding,
 								marginBottom: 0,
-								lineHeight: 1
+								lineHeight: h2LineHeight
 							}}
 						>
-							Chat with the matches you want to learn with
+							Chat with the matches you want to learn with.
 						</h2>
 					</Col>
 				</Row>
@@ -127,14 +147,16 @@ class Landing extends Component {
 						padding: pictureRowPadding
 					}}
 				>
-					<Col>
-						<img
-							alt="Match Example"
-							style={{
-								height: imageHeight
-							}}
-							src="https://user-images.githubusercontent.com/2585159/41510382-32448628-7229-11e8-8017-e87d7f761aea.png"
-						/>
+					<Col xs={{ span: 16 }} xl={{ span: 8 }}>
+						<Slider {...settings}>
+							<img
+								alt=""
+								style={{
+									width: "100%" // styling done for Slider in vote-comparison.css
+								}}
+								src={firstLandingMatchExample}
+							/>
+						</Slider>
 					</Col>
 				</Row>
 			</div>
@@ -144,13 +166,15 @@ class Landing extends Component {
 	renderLogin() {
 		const { loggedInState, windowWidth } = this.props;
 
-		let callToActionPadding = "120px 0px 60px";
-		let callToActionFontSize = 28;
+		let h2Padding = "120px 0px 60px";
+		let h2FontSize = 32;
+		let h2LineHeight = 1;
 		let loginPadding = "0px 0px 120px";
 
 		if (windowWidth < 768) {
-			callToActionPadding = "60px 0px 30px";
-			callToActionFontSize = 22;
+			h2Padding = "60px 0px 30px";
+			h2FontSize = 22;
+			h2LineHeight = 1.3;
 			loginPadding = "0px 0px 60px";
 		}
 
@@ -159,7 +183,7 @@ class Landing extends Component {
 				<div>
 					<Row
 						style={{
-							padding: callToActionPadding
+							padding: h2Padding
 						}}
 						type="flex"
 						justify="center"
@@ -171,10 +195,10 @@ class Landing extends Component {
 									textAlign: "center",
 									color: GREY_9,
 									fontFamily: "Overpass",
-									fontSize: callToActionFontSize,
+									fontSize: h2FontSize,
 									fontWeight: "bold",
 									marginBottom: 0,
-									lineHeight: 1
+									lineHeight: h2LineHeight
 								}}
 							>
 								Join Earth's largest community of online
