@@ -95,12 +95,12 @@ class Contacts extends Component {
 									style={{
 										backgroundColor:
 											colorTheme.keyText8Color,
-										color: colorTheme.text1Color,
-										boxShadow:
-											"0 0 0 1px " +
-											colorTheme.keyText8Color
+										color: colorTheme.text3Color,
+										boxShadow: "none",
+										marginRight: "10px",
+										fontFamily: "Overpass",
+										fontSize: "12px"
 									}}
-									offset={[22, -15]} // [lower, right]
 								/>
 								{contactName}
 								{this.renderOnline(contact.isOnline)}
@@ -111,7 +111,6 @@ class Contacts extends Component {
 			/>
 		);
 	}
-
 	render() {
 		const { colorTheme } = this.props;
 

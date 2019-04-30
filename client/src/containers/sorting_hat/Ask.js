@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { Row, Col, Icon, Modal } from "antd";
 import ErrorMessage from "./ErrorMessage";
 import "./Ask.css";
+import answerBox from "../images/answerBox.png";
 
 class Ask extends Component {
 	componentWillMount() {
@@ -69,7 +70,7 @@ class Ask extends Component {
 									width: "28px",
 									padding: "0px 0px 0px 0px" // top right bottom left
 								}}
-								src="https://user-images.githubusercontent.com/24757872/40994715-96be843e-68c2-11e8-8df8-1cb8e2dc7d07.png"
+								src={answerBox}
 							/>
 						</Col>
 						<Col xl={{ span: 13 }}>

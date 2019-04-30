@@ -13,6 +13,7 @@ import LoginButtons from "./LoginButtons";
 import { GREY_9, GREY_1 } from "../styles/ColorConstants";
 import { Layout, Row, Col } from "antd";
 import "./custom-header.css";
+import logo from "../images/logo.png";
 
 const { Header } = Layout;
 
@@ -59,7 +60,7 @@ class CustomHeader extends Component {
 								<img
 									alt=""
 									style={{ width: "32px" }}
-									src="https://user-images.githubusercontent.com/2585159/40581477-fe1ecac2-611e-11e8-9c30-ab8a66644425.png"
+									src={logo}
 								/>
 							</a>
 						</Col>

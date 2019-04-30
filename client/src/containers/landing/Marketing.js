@@ -2,20 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { GREY_2, GREY_1 } from "../styles/ColorConstants";
 import { Row, Col } from "antd";
+import onlineClassAlone from "../images/onlineClassAlone.png";
+import futureOnlineClasses from "../images/futureOnlineClasses.png";
 
 class Marketing extends Component {
 	renderCartoons() {
 		const { windowWidth } = this.props;
 
-		let h2Padding = "60px 0px 0px 0px";
+		let h3Padding = "60px 0px 0px 0px";
 		let imagePadding = "30px 0px 0px 0px";
-		let h2FontSize = 22;
+		let h3FontSize = 28;
 		let imageHeight = "300px";
 		if (windowWidth < 768) {
-			h2Padding = "30px 0px 0px 0px";
+			h3Padding = "30px 0px 0px 0px";
 			imagePadding = "15px 0px 0px 0px";
-			h2FontSize = 18;
-			imageHeight = "200px";
+			h3FontSize = 18;
+			imageHeight = "150px";
 		}
 
 		return (
@@ -23,7 +25,7 @@ class Marketing extends Component {
 				<Row type="flex" justify="left">
 					<Col
 						style={{
-							padding: h2Padding
+							padding: h3Padding
 						}}
 						xs={{ span: 24 }}
 						sm={{ span: 11 }}
@@ -33,18 +35,18 @@ class Marketing extends Component {
 					>
 						<Row type="flex" justify="center">
 							<Col>
-								<h2
+								<h3
 									style={{
 										color: GREY_2,
 										fontFamily: "Overpass",
 										fontWeight: "bold",
-										fontSize: h2FontSize,
+										fontSize: h3FontSize,
 										marginBottom: 0,
 										lineHeight: 1
 									}}
 								>
 									Online class alone
-								</h2>
+								</h3>
 							</Col>
 						</Row>
 						<Row
@@ -60,14 +62,14 @@ class Marketing extends Component {
 									style={{
 										height: imageHeight
 									}}
-									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
+									src={onlineClassAlone}
 								/>
 							</Col>
 						</Row>
 					</Col>
 					<Col
 						style={{
-							padding: h2Padding
+							padding: h3Padding
 						}}
 						xs={{ span: 24 }}
 						sm={{ span: 11 }}
@@ -77,19 +79,19 @@ class Marketing extends Component {
 					>
 						<Row type="flex" justify="center">
 							<Col>
-								<h2
+								<h3
 									style={{
 										textAlign: "center",
 										color: GREY_2,
 										fontFamily: "Overpass",
 										fontWeight: "bold",
-										fontSize: h2FontSize,
+										fontSize: h3FontSize,
 										marginBottom: 0,
 										lineHeight: 1
 									}}
 								>
 									Online class through infinity2o
-								</h2>
+								</h3>
 							</Col>
 						</Row>
 						<Row
@@ -105,7 +107,7 @@ class Marketing extends Component {
 									style={{
 										height: imageHeight
 									}}
-									src="https://user-images.githubusercontent.com/2585159/40999319-20ee0d16-68d0-11e8-900a-0c239b422906.png"
+									src={futureOnlineClasses}
 								/>
 							</Col>
 						</Row>
@@ -120,10 +122,10 @@ class Marketing extends Component {
 
 		let h1Padding = "180px 0px 0px 0px";
 		let endColumnHeight = "120px";
-		let h1FontSize = 42;
+		let h1FontSize = 56;
 		if (windowWidth < 768) {
 			h1Padding = "120px 0px 0px 0px";
-			h1FontSize = 28;
+			h1FontSize = 24;
 			endColumnHeight = "60px";
 		}
 
@@ -153,8 +155,7 @@ class Marketing extends Component {
 								lineHeight: 1
 							}}
 						>
-							Meet people with similar beliefs to take online
-							courses with.
+							Meet your online course partner.
 						</h1>
 					</Col>
 				</Row>
