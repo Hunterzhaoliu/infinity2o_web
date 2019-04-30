@@ -7,7 +7,10 @@ import { GREY_9, GREY_1 } from "../styles/ColorConstants";
 import LoginButtons from "./LoginButtons";
 import InputVote from "../sorting_hat/InputVote";
 import Marketing from "./Marketing";
+import Slider from "react-slick";
 import { Layout, Row, Col } from "antd";
+import firstLandingMatchExample from "../images/first_landing_match_example.png";
+
 const { Content } = Layout;
 
 class Landing extends Component {
@@ -89,16 +92,29 @@ class Landing extends Component {
 		const { windowWidth } = this.props;
 
 		let h2Padding = "120px 0px 0px";
-		let imageHeight = 400;
 		let h2FontSize = 28;
 		let pictureRowPadding = "60px 0px 120px";
 
 		if (windowWidth < 768) {
 			h2Padding = "60px 0px 0px";
-			imageHeight = 250;
 			h2FontSize = 22;
 			pictureRowPadding = "30px 0px 60px";
 		}
+
+		const settings = {
+			dots: false,
+			adaptiveHeight: true,
+			infinite: true,
+			autoplay: true,
+			pauseOnHover: true,
+			speed: 500, // transition speed
+			autoplaySpeed: 6000, // delay between each auto scroll (in milliseconds)
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			arrows: false,
+			pauseOnDotsHover: false,
+			pauseOnFocus: true
+		};
 
 		return (
 			<div>
@@ -127,14 +143,16 @@ class Landing extends Component {
 						padding: pictureRowPadding
 					}}
 				>
-					<Col>
-						<img
-							alt="Match Example"
-							style={{
-								height: imageHeight
-							}}
-							src="https://user-images.githubusercontent.com/2585159/41510382-32448628-7229-11e8-8017-e87d7f761aea.png"
-						/>
+					<Col span={8}>
+						<Slider {...settings}>
+							<img
+								alt=""
+								style={{
+									width: "100%" // styling done for Slider in vote-comparison.css
+								}}
+								src={firstLandingMatchExample}
+							/>
+						</Slider>
 					</Col>
 				</Row>
 			</div>
