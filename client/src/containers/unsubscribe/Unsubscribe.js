@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as unsubscribeActionCreators from "../../actions/unsubscribe";
 import { bindActionCreators } from "redux";
-import { GREY_7, GREY_2, GREY_1, GREY_DOT_5 } from "../styles/ColorConstants";
+import { GREY_7, GREY_1, GREY_DOT_5 } from "../styles/ColorConstants";
 import LoginButtons from "../landing/LoginButtons";
 import MatchesButton from "../navigationButtons/MatchesButton";
 import { Layout, Row, Col, Card } from "antd";
+import logo from "../images/logo.png";
+
 const { Content } = Layout;
 
 class Unsubscribe extends Component {
@@ -91,11 +93,7 @@ class Unsubscribe extends Component {
 									</h4>
 								</Col>
 								<Col>
-									<img
-										alt=""
-										src="https://user-images.githubusercontent.com/24757872/43986315-d41857d8-9cd4-11e8-902d-5ceb9d7cb367.png"
-										width="50px"
-									/>
+									<img alt="" src={logo} width="50px" />
 								</Col>
 							</Row>
 							<Row type="flex" justify="center" align="middle">

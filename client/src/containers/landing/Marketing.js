@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { GREY_2, GREY_1 } from "../styles/ColorConstants";
 import { Row, Col } from "antd";
+import onlineClassAlone from "../images/onlineClassAlone.png";
+import futureOnlineClasses from "../images/futureOnlineClasses.png";
 
 class Marketing extends Component {
 	renderCartoons() {
@@ -60,7 +62,7 @@ class Marketing extends Component {
 									style={{
 										height: imageHeight
 									}}
-									src="https://user-images.githubusercontent.com/2585159/40999312-1c66c9ea-68d0-11e8-9528-4fe4123070d3.png"
+									src={onlineClassAlone}
 								/>
 							</Col>
 						</Row>
@@ -105,7 +107,7 @@ class Marketing extends Component {
 									style={{
 										height: imageHeight
 									}}
-									src="https://user-images.githubusercontent.com/2585159/40999319-20ee0d16-68d0-11e8-900a-0c239b422906.png"
+									src={futureOnlineClasses}
 								/>
 							</Col>
 						</Row>
