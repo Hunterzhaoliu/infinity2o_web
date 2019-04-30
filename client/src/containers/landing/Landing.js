@@ -136,7 +136,7 @@ class Landing extends Component {
 								lineHeight: h2LineHeight
 							}}
 						>
-							Chat with the matches you want to learn with
+							Chat with the matches you want to learn with.
 						</h2>
 					</Col>
 				</Row>
