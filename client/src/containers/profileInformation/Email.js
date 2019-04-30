@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-// import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
+import emailIcon from "../images/emailIcon.png";
 
 class Email extends Component {
 	render() {
@@ -19,7 +19,7 @@ class Email extends Component {
 						style={{
 							width: "25px"
 						}}
-						src="https://user-images.githubusercontent.com/24757872/40867452-d7a6feaa-65c9-11e8-849f-9d144103b0c3.png"
+						src={emailIcon}
 					/>
 				</Col>
 				<Col
