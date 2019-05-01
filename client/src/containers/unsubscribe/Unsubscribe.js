@@ -7,6 +7,7 @@ import LoginButtons from "../landing/LoginButtons";
 import MatchesButton from "../navigationButtons/MatchesButton";
 import { Layout, Row, Col, Card } from "antd";
 import logo from "../images/logo.png";
+import { Helmet } from "react-helmet";
 
 const { Content } = Layout;
 
@@ -49,6 +50,9 @@ class Unsubscribe extends Component {
 					background: backgroundColor
 				}}
 			>
+				<Helmet>
+					<title>Unsubscribe</title>
+				</Helmet>
 				<Row type="flex" justify="center" align="top">
 					<Col>
 						<Card

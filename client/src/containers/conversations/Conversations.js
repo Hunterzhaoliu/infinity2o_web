@@ -8,6 +8,8 @@ import Chat from "./Chat";
 import Contacts from "./Contacts";
 import VoteComparison from "./VoteComparison";
 import { Layout, Row, Col } from "antd";
+import { Helmet } from "react-helmet";
+
 const { Content } = Layout;
 
 class Conversation extends Component {
@@ -109,6 +111,9 @@ class Conversation extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
+				<Helmet>
+					<title>Conversations</title>
+				</Helmet>
 				{this.renderConversations()}
 			</Content>
 		);

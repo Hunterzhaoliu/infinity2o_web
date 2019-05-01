@@ -10,7 +10,6 @@ import sortingHatReducer from "./sortingHatReducer";
 import matchesReducer from "./matchesReducer";
 import contactsReducer from "./contactsReducer";
 import chatReducer from "./chatReducer";
-import aboutReducer from "./aboutReducer";
 
 export default combineReducers({
 	auth: authReducer,
@@ -23,6 +22,5 @@ export default combineReducers({
 	sortingHat: sortingHatReducer,
 	matches: matchesReducer,
 	contacts: contactsReducer,
-	chat: chatReducer,
-	about: aboutReducer
+	chat: chatReducer
 });
