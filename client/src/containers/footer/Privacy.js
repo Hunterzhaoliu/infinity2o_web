@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
 	GREY_1,
 	GREY_5,
 	GREY_6,
 	GREY_8,
 	GREY_9
-} from '../styles/ColorConstants';
-import { Layout, Row, Col } from 'antd';
+} from "../styles/ColorConstants";
+import { Layout, Row, Col } from "antd";
+import { Helmet } from "react-helmet";
+
 const { Content } = Layout;
 
 class Privacy extends Component {
@@ -19,7 +21,7 @@ class Privacy extends Component {
 		let text2Color = colorTheme.text2Color;
 		let text4Color = colorTheme.text4Color;
 
-		if (loggedInState === 'not_logged_in') {
+		if (loggedInState === "not_logged_in") {
 			background = GREY_1;
 			text1Color = GREY_9;
 			text2Color = GREY_8;
@@ -29,10 +31,13 @@ class Privacy extends Component {
 		return (
 			<Content
 				style={{
-					padding: '75px 50px 0px', // top right bottom left
+					padding: "75px 50px 0px", // top right bottom left
 					background: background
 				}}
 			>
+				<Helmet>
+					<title>Privacy</title>
+				</Helmet>
 				<Row type="flex" justify="center">
 					<Col>
 						<h1 style={{ color: text1Color }}>Privacy Policy</h1>
@@ -270,4 +275,7 @@ function mapDispatchToProps(dispatch) {
 	return {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Privacy);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Privacy);

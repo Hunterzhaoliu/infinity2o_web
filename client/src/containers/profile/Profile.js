@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import VoteEdit from "./VoteEdit";
 import { Layout, Row, Col } from "antd";
 import ProfileCard from "./ProfileCard";
+import { Helmet } from "react-helmet";
 
 const { Content } = Layout;
 
@@ -57,6 +58,9 @@ class Profile extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
+				<Helmet>
+					<title>Profile</title>
+				</Helmet>
 				<Row type="flex" justify="center" align="middle">
 					<Col
 						sm={{ span: 21 }}

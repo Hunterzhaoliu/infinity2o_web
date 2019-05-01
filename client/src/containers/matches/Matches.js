@@ -7,6 +7,8 @@ import { MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH } from "../../utils/constants";
 import "./Matches.css";
 import { Layout, Row, Col, Progress, Icon } from "antd";
 import MatchCards from "./MatchCards";
+import { Helmet } from "react-helmet";
+
 const { Content } = Layout;
 
 class Matches extends Component {
@@ -179,6 +181,9 @@ class Matches extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
+				<Helmet>
+					<title>Matches</title>
+				</Helmet>
 				<Row type="flex" justify="center">
 					<Col>
 						<h2

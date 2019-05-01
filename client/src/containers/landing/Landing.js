@@ -9,6 +9,7 @@ import InputVote from "../sorting_hat/InputVote";
 import Marketing from "./Marketing";
 import Slider from "react-slick";
 import { Layout, Row, Col } from "antd";
+import { Helmet } from "react-helmet";
 import firstLandingMatchExample from "../images/first_landing_match_example.png";
 
 const { Content } = Layout;
@@ -221,8 +222,17 @@ class Landing extends Component {
 	}
 
 	render() {
+		const metaDescription =
+			"Meet your online course partner. infinity2o " +
+			"finds you a partner to take an online course with based on what " +
+			"you're looking for. Every day, receive two quality matches that you can " +
+			"start a conversation with.";
 		return (
 			<div>
+				<Helmet>
+					<meta name={metaDescription} />
+					<title>Online Course Partners</title>
+				</Helmet>
 				<Content
 					style={{
 						background: GREY_9
