@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Popover, Icon } from "antd";
+import { Row, Col, Popover, Icon, Button } from "antd";
 import "./neurons.css";
 import Emoji from "../styles/Emoji";
 
@@ -59,8 +59,8 @@ class Neurons extends Component {
 
     return (
       <Popover content={neuronExplanation}>
-        <button
-          className="popover-button"
+        <Button
+          shape="circle"
           style={{
             borderColor: colorTheme.backgroundColor,
             backgroundColor: colorTheme.backgroundColor,
@@ -69,12 +69,13 @@ class Neurons extends Component {
         >
           <Icon
             style={{
-              fontSize: 12,
-              padding: "0px 0px 6px"
+              padding: "2px 0px 0px 2px", // TRBL
+              fontSize: 23
             }}
-            type="question-circle-o"
+            type="question"
+            theme="twoTone"
           />
-        </button>
+        </Button>
       </Popover>
     );
   }
