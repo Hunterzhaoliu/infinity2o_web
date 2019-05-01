@@ -138,6 +138,3 @@ export const TOGGLE_BELIEF_COMPARISON = "TOGGLE_BELIEF_COMPARISON";
 
 // unsubscribe/Unsubscribe.js
 export const USER_UNSUBSCRIBED = "USER_UNSUBSCRIBED";
-
-// About page
-export const SAVE_FETCHED_TEAM_INFO = "SAVE_FETCHED_TEAM_INFO";

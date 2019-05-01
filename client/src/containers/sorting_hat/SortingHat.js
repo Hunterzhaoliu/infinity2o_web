@@ -8,6 +8,7 @@ import { Layout, Row, Col } from "antd";
 import InputVote from "./InputVote";
 import Ask from "./Ask";
 import "./sorting-hat.css";
+import { Helmet } from "react-helmet";
 
 const { Content } = Layout;
 
@@ -34,6 +35,9 @@ class SortingHat extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
+				<Helmet>
+					<title>Sorting Hat</title>
+				</Helmet>
 				<Ask />
 				<Row type="flex" justify="center" align="middle">
 					<Col>

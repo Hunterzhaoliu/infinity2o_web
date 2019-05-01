@@ -25,16 +25,6 @@ const getUserInfo = async mongoDBMatchId => {
 };
 
 module.exports = app => {
-	app.get("/api/users", requireLogin, async (request, response) => {
-		const mongoDBUserIds = request.query.listOfUserMongoDBUserId;
-		let usersInfo = [];
-		for (let mongoDBUserId of mongoDBUserIds) {
-			const userInfo = await getUserInfo(mongoDBUserId);
-			usersInfo.push(userInfo);
-		}
-		response.send(usersInfo);
-	});
-
 	app.get("/api/matches", requireLogin, async (request, response) => {
 		// formats the request string into an array
 		const mongoDBUserId = request.user._id;
@@ -83,7 +73,9 @@ module.exports = app => {
 			const userInDB = await UserCollection.findOne({ _id: userId });
 			let userConversationList = userInDB.conversations.userConversations;
 			// console.log('userConversationList = ', userConversationList);
-			const matcOverpassB = await UserCollection.findOne({ _id: matchId });
+			const matcOverpassB = await UserCollection.findOne({
+				_id: matchId
+			});
 			let matchConversationList =
 				matcOverpassB.conversations.userConversations;
 			// console.log('matchConversationList = ', matchConversationList);

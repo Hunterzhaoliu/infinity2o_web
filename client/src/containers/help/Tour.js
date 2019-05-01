@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import * as colorThemeActions from "../../actions/colorTheme";
 import { bindActionCreators } from "redux";
 import { Layout, Row, Col } from "antd";
+import { Helmet } from "react-helmet";
+
 const { Content } = Layout;
 
 class Tour extends Component {
@@ -26,10 +28,12 @@ class Tour extends Component {
 					background: colorTheme.backgroundColor
 				}}
 			>
+				<Helmet>
+					<title>Tour</title>
+				</Helmet>
 				<Row type="flex" justify="center">
 					<Col span={24}>
-						<h1
-							key="0"
+						<h2
 							style={{
 								color: colorTheme.text2Color,
 								fontFamily: "Overpass",
@@ -39,7 +43,7 @@ class Tour extends Component {
 							}}
 						>
 							Welcome to infinity2o
-						</h1>
+						</h2>
 					</Col>
 				</Row>
 				<Row
