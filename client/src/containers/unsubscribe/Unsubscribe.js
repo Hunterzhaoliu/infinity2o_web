@@ -35,7 +35,7 @@ class Unsubscribe extends Component {
 		let textColor = GREY_7;
 		if (loggedInState === "logged_in") {
 			backgroundColor = colorTheme.backgroundColor;
-			cardColor = colorTheme.textDot5Color;
+			cardColor = colorTheme.text9Dot5Color;
 			textColor = colorTheme.text1Color;
 		}
 

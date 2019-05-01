@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
-import interestIcon from "../images/interestIcon.png";
+import Emoji from "../styles/Emoji";
 
 class Interests extends Component {
   renderInterests() {
@@ -48,18 +48,12 @@ class Interests extends Component {
           align="middle"
         >
           <Col span={1}>
-            <img
-              alt="Interests: "
-              style={{
-                width: "25px"
-              }}
-              src={interestIcon}
-            />
+            <Emoji fontSize={24} label="interests" symbol="❤️ " />
           </Col>
           <Col
             span={23}
             style={{
-              padding: "0px 10px 0px 20px",
+              padding: "0px 0px 0px 20px",
               fontFamily: "Overpass",
               lineHeight: 1.2,
               fontSize: 16,

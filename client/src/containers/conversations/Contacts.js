@@ -40,10 +40,10 @@ class Contacts extends Component {
 				className="contacts-list"
 				dataSource={contacts.allContacts}
 				renderItem={contact => {
-					let borderColor = colorTheme.textDot5Color;
-					let background = colorTheme.textDot5Color;
+					let borderColor = colorTheme.text9Dot5Color;
+					let background = colorTheme.text9Dot5Color;
 					let fontWeight = "400px";
-					let buttonLeftSideColor = colorTheme.textDot5Color;
+					let buttonLeftSideColor = colorTheme.text9Dot5Color;
 
 					if (
 						contacts.selectedConversationInfo.conversationId ===
@@ -117,7 +117,7 @@ class Contacts extends Component {
 		return (
 			<Content
 				style={{
-					background: colorTheme.textDot5Color,
+					background: colorTheme.text9Dot5Color,
 					border: "1px solid " + colorTheme.text8Color
 				}}
 			>

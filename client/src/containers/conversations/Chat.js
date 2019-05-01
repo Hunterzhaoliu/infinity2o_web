@@ -42,14 +42,14 @@ class Chat extends Component {
 		}
 	};
 
-	renderPicture(pictureUrl, textDot5Color) {
+	renderPicture(pictureUrl, text9Dot5Color) {
 		if (pictureUrl === undefined || pictureUrl === null) {
 			pictureUrl = dolphin;
 		}
 		return (
 			<img
 				style={{
-					border: "2px solid " + textDot5Color
+					border: "2px solid " + text9Dot5Color
 				}}
 				onError={error => {
 					// in case the imageUrl is invalid
@@ -135,12 +135,12 @@ class Chat extends Component {
 							{this.renderPicture(
 								selectedConversationInfo
 									.selectedContactMongoDBInfo.imageUrl,
-								colorTheme.textDot5Color
+								colorTheme.text9Dot5Color
 							)}
 						</div>
 						{this.renderPicture(
 							userImageUrl,
-							colorTheme.textDot5Color
+							colorTheme.text9Dot5Color
 						)}
 					</div>
 					<p className="welcome-message">Say hi to your new Match!</p>
@@ -164,8 +164,8 @@ class Chat extends Component {
 		const { colorTheme, chat } = this.props;
 
 		document.documentElement.style.setProperty(
-			`--textDot5Color`,
-			colorTheme.textDot5Color
+			`--text9Dot5Color`,
+			colorTheme.text9Dot5Color
 		);
 		document.documentElement.style.setProperty(
 			`--text4Color`,
@@ -175,7 +175,7 @@ class Chat extends Component {
 		return (
 			<Content
 				style={{
-					backgroundColor: colorTheme.textDot5Color,
+					backgroundColor: colorTheme.text9Dot5Color,
 					borderWidth: "1px 1px 0px 0px",
 					borderStyle: "solid",
 					borderColor: colorTheme.text8Color
@@ -194,7 +194,7 @@ class Chat extends Component {
 							onPressEnter={this.onPressEnter}
 							style={{
 								borderColor: colorTheme.text8Color,
-								background: colorTheme.textDot5Color,
+								background: colorTheme.text9Dot5Color,
 								color: colorTheme.text8Color
 							}}
 						/>

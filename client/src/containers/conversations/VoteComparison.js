@@ -17,7 +17,7 @@ class VoteComparison extends Component {
 		return (
 			<img
 				style={{
-					border: "2px solid " + colorTheme.textDot5Color
+					border: "2px solid " + colorTheme.text9Dot5Color
 				}}
 				onError={error => {
 					// in case the imageUrl is invalid
@@ -46,8 +46,8 @@ class VoteComparison extends Component {
 							borderded="false"
 							loading={false}
 							style={{
-								borderColor: colorTheme.textDot5Color,
-								background: colorTheme.textDot5Color
+								borderColor: colorTheme.text9Dot5Color,
+								background: colorTheme.text9Dot5Color
 							}}
 							bodyStyle={{ padding: "30px" }}
 						>
@@ -112,8 +112,8 @@ class VoteComparison extends Component {
 							borderded="false"
 							loading={false}
 							style={{
-								borderColor: colorTheme.textDot5Color,
-								background: colorTheme.textDot5Color
+								borderColor: colorTheme.text9Dot5Color,
+								background: colorTheme.text9Dot5Color
 							}}
 							bodyStyle={{ padding: "30px" }}
 						>
@@ -208,8 +208,8 @@ class VoteComparison extends Component {
 					<Col>
 						<button
 							style={{
-								borderColor: colorTheme.textDot5Color,
-								background: colorTheme.textDot5Color,
+								borderColor: colorTheme.text9Dot5Color,
+								background: colorTheme.text9Dot5Color,
 								color: colorTheme.keyText8Color
 							}}
 							className="contact-information-button"

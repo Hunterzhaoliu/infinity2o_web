@@ -149,8 +149,8 @@ class ContactCard extends Component {
 				loading={false}
 				style={{
 					color: colorTheme.text1Color,
-					borderColor: colorTheme.textDot5Color,
-					background: colorTheme.textDot5Color
+					borderColor: colorTheme.text9Dot5Color,
+					background: colorTheme.text9Dot5Color
 				}}
 				bodyStyle={{ padding: "0px 0px 60px 0px" }} // padding around inside border of card
 			>
