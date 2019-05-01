@@ -30,7 +30,8 @@ class ProfileCard extends Component {
 
     return (
       <Row type="flex" justify="center">
-        <Col xl={{ span: 8 }}>
+        <Col md={{ span: 3 }} xl={{ span: 8 }} />
+        <Col md={{ span: 18 }} xl={{ span: 8 }}>
           <Card
             bordered="false"
             loading={false}
@@ -39,7 +40,7 @@ class ProfileCard extends Component {
               borderColor: colorTheme.text9Dot5Color,
               background: colorTheme.text9Dot5Color
             }}
-            bodyStyle={{ padding: "0px" }} // padding around inside border of card
+            bodyStyle={{ padding: "0px 0px 0px 0px" }} // padding around inside border of card
           >
             <Row type="flex" justify="center">
               <div
@@ -124,6 +125,7 @@ class ProfileCard extends Component {
             </Row>
           </Card>
         </Col>
+        <Col md={{ span: 3 }} xl={{ span: 8 }} />
       </Row>
     );
   }
