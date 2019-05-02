@@ -19,14 +19,6 @@ class Unsubscribe extends Component {
     const userId = URLArray[4];
     this.props.userUnsubscribed(userId);
   }
-
-  renderSeeMatchesButton(loggedInState) {
-    if (loggedInState === "logged_in") {
-      return <MatchesButton />;
-    } else {
-      return <LoginButtons />;
-    }
-  }
   render() {
     const { name, loggedInState, colorTheme } = this.props;
     const userFirstName = name.split(" ")[0];
