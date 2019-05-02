@@ -9,18 +9,6 @@ import "./about.css";
 const { Content } = Layout;
 
 class About extends Component {
-  // renderTeam() {
-  // 	const { teamMembers, colorTheme } = this.props;
-  //
-  // 	return _.map(teamMembers, teamMember => {
-  // 		return (
-  // 			<Col>
-  // 				<h1 style={{ color: colorTheme.text2Color }}>Hi</h1>
-  // 			</Col>
-  // 		);
-  // 	});
-  // }
-
   render() {
     const { colorTheme, loggedInState } = this.props;
 
