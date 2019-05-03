@@ -3,6 +3,26 @@ const requireLogin = require("../middlewares/requireLogin");
 const UserCollection = mongoose.model("users");
 
 module.exports = app => {
+  app.put(
+    "/api/profile/user_visited_site",
+    requireLogin,
+    async (request, response) => {
+      try {
+        await UserCollection.findOneAndUpdate(
+          { _id: request.user._id },
+          {
+            $set: {
+              "profile.minerva.lastRecordedSiteVisitDate": new Date()
+            }
+          }
+        );
+        response.send("done");
+      } catch (error) {
+        response.status(422).send(error);
+      }
+    }
+  );
+
   app.post("/api/profile", requireLogin, async (request, response) => {
     const {
       name,
