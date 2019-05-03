@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import * as unsubscribeActionCreators from "../../actions/unsubscribe";
 import { bindActionCreators } from "redux";
 import { GREY_7, GREY_1, GREY_DOT_5 } from "../styles/ColorConstants";
-import LoginButtons from "../landing/LoginButtons";
-import MatchesButton from "../navigationButtons/MatchesButton";
 import { Layout, Row, Col, Card } from "antd";
 import logo from "../images/logo.png";
 import { Helmet } from "react-helmet";
@@ -18,14 +16,6 @@ class Unsubscribe extends Component {
     // URLArray =  [ "http:", "", "localhost:3000", "unsubscribe", "5ad55047b4e23300148b0cd7" ]
     const userId = URLArray[4];
     this.props.userUnsubscribed(userId);
-  }
-
-  renderSeeMatchesButton(loggedInState) {
-    if (loggedInState === "logged_in") {
-      return <MatchesButton />;
-    } else {
-      return <LoginButtons />;
-    }
   }
   render() {
     const { name, loggedInState, colorTheme } = this.props;
