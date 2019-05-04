@@ -178,7 +178,6 @@ class MatchCards extends Component {
 
   render() {
     const { match, colorTheme } = this.props;
-    console.log("match = ", match);
     return (
       <Card
         bordered="false"
