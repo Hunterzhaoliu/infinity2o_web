@@ -7,12 +7,21 @@ module.exports = app => {
     "/api/profile/user_visited_site",
     requireLogin,
     async (request, response) => {
+      // first set time to local time and then convert to eastern time zone
+      let timeInEasternTimeZone = new Date();
+      // getTimezoneOffset returns in minutes hence / 60 and subtract four for
+      // difference between UTC and eastern time zone
+      timeInEasternTimeZone.setHours(
+        timeInEasternTimeZone.getHours() +
+          timeInEasternTimeZone.getTimezoneOffset() / 60 -
+          4
+      );
       try {
         await UserCollection.findOneAndUpdate(
           { _id: request.user._id },
           {
             $set: {
-              "profile.minerva.lastRecordedSiteVisitDate": new Date()
+              "profile.minerva.lastRecordedSiteVisitDate": timeInEasternTimeZone
             }
           }
         );
