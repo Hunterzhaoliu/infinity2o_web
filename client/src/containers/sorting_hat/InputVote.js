@@ -4,13 +4,7 @@ import { connect } from "react-redux";
 import * as sortingHatActionCreators from "../../actions/sorting_hat/sortingHat";
 import * as landingActionCreators from "../../actions/landing";
 import { bindActionCreators } from "redux";
-import {
-  GREY_8,
-  GREY_7,
-  GREY_1,
-  GREY_DOT_5,
-  RED_ORANGE_3
-} from "../styles/ColorConstants";
+import { GREY_8, GREY_7, GREY_1, RED_ORANGE_3 } from "../styles/ColorConstants";
 import FirstVote from "../landing/FirstVote";
 import { Card, Col, Layout, Row, Icon } from "antd";
 import "./input-vote.css";

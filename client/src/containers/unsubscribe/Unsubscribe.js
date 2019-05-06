@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import * as unsubscribeActionCreators from "../../actions/unsubscribe";
 import { bindActionCreators } from "redux";
 import { GREY_7, GREY_1, GREY_DOT_5 } from "../styles/ColorConstants";
-import LoginButtons from "../landing/LoginButtons";
-import MatchesButton from "../navigationButtons/MatchesButton";
 import { Layout, Row, Col, Card } from "antd";
 import logo from "../images/logo.png";
 import { Helmet } from "react-helmet";
@@ -19,15 +17,6 @@ class Unsubscribe extends Component {
     const userId = URLArray[4];
     this.props.userUnsubscribed(userId);
   }
-
-  renderSeeMatchesButton(loggedInState) {
-    if (loggedInState === "logged_in") {
-      return <MatchesButton />;
-    } else {
-      return <LoginButtons />;
-    }
-  }
-
   render() {
     const { name, loggedInState, colorTheme } = this.props;
     const userFirstName = name.split(" ")[0];
@@ -36,7 +25,7 @@ class Unsubscribe extends Component {
     let textColor = GREY_7;
     if (loggedInState === "logged_in") {
       backgroundColor = colorTheme.backgroundColor;
-      cardColor = colorTheme.text9Dot5Color;
+      cardColor = colorTheme.textDot5Color;
       textColor = colorTheme.text1Color;
     }
 
@@ -53,6 +42,7 @@ class Unsubscribe extends Component {
       >
         <Helmet>
           <title>Unsubscribe</title>
+          <meta name="robots" content="noindex" />
         </Helmet>
         <Row type="flex" justify="center" align="top">
           <Col>
