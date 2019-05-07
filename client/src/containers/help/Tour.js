@@ -24,7 +24,7 @@ class Tour extends Component {
       <Content
         style={{
           textAlign: "center",
-          padding: 120,
+          padding: "120px 0px 0px 0px",
           background: colorTheme.backgroundColor
         }}
       >
@@ -39,7 +39,8 @@ class Tour extends Component {
                 fontFamily: "Overpass",
                 fontSize: "35px",
                 fontWeight: "bold",
-                padding: "25px 0px 0px 0px"
+                lineHeight: 1,
+                marginBottom: 0
               }}
             >
               Welcome to infinity2o
@@ -47,7 +48,7 @@ class Tour extends Component {
           </Col>
         </Row>
         <Row
-          style={{ padding: "25px 0px 0px 0px" }}
+          style={{ padding: "30px 0px 0px 0px" }}
           type="flex"
           justify="center"
         >
