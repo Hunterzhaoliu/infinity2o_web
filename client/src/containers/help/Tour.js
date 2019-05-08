@@ -20,6 +20,11 @@ class Tour extends Component {
     const HEIGHT_RATIO = 0.38;
     const videoWidth = windowWidth * WIDTH_RATIO;
     const videoHeight = windowWidth * HEIGHT_RATIO;
+
+    let h2FontSize = 36;
+    if (windowWidth < 768) {
+      h2FontSize = 22;
+    }
     return (
       <Content
         style={{
@@ -37,7 +42,7 @@ class Tour extends Component {
               style={{
                 color: colorTheme.text2Color,
                 fontFamily: "Overpass",
-                fontSize: "35px",
+                fontSize: h2FontSize,
                 fontWeight: "bold",
                 lineHeight: 1,
                 marginBottom: 0

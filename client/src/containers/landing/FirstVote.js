@@ -25,7 +25,7 @@ class FirstVote extends Component {
 
     return (
       <Modal
-        visible={true} //isFirstVoteModalOpen
+        visible={isFirstVoteModalOpen}
         onCancel={e => this.props.closeFirstVoteModal()}
         footer={null}
         centered={true}
