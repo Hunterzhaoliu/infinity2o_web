@@ -354,9 +354,13 @@ class VoteEdit extends Component {
 	}
 
 	renderAskToRevote() {
-		const { colorTheme, voteEdit } = this.props;
+		const { colorTheme, voteEdit, windowWidth } = this.props;
 
 		if (voteEdit.askToRevote !== null) {
+            let h3FontSize = 24;
+            if (windowWidth < 768) {
+                h3FontSize = 18;
+            }
 			return (
 				<Modal
 					width="700px"
@@ -378,7 +382,7 @@ class VoteEdit extends Component {
 								fontFamily: "Overpass",
 								lineHeight: 1,
 								marginBottom: 0,
-								fontSize: 24
+								fontSize: h3FontSize
 							}}
 						>
 							{voteEdit.askToRevote.question}
@@ -488,6 +492,7 @@ This function gives the UI the parts of the state it will need to display.
 */
 function mapStateToProps(state) {
 	return {
+        windowWidth: state.customHeader.windowWidth,
 		colorTheme: state.colorTheme,
 		profile: state.profile,
 		voteEdit: state.voteEdit,
