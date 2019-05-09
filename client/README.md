@@ -5,7 +5,7 @@ rearranged into a different flex layout at the following
 window widths:
 
 ```
-xs < 576
+480 < xs < 576
 sm >=576px
 md >= 768px
 
