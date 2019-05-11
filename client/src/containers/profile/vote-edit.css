@@ -18,7 +18,3 @@
 .vote-edit-button:focus {
   outline: none;
 }
-
-.vote-edit-modal {
-  width: var(--modalWidth);
-}

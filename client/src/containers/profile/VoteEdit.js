@@ -231,6 +231,10 @@ class VoteEdit extends Component {
           key={answerIndex}
         >
           <Col
+            xs={{ span: 12 }}
+            sm={{ span: 12 }}
+            md={{ span: 12 }}
+            lg={{ span: 12 }}
             xl={{ span: 12 }}
             style={{
               textAlign: "center"
@@ -260,11 +264,11 @@ class VoteEdit extends Component {
             </button>
           </Col>
           <Col
-            xs={{ span: 4 }}
-            sm={{ span: 4 }}
-            md={{ span: 4 }}
-            lg={{ span: 4 }}
-            xl={{ span: 4 }}
+            xs={{ span: 6 }}
+            sm={{ span: 6 }}
+            md={{ span: 6 }}
+            lg={{ span: 6 }}
+            xl={{ span: 6 }}
             style={{
               textAlign: "center"
             }}
@@ -355,20 +359,18 @@ class VoteEdit extends Component {
       let modalPaddingLocation = "90px 0px 0px 0px";
       let modalInnerPadding = "60px";
       let h4FontSize = 20;
-      let modalWidth = "50%";
+      let modalMargin = "auto";
       if (windowWidth < 768) {
         h3FontSize = 22;
         modalPaddingLocation = "0px 0px 0px 0px";
         modalInnerPadding = "30px 15px";
         h4FontSize = 17;
-        modalWidth = "50%";
+        modalMargin = "0px 30px";
       }
-
-      document.documentElement.style.setProperty(`--modalWidth`, modalWidth);
 
       return (
         <Modal
-          className="vote-edit-modal"
+          width={"50%"} // only works for windowWidth < 768
           visible={voteEdit.isRevoteModalOpen}
           onCancel={e => this.props.closeRevoteModal()}
           footer={null}
@@ -377,7 +379,7 @@ class VoteEdit extends Component {
             padding: modalInnerPadding,
             backgroundColor: colorTheme.backgroundColor
           }}
-          style={{ padding: modalPaddingLocation }} // where the modal is
+          style={{ padding: modalPaddingLocation, margin: modalMargin }} // where the modal is
         >
           <Row type="flex" justify="center">
             <h3
@@ -447,7 +449,7 @@ class VoteEdit extends Component {
               sm={{ span: 6 }}
               md={{ span: 6 }}
               lg={{ span: 6 }}
-              xl={{ span: 4 }}
+              xl={{ span: 6 }}
             >
               <h4
                 style={{
