@@ -73,7 +73,13 @@ class Matches extends Component {
     if (hasMatches) {
       const match = matches.current1DisplayedMatches[0];
       return (
-        <Col xl={{ span: 7 }}>
+        <Col
+          xs={{ span: 20 }}
+          sm={{ span: 20 }}
+          md={{ span: 14 }}
+          lg={{ span: 11 }}
+          xl={{ span: 8 }}
+        >
           <MatchCards match={match} history={history} />
         </Col>
       );

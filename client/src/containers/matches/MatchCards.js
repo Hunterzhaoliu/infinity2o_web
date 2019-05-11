@@ -156,7 +156,13 @@ class MatchCards extends Component {
               Next
             </button>
           </Col>
-          <Col xl={{ offset: 4 }}>
+          <Col
+            xs={{ offset: 4 }}
+            sm={{ offset: 4 }}
+            md={{ offset: 4 }}
+            lg={{ offset: 4 }}
+            xl={{ offset: 4 }}
+          >
             <button
               className="match-cards-button"
               style={{
@@ -223,7 +229,7 @@ class MatchCards extends Component {
         >
           <Col>
             <Interests interests={match.interests} />
-            <TimeZone value={match.timeZone} />
+            <TimeZone timeZone={match.timeZone} />
           </Col>
         </Row>
         {this.renderMatchButtons()}
