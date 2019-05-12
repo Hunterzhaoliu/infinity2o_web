@@ -28,11 +28,13 @@ class SortingHat extends Component {
   render() {
     const { colorTheme, history, windowWidth } = this.props;
 
-    let mainH2FontSize = 32;
-    let votingH3FontSize = 24;
+    let h2FontSize = 32;
+    let h3FontSize = 24;
+    let buttonFontSize = 24;
     if (windowWidth < 768) {
-      mainH2FontSize = 26;
-      votingH3FontSize = 18;
+      h2FontSize = 22;
+      h3FontSize = 18;
+      buttonFontSize = 18;
     }
     return (
       <Content
@@ -46,13 +48,19 @@ class SortingHat extends Component {
         </Helmet>
         <Ask />
         <Row type="flex" justify="center" align="middle">
-          <Col>
+          <Col
+            xs={{ span: 20 }}
+            sm={{ span: 20 }}
+            md={{ span: 24 }}
+            lg={{ span: 15 }}
+            xl={{ span: 10 }}
+          >
             <h2
               style={{
                 color: colorTheme.text2Color,
                 marginBottom: 0,
                 lineHeight: 1,
-                fontSize: mainH2FontSize,
+                fontSize: h2FontSize,
                 fontFamily: "Overpass",
                 textAlign: "center"
               }}
@@ -66,7 +74,8 @@ class SortingHat extends Component {
               style={{
                 borderColor: colorTheme.keyText8Color,
                 background: colorTheme.keyText8Color,
-                color: colorTheme.text2Color
+                color: colorTheme.text2Color,
+                fontSize: buttonFontSize
               }}
               onClick={e => this.props.openAskModal()}
             >
@@ -76,8 +85,13 @@ class SortingHat extends Component {
         </Row>
         <Row type="flex" justify="center" align="middle">
           <Col
+            xs={{ span: 19 }}
+            sm={{ span: 19 }}
+            md={{ span: 24 }}
+            lg={{ span: 24 }}
+            xl={{ span: 24 }}
             style={{
-              padding: "30px 0px 40px 0px"
+              padding: "30px 0px 40px"
             }}
           >
             <h3
@@ -86,7 +100,7 @@ class SortingHat extends Component {
                 color: colorTheme.text4Color,
                 marginBottom: 0,
                 lineHeight: 1,
-                fontSize: votingH3FontSize,
+                fontSize: h3FontSize,
                 fontFamily: "Overpass"
               }}
             >
@@ -96,7 +110,7 @@ class SortingHat extends Component {
         </Row>
         <Row type="flex" justify="center">
           <Col
-            xs={{ span: 21 }}
+            xs={{ span: 20 }}
             sm={{ span: 16 }}
             md={{ span: 20 }}
             lg={{ span: 18 }}

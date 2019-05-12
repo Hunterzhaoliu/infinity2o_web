@@ -128,6 +128,37 @@ class InputVote extends Component {
     this.props.onVoteLanding(answerIndex, askIndex, isFirstVote);
   }
 
+  renderSpanChange(isDisplayingAskStats) {
+    const { windowWidth } = this.props;
+    if (isDisplayingAskStats) {
+      if (windowWidth > 768) {
+        return 16;
+      } else {
+        return 17;
+      }
+    }
+  }
+
+  renderAskStats(answerVotes, askTotalVotes, isDisplayingAskStats) {
+    if (isDisplayingAskStats) {
+      const askStat =
+        String(((answerVotes / askTotalVotes) * 100).toFixed(1)) + "%";
+
+      return (
+        <p
+          style={{
+            marginBottom: 0,
+            lineHeight: 1,
+            fontFamily: "Overpass",
+            fontSize: "16px"
+          }}
+        >
+          {askStat}
+        </p>
+      );
+    }
+  }
+
   renderAnswers(
     answers,
     askIndex,
@@ -173,7 +204,13 @@ class InputVote extends Component {
       }
 
       return (
-        <Row style={{ padding: "10px 0px 0px" }} key={answerIndex}>
+        <Row
+          style={{ padding: "10px 0px 0px" }}
+          key={answerIndex}
+          type="flex"
+          justify="center"
+          align="middle"
+        >
           <Col span={this.renderSpanChange(isDisplayingAskStats)}>
             {this.renderAnswerButton(
               displayAnswerButtonColor,
@@ -186,7 +223,13 @@ class InputVote extends Component {
               isDisplayingSaveIcon
             )}
           </Col>
-          <Col>
+          <Col
+            xs={{ offset: 1 }}
+            sm={{ offset: 1 }}
+            md={{ offset: 1 }}
+            lg={{ offset: 1 }}
+            xl={{ offset: 1 }}
+          >
             {this.renderAskStats(
               answerVotes,
               askTotalVotes,
@@ -199,7 +242,13 @@ class InputVote extends Component {
   }
 
   renderQandAs() {
-    const { colorTheme, sortingHat, landing, activeSection } = this.props;
+    const {
+      colorTheme,
+      sortingHat,
+      landing,
+      activeSection,
+      windowWidth
+    } = this.props;
 
     let fourAsks;
     let cardColor = colorTheme.textDot5Color;
@@ -239,6 +288,13 @@ class InputVote extends Component {
             totalVotesDisplay = String(askTotalVotes) + " vote(s)";
           }
 
+          let h3FontSize = "22px";
+          let h5FontSize = "18px";
+          if (windowWidth < 768) {
+            h3FontSize = "18px";
+            h5FontSize = "16px";
+          }
+
           return (
             <Col
               xs={{ span: 24 }}
@@ -266,22 +322,22 @@ class InputVote extends Component {
                     marginBottom: 0,
                     lineHeight: 1,
                     padding: "0px 0px 10px 0px",
-                    fontSize: "20px"
+                    fontSize: h3FontSize
                   }}
                 >
                   {displayQuestion}
                 </h3>
-                <div
+                <h5
                   style={{
                     color: voteColor,
                     lineHeight: 1,
                     fontFamily: "Overpass",
                     marginBottom: 0,
-                    fontSize: "16px"
+                    fontSize: h5FontSize
                   }}
                 >
                   {totalVotesDisplay}
-                </div>
+                </h5>
                 {this.renderAnswers(
                   displayAnswers,
                   askIndex,
@@ -328,37 +384,6 @@ class InputVote extends Component {
         return <Icon type="check" />;
       } else if (saveState[saveIndex] === "save_error") {
         return <Icon type="warning" />;
-      }
-    }
-  }
-
-  renderAskStats(answerVotes, askTotalVotes, isDisplayingAskStats) {
-    if (isDisplayingAskStats) {
-      const askStat =
-        String(((answerVotes / askTotalVotes) * 100).toFixed(1)) + "%";
-
-      return (
-        <div
-          style={{
-            marginBottom: 0,
-            lineHeight: 1,
-            fontFamily: "Overpass",
-            padding: "8px 0px 0px"
-          }}
-        >
-          {askStat}
-        </div>
-      );
-    }
-  }
-
-  renderSpanChange(isDisplayingAskStats) {
-    const { windowWidth } = this.props;
-    if (isDisplayingAskStats) {
-      if (windowWidth > 1250) {
-        return 16;
-      } else {
-        return 20;
       }
     }
   }
