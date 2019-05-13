@@ -130,7 +130,7 @@ class Conversation extends Component {
   }
 
   render() {
-    const { colorTheme, windowWidth } = this.props;
+    const { colorTheme } = this.props;
     return (
       <Content
         style={{
