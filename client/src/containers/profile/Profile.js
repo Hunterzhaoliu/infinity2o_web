@@ -15,22 +15,27 @@ class Profile extends Component {
     this.props.onProfile();
   }
 
-  componentDidUpdate(previousProps) {
-    const { loggedInState, colorTheme } = this.props;
-    console.log(
-      "previousProps.colorTheme.activeSection = ",
-      previousProps.colorTheme.activeSection
-    );
-    console.log("colorTheme.activeSection = ", colorTheme.activeSection);
-    console.log("loggedInState = ", loggedInState);
-    if (
-      previousProps.colorTheme.activeSection !== colorTheme.activeSection &&
-      loggedInState === "not_logged_in"
-    ) {
-      // loggedInState has been updated, push user to landing page
-      this.props.history.push("/");
-    }
-  }
+  // componentDidUpdate(previousProps) {
+  //   const { loggedInState, colorTheme } = this.props;
+  //   // user can be logged in and access profile page
+  //   // user can be not logged in and try to access profile page, need to reject
+  //   // user can be logging in and access profile page
+  //   console.log(
+  //     "previousProps.colorTheme.activeSection = ",
+  //     previousProps.colorTheme.activeSection
+  //   );
+  //   console.log("colorTheme.activeSection = ", colorTheme.activeSection);
+  //   console.log("previousProps.loggedInState = ", previousProps.loggedInState);
+  //   console.log("loggedInState = ", loggedInState);
+  //
+  //   if (
+  //     previousProps.colorTheme.activeSection !== colorTheme.activeSection &&
+  //     loggedInState === "not_logged_in"
+  //   ) {
+  //     // loggedInState has been updated, push user to landing page
+  //     this.props.history.push("/");
+  //   }
+  // }
 
   renderQuestions() {
     const { colorTheme, profile, windowWidth } = this.props;

@@ -22,6 +22,7 @@ import { Layout } from "antd";
 
 class App extends Component {
   componentWillMount() {
+    console.log("app initializeApp");
     // run once before first render()
     this.props.initializeApp();
   }
