@@ -93,12 +93,12 @@ class ContactCard extends Component {
     );
   }
 
-  renderCloseConversationButton(text6Color) {
+  renderCloseConversationButton(text4Color) {
     const { contacts } = this.props;
     return (
       <button
         style={{
-          color: text6Color
+          color: text4Color
         }}
         className="close-conversation-button"
         onClick={e =>
@@ -162,7 +162,7 @@ class ContactCard extends Component {
           justify="end"
           align="middle"
         >
-          {this.renderCloseConversationButton(colorTheme.text6Color)}
+          {this.renderCloseConversationButton(colorTheme.text4Color)}
         </Row>
         {this.renderContactPicture(
           selectedContact.imageUrl,
@@ -193,7 +193,7 @@ class ContactCard extends Component {
         </Row>
         {this.renderContactTotalVotes(selectedContact.totalUserVotes)}
         <Row
-          style={{ padding: "0px 0px 0px 20px" }}
+          style={{ padding: "0px 0px 0px 20px", textAlign: "left" }}
           type="flex"
           justify="start"
           align="middle"
@@ -203,7 +203,10 @@ class ContactCard extends Component {
               interests={selectedContact.interests}
               textColor={colorTheme.text3Color}
             />
-            <TimeZone timeZone={selectedContact.timeZone} />
+            <TimeZone
+              timeZone={selectedContact.timeZone}
+              textColor={colorTheme.text3Color}
+            />
           </Col>
         </Row>
         <Row style={{ padding: "20px 0px 0px 0px" }}>

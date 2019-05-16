@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 const { Content } = Layout;
 
 class Tour extends Component {
-  componentWillMount() {
+  componentDidMount() {
     // run once before first render()
 
     this.props.onTour();

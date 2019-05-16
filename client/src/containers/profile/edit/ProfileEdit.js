@@ -14,7 +14,7 @@ import "./ProfileEdit.css";
 const { Content } = Layout;
 
 class ProfileEdit extends Component {
-  componentWillMount() {
+  componentDidMount() {
     // run once before first render()
     this.props.onProfile();
   }

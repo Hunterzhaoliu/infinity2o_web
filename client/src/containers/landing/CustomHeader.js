@@ -3,7 +3,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as customHeaderActionCreators from "../../actions/customHeader";
 import ChangeThemeButton from "../navigationButtons/ChangeThemeButton";
-import TourButton from "../navigationButtons/TourButton";
 import ProfileButton from "../navigationButtons/ProfileButton";
 import SortingHatButton from "../navigationButtons/SortingHatButton";
 import MatchesButton from "../navigationButtons/MatchesButton";
@@ -112,9 +111,6 @@ class CustomHeader extends Component {
                 <ChangeThemeButton />
               </Col>
               <Col xl={{ offset: 2 }} />
-              <Col style={{ padding: "0px 0px 0px 10px" }}>
-                <TourButton />
-              </Col>
               <Col style={{ padding: "0px 0px 0px 10px" }}>
                 <ProfileButton />
               </Col>

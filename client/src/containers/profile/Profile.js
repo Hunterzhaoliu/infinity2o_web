@@ -11,14 +11,8 @@ import { Helmet } from "react-helmet";
 const { Content } = Layout;
 
 class Profile extends Component {
-  componentWillMount() {
-    const { loggedInState } = this.props;
-    if (loggedInState === "not_logged_in") {
-      // push user to landing page
-      this.props.history.push("/");
-    } else {
-      this.props.onProfile();
-    }
+  componentDidMount() {
+    this.props.onProfile();
   }
 
   renderQuestions() {
@@ -28,7 +22,7 @@ class Profile extends Component {
 
       let pPadding = "12px 0px 22px 0px";
       if (windowWidth < 768) {
-          pPadding = "0px 0px 15px 0px"
+        pPadding = "0px 0px 15px 0px";
       }
 
       const newest8Questions = profile.asks.questions.slice(-8).reverse();
@@ -63,9 +57,9 @@ class Profile extends Component {
     let questionsRowPadding = "0px 0px 5px 0px";
 
     if (windowWidth < 768) {
-        h2FontSize = 26;
-        h4FontSize = 16;
-        questionsRowPadding = "60px 0px 5px 0px";
+      h2FontSize = 26;
+      h4FontSize = 16;
+      questionsRowPadding = "60px 0px 5px 0px";
     }
 
     return (
@@ -88,60 +82,64 @@ class Profile extends Component {
           >
             <ProfileCard />
             <Row style={{ padding: "60px 0px 0px 0px" }}>
-              <Col xs={{ span: 24 }}
-              sm={{ span: 24 }}
-              md={{ span: 11 }}
-              lg={{ span: 12 }}
-              xl={{ span: 12 }}>
+              <Col
+                xs={{ span: 24 }}
+                sm={{ span: 24 }}
+                md={{ span: 11 }}
+                lg={{ span: 12 }}
+                xl={{ span: 12 }}
+              >
                 <Row
                   style={{ padding: "0px 0px 5px 0px" }}
                   type="flex"
                   justify="left"
                   align="bottom"
                 >
-                    <Col>
-                  <h2
-                    style={{
-                      color: colorTheme.keyText6Color,
-                      fontFamily: "Overpass",
-                      lineHeight: 1,
-                      marginBottom: 0,
-                      fontSize: h2FontSize
-                    }}
-                  >
-                    Votes
-                  </h2>
+                  <Col>
+                    <h2
+                      style={{
+                        color: colorTheme.keyText6Color,
+                        fontFamily: "Overpass",
+                        lineHeight: 1,
+                        marginBottom: 0,
+                        fontSize: h2FontSize
+                      }}
+                    >
+                      Votes
+                    </h2>
                   </Col>
-                  <Col >
-                  <h4
-                    style={{
-                      padding: "0px 0px 0px 10px",
-                      color: colorTheme.text6Color,
-                      fontFamily: "Overpass",
-                      lineHeight: 1,
-                      marginBottom: 0,
-                      fontSize: h4FontSize
-                    }}
-                  >
-                    {"(" + String(profile.asks.totalUserVotes) + ")"}
-                  </h4>
+                  <Col>
+                    <h4
+                      style={{
+                        padding: "0px 0px 0px 10px",
+                        color: colorTheme.text6Color,
+                        fontFamily: "Overpass",
+                        lineHeight: 1,
+                        marginBottom: 0,
+                        fontSize: h4FontSize
+                      }}
+                    >
+                      {"(" + String(profile.asks.totalUserVotes) + ")"}
+                    </h4>
                   </Col>
                 </Row>
                 <Row>
-                <Col xs={{ span: 24 }}
-                sm={{ span: 24 }}
-                md={{ span: 24 }}
-                lg={{ span: 22 }}
-                xl={{ span: 22 }}>
-                <hr
-                  style={{
-                    backgroundColor: colorTheme.keyText7Color,
-                    height: 2,
-                    border: 0,
-                    margin: "0px 0px 30px 0px"
-                  }}
-                />
-                </Col>
+                  <Col
+                    xs={{ span: 24 }}
+                    sm={{ span: 24 }}
+                    md={{ span: 24 }}
+                    lg={{ span: 22 }}
+                    xl={{ span: 22 }}
+                  >
+                    <hr
+                      style={{
+                        backgroundColor: colorTheme.keyText7Color,
+                        height: 2,
+                        border: 0,
+                        margin: "0px 0px 30px 0px"
+                      }}
+                    />
+                  </Col>
                 </Row>
                 <Row type="flex" justify="start">
                   <Col>
@@ -149,13 +147,15 @@ class Profile extends Component {
                   </Col>
                 </Row>
               </Col>
-              <Col xs={{ span: 24 }}
-              sm={{ span: 24 }}
-              md={{ offset: 1, span: 11 }}
-              lg={{ offset: 0, span: 11 }}
-              xl={{ span: 12 }}>
+              <Col
+                xs={{ span: 24 }}
+                sm={{ span: 24 }}
+                md={{ offset: 1, span: 11 }}
+                lg={{ offset: 0, span: 11 }}
+                xl={{ span: 12 }}
+              >
                 <Row
-                  style={{ padding: questionsRowPadding}}
+                  style={{ padding: questionsRowPadding }}
                   type="flex"
                   justify="left"
                   align="bottom"
@@ -185,20 +185,22 @@ class Profile extends Component {
                   </h4>
                 </Row>
                 <Row>
-                <Col xs={{ span: 24 }}
-                sm={{ span: 24 }}
-                md={{ span: 24 }}
-                lg={{ span: 22 }}
-                xl={{ span: 22 }}>
-                <hr
-                  style={{
-                    backgroundColor: colorTheme.keyText7Color,
-                    height: 2,
-                    border: 0,
-                    margin: "0px 0px 30px 0px"
-                  }}
-                />
-                </Col>
+                  <Col
+                    xs={{ span: 24 }}
+                    sm={{ span: 24 }}
+                    md={{ span: 24 }}
+                    lg={{ span: 22 }}
+                    xl={{ span: 22 }}
+                  >
+                    <hr
+                      style={{
+                        backgroundColor: colorTheme.keyText7Color,
+                        height: 2,
+                        border: 0,
+                        margin: "0px 0px 30px 0px"
+                      }}
+                    />
+                  </Col>
                 </Row>
                 {this.renderQuestions()}
               </Col>
