@@ -14,6 +14,7 @@ import {
 import { updateWithSavedColorTheme } from "./colorTheme";
 import { store } from "../index";
 import io from "socket.io-client";
+import history from "../containers/history";
 export let clientSocket;
 
 function saveUserProfile(response, dispatch) {
@@ -87,14 +88,19 @@ async function storeUserSocketIdInRedis(
 }
 
 export const initializeApp = () => async dispatch => {
-  console.log("first initializeApp auth action");
   const response = await axios.get("/api/current_user");
-  console.log("second initializeApp auth action");
   dispatch({
     type: SAVE_FETCHED_USER_AUTH,
     auth: response.data.auth,
     mongoDBUserId: response.data._id
   });
+  if (window.location.href.includes("profile")) {
+    // on profile page, need to check if user is logged in
+    if (response.data.auth === undefined) {
+      // user not logged in, need to push to landing page
+      history.push("/");
+    }
+  }
   if (response.data.auth !== undefined) {
     // user is logged in
     // console.log("window.location.href = ", window.location.href);

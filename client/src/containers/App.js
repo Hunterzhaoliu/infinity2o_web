@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import * as authActionCreators from "../actions/auth";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -16,6 +16,7 @@ import Terms from "./footer/Terms";
 import Privacy from "./footer/Privacy";
 import CustomFooter from "./landing/CustomFooter";
 import Unsubscribe from "./unsubscribe/Unsubscribe";
+import history from "./history";
 
 import { Layout } from "antd";
 
@@ -23,7 +24,7 @@ class App extends Component {
   render() {
     this.props.initializeApp();
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Layout>
           <Layout style={{ height: "100vh" }}>
             <CustomHeader />
@@ -45,7 +46,7 @@ class App extends Component {
             <CustomFooter />
           </Layout>
         </Layout>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

@@ -188,7 +188,6 @@ export default function(state = initialState, action) {
       newState = _getStateForSection(newState);
       return newState;
     case MOVE_TO_LOGGED_OUT_LANDING:
-      console.log("MOVE_TO_LOGGED_OUT_LANDING reducer");
       newState.activeSection = "logged_out_landing";
       return newState;
     case MOVE_TO_CONVERSATIONS:

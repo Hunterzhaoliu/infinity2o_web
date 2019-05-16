@@ -78,7 +78,7 @@ class Matches extends Component {
           sm={{ span: 20 }}
           md={{ span: 14 }}
           lg={{ span: 11 }}
-          xl={{ span: 8 }}
+          xl={{ span: 7 }}
         >
           <MatchCards match={match} history={history} />
         </Col>

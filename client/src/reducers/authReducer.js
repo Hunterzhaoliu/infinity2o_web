@@ -15,7 +15,6 @@ export default function(state = initialState, action) {
   let newState = cloneObject(state);
   switch (action.type) {
     case SAVE_FETCHED_USER_AUTH:
-      console.log("SAVE_FETCHED_USER_AUTH reducer");
       if (action.auth !== undefined) {
         newState.loggedInState = "logged_in";
         newState.mongoDBUserId = action.mongoDBUserId;
