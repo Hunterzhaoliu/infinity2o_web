@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import * as authActionCreators from "../actions/auth";
-import { bindActionCreators } from "redux";
-
 import CustomMenu from "./landing/CustomMenu";
 import CustomHeader from "./landing/CustomHeader";
 import Landing from "./landing/Landing";
@@ -21,12 +18,6 @@ import Unsubscribe from "./unsubscribe/Unsubscribe";
 import { Layout } from "antd";
 
 class App extends Component {
-  componentWillMount() {
-    console.log("app initializeApp");
-    // run once before first render()
-    this.props.initializeApp();
-  }
-
   render() {
     return (
       <BrowserRouter>
@@ -56,29 +47,7 @@ class App extends Component {
   }
 }
 
-/*
-So we have a state and a UI(with props).
-This function gives the UI the parts of the state it will need to display.
-*/
-function mapStateToProps(state) {
-  return {};
-}
-
-/*
-So we have a state and a UI(with props).
-This function gives the UI the functions it will need to be called.
-*/
-function mapDispatchToProps(dispatch) {
-  const authDispatchers = bindActionCreators(authActionCreators, dispatch);
-
-  return {
-    initializeApp: () => {
-      authDispatchers.initializeApp();
-    }
-  };
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  null,
+  null
 )(App);
