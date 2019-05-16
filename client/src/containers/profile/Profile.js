@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet";
 const { Content } = Layout;
 
 class Profile extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.onProfile();
   }
 

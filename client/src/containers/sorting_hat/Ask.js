@@ -10,7 +10,7 @@ import "./Ask.css";
 import answerBox from "../images/answerBox.png";
 
 class Ask extends Component {
-	componentWillMount() {
+	componentDidMount() {
 		// run once before first render()
 		// keeps the custom Header button colors
 		this.props.onSortingHat();

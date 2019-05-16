@@ -12,7 +12,7 @@ import { Helmet } from "react-helmet";
 const { Content } = Layout;
 
 class Matches extends Component {
-  componentWillMount() {
+  componentDidMount() {
     // run once before first render()
     const { loggedInState } = this.props;
     if (loggedInState === "not_logged_in") {

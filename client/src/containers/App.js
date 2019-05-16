@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import * as authActionCreators from "../actions/auth";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import CustomMenu from "./landing/CustomMenu";
 import CustomHeader from "./landing/CustomHeader";
@@ -19,6 +21,7 @@ import { Layout } from "antd";
 
 class App extends Component {
   render() {
+    this.props.initializeApp();
     return (
       <BrowserRouter>
         <Layout>
@@ -47,7 +50,17 @@ class App extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  const authDispatchers = bindActionCreators(authActionCreators, dispatch);
+
+  return {
+    initializeApp: () => {
+      authDispatchers.initializeApp();
+    }
+  };
+}
+
 export default connect(
   null,
-  null
+  mapDispatchToProps
 )(App);

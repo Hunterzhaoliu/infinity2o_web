@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as colorThemeActions from "../../actions/colorTheme";
 import * as landingActions from "../../actions/landing";
-import * as authActionCreators from "../../actions/auth";
 import { bindActionCreators } from "redux";
 import { GREY_9, GREY_1 } from "../styles/ColorConstants";
 import LoginButtons from "./LoginButtons";
@@ -16,24 +14,9 @@ import firstLandingMatchExample from "../images/first_landing_match_example.png"
 const { Content } = Layout;
 
 class Landing extends Component {
-  componentWillMount() {
-    // run once before first render()
-    this.props.initializeApp().then(() => {
-      this.props.fetchLandingPageSortingHatAsks();
-      console.log("after both componentWillMount functions");
-    });
+  componentDidMount() {
+    this.props.fetchLandingPageSortingHatAsks();
   }
-
-  // componentDidMount() {
-  //   console.log("landing componentDidMount");
-  //   // determines if logged_in_landing or logged_out_landing page
-  //   // just to dispatch action saying which page user is on
-  //   if (this.props.loggedInState === "logged_in") {
-  //     this.props.determineWhichLanding(true);
-  //   } else {
-  //     this.props.determineWhichLanding(false);
-  //   }
-  // }
 
   renderLandingAsks() {
     const { windowWidth } = this.props;
@@ -279,18 +262,10 @@ This function gives the UI the functions it will need to be called.
 */
 function mapDispatchToProps(dispatch) {
   const landingDispatchers = bindActionCreators(landingActions, dispatch);
-  const colorThemeDispatchers = bindActionCreators(colorThemeActions, dispatch);
-  const authDispatchers = bindActionCreators(authActionCreators, dispatch);
 
   return {
     fetchLandingPageSortingHatAsks: () => {
       landingDispatchers.fetchLandingPageSortingHatAsks();
-    },
-    determineWhichLanding: onLoggedInLanding => {
-      colorThemeDispatchers.determineWhichLanding(onLoggedInLanding);
-    },
-    initializeApp: () => {
-      authDispatchers.initializeApp();
     }
   };
 }

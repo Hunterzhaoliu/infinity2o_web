@@ -1,8 +1,6 @@
 import axios from "axios";
 import {
   MOVE_TO_TOUR,
-  MOVE_TO_LOGGED_OUT_LANDING,
-  MOVE_TO_LOGGED_IN_LANDING,
   UPDATE_COLOR_THEME,
   MOVE_TO_PROFILE,
   MOVE_TO_SORTING_HAT,
@@ -42,17 +40,7 @@ export const onTour = () => {
   };
 };
 
-export const determineWhichLanding = onLoggedInLanding => {
-  if (onLoggedInLanding === true) {
-    return function(dispatch) {
-      dispatch({ type: MOVE_TO_LOGGED_IN_LANDING });
-    };
-  } else {
-    return function(dispatch) {
-      dispatch({ type: MOVE_TO_LOGGED_OUT_LANDING });
-    };
-  }
-};
+// onLanding is done in landing action
 
 export const onProfile = () => {
   return function(dispatch) {

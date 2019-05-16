@@ -8,7 +8,7 @@ import { Layout, Button, Row, Col, Card } from 'antd';
 const { Content } = Layout;
 
 class Options extends Component {
-	componentWillMount() {
+	componentDidMount() {
 		// run once before first render()
 	}
 
