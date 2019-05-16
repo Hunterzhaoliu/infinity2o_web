@@ -10,7 +10,7 @@ import { Helmet } from "react-helmet";
 const { Content } = Layout;
 
 class Unsubscribe extends Component {
-  componentWillMount() {
+  componentDidMount() {
     // run once before first render()
     const URLArray = window.location.href.split("/");
     // URLArray =  [ "http:", "", "localhost:3000", "unsubscribe", "5ad55047b4e23300148b0cd7" ]

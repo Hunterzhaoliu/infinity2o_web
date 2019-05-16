@@ -59,7 +59,7 @@ class Interests extends Component {
           <Col
             span={23}
             style={{
-              padding: "0px 10px 0px 20px",
+              padding: "0px 20px 0px 20px",
               fontFamily: "Overpass",
               lineHeight: 1.2,
               fontSize: 16,

@@ -12,7 +12,7 @@ import { Helmet } from "react-helmet";
 const { Content } = Layout;
 
 class Matches extends Component {
-  componentWillMount() {
+  componentDidMount() {
     // run once before first render()
     const { loggedInState } = this.props;
     if (loggedInState === "not_logged_in") {
@@ -78,7 +78,7 @@ class Matches extends Component {
           sm={{ span: 20 }}
           md={{ span: 14 }}
           lg={{ span: 11 }}
-          xl={{ span: 8 }}
+          xl={{ span: 7 }}
         >
           <MatchCards match={match} history={history} />
         </Col>
@@ -246,9 +246,9 @@ class Matches extends Component {
     return (
       <Content
         style={{
-          textAlign: "center",
           padding: "120px 0px 0px",
-          background: colorTheme.backgroundColor
+          background: colorTheme.backgroundColor,
+          textAlign: "center"
         }}
       >
         <Helmet>

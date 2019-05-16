@@ -13,7 +13,7 @@ import { Helmet } from "react-helmet";
 const { Content } = Layout;
 
 class Conversation extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { loggedInState } = this.props;
     if (loggedInState === "not_logged_in") {
       // push user to landing page

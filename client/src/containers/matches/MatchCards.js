@@ -219,10 +219,9 @@ class MatchCards extends Component {
           <LinkedIn value={match.linkedInPublicProfileUrl} />
           <Github value={match.githubPublicProfileUrl} />
         </Row>
-
         {this.renderMatchTotalVotes(match.totalUserVotes)}
         <Row
-          style={{ padding: "0px 0px 0px 20px" }}
+          style={{ padding: "0px 0px 0px 20px", textAlign: "start" }}
           type="flex"
           justify="start"
           align="middle"
