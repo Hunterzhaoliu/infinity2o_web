@@ -246,9 +246,9 @@ class Matches extends Component {
     return (
       <Content
         style={{
-          textAlign: "center",
           padding: "120px 0px 0px",
-          background: colorTheme.backgroundColor
+          background: colorTheme.backgroundColor,
+          textAlign: "center"
         }}
       >
         <Helmet>

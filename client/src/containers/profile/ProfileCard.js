@@ -32,7 +32,7 @@ class ProfileCard extends Component {
       <Row type="flex" justify="center">
         <Col
           xs={{ span: 24 }}
-          sm={{ span: 24 }}
+          sm={{ span: 18 }}
           md={{ span: 14 }}
           lg={{ span: 11 }}
           xl={{ span: 8 }}
@@ -94,7 +94,7 @@ class ProfileCard extends Component {
               justify="start"
               align="middle"
             >
-              <Col xl={{ span: 24 }}>
+              <Col>
                 <Neurons
                   payment={profile.payment}
                   textColor={colorTheme.text3Color}
@@ -122,7 +122,7 @@ class ProfileCard extends Component {
                       }}
                       href="/profile/edit"
                     >
-                      Edit Info
+                      edit
                     </a>
                   </Col>
                 </Row>

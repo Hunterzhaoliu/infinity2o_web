@@ -58,16 +58,16 @@ class Neurons extends Component {
           className="popover-button"
           style={{
             borderColor: colorTheme.backgroundColor,
-            backgroundColor: colorTheme.backgroundColor,
-            color: colorTheme.text3Color
+            backgroundColor: colorTheme.backgroundColor
           }}
         >
           <Icon
             style={{
-              fontSize: 12,
-              padding: "0px 0px 6px"
+              fontSize: 16,
+              fontWeight: 600,
+              color: colorTheme.text6Color
             }}
-            type="question-circle-o"
+            type="question"
           />
         </button>
       </Popover>
@@ -106,7 +106,15 @@ class Neurons extends Component {
         >
           {this.renderNumberOfNeurons()}
         </Col>
-        <Col offset={1}>{this.renderNeuronExplanation()}</Col>
+        <Col
+          xs={{ offset: 3 }}
+          sm={{ offset: 10 }}
+          md={{ offset: 8 }}
+          lg={{ offset: 8 }}
+          xl={{ offset: 8 }}
+        >
+          {this.renderNeuronExplanation()}
+        </Col>
       </Row>
     );
   }

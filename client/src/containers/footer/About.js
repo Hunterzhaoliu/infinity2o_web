@@ -150,8 +150,8 @@ class About extends Component {
             >
               &emsp; We believe online courses will be very important in future
               education. But until now, online courses have been indepedent
-              places to learn reliant on random discussion forums with broken
-              responses rather than real discussion.
+              places to learn reliant on broken responses rather than real
+              discussion.
             </p>
           </Col>
         </Row>
