@@ -1,55 +1,50 @@
 /* placeholder color */
 .ant-input::-webkit-input-placeholder {
-	color: var(--text5Color);
-}
-
-/* modal background color */
-.ant-modal-content {
-	background-color: var(--text8Color);
+  color: var(--text5Color);
 }
 
 /* to change the placeholder text color */
-::placeholder {
-	color: var(--text7Color);
-}
+/* ::placeholder {
+  color: var(--text5Color);
+} */
 
 .ask-input {
-	border: none;
-	background: var(--text8Color);
-	color: var(--text4Color);
-	box-shadow: 0px -3px 0px 0px var(--text4Color) inset;
-	font-family: "Overpass";
-	line-height: 1;
-	margin-bottom: 0;
-	width: 100%;
+  border: none;
+  background: var(--text8Color);
+  color: var(--text4Color);
+  box-shadow: 0px -3px 0px 0px var(--text4Color) inset;
+  font-family: "Overpass";
+  line-height: 1;
+  margin-bottom: 0;
+  width: 100%;
 }
 
 .ask-input:focus {
-	outline: none;
+  outline: none;
 }
 
 h6 {
-	color: var(--text5Color);
-	font-family: "Overpass";
-	line-height: 1;
-	margin-bottom: 0;
-	font-size: 16px;
+  color: var(--text5Color);
+  font-family: "Overpass";
+  line-height: 1;
+  margin-bottom: 0;
+  font-size: 16px;
 }
 
 .ask-button {
-	font-family: "Overpass";
-	line-height: 40px;
-	padding: 0px 14px;
-	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-	border-radius: 4px;
-	font-size: 16px;
-	font-weight: 500;
-	border-style: none;
-	outline: none;
+  font-family: "Overpass";
+  line-height: 40px;
+  padding: 0px 14px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  border-style: none;
+  outline: none;
 }
 
 .ask-button:hover {
-	transform: translateY(-1px);
-	box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-	cursor: pointer;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
