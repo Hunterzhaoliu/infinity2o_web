@@ -9,7 +9,9 @@ import Marketing from "./Marketing";
 import Slider from "react-slick";
 import { Layout, Row, Col } from "antd";
 import { Helmet } from "react-helmet";
-import firstLandingMatchExample from "../images/first_landing_match_example.png";
+import firstLandingMatchExample from "../images/firstLandingMatchExample.png";
+import secondLandingMatchExample from "../images/secondLandingMatchExample.png";
+import thirdLandingMatchExample from "../images/thirdLandingMatchExample.png";
 
 const { Content } = Layout;
 
@@ -140,6 +142,20 @@ class Landing extends Component {
                   width: "100%" // styling done for Slider in vote-comparison.css
                 }}
                 src={firstLandingMatchExample}
+              />
+              <img
+                alt=""
+                style={{
+                  width: "100%"
+                }}
+                src={secondLandingMatchExample}
+              />
+              <img
+                alt=""
+                style={{
+                  width: "100%"
+                }}
+                src={thirdLandingMatchExample}
               />
             </Slider>
           </Col>
