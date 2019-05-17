@@ -27,13 +27,14 @@ class Neurons extends Component {
   }
   renderNeuronExplanation() {
     const { colorTheme } = this.props;
-    document.documentElement.style.setProperty(
-      `--text7Color`,
-      colorTheme.text7Color
-    );
+
     document.documentElement.style.setProperty(
       `--text8Color`,
       colorTheme.text8Color
+    );
+    document.documentElement.style.setProperty(
+      `--backgroundColor`,
+      colorTheme.backgroundColor
     );
 
     const neuronExplanation = (
