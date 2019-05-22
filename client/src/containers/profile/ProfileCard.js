@@ -94,7 +94,7 @@ class ProfileCard extends Component {
               justify="start"
               align="middle"
             >
-              <Col>
+              <Col span={24}>
                 <Neurons
                   payment={profile.payment}
                   textColor={colorTheme.text3Color}
