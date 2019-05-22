@@ -12,12 +12,12 @@
 1.  Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
 2.  Heroku Redis addons:
 
--   Local Development & Staging: `heroku addons:info redis-transparent-42654`
-    -   Connect to AWS redis = `heroku redis:cli -a infinity2o-staging -c infinity2o-staging`
-    -   View all keys = `KEYS *`
-    -   Delete a key = `DEL keyValue`
--   Production: `heroku addons:info redis-reticulated-26782`
-    -   Connect to AWS redis = `heroku redis:cli -a infinity2o -c infinity2o`
+- Local Development & Staging: `heroku addons:info redis-transparent-42654`
+  - Connect to AWS redis = `heroku redis:cli -a infinity2o-staging -c infinity2o-staging`
+  - View all keys = `KEYS *`
+  - Delete a key = `DEL keyValue`
+- Production: `heroku addons:info redis-reticulated-26782`
+  - Connect to AWS redis = `heroku redis:cli -a infinity2o -c infinity2o`
 
 ### mlab.com databases:
 
@@ -59,18 +59,24 @@
 
 1.  Login with `qn1over12@gmail.com` & password = `21xxxxx@ix`
 2.  Already added 2 CNAMEs.
-    -   Name: `infinity2o.com` Value: `www.infinity2o.com.herokudns.com`
-        TTL: `Automatic` Status: `Arrow through cloud`
-    -   Name: `www` Value: `www.infinity2o.com.herokudns.com`
-        TTL: `Automatic` Status: `Arrow through cloud`
+    - Name: `infinity2o.com` Value: `www.infinity2o.com.herokudns.com`
+      TTL: `Automatic` Status: `Arrow through cloud`
+    - Name: `www` Value: `www.infinity2o.com.herokudns.com`
+      TTL: `Automatic` Status: `Arrow through cloud`
 
 ### E-mail support:
 
 1.  `askinfinity2o@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`. Recovery = Hunter's phone & `q42liu@gmail.com`
 
-### Coursera.org Affiliate marketing account:
+### Affiliate marketing account:
 
-1.  e-mail = `q42liu@gmail.com`, username = `q42liu`, & password = `21xxxxx@ix`. Recovery = `wxxxxx` at http://cli.linksynergy.com/cli/publisher/home.php?lang=en
+#### Coursera.org, Udemy.com, and Codeacademy.com
+
+e-mail = `askinfinity2o@gmail.com`, username = `infinity2o`, & password = `21xxxxx@ix`. http://cli.linksynergy.com/cli/publisher/home.php?lang=en
+
+#### Edx.org
+
+e-mail = `askinfinity2o@gmail.com`, username = `infinity2o`, & password = `mxxxxFxxxxxIxxxxxx`.
 
 ### Local development setup:
 
@@ -91,8 +97,8 @@
 5.  go to the database in MongoDB and find the mongorestore command under the tools tab
 6.  delete all collections in database and then mongorestore the production data by `cd` into wanted production data date folder
 
--   Development Example: `mongorestore -h ds121686.mlab.com:21686 -d infinity2o-dev -u infinity2o-dev -p 2134711p <input db directory>`
-    where `<input db directory>` is `infinity2o-prod`
+- Development Example: `mongorestore -h ds121686.mlab.com:21686 -d infinity2o-dev -u infinity2o-dev -p 2134711p <input db directory>`
+  where `<input db directory>` is `infinity2o-prod`
 
 ### Development workflow checklists
 
