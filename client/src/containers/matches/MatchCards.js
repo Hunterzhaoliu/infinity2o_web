@@ -104,7 +104,7 @@ class MatchCards extends Component {
     );
   }
 
-  renderMatchPicture(imageUrl, backgroundColor) {
+  renderMatchPicture(imageUrl, matchCardHeaderColor) {
     if (imageUrl === undefined || imageUrl === null) {
       imageUrl = dolphin;
     }
@@ -115,7 +115,7 @@ class MatchCards extends Component {
           style={{
             width: "100%",
             height: "130px",
-            backgroundColor: backgroundColor
+            backgroundColor: matchCardHeaderColor
           }}
         />
         <img
@@ -133,53 +133,45 @@ class MatchCards extends Component {
   }
 
   renderMatchButtons() {
-    const { colorTheme, match, history, activeSection } = this.props;
-    if (activeSection === "matches") {
-      // about page uses the same code for Hunter and Q profiles
-      // don't need to display match buttons on about page
-      return (
-        <Row
-          style={{ padding: "30px 0px 0px 0px" }}
-          type="flex"
-          justify="center"
-        >
-          <Col>
-            <button
-              className="match-cards-button"
-              style={{
-                borderColor: colorTheme.backgroundColor,
-                background: colorTheme.backgroundColor,
-                color: colorTheme.text2Color
-              }}
-              onClick={e => this.onNextMatch()}
-            >
-              Next
-            </button>
-          </Col>
-          <Col
-            xs={{ offset: 4 }}
-            sm={{ offset: 4 }}
-            md={{ offset: 4 }}
-            lg={{ offset: 4 }}
-            xl={{ offset: 4 }}
+    const { colorTheme, match, history } = this.props;
+    return (
+      <Row style={{ padding: "30px 0px 0px 0px" }} type="flex" justify="center">
+        <Col>
+          <button
+            className="match-cards-button"
+            style={{
+              borderColor: colorTheme.backgroundColor,
+              background: colorTheme.backgroundColor,
+              color: colorTheme.text2Color
+            }}
+            onClick={e => this.onNextMatch()}
           >
-            <button
-              className="match-cards-button"
-              style={{
-                borderColor: colorTheme.keyText6Color,
-                background: colorTheme.keyText6Color,
-                color: colorTheme.text1Color
-              }}
-              onClick={e =>
-                this.onStartConversation(history, match.name, match.id)
-              }
-            >
-              Say Hi
-            </button>
-          </Col>
-        </Row>
-      );
-    }
+            Next
+          </button>
+        </Col>
+        <Col
+          xs={{ offset: 4 }}
+          sm={{ offset: 4 }}
+          md={{ offset: 4 }}
+          lg={{ offset: 4 }}
+          xl={{ offset: 4 }}
+        >
+          <button
+            className="match-cards-button"
+            style={{
+              borderColor: colorTheme.keyText6Color,
+              background: colorTheme.keyText6Color,
+              color: colorTheme.text1Color
+            }}
+            onClick={e =>
+              this.onStartConversation(history, match.name, match.id)
+            }
+          >
+            Say Hi
+          </button>
+        </Col>
+      </Row>
+    );
   }
 
   render() {
@@ -247,8 +239,7 @@ function mapStateToProps(state) {
     neuronsInBillions: state.profile.payment.neuronsInBillions,
     mongoDBUserId: state.auth.mongoDBUserId,
     nextMatches: state.matches.nextMatches,
-    basicMatchInfo: state.matches.basicMatchInfo,
-    activeSection: state.colorTheme.activeSection
+    basicMatchInfo: state.matches.basicMatchInfo
   };
 }
 

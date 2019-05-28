@@ -34,7 +34,7 @@
 
 ### LinkedIn OAuth:
 
-1.  Login TODO: Hunter knows
+1.  Login: `hunterzhaoliu@gmail.com`
 
 ### Stripe.com login:
 
@@ -42,7 +42,7 @@
 
 ### Sendgrid.com login:
 
-1.  Login with `qn1over12@gmail.com` & password = `mxxxxFxxxxxIxxxxxx`
+1.  username = `infinity2o`, email = `askinfinity2o@gmail.com`, & password = `mxxxxFxxxxxIxxxxxx`
 
 ### Google Domains
 
@@ -74,9 +74,9 @@
 
 e-mail = `askinfinity2o@gmail.com`, username = `infinity2o`, & password = `21xxxxx@ix`. http://cli.linksynergy.com/cli/publisher/home.php?lang=en
 
-#### Edx.org
+#### edx.org
 
-e-mail = `askinfinity2o@gmail.com`, username = `infinity2o`, & password = `mxxxxFxxxxxIxxxxxx`.
+e-mail = `askinfinity2o@gmail.com`, username = `infinity2o`, & password = `mxxxxFxxxxxIxxxxxx`. https://ui.awin.com/user
 
 ### Local development setup:
 

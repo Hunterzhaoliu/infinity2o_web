@@ -93,6 +93,7 @@ class Ask extends Component {
                 onChange={this.onChangeAnswer}
                 placeholder={"Answer " + (key + 1).toString()}
                 style={{ fontSize: inputAnswerFontSize }}
+                value={answer}
               />
             </Col>
             {this.renderAnswerCharacterCount(
@@ -273,6 +274,7 @@ class Ask extends Component {
             xl={{ offset: 3, span: 17 }}
           >
             <input
+              value={ask.newQuestion}
               className="ask-input"
               onChange={this.onChangeQuestion}
               placeholder="Question"

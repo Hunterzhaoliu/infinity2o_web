@@ -119,7 +119,6 @@ module.exports = app => {
       }
     }
   );
-  // TODO: combine the next three routes to be one and change contactMongoDBId to contactMongoDBId
   app.put(
     "/api/profile/increment_unseen_messages",
     requireLogin,
@@ -152,7 +151,6 @@ module.exports = app => {
     async (request, response) => {
       const { contactMongoDBId } = request.body;
       try {
-        // https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
         await UserCollection.findOneAndUpdate(
           {
             _id: request.user._id,
@@ -178,7 +176,6 @@ module.exports = app => {
     async (request, response) => {
       const { conversationId, numberOfUnseenMessages } = request.body;
       try {
-        // https://stackoverflow.com/questions/15691224/mongoose-update-values-in-array-of-objects
         await UserCollection.findOneAndUpdate(
           {
             _id: request.user._id,
