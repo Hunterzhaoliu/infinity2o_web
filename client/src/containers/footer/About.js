@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { GREY_1, GREY_3, GREY_9 } from "../styles/ColorConstants";
 import { Layout, Row, Col } from "antd";
-import MatchCards from "../matches/MatchCards";
 import { Helmet } from "react-helmet";
+import hunterProfile from "../images/hunterProfile.png";
+import qProfile from "../images/qProfile.png";
 import "./about.css";
 
 const { Content } = Layout;
@@ -36,40 +37,6 @@ class About extends Component {
       pPadding = "30px 0px 30px 0px";
       secondMatchCardPadding = "15px 0px 0px 0px";
     }
-
-    const q = {
-      name: "Q Liu",
-      age: 25,
-      totalUserVotes: 62,
-      interests: [
-        "entrepreneurship",
-        "nutrition",
-        "robotics",
-        "mechanical_engineering",
-        "electrical_engineering"
-      ],
-      linkedInPublicProfileUrl: "https://www.linkedin.com/in/letterq/",
-      githubPublicProfileUrl: "https://github.com/quinnliu",
-      imageUrl:
-        "https://lh5.googleusercontent.com/-J_P0Sk0phsE/AAAAAAAAAAI/AAAAAAAAACU/kM-9AVW-rl8/photo.j150"
-    };
-
-    const hunter = {
-      name: "Hunter Liu",
-      age: 18,
-      totalUserVotes: 47,
-      interests: [
-        "artificial_intelligence",
-        "computer_science",
-        "design",
-        "economics",
-        "entrepreneurship"
-      ],
-      linkedInPublicProfileUrl: "https://www.linkedin.com/in/hunterzhaoliu/",
-      githubPublicProfileUrl: "https://github.com/Hunter690",
-      imageUrl:
-        "https://lh4.googleusercontent.com/-_cJdeMMJK7c/AAAAAAAAAAI/AAAAAAAAAhA/7XZmb3NeW9g/photo.j150"
-    };
 
     return (
       <Content
@@ -123,7 +90,7 @@ class About extends Component {
             lg={{ span: 9 }}
             xl={{ span: 7 }}
           >
-            <MatchCards match={hunter} />
+            <img style={{ width: "100%" }} src={hunterProfile} alt="" />
           </Col>
           <Col
             style={{ padding: secondMatchCardPadding }}
@@ -133,7 +100,7 @@ class About extends Component {
             lg={{ offset: 1, span: 9 }}
             xl={{ offset: 1, span: 7 }}
           >
-            <MatchCards match={q} />
+            <img style={{ width: "100%" }} src={qProfile} alt="" />
           </Col>
         </Row>
         <Row style={{ padding: pPadding }} type="flex" justify="left">
