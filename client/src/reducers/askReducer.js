@@ -17,7 +17,7 @@ let cloneObject = obj => {
 
 let initialState = {
 	isAskModalOpen: false,
-	newQuestion: null,
+	newQuestion: "",
 	newAnswers: ["", ""],
 	questionLength: 0,
 	hasQuestionError: false,
@@ -86,6 +86,7 @@ export default function(state = initialState, action) {
 			newState.save = "save_start";
 			return newState;
 		case SAVE_QUESTION_DONE:
+            newState = initialState;
 			newState.save = "save_done";
 			return newState;
 		case SAVE_QUESTION_ERROR:

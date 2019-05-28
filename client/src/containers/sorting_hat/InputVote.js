@@ -54,20 +54,26 @@ class InputVote extends Component {
       return;
     } else {
       return (
-        <Row style={{ padding: "10px 0px 0px" }}>
-          <button
-            className="input-vote-button"
-            style={{
-              borderColor: colorTheme.backgroundColor,
-              background: colorTheme.backgroundColor,
-              color: colorTheme.text2Color
-            }}
-            onClick={e =>
-              this.props.onNextAsk(sortingHat.nextAsks, askIndex, mongoDBUserId)
-            }
-          >
-            {buttonText}
-          </button>
+        <Row type="flex" justify="center" style={{ padding: "10px 0px 0px" }}>
+          <Col>
+            <button
+              className="input-vote-button"
+              style={{
+                borderColor: colorTheme.backgroundColor,
+                background: colorTheme.backgroundColor,
+                color: colorTheme.text2Color
+              }}
+              onClick={e =>
+                this.props.onNextAsk(
+                  sortingHat.nextAsks,
+                  askIndex,
+                  mongoDBUserId
+                )
+              }
+            >
+              {buttonText}
+            </button>
+          </Col>
         </Row>
       );
     }
@@ -145,16 +151,24 @@ class InputVote extends Component {
         String(((answerVotes / askTotalVotes) * 100).toFixed(1)) + "%";
 
       return (
-        <p
-          style={{
-            marginBottom: 0,
-            lineHeight: 1,
-            fontFamily: "Overpass",
-            fontSize: "16px"
-          }}
+        <Col
+          xs={{ offset: 1 }}
+          sm={{ offset: 1 }}
+          md={{ offset: 1 }}
+          lg={{ offset: 1 }}
+          xl={{ offset: 1 }}
         >
-          {askStat}
-        </p>
+          <p
+            style={{
+              marginBottom: 0,
+              lineHeight: 1,
+              fontFamily: "Overpass",
+              fontSize: "16px"
+            }}
+          >
+            {askStat}
+          </p>
+        </Col>
       );
     }
   }
@@ -223,19 +237,11 @@ class InputVote extends Component {
               isDisplayingSaveIcon
             )}
           </Col>
-          <Col
-            xs={{ offset: 1 }}
-            sm={{ offset: 1 }}
-            md={{ offset: 1 }}
-            lg={{ offset: 1 }}
-            xl={{ offset: 1 }}
-          >
-            {this.renderAskStats(
-              answerVotes,
-              askTotalVotes,
-              isDisplayingAskStats
-            )}
-          </Col>
+          {this.renderAskStats(
+            answerVotes,
+            askTotalVotes,
+            isDisplayingAskStats
+          )}
         </Row>
       );
     });
