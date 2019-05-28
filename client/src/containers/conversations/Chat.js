@@ -28,14 +28,16 @@ class Chat extends Component {
   onPressEnter = () => {
     //console.log('pressed enter');
     const { selectedConversationInfo, userId, chat } = this.props;
-
-    if (chat.currentMessage.replace(/\s/g, "").length) {
+    if (
+      chat.currentMessage !== null &&
+      chat.currentMessage.replace(/\s/g, "").length > 0
+    ) {
       // string does not only contains whitespace
       this.props.sendMessageToServer(
         selectedConversationInfo.conversationId,
         selectedConversationInfo.selectedContactOnline,
         selectedConversationInfo.selectedContactSocketId,
-        selectedConversationInfo.selectedContactMongoDBId,
+        selectedConversationInfo.selectedContactMongoDBInfo.id,
         userId,
         chat.currentMessage
       );

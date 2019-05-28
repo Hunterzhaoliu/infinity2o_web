@@ -275,7 +275,6 @@ module.exports = app => {
     const userVotedAsks = userInDB.profile.asks.votes;
 
     // finds if the user has already answered the question
-    // TODO: optimize this search
     for (let i = 0; i < userVotedAsks.length; i++) {
       if (String(userVotedAsks[i]._askId) === String(askId)) {
         previousAnswerId = userVotedAsks[i]._answerId;

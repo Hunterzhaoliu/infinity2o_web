@@ -34,7 +34,7 @@
 
 ### LinkedIn OAuth:
 
-1.  Login TODO: Hunter knows
+1.  Login: `hunterzhaoliu@gmail.com`
 
 ### Stripe.com login:
 
