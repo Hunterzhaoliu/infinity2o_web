@@ -12,12 +12,24 @@ import "./profile-card.css";
 import dolphin from "../images/dolphin.jpg";
 
 class ProfileCard extends Component {
-  renderNameAndAge() {
-    const { profile } = this.props;
-    if (profile.age !== undefined) {
-      return profile.name + ", " + profile.age;
-    } else {
-      return profile.name;
+  renderAge(age, colorThemeText6Color) {
+    if (age !== undefined && age !== null) {
+      return (
+        <Col>
+          <h4
+            style={{
+              color: colorThemeText6Color,
+              fontFamily: "Overpass",
+              lineHeight: 1,
+              marginBottom: 0,
+              fontSize: 26
+            }}
+          >
+            {", "}
+            {age}
+          </h4>
+        </Col>
+      );
     }
   }
 
@@ -52,7 +64,7 @@ class ProfileCard extends Component {
                 style={{
                   width: "100%",
                   height: "130px",
-                  backgroundColor: colorTheme.key
+                  backgroundColor: colorTheme.keyText7Color
                 }}
               />
               <img
@@ -75,16 +87,17 @@ class ProfileCard extends Component {
               <Col>
                 <h4
                   style={{
-                    color: colorTheme.keyText6Color,
+                    color: colorTheme.keyText7Color,
                     fontFamily: "Overpass",
                     lineHeight: 1,
                     marginBottom: 0,
                     fontSize: 26
                   }}
                 >
-                  {this.renderNameAndAge()}
+                  {profile.name}
                 </h4>
               </Col>
+              {this.renderAge(profile.age, colorTheme.text6Color)}
               <LinkedIn value={profile.linkedInPublicProfileUrl} />
               <Github value={profile.githubPublicProfileUrl} />
             </Row>

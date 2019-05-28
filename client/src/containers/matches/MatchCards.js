@@ -104,7 +104,7 @@ class MatchCards extends Component {
     );
   }
 
-  renderMatchPicture(imageUrl, backgroundColor) {
+  renderMatchPicture(imageUrl, matchCardHeaderColor) {
     if (imageUrl === undefined || imageUrl === null) {
       imageUrl = dolphin;
     }
@@ -115,7 +115,7 @@ class MatchCards extends Component {
           style={{
             width: "100%",
             height: "130px",
-            backgroundColor: backgroundColor
+            backgroundColor: matchCardHeaderColor
           }}
         />
         <img
