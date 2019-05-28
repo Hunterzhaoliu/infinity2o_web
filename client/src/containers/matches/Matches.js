@@ -125,7 +125,9 @@ class Matches extends Component {
       // before we run minerva for them
       const votesToGo =
         MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH - totalUserVotesAcrossAllSessions;
-      const percentVotes = (100 / 8) * totalUserVotesAcrossAllSessions;
+      const percentVotes =
+        (100 / MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH) *
+        totalUserVotesAcrossAllSessions;
 
       let h4FontSize = "24px";
       let h6FontSize = "20px";
