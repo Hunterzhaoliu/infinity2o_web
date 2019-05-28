@@ -19,7 +19,13 @@ const { Content } = Layout;
 
 class InputVote extends Component {
   onVote(answerIndex, askIndex, askId) {
-    const { sortingHat, history, mongoDBUserId } = this.props;
+    const {
+      sortingHat,
+      history,
+      mongoDBUserId,
+      ranInitialMinerva,
+      totalUserVotes
+    } = this.props;
     // now we know which answer user pressed so let's pass the answesId too
     const ask = sortingHat.current4DisplayedAsks[askIndex];
     const answerId = ask.answers[answerIndex]._id;
@@ -38,7 +44,9 @@ class InputVote extends Component {
       askIndex,
       askId,
       history,
-      mongoDBUserId
+      mongoDBUserId,
+      ranInitialMinerva,
+      totalUserVotes
     );
   }
 
@@ -429,7 +437,9 @@ function mapStateToProps(state) {
     mongoDBUserId: state.auth.mongoDBUserId,
     windowWidth: state.customHeader.windowWidth,
     landing: state.landing,
-    activeSection: state.colorTheme.activeSection
+    activeSection: state.colorTheme.activeSection,
+    ranInitialMinerva: state.profile.ranInitialMinerva,
+    totalUserVotes: state.profile.asks.totalUserVotes
   };
 }
 
@@ -454,7 +464,9 @@ function mapDispatchToProps(dispatch) {
       askIndex,
       askId,
       history,
-      mongoDBUserId
+      mongoDBUserId,
+      ranInitialMinerva,
+      totalUserVotes
     ) => {
       sortingHatDispatchers.onVote(
         answerIndex,
@@ -462,7 +474,9 @@ function mapDispatchToProps(dispatch) {
         askIndex,
         askId,
         history,
-        mongoDBUserId
+        mongoDBUserId,
+        ranInitialMinerva,
+        totalUserVotes
       );
     },
     onVoteLanding: (answerIndex, askIndex, isFirstVote) => {

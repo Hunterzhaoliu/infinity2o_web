@@ -39,7 +39,7 @@ class Matches extends Component {
       colorTheme,
       matches,
       history,
-      totalUserVotesAcrossAllSessions,
+      totalUserVotes,
       runningAthenaForUser,
       windowWidth
     } = this.props;
@@ -118,16 +118,12 @@ class Matches extends Component {
           />
         </Col>
       );
-    } else if (
-      totalUserVotesAcrossAllSessions < MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
-    ) {
+    } else if (totalUserVotes < MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH) {
       // display progress bar showing user needs to vote X more times
       // before we run minerva for them
-      const votesToGo =
-        MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH - totalUserVotesAcrossAllSessions;
+      const votesToGo = MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH - totalUserVotes;
       const percentVotes =
-        (100 / MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH) *
-        totalUserVotesAcrossAllSessions;
+        (100 / MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH) * totalUserVotes;
 
       let h4FontSize = "24px";
       let h6FontSize = "20px";
@@ -166,8 +162,8 @@ class Matches extends Component {
                   marginBottom: 0
                 }}
               >
-                Recieve your first 2 matches by voting on 8 questions in Sorting
-                Hat
+                Recieve your first 2 matches by voting on{" "}
+                {MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH} questions in Sorting Hat
               </h4>
             </Col>
           </Row>
@@ -298,8 +294,7 @@ function mapStateToProps(state) {
     loggedInState: state.auth.loggedInState,
     colorTheme: state.colorTheme,
     matches: state.matches,
-    totalUserVotesAcrossAllSessions:
-      state.matches.totalUserVotesAcrossAllSessions,
+    totalUserVotes: state.profile.asks.totalUserVotes,
     runningAthenaForUser: state.matches.runningAthenaForUser,
     mongoDBUserId: state.auth.mongoDBUserId,
     basicMatchInfo: state.matches.basicMatchInfo,

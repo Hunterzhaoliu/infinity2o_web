@@ -22,7 +22,8 @@ import {
   ADD_NEURONS,
   ADD_NEURONS_ERROR,
   RUNNING_ATHENA_FOR_USER_DONE,
-  USER_UNSUBSCRIBED
+  USER_UNSUBSCRIBED,
+  UPDATE_TOTAL_USER_VOTES
 } from "../../actions/types";
 
 let cloneObject = obj => {
@@ -174,6 +175,9 @@ export default function(state = initialState, action) {
       return newState;
     case USER_UNSUBSCRIBED:
       newState.name = action.name;
+      return newState;
+    case UPDATE_TOTAL_USER_VOTES:
+      newState.asks.totalUserVotes += 1;
       return newState;
     default:
       return state;
