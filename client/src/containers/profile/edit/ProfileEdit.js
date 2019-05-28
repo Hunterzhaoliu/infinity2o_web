@@ -52,7 +52,7 @@ class ProfileEdit extends Component {
     }
   }
 
-  renderContent() {
+  render() {
     const {
       colorTheme,
       saveProfile,
@@ -63,142 +63,6 @@ class ProfileEdit extends Component {
       onChangeLinkedInPublicProfileUrl,
       onChangeGithubPublicProfileUrl
     } = this.props;
-
-    return (
-      <Row type="flex" justify="start" align="middle">
-        <Col
-          xs={{ offset: 3, span: 21 }}
-          sm={{ offset: 2, span: 22 }}
-          md={{ offset: 2, span: 22 }}
-          lg={{ offset: 4, span: 20 }}
-          xl={{ offset: 5, span: 19 }}
-        >
-          <Row>
-            <InputField
-              value={profile.name}
-              label="Name:"
-              errorMessage="Cool name! But we need 1 to 30 valid letters"
-              hasError={profile.hasNameError}
-              onChange={onChangeName}
-            />
-          </Row>
-          <Row
-            style={{
-              height: "26px"
-            }}
-          />
-          <Row>
-            <InputField
-              value={profile.email}
-              label="E-mail:"
-              errorMessage="Invalid e-mail format"
-              hasError={profile.hasEmailError}
-              onChange={onChangeEmail}
-            />
-          </Row>
-          <Row
-            style={{
-              height: "26px"
-            }}
-          />
-          <Row>
-            <InputAge label="Age:" />
-          </Row>
-          <Row
-            style={{
-              height: "15px"
-            }}
-          />
-          <Row>
-            <InputInterests />
-          </Row>
-          <Row
-            style={{
-              height: "15px"
-            }}
-          />
-          <Row>
-            <InputField
-              value={profile.linkedInPublicProfileUrl}
-              label="LinkedIn:"
-              errorMessage="Invalid LinkedIn link. Needs to start with http:// or https://"
-              hasError={profile.hasLinkedInPublicProfileUrlError}
-              onChange={onChangeLinkedInPublicProfileUrl}
-            />
-          </Row>
-          <Row
-            style={{
-              padding: "15px 0px 0px 0px"
-            }}
-          />
-          <Row>
-            <InputField
-              value={profile.githubPublicProfileUrl}
-              label="Github:"
-              errorMessage="Invalid github link. Needs to start with http:// or https://"
-              hasError={profile.hasGithubPublicProfileUrlError}
-              onChange={onChangeGithubPublicProfileUrl}
-            />
-          </Row>
-          <Row
-            type="flex"
-            justify="start"
-            align="middle"
-            style={{
-              padding: "15px 0px 0px 0px"
-            }}
-          />
-          <Row>
-            <InputTimeZone />
-          </Row>
-          <Row
-            type="flex"
-            justify="start"
-            align="middle"
-            style={{
-              padding: "15px 0px 0px 0px"
-            }}
-          />
-          <Row>
-            <InputSchedule />
-          </Row>
-          <Row
-            type="flex"
-            justify="start"
-            align="middle"
-            style={{
-              padding: "15px 0px 0px 0px"
-            }}
-          />
-          <Row
-            type="flex"
-            justify="start"
-            style={{
-              padding: "15px 0px 0px 0px"
-            }}
-          >
-            <Col>
-              <button
-                className="profile-edit-button"
-                style={{
-                  borderColor: colorTheme.key,
-                  background: colorTheme.key,
-                  color: colorTheme.text1Color
-                }}
-                disabled={this.isSaveDisabled(profile)}
-                onClick={() => saveProfile(profile, history)}
-              >
-                Save {this.renderSaveIcon(profile.save)}
-              </button>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-    );
-  }
-
-  render() {
-    const { colorTheme } = this.props;
     return (
       <Content
         style={{
@@ -206,7 +70,135 @@ class ProfileEdit extends Component {
           background: colorTheme.backgroundColor
         }}
       >
-        {this.renderContent()}
+        <Row type="flex" justify="start" align="middle">
+          <Col
+            xs={{ offset: 3, span: 21 }}
+            sm={{ offset: 2, span: 22 }}
+            md={{ offset: 2, span: 22 }}
+            lg={{ offset: 4, span: 20 }}
+            xl={{ offset: 5, span: 19 }}
+          >
+            <Row>
+              <InputField
+                value={profile.name}
+                label="Name:"
+                errorMessage="Cool name! But we need 1 to 30 valid letters"
+                hasError={profile.hasNameError}
+                onChange={onChangeName}
+              />
+            </Row>
+            <Row
+              style={{
+                height: "26px"
+              }}
+            />
+            <Row>
+              <InputField
+                value={profile.email}
+                label="E-mail:"
+                errorMessage="Invalid e-mail format"
+                hasError={profile.hasEmailError}
+                onChange={onChangeEmail}
+              />
+            </Row>
+            <Row
+              style={{
+                height: "26px"
+              }}
+            />
+            <Row>
+              <InputAge label="Age:" />
+            </Row>
+            <Row
+              style={{
+                height: "15px"
+              }}
+            />
+            <Row>
+              <InputInterests />
+            </Row>
+            <Row
+              style={{
+                height: "15px"
+              }}
+            />
+            <Row>
+              <InputField
+                value={profile.linkedInPublicProfileUrl}
+                label="LinkedIn:"
+                errorMessage="Invalid LinkedIn link. Needs to start with http:// or https://"
+                hasError={profile.hasLinkedInPublicProfileUrlError}
+                onChange={onChangeLinkedInPublicProfileUrl}
+              />
+            </Row>
+            <Row
+              style={{
+                padding: "15px 0px 0px 0px"
+              }}
+            />
+            <Row>
+              <InputField
+                value={profile.githubPublicProfileUrl}
+                label="Github:"
+                errorMessage="Invalid github link. Needs to start with http:// or https://"
+                hasError={profile.hasGithubPublicProfileUrlError}
+                onChange={onChangeGithubPublicProfileUrl}
+              />
+            </Row>
+            <Row
+              type="flex"
+              justify="start"
+              align="middle"
+              style={{
+                padding: "15px 0px 0px 0px"
+              }}
+            />
+            <Row>
+              <InputTimeZone />
+            </Row>
+            <Row
+              type="flex"
+              justify="start"
+              align="middle"
+              style={{
+                padding: "15px 0px 0px 0px"
+              }}
+            />
+            <Row>
+              <InputSchedule />
+            </Row>
+            <Row
+              type="flex"
+              justify="start"
+              align="middle"
+              style={{
+                padding: "15px 0px 0px 0px"
+              }}
+            />
+            <Row
+              type="flex"
+              justify="start"
+              style={{
+                padding: "15px 0px 0px 0px"
+              }}
+            >
+              <Col>
+                <button
+                  className="profile-edit-button"
+                  style={{
+                    borderColor: colorTheme.key,
+                    background: colorTheme.key,
+                    color: colorTheme.text1Color
+                  }}
+                  disabled={this.isSaveDisabled(profile)}
+                  onClick={() => saveProfile(profile, history)}
+                >
+                  Save {this.renderSaveIcon(profile.save)}
+                </button>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </Content>
     );
   }

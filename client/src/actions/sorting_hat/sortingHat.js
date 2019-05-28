@@ -48,7 +48,8 @@ export const onVote = (
   history,
   mongoDBUserId,
   ranInitialMinerva,
-  totalUserVotes
+  totalUserVotes,
+  filledInterests
 ) => async dispatch => {
   dispatch({ type: SAVE_VOTE_START, saveIndex: askIndex });
   dispatch({
@@ -89,33 +90,38 @@ export const onVote = (
   // subtract 1 from MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH because not counting current vote
   if (
     !ranInitialMinerva &&
-    totalUserVotes >= MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH - 1
+    totalUserVotes >= MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH - 1 &&
+    filledInterests
   ) {
+    runAthena(dispatch);
+  }
+};
+
+export const runAthena = async dispatch => {
+  dispatch({
+    type: RUNNING_ATHENA_FOR_USER_START
+  });
+
+  // runs athena and puts new user matches into DB
+  const initialMatchesResponse = await axios.post("/api/matches/initial");
+
+  if (initialMatchesResponse.status === 200) {
+    // don't need to retrieve user matches here because redirected to
+    // matches page where fetchUserMatches is always called
+    // the numberOfUnseenMatches is also updated in auth
     dispatch({
-      type: RUNNING_ATHENA_FOR_USER_START
+      type: RUNNING_ATHENA_FOR_USER_DONE
     });
 
-    // runs athena and puts new user matches into DB
-    const initialMatchesResponse = await axios.post("/api/matches/initial");
-
-    if (initialMatchesResponse.status === 200) {
-      // don't need to retrieve user matches here because redirected to
-      // matches page where fetchUserMatches is always called
-      // the numberOfUnseenMatches is also updated in auth
-      dispatch({
-        type: RUNNING_ATHENA_FOR_USER_DONE
-      });
-
-      // update match badge icon
-      dispatch({
-        type: NEW_UNSEEN_MATCH,
-        numberOfUnseenMatchesToAdd: 2
-      });
-    } else {
-      dispatch({
-        type: RUNNING_ATHENA_FOR_USER_ERROR
-      });
-    }
+    // update match badge icon
+    dispatch({
+      type: NEW_UNSEEN_MATCH,
+      numberOfUnseenMatchesToAdd: 2
+    });
+  } else {
+    dispatch({
+      type: RUNNING_ATHENA_FOR_USER_ERROR
+    });
   }
 };
 
