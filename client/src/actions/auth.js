@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   SAVE_FETCHED_USER_AUTH,
   SAVE_FETCHED_USER_PROFILE,
-  UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
   UPDATE_MATCHES_SEEN,
   UPDATE_CONTACT_WITH_NEW_USER_SOCKET_ID,
   TOLD_REDIS_CLIENT_IS_ONLINE,
@@ -34,11 +33,6 @@ function saveUserProfile(response, dispatch) {
   dispatch({
     type: SAVE_FETCHED_USER_PROFILE,
     profile: response.data.profile
-  });
-
-  dispatch({
-    type: UPDATE_TOTAL_USER_VOTES_ACROSS_ALL_SESSIONS,
-    additionalVotes: response.data.profile.asks.totalUserVotes
   });
 
   // separate dispatch that goes to customHeader reducer

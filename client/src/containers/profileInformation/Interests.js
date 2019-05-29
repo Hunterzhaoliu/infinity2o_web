@@ -4,8 +4,7 @@ import { Row, Col } from "antd";
 import interestIcon from "../images/interestIcon.png";
 
 class Interests extends Component {
-  renderInterests() {
-    const { interests } = this.props;
+  renderInterests(interests) {
     // interests = profile.interests
     let formattedInterests = "";
     let upperCaseInterest = "";
@@ -39,7 +38,7 @@ class Interests extends Component {
 
   render() {
     const { interests, textColor } = this.props;
-    if (interests !== null && interests.length > 0) {
+    if (interests !== null) {
       return (
         <Row
           style={{ padding: "15px 0px 0px 0px" }}
@@ -66,7 +65,7 @@ class Interests extends Component {
               color: textColor
             }}
           >
-            {this.renderInterests()}
+            {this.renderInterests(interests)}
           </Col>
         </Row>
       );

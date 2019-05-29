@@ -39,9 +39,10 @@ class Matches extends Component {
       colorTheme,
       matches,
       history,
-      totalUserVotesAcrossAllSessions,
+      totalUserVotes,
       runningAthenaForUser,
-      windowWidth
+      windowWidth,
+      userInterests
     } = this.props;
 
     document.documentElement.style.setProperty(
@@ -118,14 +119,12 @@ class Matches extends Component {
           />
         </Col>
       );
-    } else if (
-      totalUserVotesAcrossAllSessions < MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH
-    ) {
-      // display progress bar showing user needs to vote X more times
-      // before we run minerva for them
-      const votesToGo =
-        MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH - totalUserVotesAcrossAllSessions;
-      const percentVotes = (100 / 8) * totalUserVotesAcrossAllSessions;
+    } else if (totalUserVotes < MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH) {
+      // display progress bar showing user needs to vote X more times and user
+      // needs to enter their interests in before we run minerva for them
+      const votesToGo = MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH - totalUserVotes;
+      const percentVotes =
+        (100 / MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH) * totalUserVotes;
 
       let h4FontSize = "24px";
       let h6FontSize = "20px";
@@ -136,6 +135,12 @@ class Matches extends Component {
         h6FontSize = "16px";
         h4Padding = "0px 0px 30px";
         progressPadding = "15px 0px 0px";
+      }
+
+      let addInterestsExplanation = "";
+      if (userInterests.length === 0) {
+        // user has not filled their interests yet
+        addInterestsExplanation = "and enter your interests in Profile.";
       }
 
       return (
@@ -164,8 +169,9 @@ class Matches extends Component {
                   marginBottom: 0
                 }}
               >
-                Recieve your first 2 matches by voting on 8 questions in Sorting
-                Hat
+                Recieve your first 2 matches by voting on{" "}
+                {MINIMUM_VOTES_TO_GET_IMMEDIATE_MATCH} questions in Sorting Hat{" "}
+                {addInterestsExplanation}.
               </h4>
             </Col>
           </Row>
@@ -198,6 +204,49 @@ class Matches extends Component {
                 showInfo={false}
                 status="active"
               />
+            </Col>
+          </Row>
+        </Col>
+      );
+    } else if (userInterests.length === 0) {
+      // user needs to know that they need to enter in their interests before they get matches
+
+      let h4FontSize = "24px";
+      let h4Padding = "30px 0px 60px";
+      if (windowWidth < 768) {
+        h4FontSize = "18px";
+        h4Padding = "0px 0px 30px";
+      }
+
+      return (
+        <Col
+          xs={{ span: 24 }}
+          sm={{ span: 24 }}
+          md={{ span: 24 }}
+          lg={{ span: 24 }}
+          xl={{ span: 24 }}
+        >
+          <Row type="flex" justify="center">
+            <Col
+              xs={{ span: 17 }}
+              sm={{ span: 15 }}
+              md={{ span: 18 }}
+              lg={{ span: 14 }}
+              xl={{ span: 24 }}
+            >
+              <h4
+                style={{
+                  padding: h4Padding,
+                  color: colorTheme.text3Color,
+                  fontFamily: "Overpass",
+                  fontSize: h4FontSize,
+                  lineHeight: 1,
+                  marginBottom: 0
+                }}
+              >
+                Recieve your first 2 matches by entering your interests in
+                Profile.
+              </h4>
             </Col>
           </Row>
         </Col>
@@ -236,13 +285,18 @@ class Matches extends Component {
   }
 
   render() {
-    const { colorTheme, windowWidth } = this.props;
+    const { colorTheme, windowWidth, userInterests } = this.props;
 
     let h2FontSize = "32px";
     if (windowWidth < 768) {
       h2FontSize = "22px";
     }
 
+    let fillInterestsExplanation = "";
+    if (userInterests.length === 0) {
+      // user has not filled their interests yet
+      fillInterestsExplanation = "Enter your interests in Profile to get the: ";
+    }
     return (
       <Content
         style={{
@@ -258,8 +312,8 @@ class Matches extends Component {
           <Col
             xs={{ span: 18 }}
             sm={{ span: 20 }}
-            md={{ span: 24 }}
-            lg={{ span: 24 }}
+            md={{ span: 20 }}
+            lg={{ span: 20 }}
             xl={{ span: 24 }}
           >
             <h2
@@ -271,7 +325,8 @@ class Matches extends Component {
                 marginBottom: 0
               }}
             >
-              Best 2 Matches. Every Single Day. At 9 AM.
+              {fillInterestsExplanation}
+              Best 2 Matches. Every Day. 9 AM EST.
             </h2>
           </Col>
         </Row>
@@ -296,12 +351,12 @@ function mapStateToProps(state) {
     loggedInState: state.auth.loggedInState,
     colorTheme: state.colorTheme,
     matches: state.matches,
-    totalUserVotesAcrossAllSessions:
-      state.matches.totalUserVotesAcrossAllSessions,
+    totalUserVotes: state.profile.asks.totalUserVotes,
     runningAthenaForUser: state.matches.runningAthenaForUser,
     mongoDBUserId: state.auth.mongoDBUserId,
     basicMatchInfo: state.matches.basicMatchInfo,
-    windowWidth: state.customHeader.windowWidth
+    windowWidth: state.customHeader.windowWidth,
+    userInterests: state.profile.interests
   };
 }
 

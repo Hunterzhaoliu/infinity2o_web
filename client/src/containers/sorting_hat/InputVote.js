@@ -19,7 +19,14 @@ const { Content } = Layout;
 
 class InputVote extends Component {
   onVote(answerIndex, askIndex, askId) {
-    const { sortingHat, history, mongoDBUserId } = this.props;
+    const {
+      sortingHat,
+      history,
+      mongoDBUserId,
+      ranInitialMinerva,
+      totalUserVotes,
+      interests
+    } = this.props;
     // now we know which answer user pressed so let's pass the answesId too
     const ask = sortingHat.current4DisplayedAsks[askIndex];
     const answerId = ask.answers[answerIndex]._id;
@@ -32,13 +39,22 @@ class InputVote extends Component {
         mongoDBUserId
       );
     }
+
+    let filledInterests = false;
+    if (interests.length > 0) {
+      filledInterests = true;
+    }
+
     this.props.onVote(
       answerIndex,
       answerId,
       askIndex,
       askId,
       history,
-      mongoDBUserId
+      mongoDBUserId,
+      ranInitialMinerva,
+      totalUserVotes,
+      filledInterests
     );
   }
 
@@ -429,7 +445,10 @@ function mapStateToProps(state) {
     mongoDBUserId: state.auth.mongoDBUserId,
     windowWidth: state.customHeader.windowWidth,
     landing: state.landing,
-    activeSection: state.colorTheme.activeSection
+    activeSection: state.colorTheme.activeSection,
+    ranInitialMinerva: state.profile.ranInitialMinerva,
+    totalUserVotes: state.profile.asks.totalUserVotes,
+    interests: state.profile.interests
   };
 }
 
@@ -454,7 +473,10 @@ function mapDispatchToProps(dispatch) {
       askIndex,
       askId,
       history,
-      mongoDBUserId
+      mongoDBUserId,
+      ranInitialMinerva,
+      totalUserVotes,
+      filledInterests
     ) => {
       sortingHatDispatchers.onVote(
         answerIndex,
@@ -462,7 +484,10 @@ function mapDispatchToProps(dispatch) {
         askIndex,
         askId,
         history,
-        mongoDBUserId
+        mongoDBUserId,
+        ranInitialMinerva,
+        totalUserVotes,
+        filledInterests
       );
     },
     onVoteLanding: (answerIndex, askIndex, isFirstVote) => {
