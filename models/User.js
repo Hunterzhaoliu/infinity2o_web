@@ -50,7 +50,7 @@ const userSchema = new Schema(
         infinityStatus: Boolean,
         neuronsInBillions: {
           type: Number,
-          default: 0.22
+          default: 1.2
         }
       },
       minerva: {
