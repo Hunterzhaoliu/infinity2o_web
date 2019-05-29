@@ -88,7 +88,7 @@ export const saveProfile = (profile, history) => async dispatch => {
     if (
       !profile.ranInitialMinerva &&
       profile.interests.length > 0 &&
-      profile.asks.totalUserVotes > 4
+      profile.asks.totalUserVotes >= 4
     ) {
       // user just filled out their interests and has already voted on 4 Sorting Hat questions, so run Athena
       runAthena(dispatch);
