@@ -285,13 +285,18 @@ class Matches extends Component {
   }
 
   render() {
-    const { colorTheme, windowWidth } = this.props;
+    const { colorTheme, windowWidth, userInterests } = this.props;
 
     let h2FontSize = "32px";
     if (windowWidth < 768) {
       h2FontSize = "22px";
     }
 
+    let fillInterestsExplanation = "";
+    if (userInterests.length === 0) {
+      // user has not filled their interests yet
+      fillInterestsExplanation = "Enter your interests in Profile to get the: ";
+    }
     return (
       <Content
         style={{
@@ -307,8 +312,8 @@ class Matches extends Component {
           <Col
             xs={{ span: 18 }}
             sm={{ span: 20 }}
-            md={{ span: 24 }}
-            lg={{ span: 24 }}
+            md={{ span: 20 }}
+            lg={{ span: 20 }}
             xl={{ span: 24 }}
           >
             <h2
@@ -320,7 +325,8 @@ class Matches extends Component {
                 marginBottom: 0
               }}
             >
-              Best 2 Matches. Every Single Day. At 9 AM.
+              {fillInterestsExplanation}
+              Best 2 Matches. Every Day. 9 AM EST.
             </h2>
           </Col>
         </Row>
