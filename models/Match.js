@@ -6,4 +6,4 @@ const matchSchema = new Schema({
   seen: { type: Boolean, default: false }
 });
 
-module.exports = matchSchema;
+mongoose.model("match", matchSchema);
