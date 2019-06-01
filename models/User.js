@@ -4,6 +4,7 @@ const ProfileQuestionDisplay = require("./ProfileQuestionDisplay");
 const ProfileVoteDisplay = require("./ProfileVoteDisplay");
 const UserConversation = require("./UserConversation");
 const Match = require("./Match");
+const CompletedCourse = require("./CompletedCourse");
 
 const userSchema = new Schema(
   {
@@ -54,10 +55,10 @@ const userSchema = new Schema(
         }
       },
       minerva: {
-        // after a new user votes on 8 asks we run
-        // minerva for them for the first time immediately
+        // after a new user votes on 4 asks we run Athena
         ranInitialMinerva: { type: Boolean, default: false },
-        lastRecordedSiteVisitDate: Date
+        lastRecordedSiteVisitDate: Date,
+        listOfCompletedCourses: [CompletedCourse]
       }
     },
     matches: [Match],
