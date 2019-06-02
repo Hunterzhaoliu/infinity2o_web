@@ -209,4 +209,30 @@ module.exports = app => {
       }
     }
   );
+
+  app.put(
+    "/api/conversations/completed_course",
+    requireLogin,
+    async (request, response) => {
+      const userId = request.user._id;
+      const { courseName, courseProvider } = request.body;
+      const completedCourse = {
+        courseName: courseName,
+        courseProvider: courseProvider
+      };
+
+      console.log("completedCourse = ", completedCourse);
+
+      await UserCollection.update(
+        { _id: userId },
+        {
+          $push: {
+            "profile.minerva.completedCourses": completedCourse
+          }
+        }
+      );
+
+      response.send("done");
+    }
+  );
 };

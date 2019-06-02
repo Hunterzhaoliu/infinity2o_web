@@ -38,6 +38,8 @@ const recommendCourses = (
     contactCompletedCourses
   );
 
+  console.log("combinedCompletedCourses = ", combinedCompletedCourses);
+
   let recommendedCourses = [];
   sharedInterests.forEach(function(sharedInterest) {
     let courseIndex = 0;
@@ -49,10 +51,10 @@ const recommendCourses = (
       // still need to recommend course
       const recommendedCourse = recommendedCoursesForInterest[courseIndex];
       const courseNameAndProvider = {
-        courseName: recommendedCourse["name"],
-        courseProvider: recommendedCourse["provider"]
+        courseProvider: recommendedCourse["provider"],
+        courseName: recommendedCourse["name"]
       };
-
+      console.log("courseNameAndProvider = ", courseNameAndProvider);
       if (combinedCompletedCourses.includes(courseNameAndProvider) === false) {
         // neither partner has taken the course, add course to recommended_courses
         recommendedCourses.push(recommendedCourse);

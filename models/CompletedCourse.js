@@ -6,4 +6,4 @@ const completedCourseSchema = new Schema({
   providerName: String
 });
 
-module.exports = completedCourseSchema;
+mongoose.model("completedCourse", completedCourseSchema);
