@@ -118,6 +118,8 @@ class ContactCard extends Component {
     if (firstTwoContacts.length === 1) {
       // no other contacts, don't need to select a different contact
     } else {
+      const { userVotes, userCompletedCourses, userInterests } = this.props;
+
       // when close conversation, select top most candidate
       let contactToShow = firstTwoContacts[0];
       if (firstTwoContacts[0].conversationId === conversationId) {
@@ -126,6 +128,9 @@ class ContactCard extends Component {
       }
 
       this.props.onSelectContact(
+        userVotes,
+        userCompletedCourses,
+        userInterests,
         contactToShow.conversationId,
         contactToShow.isOnline,
         contactToShow.socketId,
@@ -240,7 +245,10 @@ This function gives the UI the parts of the state it will need to display.
 function mapStateToProps(state) {
   return {
     colorTheme: state.colorTheme,
-    contacts: state.contacts
+    contacts: state.contacts,
+    userVotes: state.profile.asks.votes,
+    userCompletedCourses: state.profile.completedCourses,
+    userInterests: state.profile.interests
   };
 }
 
@@ -262,6 +270,9 @@ function mapDispatchToProps(dispatch) {
       contactsDispatchers.toggleBeliefComparison(showContactCard);
     },
     onSelectContact: (
+      userVotes,
+      userCompletedCourses,
+      userInterests,
       conversationId,
       isOnline,
       socketId,
@@ -269,6 +280,9 @@ function mapDispatchToProps(dispatch) {
       numberOfUnseenMessages
     ) => {
       contactsDispatchers.onSelectContact(
+        userVotes,
+        userCompletedCourses,
+        userInterests,
         conversationId,
         isOnline,
         socketId,

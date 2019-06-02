@@ -38,7 +38,8 @@ let initialState = {
       availability: null,
       asks: null,
       id: null,
-      imageUrl: null
+      imageUrl: null,
+      completedCourses: null
     },
     showContactCard: true,
     agreedAsks: [],
@@ -122,12 +123,8 @@ export default function(state = initialState, action) {
           // contact has this information
           newState.selectedConversationInfo.selectedContactMongoDBInfo[key] =
             action.selectedContactInfo[key];
-        } else {
-          // contact doesn't have this information
-          newState.selectedConversationInfo.selectedContactMongoDBInfo[
-            key
-          ] = null;
         }
+        // contact doesn't have this information, don't need to do anything
       }
       return newState;
     case TOGGLE_BELIEF_COMPARISON:

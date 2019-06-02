@@ -175,21 +175,6 @@ function mapDispatchToProps(dispatch) {
     },
     fetchConversations: () => {
       contactsDispatchers.fetchConversations();
-    },
-    onSelectContact: (
-      conversationId,
-      isOnline,
-      socketId,
-      matchId,
-      numberOfUnseenMessages
-    ) => {
-      contactsDispatchers.onSelectContact(
-        conversationId,
-        isOnline,
-        socketId,
-        matchId,
-        numberOfUnseenMessages
-      );
     }
   };
 }

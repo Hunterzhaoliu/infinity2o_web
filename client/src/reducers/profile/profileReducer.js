@@ -57,7 +57,8 @@ let initialState = {
     infinityStatus: false
   },
   colorThemeSave: null,
-  ranInitialMinerva: false
+  ranInitialMinerva: false,
+  completedCourses: []
 };
 
 export default function(state = initialState, action) {
@@ -78,6 +79,7 @@ export default function(state = initialState, action) {
         newState.asks = action.profile.asks;
         newState.payment = action.profile.payment;
         newState.ranInitialMinerva = action.profile.minerva.ranInitialMinerva;
+        newState.completedCourses = action.profile.minerva.completedCourses;
       }
       return newState;
     case SAVE_COLOR_THEME_START:
