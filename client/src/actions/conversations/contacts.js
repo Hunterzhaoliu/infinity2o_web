@@ -11,7 +11,8 @@ import {
   UPDATE_SELECTED_CONTACT_INFO,
   UPDATE_VOTE_COMPARISON,
   DELETE_CONVERSATION,
-  TOGGLE_BELIEF_COMPARISON
+  TOGGLE_BELIEF_COMPARISON,
+  RECOMMEND_COURSES
 } from "../types";
 import { allRecommendedCourses } from "../../utils/allRecommendedCourses";
 
@@ -22,11 +23,6 @@ const recommendCourses = (
   contactCompletedCourses,
   dispatch
 ) => {
-  // console.log("userInterests = ", userInterests);
-  // console.log("userCompletedCourses = ", userCompletedCourses);
-  // console.log("contactInterests = ", contactInterests);
-  // console.log("contactCompletedCourses = ", contactCompletedCourses);
-  // console.log("allRecommendedCourses = ", allRecommendedCourses);
   // find shared interests and for loop to find recommended courses
   let sharedInterests = userInterests.filter(userInterest =>
     contactInterests.includes(userInterest)
@@ -66,7 +62,10 @@ const recommendCourses = (
     }
   });
 
-  console.log("recommendedCourses = ", recommendedCourses);
+  dispatch({
+    type: RECOMMEND_COURSES,
+    recommendedCourses: recommendedCourses
+  });
 };
 
 const voteComparison = (userVotes, contactVotes, dispatch) => {

@@ -1,52 +1,114 @@
 /* https://stackoverflow.com/questions/3296644/hiding-the-scrollbar-on-an-html-page */
 .chat-list {
-	overflow: scroll;
-	overflow-x: hidden;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
-	width: 0px; /* remove scrollbar space */
-	/* background: transparent;  optional: just make scrollbar invisible */
+  width: 0px; /* remove scrollbar space */
+  /* background: transparent;  optional: just make scrollbar invisible */
 }
 
 .chat-input {
-	width: 100%;
-	border-radius: 0px;
-	border-width: 1px 0px 0px 0px;
-	height: 60px;
-	font-family: "Overpass";
-	line-height: 1;
-	margin-bottom: 0;
-	font-size: 16px;
+  width: 100%;
+  border-radius: 0px;
+  border-width: 1px 0px 0px 0px;
+  height: 60px;
+  font-family: "Overpass";
+  line-height: 1;
+  margin-bottom: 0;
+  font-size: 16px;
 }
 
 .chat-input:focus {
-	box-shadow: none;
-	color: var(--text4Color) !important;
+  box-shadow: none;
+  color: var(--text4Color) !important;
 }
 
 .chat-profile-img {
-	height: 50px;
-	width: 50px;
-	border-radius: 50%;
-	border: 2px solid var(--textDot5Color);
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid;
 }
 
 .chat-contact-picture {
-	position: relative;
-	margin-right: -15px;
+  position: relative;
+  margin-right: -15px;
 }
 
 .welcome-message {
-	padding-top: 15px;
-	font-family: "Overpass";
-	line-height: 1;
-	margin-bottom: 0;
-	font-size: 16px;
-	color: var(--text4Color);
+  font-family: "Overpass";
+  line-height: 1;
+  margin-bottom: 0;
+  font-size: 16px;
 }
 
 .chat-images {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+.course-name {
+  font-family: "Overpass";
+  line-height: 1;
+  margin-bottom: 0;
+  font-size: 24px;
+}
+
+.school-and-provider-name {
+  font-family: "Overpass";
+  line-height: 1;
+  margin-bottom: 0;
+  font-size: 18px;
+  padding-top: 15px;
+}
+
+.course-description {
+  font-family: "Overpass";
+  line-height: 1;
+  margin-bottom: 0;
+  font-size: 16px;
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.course-description-img {
+  width: 20px;
+}
+
+.completed-course-button {
+  font-family: "Overpass";
+  line-height: 40px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 0px 14px;
+  font-weight: 600;
+  border-style: none;
+  outline: none;
+}
+
+.completed-course-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.interested-in-course-a {
+  font-family: "Overpass";
+  line-height: 40px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 0px 14px;
+  font-weight: 600;
+  display: inline-block;
+  text-decoration: none !important;
+}
+
+.interested-in-course-a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
