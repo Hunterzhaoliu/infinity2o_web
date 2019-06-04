@@ -33,10 +33,17 @@ const recommendCourses = (
     sharedInterests = ["computer_science"];
   }
 
-  // find the combined list of completed courses
-  const combinedCompletedCourses = userCompletedCourses.concat(
-    contactCompletedCourses
-  );
+  // // find the combined list of completed courses
+  // const combinedCompletedCourses = userCompletedCourses.concat(
+  //   contactCompletedCourses
+  // );
+
+  const combinedCompletedCourses = [
+    {
+      courseName: "Intro to Computer Science",
+      courseProvider: "Udacity"
+    }
+  ];
 
   console.log("combinedCompletedCourses = ", combinedCompletedCourses);
 
