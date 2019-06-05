@@ -63,6 +63,7 @@ const recommendCourses = (
       };
       console.log("courseNameAndProvider = ", courseNameAndProvider);
       if (combinedCompletedCourses.includes(courseNameAndProvider) === false) {
+        console.log("found completed course");
         // neither partner has taken the course, add course to recommended_courses
         recommendedCourses.push(recommendedCourse);
       }
