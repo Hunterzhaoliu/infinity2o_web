@@ -33,19 +33,18 @@ const recommendCourses = (
     sharedInterests = ["computer_science"];
   }
 
-  // // find the combined list of completed courses
-  // const combinedCompletedCourses = userCompletedCourses.concat(
-  //   contactCompletedCourses
-  // );
+  // find the combined list of completed courses
+  const listOfCombinedCompletedCourses = userCompletedCourses.concat(
+    contactCompletedCourses
+  );
 
-  const combinedCompletedCourses = [
-    {
-      courseName: "Intro to Computer Science",
-      courseProvider: "Udacity"
-    }
-  ];
-
-  console.log("combinedCompletedCourses = ", combinedCompletedCourses);
+  // looking through a list of combinedCompletedCourses does not work
+  // making combinedCompletedCourses into an object
+  let dictOfCombinedCompletedCourses = {};
+  listOfCombinedCompletedCourses.forEach(function(completedCourse) {
+    dictOfCombinedCompletedCourses[completedCourse["courseProvider"]] =
+      completedCourse["courseName"];
+  });
 
   let recommendedCourses = [];
   sharedInterests.forEach(function(sharedInterest) {
@@ -57,13 +56,11 @@ const recommendCourses = (
     ) {
       // still need to recommend course
       const recommendedCourse = recommendedCoursesForInterest[courseIndex];
-      const courseNameAndProvider = {
-        courseProvider: recommendedCourse["provider"],
-        courseName: recommendedCourse["name"]
-      };
-      console.log("courseNameAndProvider = ", courseNameAndProvider);
-      if (combinedCompletedCourses.includes(courseNameAndProvider) === false) {
-        console.log("found completed course");
+
+      if (
+        dictOfCombinedCompletedCourses[recommendedCourse["provider"]] !==
+        recommendedCourse["name"]
+      ) {
         // neither partner has taken the course, add course to recommended_courses
         recommendedCourses.push(recommendedCourse);
       }
