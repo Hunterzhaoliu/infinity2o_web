@@ -73,3 +73,30 @@ export const sendMessageToServer = (
     dispatch({ type: MESSAGE_SENT_ERROR });
   }
 };
+
+export const alreadyTakenCourse = (
+  courseName,
+  courseProvider
+) => async dispatch => {
+  const completedCourseInfo = {
+    courseName: courseName,
+    courseProvider: courseProvider
+  };
+  const completedCourseResponse = await axios.put(
+    "/api/conversations/completed_course",
+    completedCourseInfo
+  );
+
+  console.log(
+    "completedCourseResponse.status = ",
+    completedCourseResponse.status
+  );
+  // if (
+  //   completedCourseResponse.status === 200
+  // ) {
+  //   dispatch({
+  //     type: COMPLETED_COURSE,
+  //     completedCourse: completedCourse
+  //   });
+  // }
+};

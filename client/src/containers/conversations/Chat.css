@@ -1,52 +1,26 @@
 /* https://stackoverflow.com/questions/3296644/hiding-the-scrollbar-on-an-html-page */
 .chat-list {
-	overflow: scroll;
-	overflow-x: hidden;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
-	width: 0px; /* remove scrollbar space */
-	/* background: transparent;  optional: just make scrollbar invisible */
+  width: 0px; /* remove scrollbar space */
+  /* background: transparent;  optional: just make scrollbar invisible */
 }
 
 .chat-input {
-	width: 100%;
-	border-radius: 0px;
-	border-width: 1px 0px 0px 0px;
-	height: 60px;
-	font-family: "Overpass";
-	line-height: 1;
-	margin-bottom: 0;
-	font-size: 16px;
+  width: 100%;
+  border-radius: 0px;
+  border-width: 1px 0px 0px 0px;
+  height: 60px;
+  font-family: "Overpass";
+  line-height: 1;
+  margin-bottom: 0;
+  font-size: 16px;
 }
 
 .chat-input:focus {
-	box-shadow: none;
-	color: var(--text4Color) !important;
-}
-
-.chat-profile-img {
-	height: 50px;
-	width: 50px;
-	border-radius: 50%;
-	border: 2px solid var(--textDot5Color);
-}
-
-.chat-contact-picture {
-	position: relative;
-	margin-right: -15px;
-}
-
-.welcome-message {
-	padding-top: 15px;
-	font-family: "Overpass";
-	line-height: 1;
-	margin-bottom: 0;
-	font-size: 16px;
-	color: var(--text4Color);
-}
-
-.chat-images {
-	display: flex;
-	justify-content: center;
+  box-shadow: none;
+  color: var(--text4Color) !important;
 }

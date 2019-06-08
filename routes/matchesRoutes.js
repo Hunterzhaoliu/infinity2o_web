@@ -19,7 +19,8 @@ const getUserInfo = async mongoDBMatchId => {
       availability: match.profile.availability,
       asks: match.profile.asks,
       id: match._id,
-      imageUrl: match.profile.imageUrl
+      imageUrl: match.profile.imageUrl,
+      completedCourses: match.profile.minerva.completedCourses
     };
   }
 };
@@ -33,7 +34,9 @@ module.exports = app => {
     const userMatches = userInDB.matches;
     let matchesInfo = [];
     for (let match of userMatches) {
-      const matchInfo = await getUserInfo(match.id);
+      let matchInfo = await getUserInfo(match.id);
+      // completedCourses is just used for selected_contact_info
+      delete matchInfo["completedCourses"];
       matchesInfo.push(matchInfo);
     }
     response.send(matchesInfo);
@@ -43,10 +46,6 @@ module.exports = app => {
     "/api/matches/selected_contact_info",
     requireLogin,
     async (request, response) => {
-      // console.log(
-      // 	"request.query.contactMongoDBId = ",
-      // 	request.query.contactMongoDBId
-      // );
       const selectedMatchInfo = await getUserInfo(
         request.query.contactMongoDBId
       );

@@ -4,8 +4,8 @@ import * as colorThemeActionCreators from "../../actions/colorTheme";
 import * as chatActionCreators from "../../actions/conversations/chat";
 import { bindActionCreators } from "redux";
 import { Layout, Input, Row, Col, List } from "antd";
+import CourseRecommendation from "./CourseRecommendation";
 import "./Chat.css";
-import dolphin from "../images/dolphin.jpg";
 
 const { Content } = Layout;
 
@@ -44,25 +44,15 @@ class Chat extends Component {
     }
   };
 
-  renderPicture(pictureUrl, textDot5Color) {
-    if (pictureUrl === undefined || pictureUrl === null) {
-      pictureUrl = dolphin;
+  renderLastMessageDiv(messageIndex, messagesLength) {
+    // used to place div after last message
+    if (messageIndex === messagesLength - 1) {
+      return (
+        <Col>
+          <div id="lastMessage" />
+        </Col>
+      );
     }
-    return (
-      <img
-        style={{
-          border: "2px solid " + textDot5Color
-        }}
-        onError={error => {
-          // in case the imageUrl is invalid
-          error.target.onerror = null;
-          error.target.src = dolphin;
-        }}
-        className="chat-profile-img"
-        src={pictureUrl}
-        alt=""
-      />
-    );
   }
 
   renderChatDisplay() {
@@ -125,44 +115,12 @@ class Chat extends Component {
           }}
         />
       );
-    } else {
-      const { selectedConversationInfo, userImageUrl } = this.props;
-      // no messages exist, display greeting and welcome message
-      return (
-        <div style={{ height: chatWindowVerticalHeight }}>
-          <div className="chat-images">
-            <div className="chat-contact-picture">
-              {this.renderPicture(
-                selectedConversationInfo.selectedContactMongoDBInfo.imageUrl,
-                colorTheme.textDot5Color
-              )}
-            </div>
-            {this.renderPicture(userImageUrl, colorTheme.textDot5Color)}
-          </div>
-          <p className="welcome-message">Say hi to your new Match!</p>
-        </div>
-      );
-    }
-  }
-
-  renderLastMessageDiv(messageIndex, messagesLength) {
-    // used to place div after last message
-    if (messageIndex === messagesLength - 1) {
-      return (
-        <Col>
-          <div id="lastMessage" />
-        </Col>
-      );
     }
   }
 
   render() {
     const { colorTheme, chat } = this.props;
 
-    document.documentElement.style.setProperty(
-      `--textDot5Color`,
-      colorTheme.textDot5Color
-    );
     document.documentElement.style.setProperty(
       `--text4Color`,
       colorTheme.text4Color
@@ -177,6 +135,7 @@ class Chat extends Component {
           borderColor: colorTheme.text8Color
         }}
       >
+        <CourseRecommendation />
         <Row style={{ padding: "30px" }}>
           <Col> {this.renderChatDisplay()}</Col>
         </Row>
@@ -212,8 +171,7 @@ function mapStateToProps(state) {
     userId: state.auth.mongoDBUserId,
     selectedConversationInfo: state.contacts.selectedConversationInfo,
     windowHeight: state.customHeader.windowHeight,
-    windowWidth: state.customHeader.windowWidth,
-    userImageUrl: state.profile.imageUrl
+    windowWidth: state.customHeader.windowWidth
   };
 }
 

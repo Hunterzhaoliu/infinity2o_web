@@ -58,7 +58,7 @@ const userSchema = new Schema(
         // after a new user votes on 4 asks we run Athena
         ranInitialMinerva: { type: Boolean, default: false },
         lastRecordedSiteVisitDate: Date,
-        listOfCompletedCourses: [CompletedCourse]
+        completedCourses: [CompletedCourse]
       }
     },
     matches: [Match],

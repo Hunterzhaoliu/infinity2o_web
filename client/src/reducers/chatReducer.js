@@ -5,7 +5,8 @@ import {
   DISPLAY_SENT_MESSAGE,
   MESSAGE_SENT_SUCCESS,
   MESSAGE_SENT_ERROR,
-  DISPLAY_RECEIVED_MESSAGE
+  DISPLAY_RECEIVED_MESSAGE,
+  RECOMMEND_COURSES
 } from "../actions/types";
 
 let cloneObject = obj => {
@@ -15,7 +16,8 @@ let cloneObject = obj => {
 let initialState = {
   last50Messages: [],
   currentMessage: null,
-  hasUpdateChatError: false
+  hasUpdateChatError: false,
+  recommendedCourses: []
 };
 
 export default function(state = initialState, action) {
@@ -62,6 +64,9 @@ export default function(state = initialState, action) {
       if (newState.last50Messages.length > 50) {
         newState.last50Messages.shift();
       }
+      return newState;
+    case RECOMMEND_COURSES:
+      newState.recommendedCourses = action.recommendedCourses;
       return newState;
     default:
       return state;
