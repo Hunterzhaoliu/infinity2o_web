@@ -6,7 +6,8 @@ import {
   MESSAGE_SENT_SUCCESS,
   MESSAGE_SENT_ERROR,
   DISPLAY_RECEIVED_MESSAGE,
-  RECOMMEND_COURSES
+  RECOMMEND_COURSES,
+  COMPLETED_COURSE
 } from "../actions/types";
 
 let cloneObject = obj => {
@@ -17,6 +18,7 @@ let initialState = {
   last50Messages: [],
   currentMessage: null,
   hasUpdateChatError: false,
+  completedCourses: [],
   recommendedCourses: []
 };
 
@@ -67,6 +69,23 @@ export default function(state = initialState, action) {
       return newState;
     case RECOMMEND_COURSES:
       newState.recommendedCourses = action.recommendedCourses;
+      return newState;
+    case COMPLETED_COURSE:
+      // find which of the two recommended courses has been completed, and remove the completed course from the list of recommended courses
+      const firstRecommendedCourse = state.recommendedCourses[0];
+      if (
+        firstRecommendedCourse["name"] ===
+          action.completedCourseInfo["courseName"] &&
+        firstRecommendedCourse["provider"] ===
+          action.completedCourseInfo["courseProvider"]
+      ) {
+        // first recommended course has already been taken, remove from list
+        state.recommendedCourses.shift();
+      } else {
+        // need to remove second recommended course
+        state.recommendedCourses.pop();
+      }
+      newState.recommendedCourses = state.recommendedCourses;
       return newState;
     default:
       return state;

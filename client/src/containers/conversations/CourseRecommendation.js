@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as chatActionCreators from "../../actions/conversations/chat";
@@ -10,142 +11,146 @@ import dollarSign from "../images/dollarSign.png";
 import courseLength from "../images/courseLength.png";
 
 class CourseRecommendation extends Component {
-  renderRecommendedCourse(recommendedCourse) {
+  renderRecommendedCourses(recommendedCourses) {
     const { colorTheme } = this.props;
-    return (
-      <div>
-        <Row type="flex" justify="center">
-          <Col>
-            <h3
-              style={{ color: colorTheme.text2Color }}
-              className="course-name"
-            >
-              {recommendedCourse.name}
-            </h3>
-          </Col>
-        </Row>
-        <Row type="flex" justify="center">
-          <Col>
-            <h4
-              style={{ color: colorTheme.text2Color }}
-              className="school-and-provider-name"
-            >
-              {recommendedCourse.schoolOfferingCourse} at{" "}
-              {recommendedCourse.provider}
-            </h4>
-          </Col>
-        </Row>
-        <Row
-          style={{
-            paddingTop: "15px"
-          }}
-          type="flex"
-          justify="center"
-          align="middle"
-        >
-          <Col>
-            <img className="course-description-img" src={dollarSign} alt="" />
-          </Col>
-          <Col>
-            <h5
-              style={{ color: colorTheme.text3Color }}
-              className="course-description"
-            >
-              {recommendedCourse.cost}
-            </h5>
-          </Col>
-        </Row>
-        <Row
-          style={{
-            paddingTop: "15px"
-          }}
-          type="flex"
-          justify="center"
-          align="middle"
-        >
-          <Col>
-            <img className="course-description-img" src={courseLength} alt="" />
-          </Col>
-          <Col>
-            <h5
-              style={{ color: colorTheme.text3Color }}
-              className="course-description"
-            >
-              {recommendedCourse.length} Weeks
-            </h5>
-          </Col>
-        </Row>
-        <Row
-          style={{
-            paddingTop: "15px",
-            paddingBottom: "30px"
-          }}
-          type="flex"
-          justify="center"
-          align="middle"
-        >
-          <Col>
-            <button
-              style={{
-                borderColor: colorTheme.backgroundColor,
-                background: colorTheme.backgroundColor,
-                color: colorTheme.text3Color
-              }}
-              className="completed-course-button"
-              onClick={e =>
-                this.props.alreadyTakenCourse(
-                  recommendedCourse.name,
-                  recommendedCourse.provider
-                )
-              }
-            >
-              Completed
-            </button>
-          </Col>
-          <Col offset={3}>
-            <a
-              style={{
-                borderColor: colorTheme.backgroundColor,
-                background: colorTheme.backgroundColor,
-                color: colorTheme.text3Color
-              }}
-              className="interested-in-course-a"
-              target="_blank"
-              href={recommendedCourse.link}
-            >
-              Interested
-            </a>
-          </Col>
-        </Row>
-      </div>
-    );
+
+    return _.map(recommendedCourses, (recommendedCourse, index) => {
+      return (
+        <div key={index}>
+          <Row type="flex" justify="center">
+            <Col>
+              <h3
+                style={{ color: colorTheme.text2Color }}
+                className="course-name"
+              >
+                {recommendedCourse.name}
+              </h3>
+            </Col>
+          </Row>
+          <Row type="flex" justify="center">
+            <Col>
+              <h4
+                style={{ color: colorTheme.text2Color }}
+                className="school-and-provider-name"
+              >
+                {recommendedCourse.schoolOfferingCourse} at{" "}
+                {recommendedCourse.provider}
+              </h4>
+            </Col>
+          </Row>
+          <Row
+            style={{
+              paddingTop: "15px"
+            }}
+            type="flex"
+            justify="center"
+            align="middle"
+          >
+            <Col>
+              <img className="course-description-img" src={dollarSign} alt="" />
+            </Col>
+            <Col>
+              <h5
+                style={{ color: colorTheme.text3Color }}
+                className="course-description"
+              >
+                {recommendedCourse.cost}
+              </h5>
+            </Col>
+          </Row>
+          <Row
+            style={{
+              paddingTop: "15px"
+            }}
+            type="flex"
+            justify="center"
+            align="middle"
+          >
+            <Col>
+              <img
+                className="course-description-img"
+                src={courseLength}
+                alt=""
+              />
+            </Col>
+            <Col>
+              <h5
+                style={{ color: colorTheme.text3Color }}
+                className="course-description"
+              >
+                {recommendedCourse.length} Weeks
+              </h5>
+            </Col>
+          </Row>
+          <Row
+            style={{
+              paddingTop: "15px",
+              paddingBottom: "30px"
+            }}
+            type="flex"
+            justify="center"
+            align="middle"
+          >
+            <Col>
+              <button
+                style={{
+                  borderColor: colorTheme.backgroundColor,
+                  background: colorTheme.backgroundColor,
+                  color: colorTheme.text3Color
+                }}
+                className="completed-course-button"
+                onClick={e =>
+                  this.props.alreadyTakenCourse(
+                    recommendedCourse.name,
+                    recommendedCourse.provider
+                  )
+                }
+              >
+                Completed
+              </button>
+            </Col>
+            <Col offset={3}>
+              <a
+                style={{
+                  borderColor: colorTheme.backgroundColor,
+                  background: colorTheme.backgroundColor,
+                  color: colorTheme.text3Color
+                }}
+                className="interested-in-course-a"
+                target="_blank"
+                href={recommendedCourse.link}
+              >
+                Interested
+              </a>
+            </Col>
+          </Row>
+        </div>
+      );
+    });
   }
 
-  renderRecommendedCourses() {
+  renderRecommendedCoursesSlider() {
     const { chat } = this.props;
 
-    const settings = {
-      dots: false,
-      adaptiveHeight: true,
-      infinite: true,
-      autoplay: true,
-      pauseOnHover: true,
-      speed: 500, // transition speed
-      autoplaySpeed: 6000, // delay between each auto scroll (in milliseconds)
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false,
-      pauseOnDotsHover: false,
-      pauseOnFocus: true
-    };
-
     if (chat.recommendedCourses.length !== 0) {
-      const firstRecommendedCourse = chat.recommendedCourses[0];
-      const secondRecommendedCourse = chat.recommendedCourses[1];
+      const settings = {
+        dots: false,
+        adaptiveHeight: true,
+        infinite: true,
+        autoplay: true,
+        pauseOnHover: true,
+        speed: 500, // transition speed
+        autoplaySpeed: 6000, // delay between each auto scroll (in milliseconds)
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        pauseOnDotsHover: false,
+        pauseOnFocus: true
+      };
+
       return (
         <Slider {...settings}>
-          {this.renderRecommendedCourse(firstRecommendedCourse)}
-          {this.renderRecommendedCourse(secondRecommendedCourse)}
+          {this.renderRecommendedCourses(chat.recommendedCourses)}
         </Slider>
       );
     }
@@ -239,7 +244,7 @@ class CourseRecommendation extends Component {
     return (
       <div>
         <Row style={{ padding: "30px 30px 0px" }}>
-          <Col> {this.renderRecommendedCourses()}</Col>
+          <Col> {this.renderRecommendedCoursesSlider()}</Col>
         </Row>
         <Row style={{ padding: "0px 30px" }}>
           <Col> {this.renderIntroduction()}</Col>
