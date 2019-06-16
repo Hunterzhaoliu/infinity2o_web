@@ -49,7 +49,12 @@ let initialState = {
   hasTimeZoneError: false,
   hasAvailabilityError: false,
   save: null,
-  asks: null,
+  asks: {
+    totalUserVotes: null,
+    answerIdsUserVotedOn: [],
+    votes: [],
+    questions: []
+  },
   payment: {
     hasDecrementNeuronsError: false,
     hasPaymentError: false,
@@ -76,7 +81,11 @@ export default function(state = initialState, action) {
         newState.githubPublicProfileUrl = action.profile.githubPublicProfileUrl;
         newState.timeZone = action.profile.timeZone;
         newState.availability = action.profile.availability;
-        newState.asks = action.profile.asks;
+        newState.asks.totalUserVotes = action.profile.asks.totalUserVotes;
+        newState.asks.answerIdsUserVotedOn =
+          action.profile.asks.answerIdsUserVotedOn;
+        newState.asks.votes = action.profile.asks.votes;
+        newState.asks.questions = action.profile.asks.questions;
         newState.payment = action.profile.payment;
         newState.ranInitialMinerva = action.profile.minerva.ranInitialMinerva;
         newState.completedCourses = action.profile.minerva.completedCourses;

@@ -11,7 +11,6 @@ class Neurons extends Component {
 
   renderNumberOfNeurons() {
     const { payment } = this.props;
-
     if (payment.infinityStatus) {
       return (
         <Col>
