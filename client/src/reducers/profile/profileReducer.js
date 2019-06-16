@@ -59,7 +59,8 @@ let initialState = {
     hasDecrementNeuronsError: false,
     hasPaymentError: false,
     hasAddNeuronError: false,
-    infinityStatus: false
+    infinityStatus: false,
+    neuronsInBillions: null
   },
   colorThemeSave: null,
   ranInitialMinerva: false,
