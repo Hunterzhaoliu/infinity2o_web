@@ -24,7 +24,7 @@ class InputVote extends Component {
       history,
       mongoDBUserId,
       ranInitialMinerva,
-      totalUserVotes,
+      asks,
       interests
     } = this.props;
     // now we know which answer user pressed so let's pass the answesId too
@@ -53,7 +53,7 @@ class InputVote extends Component {
       history,
       mongoDBUserId,
       ranInitialMinerva,
-      totalUserVotes,
+      asks.totalUserVotes,
       filledInterests
     );
   }
@@ -447,7 +447,7 @@ function mapStateToProps(state) {
     landing: state.landing,
     activeSection: state.colorTheme.activeSection,
     ranInitialMinerva: state.profile.ranInitialMinerva,
-    totalUserVotes: state.profile.asks.totalUserVotes,
+    asks: state.profile.asks,
     interests: state.profile.interests
   };
 }

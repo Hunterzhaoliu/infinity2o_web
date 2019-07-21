@@ -3,7 +3,8 @@ import {
   ON_CHANGE_CURRENT_MESSAGE,
   DISPLAY_SENT_MESSAGE,
   MESSAGE_SENT_SUCCESS,
-  MESSAGE_SENT_ERROR
+  MESSAGE_SENT_ERROR,
+  COMPLETED_COURSE
 } from "../types";
 import { clientSocket } from "../auth";
 
@@ -87,16 +88,11 @@ export const alreadyTakenCourse = (
     completedCourseInfo
   );
 
-  console.log(
-    "completedCourseResponse.status = ",
-    completedCourseResponse.status
-  );
-  // if (
-  //   completedCourseResponse.status === 200
-  // ) {
-  //   dispatch({
-  //     type: COMPLETED_COURSE,
-  //     completedCourse: completedCourse
-  //   });
-  // }
+  if (completedCourseResponse.status === 200) {
+    // need to remove the completed course from the list of recommended courses
+    dispatch({
+      type: COMPLETED_COURSE,
+      completedCourseInfo: completedCourseInfo
+    });
+  }
 };

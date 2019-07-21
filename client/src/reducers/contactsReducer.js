@@ -38,8 +38,7 @@ let initialState = {
       availability: null,
       asks: null,
       id: null,
-      imageUrl: null,
-      completedCourses: null
+      imageUrl: null
     },
     showContactCard: true,
     agreedAsks: [],

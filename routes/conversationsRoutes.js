@@ -221,8 +221,6 @@ module.exports = app => {
         courseProvider: courseProvider
       };
 
-      console.log("completedCourse = ", completedCourse);
-
       await UserCollection.update(
         { _id: userId },
         {

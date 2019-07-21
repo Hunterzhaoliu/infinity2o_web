@@ -19,7 +19,7 @@ export let clientSocket;
 function saveUserProfile(response, dispatch) {
   const lastRecordedSiteVisitDate =
     response.data.profile.minerva.lastRecordedSiteVisitDate;
-  // for some reason, the date from mongoDB doesn't have the .getDate() funciton
+  // for some reason, the date from mongoDB doesn't have the .getDate() function
   // so need to reset it as a Date data
   if (
     lastRecordedSiteVisitDate === undefined ||

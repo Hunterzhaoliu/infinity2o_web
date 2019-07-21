@@ -11,7 +11,6 @@ class Neurons extends Component {
 
   renderNumberOfNeurons() {
     const { payment } = this.props;
-
     if (payment.infinityStatus) {
       return (
         <Col>
@@ -19,12 +18,13 @@ class Neurons extends Component {
         </Col>
       );
     } else {
-      let displayNeuronsInBillions = payment.neuronsInBillions.toFixed(1);
-      if (displayNeuronsInBillions !== undefined) {
+      if (payment.neuronsInBillions !== null) {
+        const displayNeuronsInBillions = payment.neuronsInBillions.toFixed(1);
         return displayNeuronsInBillions + " Billion Neurons";
       }
     }
   }
+
   renderNeuronExplanation() {
     const { colorTheme } = this.props;
 

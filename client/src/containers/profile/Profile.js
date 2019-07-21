@@ -17,7 +17,7 @@ class Profile extends Component {
 
   renderQuestions() {
     const { colorTheme, profile, windowWidth } = this.props;
-    if (profile.asks != null) {
+    if (profile.asks.questions.length > 0) {
       // user has asked a question in sorting hat
 
       let pPadding = "12px 0px 22px 0px";

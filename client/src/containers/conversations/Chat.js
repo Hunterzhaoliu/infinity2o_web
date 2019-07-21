@@ -58,11 +58,21 @@ class Chat extends Component {
   renderChatDisplay() {
     const { chat, colorTheme, userId, windowHeight, windowWidth } = this.props;
 
-    let chatWindowVerticalHeight = String(windowHeight - 240) + "px"; // 240 = header padding + inner content padding + input height
+    // on desktop with recommended courses
+    let chatWindowVerticalHeight = windowHeight - 565; // 565 = header padding + inner content padding + input height + course recommendation height + introduction height
+
+    if (chat.recommendedCourses.length === 0) {
+      chatWindowVerticalHeight = windowHeight - 320;
+    }
 
     if (windowWidth < 768) {
-      chatWindowVerticalHeight = String(windowHeight - 180) + "px";
+      chatWindowVerticalHeight = windowHeight - 521; // = header padding + inner content padding + input height + course recommendation height + introduction height
+      if (chat.recommendedCourses.length === 0) {
+        chatWindowVerticalHeight = windowHeight - 276;
+      }
     }
+
+    chatWindowVerticalHeight = String(chatWindowVerticalHeight) + "px";
 
     if (chat.last50Messages.length > 0) {
       // messages exist, return list of messages
