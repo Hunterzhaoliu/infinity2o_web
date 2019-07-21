@@ -42,26 +42,28 @@ const recommendCourses = (
   // making combinedCompletedCourses into an object
   let dictOfCombinedCompletedCourses = {};
   listOfCombinedCompletedCourses.forEach(function(completedCourse) {
-    dictOfCombinedCompletedCourses[completedCourse["courseProvider"]] =
-      completedCourse["courseName"];
+    const uniqueCourseId =
+      completedCourse["courseProvider"] + completedCourse["courseName"];
+    dictOfCombinedCompletedCourses[uniqueCourseId] = true;
   });
 
   let recommendedCourses = [];
   sharedInterests.forEach(function(sharedInterest) {
     let courseIndex = 0;
     const recommendedCoursesForInterest = allRecommendedCourses[sharedInterest];
+
     while (
       recommendedCourses.length < 2 &&
       courseIndex < recommendedCoursesForInterest.length
     ) {
       // still need to recommend course
       const recommendedCourse = recommendedCoursesForInterest[courseIndex];
-
+      const possibleRecommendedCourse =
+        recommendedCourse["provider"] + recommendedCourse["name"];
       if (
-        dictOfCombinedCompletedCourses[recommendedCourse["provider"]] !==
-        recommendedCourse["name"]
+        dictOfCombinedCompletedCourses[possibleRecommendedCourse] === undefined
       ) {
-        // neither partner has taken the course, add course to recommended_courses
+        // neither partner has taken the course, add course to recommendedCourses
         recommendedCourses.push(recommendedCourse);
       }
 

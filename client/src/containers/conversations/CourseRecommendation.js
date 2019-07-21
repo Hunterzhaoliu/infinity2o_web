@@ -149,9 +149,11 @@ class CourseRecommendation extends Component {
       };
 
       return (
-        <Slider {...settings}>
-          {this.renderRecommendedCourses(chat.recommendedCourses)}
-        </Slider>
+        <div style={{ minHeight: "245px" }}>
+          <Slider {...settings}>
+            {this.renderRecommendedCourses(chat.recommendedCourses)}
+          </Slider>
+        </div>
       );
     }
   }
