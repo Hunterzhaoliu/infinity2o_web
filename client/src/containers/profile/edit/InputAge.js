@@ -13,6 +13,12 @@ class InputAge extends Component {
 
   render() {
     const { colorTheme, label, profile } = this.props;
+
+    // input cannot have value as `null` or undefined, need to change to empty string
+    if (profile.age === null || profile.age === undefined) {
+      profile.age = "";
+    }
+
     return (
       <div>
         <Row type="flex" justify="start" align="middle">

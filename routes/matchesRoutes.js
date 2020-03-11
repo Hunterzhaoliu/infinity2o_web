@@ -165,7 +165,7 @@ module.exports = app => {
     // send message to Athena server to run Athena
     // for a specific user
     const mongoDBUserId = request.user._id;
-    const URL = "amqp://infinity2o:2134711@18.234.188.1:5672";
+    const URL = "amqp://infinity2o:2134711@54.165.110.8:5672";
     await amqp.connect(
       URL,
       function(error, connection) {

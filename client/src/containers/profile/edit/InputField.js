@@ -13,6 +13,12 @@ class InputField extends Component {
   render() {
     const { value, colorTheme, label, errorMessage, hasError } = this.props;
 
+    let finalValue = value;
+    // input cannot have value as `null` or `undefined`, need to change to empty string
+    if (finalValue === null || finalValue === undefined) {
+      finalValue = "";
+    }
+
     return (
       <Col>
         <Row type="flex" justify="start" align="middle">
@@ -44,7 +50,7 @@ class InputField extends Component {
           >
             <input
               className="input-field-input"
-              value={value}
+              value={finalValue}
               onChange={this.onModify}
               style={{
                 color: colorTheme.text2Color,
