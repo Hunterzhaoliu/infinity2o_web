@@ -88,7 +88,7 @@ class CustomFooter extends Component {
 								onClick={onFooter}
 								href="/privacy"
 							>
-								terms
+								terms & privacy
 							</a>
 						</Col>
 						<Col
@@ -122,7 +122,7 @@ class CustomFooter extends Component {
 									marginBottom: 0
 								}}
 							>
-								infinity2o Copyright © 2021 + ~13.899 * 10^13?
+								infinity2o © 2021 + ~13.899 * 10^13?
 							</p>
 						</Col>
 					</Row>
