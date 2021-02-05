@@ -1,6 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const LinkedInStrategy = require("@sokratis/passport-linkedin-oauth2").Strategy;
+//const LinkedInStrategy = require("@sokratis/passport-linkedin-oauth2").Strategy;
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
 
@@ -61,62 +61,62 @@ passport.use(
   )
 );
 
-passport.use(
-  new LinkedInStrategy(
-    {
-      clientID: keys.linkedInClientID,
-      clientSecret: keys.linkedInClientSecret,
-      callbackURL: "/auth/linkedIn/callback",
-      scope: ["r_emailaddress", "r_liteprofile"],
-      state: true, // used to prevent CSRF attacks
-      proxy: true
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      const existingUser = await UserCollection.findOne({
-        "auth.linkedInId": profile.id
-      }); // asynchronus
-      if (existingUser) {
-        // we already have this user in db
-
-        // update their name, email, linkedInPublicProfileUrl if they don't have one
-        if (
-          existingUser.profile.name === undefined ||
-          existingUser.profile.emailInformation.email === undefined ||
-          existingUser.profile.linkedInPublicProfileUrl === undefined ||
-          existingUser.profile.imageUrl === undefined
-        ) {
-          await UserCollection.updateOne(
-            {
-              "auth.linkedInId": profile.id
-            },
-            {
-              $set: {
-                "profile.name": profile.displayName,
-                "profile.emailInformation.email": profile.emails[0].value,
-                "profile.imageUrl": profile.photos[2].value
-              }
-            }
-          );
-        }
-
-        error = null;
-        done(error, existingUser);
-      } else {
-        const newUserFromDB = await new UserCollection({
-          auth: {
-            linkedInId: profile.id
-          },
-          profile: {
-            name: profile.displayName,
-            "emailInformation.email": profile.emails[0].value,
-            imageUrl: profile.photos[2].value
-          }
-        }).save();
-        done(null, newUserFromDB);
-      }
-    }
-  )
-);
+// passport.use(
+//   new LinkedInStrategy(
+//     {
+//       clientID: keys.linkedInClientID,
+//       clientSecret: keys.linkedInClientSecret,
+//       callbackURL: "/auth/linkedIn/callback",
+//       scope: ["r_emailaddress", "r_liteprofile"],
+//       state: true, // used to prevent CSRF attacks
+//       proxy: true
+//     },
+//     async (accessToken, refreshToken, profile, done) => {
+//       const existingUser = await UserCollection.findOne({
+//         "auth.linkedInId": profile.id
+//       }); // asynchronus
+//       if (existingUser) {
+//         // we already have this user in db
+//
+//         // update their name, email, linkedInPublicProfileUrl if they don't have one
+//         if (
+//           existingUser.profile.name === undefined ||
+//           existingUser.profile.emailInformation.email === undefined ||
+//           existingUser.profile.linkedInPublicProfileUrl === undefined ||
+//           existingUser.profile.imageUrl === undefined
+//         ) {
+//           await UserCollection.updateOne(
+//             {
+//               "auth.linkedInId": profile.id
+//             },
+//             {
+//               $set: {
+//                 "profile.name": profile.displayName,
+//                 "profile.emailInformation.email": profile.emails[0].value,
+//                 "profile.imageUrl": profile.photos[2].value
+//               }
+//             }
+//           );
+//         }
+//
+//         error = null;
+//         done(error, existingUser);
+//       } else {
+//         const newUserFromDB = await new UserCollection({
+//           auth: {
+//             linkedInId: profile.id
+//           },
+//           profile: {
+//             name: profile.displayName,
+//             "emailInformation.email": profile.emails[0].value,
+//             imageUrl: profile.photos[2].value
+//           }
+//         }).save();
+//         done(null, newUserFromDB);
+//       }
+//     }
+//   )
+// );
 
 // serializeUser generates the user token which the user sends back to the
 // server on every request

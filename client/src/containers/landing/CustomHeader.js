@@ -84,7 +84,6 @@ class CustomHeader extends Component {
             {this.renderCompanyName()}
           </Row>
         </Col>
-        <LoginButtons />
       </Row>
     );
   }

@@ -1,6 +1,25 @@
 # infinity2o.com
 
-## Setup
+## Why
+1. store whole genome DNA sequences of your human cells in a private git
+repo efficiently
+
+2. have a private hashtable of common DNA sequences for more efficient storage
+
+3. research how to store epigenetic information efficiently
+
+4. have a private hashtable of common epigenetic patterns for more
+efficient storage
+
+5. figure out a business model for accelerating genomic && epigenetic
+sequences
+
+6. Use product on urself to revert to optimal saved age
+
+## How
+1. Find a genetics expert who wants to apply to illumina accelerator with u
+
+## What
 
 1.  `node -v` = v8.9.3 & `npm -v` = 5.6.0
 2.  `heroku -v` = `heroku-cli/6.15.13-3dce47c (darwin-x64) node-v9.3.0`
@@ -9,7 +28,7 @@
 
 ### Local development setup:
 
-1.  `cd infinity2o_server` then `npm run dev`
+1.  `cd infinity2o_web` then `npm run dev`
 
 ### AWS development setup:
 
