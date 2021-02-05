@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import * as colorThemeActionCreators from "../../actions/colorTheme";
 import { connect } from "react-redux";
-import { GREY_1, GREY_2, GREY_3, GREY_4 } from "../styles/ColorConstants";
+import { GREY_1, GREY_2, GREY_3, GREY_4, GREY_5 } from "../styles/ColorConstants";
 import { Layout, Row, Col } from "antd";
+import { FONT } from "../styles/Font";
 import "./custom-footer.css";
 
 const { Footer } = Layout;
@@ -19,7 +20,7 @@ class CustomFooter extends Component {
 			backgroundColor = GREY_1;
 			textColor = GREY_3;
 			buttonColor = GREY_2;
-			textColor2 = GREY_4;
+			textColor2 = GREY_5;
 		}
 
 		if (colorTheme.activeSection === "conversations") {
@@ -40,13 +41,14 @@ class CustomFooter extends Component {
 								style={{
 									borderColor: buttonColor,
 									background: buttonColor,
-									color: textColor2
+									color: textColor2,
+									fontFamily: FONT
 								}}
 								size={"small"}
 								onClick={onFooter}
 								href="/terms"
 							>
-								Terms
+								team
 							</a>
 						</Col>
 						<Col
@@ -59,13 +61,14 @@ class CustomFooter extends Component {
 								style={{
 									borderColor: buttonColor,
 									background: buttonColor,
-									color: textColor2
+									color: textColor2,
+									fontFamily: FONT
 								}}
 								size={"small"}
 								onClick={onFooter}
 								href="/privacy"
 							>
-								Privacy
+								sources
 							</a>
 						</Col>
 						<Col
@@ -78,13 +81,34 @@ class CustomFooter extends Component {
 								style={{
 									borderColor: buttonColor,
 									background: buttonColor,
-									color: textColor2
+									color: textColor2,
+									fontFamily: FONT
+								}}
+								size={"small"}
+								onClick={onFooter}
+								href="/privacy"
+							>
+								terms
+							</a>
+						</Col>
+						<Col
+							style={{
+								padding: "0px 0px 0px 20px"
+							}}
+						>
+							<a
+								className="custom-footer-anchor"
+								style={{
+									borderColor: buttonColor,
+									background: buttonColor,
+									color: textColor2,
+									fontFamily: FONT
 								}}
 								size={"small"}
 								onClick={onFooter}
 								href="/about"
 							>
-								About
+								privacy
 							</a>
 						</Col>
 					</Row>
@@ -94,11 +118,11 @@ class CustomFooter extends Component {
 								style={{
 									color: textColor,
 									padding: "20px 0px 0px 0px",
-									fontFamily: "Overpass",
+									fontFamily: FONT,
 									marginBottom: 0
 								}}
 							>
-								infinity2o © 2019
+								infinity2o Copyright © 2021 + ~13.899 * 10^13?
 							</p>
 						</Col>
 					</Row>

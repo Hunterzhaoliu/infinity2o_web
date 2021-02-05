@@ -119,8 +119,9 @@ class Marketing extends Component {
               }}
             >
               As genetic & epigenetic engineering advances, in the future
-              you will be able to revert your body to a previous healthier
-              version like a 4D real-time 100% immersive video game
+              you will be able to revert your body's ~3.7 * 10^13 cells outside
+              your neocortex to a previous healthier version like a 4D real-time
+              100% immersive video game
             </h2>
           </Col>
         </Row>
@@ -144,7 +145,7 @@ class Marketing extends Component {
                 padding: "0px 20px 0px 20px" // top right bottom left
               }}
             >
-              Video series on exactly how genetic engineering technologies work
+              Cinematic video series on exactly how genetic engineering technologies work
             </h2>
           </Col>
         </Row>
