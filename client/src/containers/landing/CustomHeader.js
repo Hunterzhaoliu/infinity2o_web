@@ -10,6 +10,7 @@ import ConversationButton from "../navigationButtons/ConversationButton";
 import LogoutButton from "../navigationButtons/LogoutButton";
 import LoginButtons from "./LoginButtons";
 import { GREY_9, GREY_1 } from "../styles/ColorConstants";
+import { FONT } from "../styles/Font";
 import { Layout, Row, Col } from "antd";
 import "./custom-header.css";
 import logo from "../images/logo.png";
@@ -46,7 +47,7 @@ class CustomHeader extends Component {
               style={{
                 padding: "0px 0px 0px 10px",
                 color: GREY_1,
-                fontFamily: "Overpass",
+                fontFamily: FONT,
                 marginBottom: 0,
                 lineHeight: 1,
                 fontSize: "18px"
@@ -75,7 +76,7 @@ class CustomHeader extends Component {
           lg={{ span: 15 }}
           xl={{ span: 16 }}
         >
-          <Row type="flex" justify="start" align="middle">
+          <Row type="flex" justify="center" align="middle">
             <Col>
               <a href="/">
                 <img alt="" style={{ width: "32px" }} src={logo} />
