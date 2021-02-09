@@ -5,127 +5,9 @@ import { Row, Col } from "antd";
 import onlineClassAloneBoy from "../images/onlineClassAloneBoy.png";
 import onlineClassAloneGirl from "../images/onlineClassAloneGirl.png";
 import futureOnlineClasses from "../images/futureOnlineClasses.png";
+import { FONT } from "../styles/Font";
 
 class Marketing extends Component {
-  renderCartoons() {
-    const { windowWidth } = this.props;
-
-    let h3Padding = "60px 0px 0px 0px";
-    let imagePadding = "30px 0px 0px 0px";
-    let h3FontSize = 28;
-    let imageHeight = "250px";
-    if (windowWidth < 768) {
-      h3Padding = "30px 0px 0px 0px";
-      imagePadding = "15px 0px 0px 0px";
-      h3FontSize = 18;
-      imageHeight = "150px";
-    }
-
-    return (
-      <div>
-        <Row type="flex" justify="left">
-          <Col
-            style={{
-              padding: h3Padding
-            }}
-            xs={{ span: 24 }}
-            sm={{ span: 11 }}
-            md={{ span: 12 }}
-            lg={{ span: 11 }}
-            xl={{ offset: 3, span: 9 }} // half of the screen
-          >
-            <Row type="flex" justify="center">
-              <Col>
-                <h3
-                  style={{
-                    color: GREY_2,
-                    fontFamily: "Overpass",
-                    fontWeight: "bold",
-                    fontSize: h3FontSize,
-                    marginBottom: 0,
-                    lineHeight: 1
-                  }}
-                >
-                  Online class alone
-                </h3>
-              </Col>
-            </Row>
-            <Row
-              style={{
-                padding: imagePadding
-              }}
-              type="flex"
-              justify="center"
-            >
-              <Col>
-                <img
-                  alt=""
-                  style={{
-                    height: imageHeight
-                  }}
-                  src={onlineClassAloneBoy}
-                />
-              </Col>
-              <Col>
-                <img
-                  alt=""
-                  style={{
-                    height: imageHeight
-                  }}
-                  src={onlineClassAloneGirl}
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col
-            style={{
-              padding: h3Padding
-            }}
-            xs={{ span: 24 }}
-            sm={{ span: 11 }}
-            md={{ span: 12 }}
-            lg={{ span: 11 }}
-            xl={{ span: 7 }}
-          >
-            <Row type="flex" justify="center">
-              <Col>
-                <h3
-                  style={{
-                    textAlign: "center",
-                    color: GREY_2,
-                    fontFamily: "Overpass",
-                    fontWeight: "bold",
-                    fontSize: h3FontSize,
-                    marginBottom: 0,
-                    lineHeight: 1
-                  }}
-                >
-                  Online class through infinity2o
-                </h3>
-              </Col>
-            </Row>
-            <Row
-              style={{
-                padding: imagePadding
-              }}
-              type="flex"
-              justify="center"
-            >
-              <Col>
-                <img
-                  alt=""
-                  style={{
-                    height: imageHeight
-                  }}
-                  src={futureOnlineClasses}
-                />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </div>
-    );
-  }
 
   render() {
     const { windowWidth } = this.props;
@@ -155,17 +37,118 @@ class Marketing extends Component {
                 textAlign: "center",
                 color: GREY_1,
                 fontSize: h1FontSize,
-                fontFamily: "Overpass",
-                fontWeight: "bold",
+                fontFamily: FONT,
                 marginBottom: 0,
-                lineHeight: 1
+                lineHeight: 1,
+                padding: "0px 20px 0px 20px" // top right bottom left
               }}
             >
-              Meet your online course partner.
+              We securely save all your DNA & epigenomes in computers as the
+              first step to reversing your biological age
             </h1>
           </Col>
         </Row>
-        {this.renderCartoons()}
+        <Row type="flex" justify="center" style={{ padding: h1Padding }}>
+          <Col
+            xs={{ span: 21 }}
+            sm={{ span: 21 }}
+            md={{ span: 22 }}
+            lg={{ span: 23 }}
+            xl={{ span: 24 }}
+          >
+            <h2
+              key="0"
+              style={{
+                textAlign: "center",
+                color: GREY_1,
+                fontSize: h1FontSize-4,
+                fontFamily: FONT,
+                marginBottom: 0,
+                lineHeight: 1,
+                padding: "0px 20px 0px 20px" // top right bottom left
+              }}
+            >
+              Using the most accurate & cost effective DNA sequencer on Earth
+              NovaSeq 6000
+            </h2>
+          </Col>
+        </Row>
+        <Row type="flex" justify="center" style={{ padding: h1Padding }}>
+          <Col
+            xs={{ span: 21 }}
+            sm={{ span: 21 }}
+            md={{ span: 22 }}
+            lg={{ span: 23 }}
+            xl={{ span: 24 }}
+          >
+            <h2
+              key="0"
+              style={{
+                textAlign: "center",
+                color: GREY_1,
+                fontSize: h1FontSize-4,
+                fontFamily: FONT,
+                marginBottom: 0,
+                lineHeight: 1,
+                padding: "0px 20px 0px 20px" // top right bottom left
+              }}
+            >
+              Save all your DNA & epigenomes in secure computers you can visit
+              online or in-person
+            </h2>
+          </Col>
+        </Row>
+        <Row type="flex" justify="center" style={{ padding: h1Padding }}>
+          <Col
+            xs={{ span: 21 }}
+            sm={{ span: 21 }}
+            md={{ span: 22 }}
+            lg={{ span: 23 }}
+            xl={{ span: 24 }}
+          >
+            <h2
+              key="0"
+              style={{
+                textAlign: "center",
+                color: GREY_1,
+                fontSize: h1FontSize-4,
+                fontFamily: FONT,
+                marginBottom: 0,
+                lineHeight: 1,
+                padding: "0px 20px 0px 20px" // top right bottom left
+              }}
+            >
+              As genetic & epigenetic engineering advances, in the future
+              you will be able to revert your body's ~3.7 * 10^13 cells outside
+              your neocortex to a previous healthier version like a 4D real-time
+              100% immersive video game
+            </h2>
+          </Col>
+        </Row>
+        <Row type="flex" justify="center" style={{ padding: h1Padding }}>
+          <Col
+            xs={{ span: 21 }}
+            sm={{ span: 21 }}
+            md={{ span: 22 }}
+            lg={{ span: 23 }}
+            xl={{ span: 24 }}
+          >
+            <h2
+              key="0"
+              style={{
+                textAlign: "center",
+                color: GREY_1,
+                fontSize: h1FontSize-4,
+                fontFamily: FONT,
+                marginBottom: 0,
+                lineHeight: 1,
+                padding: "0px 20px 0px 20px" // top right bottom left
+              }}
+            >
+              Cinematic video series on exactly how genetic engineering technologies work
+            </h2>
+          </Col>
+        </Row>
         <Row>
           <Col style={{ height: endColumnHeight }} />
         </Row>

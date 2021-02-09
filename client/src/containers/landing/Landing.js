@@ -12,6 +12,7 @@ import { Helmet } from "react-helmet";
 import firstLandingMatchExample from "../images/firstLandingMatchExample.png";
 import secondLandingMatchExample from "../images/secondLandingMatchExample.png";
 import thirdLandingMatchExample from "../images/thirdLandingMatchExample.png";
+import { FONT } from "../styles/Font";
 
 const { Content } = Layout;
 
@@ -23,7 +24,7 @@ class Landing extends Component {
   renderLandingAsks() {
     const { windowWidth } = this.props;
     const how_part_0 =
-      "Let us find you the best partner based on what you're looking for.";
+      "Efficiently saved in a private git repo";
 
     let h2Padding = "120px 0px 0px";
     let h2FontSize = 32;
@@ -46,8 +47,7 @@ class Landing extends Component {
                 textAlign: "center",
                 color: GREY_9,
                 fontSize: h2FontSize,
-                fontFamily: "Overpass",
-                fontWeight: "bold",
+                fontFamily: FONT,
                 marginBottom: 0,
                 lineHeight: h2LineHeight
               }}
@@ -226,7 +226,7 @@ class Landing extends Component {
       <div>
         <Helmet>
           <meta name={metaDescription} />
-          <title>Online Course Partners</title>
+          <title>1st step to control your age</title>
         </Helmet>
         <Content
           style={{
@@ -234,27 +234,6 @@ class Landing extends Component {
           }}
         >
           <Marketing />
-        </Content>
-        <Content
-          style={{
-            background: GREY_1
-          }}
-        >
-          {this.renderLandingAsks()}
-        </Content>
-        <Content
-          style={{
-            background: GREY_9
-          }}
-        >
-          {this.renderMatch()}
-        </Content>
-        <Content
-          style={{
-            background: GREY_1
-          }}
-        >
-          {this.renderLogin()}
         </Content>
       </div>
     );
