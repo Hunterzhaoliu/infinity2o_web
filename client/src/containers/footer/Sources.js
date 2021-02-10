@@ -26,7 +26,6 @@ class Sources extends Component {
     let h4Padding = "60px 0px 60px 0px";
     let pFontSize = "20px";
     let pPadding = "60px 0px 60px 0px";
-    let secondMatchCardPadding = "0px 0px 0px 0px";
 
     if (windowWidth < 768) {
       h2FontSize = "24px";
@@ -34,7 +33,6 @@ class Sources extends Component {
       h4Padding = "30px 0px 30px 0px";
       pFontSize = "16px";
       pPadding = "30px 0px 30px 0px";
-      secondMatchCardPadding = "15px 0px 0px 0px";
     }
 
     return (
@@ -65,8 +63,8 @@ class Sources extends Component {
         </Row>
         <Row type="flex" justify="start">
           <Col>
-            <p style={{ color: paragraphColor }}>
-              1. TODO
+            <p style={{ color: paragraphColor, fontFamily: FONT, fontSize: pFontSize }}>
+              1. http://book.bionumbers.org/how-genetically-similar-are-two-random-people/
             </p>
           </Col>
         </Row>

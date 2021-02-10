@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { GREY_1, GREY_3, GREY_9 } from "../styles/ColorConstants";
 import { Layout, Row, Col } from "antd";
 import { Helmet } from "react-helmet";
-import hunterProfile from "../images/hunterProfile.png";
-import qProfile from "../images/qProfile.png";
+// import hunterProfile from "../images/hunterProfile.png";
+// import qProfile from "../images/qProfile.png";
 import { FONT } from "../styles/Font";
 import "./about.css";
 

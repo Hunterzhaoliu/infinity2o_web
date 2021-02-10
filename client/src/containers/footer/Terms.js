@@ -8,13 +8,14 @@ import {
   GREY_9
 } from "../styles/ColorConstants";
 import { Layout, Row, Col } from "antd";
+import { FONT } from "../styles/Font";
 import { Helmet } from "react-helmet";
 
 const { Content } = Layout;
 
 class Terms extends Component {
   render() {
-    const { colorTheme, loggedInState, name } = this.props;
+    const { colorTheme, loggedInState, name, windowWidth } = this.props;
 
     let background = colorTheme.backgroundColor;
     let text1Color = colorTheme.text1Color;
@@ -28,11 +29,26 @@ class Terms extends Component {
       text4Color = GREY_6;
     }
 
+    let h2FontSize = "36px";
+    let h4FontSize = "24px";
+    let h4Padding = "60px 0px 60px 0px";
+    let pFontSize = "20px";
+    let pPadding = "60px 0px 60px 0px";
+
+    if (windowWidth < 768) {
+      h2FontSize = "24px";
+      h4FontSize = "18px";
+      h4Padding = "30px 0px 30px 0px";
+      pFontSize = "16px";
+      pPadding = "30px 0px 30px 0px";
+    }
+
     return (
       <Content
         style={{
           padding: "75px 50px 0px", // top right bottom left
-          background: background
+          background: background,
+          fontFamily: FONT, fontSize: pFontSize
         }}
       >
         <Helmet>
@@ -46,7 +62,7 @@ class Terms extends Component {
         </Row>
         <Row type="flex" justify="center">
           <Col>
-            <p style={{ color: GREY_5 }}>Last revised on ~13.899 * 10^13? + 2/9 + 2021</p>
+            <p style={{ color: GREY_5 }}>Last revised on ~13.899 * 10^13? + 2021 + 2/9</p>
           </Col>
         </Row>
         <Row type="flex" justify="start">
@@ -55,7 +71,7 @@ class Terms extends Component {
               1. Acceptance of Terms of Use Agreement
             </p>
             <p style={{ color: text4Color }}>
-              By creating an account on infinity2o.com or iOS apps, you must be
+              By creating an account on infinity2o, you must be
               at least 18 years old. By using your Apple ID or email account to
               login, you agree to the Terms and Condition, Privacy Policy, and
               the use of Cookies.
@@ -66,46 +82,21 @@ class Terms extends Component {
           <Col>
             <p style={{ color: text2Color }}>2. Types of Content</p>
             <p style={{ color: text4Color }}>
-              Since you can create questions and talk to other users through
-              matches, we have to have certain restrictions on the certain
-              content that can be discussed or created such as
-            </p>
-            <ul style={{ color: text4Color }}>
-              <li>
-                Any language or imagery that could harass or upset any other
-                person
-              </li>
-              <li>
-                Any abusive, violent, threatening, and discriminatory actions
-                that promote racism or sexism
-              </li>
-              <li>
-                Anything that encourages any illegal activity inciting terrorism
-                or racial hatred that can constitutes as committing a criminal
-                offence
-              </li>
-              <li>
-                Viruses, worm programmes, or other malicious code that could
-                damage any software or hardware relating to the company
-              </li>
-            </ul>
-            <p style={{ color: text4Color }}>
-              Any content that you post or create is your responsible and you
+              Any content that you post or create is your responsibility and you
               cannot hold infinity2o or other users accountable for anything
               that you create. If you reveal any personal information such as
               mailing address or banking details, it is at your own risk.
             </p>
             <ul style={{ color: text4Color }}>
               <li>
-                You cannot sell, use, or modify infinity2o’s content except as
+                You can not sell, use, or modify infinity2o’s content except as
                 permitted through the website.
               </li>
               <li>
-                You cannot create similar work from Our Content or commercially
-                exploit Our Content
+                You can not create similar work from our content or commercially
+                exploit our content.
               </li>
-              <li>You can only use Our Content for lawful purposes only</li>
-              <li>You cannot use our name in any hidden texts</li>
+              <li>You can only use our content for lawful purposes only.</li>
             </ul>
           </Col>
         </Row>
@@ -120,20 +111,22 @@ class Terms extends Component {
               <li>
                 Comply with all applicable laws, including without limitation,
                 privacy laws, intellectual property laws, anti-spam laws, equal
-                opportunity laws and regulatory requirements
+                opportunity laws and regulatory requirements.
               </li>
-              <li>Use your real name and not someone else’s identity</li>
-              <li>Use the service in a professional manner</li>
+              <li>Use your real legal name and not someone else’s identity,
+              however nicknames created after important events in your life are
+              allowed.</li>
+              <li>Use the service in a professional manner.</li>
             </ul>
             <p style={{ color: text4Color }}>You agree not to:</p>
             <ul style={{ color: text4Color }}>
-              <li>Act in an unlawful manner</li>
-              <li>Misrepresent your identity</li>
+              <li>Act in an unlawful manner.</li>
+              <li>Misrepresent your real identity.</li>
               <li>
                 Disclose information that you do not have the consent to
-                disclose
+                disclose.
               </li>
-              <li>Create any fraud or similar practices</li>
+              <li>Create any fraud or similar practices.</li>
             </ul>
           </Col>
         </Row>
@@ -141,22 +134,13 @@ class Terms extends Component {
           <Col>
             <p style={{ color: text2Color }}>4. Privacy</p>
             <p style={{ color: text4Color }}>
-              By using infinity2o.com, you agree to accept our Privacy Policy
+              By using infinity2o, you agree to accept our Privacy Policy
             </p>
           </Col>
         </Row>
         <Row type="flex" justify="start">
           <Col>
-            <p style={{ color: text2Color }}>5. Third Parties</p>
-            <p style={{ color: text4Color }}>
-              Infinity2o currently does not have any third parties or affiliate
-              companies.
-            </p>
-          </Col>
-        </Row>
-        <Row type="flex" justify="start">
-          <Col>
-            <p style={{ color: text2Color }}>6. Location Based Features</p>
+            <p style={{ color: text2Color }}>5. Location Based Features</p>
             <p style={{ color: text4Color }}>
               Your location is solely based on the information you share since
               inifinity2o currently doesn’t have a GPS tracking service.
@@ -165,26 +149,31 @@ class Terms extends Component {
         </Row>
         <Row type="flex" justify="start">
           <Col>
-            <p style={{ color: text2Color }}>7. Disclaimer</p>
+            <p style={{ color: text2Color }}>6. Disclaimer</p>
             <p style={{ color: text4Color }}>
               The site of infinity2o content is without warranty of any kind,
               either expressed or implied. Should the law not permit the
               exclusion of express or implied warranties, we grant the minimum
               express or implied warranty required by applicable law.
-              Additionally, we do not make warranties that the site will be
-              uninterrupted, secure, or error free. The use of infinity2o is at
-              your own risk. Infinity2o is not responsible for any users and
-              does not conduct criminal background checks on its members.
-              Infinity2o and any of its company members are not liable for any
-              damage, indirect or direct, loss of data, income, profit, loss or
-              damage to property, claims of third parties, or our content,
-              however caused. If you are dissatisfied in anyway with the site,
-              your remedy is to stop the use of the site. You hereby waive any
+              Additionally, although we will do our best to achieve as close
+              to 100% accurracy & security as possible we do not make the claim
+              that the site and your data will be 100% secure, or 100% error
+              free at all times. infinity2o takes full responsibility if your
+              data is stolen or purposely edited with unmoral or unethical
+              intent && will conduct an internal investigation as to why the
+              inaccurate data was produced or data was stolen using a team
+              based on who we believe are the most competent detectives.
+              We currently do not conduct criminal background checks on
+              all of our customers.
+
+              If you are dissatisfied in anyway with infinity2o's service,
+              your remedy is to stop the use of the site & contact our
+              headquarters to retrieve your collected data. You hereby waive any
               and all claims that arise out of your use of the site. Due to some
               states not allowing the disclaimer of implied warranties, some of
               these provisions may not apply to you. If any portion of this
               liability is invalid, our aggregate liability shall not exceed one
-              dollar U.S. currency. This limitation of liability is a
+              penny U.S. currency. This limitation of liability is a
               fundamental element of the basis of bargain and reflects a fair
               allocation of risk. You agree that the limitations and exclusions
               of liability specified will survive even if found to have failed
@@ -194,10 +183,10 @@ class Terms extends Component {
         </Row>
         <Row type="flex" justify="start">
           <Col>
-            <p style={{ color: text2Color }}>8. Indemnity</p>
+            <p style={{ color: text2Color }}>7. Indemnity</p>
             <p style={{ color: text4Color }}>
               All the actions you make and information you post on
-              infinity2o.com remain your responsibility. Therefore, you agree to
+              infinity2o remain your responsibility. Therefore, you agree to
               indemnify, defend, release, and hold us, and our partners
               harmless, from and against any third party claims, damages, or
               actions.
@@ -207,53 +196,53 @@ class Terms extends Component {
         <Row type="flex" justify="start">
           <Col>
             <p style={{ color: text2Color }}>
-              9. Digital Millennium Copyright Act
+              8. Digital Millennium Copyright Act
             </p>
             <p style={{ color: text4Color }}>
               Under the Digital Millennium Copyright act, the DMCA, if any of
-              Our Content infringes upon your intellectual property rights,
+              our content infringes upon your intellectual property rights,
               submit a notification alleging this infringement to
-              askinfinity2o@gmail.com.
+              wangzhaoliuq@protonmail.com
             </p>
           </Col>
         </Row>
         <Row type="flex" justify="start">
           <Col>
-            <p style={{ color: text2Color }}>10. Miscellaneous</p>
+            <p style={{ color: text2Color }}>9. Miscellaneous</p>
             <p style={{ color: text4Color }}>
               These Terms and Conditions, which we may change and will notify
               you by email, constitute the agreement between you and infinity2o.
-              The terms supersede all previous agreements. Infinity2o does not
+              The terms supersede all previous agreements. infinity2o does not
               give or make any warranty of any kind about the information of
-              infinity2o.com. The use of infinity2o is at your own risk.
-              Infinity2o cannot be held accountable or responsible for any loss.
+              infinity2o. The use of infinity2o is at your own risk.
+              infinity2o cannot be held accountable or responsible for any loss.
               You are responsible for taking all necessary precautions to ensure
               that infinity2o is free of viruses and other harmful components.
-              Infinity2o is not responsible for any damage to your computer
+              infinity2o is not responsible for any damage to your computer
               hardware, computer software, or other equipment or technology from
               security breaches or any form of viruses, bugs, tampering, or
               fraud. If for any reason the Terms are declared illegal, the
               extent to that term being illegal will be deleted and the rest of
-              the Terms will remain in full force and effect. By submitting your
-              personal information, you agree for your transfer of your
-              information to other countries and destinations for other users to
-              see.
+              the Terms will remain in full force and effect.
             </p>
           </Col>
         </Row>
         <Row type="flex" justify="start">
           <Col>
-            <p style={{ color: text2Color }}>11. Recap</p>
+            <p style={{ color: text2Color }}>10. Recap</p>
             <p style={{ color: text4Color }}>
               By creating an account on infinity2o, you are consenting to the
               law and agree that you will not file or participate in a class
-              action against infinity2o’s company creators. If there are any
+              action against infinity2o’s company creators unless you have
+              a good reason to believe we have used your data in an unmoral
+              or unethical manner. If there are any
               translated copies of the Terms, the original English version will
-              surpass any other version. By using the website, you are
+              surpass any other version. By using the website or any other
+              of our services, you are
               consenting that you will not file an action against infinity2o.
               You agree to all of the Terms and Condition statements. If you
               have any questions or concern you may email
-              askinfinity2o@gmail.com
+              wangzhaoliuq@protonmail.com
             </p>
           </Col>
         </Row>
@@ -270,7 +259,8 @@ function mapStateToProps(state) {
   return {
     colorTheme: state.colorTheme,
     loggedInState: state.auth.loggedInState,
-    name: state.profile.name
+    name: state.profile.name,
+    windowWidth: state.customHeader.windowWidth
   };
 }
 
