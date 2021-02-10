@@ -11,7 +11,8 @@ import ProfileEdit from "./profile/edit/ProfileEdit";
 import SortingHat from "./sorting_hat/SortingHat";
 import Matches from "./matches/Matches";
 import Conversations from "./conversations/Conversations";
-import About from "./footer/About";
+import Sources from "./footer/Sources";
+import Team from "./footer/Team";
 import Terms from "./footer/Terms";
 import Privacy from "./footer/Privacy";
 import CustomFooter from "./landing/CustomFooter";
@@ -39,10 +40,10 @@ class App extends Component {
               path="/conversations"
               component={Conversations}
             />
-            <Route exact={true} path="/about" component={About} />
+            <Route exact={true} path="/team" component={Team} />
+            <Route exact={true} path="/sources" component={Sources} />
             <Route exact={true} path="/terms" component={Terms} />
             <Route exact={true} path="/privacy" component={Privacy} />
-            <Route exact={false} path="/unsubscribe" component={Unsubscribe} />
             <CustomFooter />
           </Layout>
         </Layout>

@@ -46,15 +46,7 @@ class Terms extends Component {
         </Row>
         <Row type="flex" justify="center">
           <Col>
-            <p style={{ color: GREY_5 }}>Last revised on June 15, 2018</p>
-          </Col>
-        </Row>
-        <Row type="flex" justify="center">
-          <Col>
-            <p style={{ color: text2Color }}>
-              Hello {name}! Our mission at Infinity2o is to provide anyone the
-              perfect learning partner.
-            </p>
+            <p style={{ color: GREY_5 }}>Last revised on ~13.899 * 10^13? + 2/9 + 2021</p>
           </Col>
         </Row>
         <Row type="flex" justify="start">
@@ -63,10 +55,10 @@ class Terms extends Component {
               1. Acceptance of Terms of Use Agreement
             </p>
             <p style={{ color: text4Color }}>
-              By creating an account on infinity2o.com, you must be at least 13
-              years old. By using your LinkedIn or email account to login, you
-              agree to the Terms and Condition, Privacy Policy, and the use of
-              Cookies.
+              By creating an account on infinity2o.com or iOS apps, you must be
+              at least 18 years old. By using your Apple ID or email account to
+              login, you agree to the Terms and Condition, Privacy Policy, and
+              the use of Cookies.
             </p>
           </Col>
         </Row>

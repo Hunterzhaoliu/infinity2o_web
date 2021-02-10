@@ -46,22 +46,16 @@ class Privacy extends Component {
         </Row>
         <Row type="flex" justify="center">
           <Col>
-            <p style={{ color: GREY_5 }}>Last revised on June 14, 2018</p>
-          </Col>
-        </Row>
-        <Row type="flex" justify="center">
-          <Col>
-            <p style={{ color: text2Color }}>
-              Hello {name}! Our mission at Infinity2o is to provide anyone the
-              perfect learning partner. This explains how we collect, store, and
-              protect your information.
-            </p>
+            <p style={{ color: GREY_5 }}>Last revised on ~13.899 * 10^13? + 2021 + 2/9</p>
           </Col>
         </Row>
         <Row type="flex" justify="start">
           <Col>
             <p style={{ color: text2Color }}>1. Collection of Information</p>
             <p style={{ color: text4Color }}>
+              With your consent we will save your whole human genome in private
+              computers our company keeps secure. Because all humans share
+              more than 
               When you create an account, we collect information such as:
             </p>
             <ul style={{ color: text4Color }}>

@@ -46,7 +46,7 @@ class CustomFooter extends Component {
 								}}
 								size={"small"}
 								onClick={onFooter}
-								href="/terms"
+								href="/team"
 							>
 								team
 							</a>
@@ -66,7 +66,7 @@ class CustomFooter extends Component {
 								}}
 								size={"small"}
 								onClick={onFooter}
-								href="/privacy"
+								href="/sources"
 							>
 								sources
 							</a>
@@ -86,9 +86,9 @@ class CustomFooter extends Component {
 								}}
 								size={"small"}
 								onClick={onFooter}
-								href="/privacy"
+								href="/terms"
 							>
-								terms & privacy
+								terms
 							</a>
 						</Col>
 						<Col
@@ -106,7 +106,7 @@ class CustomFooter extends Component {
 								}}
 								size={"small"}
 								onClick={onFooter}
-								href="/about"
+								href="/privacy"
 							>
 								privacy
 							</a>
