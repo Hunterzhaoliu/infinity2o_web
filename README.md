@@ -80,7 +80,9 @@ e-mail = `askinfinity2o@gmail.com`, username = `infinity2o`, & password = `mxxxx
 
 ### Local development setup:
 
-1.  `cd infinity2o_server` then `npm run dev`
+1. `cd infinity2o_web`
+2. `npm install`
+3. `npm run dev`
 
 ### AWS development setup:
 
